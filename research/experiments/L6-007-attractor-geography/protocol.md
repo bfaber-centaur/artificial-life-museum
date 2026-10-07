@@ -90,4 +90,8 @@ No P-value machinery: runs are deterministic. Thresholds above are the decision 
 
 ## Amendments
 
-_None._
+- 2026-10-07 23:45 UTC, after all L6-007 runs had started and before any result was read: added
+  `d2_resize.py`, an exploratory (not pre-registered) rerun of Lane 3's four S102 seed-resize
+  methods (block, nearest, bilinear, cubic) at R 26 and R 39 in Lane 6's engine, requested for
+  dispute D2 (C039 vs C047). It does not change P1–P4. Part A's R26 variant keeps the bilinear
+  seeds as pre-registered.
