@@ -1,0 +1,3 @@
+(640, 'alive at t = 300; mass 0.4252, speed 0.5691 R/tu')
+(1280, 'alive at t = 300; mass 0.4250, speed 0.5707 R/tu')
+(2560, 'alive at t = 300; mass 0.4249, speed 0.5714 R/tu')
