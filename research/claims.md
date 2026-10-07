@@ -96,7 +96,9 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
 | Lane 3 PR #8 @ `5f316f3`: corrected claim 3, new claim 7 (L4-001 replication) | C012, C013, C023, C026, C027 |
 | Lane 4 L4-001 README proposed claims 1 / 2 / 3 / 4 / 5 (PR #5 @ `7bd1a42`) | C023 / C026 / C028 / C029 / C030 |
 | Lane 4 protocol amendment A3 (size-independent centroid) | C023 |
-| Lane 5 L5-002 README proposed claims 1 / 2 / 3, plus the exploratory 6 tu rule (PR #9 @ `bd86e76`) | C031 / C032 / C034, C033 |
+| Lane 5 L5-002 README proposed claims 1 / 2 / 3, plus the exploratory 6 tu rule (PR #9 @ `bd86e76`; claims 1–2 reworded @ `f6239f6`) | C031 / C032 / C034, C033 |
+| Lane 7 hostile-review HR-008 (L5-002 review, edge-state λ) | C029, C031, C032 |
+| Lane 5 L5-003 README proposed claims 1 / 2 / 3 (PR #9 @ `f6239f6`) | C035 / C036 / C037 |
 | Lane 7 hostile-review HR-007 (C023 world size, thresholds) | C023, C026 |
 | Lane 6 | not started |
 
@@ -847,7 +849,7 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
 
 ### C029 — Near the uniform-attenuation edge, S001's collapse time grows like −7.0·ln(s − s*) steps (passage near an unstable edge state)
 
-- **Status:** OBSERVED
+- **Status:** REPRODUCED
 - **Owner lane:** Lane 4
 - **Sources:** L4-001 README proposed claim 4 and "Exploratory" section (PR #5 @ `7bd1a42`, open)
 - **Specimen / version:** S001, dossier commit `65c03cc`
@@ -865,8 +867,15 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
   sequence. Lane 7 (HR-007) independently reports no long slowing-down at the bisection
   resolution (≈ 28 → 46 steps), which is consistent: the logarithmic growth only becomes large
   far below 1/256.
+- **Reproduction by Lane 7 (HR-008, PR #7 @ `afb8c30`):** `research/experiments/HR008-edge-mode/edge_mode.py`
+  re-bisects I001 at t0 = 1000 to s* = 0.101098876142 (Lane 4: 0.101098876141) and fits λ = 1.55/tu
+  from collapse-time scaling and 1.82/tu from survivor/death pair separation (Lane 4's 7.0 steps
+  per e-fold ≈ 1.43/tu). I003 behaves the same way (s* = 0.308763771041; λ = 1.78 and 1.64/tu).
+  I004 does not: collapse is a flat 48 steps at every offset, because the cut removes whole cells.
+  Lane 7 drives Lane 4's runner and `alm.disturb` on `ref`, so this is REPRODUCED, not independent.
 - **History:**
   - 2026-10-07 — OBSERVED — Lane 4.
+  - 2026-10-07 — REPRODUCED — Lane 7 HR-008 (same engine, own bisection and fits); extended to I003.
 
 ### C030 — Within about 1e−6 below the uniform-attenuation edge, S001's survival is non-monotone ("death islands"), and the island positions depend on the engine
 
@@ -890,7 +899,7 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
 - **History:**
   - 2026-10-07 — NUMERICALLY_FRAGILE — Lane 4; archivist ledgered.
 
-### C031 — No early bulk-morphometric feature (or pair) predicts S001's survival across disturbance types
+### C031 — No survive/die cut on an early bulk morphometric transfers between S001 disturbance types
 
 - **Status:** OBSERVED (preregistered negative result)
 - **Owner lane:** Lane 5
@@ -912,15 +921,21 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
 - **Run IDs:** `features.csv`, `results.json` (L5-002 directory); underlying runs as C023
 - **Search / parameter bounds:** 23 features × 4 lags; sets of size ≤ 2
 - **Reproduction command:** `measure.py`, then `analyze.py` (L5-002 directory; needs Lane 4's PR #5 code)
-- **Known caveats:** single engine, one resolution, one heading plateau. 30 near-edge runs per fold. A
-  negative result for bulk morphometrics only; a non-morphometric feature (projection on the edge
-  state's unstable mode) is Lane 5's proposed next test.
+- **Known caveats:** single engine, one resolution, one heading plateau. The five phases are
+  consecutive steps, so each fold holds about 5 independent edges, not 30 independent runs. Within
+  one disturbance the same features rank near-edge outcomes almost perfectly (direction-free AUC
+  ≥ 0.93–0.96 for F6_k5, F1_k0, F2_k10; Lane 7 `HR008-edge-mode/within_auc.csv`), but that mostly
+  tracks strength s. Lane 7 checked the preregistration order and found it clean, and notes the
+  negative was largely predictable because collapse starts no earlier than about 5 tu. A
+  non-morphometric coordinate is tested in C035–C037.
 - **History:**
   - 2026-10-07 — OBSERVED — Lane 5, preregistered.
+  - 2026-10-07 — reworded — Lane 5 (`f6239f6`) after HR-008: "no transferable cut", not "no early
+    information".
 
-### C032 — Near the edge, the S001 run that will die is indistinguishable in bulk shape from the survivor for about 2 time units after the edit
+### C032 — For attenuation (I001) and frontal addition (I003), S001's edge behaves like an unstable edge state: the doomed run tracks its survivor twin to < 1% for about 2 time units
 
-- **Status:** OBSERVED
+- **Status:** REPRODUCED
 - **Owner lane:** Lane 5
 - **Sources:** L5-002 README proposed claim 2, `divergence.md`, `edge_values.md` (PR #9 @ `bd86e76`, open)
 - **Specimen / version:** S001, dossier commit `65c03cc`
@@ -934,10 +949,19 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
 - **Run IDs:** `divergence.md`, `edge_values.md` (generated by `divergence.py`, `edge_values.py`)
 - **Search / parameter bounds:** 400 steps side by side; four interventions × five phases
 - **Reproduction command:** `divergence.py`, `edge_values.py` (L5-002 directory)
-- **Known caveats:** exploratory, not preregistered; single engine. Consistent with C029 (a passage near
-  an unstable edge state) and with HR-007's 46–74-step death times.
+- **Edge-state evidence (Lane 7 HR-008):** one dominant unstable rate λ ≈ 1.5–1.8/tu, estimated two
+  ways per disturbance for I001 and I003 (C029). The I001 and I003 lingering states correlate only
+  0.90 with each other after alignment, so a single shared edge state is not established.
+- **Known caveats:** exploratory, not preregistered; `ref` engine for both lanes (hence REPRODUCED,
+  though Lane 5 calls it independently checked). **Does not apply to I002 or I004** at R = 13:
+  those edits remove whole cells, so the edge pair is two different discrete edits, and I004's
+  doomed runs die at step 48 with no approach to an edge state. The divergence-table rows for
+  I002/I004 compare discrete edits, not trajectories straddling a saddle. Lane 4's death islands
+  (C030) show the one-mode picture fails at fine scales.
 - **History:**
-  - 2026-10-07 — OBSERVED — Lane 5.
+  - 2026-10-07 — OBSERVED — Lane 5 (originally stated for I001, I003, I004).
+  - 2026-10-07 — narrowed and REPRODUCED — Lane 5 (`f6239f6`) restricted it to I001/I003 after
+    Lane 7 HR-008 measured λ two ways and showed I004 has no edge-state approach.
 
 ### C033 — "Mass at 6 time units ≥ 98% of control" classifies every S001 outcome, including on an unseen disturbance, but only because collapse has already begun
 
@@ -976,8 +1000,79 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
   4.6–5.7% and the first deaths 5.6–7.6% (archivist checked `i005-runs.csv`: 34 RECOVERED, 171 DIED,
   nothing else). This places rear deletion near central deletion (≈ 5%, C026) and below the port cut (8–9%).
 - **Run IDs:** `i005-runs.csv` (205 runs)
-- **Search / parameter bounds:** coarse grid only; edge not bisected
+- **Search / parameter bounds:** coarse grid (0.025 in s); bisected later in L5-003
+  (`research/experiments/L5-003-edge-direction/i005-bisect.csv`, 15 runs, committed in `f2ccfdb` before
+  any projection): edge ≈ 0.161 at t0 = 1000
 - **Reproduction command:** `.venv/bin/python research/experiments/L5-002-survival-predictor/gen_i005.py`
 - **Known caveats:** single engine; coarse grid (0.025 in s); phases overlap in mass terms. Extends C026.
+- **History:**
+  - 2026-10-07 — OBSERVED — Lane 5.
+
+### C035 — A coordinate along the edge-pair split direction, read at 2 time units, passes the preregistered hold-one-disturbance-out test, but only ties a shape-deficit null on the unseen disturbance
+
+- **Status:** OBSERVED (preregistered; narrow pass)
+- **Owner lane:** Lane 5
+- **Sources:** `research/experiments/L5-003-edge-direction/README.md` proposed claim 1 (PR #9 @ `f6239f6`,
+  open); preregistration `PREREGISTRATION.md` committed in `846ed50` before any state was projected; no amendments
+- **Specimen / version:** S001, dossier commit `65c03cc`
+- **Simulator / version:** `ref`; Lane 4's L4-001 states; exact Fourier sub-pixel shift into the comoving frame
+- **Parameters:** baseline rule, T = 10, R = 13, 128²; 68.2° heading plateau
+- **Intervention:** I001–I004 (folds), I005 (held out; I005 bisection in `f2ccfdb`, labelled before projection)
+- **Metric:** u_k = normalised mean unit difference (death − survivor) of edge pairs over the training
+  disturbances at lag k; c_k = ⟨state − control, u_k⟩; threshold stump; worst-fold near-edge balanced
+  accuracy, bar 0.90; smallest passing lag selected. Null: shape-deficit coordinate.
+- **Result:** lag 20 (2 tu): worst fold 0.90, mean 0.97, 2 errors in 120 near-edge runs (null 0.78 / 0.90).
+  Lags 0–10 fail (0.50). Frozen on I005 (cut 1.259): 0.977 on 220 runs, 0.929 on 25 near-edge; the null
+  scores the same. At lag 20, 53 of 68 near-edge dying runs are still inside Lane 4's ±20% mass band.
+- **Run IDs:** `coords.csv`, `directions.json`, `directions.npz`, `results.json`, `i005-bisect.csv` (L5-003 directory)
+- **Search / parameter bounds:** lags 0, 5, 10, 20, 30 steps
+- **Reproduction command:** `bisect_i005.py`, `project.py`, `score.py` (L5-003 directory; needs PR #5 code)
+- **Known caveats:** the worst fold sits exactly on the bar (one error among I001's 5 near-edge
+  survivors); about 5 independent edges per fold. The direction mixes a real edge mode (I001, I003)
+  with pixel-quantized edits (I002, I004, I005). It reads the divergence early but does not predict
+  before it begins. No advantage over the null on the unseen disturbance. One engine, R, heading.
+- **History:**
+  - 2026-10-07 — OBSERVED — Lane 5, preregistered.
+
+### C036 — At 2 time units, S001's survive/die split directions for attenuation, frontal addition, port cut and rear deletion are similar (cosine 0.82–0.92); central deletion's is not (0.12–0.25)
+
+- **Status:** OBSERVED
+- **Owner lane:** Lane 5
+- **Sources:** L5-003 README proposed claim 2 (PR #9 @ `f6239f6`, open)
+- **Specimen / version:** S001, dossier commit `65c03cc`
+- **Simulator / version:** `ref`
+- **Parameters:** as C035, lag 20
+- **Intervention:** I001–I005
+- **Metric:** pairwise cosine between per-disturbance mean split directions
+- **Result:** I001–I003 0.92, I001–I004 0.82, I001–I005 0.88, I003–I004 0.88, I003–I005 0.90, I004–I005
+  0.83; I002 with any other 0.12–0.25. At lag 10 all cosines are ≤ 0.46. The shared pattern is mostly core loss.
+- **Run IDs:** `directions.json` (L5-003 directory)
+- **Search / parameter bounds:** lags 10 and 20 reported
+- **Reproduction command:** `project.py` (L5-003 directory)
+- **Known caveats:** descriptive; does not show a shared edge state (C037). Single-pair directions
+  within one disturbance agree less (0.53–0.60) than the averages across disturbances.
+- **History:**
+  - 2026-10-07 — OBSERVED — Lane 5.
+
+### C037 — No evidence yet that a single unstable mode's coordinate predicts S001's survival better than a shape-deficit null
+
+- **Status:** OBSERVED (exploratory)
+- **Owner lane:** Lane 5
+- **Sources:** L5-003 README proposed claim 3 and "Scoped to the genuine edge state" (PR #9 @ `f6239f6`,
+  open), prompted by Lane 7 HR-008
+- **Specimen / version:** S001, dossier commit `65c03cc`
+- **Simulator / version:** `ref`
+- **Parameters:** as C035
+- **Intervention:** directions built from I001 only, I003 only, or both (the two edits with a measured edge state, C032)
+- **Metric:** near-edge balanced accuracy of the transferred cut
+- **Result:** lag 20: I001 → I003 0.75 (null 0.78); I003 → I001 0.50 (null 0.50); I001+I003 → I004 / I005 /
+  I002 0.73 / 0.64 / 1.00 (null 0.93 / 0.93 / 1.00). Lag 30: no better than the null anywhere except
+  I001+I003 → I004 (0.83 vs 0.80). The I001 and I003 split directions align (cosine 0.92) but their cuts
+  do not transfer.
+- **Run IDs:** `results-scoped-exploratory.json`, `x_*` columns of `coords.csv` (preregistered columns byte-identical)
+- **Search / parameter bounds:** lags 20 and 30
+- **Reproduction command:** `score_scoped.py` (L5-003 directory)
+- **Known caveats:** exploratory, after the preregistered result. Proposed next tests: smooth edits on
+  both sides (R = 26) or an adjoint (left-eigenvector) projection.
 - **History:**
   - 2026-10-07 — OBSERVED — Lane 5.
