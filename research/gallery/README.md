@@ -120,7 +120,8 @@ lists its frame range, view, overlays and disclosures.
 **Unmerged dependency.** S101–S103 are proposed in Lane 6's PR #11, which is not merged. Their
 seed cells and rules are vendored in one place, [`vendor/pr11/`](vendor/pr11/README.md), and
 registered by [`galspec.py`](galspec.py) only if main lacks them. If main later registers
-different cells under these IDs, the scripts refuse to run.
+different cells under these IDs, the scripts refuse to run. The exact cleanup once #11 merges is
+listed in [`vendor/pr11/README.md`](vendor/pr11/README.md#cleanup-after-pr-11-merges).
 
 ## How the pictures are made
 
@@ -155,6 +156,11 @@ in `runs.json` from its manifest and stops with an error unless the replay's fin
 .venv/bin/python -m alm.run --specimen S001 --steps 3000 --every 10
 .venv/bin/python research/gallery/run_specimen.py --specimen S102 --steps 3000 --every 10   # S101–S103
 ```
+
+`tests/test_gallery.py` runs the whole pipeline end to end on short (60-step) real runs in a
+scratch folder. It collects, replays, verifies the hashes and renders G001–G003, then checks every
+listed media file and provenance entry. It also checks that a run with a wrong final hash is
+refused. Re-running `render` on the committed runs reproduces the committed media byte for byte.
 
 `run_specimen.py` is `python -m alm.run` with the vendored specimens registered. Once PR #11 is
 merged, plain `alm.run` does the same.

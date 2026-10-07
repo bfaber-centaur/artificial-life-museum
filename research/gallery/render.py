@@ -73,7 +73,7 @@ def collect() -> None:
     runs = {}
     for s in SUBJECTS:
         cfg = almrun.RunConfig(specimen=s.specimen, steps=STEPS, every=EVERY)
-        res = almrun.run(cfg)
+        res = almrun.run(cfg, out_root=TRACES)
         runs[s.specimen] = res.run_id
         print(f"{s.specimen}: {res.run_id} final {res.manifest['final_state_sha256'][:12]}")
     RUNS_JSON.write_text(json.dumps(runs, indent=2) + "\n")
@@ -219,14 +219,15 @@ def _run_command(r: Replay) -> str:
     return f"git checkout {r.manifest['simulator']['git_commit'][:12]} && .venv/bin/{cmd}"
 
 
-def write_video(frames: list, path_gif: Path, path_mp4: Path | None, fps: int) -> None:
+def write_video(frames: list, path_gif: Path, path_mp4: Path | None, fps: int) -> bool:
+    """Write the GIF, and the MP4 when ffmpeg is available; True if the MP4 was written."""
     from PIL import Image
 
     pal = [f.convert("P", palette=Image.Palette.ADAPTIVE, colors=128) for f in frames]
     pal[0].save(path_gif, save_all=True, append_images=pal[1:], duration=int(1000 / fps), loop=0,
                 optimize=True, disposal=1)
     if path_mp4 is None or shutil.which("ffmpeg") is None:
-        return
+        return False
     w, h = frames[0].size
     proc = subprocess.Popen(
         ["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{w}x{h}",
@@ -239,6 +240,7 @@ def write_video(frames: list, path_gif: Path, path_mp4: Path | None, fps: int) -
     proc.stdin.close()
     if proc.wait() != 0:
         raise RuntimeError("ffmpeg failed")
+    return True
 
 
 # --- exhibits ---------------------------------------------------------------------------------
@@ -273,12 +275,12 @@ def g001_four_ways(reps: dict[str, Replay]) -> None:
         d.text((gap, H - 20), f"t = {t / 10:6.1f} time units (step {t})   ·   R = 13 cells   ·   "
                f"blue line: centroid, last {trail_steps // 10} tu", fill=DIM, font=font(12))
         out.append(img)
-    write_video(out, folder / "four-ways.gif", folder / "four-ways.mp4", fps)
+    mp4 = write_video(out, folder / "four-ways.gif", folder / "four-ways.mp4", fps)
     out[-1].save(folder / "four-ways-final.png")
     save_provenance(folder, {
         "exhibit": "G001",
         "title": "Four ways to move",
-        "media": ["four-ways.gif", "four-ways.mp4", "four-ways-final.png"],
+        "media": ["four-ways.gif"] + (["four-ways.mp4"] if mp4 else []) + ["four-ways-final.png"],
         "frames": {"steps": [steps[0], steps[-1]], "stride_steps": stride, "count": len(steps),
                    "playback_fps": fps, "time_compression": f"{fps * stride / 10:g} time units per second"},
         "view": "full 128x128 periodic world, fixed camera, no crop; 2x nearest-neighbour",
