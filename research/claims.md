@@ -89,6 +89,9 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
 | Lane 7 hostile-review HR-003 (Lane 5 tooling, anisotropy bias) | C008, C014, C021 |
 | Lane 7 hostile-review HR-005 (Lane 3 numerics) | C003, C006, C009, C013 (D1) |
 | Lane 7 hostile-review HR-006 (heading-dependent means) | C007, C015, C022 |
+| Lane 5 restated L5-baseline claims 1 and 2 (PR #9 @ `c5d2435`) | C022, C024 |
+| Lane 5 L5-axis-breathing proposed claim (PR #9 @ `c5d2435`) | C025 |
+| Lane 5 `symmetry_order` noise-floor fix (PR #9 @ `c5d2435`) | C021 history |
 | Lane 4 L4-001 results at commit `12d9265` (PR #5, open; no claim proposed yet) | C023 |
 | Lane 6 | not started |
 
@@ -275,12 +278,15 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
   elongated) and speed 0.4734 vs 0.4794 R/time (1.2% slower; Lane 3 independently finds the same
   speed drop, C015). Lane 5's three rotations all landed on 5/2-type or near-diagonal plateaus,
   so they never sampled the axis plateau. Output: `research/experiments/H001-lattice-wobble/heading_means.csv`.
-  Lane 5 has not yet responded.
+  Lane 5 reproduced the low axis anisotropy on `alm` with its own feature code (0.2665 over steps
+  2000–7999, `research/experiments/L5-axis-breathing/results.csv`, PR #9 @ `c5d2435`), so the
+  refuting evidence is itself on two paths. Lane 5 accepted the refutation and restated its claim (C022).
 - **History:**
   - 2026-10-07 — OBSERVED — Lane 5, `ref` path.
   - 2026-10-07 — REPRODUCED — Lane 5, re-run on `alm` (PR #9).
   - 2026-10-07 — REFUTED — archivist, on Lane 7 HR-006 (axis-locked heading at R = 13); the
     statement holds at R = 26 and for mass and gyradius (C022).
+  - 2026-10-07 — refutation accepted by Lane 5 (PR #9 @ `c5d2435`), which restated the claim as C022.
 
 ### C008 — Every S001 baseline feature oscillation has a grid-crossing period (or its alias or beat)
 
@@ -306,6 +312,7 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
 - **History:**
   - 2026-10-07 — OBSERVED — Lane 5.
   - 2026-10-07 — REFUTED — archivist, on Lane 7's counterexample from Lane 5's own data.
+  - 2026-10-07 — refutation accepted by Lane 5 (PR #9 @ `c5d2435`), which restated the claim as C024.
 
 ### C009 — At T = 10, S001's speed is about 16% below its Δt → 0 limit and its mass 2.6% above
 
@@ -565,7 +572,9 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
 - **Search / parameter bounds:** three start rotations (two independent headings)
 - **Reproduction command:** `.venv/bin/python research/experiments/L5-baseline/measure_s001.py`
 - **Known caveats:** R = 13 only. Lane 7 found `rotational_harmonics` reaches 0.033 on an
-  isotropic body from lattice sampling alone (C021); a₂ = 0.216 is well above that.
+  isotropic body from lattice sampling alone (C021); a₂ = 0.216 is well above that. From PR #9
+  @ `c5d2435` the harmonics are radius-weighted; the regenerated a₂ is 0.216 ± 0.002 / 0.214 ±
+  0.012 / 0.216 ± 0.002, so the claim is unchanged.
 - **History:**
   - 2026-10-07 — REPRODUCED — Lane 5 (two stepping paths).
 
@@ -583,15 +592,22 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
 - **Run IDs:** none recorded (snippet in HR-003)
 - **Search / parameter bounds:** three centres
 - **Reproduction command:** see HR-003; Lane 7 suggests a test that an isotropic Gaussian reports no symmetry order
-- **Known caveats:** tooling claim. Any symmetry-order result needs a noise floor from isotropic controls.
+- **Known caveats:** tooling claim about `alm.morphometrics` up to `1849dbe`. Any symmetry-order
+  result needs a noise floor from isotropic controls.
 - **History:**
   - 2026-10-07 — OBSERVED — Lane 7.
+  - 2026-10-07 — tool fixed — Lane 5 (PR #9 @ `c5d2435`): harmonics are radius-weighted, and
+    `symmetry_order` returns 0 below `SYMMETRY_FLOOR = 0.05` (isotropic Gaussians sd 3–8 cells
+    < 0.03, hard disk r = 8 < 0.04), with a test. The claim stays as a record of the old behaviour;
+    results computed with the old function before `c5d2435` inherit it.
 
 ### C022 — S001's mass and gyradius means are heading-invariant to 0.2% at R = 13 and 26; at R = 26 anisotropy and speed are too
 
 - **Status:** OBSERVED
 - **Owner lane:** Lane 7 (with Lane 5's original data)
-- **Sources:** hostile-review HR-006 (PR #7 @ `0fd42ee`, open); L5-baseline (C007)
+- **Sources:** hostile-review HR-006 (PR #7 @ `0fd42ee`, open); L5-baseline (C007) and Lane 5's
+  restated claim 1 (PR #9 @ `c5d2435`, open): "mass and gyradius means heading-invariant to 0.2%
+  at R = 13 across 21.8°, 40.4°, 68.2° and the axis plateau; speed to 1%"
 - **Specimen / version:** S001, dossier commit `65c03cc`; start states rotated (bilinear), zoomed for R = 26
 - **Simulator / version:** `ref` via `heading_means.py` @ `0fd42ee`
 - **Parameters:** baseline rule, T = 10; R = 13 (rotations 0°, 27°, 55°, 70°) and R = 26 (0°, 67°)
@@ -603,9 +619,13 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
 - **Run IDs:** `research/experiments/H001-lattice-wobble/heading_means.csv`
 - **Search / parameter bounds:** four headings at R = 13, two at R = 26
 - **Reproduction command:** `heading_means.py 13 0 27 55 70; heading_means.py 26 0 67`
-- **Known caveats:** single path; only two headings at R = 26; T = 10 only.
+- **Known caveats:** on the diagonal plateaus the mass and gyradius means agree between Lane 5
+  (`ref` and `alm`, `alm.morphometrics`) and Lane 7 (`ref`, own code) to 0.2%; the axis plateau and
+  the R = 26 values come from Lane 7 alone, so the status stays OBSERVED. Only two headings at
+  R = 26; T = 10 only.
 - **History:**
   - 2026-10-07 — OBSERVED — Lane 7.
+  - 2026-10-07 — Lane 5 adopts the mass/gyradius restatement (PR #9 @ `c5d2435`).
 
 ### C023 — Each of four standardized disturbances has a single sharp RECOVERED → DIED edge for S001, at small strength, with no intermediate outcomes
 
@@ -641,3 +661,52 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
   T = 10 / R = 13 baseline numbers, which are themselves discretisation-dependent (C009, C010).
 - **History:**
   - 2026-10-07 — OBSERVED — archivist, from Lane 4's generated summary at `12d9265`.
+
+### C024 — S001's short-period (2–15 step) feature fluctuations on the diagonal plateaus shrink with resolution
+
+- **Status:** INDEPENDENTLY_CHECKED
+- **Owner lane:** Lane 5 (restated claim 2), Lane 7 (independent check)
+- **Sources:** L5-baseline restated claim 2 (PR #9 @ `c5d2435`, open), which replaces C008;
+  hostile-review HR-003 point 2 (PR #7, open)
+- **Specimen / version:** S001, dossier commit `65c03cc`; cells zoomed to R (bilinear)
+- **Simulator / version:** Lane 5: `alm` + `alm.morphometrics` (`axis_breathing.py` @ `c5d2435`).
+  Lane 7: `ref` + independent second-moment code (`aniso_check.py` @ `c1df640`).
+- **Parameters:** baseline rule, T = 10, start rotation 0; R = 13 / 20 / 26 on 128 / 198 / 256 grids
+- **Intervention:** none
+- **Metric:** sd of anisotropy (1 − λmin/λmax) over the analysis window
+- **Result:** Lane 7 4.8e−3 → 3.1e−3 → 1.4e−3; Lane 5 4.8e−3 → 3e−3 → 1e−3 (R = 13 / 20 / 26). The
+  8.0-step anisotropy component at R = 13 is absent at R = 20 and 26.
+- **Run IDs:** `research/experiments/L5-axis-breathing/results.csv` rows (R, 0);
+  `research/experiments/H001-lattice-wobble/aniso_check.txt`
+- **Search / parameter bounds:** three resolutions, one heading family (diagonal plateau)
+- **Reproduction command:** `.venv/bin/python research/experiments/L5-axis-breathing/axis_breathing.py`; `aniso_check.py`
+- **Known caveats:** anisotropy only; other features' fluctuations were checked for mass (C003) but
+  not individually for gyradius or area. T = 10 only.
+- **History:**
+  - 2026-10-07 — INDEPENDENTLY_CHECKED — archivist, Lane 5 (`alm`) and Lane 7 (`ref`, own code) agree.
+
+### C025 — S001 travelling along a grid axis at R = 13 "breathes": a slow, large shape oscillation (anisotropy 0.09–0.50) that is absent at R = 26
+
+- **Status:** NUMERICALLY_FRAGILE
+- **Owner lane:** Lane 5
+- **Sources:** `research/experiments/L5-axis-breathing/README.md` (PR #9 @ `c5d2435`, open)
+- **Specimen / version:** S001, dossier commit `65c03cc`; cells zoomed and rotated (bilinear) as in H001 `initial_state`
+- **Simulator / version:** `alm` (Lane 2) + `alm.morphometrics` @ `c5d2435`
+- **Parameters:** baseline rule, T = 10; (R, start rotation) ∈ {(13, 0), (13, 70), (20, 0), (20, 70),
+  (26, 0), (26, 67)}; grids 128 / 198 / 256
+- **Intervention:** none (start-state rotation onto the axis plateau)
+- **Metric:** anisotropy mean, sd, range and dominant period; per-step heading sd; steps 2000–7999
+- **Result:** R = 13 axis run (heading 0.22°): anisotropy 0.267 ± 0.094, range 0.087–0.500, dominant
+  period 140 steps (247 in a shorter preliminary window), heading sd 4.2° per step, speed 0.4751.
+  On the 68.2° plateau: 0.295 ± 0.005, heading sd 1.6°. R = 26 run 2.06° off axis: 0.299 ± 0.010, no
+  slow component. R = 20 did not land on the axis (−5.5°): 0.293 ± 0.012.
+- **Run IDs:** `research/experiments/L5-axis-breathing/results.csv` (6 rows)
+- **Search / parameter bounds:** one axis-locked run per R; 8000 steps
+- **Reproduction command:** `.venv/bin/python research/experiments/L5-axis-breathing/axis_breathing.py`
+- **Known caveats:** single stepping path for the oscillation itself; Lane 7's independent code
+  agrees only on the mean anisotropy (0.2649 vs 0.2665, different windows). The period depends
+  on the window (quasi-periodic). The R = 13 → 26 transition is unresolved because R = 20 missed
+  the axis. Example of a behaviour that must not be nicknamed as a phenotype (fails the
+  resolution criterion).
+- **History:**
+  - 2026-10-07 — NUMERICALLY_FRAGILE — Lane 5 proposed; archivist ledgered.
