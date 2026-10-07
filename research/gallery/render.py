@@ -586,7 +586,7 @@ def g005_circler_to_ring(reps: dict[str, Replay]) -> None:
     injury_exhibit(
         reps, rows, EXHIBITS / "G005-circler-to-ring", "circler-ring", _ring_fate,
         f"Lane 4 I004 port injury, s = {G5_S:g}, heading from the 10-step centroid chord (Lane 6 L6-005); "
-        "rows differ only in the cut step",
+        "same recipe, cut two steps apart",
         {"exhibit": "G005", "title": "Two steps apart",
          "intervention": {"name": "gallery_port_injury_h", "lane4_id": "I004", "s": G5_S, "steps": list(G5_T0S),
                           "definition": "alm.disturb.i004_port_injury (L4-001 protocol), frame centred on the "

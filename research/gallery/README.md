@@ -19,6 +19,7 @@ made of, ten times per unit of time. Some of them travel; one of them never chan
 | [G002](#g002--portraits) | Portraits | S001, S101, S102, S103 | 2026-10-07 |
 | [G003](#g003--contact-sheet-half-a-time-unit-at-a-time) | Contact sheet | S001, S101, S102, S103 | 2026-10-07 |
 | [G004](#g004--same-cut-two-fates) | Same cut, two fates (before and after) | S101, S001 | 2026-10-07 |
+| [G005](#g005--two-steps-apart) | Two steps apart: the circler becomes the ring | S102 → S103 | 2026-10-07 |
 
 ### G001 — Four ways to move
 
@@ -103,6 +104,34 @@ covers 2 time units before the cut to 60 after it and holds on the cut frame for
   because the runner's intervention hook does not see the previous state. The cut itself is Lane
   4's `i004_port_injury` unchanged.
 
+### G005 — Two steps apart
+
+![The circler cut at step 3000 dies; cut at step 3002 it becomes the static ring S103](exhibits/G005-circler-to-ring/circler-ring-sheet.png)
+
+![Film of both cuts, aligned on the cut](exhibits/G005-circler-to-ring/circler-ring.gif)
+
+Video: [`circler-ring.mp4`](exhibits/G005-circler-to-ring/circler-ring.mp4) · provenance:
+[`provenance.json`](exhibits/G005-circler-to-ring/provenance.json)
+
+Two copies of the circler S102 get the same injury: Lane 4's I004 port injury at s = 0.25. The
+only difference is timing. One is cut at step 3000, the other two steps later at step 3002. The
+cut follows Lane 6's own recipe from L6-005. "Port" is taken from the direction the circler moved
+over the previous 10 steps. A circler turns fast, so that direction differs by about 15° between
+the two cuts. Both films are aligned on their own cut.
+
+- **Observation.** Cut at step 3000, the circler falls apart and is gone 25 steps later. Cut at
+  step 3002, it shrinks into a small bright ring within about 10 time units. From 46 time units
+  after the cut, it stops changing at all. Its final state is S103 exactly: cell for cell the
+  same values, shifted on the grid (checked by `equals_up_to_shift` in `render.py`).
+- **Interpretation, from the ledger.** This is Lane 6's C040 (*observed*, not yet reproduced by a
+  second lane). There, a port injury turned the circler into S103 in 2 of 38 I004 runs, both in
+  this phase. The gallery's run repeats Lane 6's numbers exactly through `alm.run`. That stepper is
+  bitwise equal to Lane 6's (C038), so this is a rerun, not an independent check. Two runs
+  cannot show how often the switch happens or why one phase and not the other.
+- **Why it is here.** One exhibit has the gallery's three behaviours in a single lineage: a
+  circler, a death, and a still ring. It also shows how much the outcome depends on two steps
+  of timing.
+
 ## Field note, 7 October 2026
 
 > *What I saw.* Four animals, four temperaments. The Orbium set off at once along a line it never
@@ -145,9 +174,11 @@ pointing down.
 | S103 | [`S103-57feb4ccc4`](../traces/S103-57feb4ccc4/) | 0–3000 | `a81efdac…` | `research/specimens/S103-static-ring/` (vendored copy at run time) |
 | S101 + I004 0.25 at step 3000 (G004) | [`S101-2ca50bbd39`](../traces/S101-2ca50bbd39/) | 0–5000 | `3db8b6da…` | `research/specimens/S101-orbium-pair/` (vendored copy at run time) |
 | S001 + I004 0.25 at step 3000 (G004) | [`S001-f51c4e7c2e`](../traces/S001-f51c4e7c2e/) | 0–5000 | `fa43239b…` | main |
+| S102 + I004 0.25 at step 3000 (G005) | [`S102-3769097a3c`](../traces/S102-3769097a3c/) | 0–5002 | `fa43239b…` (empty world) | main |
+| S102 + I004 0.25 at step 3002 (G005) | [`S102-ab87e3d6e0`](../traces/S102-ab87e3d6e0/) | 0–5002 | `8f6edaba…` | main |
 
-The G001–G003 runs were made with `alm.run` at commit `96cb86c`, and the G004 runs at `066878d`,
-all with a clean `src/`. The full rule,
+The G001–G003 runs were made with `alm.run` at commit `96cb86c`, the G004 runs at `066878d` and
+the G005 runs at `de6f69c`, all with a clean `src/`. The full rule,
 grid, environment and hashes are in each trace's `manifest.json`. Each exhibit's `provenance.json`
 lists its frame range, view, overlays and disclosures.
 
@@ -191,15 +222,18 @@ in `runs.json` from its manifest and stops with an error unless the replay's fin
 .venv/bin/python -m alm.run --specimen S102 --steps 3000 --every 10
 .venv/bin/python research/gallery/run_specimen.py --specimen S101 --steps 5000 --every 10 \
     --intervene 3000:gallery_port_injury:s=0.25                                        # G004
+.venv/bin/python research/gallery/run_specimen.py --specimen S102 --steps 5002 --every 10 \
+    --intervene 3002:gallery_port_injury_h:s=0.25,hx=-0.9988910184063488,hy=0.047082197772908396  # G005
 ```
 
 `tests/test_gallery.py` runs the whole pipeline end to end on short (60-step) real runs in a
-scratch folder. It collects, replays, verifies the hashes and renders G001–G004, then checks every
+scratch folder. It collects, replays, verifies the hashes and renders G001–G005, then checks every
 listed media file and provenance entry. It also checks that a run with a wrong final hash is
 refused. Re-running `render` on the committed runs reproduces the committed media byte for byte.
 
-`run_specimen.py` is `python -m alm.run` with the gallery's `gallery_port_injury` intervention
-([`galintervene.py`](galintervene.py)) registered. The G004 S001 run uses the same flag with
+`run_specimen.py` is `python -m alm.run` with the gallery's `gallery_port_injury` and
+`gallery_port_injury_h` interventions ([`galintervene.py`](galintervene.py)) registered. G005's
+heading values come from `galintervene.chord_heading("S102", 3002)`. The G004 S001 run uses the same flag with
 `--specimen S001`.
 
 ## Gallery conventions
@@ -223,6 +257,8 @@ refused. Re-running `render` on the committed runs reproduces the committed medi
 
 ## Cycle log
 
+- **2026-10-07, cycle 3 (Lane 8).** G005: the circler cut at two phases two steps apart. One
+  dies, the other becomes S103 exactly (C040).
 - **2026-10-07, after PR #11 merged.** Retired the vendored S101–S103 copies and the
   registration shim. The committed runs and media are unchanged.
 - **2026-10-07, cycle 2 (Lane 8).** G004: the bound pair and a single Orbium under the same port
