@@ -94,6 +94,8 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
 | Lane 5 `symmetry_order` noise-floor fix (PR #9 @ `c5d2435`) | C021 history |
 | Lane 4 L4-001 results at commit `12d9265` (PR #5, open; no claim proposed yet) | C023 |
 | Lane 3 PR #8 @ `5f316f3`: corrected claim 3, new claim 7 (L4-001 replication) | C012, C013, C023, C026, C027 |
+| Lane 4 L4-001 README proposed claims 1 / 2 / 3 / 4 / 5 (PR #5 @ `7bd1a42`) | C023 / C026 / C028 / C029 / C030 |
+| Lane 4 protocol amendment A3 (size-independent centroid) | C023 |
 | Lane 7 hostile-review HR-007 (C023 world size, thresholds) | C023, C026 |
 | Lane 6 | not started |
 
@@ -638,7 +640,7 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
   - 2026-10-07 — OBSERVED — Lane 7.
   - 2026-10-07 — Lane 5 adopts the mass/gyradius restatement (PR #9 @ `c5d2435`).
 
-### C023 — Each of four standardized disturbances has a single sharp RECOVERED → DIED edge for S001, at small strength, with no intermediate outcomes
+### C023 — S001 has a single sharp, all-or-nothing survival edge for each of four standardized disturbances
 
 - **Status:** INDEPENDENTLY_CHECKED at T = 10, R = 13 (Lane 4 on `ref` + `alm`; Lane 3 on
   `alm_check` with its own battery code). The exact I003 and I004 edge values are
@@ -646,8 +648,9 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
 - **Owner lane:** Lane 4
 - **Sources:** `research/experiments/L4-001-disturbance-battery/protocol.md` (preregistered at
   `aa4cd5c`) and `results/summary.md`, `results/bisect-brackets.csv` (commit `12d9265`, PR #5,
-  open). Lane 4 has **not** yet proposed a claim; this entry was written by the archivist from the
-  generated summary and will be replaced by Lane 4's own wording.
+  open). Lane 4's own wording is proposed claim 1 in
+  `research/experiments/L4-001-disturbance-battery/README.md` (PR #5 @ `7bd1a42`), which replaced
+  the archivist's provisional title.
 - **Specimen / version:** S001, dossier commit `65c03cc`
 - **Simulator / version:** `ref` (`reconstruct.py`), interventions in `src/alm/disturb.py` @ `12d9265`
 - **Parameters:** baseline rule, 128² torus; intervention at t0 = 1000…1004 (five phase replicates),
@@ -663,10 +666,22 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
   I001 0.1016 at every phase (≈ 10% mass removed kills); I002 radius 0.061–0.086 R (1.6–7% mass);
   I003 peak 0.308–0.317 (≈ +28% mass); I004 0.080–0.089 of mass. All four are sharp by the
   preregistered rule (largest phase spread 0.025, I002).
-- **Run IDs:** `L4-001-<intervention>-s<strength>-t<t0>-N128-ref` (deterministic), rows in
-  `results/coarse.csv` and `results/bisect.csv`
+- **Lane 4's statement (README, mass terms):** I001 survives ≤ 10.0% loss, dies ≥ 10.3% (all phases);
+  I002 survives 3.9–4.0%, dies 5.2–5.4%; I004 edge at 7.8–9.1% loss; I003 edge at +27.5–28.7% gain.
+  Below the edge, recovered bodies correlate with the unperturbed control at r ≥ 0.990; above it,
+  mass collapses 30–80 steps after the edit.
+- **Run IDs:** `L4-001-<I>-s<strength 6dp>-t<t0>-N<N>-<engine>[-T20|-R26][-cL]` (deterministic; the
+  format changed in amendment A2), rows in `results/coarse.csv`, `results/bisect.csv`,
+  `results/bisect-brackets.csv`, `results/check-*.csv`
 - **Search / parameter bounds:** coarse grids 0–0.95 or 0–1.00 by 0.05; phases t0 = 1000–1004
-- **Reproduction command:** see `research/experiments/L4-001-disturbance-battery/run.py` and `analyze.py`
+- **Reproduction command:** `research/experiments/L4-001-disturbance-battery/reproduce.sh` (stages `base`, `checks`, `a1`, `states`, `analyze`)
+- **A1 (Lane 4, single phase t0 = 100 time units):** T = 20: I001 +3%, I002 unchanged in mass, I003
+  +11%, I004 +11%. R = 26 (zoomed 2×, N = 256): I001 −3%, I002 unchanged in mass, I003 and I004
+  unchanged. Agrees with Lane 3's T = 40 and R = 26 runs (C027).
+- **A3 (Lane 4):** with a size-independent centroid (`disturb.local_centroid`, suffix `-cL`),
+  40/40 bracket ends agree between N = 128 and 192 (`check-ref-N128-cL.csv`, `check-ref-N192-cL.csv`).
+  Against the original brackets the same three runs flip, so those three edges sit one bisection
+  step lower; the I002 edge does not move in mass units. Same finding as HR-007.
 - **Robustness re-runs (commit `0e2cbe2`, `results/check-*.csv`):** the archivist compared each
   re-run's class with the `ref` bisection bracket (`s_ok` → RECOVERED, `s_fail` → DIED):
   - `alm` engine, N = 128 (`check-alm-N128.csv`): **40 of 40 bracket ends match.**
@@ -693,8 +708,8 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
   failures reach mass < 0.01 within 46 (I001), 74 (I003) and 48 (I004) steps of the edit, with
   no long slowing-down near the edge (`deathtime.txt`).
 - **Known caveats:** the I002/I003 bracket positions depend on the centroid estimator at the
-  bisection resolution, so they carry a placement uncertainty of at least ±1 step (±0.003 in s);
-  Lane 4 has not yet re-run with a bias-corrected centroid. Report I002 as removed mass, not
+  bisection resolution, so each edge is known to ±1 bisection step (±0.003 in s), as Lane 4 now
+  states. Report I002 as removed mass, not
   radius: at R = 13 three central cells (3.9–4.0% of mass) survive and four (5.2–5.4%) die at
   every phase (Lane 3, HR-007). I003 and I004 shift 11–13% at T = 40 (C027). Phase replicates
   are consecutive steps and sample only a thin line through the 2-D sub-pixel phase (HR-002, open). Amendment A1 preregisters T = 20 and R = 26 re-runs, not yet reported. Lane 7
@@ -707,6 +722,8 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
     shifts 3 of 40 bracket ends.
   - 2026-10-07 — INDEPENDENTLY_CHECKED — archivist, on Lane 3's 20/20 replication (`5f316f3`);
     N = 192 shift explained as centroid-estimator bias (HR-007, `a2a1d2a`).
+  - 2026-10-07 — restated — Lane 4 proposed claim 1 (`7bd1a42`) adopted as the statement; A1 and
+    A3 results added. Lane 4 proposed REPRODUCED + INDEPENDENTLY_CHECKED; status unchanged.
 
 ### C024 — S001's short-period (2–15 step) feature fluctuations on the diagonal plateaus shrink with resolution
 
@@ -774,11 +791,14 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
 - **Run IDs:** as C023 (`L4-001-*-N128-ref`, `-alm`); Lane 3 `research/traces/lane3/disturb-T10-R13*.csv`
 - **Search / parameter bounds:** four interventions, five phases, R = 13 (R = 26 and T = 40 in C023/C027)
 - **Reproduction command:** as C023; `python -m alm_check.disturb --T 10 --R 13`
-- **Known caveats:** one specimen; the comparison spans different body regions, so it does not
-  isolate which region matters. I004 shifts with T (C027). At R = 26 the I002 edge is
+- **Robustness (Lane 4 README):** the ordering centre < side < uniform holds at T = 20, R = 26 and N = 192.
+- **Known caveats:** one specimen; three geometries, not a fitted spatial law (Lane 4). Lane 4
+  proposed REPRODUCED; the archivist keeps INDEPENDENTLY_CHECKED because Lane 3's separate code
+  measured the same mass edges. I004 shifts with T (C027). At R = 26 the I002 edge is
   −4.6 to −5.0% → −5.3 to −5.6% (Lane 3).
 - **History:**
   - 2026-10-07 — INDEPENDENTLY_CHECKED — archivist, on C023's two-implementation data.
+  - 2026-10-07 — Lane 4 proposes the same claim (README claim 2, `7bd1a42`).
 
 ### C027 — The frontal-addition (I003) and port-side-injury (I004) kill edges move 11–13% when the timestep is quartered (T = 10 → 40)
 
@@ -801,3 +821,70 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
   with C009: the T = 10 creature is slower and, by this measure, more fragile than the Δt → 0 one.
 - **History:**
   - 2026-10-07 — NUMERICALLY_FRAGILE — Lane 3; archivist ledgered.
+
+### C028 — Post-edit total mass does not predict S001's survival across disturbance types
+
+- **Status:** OBSERVED
+- **Owner lane:** Lane 4
+- **Sources:** L4-001 README proposed claim 3 (PR #5 @ `7bd1a42`, open)
+- **Specimen / version:** S001, dossier commit `65c03cc`
+- **Simulator / version:** `ref`; `src/alm/disturb.py` @ `7bd1a42`
+- **Parameters:** baseline rule, T = 10, R = 13, 128²; t0 = 1000–1004
+- **Intervention:** I001 vs I002 near their edges
+- **Metric:** ΣA/R² immediately after the edit (`mass_after_edit`) vs class
+- **Result:** surviving I001 states at s = 0.10 have 0.392–0.393; dying I002 states near the edge
+  have 0.412–0.414 (archivist check: every DIED I002 run with ≤ 11% removed has 0.400–0.414, all
+  heavier than the surviving I001 runs). Lane 4 also reports that peak potential, positive-growth
+  mass and one-step mass change give no single threshold separating all four interventions.
+- **Run IDs:** rows in `results/coarse.csv` and `results/bisect.csv`
+- **Search / parameter bounds:** four interventions, five phases
+- **Reproduction command:** `reproduce.sh analyze`
+- **Known caveats:** follows from C026; single engine. The search for a predictor is open (Lane 5),
+  with bracket-end states saved in `research/experiments/L4-001-disturbance-battery/states/`.
+- **History:**
+  - 2026-10-07 — OBSERVED — Lane 4.
+
+### C029 — Near the uniform-attenuation edge, S001's collapse time grows like −7.0·ln(s − s*) steps (passage near an unstable edge state)
+
+- **Status:** OBSERVED
+- **Owner lane:** Lane 4
+- **Sources:** L4-001 README proposed claim 4 and "Exploratory" section (PR #5 @ `7bd1a42`, open)
+- **Specimen / version:** S001, dossier commit `65c03cc`
+- **Simulator / version:** `ref`; `explore_separatrix.py` @ `7bd1a42`
+- **Parameters:** baseline rule, T = 10, R = 13, 128²; t0 = 1000 only
+- **Intervention:** I001, s from s* + 4.5e−4 down to s* + 1e−12 (s* = 0.101098876141)
+- **Metric:** step at which mass falls below 0.01
+- **Result:** death step rises from 49 to 196 steps, fitting ≈ −14 − 7.0·ln(s − s*), i.e. one
+  unstable direction growing at about 1.4 per time unit. A lingering state (131 steps after an
+  edit at s* + 1e−11) is saved as `states/edge-I001-t1000.npz` for Lane 6.
+- **Run IDs:** `results/separatrix-I001-t1000.csv`
+- **Search / parameter bounds:** one intervention, one phase
+- **Reproduction command:** `explore_separatrix.py`, `plot_separatrix.py`
+- **Known caveats:** exploratory, not preregistered; single engine and phase; the fit is on one
+  sequence. Lane 7 (HR-007) independently reports no long slowing-down at the bisection
+  resolution (≈ 28 → 46 steps), which is consistent: the logarithmic growth only becomes large
+  far below 1/256.
+- **History:**
+  - 2026-10-07 — OBSERVED — Lane 4.
+
+### C030 — Within about 1e−6 below the uniform-attenuation edge, S001's survival is non-monotone ("death islands"), and the island positions depend on the engine
+
+- **Status:** NUMERICALLY_FRAGILE
+- **Owner lane:** Lane 4
+- **Sources:** L4-001 README proposed claim 5 (PR #5 @ `7bd1a42`, open)
+- **Specimen / version:** S001, dossier commit `65c03cc`
+- **Simulator / version:** `ref` and `alm`
+- **Parameters:** baseline rule, T = 10, R = 13, 128²; t0 = 1000
+- **Intervention:** I001, linear scan of 41 strengths over s* − 4e−7 … s*
+- **Metric:** class (RECOVERED / DIED)
+- **Result:** ref `RRRRRRRRRRRRRRRRRRRRRRDDDDRRDDDDDDDRRRRRR`; alm
+  `RRRRRRRRRRRDDDDRDDDDDDDRRRRRRDDDDDDDDDDDD`. Both engines show islands; their locations differ.
+  Survivors near the edge make a large mass excursion (up to 0.48) before recovering.
+- **Run IDs:** `results/separatrix-scan-I001-t1000-ref.csv`, `separatrix-scan-I001-t1000-alm.csv`
+- **Search / parameter bounds:** 41 points, 4e−7 wide, one phase
+- **Reproduction command:** `explore_separatrix.py`
+- **Known caveats:** the existence of fine structure reproduces across two engines; its location
+  does not, so only the existence is a candidate claim. These offsets are far below any physical
+  perturbation precision and below the float-rounding divergence between engines.
+- **History:**
+  - 2026-10-07 — NUMERICALLY_FRAGILE — Lane 4; archivist ledgered.
