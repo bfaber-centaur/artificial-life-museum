@@ -75,7 +75,28 @@ def _s001() -> Specimen:
     )
 
 
-_REGISTRY = {"S001": _s001}
+def _lane6(specimen_id: str, slug: str, name: str, rule: Rule) -> Specimen:
+    path = SPECIMEN_DIR / f"{specimen_id}-{slug}" / "initial-cells-u8.csv"
+    return Specimen(
+        id=specimen_id,
+        name=name,
+        rule=rule,
+        cells=np.loadtxt(path, delimiter=",", dtype=np.int64),
+        source=f"research/specimens/{specimen_id}-{slug}.md (Lane 6 field exploration)",
+    )
+
+
+# Lane 6 field candidates use the S1xx block. S101 lives under the S001 rule; S102 and S103
+# share one "coexistence" rule where Orbium also persists.
+_S001_RULE = Rule(R=13, T=10, mu=0.15, sigma=0.015, beta=(1.0,), kernel="poly", growth="poly")
+_COEX_RULE = Rule(R=13, T=10, mu=0.155, sigma=0.020, beta=(1.0,), kernel="poly", growth="poly")
+
+_REGISTRY = {
+    "S001": _s001,
+    "S101": lambda: _lane6("S101", "orbium-pair", "bound Orbium pair (Synorbium-like) under the S001 rule", _S001_RULE),
+    "S102": lambda: _lane6("S102", "circler", "Gyrorbium-like circler under the coexistence rule", _COEX_RULE),
+    "S103": lambda: _lane6("S103", "static-ring", "Circium-like static ring under the coexistence rule", _COEX_RULE),
+}
 
 
 def register(specimen_id: str, loader) -> None:
