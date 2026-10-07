@@ -104,7 +104,12 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--extra", default=None)
     ap.add_argument("--out", default=os.path.join(HERE, "features.csv"))
+    ap.add_argument("--lags", default=None,
+                    help="exploratory only: comma-separated lags replacing the pre-registered 0,5,10,20")
     a = ap.parse_args()
+    if a.lags:
+        global LAGS
+        LAGS = tuple(int(x) for x in a.lags.split(","))
     l4.set_cond("base")
     srcs = [a.extra] if a.extra else [os.path.join(L4, "results", "coarse.csv"),
                                        os.path.join(L4, "results", "bisect.csv")]
