@@ -28,16 +28,18 @@ Do this as its own small PR, after #11 is on main:
    because main's cells or rules differ, stop. Keep this folder and report the difference to
    the coordinator: the gallery's runs were made from the vendored seeds and stay reproducible
    from them.
-2. Delete `research/gallery/vendor/pr11/` (this folder), `research/gallery/galspec.py` and
-   `research/gallery/run_specimen.py`.
+2. Delete `research/gallery/vendor/pr11/` (this folder) and `research/gallery/galspec.py`. In
+   `research/gallery/run_specimen.py`, remove the `galspec` import and call (it still registers
+   the gallery's interventions, so keep the file).
 3. In `research/gallery/render.py`, remove `import galspec`, both `galspec.ensure_registered()`
-   calls, and the `if r.manifest["specimen"]["id"] in galspec.PR11:` rewrite in `_run_command`.
+   calls, and the `galspec.PR11 or` part of the condition in `_run_command` (keep the
+   `gallery_ivs` part).
 4. In `tests/test_gallery.py`, delete `test_vendored_specimens_register_and_match_pins`, the
    `galspec` import and the `ensure_registered()` calls. Keep
    the S103 fixed-point test and the render-pipeline tests as they are.
 5. In `research/gallery/README.md`, point the "Seed cells from" column at
    `research/specimens/S10x-*/`. Then delete the "Unmerged dependency" paragraph and the
-   `run_specimen.py` lines under "Reproduce", and add a cycle-log line.
+   S101–S103 note on the `run_specimen.py` line under "Reproduce", and add a cycle-log line.
 6. Run `render.py render` and check that `git status` shows no changed media. Do not re-run
    `collect`: the existing traces keep their run IDs and hashes, and their manifests still name
    the vendored source, which is the historical record of how they were made.

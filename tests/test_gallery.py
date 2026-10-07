@@ -40,6 +40,8 @@ def _short_pipeline(tmp_path, monkeypatch):
     monkeypatch.setattr(render, "RUNS_JSON", tmp_path / "runs.json")
     monkeypatch.setattr(render, "STEPS", 60)
     monkeypatch.setattr(render, "WINDOW", (20, 60))
+    monkeypatch.setattr(render, "G4_STEPS", 60)
+    monkeypatch.setattr(render, "G4_T0", 30)
     render.collect()
     return render
 
@@ -50,17 +52,17 @@ def test_render_pipeline_end_to_end(tmp_path, monkeypatch):
 
     render = _short_pipeline(tmp_path, monkeypatch)
     runs = json.loads((tmp_path / "runs.json").read_text())
-    assert sorted(runs) == sorted(s.specimen for s in render.SUBJECTS)
+    assert sorted(runs) == sorted(render.run_configs())
     render.render()
 
     folders = sorted((tmp_path / "exhibits").iterdir())
-    assert [f.name[:4] for f in folders] == ["G001", "G002", "G003"]
+    assert [f.name[:4] for f in folders] == ["G001", "G002", "G003", "G004"]
     for folder in folders:
         prov = json.loads((folder / "provenance.json").read_text())
         assert prov["media"]
         for name in prov["media"]:
             assert (folder / name).stat().st_size > 0, f"{folder.name}/{name} missing"
-        assert {src["run_id"] for src in prov["sources"]} == set(runs.values())
+        assert {src["run_id"] for src in prov["sources"]} <= set(runs.values())
         for src in prov["sources"]:
             man = json.loads((tmp_path / "traces" / src["run_id"] / "manifest.json").read_text())
             assert src["final_state_sha256"] == man["final_state_sha256"]

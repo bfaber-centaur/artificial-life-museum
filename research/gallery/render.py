@@ -33,7 +33,9 @@ import numpy as np
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 
+import galintervene  # noqa: E402
 import galspec  # noqa: E402
+from alm import interventions as ivs  # noqa: E402
 from alm import measure, provenance, specimens  # noqa: E402
 from alm import run as almrun  # noqa: E402
 from alm.lenia import Lenia, Rule  # noqa: E402
@@ -58,6 +60,11 @@ class Subject:
     name: str  # display name, taken from the specimen registry / ledger
 
 
+# G004: Lane 4's I004 port injury, same strength, on the bound pair and on a single Orbium
+# (ledger C041). Both runs settle for G4_T0 steps first, as in L6-005.
+G4_STEPS, G4_T0, G4_S = 5000, 3000, 0.25
+G4_SUBJECTS = [("S101", "bound Orbium pair"), ("S001", "Orbium (O2u)")]
+
 SUBJECTS = [
     Subject("S001", "glides", "Orbium (O2u)"),
     Subject("S101", "glides as a bound pair", "bound Orbium pair"),
@@ -68,14 +75,27 @@ SUBJECTS = [
 
 # --- collection -------------------------------------------------------------------------------
 
+def run_configs() -> dict[str, almrun.RunConfig]:
+    """Every run the gallery shows, keyed as in runs.json."""
+    cfgs = {s.specimen: almrun.RunConfig(specimen=s.specimen, steps=STEPS, every=EVERY) for s in SUBJECTS}
+    for sid, _ in G4_SUBJECTS:
+        cfgs[f"G004:{sid}"] = almrun.RunConfig(
+            specimen=sid, steps=G4_STEPS, every=EVERY,
+            interventions=[(G4_T0, galintervene.GalleryPortInjury(s=G4_S))],
+        )
+    return cfgs
+
+
 def collect() -> None:
+    """Run every configuration not yet recorded in runs.json (recorded runs are kept)."""
     galspec.ensure_registered()
-    runs = {}
-    for s in SUBJECTS:
-        cfg = almrun.RunConfig(specimen=s.specimen, steps=STEPS, every=EVERY)
+    runs = json.loads(RUNS_JSON.read_text()) if RUNS_JSON.exists() else {}
+    for key, cfg in run_configs().items():
+        if key in runs and (TRACES / runs[key] / "manifest.json").exists():
+            continue
         res = almrun.run(cfg, out_root=TRACES)
-        runs[s.specimen] = res.run_id
-        print(f"{s.specimen}: {res.run_id} final {res.manifest['final_state_sha256'][:12]}")
+        runs[key] = res.run_id
+        print(f"{key}: {res.run_id} final {res.manifest['final_state_sha256'][:12]}")
     RUNS_JSON.write_text(json.dumps(runs, indent=2) + "\n")
 
 
@@ -87,6 +107,7 @@ class Replay:
     manifest: dict
     rule: Rule
     frames: dict[int, np.ndarray]  # step -> state, for the requested steps
+    edits: dict[int, tuple[np.ndarray, np.ndarray]]  # step -> (pre, post) of each intervention
     centroids: np.ndarray  # (steps + 1, 2) wrapped periodic centroid (cx, cy) per step
 
 
@@ -94,8 +115,10 @@ def replay(run_id: str, keep: set[int]) -> Replay:
     """Re-run ``run_id`` from its manifest, keeping states at ``keep``; verify the final hash."""
     man = json.loads((TRACES / run_id / "manifest.json").read_text())
     cfg = man["config"]
-    if cfg["interventions"]:
-        raise ValueError(f"{run_id}: replay of intervention runs is not implemented")
+    schedule: dict[int, list] = {}
+    for iv in cfg["interventions"]:
+        schedule.setdefault(iv["step"], []).append(ivs.make(iv["name"], **iv["params"]))
+    rng = np.random.default_rng(cfg["seed"])
     spec = specimens.load(cfg["specimen"])
     if spec.cells_sha256 != man["specimen"]["cells_sha256_int16le"]:
         raise ValueError(f"{run_id}: specimen cells differ from the run's")
@@ -105,17 +128,21 @@ def replay(run_id: str, keep: set[int]) -> Replay:
         raise ValueError(f"{run_id}: initial state differs from the run's")
     sim = Lenia(rule, A0)
     n = man["timestep"]["steps"]
-    frames, cents = {}, np.empty((n + 1, 2))
+    frames, edits, cents = {}, {}, np.empty((n + 1, 2))
     for t in range(n + 1):
         if t > 0:
             sim.step()
+        for iv in schedule.get(t, []):  # as alm.run: after the step, then re-clip
+            pre = sim.A.copy()
+            sim.A = np.clip(np.asarray(iv.apply(pre.copy(), sim, rng), dtype=np.float64), 0.0, 1.0)
+            edits[t] = (pre, sim.A.copy())
         cents[t] = measure.periodic_centroid(sim.A)
         if t in keep:
             frames[t] = sim.A.copy()
     final = provenance.state_sha256(sim.A)
     if final != man["final_state_sha256"]:
         raise ValueError(f"{run_id}: replay final sha256 {final} != manifest {man['final_state_sha256']}")
-    return Replay(run_id, man, rule, frames, cents)
+    return Replay(run_id, man, rule, frames, edits, cents)
 
 
 # --- drawing primitives -----------------------------------------------------------------------
@@ -214,7 +241,8 @@ def save_provenance(folder: Path, exhibit: dict, replays: list[Replay]) -> None:
 
 def _run_command(r: Replay) -> str:
     cmd = r.manifest["reproduction"]["command"]
-    if r.manifest["specimen"]["id"] in galspec.PR11:
+    gallery_ivs = any(iv["name"].startswith("gallery_") for iv in r.manifest["config"]["interventions"])
+    if r.manifest["specimen"]["id"] in galspec.PR11 or gallery_ivs:
         cmd = cmd.replace("python -m alm.run", "python research/gallery/run_specimen.py", 1)
     return f"git checkout {r.manifest['simulator']['git_commit'][:12]} && .venv/bin/{cmd}"
 
@@ -372,6 +400,130 @@ def g003_contact_sheet(reps: dict[str, Replay]) -> None:
     }, [reps[s.specimen] for s in SUBJECTS])
 
 
+REMOVED = (213, 94, 0)  # Lane 9's "mass removed" vermillion, #D55E00
+
+
+def _ffill(cents: np.ndarray) -> np.ndarray:
+    """Centroids with NaN (empty world) replaced by the last defined one, so the camera stays put."""
+    out = cents.copy()
+    for t in range(1, len(out)):
+        if np.isnan(out[t, 0]):
+            out[t] = out[t - 1]
+    return out
+
+
+def _tint_removed(img_rgb: np.ndarray, pre: np.ndarray, post: np.ndarray, scale: int) -> np.ndarray:
+    """Overlay cells the edit emptied, in vermillion with opacity = mass removed from that cell."""
+    lost = np.clip(pre - post, 0, 1)
+    a = np.repeat(np.repeat(lost, scale, 0), scale, 1)[..., None]
+    a = np.where(a > 0, 0.35 + 0.65 * a, 0.0)
+    return (img_rgb * (1 - a) + np.array(REMOVED) * a).astype(np.uint8)
+
+
+def g4_steps() -> list[int]:
+    """Tile steps: the cut step twice (just before and just after the edit), then 0.5, 2, 10, 50
+    and 200 time units after (capped at the run's length)."""
+    after = [G4_T0 + k for k in (5, 20, 100, 500, 2000)]
+    return [G4_T0, G4_T0] + [t for t in after if t <= G4_STEPS]
+
+
+def g004_shedding(reps: dict[str, Replay]) -> None:
+    """G004: the same port injury on the bound pair and on a single Orbium (C041)."""
+    from PIL import Image, ImageDraw
+
+    folder = EXHIBITS / "G004-port-injury"
+    folder.mkdir(parents=True, exist_ok=True)
+    size, scale = 64, 3
+    cell = size * scale
+    steps = g4_steps()
+    left, top, gap = 200, 34, 4
+    W = left + len(steps) * (cell + gap)
+    H = top + len(G4_SUBJECTS) * (cell + gap) + 44
+    sheet = Image.new("RGB", (W, H), BG)
+    d = ImageDraw.Draw(sheet)
+    heads = ["before", "cut"] + [f"+{(t - G4_T0) / 10:g} tu" for t in steps[2:]]
+    for j, h in enumerate(heads):
+        d.text((left + j * (cell + gap) + 4, 10), h, fill=DIM, font=font(13))
+    for i, (sid, name) in enumerate(G4_SUBJECTS):
+        r = reps[f"G004:{sid}"]
+        cents = _ffill(r.centroids)
+        pre, post = r.edits[G4_T0]
+        iv = r.manifest["interventions_applied"][0]
+        y = top + i * (cell + gap)
+        d.text((10, y + 8), sid, fill=INK, font=font(16, True))
+        d.text((10, y + 30), name, fill=DIM, font=font(12))
+        d.text((10, y + 48), f"{100 * (1 - iv['mass_after'] / iv['mass_before']):.1f}% of mass cut", fill=DIM,
+               font=font(12))
+        m_end = r.frames[steps[-1]].sum() / r.rule.R**2
+        fate = ("dies" if m_end == 0 else "one Orbium-mass body remains" if abs(m_end / 0.4358 - 1) < 0.01
+                else f"survives, mass {m_end:.3f}")
+        d.text((10, y + 66), fate, fill=INK, font=font(12, True))
+        for j, t in enumerate(steps):
+            c = cents[t]
+            if j == 0:
+                rgb = colorize(centred(pre, c, size), scale)
+            elif j == 1:
+                rgb = _tint_removed(colorize(centred(post, c, size), scale), centred(pre, c, size),
+                                    centred(post, c, size), scale)
+            else:
+                rgb = colorize(centred(r.frames[t], c, size), scale)
+            sheet.paste(Image.fromarray(rgb), (left + j * (cell + gap), y))
+    d.text((10, H - 38), "vermillion: cells the cut emptied (opacity = value removed) · each tile 64x64 cells, "
+           "camera follows the centroid", fill=DIM, font=font(12))
+    d.text((10, H - 20), f"Lane 4 I004 port injury, s = {G4_S:g}, at step {G4_T0} after settling; "
+           "heading by forward difference (see provenance)", fill=DIM, font=font(12))
+    sheet.save(folder / "port-injury-sheet.png", optimize=True)
+
+    # The film: both creatures from 2 tu before the cut, camera following, same clock.
+    stride, fps = 2, 20
+    t_end = min(G4_T0 + 600, G4_STEPS)
+    film_steps = list(range(G4_T0 - 20, t_end + 1, stride))
+    pw, head = cell + 0, 40
+    FW, FH = 2 * pw + 3 * gap, pw + head + 2 * gap + 22
+    out = []
+    for t in film_steps:
+        img = Image.new("RGB", (FW, FH), BG)
+        d = ImageDraw.Draw(img)
+        for k, (sid, name) in enumerate(G4_SUBJECTS):
+            r = reps[f"G004:{sid}"]
+            c = _ffill(r.centroids)[t]
+            x0 = gap + k * (pw + gap)
+            d.text((x0, gap), sid, fill=INK, font=font(14, True))
+            d.text((x0, gap + 19), name, fill=DIM, font=font(11))
+            A = r.frames[t]
+            rgb = colorize(centred(A, c, size), scale)
+            if t == G4_T0:  # the cut frame shows what was removed
+                pre, post = r.edits[G4_T0]
+                rgb = _tint_removed(rgb, centred(pre, c, size), centred(post, c, size), scale)
+            img.paste(Image.fromarray(rgb), (x0, gap + head))
+        label = ("before the cut" if t < G4_T0 else "the cut (held 1 s; vermillion = removed)" if t == G4_T0
+                 else f"+{(t - G4_T0) / 10:.1f} tu after the cut")
+        d.text((gap, FH - 20), label, fill=DIM, font=font(12))
+        out.extend([img] * (fps if t == G4_T0 else 1))
+    mp4 = write_video(out, folder / "port-injury.gif", folder / "port-injury.mp4", fps)
+    media = ["port-injury-sheet.png", "port-injury.gif"] + (["port-injury.mp4"] if mp4 else [])
+    save_provenance(folder, {
+        "exhibit": "G004",
+        "title": "Same cut, two fates",
+        "media": media,
+        "frames": {"sheet_steps": steps, "sheet_note": "columns 1-2 are the state at the cut step just before "
+                   "and just after the edit", "film_steps": [film_steps[0], film_steps[-1]], "film_stride_steps": stride,
+                   "playback_fps": fps},
+        "intervention": {"name": "gallery_port_injury", "lane4_id": "I004", "s": G4_S, "step": G4_T0,
+                         "definition": "alm.disturb.i004_port_injury (L4-001 protocol)",
+                         "heading": "forward difference over one probe step (Lane 4 uses the previous "
+                                    "step's centroid); see research/gallery/galintervene.py"},
+        "view": f"{size}x{size}-cell windows shifted by whole cells to centre the centroid (camera follows; "
+                "after death the camera holds its last position); 3x nearest-neighbour",
+        "overlays": ["vermillion tint on cells emptied by the cut (sheet column 'cut'; the film's cut frame), "
+                     "opacity 0.35 + 0.65 x value removed", "text labels"],
+        "disclosures": ["camera follows the centroid, so travel is hidden",
+                        "the film holds the cut frame for one second (20 repeated frames); all other "
+                        "frames are 2 steps apart",
+                        "GIF palette reduced to 128 colours; the MP4 is H.264 (lossy)"],
+    }, [reps[f"G004:{sid}"] for sid, _ in G4_SUBJECTS])
+
+
 def render() -> None:
     galspec.ensure_registered()
     runs = json.loads(RUNS_JSON.read_text())
@@ -383,6 +535,12 @@ def render() -> None:
     g001_four_ways(reps)
     g002_portraits(reps)
     g003_contact_sheet(reps)
+    g4 = {}
+    keep4 = set(g4_steps()) | set(range(G4_T0 - 20, min(G4_T0 + 600, G4_STEPS) + 1))
+    for sid, _ in G4_SUBJECTS:
+        g4[f"G004:{sid}"] = replay(runs[f"G004:{sid}"], keep4)
+        print(f"G004:{sid}: replay of {runs[f'G004:{sid}']} matches its final_state_sha256")
+    g004_shedding(g4)
 
 
 def main(argv=None) -> int:
