@@ -90,15 +90,15 @@ travel. Provenance: [`provenance.json`](exhibits/G003-contact-sheet/provenance.j
 
 ## Specimens shown
 
-Names are the registered names; no nicknames. S101–S103 are catalogued species carried to nearby
+Names are the registered names; no nicknames. Statuses are as of the ledger on 2026-10-07; "reproduced" here means clean-process reruns by Lane 6, not a second lane. S101–S103 are catalogued species carried to nearby
 rules, not new forms ([C043](../claims.md)).
 
 | ID | Registered name | Rule | Behaviour in its run (steps 1000–3000) | Ledger |
 | --- | --- | --- | --- | --- |
 | S001 | Orbium unicaudatus (O2u) | R 13, T 10, μ 0.15, σ 0.015 | mass 0.4358, speed 0.479 R/tu, heading 68.2° | dossier [`S001-orbium.md`](../specimens/S001-orbium.md); C001–C016 |
-| S101 | bound Orbium pair (Synorbium-like) | S001's rule | mass 0.8736, speed 0.473 R/tu, heading 35.5° | C041, C043 (not yet reproduced by a second lane) |
-| S102 | Gyrorbium-like circler | R 13, T 10, μ 0.155, σ 0.020 | mass 0.522 (sd 0.010), net speed 0.003 R/tu | C038, C039 (NUMERICALLY_FRAGILE), C040, C043 |
-| S103 | Circium-like static ring | same as S102 | mass 0.3787, final state = initial state | C038, C042, C043 |
+| S101 | bound Orbium pair (Synorbium-like) | S001's rule | mass 0.8736, speed 0.473 R/tu, heading 35.5° | C041 *observed*; C043 *observed* (not yet reproduced by a second lane) |
+| S102 | Gyrorbium-like circler | R 13, T 10, μ 0.155, σ 0.020 | mass 0.522 (sd 0.010), net speed 0.003 R/tu | C038 *reproduced*; C039 *numerically fragile*; C040, C043 *observed* |
+| S103 | Circium-like static ring | same as S102 | mass 0.3787, final state = initial state | C038, C042 *reproduced*; C043 *observed* |
 
 All four use the poly kernel core and poly growth, β [1], Euler steps with a hard clip to
 [0, 1], float64 and a periodic 128 × 128 world. Headings are measured from +x toward +y, with y
@@ -167,6 +167,11 @@ merged, plain `alm.run` does the same.
   rendering method, and the render must verify against the run's final hash.
 - **Captions** separate observation (what the frames show) from interpretation, and they cite the
   ledger instead of making claims. No species names or nicknames that the ledger does not use.
+- **Claim statuses** are copied from the ledger and written in the same plain words that Lane 9's
+  figures use as badges (*independently checked*, *reproduced*, *observed*, *numerically fragile*,
+  *refuted*). Where an exhibit marks edits, it follows Lane 9's encoding: vermillion `#D55E00`
+  for mass removed, blue `#0072B2` for mass added (PR #13, `research/figures/conventions.json`).
+  Creature colormaps are the gallery's own.
 - **Revisits** replace an exhibit's media in place and add a line to the cycle log, so the old
   version stays in git history.
 - **Planned exhibits** (also numbered G###): before-and-after disturbance sequences, contact
