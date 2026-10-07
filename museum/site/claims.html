@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claims on display · ALM museum</title>
+<meta name="description" content="Every claim the museum cites, with its current ledger status.">
+<link rel="stylesheet" href="museum.css">
+</head>
+<body class="room-claims">
+<header class="site">
+  <a class="brand" href="index.html">ALM <span>an artificial-life natural history museum</span></a>
+  <details class="map"><summary>Rooms</summary><ol>
+<li><a href="index.html">Entrance</a></li>
+<li><a href="orbium.html">1 · The ruler: Orbium</a></li>
+<li><a href="wobbles.html">2 · The wobble that wasn&#x27;t</a></li>
+<li><a href="edges.html">3 · How much can it take?</a></li>
+<li><a href="one-rule.html">4 · Three animals, one rule</a></li>
+<li><a href="how-we-know.html">5 · How we know</a></li>
+<li><a href="collection.html">Reference · The collection</a></li>
+<li><a class="here" href="claims.html">Reference · Claims on display</a></li>
+  </ol></details>
+</header>
+<main>
+<p class="kicker">Reference</p>
+<h1>Claims on display</h1>
+<p class="lede">These are the claims the museum's rooms cite, with the status each one has in the
+ledger right now. The ledger has more; read it whole in
+<a href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/claims.md">research/claims.md</a>, where every claim carries
+its parameters, run IDs, reproduction command, caveats and history.</p>
+<h2>How to read a badge</h2>
+<ul class="legend">
+<li><span class="badge s-INDEPENDENTLY_CHECKED" title="INDEPENDENTLY_CHECKED">independently checked</span> a second lane ran a distinct implementation and got the same answer.</li>
+<li><span class="badge s-NUMERICALLY_FRAGILE" title="NUMERICALLY_FRAGILE">numerically fragile</span> changes or disappears under a modest change of timestep, resolution or boundary.</li>
+<li><span class="badge s-REPRODUCED" title="REPRODUCED">reproduced</span> seen again from a clean process with the same inputs.</li>
+<li><span class="badge s-OBSERVED" title="OBSERVED">observed</span> seen in at least one recorded run; not yet reproduced.</li>
+<li><span class="badge s-CONJECTURED" title="CONJECTURED">conjectured</span> a hypothesis without direct supporting runs yet.</li>
+<li><span class="badge s-REFUTED" title="REFUTED">refuted</span> contradicted by recorded evidence. Refuted claims stay on display.</li>
+</ul>
+<p>A badge shows the first status word of the ledger entry. Many entries qualify it (for example
+"reproduced, not yet by a second lane"); the full status text is printed under each badge here,
+and appears when you hover over a badge anywhere in the museum.</p>
+<div class="table-wrap"><table class="claims">
+<thead><tr><th scope="col">ID</th><th scope="col">Claim</th><th scope="col">Status in the ledger</th><th scope="col">Shown in</th></tr></thead>
+<tbody>
+<tr id="C001">
+  <th scope="row"><a href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/claims.md#c001--s001-glides-stably-under-the-baseline-rule-for-at-least-20-000-steps">C001</a></th>
+  <td>S001 glides stably under the baseline rule for at least 20 000 steps</td>
+  <td><span class="badge s-INDEPENDENTLY_CHECKED" title="INDEPENDENTLY_CHECKED">independently checked</span><div class="status-text">INDEPENDENTLY_CHECKED</div></td>
+  <td><a href="index.html">The search for Mr Wobbles</a>, <a href="orbium.html">The ruler</a>, <a href="collection.html">The collection</a></td>
+</tr>
+<tr id="C003">
+  <th scope="row"><a href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/claims.md#c003--s001s-mass-wobble-is-a-lattice-sampling-artifact-its-relative-amplitude-vanishes-as-the-creature-is-resolved-more-finely">C003</a></th>
+  <td>S001&#x27;s mass wobble is a lattice-sampling artifact: its relative amplitude vanishes as the creature is resolved more finely</td>
+  <td><span class="badge s-INDEPENDENTLY_CHECKED" title="INDEPENDENTLY_CHECKED">independently checked</span><div class="status-text">INDEPENDENTLY_CHECKED</div></td>
+  <td><a href="wobbles.html">The wobble that wasn&#x27;t</a></td>
+</tr>
+<tr id="C004">
+  <th scope="row"><a href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/claims.md#c004--s001-has-a-432-step-mass-oscillation-as-a-property-of-the-organism">C004</a></th>
+  <td>S001 has a 4.32-step mass oscillation (as a property of the organism)</td>
+  <td><span class="badge s-NUMERICALLY_FRAGILE" title="NUMERICALLY_FRAGILE">numerically fragile</span><div class="status-text">NUMERICALLY_FRAGILE</div></td>
+  <td><a href="index.html">The search for Mr Wobbles</a>, <a href="wobbles.html">The wobble that wasn&#x27;t</a></td>
+</tr>
+<tr id="C005">
+  <th scope="row"><a href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/claims.md#c005--s001s-dominant-mass-period-equals-the-single-axis-grid-crossing-period-1v_x-or-a-simple-xy-beat-at-its-heading">C005</a></th>
+  <td>S001&#x27;s dominant mass period equals the single-axis grid-crossing period 1/|v_x| (or a simple x–y beat) at its heading</td>
+  <td><span class="badge s-REFUTED" title="REFUTED">refuted</span><div class="status-text">REFUTED</div></td>
+  <td><a href="wobbles.html">The wobble that wasn&#x27;t</a>, <a href="how-we-know.html">How we know</a></td>
+</tr>
+<tr id="C006">
+  <th scope="row"><a href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/claims.md#c006--s001s-dominant-mass-period-lies-on-a-low-order-lattice-line-f--mv_x--nv_y-m-n--2-folded-into-0-05-cyclesstep">C006</a></th>
+  <td>S001&#x27;s dominant mass period lies on a low-order lattice line f = m·v_x + n·v_y (|m|, |n| ≤ 2), folded into [0, 0.5] cycles/step</td>
+  <td><span class="badge s-OBSERVED" title="OBSERVED">observed</span><div class="status-text">OBSERVED</div></td>
+  <td><a href="wobbles.html">The wobble that wasn&#x27;t</a></td>
+</tr>
+<tr id="C009">
+  <th scope="row"><a href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/claims.md#c009--at-t--10-s001s-speed-is-about-16-below-its-δt--0-limit-and-its-mass-26-above">C009</a></th>
+  <td>At T = 10, S001&#x27;s speed is about 16% below its Δt → 0 limit and its mass 2.6% above</td>
+  <td><span class="badge s-OBSERVED" title="OBSERVED">observed</span><div class="status-text">OBSERVED</div></td>
+  <td><a href="orbium.html">The ruler</a></td>
+</tr>
+<tr id="C010">
+  <th scope="row"><a href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/claims.md#c010--s001-travels-at-0479-r-per-time-unit">C010</a></th>
+  <td>S001 travels at 0.479 R per time unit</td>
+  <td><span class="badge s-NUMERICALLY_FRAGILE" title="NUMERICALLY_FRAGILE">numerically fragile</span><div class="status-text">NUMERICALLY_FRAGILE</div></td>
+  <td><a href="orbium.html">The ruler</a></td>
+</tr>
+<tr id="C011">
+  <th scope="row"><a href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/claims.md#c011--at-r--13-s001s-travel-heading-locks-onto-a-discrete-set-of-lattice-directions">C011</a></th>
+  <td>At R = 13, S001&#x27;s travel heading locks onto a discrete set of lattice directions</td>
+  <td><span class="badge s-INDEPENDENTLY_CHECKED" title="INDEPENDENTLY_CHECKED">independently checked</span><div class="status-text">INDEPENDENTLY_CHECKED</div></td>
+  <td><a href="orbium.html">The ruler</a>, <a href="wobbles.html">The wobble that wasn&#x27;t</a></td>
+</tr>
+<tr id="C012">
+  <th scope="row"><a href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/claims.md#c012--at-r--26-the-heading-lock-mostly-disappears">C012</a></th>
+  <td>At R = 26 the heading lock mostly disappears</td>
+  <td><span class="badge s-REFUTED" title="REFUTED (withdrawn by Lane 3)">refuted</span><div class="status-text">REFUTED (withdrawn by Lane 3)</div></td>
+  <td><a href="how-we-know.html">How we know</a></td>
+</tr>
+<tr id="C013">
+  <th scope="row"><a href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/claims.md#c013--at-r--26-the-heading-lock-persists-weaker-46-start-rotations-settle-on-17-headings">C013</a></th>
+  <td>At R = 26 the heading lock persists, weaker: 46 start rotations settle on 17 headings</td>
+  <td><span class="badge s-INDEPENDENTLY_CHECKED" title="INDEPENDENTLY_CHECKED">independently checked</span><div class="status-text">INDEPENDENTLY_CHECKED</div></td>
+  <td><a href="wobbles.html">The wobble that wasn&#x27;t</a>, <a href="how-we-know.html">How we know</a></td>
+</tr>
+<tr id="C014">
+  <th scope="row"><a href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/claims.md#c014--r--13-is-resolution-converged-for-s001s-mean-mass-size-and-speed-but-not-for-mean-anisotropy">C014</a></th>
+  <td>R = 13 is resolution-converged for S001&#x27;s mean mass, size and speed (but not for mean anisotropy)</td>
+  <td><span class="badge s-INDEPENDENTLY_CHECKED" title="INDEPENDENTLY_CHECKED (mean mass); OBSERVED (speed, gyradius, anisotropy)">independently checked</span><div class="status-text">INDEPENDENTLY_CHECKED (mean mass); OBSERVED (speed, gyradius, anisotropy)</div></td>
+  <td><a href="orbium.html">The ruler</a>, <a href="wobbles.html">The wobble that wasn&#x27;t</a></td>
+</tr>
+<tr id="C020">
+  <th scope="row"><a href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/claims.md#c020--s001-is-elongated-along-its-direction-of-travel-major-axis-within-03-of-heading-dominant-rotational-harmonic-k--2">C020</a></th>
+  <td>S001 is elongated along its direction of travel (major axis within 0.3° of heading; dominant rotational harmonic k = 2)</td>
+  <td><span class="badge s-REPRODUCED" title="REPRODUCED">reproduced</span><div class="status-text">REPRODUCED</div></td>
+  <td><a href="orbium.html">The ruler</a></td>
+</tr>
+<tr id="C023">
+  <th scope="row"><a href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/claims.md#c023--s001-has-a-single-sharp-all-or-nothing-survival-edge-for-each-of-four-standardized-disturbances">C023</a></th>
+  <td>S001 has a single sharp, all-or-nothing survival edge for each of four standardized disturbances</td>
+  <td><span class="badge s-INDEPENDENTLY_CHECKED" title="INDEPENDENTLY_CHECKED at T = 10, R = 13 (Lane 4 on `ref` + `alm`; Lane 3 on `alm_check` with its own battery code). The exact I003 and I004 edge values are NUMERICALLY_FRAGILE in T (C027).">independently checked</span><div class="status-text">INDEPENDENTLY_CHECKED at T = 10, R = 13 (Lane 4 on `ref` + `alm`; Lane 3 on `alm_check` with its own battery code). The exact I003 and I004 edge values are NUMERICALLY_FRAGILE in T (C027).</div></td>
+  <td><a href="edges.html">How much can it take?</a>, <a href="how-we-know.html">How we know</a></td>
+</tr>
+<tr id="C026">
+  <th scope="row"><a href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/claims.md#c026--where-mass-is-removed-matters-more-than-how-much-s001-survives-losing-10-uniformly-but-dies-from-about-5-removed-at-its-centre">C026</a></th>
+  <td>Where mass is removed matters more than how much: S001 survives losing 10% uniformly but dies from about 5% removed at its centre</td>
+  <td><span class="badge s-INDEPENDENTLY_CHECKED" title="INDEPENDENTLY_CHECKED">independently checked</span><div class="status-text">INDEPENDENTLY_CHECKED</div></td>
+  <td><a href="edges.html">How much can it take?</a></td>
+</tr>
+<tr id="C027">
+  <th scope="row"><a href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/claims.md#c027--the-frontal-addition-i003-and-port-side-injury-i004-kill-edges-move-1113-when-the-timestep-is-quartered-t--10--40">C027</a></th>
+  <td>The frontal-addition (I003) and port-side-injury (I004) kill edges move 11–13% when the timestep is quartered (T = 10 → 40)</td>
+  <td><span class="badge s-NUMERICALLY_FRAGILE" title="NUMERICALLY_FRAGILE">numerically fragile</span><div class="status-text">NUMERICALLY_FRAGILE</div></td>
+  <td><a href="edges.html">How much can it take?</a></td>
+</tr>
+<tr id="C028">
+  <th scope="row"><a href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/claims.md#c028--post-edit-total-mass-does-not-predict-s001s-survival-across-disturbance-types">C028</a></th>
+  <td>Post-edit total mass does not predict S001&#x27;s survival across disturbance types</td>
+  <td><span class="badge s-OBSERVED" title="OBSERVED">observed</span><div class="status-text">OBSERVED</div></td>
+  <td><a href="edges.html">How much can it take?</a></td>
+</tr>
+<tr id="C029">
+  <th scope="row"><a href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/claims.md#c029--near-the-uniform-attenuation-edge-s001s-collapse-time-grows-like-70lns--s-steps-passage-near-an-unstable-edge-state">C029</a></th>
+  <td>Near the uniform-attenuation edge, S001&#x27;s collapse time grows like −7.0·ln(s − s*) steps (passage near an unstable edge state)</td>
+  <td><span class="badge s-REPRODUCED" title="REPRODUCED">reproduced</span><div class="status-text">REPRODUCED</div></td>
+  <td><a href="edges.html">How much can it take?</a></td>
+</tr>
+<tr id="C038">
+  <th scope="row"><a href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/claims.md#c038--one-rule-s001s-with-μ--0155-σ--0020-supports-three-phenotypes-chosen-by-history-an-orbium-glider-a-circler-s102-and-a-static-ring-s103">C038</a></th>
+  <td>One rule (S001&#x27;s, with μ = 0.155, σ = 0.020) supports three phenotypes chosen by history: an Orbium glider, a circler (S102) and a static ring (S103)</td>
+  <td><span class="badge s-REPRODUCED" title="REPRODUCED (clean-process reruns); not yet reproduced by a second lane">reproduced</span><div class="status-text">REPRODUCED (clean-process reruns); not yet reproduced by a second lane</div></td>
+  <td><a href="index.html">The search for Mr Wobbles</a>, <a href="one-rule.html">Three animals, one rule</a>, <a href="collection.html">The collection</a></td>
+</tr>
+<tr id="C039">
+  <th scope="row"><a href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/claims.md#c039--the-circler-s102-at-its-registered-rule-μ-0155-σ-0020-does-not-survive-doubling-the-resolution">C039</a></th>
+  <td>The circler S102 at its registered rule (μ 0.155, σ 0.020) does not survive doubling the resolution</td>
+  <td><span class="badge s-NUMERICALLY_FRAGILE" title="NUMERICALLY_FRAGILE">numerically fragile</span><div class="status-text">NUMERICALLY_FRAGILE</div></td>
+  <td><a href="one-rule.html">Three animals, one rule</a>, <a href="collection.html">The collection</a></td>
+</tr>
+<tr id="C040">
+  <th scope="row"><a href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/claims.md#c040--at-the-coexistence-rule-lane-4s-disturbances-never-switch-a-glider-into-a-circler-or-back-0316-a-port-injury-switched-the-circler-into-the-static-ring-s103-in-2-of-38-runs">C040</a></th>
+  <td>At the coexistence rule, Lane 4&#x27;s disturbances never switch a glider into a circler or back (0/316); a port injury switched the circler into the static ring S103 in 2 of 38 runs</td>
+  <td><span class="badge s-OBSERVED" title="OBSERVED; not yet reproduced by a second lane">observed</span><div class="status-text">OBSERVED; not yet reproduced by a second lane</div></td>
+  <td><a href="one-rule.html">Three animals, one rule</a></td>
+</tr>
+<tr id="C041">
+  <th scope="row"><a href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/claims.md#c041--under-s001s-own-rule-a-bound-orbium-pair-s101-survives-port-injury-of-1050-by-shedding-to-a-single-orbium-where-a-single-orbium-dies-at-10">C041</a></th>
+  <td>Under S001&#x27;s own rule, a bound Orbium pair (S101) survives port injury of 10–50% by shedding to a single Orbium, where a single Orbium dies at 10%</td>
+  <td><span class="badge s-OBSERVED" title="OBSERVED; not yet reproduced by a second lane">observed</span><div class="status-text">OBSERVED; not yet reproduced by a second lane</div></td>
+  <td><a href="one-rule.html">Three animals, one rule</a>, <a href="collection.html">The collection</a></td>
+</tr>
+<tr id="C042">
+  <th scope="row"><a href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/claims.md#c042--s103-is-an-exact-fixed-point-of-the-clipped-lenia-map-it-is-t-independent-and-returns-bitwise-to-itself-after-attenuation-up-to-20">C042</a></th>
+  <td>S103 is an exact fixed point of the clipped Lenia map: it is T-independent and returns bitwise to itself after attenuation up to 20%</td>
+  <td><span class="badge s-REPRODUCED" title="REPRODUCED (clean-process reruns); not yet reproduced by a second lane">reproduced</span><div class="status-text">REPRODUCED (clean-process reruns); not yet reproduced by a second lane</div></td>
+  <td><a href="one-rule.html">Three animals, one rule</a>, <a href="collection.html">The collection</a></td>
+</tr>
+<tr id="C043">
+  <th scope="row"><a href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/claims.md#c043--s101-s102-and-s103-are-catalogued-species-carried-to-nearby-rules-not-new-forms">C043</a></th>
+  <td>S101, S102 and S103 are catalogued species carried to nearby rules, not new forms</td>
+  <td><span class="badge s-OBSERVED" title="OBSERVED (any novelty claim for S101–S103 is REFUTED)">observed</span><div class="status-text">OBSERVED (any novelty claim for S101–S103 is REFUTED)</div></td>
+  <td><a href="index.html">The search for Mr Wobbles</a>, <a href="one-rule.html">Three animals, one rule</a>, <a href="how-we-know.html">How we know</a>, <a href="collection.html">The collection</a></td>
+</tr>
+<tr id="C044">
+  <th scope="row"><a href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/claims.md#c044--around-s001-orbiums-μ--σ-neighbourhood-is-one-continuum-no-other-phenotype-arises-from-orbium-cells-soups-or-rescaled-orbia-except-a-circler-at-two-rules-and-the-bound-pair">C044</a></th>
+  <td>Around S001, Orbium&#x27;s μ × σ neighbourhood is one continuum: no other phenotype arises from Orbium cells, soups or rescaled Orbia except a circler at two rules and the bound pair</td>
+  <td><span class="badge s-OBSERVED" title="OBSERVED; not yet reproduced by a second lane">observed</span><div class="status-text">OBSERVED; not yet reproduced by a second lane</div></td>
+  <td><a href="one-rule.html">Three animals, one rule</a></td>
+</tr>
+</tbody></table></div>
+
+</main>
+<footer class="site">
+  <p>Claim statuses read from <code>research/claims.md</code> (sha256 <code>99fc1c1c4c0a</code>) when this page was built.</p>
+  <p>Every picture here is a recorded simulation or a figure drawn from committed data. Statuses
+  are the claims ledger's, not the museum's: a badge never says more than
+  <a href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/claims.md">research/claims.md</a> does.</p>
+</footer>
+</body>
+</html>

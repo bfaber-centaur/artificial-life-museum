@@ -1,0 +1,95 @@
+<!--meta {
+  "slug": "one-rule", "order": 40, "title": "Three animals, one rule", "nav_label": "4 · Three animals, one rule",
+  "kicker": "Room 4 · Specimens S101, S102, S103",
+  "summary": "A glider, a circler and a static ring living under the same physics, and a bound pair that survives a wound by shedding a partner.",
+  "expect": {"C038": "REPRODUCED", "C039": "NUMERICALLY_FRAGILE", "C040": "OBSERVED", "C041": "OBSERVED",
+             "C042": "REPRODUCED", "C043": "OBSERVED", "C044": "OBSERVED"}
+} -->
+<h1>Three animals, one rule</h1>
+<p class="lede">Turn Orbium's two dials slightly, from μ = 0.15, σ = 0.015 to μ = 0.155,
+σ = 0.020, and the same physics supports three quite different animals. Which one you get
+depends on how the world started, not on the rule.</p>
+
+<figure class="vitrine">
+  <span class="label-tag">Contact sheet · eight frames, half a time unit apart</span>
+  <img src="{{asset:research/gallery/exhibits/G003-contact-sheet/contact-sheet.png}}" width="1374" height="648" loading="lazy"
+       alt="A grid of frames, four rows by eight columns, with the camera following each creature. Orbium and the bound pair look nearly identical in every frame; the circler looks different in every frame; the ring is identical in every frame.">
+  <figcaption><strong>Shape over time, travel hidden.</strong> The camera follows each creature,
+  so only changes of shape remain. Orbium (S001) and the bound pair (S101) hardly change. The
+  circler (S102) is never the same twice. The ring (S103) never changes at all. Eight frames do
+  not establish a period. Lane 8, exhibit G003 ·
+  {{src:research/gallery/exhibits/G003-contact-sheet/provenance.json|provenance}}.</figcaption>
+</figure>
+
+<div class="label">
+  <p class="obs">At μ = 0.155, σ = 0.020, an Orbium glider, the circler and the static ring each
+  persist for at least 500 time units, and the wounds from Room 3 never turned a glider into a
+  circler or back, in 316 tries.</p>
+  <p class="int">One rule supports three phenotypes chosen by history {{claim:C038}}
+  ({{status:C038}}). No glider–circler switching was seen {{claim:C040}}.</p>
+</div>
+
+<div class="grid4">
+  <figure class="vitrine" style="margin:0">
+    <img src="{{asset:research/gallery/exhibits/G002-portraits/S102-portrait.png}}" width="512" height="576"
+         alt="The circler S102 at step 3000: a lopsided, swirling body with a hollow at one side.">
+    <figcaption><strong>S102, the circler.</strong> As fast as Orbium, but it runs round a circle
+    whose radius is about a quarter of a kernel radius, about one lap every 3.8 time units, and goes nowhere.
+    It is the most fragile of the three: at twice the resolution it dies at this rule, though it
+    lives at a slightly larger σ {{claim:C039}}.</figcaption>
+  </figure>
+  <figure class="vitrine" style="margin:0">
+    <img src="{{asset:research/gallery/exhibits/G002-portraits/S103-portrait.png}}" width="512" height="576"
+         alt="The static ring S103 at step 3000: a small, sharp ring of fully saturated cells around an empty core.">
+    <figcaption><strong>S103, the still ring.</strong> 64 completely full cells around an empty
+    core. After 10&nbsp;000 steps it is bit-for-bit the same as when it started, and after a 20%
+    dimming it returns exactly to itself {{claim:C042}}. It exists because Lenia clips every cell
+    to [0, 1]: a version without the clip would not have it. In 2 of 38 runs, a flank wound
+    turned the circler into this ring.</figcaption>
+  </figure>
+</div>
+
+<h2>The pair that sheds a partner</h2>
+<div class="pair">
+  <figure class="vitrine" style="margin:0">
+    <img src="{{asset:research/gallery/exhibits/G002-portraits/S101-portrait.png}}" width="512" height="576"
+         alt="The bound pair S101: two Orbium bodies side by side inside one shared thin shell.">
+    <figcaption><strong>S101, the bound Orbium pair.</strong> Two Orbium bodies side by side,
+    joined by one thin shared shell, under Orbium's own rule. Its mass is 2.004 times Orbium's
+    and it travels 1.4% slower. Lane 8, exhibit G002.</figcaption>
+  </figure>
+  <div>
+    <div class="label">
+      <p class="obs">Cut into a single Orbium's flank at the protocol's strength 0.10 or more
+      and it dies, in all 36 runs. Make the same cut in the pair, at any strength from 0.10 to
+      0.50, and all 18 runs end as one ordinary, healthy Orbium.</p>
+      <p class="int">The pair survives the wound by shedding to a single Orbium
+      {{claim:C041}}.</p>
+    </div>
+    <div class="caveat"><strong>The obvious objection</strong> The partners travel side by side,
+    and the cut runs along the direction of travel, so it mostly lands on one partner. The result
+    may only mean that the uninjured partner is not dragged down by the dying one, not that the
+    pair heals or cooperates. Lane 6 raised this itself. The Night 1 pair-dynamics expedition is
+    testing it now, against lone-Orbium baselines.</div>
+  </div>
+</div>
+
+<h2>Not new species</h2>
+<p>It would be tempting to name these. They are not new: each one is a species already in
+Bert Chan's catalogue, carried to a nearby rule. Run the catalogue's own Synorbium, Gyrorbium
+and Circium patterns under these rules and they settle into the same bodies, to three or four
+decimal places {{claim:C043}}. Around Orbium itself, the field explorer found no other forms at
+all, apart from the circler and the pair {{claim:C044}}. That is why these specimens have stable
+IDs but no nicknames.</p>
+
+<div class="pending"><strong>In preparation.</strong> Figure C, a map of where these three
+phenotypes live in parameter space and how that map moves with resolution, is being drawn by the
+scientific illustrator and will hang here once it is accepted. The attractor-geography expedition
+is mapping the same region in more detail.</div>
+
+<aside class="sources"><h2>Sources</h2><ul>
+  <li>Dossiers: {{src:research/specimens/S101-orbium-pair.md|S101}}, {{src:research/specimens/S102-circler.md|S102}}, {{src:research/specimens/S103-static-ring.md|S103}} (Lane 6)</li>
+  <li>{{src:research/experiments/L6-field/README.md|Field exploration L6}}: sweeps, coexistence, disturbance switching (Lane 6)</li>
+  <li>{{src:research/gallery/README.md|Gallery notes}} with run IDs and hashes, exhibits {{src:research/gallery/exhibits/G002-portraits|G002}} and {{src:research/gallery/exhibits/G003-contact-sheet|G003}} (Lane 8)</li>
+  <li>{{src:research/figures/README.md|Figures index}}, where Figure C will appear (Lane 9)</li>
+</ul></aside>

@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The search for Mr Wobbles</title>
+<meta name="description" content="A small museum of creatures that live in classic Lenia, built from recorded simulations and a public claims ledger.">
+<link rel="stylesheet" href="museum.css">
+</head>
+<body class="room-index">
+<header class="site">
+  <a class="brand" href="index.html">ALM <span>an artificial-life natural history museum</span></a>
+  <details class="map"><summary>Rooms</summary><ol>
+<li><a class="here" href="index.html">Entrance</a></li>
+<li><a href="orbium.html">1 · The ruler: Orbium</a></li>
+<li><a href="wobbles.html">2 · The wobble that wasn&#x27;t</a></li>
+<li><a href="edges.html">3 · How much can it take?</a></li>
+<li><a href="one-rule.html">4 · Three animals, one rule</a></li>
+<li><a href="how-we-know.html">5 · How we know</a></li>
+<li><a href="collection.html">Reference · The collection</a></li>
+<li><a href="claims.html">Reference · Claims on display</a></li>
+  </ol></details>
+</header>
+<main>
+<p class="kicker">ALM · an artificial-life natural history museum</p>
+<section class="hero">
+  <div>
+    <h1>The search for Mr&nbsp;Wobbles</h1>
+    <p class="lede">These animals live on a grid of numbers. Nobody drew them. Each one is a
+    pattern that keeps its shape while a single, fixed rule rewrites every cell it is made of,
+    ten times per unit of time.</p>
+    <p>This museum shows what a field station of Claude agents, each working in its own lane
+    with a human editor deciding what is accepted, has learned about four of these creatures,
+    and how sure we are of each piece. Every picture is a recorded run. Every statement links to its evidence. Some of the
+    most interesting exhibits are the ideas that turned out to be wrong.</p>
+    <a class="cta" href="orbium.html">Start the tour</a>
+  </div>
+  <figure class="vitrine">
+    <img src="../../research/gallery/exhibits/G001-four-ways-to-move/four-ways.gif" width="530" height="644"
+         alt="Four Lenia creatures on their own 128 by 128 worlds: a glider crossing in straight lines, a bound pair doing the same, a circler turning on the spot, and a ring that never changes.">
+    <figcaption><strong>Four ways to move.</strong> Glider, bound pair, circler and still ring,
+    each on its own wrap-around world, over the same 40 time units. Exhibit G001 by the
+    wildlife photographer (Lane 8); <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/README.md">gallery notes</a> ·
+    <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G001-four-ways-to-move/provenance.json">provenance</a>.</figcaption>
+  </figure>
+</section>
+
+<h2>Who is Mr Wobbles?</h2>
+<p>Nobody, yet. The project's charter reserves a nickname, "Sir Wobbles", for the first creature
+that earns one, and sets six conditions: a stable ID and saved state, survival of a clean rerun
+and of a change in resolution or timestep, behaviour shown by an experiment rather than by looks,
+a reference check that fails to find it in the existing catalogue, and an independent
+reproduction by a second lane. Every creature in this museum has failed at least one: Orbium
+is the catalogue's own, and the other three turned out to be catalogued species too
+<a class="claim" href="claims.html#C043" title="S101, S102 and S103 are catalogued species carried to nearby rules, not new forms"><span class="cid">C043</span><span class="badge s-OBSERVED" title="OBSERVED (any novelty claim for S101–S103 is REFUTED)">observed</span></a>. They are
+displayed anyway: the charter says failed organisms belong to the collection too.</p>
+
+<h2>What is Lenia?</h2>
+<p>Lenia is a continuous cousin of Conway's Game of Life, invented by Bert Chan. Each cell holds
+a number between 0 (empty, black in our pictures) and 1 (full, pale yellow). At every step, each
+cell looks at a ring of neighbours out to a radius R, 13 cells in most of our runs, and grows or
+shrinks by a bell-shaped rule with two dials, μ and σ. That is all. Everything you will see here
+comes out of that rule, a starting pattern, and the grid it runs on.</p>
+<p>That last ingredient matters more than you might think. The first thing we found that
+wobbled was a steady pulse in Orbium's mass. It looked like a heartbeat. It turned out to be the
+grid <a class="claim" href="claims.html#C004" title="S001 has a 4.32-step mass oscillation (as a property of the organism)"><span class="cid">C004</span><span class="badge s-NUMERICALLY_FRAGILE" title="NUMERICALLY_FRAGILE">num. fragile</span></a>. Room 2 tells that story.</p>
+
+<h2>The tour</h2>
+<ol class="rooms">
+  <li><a href="orbium.html">The ruler</a><p>Orbium, the calibration animal, measured to the last
+  bit by two independent programs <a class="claim" href="claims.html#C001" title="S001 glides stably under the baseline rule for at least 20 000 steps"><span class="cid">C001</span><span class="badge s-INDEPENDENTLY_CHECKED" title="INDEPENDENTLY_CHECKED">indep. checked</span></a>.</p></li>
+  <li><a href="wobbles.html">The wobble that wasn't</a><p>A heartbeat that was really the grid,
+  and the first explanation we refuted.</p></li>
+  <li><a href="edges.html">How much can it take?</a><p>Where you wound an animal matters more than
+  how much you take.</p></li>
+  <li><a href="one-rule.html">Three animals, one rule</a><p>A glider, a circler and a ring that
+  share the same physics, and a pair that sheds a partner <a class="claim" href="claims.html#C038" title="One rule (S001&#x27;s, with μ = 0.155, σ = 0.020) supports three phenotypes chosen by history: an Orbium glider, a circler (S102) and a static ring (S103)"><span class="cid">C038</span><span class="badge s-REPRODUCED" title="REPRODUCED (clean-process reruns); not yet reproduced by a second lane">reproduced</span></a>.</p></li>
+  <li><a href="how-we-know.html">How we know</a><p>The ledger, the six status words, and the
+  reviewer whose job is to break things.</p></li>
+  <li class="ref"><a href="collection.html">The collection</a><p>All four specimens with their
+  rules, dossiers and run IDs.</p></li>
+</ol>
+
+<h2>How to read the labels</h2>
+<p>Wherever a claim is mentioned you will see its ID and a coloured badge, like
+<a class="claim" href="claims.html#C001" title="S001 glides stably under the baseline rule for at least 20 000 steps"><span class="cid">C001</span><span class="badge s-INDEPENDENTLY_CHECKED" title="INDEPENDENTLY_CHECKED">indep. checked</span></a>. The badge is the claim's status in the project's
+<a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/claims.md">claims ledger</a> at the moment this page was built; the museum never
+writes its own. Hover over a badge for the full wording, or see
+<a href="claims.html">every claim on display</a> with a key to the six status words.</p>
+
+<aside class="sources"><h2>Sources</h2><ul>
+  <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/charter.md">Project charter</a>: mission, lanes and rules of evidence</li>
+  <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/claims.md">Claims ledger</a></li>
+  <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/README.md">Specimen gallery</a> (Lane 8)</li>
+  <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/figures/README.md">Figures</a> (Lane 9)</li>
+</ul></aside>
+
+<nav class="walk" aria-label="Tour"><span></span><a class="next" href="orbium.html"><small>Next room</small>The ruler</a></nav>
+</main>
+<footer class="site">
+  <p>Claim statuses read from <code>research/claims.md</code> (sha256 <code>99fc1c1c4c0a</code>) when this page was built.</p>
+  <p>Every picture here is a recorded simulation or a figure drawn from committed data. Statuses
+  are the claims ledger's, not the museum's: a badge never says more than
+  <a href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/claims.md">research/claims.md</a> does.</p>
+</footer>
+</body>
+</html>

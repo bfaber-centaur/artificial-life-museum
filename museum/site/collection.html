@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The collection · ALM museum</title>
+<meta name="description" content="All four specimens on display, with their rules, dossiers, recorded runs and the claims about them.">
+<link rel="stylesheet" href="museum.css">
+</head>
+<body class="room-collection">
+<header class="site">
+  <a class="brand" href="index.html">ALM <span>an artificial-life natural history museum</span></a>
+  <details class="map"><summary>Rooms</summary><ol>
+<li><a href="index.html">Entrance</a></li>
+<li><a href="orbium.html">1 · The ruler: Orbium</a></li>
+<li><a href="wobbles.html">2 · The wobble that wasn&#x27;t</a></li>
+<li><a href="edges.html">3 · How much can it take?</a></li>
+<li><a href="one-rule.html">4 · Three animals, one rule</a></li>
+<li><a href="how-we-know.html">5 · How we know</a></li>
+<li><a class="here" href="collection.html">Reference · The collection</a></li>
+<li><a href="claims.html">Reference · Claims on display</a></li>
+  </ol></details>
+</header>
+<main>
+<p class="kicker">Reference</p>
+<h1>The collection</h1>
+<p class="lede">Four specimens, each with a stable ID, a saved starting state that rebuilds bit
+for bit, and a dossier. IDs starting S0 are reference specimens from the upstream catalogue;
+S1 are field finds. Names are the registered ones: no specimen has earned a nickname.</p>
+
+<div class="grid4">
+  <figure class="vitrine" style="margin:0">
+    <img src="../../research/gallery/exhibits/G002-portraits/S001-portrait.png" width="512" height="576" loading="lazy"
+         alt="Orbium S001: crescent core, dimmer shell, thin outer arc.">
+    <figcaption><strong>S001 · Orbium unicaudatus (O2u)</strong><br>
+    Rule μ 0.15, σ 0.015 · glides · <a class="claim" href="claims.html#C001" title="S001 glides stably under the baseline rule for at least 20 000 steps"><span class="cid">C001</span><span class="badge s-INDEPENDENTLY_CHECKED" title="INDEPENDENTLY_CHECKED">indep. checked</span></a><br>
+    <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/specimens/S001-orbium.md">dossier</a> · run <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/tree/main/research/traces/S001-7c75573885">S001-7c75573885</a></figcaption>
+  </figure>
+  <figure class="vitrine" style="margin:0">
+    <img src="../../research/gallery/exhibits/G002-portraits/S101-portrait.png" width="512" height="576" loading="lazy"
+         alt="Bound pair S101: two Orbium bodies side by side in one shell.">
+    <figcaption><strong>S101 · bound Orbium pair</strong> (Synorbium ignis branch)<br>
+    Rule μ 0.15, σ 0.015 · glides as a pair · <a class="claim" href="claims.html#C041" title="Under S001&#x27;s own rule, a bound Orbium pair (S101) survives port injury of 10–50% by shedding to a single Orbium, where a single Orbium dies at 10%"><span class="cid">C041</span><span class="badge s-OBSERVED" title="OBSERVED; not yet reproduced by a second lane">observed</span></a><br>
+    <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/specimens/S101-orbium-pair.md">dossier</a> · run <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/tree/main/research/traces/S101-9ea05a4377">S101-9ea05a4377</a></figcaption>
+  </figure>
+  <figure class="vitrine" style="margin:0">
+    <img src="../../research/gallery/exhibits/G002-portraits/S102-portrait.png" width="512" height="576" loading="lazy"
+         alt="Circler S102: a lopsided swirling body.">
+    <figcaption><strong>S102 · circler</strong> (Gyrorbium gyrans branch)<br>
+    Rule μ 0.155, σ 0.020 · circles · <a class="claim" href="claims.html#C038" title="One rule (S001&#x27;s, with μ = 0.155, σ = 0.020) supports three phenotypes chosen by history: an Orbium glider, a circler (S102) and a static ring (S103)"><span class="cid">C038</span><span class="badge s-REPRODUCED" title="REPRODUCED (clean-process reruns); not yet reproduced by a second lane">reproduced</span></a> <a class="claim" href="claims.html#C039" title="The circler S102 at its registered rule (μ 0.155, σ 0.020) does not survive doubling the resolution"><span class="cid">C039</span><span class="badge s-NUMERICALLY_FRAGILE" title="NUMERICALLY_FRAGILE">num. fragile</span></a><br>
+    <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/specimens/S102-circler.md">dossier</a> · run <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/tree/main/research/traces/S102-12fd60e362">S102-12fd60e362</a></figcaption>
+  </figure>
+  <figure class="vitrine" style="margin:0">
+    <img src="../../research/gallery/exhibits/G002-portraits/S103-portrait.png" width="512" height="576" loading="lazy"
+         alt="Static ring S103: a sharp ring of full cells around an empty core.">
+    <figcaption><strong>S103 · static ring</strong> (Circium lithos apertus branch)<br>
+    Rule μ 0.155, σ 0.020 · holds still · <a class="claim" href="claims.html#C042" title="S103 is an exact fixed point of the clipped Lenia map: it is T-independent and returns bitwise to itself after attenuation up to 20%"><span class="cid">C042</span><span class="badge s-REPRODUCED" title="REPRODUCED (clean-process reruns); not yet reproduced by a second lane">reproduced</span></a><br>
+    <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/specimens/S103-static-ring.md">dossier</a> · run <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/tree/main/research/traces/S103-57feb4ccc4">S103-57feb4ccc4</a></figcaption>
+  </figure>
+</div>
+
+<h2>Shared conditions</h2>
+<p>Unless a card says otherwise: kernel radius R = 13 cells, timestep 1/10 (T = 10), polynomial
+kernel and growth functions with a single ring, Euler steps with a hard clip to [0, 1], 64-bit
+floats, and a 128 × 128 world that wraps at the edges. All three field finds are catalogued
+species carried to a nearby rule <a class="claim" href="claims.html#C043" title="S101, S102 and S103 are catalogued species carried to nearby rules, not new forms"><span class="cid">C043</span><span class="badge s-OBSERVED" title="OBSERVED (any novelty claim for S101–S103 is REFUTED)">observed</span></a>.</p>
+
+<table class="facts">
+  <tr><th>ID</th><th>Mass (R²)</th><th>Speed (R per time unit)</th><th>Behaviour, steps 1000–3000</th></tr>
+  <tr><td>S001</td><td>0.4358</td><td>0.479</td><td>straight line, heading 68.2°</td></tr>
+  <tr><td>S101</td><td>0.8736</td><td>0.473</td><td>straight line, heading 35.5°</td></tr>
+  <tr><td>S102</td><td>0.522</td><td>net 0.003</td><td>tight circle</td></tr>
+  <tr><td>S103</td><td>0.3787</td><td>0</td><td>final state identical to the first</td></tr>
+</table>
+<p>Speeds depend on the timestep and headings on the grid (Room 1), so treat them as properties
+of these runs. Values from the <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/README.md">gallery&#x27;s specimen table</a>;
+each run's full rule, environment and hashes are in its <code>manifest.json</code>.</p>
+
+<aside class="sources"><h2>Sources</h2><ul>
+  <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/specimens/README.md">Specimen index</a> and dossiers (Lanes 1 and 6)</li>
+  <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/runs.json">Gallery run list</a> and <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/traces/README.md">trace format</a></li>
+  <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/L6-field/make_seeds.py">make_seeds.py</a>, which rebuilds the S101–S103 starting states</li>
+</ul></aside>
+
+
+</main>
+<footer class="site">
+  <p>Claim statuses read from <code>research/claims.md</code> (sha256 <code>99fc1c1c4c0a</code>) when this page was built.</p>
+  <p>Every picture here is a recorded simulation or a figure drawn from committed data. Statuses
+  are the claims ledger's, not the museum's: a badge never says more than
+  <a href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/claims.md">research/claims.md</a> does.</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,267 @@
+{
+  "ledger": "research/claims.md",
+  "ledger_sha256": "99fc1c1c4c0a0977fe72bca3e561b4c5b7132ab2043ec361839feb1fcd6c7664",
+  "ledger_commit": "76a8dc9",
+  "conventions_sha256": "227df043de8fff733da0840fd8297b01f064007a2320a944a5b743733f0ff1bb",
+  "claims": {
+    "C001": {
+      "status": "INDEPENDENTLY_CHECKED",
+      "status_text": "INDEPENDENTLY_CHECKED",
+      "rooms": [
+        "collection",
+        "index",
+        "orbium"
+      ]
+    },
+    "C003": {
+      "status": "INDEPENDENTLY_CHECKED",
+      "status_text": "INDEPENDENTLY_CHECKED",
+      "rooms": [
+        "wobbles"
+      ]
+    },
+    "C004": {
+      "status": "NUMERICALLY_FRAGILE",
+      "status_text": "NUMERICALLY_FRAGILE",
+      "rooms": [
+        "index",
+        "wobbles"
+      ]
+    },
+    "C005": {
+      "status": "REFUTED",
+      "status_text": "REFUTED",
+      "rooms": [
+        "how-we-know",
+        "wobbles"
+      ]
+    },
+    "C006": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "wobbles"
+      ]
+    },
+    "C009": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "orbium"
+      ]
+    },
+    "C010": {
+      "status": "NUMERICALLY_FRAGILE",
+      "status_text": "NUMERICALLY_FRAGILE",
+      "rooms": [
+        "orbium"
+      ]
+    },
+    "C011": {
+      "status": "INDEPENDENTLY_CHECKED",
+      "status_text": "INDEPENDENTLY_CHECKED",
+      "rooms": [
+        "orbium",
+        "wobbles"
+      ]
+    },
+    "C012": {
+      "status": "REFUTED",
+      "status_text": "REFUTED (withdrawn by Lane 3)",
+      "rooms": [
+        "how-we-know"
+      ]
+    },
+    "C013": {
+      "status": "INDEPENDENTLY_CHECKED",
+      "status_text": "INDEPENDENTLY_CHECKED",
+      "rooms": [
+        "how-we-know",
+        "wobbles"
+      ]
+    },
+    "C014": {
+      "status": "INDEPENDENTLY_CHECKED",
+      "status_text": "INDEPENDENTLY_CHECKED (mean mass); OBSERVED (speed, gyradius, anisotropy)",
+      "rooms": [
+        "orbium",
+        "wobbles"
+      ]
+    },
+    "C020": {
+      "status": "REPRODUCED",
+      "status_text": "REPRODUCED",
+      "rooms": [
+        "orbium"
+      ]
+    },
+    "C023": {
+      "status": "INDEPENDENTLY_CHECKED",
+      "status_text": "INDEPENDENTLY_CHECKED at T = 10, R = 13 (Lane 4 on `ref` + `alm`; Lane 3 on `alm_check` with its own battery code). The exact I003 and I004 edge values are NUMERICALLY_FRAGILE in T (C027).",
+      "rooms": [
+        "edges",
+        "how-we-know"
+      ]
+    },
+    "C026": {
+      "status": "INDEPENDENTLY_CHECKED",
+      "status_text": "INDEPENDENTLY_CHECKED",
+      "rooms": [
+        "edges"
+      ]
+    },
+    "C027": {
+      "status": "NUMERICALLY_FRAGILE",
+      "status_text": "NUMERICALLY_FRAGILE",
+      "rooms": [
+        "edges"
+      ]
+    },
+    "C028": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "edges"
+      ]
+    },
+    "C029": {
+      "status": "REPRODUCED",
+      "status_text": "REPRODUCED",
+      "rooms": [
+        "edges"
+      ]
+    },
+    "C038": {
+      "status": "REPRODUCED",
+      "status_text": "REPRODUCED (clean-process reruns); not yet reproduced by a second lane",
+      "rooms": [
+        "collection",
+        "index",
+        "one-rule"
+      ]
+    },
+    "C039": {
+      "status": "NUMERICALLY_FRAGILE",
+      "status_text": "NUMERICALLY_FRAGILE",
+      "rooms": [
+        "collection",
+        "one-rule"
+      ]
+    },
+    "C040": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED; not yet reproduced by a second lane",
+      "rooms": [
+        "one-rule"
+      ]
+    },
+    "C041": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED; not yet reproduced by a second lane",
+      "rooms": [
+        "collection",
+        "one-rule"
+      ]
+    },
+    "C042": {
+      "status": "REPRODUCED",
+      "status_text": "REPRODUCED (clean-process reruns); not yet reproduced by a second lane",
+      "rooms": [
+        "collection",
+        "one-rule"
+      ]
+    },
+    "C043": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED (any novelty claim for S101–S103 is REFUTED)",
+      "rooms": [
+        "collection",
+        "how-we-know",
+        "index",
+        "one-rule"
+      ]
+    },
+    "C044": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED; not yet reproduced by a second lane",
+      "rooms": [
+        "one-rule"
+      ]
+    }
+  },
+  "sources": {
+    "index": [
+      "research/charter.md",
+      "research/claims.md",
+      "research/figures/README.md",
+      "research/gallery/README.md",
+      "research/gallery/exhibits/G001-four-ways-to-move/provenance.json"
+    ],
+    "orbium": [
+      "research/experiments/lane3/README.md",
+      "research/gallery/exhibits/G002-portraits",
+      "research/gallery/exhibits/G002-portraits/provenance.json",
+      "research/reports/reference-dossier.md",
+      "research/specimens/S001-orbium",
+      "research/specimens/S001-orbium.md",
+      "research/traces/S001-37369303c7"
+    ],
+    "wobbles": [
+      "research/experiments/H001-lattice-wobble",
+      "research/experiments/H001-lattice-wobble/PREREGISTRATION.md",
+      "research/experiments/H001-lattice-wobble/e1.csv",
+      "research/experiments/H001-lattice-wobble/e2.csv",
+      "research/experiments/lane3/README.md",
+      "research/reports/hostile-review.md",
+      "research/specimens/S001-orbium.md",
+      "research/traces/S001-37369303c7",
+      "research/traces/lane3/resolution.csv"
+    ],
+    "edges": [
+      "research/experiments/L4-001-disturbance-battery/README.md",
+      "research/experiments/lane3/README.md",
+      "research/figures/A-survival-boundary/README.md",
+      "research/figures/A-survival-boundary/figure-A-edges.csv",
+      "research/figures/A-survival-boundary/figure-A-runs.csv",
+      "research/figures/A-survival-boundary/figure-A.pdf",
+      "research/figures/A-survival-boundary/figure-A.provenance.json",
+      "research/figures/A-survival-boundary/make_figure.py",
+      "research/reports/hostile-review.md",
+      "research/traces/lane3"
+    ],
+    "one-rule": [
+      "research/experiments/L6-field/README.md",
+      "research/figures/README.md",
+      "research/gallery/README.md",
+      "research/gallery/exhibits/G002-portraits",
+      "research/gallery/exhibits/G003-contact-sheet",
+      "research/gallery/exhibits/G003-contact-sheet/provenance.json",
+      "research/specimens/S101-orbium-pair.md",
+      "research/specimens/S102-circler.md",
+      "research/specimens/S103-static-ring.md"
+    ],
+    "how-we-know": [
+      "museum/README.md",
+      "research/charter.md",
+      "research/claims.md",
+      "research/figures/README.md",
+      "research/gallery/README.md",
+      "research/reports/hostile-review.md"
+    ],
+    "collection": [
+      "research/experiments/L6-field/make_seeds.py",
+      "research/gallery/README.md",
+      "research/gallery/runs.json",
+      "research/specimens/README.md",
+      "research/specimens/S001-orbium.md",
+      "research/specimens/S101-orbium-pair.md",
+      "research/specimens/S102-circler.md",
+      "research/specimens/S103-static-ring.md",
+      "research/traces/README.md",
+      "research/traces/S001-7c75573885",
+      "research/traces/S101-9ea05a4377",
+      "research/traces/S102-12fd60e362",
+      "research/traces/S103-57feb4ccc4"
+    ]
+  }
+}

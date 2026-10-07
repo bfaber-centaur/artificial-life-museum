@@ -1,0 +1,78 @@
+<!--meta {
+  "slug": "wobbles", "order": 20, "title": "The wobble that wasn't", "nav_label": "2 · The wobble that wasn't",
+  "kicker": "Room 2 · A heartbeat that was the grid",
+  "summary": "Orbium's steady 4.32-step mass pulse, why it is a lattice artifact, and the first explanation that was refuted.",
+  "expect": {"C003": "INDEPENDENTLY_CHECKED", "C004": "NUMERICALLY_FRAGILE", "C005": "REFUTED",
+             "C006": "OBSERVED", "C011": "INDEPENDENTLY_CHECKED", "C013": "INDEPENDENTLY_CHECKED",
+             "C014": "INDEPENDENTLY_CHECKED"}
+} -->
+<h1>The wobble that wasn't</h1>
+<p class="lede">On the first night, every measurement of Orbium showed a pulse. Its mass rose
+and fell by about a quarter of a percent, regularly, every 4.32 steps. A creature with a
+heartbeat is a much better story than a creature without one, and in a project searching for
+something worth calling Sir Wobbles, a wobble was hard to resist.</p>
+
+<figure class="evidence">
+  <span class="label-tag">Working plot · Lane 2 baseline run</span>
+  <a href="{{asset:research/traces/S001-37369303c7/overview.png}}" title="Open full size"><img src="{{asset:research/traces/S001-37369303c7/overview.png}}" width="900" height="630"
+       alt="Four plots from Orbium's 20,000-step baseline run. Top left: mass every step, a thick band between about 0.433 and 0.438 that never drifts. Top right: speed, a noisy band around 0.48. Bottom left: the centroid path, a straight line. Bottom right: the final world with the creature near the bottom edge."></a>
+  <figcaption><strong>The wobble, as first seen.</strong> Top left: Orbium's mass at every step
+  for 2000 time units. The thick band is the pulse, too fast to resolve at this zoom; it never
+  grows, shrinks or drifts. Diagnostic plot from run
+  {{src:research/traces/S001-37369303c7|S001-37369303c7}} (Lane 2), shown as recorded.</figcaption>
+</figure>
+
+<h2>Three tests a heartbeat should pass</h2>
+<p>If the pulse belonged to the animal, it should look the same whichever way the animal faces
+and however finely we draw it. Lane 1 suspected the grid; Lane 7, the project's hostile
+reviewer, wrote down in advance what result would count against that idea, then ran it.</p>
+
+<figure class="evidence">
+  <span class="label-tag">Working plot · Lane 7, experiment H001</span>
+  <a href="{{asset:research/experiments/H001-lattice-wobble/h001.png}}" title="Open full size"><img src="{{asset:research/experiments/H001-lattice-wobble/h001.png}}" width="1300" height="546"
+       alt="Two plots. Left: heading against start rotation. The points fall in flat steps below a dashed diagonal, for both R = 13 and R = 26. Right: mass wobble size against kernel radius on log axes, falling from 2.6e-3 at R = 13 to 1.3e-4 at R = 39."></a>
+  <figcaption><strong>(a)</strong> Turn the starting pattern by a few degrees and the heading
+  does not follow smoothly; it jumps between preferred lattice directions, at R = 13 and still at
+  R = 26 {{claim:C011}} {{claim:C013}}. <strong>(b)</strong> Draw the same creature on a finer
+  grid and the wobble shrinks about twentyfold between R = 13 and R = 39, while the average mass
+  stays put {{claim:C014}}. A real breathing mode would not lose 95% of its size because we
+  looked more closely. Lane 7's plot, drawn from {{src:research/experiments/H001-lattice-wobble/e1.csv|e1.csv}}
+  and {{src:research/experiments/H001-lattice-wobble/e2.csv|e2.csv}}.</figcaption>
+</figure>
+
+<div class="label">
+  <p class="obs">The pulse's size and period change with the creature's heading and with the
+  grid's resolution, and the size falls towards zero as the grid gets finer.</p>
+  <p class="int">The wobble is a lattice-sampling artifact {{claim:C003}}: two lanes, with two
+  different programs, found the same collapse. As a property of the organism, the 4.32-step
+  oscillation is {{claim:C004}}.</p>
+</div>
+
+<h2>The first explanation was wrong, and stays on display</h2>
+<p>Lane 1's first account was neat: the period is just the time Orbium takes to cross one grid
+column, 1/|v<sub>x</sub>|. At R = 13 and the catalogue heading that gives exactly 4.32 steps. It
+was proposed with a test attached, and the test failed.</p>
+<div class="label">
+  <p class="obs">Across resolutions, the single-column rule held in only 6 of 17 runs (Lane 3).
+  At R = 20 and R = 26 the strongest line in the spectrum was a mixture of x and y crossings,
+  not the x crossing alone (Lane 7).</p>
+  <p class="int">That wording is {{claim:C005}}. The broader lattice account survives: the
+  period sits on some low-order combination of the two crossing rates in 14 of 16 headings,
+  against 1.45 expected by chance {{claim:C006}}. Nobody yet knows which combination will
+  dominate at a given heading.</p>
+</div>
+<div class="caveat"><strong>Why keep a refuted idea?</strong> Because it was a good idea, honestly
+tested. The ledger never deletes a claim: the refutation, its counterexamples and the claim it
+was replaced by stay side by side, so a later visitor can check the reasoning instead of trusting
+the conclusion.</div>
+
+<p>So this wobble is not a heartbeat. It is the grid, showing through the animal, and it
+does not earn anyone a name. The search goes on; the Night 1 numerical-ecology expedition is now asking which of Orbium's other traits
+survive when resolution and timestep change.</p>
+
+<aside class="sources"><h2>Sources</h2><ul>
+  <li>{{src:research/reports/hostile-review.md|Hostile review}} HR-001 and HR-005 (Lane 7)</li>
+  <li>{{src:research/experiments/H001-lattice-wobble/PREREGISTRATION.md|H001 preregistration}}, written before any run, and {{src:research/experiments/H001-lattice-wobble|its data and scripts}}</li>
+  <li>{{src:research/experiments/lane3/README.md|Lane 3 resolution sweep}}, data {{src:research/traces/lane3/resolution.csv|resolution.csv}}</li>
+  <li>{{src:research/specimens/S001-orbium.md|S001 dossier}}, "Lattice-heading observation" (Lane 1)</li>
+</ul></aside>

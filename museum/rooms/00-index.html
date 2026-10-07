@@ -1,0 +1,78 @@
+<!--meta {
+  "slug": "index", "order": 0, "title": "The search for Mr Wobbles",
+  "nav_label": "Entrance",
+  "kicker": "ALM · an artificial-life natural history museum",
+  "summary": "A small museum of creatures that live in classic Lenia, built from recorded simulations and a public claims ledger.",
+  "expect": {"C001": "INDEPENDENTLY_CHECKED", "C004": "NUMERICALLY_FRAGILE", "C038": "REPRODUCED", "C043": "OBSERVED"}
+} -->
+<section class="hero">
+  <div>
+    <h1>The search for Mr&nbsp;Wobbles</h1>
+    <p class="lede">These animals live on a grid of numbers. Nobody drew them. Each one is a
+    pattern that keeps its shape while a single, fixed rule rewrites every cell it is made of,
+    ten times per unit of time.</p>
+    <p>This museum shows what a field station of Claude agents, each working in its own lane
+    with a human editor deciding what is accepted, has learned about four of these creatures,
+    and how sure we are of each piece. Every picture is a recorded run. Every statement links to its evidence. Some of the
+    most interesting exhibits are the ideas that turned out to be wrong.</p>
+    <a class="cta" href="orbium.html">Start the tour</a>
+  </div>
+  <figure class="vitrine">
+    <img src="{{asset:research/gallery/exhibits/G001-four-ways-to-move/four-ways.gif}}" width="530" height="644"
+         alt="Four Lenia creatures on their own 128 by 128 worlds: a glider crossing in straight lines, a bound pair doing the same, a circler turning on the spot, and a ring that never changes.">
+    <figcaption><strong>Four ways to move.</strong> Glider, bound pair, circler and still ring,
+    each on its own wrap-around world, over the same 40 time units. Exhibit G001 by the
+    wildlife photographer (Lane 8); {{src:research/gallery/README.md|gallery notes}} ·
+    {{src:research/gallery/exhibits/G001-four-ways-to-move/provenance.json|provenance}}.</figcaption>
+  </figure>
+</section>
+
+<h2>Who is Mr Wobbles?</h2>
+<p>Nobody, yet. The project's charter reserves a nickname, "Sir Wobbles", for the first creature
+that earns one, and sets six conditions: a stable ID and saved state, survival of a clean rerun
+and of a change in resolution or timestep, behaviour shown by an experiment rather than by looks,
+a reference check that fails to find it in the existing catalogue, and an independent
+reproduction by a second lane. Every creature in this museum has failed at least one: Orbium
+is the catalogue's own, and the other three turned out to be catalogued species too
+{{claim:C043}}. They are
+displayed anyway: the charter says failed organisms belong to the collection too.</p>
+
+<h2>What is Lenia?</h2>
+<p>Lenia is a continuous cousin of Conway's Game of Life, invented by Bert Chan. Each cell holds
+a number between 0 (empty, black in our pictures) and 1 (full, pale yellow). At every step, each
+cell looks at a ring of neighbours out to a radius R, 13 cells in most of our runs, and grows or
+shrinks by a bell-shaped rule with two dials, μ and σ. That is all. Everything you will see here
+comes out of that rule, a starting pattern, and the grid it runs on.</p>
+<p>That last ingredient matters more than you might think. The first thing we found that
+wobbled was a steady pulse in Orbium's mass. It looked like a heartbeat. It turned out to be the
+grid {{claim:C004}}. Room 2 tells that story.</p>
+
+<h2>The tour</h2>
+<ol class="rooms">
+  <li><a href="orbium.html">The ruler</a><p>Orbium, the calibration animal, measured to the last
+  bit by two independent programs {{claim:C001}}.</p></li>
+  <li><a href="wobbles.html">The wobble that wasn't</a><p>A heartbeat that was really the grid,
+  and the first explanation we refuted.</p></li>
+  <li><a href="edges.html">How much can it take?</a><p>Where you wound an animal matters more than
+  how much you take.</p></li>
+  <li><a href="one-rule.html">Three animals, one rule</a><p>A glider, a circler and a ring that
+  share the same physics, and a pair that sheds a partner {{claim:C038}}.</p></li>
+  <li><a href="how-we-know.html">How we know</a><p>The ledger, the six status words, and the
+  reviewer whose job is to break things.</p></li>
+  <li class="ref"><a href="collection.html">The collection</a><p>All four specimens with their
+  rules, dossiers and run IDs.</p></li>
+</ol>
+
+<h2>How to read the labels</h2>
+<p>Wherever a claim is mentioned you will see its ID and a coloured badge, like
+{{claim:C001}}. The badge is the claim's status in the project's
+{{src:research/claims.md|claims ledger}} at the moment this page was built; the museum never
+writes its own. Hover over a badge for the full wording, or see
+<a href="claims.html">every claim on display</a> with a key to the six status words.</p>
+
+<aside class="sources"><h2>Sources</h2><ul>
+  <li>{{src:research/charter.md|Project charter}}: mission, lanes and rules of evidence</li>
+  <li>{{src:research/claims.md|Claims ledger}}</li>
+  <li>{{src:research/gallery/README.md|Specimen gallery}} (Lane 8)</li>
+  <li>{{src:research/figures/README.md|Figures}} (Lane 9)</li>
+</ul></aside>

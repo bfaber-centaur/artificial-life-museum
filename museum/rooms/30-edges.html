@@ -1,0 +1,71 @@
+<!--meta {
+  "slug": "edges", "order": 30, "title": "How much can it take?", "nav_label": "3 · How much can it take?",
+  "kicker": "Room 3 · Wounds and survival",
+  "summary": "Orbium survives an injury or dies, with nothing in between, and where the injury lands matters more than its size.",
+  "expect": {"C023": "INDEPENDENTLY_CHECKED", "C026": "INDEPENDENTLY_CHECKED", "C027": "NUMERICALLY_FRAGILE",
+             "C028": "OBSERVED", "C029": "REPRODUCED"}
+} -->
+<h1>How much can it take?</h1>
+<p class="lede">A living thing is partly defined by what it recovers from. So the disturbance
+laboratory (Lane 4) and the replication lane (Lane 3) wounded Orbium, carefully and
+reproducibly, more than two thousand times between them. They
+dimmed the whole body, cut a hole in its centre, sliced its flank, or added material in front of
+it, then waited to see whether it recovered.</p>
+
+<div class="label">
+  <p class="obs">Every single run either came back to the normal Orbium or faded to nothing;
+  even the runs closest to the edge collapsed within 3 to 8 time units. None turned into something else. For each kind of wound
+  there is one sharp threshold between the two.</p>
+  <p class="int">S001 has a single, sharp, all-or-nothing survival edge for each of four
+  standard disturbances {{claim:C023}}, confirmed by Lane 3's separate implementation of the
+  whole protocol.</p>
+</div>
+
+<h2>Where matters more than how much</h2>
+<p>The surprise is the position of the edges. Orbium shrugs off losing a tenth of its mass when
+the loss is spread evenly. Take about half as much from its centre and it dies.</p>
+<table class="facts">
+  <tr><th>Wound</th><th>Lethal at about</th></tr>
+  <tr><td>Central hole</td><td>−5% of mass</td></tr>
+  <tr><td>Slice from one flank</td><td>−8 to −9%</td></tr>
+  <tr><td>Uniform dimming</td><td>−10%</td></tr>
+  <tr><td>Material added in front</td><td>+28%</td></tr>
+</table>
+<p>Where mass is removed matters more than how much {{claim:C026}}. Total mass after the wound
+does not predict survival across wound types at all {{claim:C028}}. Near the dimming threshold,
+doomed runs linger before collapsing, and the delay grows the closer they start to the edge, as
+if passing near an unstable balance point {{claim:C029}}.</p>
+
+<figure class="evidence">
+  <span class="label-tag">Figure A · Lane 9, Scientific Illustrator</span>
+  <a href="{{asset:research/figures/A-survival-boundary/figure-A.png}}" title="Open full size"><img src="{{asset:research/figures/A-survival-boundary/figure-A.png}}" width="2160" height="2880" loading="lazy"
+       alt="Four-part figure. (a) Four small greyscale maps of Orbium, each with the lethal edit tinted: a small central spot removed, a sliver from its left flank, the whole body dimmed, and a blue blob added ahead of it. (b) Dot plot of mass change per run for each disturbance; green circles (survived) and orange crosses (died) meet at about -5% for central deletion, -8 to -9% for the side cut, -10% for dimming and +28% for frontal addition. (c) Mass over 30 time units for the closest surviving and dying runs: one stays at 1.0, the other drops to 0 within 3 to 8 time units. (d) Zoomed strips of each edge for Lane 4, Lane 3's independent code, two resolutions and two timesteps; the finer-timestep rows for side cut and frontal addition are hatched and shifted."></a>
+  <figcaption><strong>Orbium survives an edit or dies; which one depends on where the edit
+  lands, not only on how much mass it changes.</strong> (a) Where each lethal wound acts:
+  vermillion is mass removed, blue is mass added. (b) Every baseline run placed by the mass
+  change it actually made; green circles recovered, crosses died, grey bars are the unsampled
+  gap between them. (c) The two runs either side of each edge. (d) Each edge zoomed, by who ran
+  it and at which resolution and timestep. Read the
+  {{src:research/figures/A-survival-boundary/README.md|full caption and its limits}} ·
+  {{src:research/figures/A-survival-boundary/figure-A-edges.csv|plotted edges}} ·
+  {{src:research/figures/A-survival-boundary/figure-A-runs.csv|plotted runs}} ·
+  {{src:research/figures/A-survival-boundary/figure-A.provenance.json|provenance}} ·
+  {{src:research/figures/A-survival-boundary/figure-A.pdf|PDF}}.</figcaption>
+</figure>
+
+<div class="caveat"><strong>Where the numbers bend</strong> The thresholds are brackets measured on
+one grid at one timestep, not constants of nature. Quarter the timestep and the flank-slice and
+frontal-addition edges move by 11 to 13% {{claim:C027}}: the hatched rows in panel d. The central
+hole cannot be measured more finely at R = 13, because three missing cells survive and four do
+not. And the five wound timings used are consecutive steps, a thin sample of the creature's
+cycle; Lane 6 found one later timing at which a 10% dimming kills.</div>
+
+<p>Room 4 returns to wounds with a different animal, a bound pair, where the same flank slice
+has a very different outcome.</p>
+
+<aside class="sources"><h2>Sources</h2><ul>
+  <li>{{src:research/experiments/L4-001-disturbance-battery/README.md|L4-001 disturbance battery}}: preregistered protocol and results (Lane 4)</li>
+  <li>{{src:research/experiments/lane3/README.md|Independent replication of the battery}} (Lane 3) and its {{src:research/traces/lane3|data}}</li>
+  <li>{{src:research/reports/hostile-review.md|Hostile review}} HR-002 and HR-007 (Lane 7)</li>
+  <li>{{src:research/figures/A-survival-boundary/make_figure.py|Figure A source code}} (Lane 9)</li>
+</ul></aside>

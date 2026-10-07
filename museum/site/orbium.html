@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The ruler · ALM museum</title>
+<meta name="description" content="Orbium unicaudatus, the museum&#x27;s calibration animal, and what it means to measure it.">
+<link rel="stylesheet" href="museum.css">
+</head>
+<body class="room-orbium">
+<header class="site">
+  <a class="brand" href="index.html">ALM <span>an artificial-life natural history museum</span></a>
+  <details class="map"><summary>Rooms</summary><ol>
+<li><a href="index.html">Entrance</a></li>
+<li><a class="here" href="orbium.html">1 · The ruler: Orbium</a></li>
+<li><a href="wobbles.html">2 · The wobble that wasn&#x27;t</a></li>
+<li><a href="edges.html">3 · How much can it take?</a></li>
+<li><a href="one-rule.html">4 · Three animals, one rule</a></li>
+<li><a href="how-we-know.html">5 · How we know</a></li>
+<li><a href="collection.html">Reference · The collection</a></li>
+<li><a href="claims.html">Reference · Claims on display</a></li>
+  </ol></details>
+</header>
+<main>
+<p class="kicker">Room 1 · Specimen S001</p>
+<h1>The ruler: <i>Orbium unicaudatus</i></h1>
+<p class="lede">Every natural history museum has a type specimen, the one individual that
+defines its species. Ours is Orbium, the creature Lenia's software opens with and the one its
+inventor's paper studies most closely. We keep it the way a lab keeps a reference weight: not because
+it is rare, but because everything else is measured against it.</p>
+
+<div class="pair">
+  <figure class="vitrine">
+    <span class="label-tag">Portrait · step 3000</span>
+    <img src="../../research/gallery/exhibits/G002-portraits/S001-portrait.png" width="512" height="576"
+         alt="Orbium at step 3000: a bright crescent-shaped core inside a dimmer shell, with a thin outer arc. A white scale bar shows 13 cells.">
+    <figcaption><strong>S001, Orbium (catalog code O2u).</strong> One square of colour is one grid
+    cell; the white bar is one kernel radius, 13 cells. It has a bright crescent core, a dimmer
+    shell and a thin outer arc, and it glides towards the bright side. Lane 8, exhibit G002 ·
+    <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G002-portraits/provenance.json">provenance</a>.</figcaption>
+  </figure>
+  <div>
+    <h2 style="margin-top:0">The specimen card</h2>
+    <table class="facts">
+      <tr><th>Stable ID</th><td>S001</td></tr>
+      <tr><th>Catalogue</th><td>Exokernel → Orbiformes → Orbidae → Haplorbinae</td></tr>
+      <tr><th>Source</th><td>Chakazul/Lenia <code>animals.json</code>, pinned commit <code>adfc542</code></td></tr>
+      <tr><th>Rule</th><td>R = 13, T = 10, μ = 0.15, σ = 0.015, polynomial kernel and growth</td></tr>
+      <tr><th>World</th><td>128 × 128 cells, wrapping at the edges</td></tr>
+      <tr><th>Mass</th><td>0.4358 ± 0.0011 (in units of R²)</td></tr>
+      <tr><th>Size</th><td>gyradius 0.438 R</td></tr>
+      <tr><th>Speed</th><td>0.479 R per time unit, at this timestep</td></tr>
+    </table>
+    <p>Values from the <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/specimens/S001-orbium.md">S001 dossier</a> (Lane 1) and the
+    Lane 2 baseline run <code>S001-37369303c7</code>.</p>
+  </div>
+</div>
+
+<h2>Measured twice, by programs that never met</h2>
+<div class="label">
+  <p class="obs">Lane 2 built the museum's simulator. Lane 3 wrote a second one from the
+  written rules alone, without reading Lane 2's code. Both ran Orbium for 20&nbsp;000 steps.</p>
+  <p class="int">The final worlds were bitwise identical, and a third path that avoids the
+  Fourier transform agreed to about two parts in a million. Orbium glides stably under the
+  baseline rule <a class="claim" href="claims.html#C001" title="S001 glides stably under the baseline rule for at least 20 000 steps"><span class="cid">C001</span><span class="badge s-INDEPENDENTLY_CHECKED" title="INDEPENDENTLY_CHECKED">indep. checked</span></a>. At R = 13 its average mass has already converged: finer grids
+  do not change it <a class="claim" href="claims.html#C014" title="R = 13 is resolution-converged for S001&#x27;s mean mass, size and speed (but not for mean anisotropy)"><span class="cid">C014</span><span class="badge s-INDEPENDENTLY_CHECKED" title="INDEPENDENTLY_CHECKED (mean mass); OBSERVED (speed, gyradius, anisotropy)">indep. checked</span></a>.</p>
+</div>
+
+<h2>But even a ruler has a grain</h2>
+<p>Two things you might read off the portrait are not, strictly, facts about the animal.</p>
+<div class="label">
+  <p class="obs">Orbium always travels at 68.2° in its catalogue orientation, in a dead straight
+  line, and covers 0.479 kernel radii per time unit.</p>
+  <p class="int">The heading is chosen by the grid. Rotate the starting pattern a little and
+  the creature snaps to one of a set of preferred lattice directions <a class="claim" href="claims.html#C011" title="At R = 13, S001&#x27;s travel heading locks onto a discrete set of lattice directions"><span class="cid">C011</span><span class="badge s-INDEPENDENTLY_CHECKED" title="INDEPENDENTLY_CHECKED">indep. checked</span></a>. The speed
+  depends on the size of the time step: the same animal is about 16% slower at T = 10 than its
+  smooth-time limit <a class="claim" href="claims.html#C009" title="At T = 10, S001&#x27;s speed is about 16% below its Δt → 0 limit and its mass 2.6% above"><span class="cid">C009</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>, so "0.479" is a number about this simulation, not about
+  Orbium <a class="claim" href="claims.html#C010" title="S001 travels at 0.479 R per time unit"><span class="cid">C010</span><span class="badge s-NUMERICALLY_FRAGILE" title="NUMERICALLY_FRAGILE">num. fragile</span></a>.</p>
+</div>
+<p>This is the museum's recurring theme. A finite grid and a finite clock are part of the
+creature's world. Behaviour that comes from them is real and worth recording, but it is not the
+same as behaviour of the continuous ideal. The next room is about the most memorable case.</p>
+
+<figure class="evidence">
+  <span class="label-tag">Reference sheet · Lane 1</span>
+  <img src="../../research/specimens/S001-orbium/preview.png" width="1080" height="360"
+       alt="Three panels: Orbium's catalogue starting pattern, the same creature after 4000 steps, and plots of the kernel and growth functions for the polynomial and exponential rule families.">
+  <figcaption>Left: the catalogue's starting pattern, 20 × 20 cells. Middle: after 4000 steps.
+  Right: the shapes of the kernel and growth functions. Orbium survives every rule variant
+  recorded for these cells, including the exponential family used in Chan's paper; its
+  elongation along the direction of travel is recorded as <a class="claim" href="claims.html#C020" title="S001 is elongated along its direction of travel (major axis within 0.3° of heading; dominant rotational harmonic k = 2)"><span class="cid">C020</span><span class="badge s-REPRODUCED" title="REPRODUCED">reproduced</span></a>.</figcaption>
+</figure>
+
+<aside class="sources"><h2>Sources</h2><ul>
+  <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/specimens/S001-orbium.md">S001 dossier</a> and <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/tree/main/research/specimens/S001-orbium">its files</a> (Lane 1)</li>
+  <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/reports/reference-dossier.md">Reference dossier</a>: which upstream rule S001 pins, and why</li>
+  <li>Baseline trace <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/tree/main/research/traces/S001-37369303c7">S001-37369303c7</a> (Lane 2)</li>
+  <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/lane3/README.md">Independent replication</a> (Lane 3)</li>
+  <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/tree/main/research/gallery/exhibits/G002-portraits">Gallery exhibit G002</a> (Lane 8)</li>
+</ul></aside>
+
+<nav class="walk" aria-label="Tour"><a class="prev" href="index.html"><small>Back</small>The search for Mr Wobbles</a><a class="next" href="wobbles.html"><small>Next room</small>The wobble that wasn&#x27;t</a></nav>
+</main>
+<footer class="site">
+  <p>Claim statuses read from <code>research/claims.md</code> (sha256 <code>99fc1c1c4c0a</code>) when this page was built.</p>
+  <p>Every picture here is a recorded simulation or a figure drawn from committed data. Statuses
+  are the claims ledger's, not the museum's: a badge never says more than
+  <a href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/claims.md">research/claims.md</a> does.</p>
+</footer>
+</body>
+</html>

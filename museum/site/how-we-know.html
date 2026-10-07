@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How we know · ALM museum</title>
+<meta name="description" content="How the field station decides what counts as known: lanes, the claims ledger, preregistration and a hostile reviewer.">
+<link rel="stylesheet" href="museum.css">
+</head>
+<body class="room-how-we-know">
+<header class="site">
+  <a class="brand" href="index.html">ALM <span>an artificial-life natural history museum</span></a>
+  <details class="map"><summary>Rooms</summary><ol>
+<li><a href="index.html">Entrance</a></li>
+<li><a href="orbium.html">1 · The ruler: Orbium</a></li>
+<li><a href="wobbles.html">2 · The wobble that wasn&#x27;t</a></li>
+<li><a href="edges.html">3 · How much can it take?</a></li>
+<li><a href="one-rule.html">4 · Three animals, one rule</a></li>
+<li><a class="here" href="how-we-know.html">5 · How we know</a></li>
+<li><a href="collection.html">Reference · The collection</a></li>
+<li><a href="claims.html">Reference · Claims on display</a></li>
+  </ol></details>
+</header>
+<main>
+<p class="kicker">Room 5 · The workshop behind the galleries</p>
+<h1>How we know</h1>
+<p class="lede">The galleries show animals. This room shows the machinery that decides what we
+are allowed to say about them. The project's unit of progress is not code or a striking
+picture: it is a specimen, a reproducible claim, an intervention and its evidence.</p>
+
+<h2>Lanes</h2>
+<p>The work is split into lanes, each run by its own agent with its own job and its own
+repository folder, so that one lane's mistake is another lane's catch.</p>
+<table class="facts">
+  <tr><th>Lane</th><th>Job</th><th>What you saw from it</th></tr>
+  <tr><td>0 · Archivist</td><td>Keeps the claims ledger and its literature provenance</td><td>Every badge</td></tr>
+  <tr><td>1 · Reference naturalist</td><td>Pins specimens to the upstream catalogue and code</td><td>Orbium's specimen card</td></tr>
+  <tr><td>2 · Simulator</td><td>Builds the museum's Lenia engine and instruments</td><td>Every run</td></tr>
+  <tr><td>3 · Numerical red team</td><td>Re-implements everything independently and varies grid and clock</td><td>The bitwise match; the wobble sweep</td></tr>
+  <tr><td>4 · Disturbance laboratory</td><td>Wounds creatures by a preregistered protocol</td><td>Room 3</td></tr>
+  <tr><td>5 · Morphometrics</td><td>Measures shape and behaviour</td><td>Shape measurements behind several claims</td></tr>
+  <tr><td>6 · Field exploration</td><td>Searches nearby rules for other creatures</td><td>Room 4</td></tr>
+  <tr><td>7 · Hostile reviewer</td><td>Tries to break other lanes' claims</td><td>Room 2's tests</td></tr>
+  <tr><td>8 · Wildlife photographer</td><td>Photographs recorded runs, verified bit for bit</td><td>Every specimen picture</td></tr>
+  <tr><td>9 · Scientific illustrator</td><td>Draws figures from committed data only</td><td>Figure A</td></tr>
+  <tr><td>10 · Exhibition designer</td><td>This museum</td><td>You are here</td></tr>
+</table>
+
+<h2>Six words for how sure we are</h2>
+<p>Every claim in the <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/claims.md">ledger</a> carries exactly one of six statuses, and
+the ledger, not this museum, sets it. "Independently checked" is reserved for agreement between
+two lanes running different code. Claims are never deleted: a refuted one stays, with the
+evidence that refuted it. See <a href="claims.html">the claims on display</a> for the key.</p>
+
+<h2>Arguments, written down</h2>
+<div class="label">
+  <p class="obs">Lane 3 first reported that at a finer grid Orbium's heading lock mostly
+  disappears. Lane 7 disagreed. Lane 3 ran a finer, longer sweep, found the lock persisting,
+  and withdrew its own claim.</p>
+  <p class="int">The withdrawn claim is <a class="claim" href="claims.html#C012" title="At R = 26 the heading lock mostly disappears"><span class="cid">C012</span><span class="badge s-REFUTED" title="REFUTED (withdrawn by Lane 3)">refuted</span></a>; the one that replaced it is
+  <a class="claim" href="claims.html#C013" title="At R = 26 the heading lock persists, weaker: 46 start rotations settle on 17 headings"><span class="cid">C013</span><span class="badge s-INDEPENDENTLY_CHECKED" title="INDEPENDENTLY_CHECKED">indep. checked</span></a>. The dispute, both sides and its resolution are recorded in the ledger's
+  Disputes table.</p>
+</div>
+<p>The hostile reviewer preregisters: before a test runs, it commits what result would count
+against the claim. Room 2's wobble test was preregistered that way, and Room 3's
+disturbance protocol was fixed before the first wound <a class="claim" href="claims.html#C023" title="S001 has a single sharp, all-or-nothing survival edge for each of four standardized disturbances"><span class="cid">C023</span><span class="badge s-INDEPENDENTLY_CHECKED" title="INDEPENDENTLY_CHECKED at T = 10, R = 13 (Lane 4 on `ref` + `alm`; Lane 3 on `alm_check` with its own battery code). The exact I003 and I004 edge values are NUMERICALLY_FRAGILE in T (C027).">indep. checked</span></a>. Refutations are results too
+<a class="claim" href="claims.html#C005" title="S001&#x27;s dominant mass period equals the single-axis grid-crossing period 1/|v_x| (or a simple x–y beat) at its heading"><span class="cid">C005</span><span class="badge s-REFUTED" title="REFUTED">refuted</span></a>.</p>
+
+<h2>Pictures that cannot lie by accident</h2>
+<ul>
+  <li><strong>Photographs</strong> (Lane 8) are frames of real runs. The render script replays
+  each run and refuses to draw unless the replay ends in exactly the recorded state. Cells
+  become square blocks of pixels; nothing is smoothed, rotated or contrast-stretched.</li>
+  <li><strong>Figures</strong> (Lane 9) plot only committed data, never interpolate between
+  sampled runs, and read claim statuses from the ledger. A figure whose encoding no longer
+  matches the ledger cannot be rebuilt.</li>
+  <li><strong>This museum</strong> follows the same rule. Every badge is read from the ledger
+  when the site is built, every room declares what status its words assume, and the build stops
+  if the ledger has moved on, so a room gets rewritten rather than left saying something the
+  evidence no longer supports.</li>
+</ul>
+
+<h2>What would earn a name</h2>
+<p>The charter's six conditions for a nickname are the museum's standing challenge. So far
+every candidate has failed the reference check: each new-looking form was found in Bert Chan's
+catalogue <a class="claim" href="claims.html#C043" title="S101, S102 and S103 are catalogued species carried to nearby rules, not new forms"><span class="cid">C043</span><span class="badge s-OBSERVED" title="OBSERVED (any novelty claim for S101–S103 is REFUTED)">observed</span></a>. The current expeditions are mapping where the coexisting forms of
+Room 4 live, testing whether the bound pair is really coupled, and asking which observed traits
+survive changes of grid and clock. When they report, the museum will show what they found,
+including what did not work.</p>
+
+<aside class="sources"><h2>Sources</h2><ul>
+  <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/charter.md">Charter</a>: mission, lanes, the discovery protocol and stop conditions</li>
+  <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/claims.md">Claims ledger</a> and its Disputes table (Lane 0)</li>
+  <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/reports/hostile-review.md">Hostile review</a> (Lane 7)</li>
+  <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/README.md">How the photographs are made</a> (Lane 8)</li>
+  <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/figures/README.md">Rules every figure follows</a> (Lane 9)</li>
+  <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/museum/README.md">How this museum is built</a> (Lane 10)</li>
+</ul></aside>
+
+<nav class="walk" aria-label="Tour"><a class="prev" href="one-rule.html"><small>Back</small>Three animals, one rule</a><span></span></nav>
+</main>
+<footer class="site">
+  <p>Claim statuses read from <code>research/claims.md</code> (sha256 <code>99fc1c1c4c0a</code>) when this page was built.</p>
+  <p>Every picture here is a recorded simulation or a figure drawn from committed data. Statuses
+  are the claims ledger's, not the museum's: a badge never says more than
+  <a href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/claims.md">research/claims.md</a> does.</p>
+</footer>
+</body>
+</html>

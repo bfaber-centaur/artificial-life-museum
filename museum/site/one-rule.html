@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Three animals, one rule · ALM museum</title>
+<meta name="description" content="A glider, a circler and a static ring living under the same physics, and a bound pair that survives a wound by shedding a partner.">
+<link rel="stylesheet" href="museum.css">
+</head>
+<body class="room-one-rule">
+<header class="site">
+  <a class="brand" href="index.html">ALM <span>an artificial-life natural history museum</span></a>
+  <details class="map"><summary>Rooms</summary><ol>
+<li><a href="index.html">Entrance</a></li>
+<li><a href="orbium.html">1 · The ruler: Orbium</a></li>
+<li><a href="wobbles.html">2 · The wobble that wasn&#x27;t</a></li>
+<li><a href="edges.html">3 · How much can it take?</a></li>
+<li><a class="here" href="one-rule.html">4 · Three animals, one rule</a></li>
+<li><a href="how-we-know.html">5 · How we know</a></li>
+<li><a href="collection.html">Reference · The collection</a></li>
+<li><a href="claims.html">Reference · Claims on display</a></li>
+  </ol></details>
+</header>
+<main>
+<p class="kicker">Room 4 · Specimens S101, S102, S103</p>
+<h1>Three animals, one rule</h1>
+<p class="lede">Turn Orbium's two dials slightly, from μ = 0.15, σ = 0.015 to μ = 0.155,
+σ = 0.020, and the same physics supports three quite different animals. Which one you get
+depends on how the world started, not on the rule.</p>
+
+<figure class="vitrine">
+  <span class="label-tag">Contact sheet · eight frames, half a time unit apart</span>
+  <img src="../../research/gallery/exhibits/G003-contact-sheet/contact-sheet.png" width="1374" height="648" loading="lazy"
+       alt="A grid of frames, four rows by eight columns, with the camera following each creature. Orbium and the bound pair look nearly identical in every frame; the circler looks different in every frame; the ring is identical in every frame.">
+  <figcaption><strong>Shape over time, travel hidden.</strong> The camera follows each creature,
+  so only changes of shape remain. Orbium (S001) and the bound pair (S101) hardly change. The
+  circler (S102) is never the same twice. The ring (S103) never changes at all. Eight frames do
+  not establish a period. Lane 8, exhibit G003 ·
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G003-contact-sheet/provenance.json">provenance</a>.</figcaption>
+</figure>
+
+<div class="label">
+  <p class="obs">At μ = 0.155, σ = 0.020, an Orbium glider, the circler and the static ring each
+  persist for at least 500 time units, and the wounds from Room 3 never turned a glider into a
+  circler or back, in 316 tries.</p>
+  <p class="int">One rule supports three phenotypes chosen by history <a class="claim" href="claims.html#C038" title="One rule (S001&#x27;s, with μ = 0.155, σ = 0.020) supports three phenotypes chosen by history: an Orbium glider, a circler (S102) and a static ring (S103)"><span class="cid">C038</span><span class="badge s-REPRODUCED" title="REPRODUCED (clean-process reruns); not yet reproduced by a second lane">reproduced</span></a>
+  (<span class="status-text">REPRODUCED (clean-process reruns); not yet reproduced by a second lane</span>). No glider–circler switching was seen <a class="claim" href="claims.html#C040" title="At the coexistence rule, Lane 4&#x27;s disturbances never switch a glider into a circler or back (0/316); a port injury switched the circler into the static ring S103 in 2 of 38 runs"><span class="cid">C040</span><span class="badge s-OBSERVED" title="OBSERVED; not yet reproduced by a second lane">observed</span></a>.</p>
+</div>
+
+<div class="grid4">
+  <figure class="vitrine" style="margin:0">
+    <img src="../../research/gallery/exhibits/G002-portraits/S102-portrait.png" width="512" height="576"
+         alt="The circler S102 at step 3000: a lopsided, swirling body with a hollow at one side.">
+    <figcaption><strong>S102, the circler.</strong> As fast as Orbium, but it runs round a circle
+    whose radius is about a quarter of a kernel radius, about one lap every 3.8 time units, and goes nowhere.
+    It is the most fragile of the three: at twice the resolution it dies at this rule, though it
+    lives at a slightly larger σ <a class="claim" href="claims.html#C039" title="The circler S102 at its registered rule (μ 0.155, σ 0.020) does not survive doubling the resolution"><span class="cid">C039</span><span class="badge s-NUMERICALLY_FRAGILE" title="NUMERICALLY_FRAGILE">num. fragile</span></a>.</figcaption>
+  </figure>
+  <figure class="vitrine" style="margin:0">
+    <img src="../../research/gallery/exhibits/G002-portraits/S103-portrait.png" width="512" height="576"
+         alt="The static ring S103 at step 3000: a small, sharp ring of fully saturated cells around an empty core.">
+    <figcaption><strong>S103, the still ring.</strong> 64 completely full cells around an empty
+    core. After 10&nbsp;000 steps it is bit-for-bit the same as when it started, and after a 20%
+    dimming it returns exactly to itself <a class="claim" href="claims.html#C042" title="S103 is an exact fixed point of the clipped Lenia map: it is T-independent and returns bitwise to itself after attenuation up to 20%"><span class="cid">C042</span><span class="badge s-REPRODUCED" title="REPRODUCED (clean-process reruns); not yet reproduced by a second lane">reproduced</span></a>. It exists because Lenia clips every cell
+    to [0, 1]: a version without the clip would not have it. In 2 of 38 runs, a flank wound
+    turned the circler into this ring.</figcaption>
+  </figure>
+</div>
+
+<h2>The pair that sheds a partner</h2>
+<div class="pair">
+  <figure class="vitrine" style="margin:0">
+    <img src="../../research/gallery/exhibits/G002-portraits/S101-portrait.png" width="512" height="576"
+         alt="The bound pair S101: two Orbium bodies side by side inside one shared thin shell.">
+    <figcaption><strong>S101, the bound Orbium pair.</strong> Two Orbium bodies side by side,
+    joined by one thin shared shell, under Orbium's own rule. Its mass is 2.004 times Orbium's
+    and it travels 1.4% slower. Lane 8, exhibit G002.</figcaption>
+  </figure>
+  <div>
+    <div class="label">
+      <p class="obs">Cut into a single Orbium's flank at the protocol's strength 0.10 or more
+      and it dies, in all 36 runs. Make the same cut in the pair, at any strength from 0.10 to
+      0.50, and all 18 runs end as one ordinary, healthy Orbium.</p>
+      <p class="int">The pair survives the wound by shedding to a single Orbium
+      <a class="claim" href="claims.html#C041" title="Under S001&#x27;s own rule, a bound Orbium pair (S101) survives port injury of 10–50% by shedding to a single Orbium, where a single Orbium dies at 10%"><span class="cid">C041</span><span class="badge s-OBSERVED" title="OBSERVED; not yet reproduced by a second lane">observed</span></a>.</p>
+    </div>
+    <div class="caveat"><strong>The obvious objection</strong> The partners travel side by side,
+    and the cut runs along the direction of travel, so it mostly lands on one partner. The result
+    may only mean that the uninjured partner is not dragged down by the dying one, not that the
+    pair heals or cooperates. Lane 6 raised this itself. The Night 1 pair-dynamics expedition is
+    testing it now, against lone-Orbium baselines.</div>
+  </div>
+</div>
+
+<h2>Not new species</h2>
+<p>It would be tempting to name these. They are not new: each one is a species already in
+Bert Chan's catalogue, carried to a nearby rule. Run the catalogue's own Synorbium, Gyrorbium
+and Circium patterns under these rules and they settle into the same bodies, to three or four
+decimal places <a class="claim" href="claims.html#C043" title="S101, S102 and S103 are catalogued species carried to nearby rules, not new forms"><span class="cid">C043</span><span class="badge s-OBSERVED" title="OBSERVED (any novelty claim for S101–S103 is REFUTED)">observed</span></a>. Around Orbium itself, the field explorer found no other forms at
+all, apart from the circler and the pair <a class="claim" href="claims.html#C044" title="Around S001, Orbium&#x27;s μ × σ neighbourhood is one continuum: no other phenotype arises from Orbium cells, soups or rescaled Orbia except a circler at two rules and the bound pair"><span class="cid">C044</span><span class="badge s-OBSERVED" title="OBSERVED; not yet reproduced by a second lane">observed</span></a>. That is why these specimens have stable
+IDs but no nicknames.</p>
+
+<div class="pending"><strong>In preparation.</strong> Figure C, a map of where these three
+phenotypes live in parameter space and how that map moves with resolution, is being drawn by the
+scientific illustrator and will hang here once it is accepted. The attractor-geography expedition
+is mapping the same region in more detail.</div>
+
+<aside class="sources"><h2>Sources</h2><ul>
+  <li>Dossiers: <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/specimens/S101-orbium-pair.md">S101</a>, <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/specimens/S102-circler.md">S102</a>, <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/specimens/S103-static-ring.md">S103</a> (Lane 6)</li>
+  <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/L6-field/README.md">Field exploration L6</a>: sweeps, coexistence, disturbance switching (Lane 6)</li>
+  <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/README.md">Gallery notes</a> with run IDs and hashes, exhibits <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/tree/main/research/gallery/exhibits/G002-portraits">G002</a> and <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/tree/main/research/gallery/exhibits/G003-contact-sheet">G003</a> (Lane 8)</li>
+  <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/figures/README.md">Figures index</a>, where Figure C will appear (Lane 9)</li>
+</ul></aside>
+
+<nav class="walk" aria-label="Tour"><a class="prev" href="edges.html"><small>Back</small>How much can it take?</a><a class="next" href="how-we-know.html"><small>Next room</small>How we know</a></nav>
+</main>
+<footer class="site">
+  <p>Claim statuses read from <code>research/claims.md</code> (sha256 <code>99fc1c1c4c0a</code>) when this page was built.</p>
+  <p>Every picture here is a recorded simulation or a figure drawn from committed data. Statuses
+  are the claims ledger's, not the museum's: a badge never says more than
+  <a href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/claims.md">research/claims.md</a> does.</p>
+</footer>
+</body>
+</html>
