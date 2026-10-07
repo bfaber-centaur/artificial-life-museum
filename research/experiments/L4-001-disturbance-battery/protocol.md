@@ -142,4 +142,22 @@ commit deliberately contains no code and no results.
 
 ## Amendments
 
-_None yet._
+### A1 (2026-10-07, after the N = 128 coarse sweep and bisection, before any T/R run)
+
+**Added check, nothing in the original definitions changes.** Lane 3 (PR #8) reports that S001's
+speed depends on T (0.479 R/time at T = 10, about 0.572 as dt → 0) and that at R = 13 the heading
+snaps to grid directions. A transition that is a discretisation artifact would move under a modest
+change of either. So the full battery (all four interventions, the same coarse grids, then
+bisection) is re-run at phase t0 = 100 time units under two extra discretisations:
+
+- **T20**: R = 13, T = 20 (dt halved).
+- **R26**: R = 26, T = 10, the catalog cells zoomed 2× nearest-neighbour (as upstream's GUI zoom
+  does), world N = 256 so the creature has the same size relative to the torus.
+
+Everything is kept in time units and R units: t0 = 100 time units, horizon 200, evaluation window
+the last 50, speed blocks of 10 time units, geometry in R. Because the baseline itself changes with
+T and R, the ±20 % bands for these two conditions are centred on that condition's own s = 0 control
+(means over its window) instead of Lane 1's T = 10, R = 13 numbers. No pass/fail threshold is set
+for the shift of s*: the result is reported as the measured s* per intervention under each
+discretisation next to the T10/R13 value, and a shift larger than the T10/R13 phase spread is
+called discretisation-sensitive.

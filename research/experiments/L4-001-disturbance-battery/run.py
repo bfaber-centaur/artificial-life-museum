@@ -75,7 +75,21 @@ def engine(name, size):
         kfft, _ = ref.make_kernel_fft(size, R, BETA, "poly")
         return lambda A: ref.step(A, kfft, MU, SIGMA, T, "poly")[0]
     if name == "alm":
-        raise NotImplementedError("Lane 2 simulator (src/alm) not merged yet")
+        # Lane 2 simulator (src/alm/lenia.py, PR #6). Set ALM_SRC to a checkout's src/
+        # to use it before it is merged here.
+        if os.environ.get("ALM_SRC"):
+            sys.path.insert(0, os.environ["ALM_SRC"])
+            for m in [m for m in sys.modules if m == "alm" or m.startswith("alm.")]:
+                del sys.modules[m]
+        from alm.lenia import Lenia, Rule
+        sim = Lenia(Rule(R=R, T=T, mu=MU, sigma=SIGMA, beta=tuple(BETA),
+                         kernel="poly", growth="poly"), np.zeros((size, size)))
+
+        def step(A):
+            sim.A = A
+            sim.step()
+            return sim.A
+        return step
     raise ValueError(name)
 
 
@@ -274,6 +288,23 @@ def bisect(coarse, out, size, eng, workers):
     return res
 
 
+def _check_job(args):
+    iv, s, t0, size, eng, horizon = args
+    return run(iv, s, t0, size, eng, horizon)
+
+
+def check(brackets, out, size, eng, workers, horizon, phases):
+    """Re-run both ends of every bisected bracket under another engine/size/horizon."""
+    with open(brackets) as f:
+        br = [b for b in csv.DictReader(f) if int(b["t0"]) in phases]
+    jobs = [(b["intervention"], float(b[k]), int(b["t0"]), size, eng, horizon)
+            for b in br for k in ("s_ok", "s_fail")]
+    with Pool(workers) as p:
+        rows = p.map(_check_job, jobs, chunksize=1)
+    write_rows(out, rows)
+    return rows
+
+
 def main():
     ap = argparse.ArgumentParser()
     sub = ap.add_subparsers(dest="cmd", required=True)
@@ -283,7 +314,7 @@ def main():
     one.add_argument("--t0", type=int, default=1000)
     one.add_argument("--horizon", type=int, default=HORIZON)
     one.add_argument("--save", default=None)
-    for p in (one, sub.add_parser("sweep"), sub.add_parser("bisect")):
+    for p in (one, sub.add_parser("sweep"), sub.add_parser("bisect"), sub.add_parser("check")):
         p.add_argument("--size", type=int, default=128)
         p.add_argument("--engine", default="ref", choices=["ref", "alm"])
         p.add_argument("--workers", type=int, default=os.cpu_count())
@@ -293,6 +324,11 @@ def main():
     bi = sub.choices["bisect"]
     bi.add_argument("--coarse", default=os.path.join(HERE, "results", "coarse.csv"))
     bi.add_argument("--out", default=os.path.join(HERE, "results", "bisect.csv"))
+    ck = sub.choices["check"]
+    ck.add_argument("--brackets", default=os.path.join(HERE, "results", "bisect-brackets.csv"))
+    ck.add_argument("--horizon", type=int, default=HORIZON)
+    ck.add_argument("--phases", default=",".join(map(str, PHASES)))
+    ck.add_argument("--out", required=True)
     a = ap.parse_args()
     if a.cmd == "one":
         r_ = run(a.iv, a.s, a.t0, a.size, a.engine, a.horizon, a.save)
@@ -301,6 +337,9 @@ def main():
                 print(f"{k}: {r_[k]}")
     elif a.cmd == "sweep":
         sweep(a.ivs.split(","), a.out, a.size, a.engine, a.workers)
+    elif a.cmd == "check":
+        check(a.brackets, a.out, a.size, a.engine, a.workers, a.horizon,
+              [int(x) for x in a.phases.split(",")])
     else:
         bisect(a.coarse, a.out, a.size, a.engine, a.workers)
 
