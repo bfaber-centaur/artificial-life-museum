@@ -1,4 +1,4 @@
-# Figure C: several phenotypes under one rule (PROVISIONAL)
+# Figure C: several phenotypes under one rule (one lane)
 
 ![Figure C](figure-C.png)
 
@@ -6,10 +6,10 @@
 plotted runs [`figure-C-data.csv`](figure-C-data.csv) · evidence matrix [`figure-C-matrix.csv`](figure-C-matrix.csv) ·
 provenance [`figure-C.provenance.json`](figure-C.provenance.json)
 
-> **Provisional evidence.** Everything plotted comes from Lane 6's PR #11, which has not been
-> merged. It is read at the pinned commit `f40f303` with `git show`, and nothing from that PR is
-> copied here. Every claim shown has one lane behind it. None has been reproduced by a second
-> lane. The figure is meant to help judge PR #11, not to certify it.
+> **One lane.** Everything plotted comes from Lane 6's PR #11, now merged. It is read with
+> `git show` at the merge commit `f72db9e`, whose files are identical (same blob ids) to the
+> `f40f303` head this figure was first drawn from. Every claim shown has one lane behind it. None
+> has been reproduced by a second lane.
 
 ## What it shows
 
@@ -75,12 +75,12 @@ kind:
   fixed before the T40 and R26 reruns) to the recorded speeds. The `outcome` column in
   `switch-T10-R13.csv` still holds the superseded "ROTATOR" labels, which Lane 6 says not to
   use, so it is ignored here.
-- **One lane, one pinned commit.** If PR #11 changes, this figure is stale until it is rebuilt
-  at the new head. When #11 merges, the paths stay the same and the figure can read from `main`.
+- **One lane, one pinned commit.** The data is read at the PR #11 merge commit. If Lane 6's files
+  change on `main` later, this figure keeps showing the merged revision until it is rebuilt.
 
 ## Alt text
 
-Three-part figure, marked provisional. (a) A grid of 441 markers over μ (0.10–0.20) and
+Three-part figure, marked as one-lane evidence. (a) A grid of 441 markers over μ (0.10–0.20) and
 σ (0.008–0.028). Blue gliders form a diagonal band from low μ and σ up to about μ 0.16 and
 σ 0.020. Grey dots (died) lie to the left, and dark squares (filled the world) to the right. Two
 pink diamonds mark circlers at μ 0.135/σ 0.018 and μ 0.155/σ 0.022. (b) Two strip plots, for μ 0.150 and 0.155. Each seed's base run sits above
@@ -91,7 +91,7 @@ different static body at T40. The circler dies at R26 and loses its phenotype at
 in one of two phases. The ring persists everywhere and returns bitwise after attenuation. The
 "second lane reproduces" column reads "not yet" for all three.
 
-## Sources (all at PR #11 commit `f40f303`)
+## Sources (all at the PR #11 merge commit `f72db9e`)
 
 | Data | Path | Used in |
 | --- | --- | --- |
@@ -107,7 +107,6 @@ Blob IDs and SHA-256s of every file read are in `figure-C.provenance.json` (`pin
 ## Reproduce
 
 ```bash
-git fetch origin claude/night0-field-tmbx06        # makes commit f40f303 available locally
 .venv/bin/python research/figures/C-phenotypes-one-rule/make_figure.py
 ```
 

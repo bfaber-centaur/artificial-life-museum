@@ -1,4 +1,4 @@
-"""Figure C: several phenotypes under one rule. PROVISIONAL, built from unmerged PR #11.
+"""Figure C: several phenotypes under one rule. Single-lane evidence (Lane 6, PR #11).
 
 Claims illustrated: C038 (glider, circler and static ring under one rule), C039 (the circler
 fails at R = 26 at its own rule), C040 (no glider/circler switching under disturbance), C042
@@ -6,9 +6,9 @@ fails at R = 26 at its own rule), C040 (no glider/circler switching under distur
 μ × σ neighbourhood). Statuses are read from research/claims.md (figlib.ledger), and the
 build stops if they no longer match EXPECTED.
 
-Evidence is Lane 6's PR #11, read at a pinned commit with `git show` (figlib.gitsource).
-Nothing from that PR is copied into this branch. If the commit is missing locally, run
-`git fetch origin claude/night0-field-tmbx06` first. Runs no simulation.
+Evidence is Lane 6's PR #11, read with `git show` (figlib.gitsource) at the commit that merged
+it into main, so the figure names exactly which revision of the data it plotted. Runs no
+simulation.
 
 The phenotype labels re-apply Lane 6's own classifier (tables.py: net speed > 0.2 R/tu
 glider; net < 0.1 and path > 0.2 circler; path < 0.02 static; fate died/filled otherwise)
@@ -36,7 +36,7 @@ from figlib.style import (GRID, INK, MUTED, OKABE_ITO, OUTCOME, PHENOTYPE, STATU
                           figure_style, status_badge)
 
 OUT = HERE / "figure-C"
-PR11 = "f40f303e7a9a71be7cb1ff8038372540f358d53d"  # PR #11 head when Figure C was drawn
+PR11 = "f72db9ef9584fffc10af0fcbbc6491c8f22a6d9c"  # merge of PR #11 into main (its data equals the f40f303 head Figure C was first drawn from)
 D6 = "research/experiments/L6-field"
 COEX = (0.155, 0.020)  # registered rule of S102 and S103
 S001_RULE = (0.150, 0.015)
@@ -301,7 +301,7 @@ def panel_matrix(ax, cells, status):
 
 
 def build():
-    src = Pinned(PR11, "PR #11 (Lane 6), unmerged")
+    src = Pinned(PR11, "PR #11 (Lane 6), merged to main")
     led = L.snapshot(EXPECTED)
     status = {cid: c["status"] for cid, c in led["claims"].items()}
     rows_out = []
@@ -311,14 +311,14 @@ def build():
         fig.suptitle("Figure C. Several phenotypes under one rule: what is observed, and how far it is checked",
                      x=0.005, ha="left", fontsize=9, fontweight="bold")
         sf = fig.subfigures(3, 1, height_ratios=[2.5, 3.6, 1.75], hspace=0.02)
-        sf[0].text(0.005, 0.975, f"PROVISIONAL: evidence from Lane 6's unmerged PR #11 @ {PR11[:7]}; one lane, "
+        sf[0].text(0.005, 0.975, f"ONE LANE: evidence from Lane 6 (PR #11, merged @ {src.commit[:7]}); "
                    f"no second-lane reproduction yet.\nClaim statuses checked against research/claims.md @ "
                    f"{led['ledger_commit']}.",
                    transform=sf[0].transSubfigure, ha="left", va="top", fontsize=6.2, color=OKABE_ITO["vermillion"],
                    fontweight="bold")
         axa = sf[0].subplots(1, 1)
         panel_map(axa, src, rows_out)
-        sf[0].suptitle(" \n ", fontsize=6.2)  # reserves the two lines used by the provisional banner
+        sf[0].suptitle(" \n ", fontsize=6.2)  # reserves the two lines used by the one-lane banner
         sf[0].supylabel(" ", fontsize=2)
         status_badge(axa, "C044", status["C044"], x=1.0, y=1.005, short=True)
 
@@ -372,7 +372,7 @@ def build():
     inputs = [pathlib.Path(__file__).resolve(), *sorted((HERE.parent / "figlib").glob("*.py"))]
     man = P.manifest("C-phenotypes-one-rule", inputs, outs,
                      ".venv/bin/python research/figures/C-phenotypes-one-rule/make_figure.py", led,
-                     ["PROVISIONAL: evidence read from unmerged PR #11 at the pinned commit; see pinned_inputs.",
+                     ["Single-lane evidence: Lane 6 data read at the PR #11 merge commit; see pinned_inputs.",
                       "Phenotypes recomputed with Lane 6's tables.py classifier; switch CSV 'outcome' column unused."],
                      pinned_inputs=src.manifest())
     P.write_manifest(HERE / "figure-C.provenance.json", man)

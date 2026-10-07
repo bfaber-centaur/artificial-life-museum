@@ -2552,7 +2552,7 @@ z
     </g>
    </g>
    <g id="text_23">
-    <text style="font-weight: 700; font-size: 6.2px; font-family: 'DejaVu Sans'; fill: #d55e00" transform="translate(2.592 25.429885)">PROVISIONAL: evidence from Lane 6's unmerged PR #11 @ f40f303; one lane, no second-lane reproduction yet.</text>
+    <text style="font-weight: 700; font-size: 6.2px; font-family: 'DejaVu Sans'; fill: #d55e00" transform="translate(2.592 25.429885)">ONE LANE: evidence from Lane 6 (PR #11, merged @ f72db9e); no second-lane reproduction yet.</text>
     <text style="font-weight: 700; font-size: 6.2px; font-family: 'DejaVu Sans'; fill: #d55e00" transform="translate(2.592 32.87158)">Claim statuses checked against research/claims.md @ 76a8dc9.</text>
    </g>
    <g id="text_24">
