@@ -28,7 +28,17 @@ heading 68.2°. Every summary statistic in the table below agrees to a relative 
 the largest difference is the sd of thresholded area, which is sensitive to single cells crossing
 0.1. These are float-rounding-level differences, the same scale Lane 1 saw against upstream.
 
-## Results (OBSERVED)
+> **Correction (2026-10-07, after Lane 7 HR-003/HR-006).** The original version of this page
+> claimed that S001 feature means are heading-invariant, and that every dominant period is a
+> grid-crossing period. The three headings tested here (68.2°, 40.4°, 21.8°) are all diagonal
+> lattice plateaus, and 0°/45° are mirror images. Lane 7 showed that S001 travelling along a grid
+> axis at R = 13 is 10% less elongated. [`../L5-axis-breathing/`](../L5-axis-breathing/) shows
+> why: at R = 13 the axis-travelling organism's shape swings by a factor of six on a slow,
+> irregular cycle, and the effect is gone at R = 26. The claims below are restated accordingly.
+> `rotational_harmonics` is now radius-weighted, and `symmetry_order` has a noise floor
+> (HR-003 #1). The a₂ row and the traces were regenerated with the new definition.
+
+## Results (OBSERVED, diagonal plateaus only)
 
 | Feature (steps 1000–4000) | rot 0° (heading 68.2°) | rot 23° (heading 40.4°) | rot 45° (heading 21.8°) |
 | --- | --- | --- | --- |
@@ -37,53 +47,64 @@ the largest difference is the sd of thresholded area, which is sensitive to sing
 | gyradius (R), mean ± sd | 0.4376 ± 0.0012 | 0.4382 ± 0.0045 | 0.4376 ± 0.0012 |
 | anisotropy 1 − λmin/λmax | 0.295 ± 0.005 | 0.292 ± 0.014 | 0.295 ± 0.005 |
 | occupied area A > 0.1 (R²) | 1.005 ± 0.015 | 1.003 ± 0.024 | 1.005 ± 0.015 |
-| harmonic a₂ (bilateral elongation) | 0.216 ± 0.008 | 0.213 ± 0.013 | 0.216 ± 0.008 |
+| harmonic a₂ (r-weighted elongation) | 0.216 ± 0.002 | 0.214 ± 0.012 | 0.216 ± 0.002 |
 | major axis − heading | −0.05° | +0.27° | +0.05° |
 | max wrap extent | 0.18 | 0.20 | 0.18 |
 | dominant period: mass | 4.32 | 14.24 | 4.32 |
 | dominant period: gyradius | 8.64 | 14.24 | 8.64 |
+| dominant period: anisotropy | 8.01 | 14.24 | 8.02 |
 | dominant period: area | 2.37 | 14.24 | 2.37 |
 
 ### What this says
 
-1. **Feature means are heading-invariant; feature fluctuations are not.** Means agree across
-   headings to 0.3% (mass), 0.15% (gyradius) and 1.2% (anisotropy). The standard deviations are
-   1.6–3.9× larger at heading 40.4° than at 68.2°/21.8°.
-2. **Every dominant period is a grid-crossing frequency.** At heading 68.2°, 1/|vx| = 4.32 steps,
-   8.64 is its first subharmonic, and 2.37 steps is the row-crossing frequency 1/1.73 = 0.578
-   cycles/step aliased below Nyquist (1 − 0.578 = 0.422 → 2.37 steps). At 40.4° everything locks
-   to the 14.2-step beat Lane 1 reported. No feature showed a period that is not explained by
-   the lattice. This extends Lane 1's mass-period observation to gyradius, anisotropy, area and the
-   rotational harmonics.
-3. **Orbium is elongated along its direction of travel**, to within 0.3°. So the
-   second-moment major axis gives the heading (up to sign) from a single snapshot, without
-   tracking. The dominant rotational harmonic is k = 2 (a₂ ≈ 0.216), which is this elongation.
-   Orbium has no rotational symmetry beyond that.
-4. The 0° and 45° runs are mirror images (heading 68.2° vs 21.8° = 90° − 68.2°) and give identical
-   statistics to 4–5 digits. This is a free sanity check on the feature code.
+1. **On the diagonal plateaus, feature means agree across headings, but fluctuations do not.**
+   Means agree to 0.3% (mass), 0.15% (gyradius) and 1.2% (anisotropy). The standard deviations
+   are 1.6–3.9× larger at heading 40.4° than at 68.2°/21.8°. **This does not extend to a heading
+   along a grid axis.** At R = 13 that heading gives anisotropy 0.265 ± 0.094 (Lane 7 HR-006,
+   reproduced in `L5-axis-breathing`). Mass and gyradius means stay within 0.2% there.
+2. **Most dominant periods are grid-crossing periods.** At heading 68.2°, 1/|vx| = 4.32 steps and
+   8.64 is its subharmonic. 2.37 steps is the row-crossing frequency 1/1.73 = 0.578 cycles/step,
+   aliased below Nyquist (1 − 0.578 = 0.422 → 2.37 steps). At 40.4° everything locks to the
+   14.2-step beat. **The anisotropy period at 68.2° (8.01 steps) does not sit on a low-order
+   lattice line** (Lane 7 HR-003 #2). It is still a lattice effect: it vanishes at R = 20 and 26,
+   and anisotropy sd falls with R. Period matching alone is therefore weak evidence. The
+   evidence that a fluctuation is an artifact is a resolution test.
+3. **Orbium is elongated along its direction of travel**, to within 0.3°. The second-moment
+   major axis therefore gives the heading (up to sign) from a single snapshot. The dominant
+   rotational harmonic is k = 2, which is this elongation. Orbium has no higher rotational
+   symmetry.
+4. The 0° and 45° runs are mirror images (heading 68.2° vs 21.8° = 90° − 68.2°) and give
+   identical statistics to 4–5 digits. This only checks the feature code. It is not a second
+   heading.
 
 ### Implications for Lane 4 (recovery definitions)
 
-- Use **feature means over a window of at least ~15 steps** (longer than the slowest lattice beat
-  seen, 14.2 steps) rather than instantaneous values when comparing pre/post states.
-- Do **not** set recovery tolerances from the baseline sd of one heading. The sd changes up to 4× with
-  heading, so a "3 sd" band fit at 68.2° would call a healthy organism at 40.4° unrecovered.
-  A heading-independent band is, for example, ±1% of the windowed mean mass.
-- An injury that rotates the organism changes its heading, so fluctuation-based metrics can
-  change after a perturbation for purely lattice reasons.
+- Use **feature means over a window** rather than instantaneous values when comparing pre/post
+  states. At least ~15 steps covers the diagonal-plateau beats. At R = 13, an organism that
+  ends up travelling along an axis needs a window of several hundred steps (see
+  `L5-axis-breathing`).
+- Do **not** set recovery tolerances from the baseline sd of one heading. The sd changes up to
+  4× between diagonal plateaus and about 20× on the axis plateau at R = 13. Mass and gyradius
+  bands are the safe choice, because their means hold across all headings tested.
+  **Anisotropy is not a heading-free recovery metric at R = 13.**
+- An injury that rotates the organism can move it onto a different lattice plateau. Its shape
+  statistics can then change for purely numerical reasons.
 
 ## Proposed claims (for the coordinator)
 
-1. **S001 baseline morphometrics are heading-invariant in mean** (mass 0.4358, gyradius 0.438 R,
-   anisotropy 0.29, area 1.00 R², speed 0.479 R/time) across headings 21.8°, 40.4°, 68.2°.
-   OBSERVED; agrees across two stepping paths (Lane 1 transcription, Lane 2 simulator).
-2. **All S001 baseline feature oscillations are lattice artifacts**: their dominant periods equal
-   grid-crossing periods (or their alias/beat) at every tested heading. OBSERVED. This extends Lane 1's
-   claim 3 and is a target for Lane 3/7, for example by varying R and checking that the periods scale.
+1. **S001 mass and gyradius means are heading-invariant to 0.2%** at R = 13 (mass 0.4358,
+   gyradius 0.438 R) across the diagonal plateaus 21.8°, 40.4°, 68.2° and the axis plateau
+   (Lane 7 HR-006). Speed is invariant to 1%. OBSERVED. The diagonal plateaus were checked
+   on two stepping paths.
+2. ~~All S001 baseline feature oscillations are lattice artifacts, shown by period matching.~~
+   Restated as follows. **S001's short-period feature fluctuations on the diagonal plateaus
+   (2–15 steps) shrink with resolution** (anisotropy sd 4.8e−3 → 3.1e−3 → 1.4e−3 at
+   R = 13/20/26), so they are numerical. Period matching alone did not establish this.
+   OBSERVED. Lane 7 checked it independently.
 
 ## Caveats
 
-- One grid size (128), one R (13), one T (10). Resolution/timestep dependence is Lane 3's.
+- One grid size per R (128 at R = 13), one T (10).
 - Rotated starts are bilinear-interpolated, so they are not exactly the catalog organism. They
   relax to the same means within the 1000-step burn-in.
 - The area threshold (0.1) is a fixed convention and was not tuned.

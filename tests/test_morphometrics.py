@@ -132,6 +132,15 @@ def test_rotational_harmonics_detect_k_fold_symmetry():
     assert max(h[1], h[2], h[4], h[5]) < 2e-2
 
 
+@pytest.mark.parametrize("center", [(64, 64), (64.5, 64.5), (64.3, 64.7)])
+def test_isotropic_blob_reports_no_symmetry_order(center):
+    # Lane 7 HR-003: unweighted harmonics reported 8-, 4- or 6-fold symmetry here.
+    h = f.rotational_harmonics(gaussian((128, 128), center, 6.0))
+    assert h[1] == pytest.approx(0, abs=1e-9)   # about the centroid, by construction
+    assert h[2:].max() < 0.01
+    assert f.symmetry_order(h) == 0
+
+
 def test_features_are_translation_invariant_on_s001():
     A = s001_state()
     B = np.roll(A, (70, -50), axis=(0, 1))

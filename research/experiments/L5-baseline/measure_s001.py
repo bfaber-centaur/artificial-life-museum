@@ -32,7 +32,7 @@ SPEC = specimens.load("S001")
 N, R, T = 128, SPEC.rule.R, SPEC.rule.T
 STEPS, BURN = 4000, 1000
 ROTATIONS = (0, 23, 45)
-FEATURES = ["mass", "gyradius", "anisotropy", "area", "harmonic_1", "harmonic_2", "harmonic_3"]
+FEATURES = ["mass", "gyradius", "anisotropy", "area", "harmonic_2", "harmonic_3"]
 
 
 def start_state(rot):
