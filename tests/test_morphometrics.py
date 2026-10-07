@@ -204,3 +204,18 @@ def test_recovery_time_cases():
     # recovered, but not long enough to satisfy hold
     assert f.recovery_time(dip, 1.0, 0.05, start=5, hold=6) == math.inf
     assert f.recovery_time(dip, 1.0, 0.05, start=5, hold=5) == 3
+
+
+# --- runner integration -----------------------------------------------------
+
+
+def test_morpho_feature_set_in_runner_trace():
+    from alm import run
+
+    res = run.run(run.RunConfig(steps=20, every=10, features=("basic", "morpho")), out_root=None)
+    row = res.rows[0]
+    assert row["morpho_gyradius"] == pytest.approx(0.455188, abs=2e-6)
+    assert row["morpho_symmetry_order"] == 2
+    assert "mass" in row and "morpho_mass" not in row
+    assert f.displacement((row["cy_cells"], row["cx_cells"]),
+                          (row["morpho_cy"], row["morpho_cx"]), (128, 128)) == pytest.approx((0, 0), abs=0.03)

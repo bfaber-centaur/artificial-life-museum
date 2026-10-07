@@ -9,7 +9,7 @@ Lane 5 (Morphometrics / Behaviour), 2026-10-07.
 | Specimen | S001 Orbium O2u, cells from `research/specimens/S001-orbium/initial-cells-u8.csv` |
 | Rule | poly/poly, R = 13, T = 10, μ = 0.15, σ = 0.015, β = [1], Euler + clip, float64 |
 | Grid | 128 × 128 periodic torus, start patch centred as in the dossier |
-| Stepping path | **interim**: Lane 1's `reconstruct.py` (`make_kernel_fft`, `step`). To be re-run on Lane 2's `src/alm` runner. |
+| Stepping path | Lane 2's simulator, `alm.Lenia` with `alm.specimens.load("S001").rule` (first version stepped Lane 1's `reconstruct.py`; see *Cross-check* below) |
 | Features | `alm.morphometrics.snapshot(A, R=13)` every step (area threshold 0.1) |
 | Intervention | none; the start state is rotated 0°, 23°, 45° (bilinear, clipped, as in Lane 1's `lattice_heading.py`) to change heading relative to the grid |
 | Horizon / window | 4000 steps; statistics over steps 1000–4000 (3001 samples, every step) |
@@ -18,6 +18,15 @@ Lane 5 (Morphometrics / Behaviour), 2026-10-07.
 | Outputs | `trace-rot00.csv`, `trace-rot23.csv`, `trace-rot45.csv` (per step), `summary.csv` |
 
 Two clean-process runs produced byte-identical traces.
+
+### Cross-check: Lane 1 stepper vs Lane 2 simulator
+
+The first version of this experiment stepped Lane 1's reference transcription. Re-running the
+same script on Lane 2's `alm.Lenia` (an independent `rfft2` implementation) changes per-step
+features by at most 1.9e−7 (mass), 1.9e−7 (gyradius) and 1.1e−6 (anisotropy) over 4000 steps at
+heading 68.2°. Every summary statistic in the table below agrees to a relative 7.6e−5 or better;
+the largest difference is the sd of thresholded area, which is sensitive to single cells crossing
+0.1. These are float-rounding-level differences, the same scale Lane 1 saw against upstream.
 
 ## Results (OBSERVED)
 
@@ -67,7 +76,7 @@ Two clean-process runs produced byte-identical traces.
 
 1. **S001 baseline morphometrics are heading-invariant in mean** (mass 0.4358, gyradius 0.438 R,
    anisotropy 0.29, area 1.00 R², speed 0.479 R/time) across headings 21.8°, 40.4°, 68.2°.
-   OBSERVED; single stepping path (Lane 1 reference transcription).
+   OBSERVED; agrees across two stepping paths (Lane 1 transcription, Lane 2 simulator).
 2. **All S001 baseline feature oscillations are lattice artifacts**: their dominant periods equal
    grid-crossing periods (or their alias/beat) at every tested heading. OBSERVED. This extends Lane 1's
    claim 3 and is a target for Lane 3/7, for example by varying R and checking that the periods scale.
