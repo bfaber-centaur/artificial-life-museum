@@ -1,8 +1,10 @@
-"""Periodic measurements (feature functions) for traces.
+"""Trace measurement registry: which numbers the runner records each sample.
 
-A feature function takes ``(A, sim)`` and returns a dict of named floats. The
-runner calls every selected feature at each sampling step and writes one CSV
-column per key. Lane 5 adds morphometrics with ``@register("name")``.
+A measurement set is a function ``(A, sim) -> dict`` of named floats,
+registered under a name. The runner calls every selected set at each sampling
+step (``--features basic,<name>``) and writes one CSV column per key. Lane 5's
+pure morphometric definitions live in ``alm.features``; wrap them here with
+``@register("name")`` to put them in traces.
 
 Units: mass and growth are normalised by R^2 (upstream ``m``/``g``); lengths
 are in kernel radii R unless the column name ends in ``_cells``.

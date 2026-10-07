@@ -41,7 +41,7 @@ Extension points:
 - Interventions: subclass `alm.interventions.Intervention`, decorate with
   `@alm.interventions.register`, schedule with `--intervene STEP:NAME:k=v,...`.
   The runner re-clips to [0, 1], logs mass before/after and snapshots both sides.
-- Measurements: `@alm.features.register("name")` on a function `(A, sim) -> dict`,
+- Measurements: `@alm.measure.register("name")` on a function `(A, sim) -> dict`,
   then `--features basic,name`.
 - Python API: `alm.run.run(alm.run.RunConfig(...), out_root=None)` returns the trace
   rows, summary, manifest and final state without writing files.

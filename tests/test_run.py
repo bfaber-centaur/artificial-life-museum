@@ -8,7 +8,7 @@ from typing import ClassVar
 import numpy as np
 import pytest
 
-from alm import features, interventions, run, specimens
+from alm import interventions, measure, run, specimens
 
 REF_TRACE = specimens.SPECIMEN_DIR / "S001-orbium" / "reference-trace.csv"
 
@@ -23,8 +23,8 @@ def test_s001_matches_lane1_reference_trace():
         assert o["gyradius"] == pytest.approx(float(r["gyradius"]), abs=1e-6)
         if r["growth"] != "nan":
             assert o["growth"] == pytest.approx(float(r["growth"]), abs=1e-6)
-        assert features.wrap(o["cx_cells"] - float(r["cx"]), 128) == pytest.approx(0, abs=1e-3)
-        assert features.wrap(o["cy_cells"] - float(r["cy"]), 128) == pytest.approx(0, abs=1e-3)
+        assert measure.wrap(o["cx_cells"] - float(r["cx"]), 128) == pytest.approx(0, abs=1e-3)
+        assert measure.wrap(o["cy_cells"] - float(r["cy"]), 128) == pytest.approx(0, abs=1e-3)
     s = res.summary
     assert s["alive_final"]
     assert s["mass_mean"] == pytest.approx(0.4358, abs=2e-4)
@@ -95,7 +95,7 @@ def test_custom_intervention_and_feature_registration():
         def apply(self, A, sim, rng):
             return A + self.amount + rng.random(A.shape)  # runner must re-clip
 
-    @features.register("_test_max")
+    @measure.register("_test_max")
     def _mx(A, sim):
         return {"maxval": float(A.max())}
 
@@ -107,7 +107,7 @@ def test_custom_intervention_and_feature_registration():
         assert "maxval" in res.manifest["measurements"]["columns"]
     finally:
         interventions.REGISTRY.pop("_test_saturate")
-        features.REGISTRY.pop("_test_max")
+        measure.REGISTRY.pop("_test_max")
 
 
 def test_bad_intervention_step_rejected():

@@ -32,7 +32,7 @@ from pathlib import Path
 
 import numpy as np
 
-from . import features as feat
+from . import measure as feat
 from . import interventions as ivs
 from . import provenance, specimens
 from .lenia import GROWTHS, KERNEL_CORES, Lenia
