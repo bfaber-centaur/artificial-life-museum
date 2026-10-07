@@ -140,7 +140,7 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
 | Lane 5 L5-002 README proposed claims 1 / 2 / 3, plus the exploratory 6 tu rule (PR #9 @ `bd86e76`; claims 1–2 reworded @ `f6239f6`) | C031 / C032 / C034, C033 |
 | Lane 7 hostile-review HR-008 (L5-002 review, edge-state λ) | C029, C031, C032 |
 | Lane 5 L5-003 README proposed claims 1 / 2 / 3 (PR #9 @ `f6239f6`) | C035 / C036 / C037 |
-| Lane 6 L6-field README proposed claims L6-a / L6-b / L6-c / L6-d / L6-e (PR #11 @ `83c8bff`) | C038, C039 / C040 / C041 / C043 / C045 |
+| Lane 6 L6-field README proposed claims L6-a / L6-b / L6-c / L6-d / L6-e (PR #11 @ `83c8bff`, merged as `f72db9e`) | C038, C039 / C040 / C041 / C043 / C045 |
 | Lane 6 S103 dossier (fixed point), L6-field negative results | C042, C044 |
 | Lane 6 L6-005 control runs at t0 = 3000/3002 | C023 caveat |
 | Lane 7 hostile-review HR-007 (C023 world size, thresholds) | C023, C026 |
@@ -1198,7 +1198,7 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
 - **History:**
   - 2026-10-07 — OBSERVED — Lane 5.
 
-Claims C038–C045 come from Lane 6 (field exploration, PR #11 @ `83c8bff`, open). **None has been
+Claims C038–C045 come from Lane 6 (field exploration, PR #11 @ `83c8bff`; merged 2026-10-07 as `f72db9e`, whose only later change, `f40f303`, adds `1P4odl` to L6-e as already ledgered in C045). **None has been
 reproduced by a second lane yet.** Statuses below reflect Lane 6's own evidence only; clean-process
 bitwise reruns count as REPRODUCED, never as INDEPENDENTLY_CHECKED. Common setup unless stated:
 ALM semantics (poly/poly, β = [1], Euler + hard clip, float64, periodic), 128² at R = 13 (scaled
@@ -1214,7 +1214,7 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
 - **Status:** REPRODUCED (clean-process reruns); not yet reproduced by a second lane
 - **Owner lane:** Lane 6
 - **Sources:** `research/experiments/L6-field/README.md` proposed claim L6-a; specimen dossiers
-  `research/specimens/S102-circler.md`, `S103-static-ring.md` (PR #11 @ `83c8bff`, open)
+  `research/specimens/S102-circler.md`, `S103-static-ring.md` (PR #11 @ `83c8bff`, merged 2026-10-07 as `f72db9e`)
 - **Specimen / version:** S001 (Orbium cells), S102 seed (`gyrator-seed-u8.csv`), S103 seed
   (`static-seed-u8.csv`), rebuilt by `make_seeds.py`; catalog OG2g cells as a check
 - **Simulator / version:** `field.py` @ `83c8bff`; `alm.run` for clean reruns
@@ -1235,7 +1235,7 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
   three phenotypes are catalogued species (C043). Lane 6's top suggested follow-up is a second-lane
   reproduction in `alm_check`.
 - **Prior literature** (search and full-text verification 2026-10-07; grades and versions in `references.md`):
-  Provisional: PR #11 is still under review, so these entries may change with it.
+  PR #11 has merged; the underlying claims are still single-lane (not yet reproduced by a second lane).
   - [Chan2019] §3.7.2 and Fig. 17, pp. 35–36 *(full text)*. **PREVIOUSLY REPORTED** (the
     phenomenon, in another genus). Two *Paraptera* species coexist at one rule (μ 0.3,
     σ ∈ [0.0468, 0.0483]), and "just outside the coexistence … slowly transform into each
@@ -1265,7 +1265,7 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
 
 - **Status:** NUMERICALLY_FRAGILE
 - **Owner lane:** Lane 6
-- **Sources:** L6-field README L6-004 and L6-006; `research/specimens/S102-circler.md` (PR #11 @ `83c8bff`, open)
+- **Sources:** L6-field README L6-004 and L6-006; `research/specimens/S102-circler.md` (PR #11 @ `83c8bff`, merged 2026-10-07 as `f72db9e`)
 - **Specimen / version:** S102 seed (`gyrator-seed-u8.csv`)
 - **Simulator / version:** `field.py` @ `83c8bff`
 - **Parameters:** μ 0.155, σ 0.020; T10/R13, T40/R13, T10/R26
@@ -1279,7 +1279,7 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
 - **Known caveats:** single lane. The phenotype persists at a nearby σ at R = 26, so this is a shift of
   its band, not its absence.
 - **Prior literature** (search and full-text verification 2026-10-07; grades and versions in `references.md`):
-  Provisional: PR #11 is still under review, so these entries may change with it.
+  PR #11 has merged; the underlying claims are still single-lane (not yet reproduced by a second lane).
   - [Chan2019] Fig. 7(b), p. 17 *(full text)*. **RELATED.** Orbium's niche stays static over
     R = 9–55 at T = 10. That is Orbium, not the circler, so it is not a contradiction.
   - [Davis2024] *(excerpt; rule from code)*. **CONSISTENT WITH** (excerpt-only, so provisional).
@@ -1296,7 +1296,7 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
 
 - **Status:** OBSERVED; not yet reproduced by a second lane
 - **Owner lane:** Lane 6
-- **Sources:** L6-field README proposed claim L6-b, L6-005 (PR #11 @ `83c8bff`, open)
+- **Sources:** L6-field README proposed claim L6-b, L6-005 (PR #11 @ `83c8bff`, merged 2026-10-07 as `f72db9e`)
 - **Specimen / version:** Orbium and S102 seed at the coexistence rule; S001-rule Orbium as control
 - **Simulator / version:** `field.py`; I001–I004 copied from Lane 4 (`claude/night0-disturbance-np4adr`
   @ `7bd1a42`, `src/alm/disturb.py`) into `disturb_helpers.py`
@@ -1312,7 +1312,7 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
 - **Reproduction command:** `disturb_switch.py` (~1 h); `tables.py bistab-T10-R13.csv switch-T10-R13.csv`
 - **Known caveats:** single T/R and two phases only. The circler → ring switch occurred in one phase only.
 - **Prior literature** (search and full-text verification 2026-10-07; grades and versions in `references.md`):
-  Provisional: PR #11 is still under review, so these entries may change with it.
+  PR #11 has merged; the underlying claims are still single-lane (not yet reproduced by a second lane).
   - [Chan2019] §3.5.3 and Fig. 12(j), pp. 26–27 *(full text)*. **RELATED.** Spontaneous
     metamorphosis among morphological–behavioural templates in shape-shifting species. It is
     unprompted, not triggered by a disturbance.
@@ -1329,7 +1329,7 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
 
 - **Status:** OBSERVED; not yet reproduced by a second lane
 - **Owner lane:** Lane 6
-- **Sources:** L6-field README proposed claim L6-c and L6-002/003; `research/specimens/S101-orbium-pair.md` (PR #11 @ `83c8bff`, open)
+- **Sources:** L6-field README proposed claim L6-c and L6-002/003; `research/specimens/S101-orbium-pair.md` (PR #11 @ `83c8bff`, merged 2026-10-07 as `f72db9e`)
 - **Specimen / version:** S101 seed (`pair-seed-u8.csv`), formed from 7 of 175 two-Orbium starts
   (4 different relative rotations); equals catalog `O4i` Synorbium ignis under the S001 rule
 - **Simulator / version:** `field.py`; clean reruns via `alm.run`
@@ -1348,7 +1348,7 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
   the uninjured partner down, not that the pair heals. I002 "robustness" is trivial (the disc sits
   in the gap). Disturbance runs at T10/R13 only. The pair's speed is ~7% lower at T 10 than T 40 (cf. C009).
 - **Prior literature** (search and full-text verification 2026-10-07; grades and versions in `references.md`):
-  Provisional: PR #11 is still under review, so these entries may change with it.
+  PR #11 has merged; the underlying claims are still single-lane (not yet reproduced by a second lane).
   - [Chan2019] §3.5.5 (pp. 28–29) and Fig. 12(k) (p. 26) *(full text)*.
     - **PREVIOUSLY REPORTED** for how the pair forms: two colliding Orbium "fuse … into one
       Synorbium".
@@ -1369,7 +1369,7 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
 
 - **Status:** REPRODUCED (clean-process reruns); not yet reproduced by a second lane
 - **Owner lane:** Lane 6
-- **Sources:** `research/specimens/S103-static-ring.md` (PR #11 @ `83c8bff`, open)
+- **Sources:** `research/specimens/S103-static-ring.md` (PR #11 @ `83c8bff`, merged 2026-10-07 as `f72db9e`)
 - **Specimen / version:** S103 seed (`static-seed-u8.csv`; = catalog `C0la` resized from R 15 to 13)
 - **Simulator / version:** `alm.run` (Lane 2 runner) and `field.py`
 - **Parameters:** μ 0.155, σ 0.020, R 13; T 10 and T 40; R 26 (resized seed)
@@ -1385,7 +1385,7 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
 - **Known caveats:** a creature of the hard clip; a Lenia variant without clipping would not have it in
   this form. The I001–I004 check used one phase.
 - **Prior literature** (search and full-text verification 2026-10-07; grades and versions in `references.md`):
-  Provisional: PR #11 is still under review, so these entries may change with it.
+  PR #11 has merged; the underlying claims are still single-lane (not yet reproduced by a second lane).
   - [LeniaCatalog] `C0la` *Circium lithos apertus* (R 15, 0.16/0.022). **PREVIOUSLY REPORTED** as a
     catalogued species (C043).
   - [Chan2019] §3.5.2 (p. 27) and Table 2 (p. 28) *(full text)*. **RELATED.** The epithet *lithos* names
@@ -1405,7 +1405,7 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
 
 - **Status:** OBSERVED (any novelty claim for S101–S103 is REFUTED)
 - **Owner lane:** Lane 6
-- **Sources:** L6-field README proposed claim L6-d and "Reference check" (PR #11 @ `83c8bff`, open)
+- **Sources:** L6-field README proposed claim L6-d and "Reference check" (PR #11 @ `83c8bff`, merged 2026-10-07 as `f72db9e`)
 - **Specimen / version:** S101–S103 seeds; catalog cells `O4i`, `OG2g`, `C0la` (`.refs/Lenia` @ `adfc542`)
 - **Simulator / version:** `field.py`
 - **Parameters:** each candidate's rule
@@ -1419,7 +1419,7 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
 - **Reproduction command:** `persistence.py`; `catalog_neighbours.py`
 - **Known caveats:** single lane.
 - **Prior literature** (search and full-text verification 2026-10-07; grades and versions in `references.md`):
-  Provisional: PR #11 is still under review, so these entries may change with it.
+  PR #11 has merged; the underlying claims are still single-lane (not yet reproduced by a second lane).
   - [LeniaCatalog] `O4i`, `OG2g`, `C0la`. **PREVIOUSLY REPORTED.** These are the catalog entries the
     claim matches. Similar outcome only: the catalog rules sit near, not at, S101–S103's rules:
 
@@ -1441,7 +1441,7 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
 
 - **Status:** OBSERVED; not yet reproduced by a second lane
 - **Owner lane:** Lane 6
-- **Sources:** L6-field README L6-001, L6-002, L6-003 (PR #11 @ `83c8bff`, open)
+- **Sources:** L6-field README L6-001, L6-002, L6-003 (PR #11 @ `83c8bff`, merged 2026-10-07 as `f72db9e`)
 - **Specimen / version:** S001 cells; random soups; resized/rescaled S001; two-Orbium starts
 - **Simulator / version:** `field.py` @ `83c8bff`
 - **Parameters:** L6-001: μ 0.100–0.200 (0.005) × σ 0.008–0.028 (0.001), 441 rules, T 10, R 13, 500 tu.
@@ -1465,7 +1465,7 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
 
 - **Status:** OBSERVED; not yet reproduced by a second lane
 - **Owner lane:** Lane 6
-- **Sources:** L6-field README proposed claim L6-e and "Reference check" (PR #11 @ `83c8bff`, open)
+- **Sources:** L6-field README proposed claim L6-e and "Reference check" (PR #11 @ `83c8bff`, merged 2026-10-07 as `f72db9e`)
 - **Specimen / version:** catalog cells from `.refs/Lenia/Python/animals.json` @ `adfc542`
 - **Simulator / version:** `field.py` (ALM semantics as in `research/specimens/S001-orbium/reconstruct.py`)
 - **Parameters:** each entry's own catalog rule (R, T, μ, σ, β)
