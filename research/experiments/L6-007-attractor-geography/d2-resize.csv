@@ -1,0 +1,9 @@
+R,method,class_1000tu,died_at_tu,mass_last100,path_speed,net_speed
+26,block,CIRCLER,,0.5234,0.5,0.0055
+26,nearest,CIRCLER,,0.5234,0.5,0.0055
+26,bilinear,DIED,8.3,0.0,0.0,0.0
+26,cubic,CIRCLER,,0.5235,0.4998,0.0053
+39,block,CIRCLER,,0.5234,0.5,0.0055
+39,nearest,CIRCLER,,0.5234,0.5,0.0054
+39,bilinear,DIED,6.0,0.0,0.0,0.0
+39,cubic,CIRCLER,,0.5235,0.5,0.0054
