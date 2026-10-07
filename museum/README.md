@@ -41,7 +41,7 @@ Opening `museum/site/index.html` straight from disk works too. Pages load images
 4. **Observation is kept apart from interpretation.** Wall labels have a "What you see" part
    and a "What the ledger says" part; caveats get their own box.
 5. **Nothing is re-encoded.** Lane 8's photographs and Lane 9's figures are shown as committed,
-   in their own colours. Specimen imagery sits in dark vitrines (`#0d0d12`, matching Lane 8's
+   in their own colours. Specimen imagery sits in dark vitrines (`#0b0b0f`, matching Lane 8's
    frames); evidence figures sit on white paper, as Lane 9 draws them.
 6. **Only what is on `main`.** Work in open PRs (Figure C, gallery G004) appears as "in
    preparation" until it is merged.
