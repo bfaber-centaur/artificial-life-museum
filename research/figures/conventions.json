@@ -82,5 +82,38 @@
     "removed": "#D55E00",
     "added": "#0072B2"
   },
-  "field_cmap": "Greys"
+  "field_cmap": "Greys",
+  "phenotype": {
+    "GLIDER": {
+      "color": "#0072B2",
+      "marker": "o",
+      "label": "glider"
+    },
+    "CIRCLER": {
+      "color": "#CC79A7",
+      "marker": "D",
+      "label": "circler"
+    },
+    "STATIC": {
+      "color": "#E69F00",
+      "marker": "s",
+      "label": "static"
+    },
+    "OTHER": {
+      "color": "#222222",
+      "marker": "*",
+      "label": "other"
+    },
+    "died": {
+      "color": "#b8b8b8",
+      "marker": ".",
+      "label": "died"
+    },
+    "filled": {
+      "color": "#7a7a7a",
+      "marker": "s",
+      "label": "filled the world",
+      "size": 0.45
+    }
+  }
 }

@@ -51,6 +51,16 @@ STATUS = {
     "REFUTED": dict(color=INK, hatch="xx", badge="refuted", short="refuted"),
 }
 
+# Phenotypes (Lane 6 motion classes). Distinct from run outcomes; marker shape always differs.
+PHENOTYPE = {
+    "GLIDER": dict(color=OKABE_ITO["blue"], marker="o", label="glider"),
+    "CIRCLER": dict(color=OKABE_ITO["purple"], marker="D", label="circler"),
+    "STATIC": dict(color=OKABE_ITO["orange"], marker="s", label="static"),
+    "OTHER": dict(color=INK, marker="*", label="other"),
+    "died": dict(color="#b8b8b8", marker=".", label="died"),
+    "filled": dict(color="#7a7a7a", marker="s", label="filled the world", size=0.45),
+}
+
 # Edits applied to a field: mass removed vs mass added (diverging, colour + sign).
 EDIT = {"removed": OKABE_ITO["vermillion"], "added": OKABE_ITO["blue"]}
 
@@ -103,7 +113,7 @@ def as_json():
         "palette": OKABE_ITO, "ink": INK, "muted": MUTED, "grid": GRID, "paper": PAPER,
         "unresolved": UNRESOLVED,
         "outcome": {k: {kk: vv for kk, vv in v.items()} for k, v in OUTCOME.items()},
-        "status": STATUS, "edit": EDIT, "field_cmap": FIELD_CMAP,
+        "status": STATUS, "edit": EDIT, "field_cmap": FIELD_CMAP, "phenotype": PHENOTYPE,
     }
 
 
