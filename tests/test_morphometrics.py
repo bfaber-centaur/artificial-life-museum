@@ -1,4 +1,4 @@
-"""Tests for alm.features on synthetic shapes with known answers, plus the S001 start state."""
+"""Tests for alm.morphometrics on synthetic shapes with known answers, plus the S001 start state."""
 
 import math
 from pathlib import Path
@@ -6,7 +6,7 @@ from pathlib import Path
 import numpy as np
 import pytest
 
-from alm import features as f
+from alm import morphometrics as f
 
 ROOT = Path(__file__).resolve().parents[1]
 S001_CELLS = ROOT / "research" / "specimens" / "S001-orbium" / "initial-cells-u8.csv"

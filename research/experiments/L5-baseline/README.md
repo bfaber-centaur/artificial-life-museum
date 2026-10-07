@@ -10,7 +10,7 @@ Lane 5 (Morphometrics / Behaviour), 2026-10-07.
 | Rule | poly/poly, R = 13, T = 10, μ = 0.15, σ = 0.015, β = [1], Euler + clip, float64 |
 | Grid | 128 × 128 periodic torus, start patch centred as in the dossier |
 | Stepping path | **interim**: Lane 1's `reconstruct.py` (`make_kernel_fft`, `step`). To be re-run on Lane 2's `src/alm` runner. |
-| Features | `alm.features.snapshot(A, R=13)` every step (area threshold 0.1) |
+| Features | `alm.morphometrics.snapshot(A, R=13)` every step (area threshold 0.1) |
 | Intervention | none; the start state is rotated 0°, 23°, 45° (bilinear, clipped, as in Lane 1's `lattice_heading.py`) to change heading relative to the grid |
 | Horizon / window | 4000 steps; statistics over steps 1000–4000 (3001 samples, every step) |
 | Seed | none (deterministic) |

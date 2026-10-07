@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Lane 5 baseline: alm.features on S001 (Orbium O2u), and which features depend on heading.
+"""Lane 5 baseline: alm.morphometrics on S001 (Orbium O2u), and which features depend on heading.
 
 Run from repo root after ./scripts/bootstrap.sh:
 
@@ -11,7 +11,7 @@ sigma=0.015, Euler + clip, float64, 128x128 torus). Re-run against Lane 2's
 src/alm runner when it lands; numbers should agree to float rounding.
 
 For start rotations 0, 23 and 45 degrees (bilinear, as in Lane 1's
-lattice_heading.py) it steps 4000 steps, records alm.features.snapshot every
+lattice_heading.py) it steps 4000 steps, records alm.morphometrics.snapshot every
 step, and summarises steps 1000..4000. Writes per-step traces and summary.csv
 next to this script.
 """
@@ -27,7 +27,7 @@ ROOT = os.path.abspath(os.path.join(HERE, "..", "..", ".."))
 sys.path.insert(0, os.path.join(ROOT, "research", "specimens", "S001-orbium"))
 sys.path.insert(0, os.path.join(ROOT, "src"))
 import reconstruct as rc  # noqa: E402
-from alm import features as F  # noqa: E402
+from alm import morphometrics as F  # noqa: E402
 
 N, R, T, MU, SIGMA = 128, 13, 10, 0.15, 0.015
 STEPS, BURN = 4000, 1000
