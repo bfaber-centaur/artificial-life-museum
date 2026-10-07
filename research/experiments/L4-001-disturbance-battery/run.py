@@ -12,6 +12,7 @@ Every run is deterministic; its run ID reproduces it.
 import argparse
 import csv
 import functools
+import json
 import importlib.util
 import os
 import subprocess
@@ -39,6 +40,27 @@ GRIDS = {
 }
 BISECT_WIDTH = 1 / 256
 
+# Discretisation conditions (protocol amendment A1). "base" is the original protocol.
+CONDS = {"base": (13, 10, 1), "T20": (13, 20, 1), "R26": (26, 10, 2)}
+COND = "base"
+ZOOM = 1
+SAMPLE = 10  # steps per trace sample (= 1 time unit)
+BASELINE = dict(disturb.BASELINE)
+
+
+def set_cond(name, baseline=None):
+    """Switch R, T, zoom and all step counts to condition `name` (times kept in time units)."""
+    global COND, R, T, ZOOM, PHASES, HORIZON, WINDOW, SAMPLE, BASELINE
+    COND = name
+    R, T, ZOOM = CONDS[name]
+    SAMPLE = T
+    if name != "base":
+        PHASES = (100 * T,)
+        HORIZON = 200 * T
+        WINDOW = 50 * T
+    if baseline is not None:
+        BASELINE = dict(baseline)
+
 
 def git_rev():
     try:
@@ -60,6 +82,7 @@ def _load_ref():
 
 def initial_state(size):
     cells = np.loadtxt(os.path.join(S001, "initial-cells-u8.csv"), delimiter=",", dtype=np.int64)
+    cells = np.kron(cells, np.ones((ZOOM, ZOOM), dtype=np.int64))  # nearest-neighbour zoom
     A = np.zeros((size, size))
     h, w = cells.shape
     y0, x0 = (size - h) // 2, (size - w) // 2
@@ -68,7 +91,7 @@ def initial_state(size):
 
 
 @functools.lru_cache(maxsize=None)
-def engine(name, size):
+def engine(name, size, R, T):
     """Return a step function A -> A for the S001 rule on an N x N torus."""
     if name == "ref":
         ref = _load_ref()
@@ -95,13 +118,13 @@ def engine(name, size):
 
 @functools.lru_cache(maxsize=None)
 def warm(engine_name, size, t0):
-    """(state at t0, centroid at t0 - 10) for the unperturbed creature."""
-    step = engine(engine_name, size)
+    """(state at t0, centroid one time unit before t0) for the unperturbed creature."""
+    step = engine(engine_name, size, R, T)
     A = initial_state(size)
     prev = None
     for t in range(1, t0 + 1):
         A = step(A)
-        if t == t0 - 10:
+        if t == t0 - SAMPLE:
             prev = disturb.periodic_centroid(A)
     return A, prev
 
@@ -109,7 +132,8 @@ def warm(engine_name, size, t0):
 # --- one run -------------------------------------------------------------------
 
 def run_id(iv, s, t0, size, eng):
-    return f"L4-001-{iv}-s{s:.4f}-t{t0}-N{size}-{eng}"
+    tag = "" if COND == "base" else f"-{COND}"
+    return f"L4-001-{iv}-s{s:.4f}-t{t0}-N{size}-{eng}{tag}"
 
 
 def aligned(A, frame):
@@ -120,8 +144,9 @@ def aligned(A, frame):
     return ndimage.rotate(B, ang, reshape=False, order=1, mode="grid-wrap")
 
 
-def run(iv, s, t0, size=128, eng="ref", horizon=HORIZON, save=None, keep_final=False):
-    step = engine(eng, size)
+def run(iv, s, t0, size=128, eng="ref", horizon=None, save=None, keep_final=False):
+    horizon = HORIZON if horizon is None else horizon
+    step = engine(eng, size, R, T)
     A, prev = warm(eng, size, t0)
     frame = disturb.frame_from(A, prev)
     before = A
@@ -140,26 +165,28 @@ def run(iv, s, t0, size=128, eng="ref", horizon=HORIZON, save=None, keep_final=F
         cn = disturb.periodic_centroid(A)
         disp += (disturb.wrap(cn[0] - c[0], n), disturb.wrap(cn[1] - c[1], n))
         c = cn
-        if k % 10 == 0:
+        if k % SAMPLE == 0:
             m = A.sum()
             samples.append((k, m / R ** 2, disturb.gyradius(A, *c) / R, disp[0], disp[1]))
-        if k == horizon - 10:
+        if k == horizon - SAMPLE:
             last10 = c
     samples = np.array(samples)
     win = samples[samples[:, 0] > horizon - WINDOW]
-    # five 100-step blocks of net displacement inside the window
+    # five 10-time-unit blocks of net displacement inside the window
     blocks = []
-    for b0 in range(horizon - WINDOW, horizon, 100):
+    blk = 10 * T
+    for b0 in range(horizon - WINDOW, horizon, blk):
         p0 = samples[samples[:, 0] == b0][0, 3:5] if b0 > 0 else np.zeros(2)
-        p1 = samples[samples[:, 0] == b0 + 100][0, 3:5]
-        blocks.append(np.hypot(*(p1 - p0)) / R / (100 / T))
+        p1 = samples[samples[:, 0] == b0 + blk][0, 3:5]
+        blocks.append(np.hypot(*(p1 - p0)) / R / (blk / T))
     wspeed = float(np.mean(blocks))
     final_mass = samples[-1, 1]
-    cls = {b: disturb.classify(win[:, 1], win[:, 2], wspeed, final_mass, band=b)
+    cls = {b: disturb.classify(win[:, 1], win[:, 2], wspeed, final_mass, band=b,
+                               baseline=BASELINE)
            for b in (0.1, 0.2, 0.3)}
 
     # recovery time: first sample from which mass and gyradius stay in the +/-20% bands
-    bm, bg = disturb.BASELINE["mass"], disturb.BASELINE["gyradius"]
+    bm, bg = BASELINE["mass"], BASELINE["gyradius"]
     ok = ((samples[:, 1] >= 0.8 * bm) & (samples[:, 1] <= 1.2 * bm)
           & (samples[:, 2] >= 0.8 * bg) & (samples[:, 2] <= 1.2 * bg))
     rec_t = float("nan")
@@ -177,6 +204,8 @@ def run(iv, s, t0, size=128, eng="ref", horizon=HORIZON, save=None, keep_final=F
         "final_mass": final_mass,
         "win_mass_min": win[:, 1].min(), "win_mass_max": win[:, 1].max(),
         "win_gyr_min": win[:, 2].min(), "win_gyr_max": win[:, 2].max(),
+        "win_mass_mean": win[:, 1].mean(), "win_gyr_mean": win[:, 2].mean(),
+        "cond": COND, "R": R, "T": T,
         "win_speed": wspeed,
         "recovery_time": rec_t,
         "class": cls[0.2], "class_band10": cls[0.1], "class_band30": cls[0.3],
@@ -202,7 +231,8 @@ def run(iv, s, t0, size=128, eng="ref", horizon=HORIZON, save=None, keep_final=F
 
 FIELDS = ["run_id", "intervention", "strength", "t0", "size", "engine", "horizon", "code_rev",
           "mass_before", "mass_after_edit", "achieved_dmass_frac", "final_mass",
-          "win_mass_min", "win_mass_max", "win_gyr_min", "win_gyr_max", "win_speed",
+          "win_mass_min", "win_mass_max", "win_gyr_min", "win_gyr_max", "win_mass_mean",
+          "win_gyr_mean", "win_speed", "cond", "R", "T",
           "recovery_time", "template_corr", "class", "class_band10", "class_band30"]
 
 
@@ -225,9 +255,30 @@ def corr(a, b):
     return float(np.corrcoef(a.ravel(), b.ravel())[0, 1])
 
 
+def baseline_path(out):
+    return os.path.join(os.path.dirname(os.path.abspath(out)), f"baseline-{COND}.json")
+
+
+def calibrate(out, size, eng):
+    """Amendment A1: centre the bands on this condition's own s = 0 control."""
+    r_ = run("I001", 0.0, PHASES[0], size, eng)
+    b = {"mass": r_["win_mass_mean"], "gyradius": r_["win_gyr_mean"], "speed": r_["win_speed"]}
+    os.makedirs(os.path.dirname(baseline_path(out)), exist_ok=True)
+    with open(baseline_path(out), "w") as f:
+        json.dump({"cond": COND, "R": R, "T": T, "size": size, "engine": eng,
+                   "control_run": r_["run_id"], **b}, f, indent=1)
+    set_cond(COND, b)
+
+
+def pool(workers):
+    return Pool(workers, initializer=set_cond, initargs=(COND, BASELINE))
+
+
 def sweep(ivs, out, size, eng, workers):
+    if COND != "base":
+        calibrate(out, size, eng)
     jobs = [(iv, s, t0, size, eng) for iv in ivs for s in GRIDS[iv] for t0 in PHASES]
-    with Pool(workers) as p:
+    with pool(workers) as p:
         res = p.map(_job, jobs, chunksize=1)
     controls = {(r_["intervention"], r_["t0"]): fa for r_, fa in res if r_["strength"] == 0}
     rows = []
@@ -241,6 +292,7 @@ def sweep(ivs, out, size, eng, workers):
 def _bisect_job(args):
     iv, t0, lo, hi, size, eng, ctrl = args
     rows = []
+    dist = None
     if iv == "I002":
         A, prev = warm(eng, size, t0)
         f = disturb.frame_from(A, prev)
@@ -262,6 +314,10 @@ def _bisect_job(args):
 
 
 def bisect(coarse, out, size, eng, workers):
+    if COND != "base":
+        with open(baseline_path(coarse)) as f:
+            b = json.load(f)
+        set_cond(COND, {k: b[k] for k in ("mass", "gyradius", "speed")})
     with open(coarse) as f:
         rows = list(csv.DictReader(f))
     jobs = []
@@ -276,7 +332,7 @@ def bisect(coarse, out, size, eng, workers):
             ctrl = run(iv, 0.0, t0, size, eng, keep_final=True)[1]
             jobs.append((iv, t0, float(rs[i - 1]["strength"]), float(rs[i]["strength"]),
                          size, eng, ctrl))
-    with Pool(workers) as p:
+    with pool(workers) as p:
         res = p.map(_bisect_job, jobs, chunksize=1)
     allrows = [r_ for *_, rs in res for r_ in rs]
     write_rows(out, allrows)
@@ -299,7 +355,7 @@ def check(brackets, out, size, eng, workers, horizon, phases):
         br = [b for b in csv.DictReader(f) if int(b["t0"]) in phases]
     jobs = [(b["intervention"], float(b[k]), int(b["t0"]), size, eng, horizon)
             for b in br for k in ("s_ok", "s_fail")]
-    with Pool(workers) as p:
+    with pool(workers) as p:
         rows = p.map(_check_job, jobs, chunksize=1)
     write_rows(out, rows)
     return rows
@@ -312,12 +368,13 @@ def main():
     one.add_argument("--iv", required=True, choices=disturb.INTERVENTIONS)
     one.add_argument("--s", type=float, required=True)
     one.add_argument("--t0", type=int, default=1000)
-    one.add_argument("--horizon", type=int, default=HORIZON)
+    one.add_argument("--horizon", type=int, default=None)
     one.add_argument("--save", default=None)
     for p in (one, sub.add_parser("sweep"), sub.add_parser("bisect"), sub.add_parser("check")):
         p.add_argument("--size", type=int, default=128)
         p.add_argument("--engine", default="ref", choices=["ref", "alm"])
         p.add_argument("--workers", type=int, default=os.cpu_count())
+        p.add_argument("--cond", default="base", choices=CONDS)
     sw = sub.choices["sweep"]
     sw.add_argument("--ivs", default="I001,I002,I003,I004")
     sw.add_argument("--out", default=os.path.join(HERE, "results", "coarse.csv"))
@@ -326,10 +383,11 @@ def main():
     bi.add_argument("--out", default=os.path.join(HERE, "results", "bisect.csv"))
     ck = sub.choices["check"]
     ck.add_argument("--brackets", default=os.path.join(HERE, "results", "bisect-brackets.csv"))
-    ck.add_argument("--horizon", type=int, default=HORIZON)
-    ck.add_argument("--phases", default=",".join(map(str, PHASES)))
+    ck.add_argument("--horizon", type=int, default=None)
+    ck.add_argument("--phases", default=None)
     ck.add_argument("--out", required=True)
     a = ap.parse_args()
+    set_cond(a.cond)
     if a.cmd == "one":
         r_ = run(a.iv, a.s, a.t0, a.size, a.engine, a.horizon, a.save)
         for k in FIELDS:
@@ -339,7 +397,7 @@ def main():
         sweep(a.ivs.split(","), a.out, a.size, a.engine, a.workers)
     elif a.cmd == "check":
         check(a.brackets, a.out, a.size, a.engine, a.workers, a.horizon,
-              [int(x) for x in a.phases.split(",")])
+              [int(x) for x in a.phases.split(",")] if a.phases else PHASES)
     else:
         bisect(a.coarse, a.out, a.size, a.engine, a.workers)
 
