@@ -64,6 +64,10 @@ class Subject:
 G4_STEPS, G4_T0, G4_S = 5000, 3000, 0.25
 G4_SUBJECTS = [("S101", "bound Orbium pair"), ("S001", "Orbium (O2u)")]
 
+# G005: the circler under the same cut one and two steps apart (ledger C040). Lane 6's L6-005
+# heading (10-step chord) and phases t0 = 3000 and 3002; Lane 6 saw circler -> S103 only at 3002.
+G5_STEPS, G5_T0S, G5_S = 5002, (3000, 3002), 0.25
+
 SUBJECTS = [
     Subject("S001", "glides", "Orbium (O2u)"),
     Subject("S101", "glides as a bound pair", "bound Orbium pair"),
@@ -81,6 +85,12 @@ def run_configs() -> dict[str, almrun.RunConfig]:
         cfgs[f"G004:{sid}"] = almrun.RunConfig(
             specimen=sid, steps=G4_STEPS, every=EVERY,
             interventions=[(G4_T0, galintervene.GalleryPortInjury(s=G4_S))],
+        )
+    for t0 in G5_T0S:
+        hx, hy = galintervene.chord_heading("S102", t0)
+        cfgs[f"G005:S102@{t0}"] = almrun.RunConfig(
+            specimen="S102", steps=G5_STEPS, every=EVERY,
+            interventions=[(t0, galintervene.GalleryPortInjuryH(s=G5_S, hx=hx, hy=hy))],
         )
     return cfgs
 
@@ -420,44 +430,52 @@ def _tint_removed(img_rgb: np.ndarray, pre: np.ndarray, post: np.ndarray, scale:
     return (img_rgb * (1 - a) + np.array(REMOVED) * a).astype(np.uint8)
 
 
+AFTER = (5, 20, 100, 500, 2000)  # sheet columns: 0.5, 2, 10, 50 and 200 time units after the cut
+
+
 def g4_steps() -> list[int]:
     """Tile steps: the cut step twice (just before and just after the edit), then 0.5, 2, 10, 50
     and 200 time units after (capped at the run's length)."""
-    after = [G4_T0 + k for k in (5, 20, 100, 500, 2000)]
-    return [G4_T0, G4_T0] + [t for t in after if t <= G4_STEPS]
+    return [G4_T0, G4_T0] + [G4_T0 + k for k in AFTER if G4_T0 + k <= G4_STEPS]
 
 
-def g004_shedding(reps: dict[str, Replay]) -> None:
-    """G004: the same port injury on the bound pair and on a single Orbium (C041)."""
+def _cut_steps(t0: int, n: int) -> list[int]:
+    return [t0, t0] + [t0 + k for k in AFTER if t0 + k <= n]
+
+
+def _film_offsets(t0: int, n: int, stride: int = 2) -> list[int]:
+    return list(range(-20, min(600, n - t0) + 1, stride))
+
+
+def injury_exhibit(reps, rows, folder: Path, stem: str, fate, footer: str, prov: dict) -> None:
+    """Before/after sheet and film for injury runs. ``rows`` are (runs key, specimen ID, name, t0);
+    each row's columns and film frames are timed from its own cut step."""
     from PIL import Image, ImageDraw
 
-    folder = EXHIBITS / "G004-port-injury"
     folder.mkdir(parents=True, exist_ok=True)
     size, scale = 64, 3
     cell = size * scale
-    steps = g4_steps()
+    ncols = max(len(_cut_steps(t0, reps[k].manifest["timestep"]["steps"])) for k, _, _, t0 in rows)
     left, top, gap = 200, 34, 4
-    W = left + len(steps) * (cell + gap)
-    H = top + len(G4_SUBJECTS) * (cell + gap) + 44
+    W = left + ncols * (cell + gap)
+    H = top + len(rows) * (cell + gap) + 44
     sheet = Image.new("RGB", (W, H), BG)
     d = ImageDraw.Draw(sheet)
-    heads = ["before", "cut"] + [f"+{(t - G4_T0) / 10:g} tu" for t in steps[2:]]
+    heads = ["before", "cut"] + [f"+{k / 10:g} tu" for k in AFTER][: ncols - 2]
     for j, h in enumerate(heads):
         d.text((left + j * (cell + gap) + 4, 10), h, fill=DIM, font=font(13))
-    for i, (sid, name) in enumerate(G4_SUBJECTS):
-        r = reps[f"G004:{sid}"]
+    for i, (key, sid, name, t0) in enumerate(rows):
+        r = reps[key]
+        steps = _cut_steps(t0, r.manifest["timestep"]["steps"])
         cents = _ffill(r.centroids)
-        pre, post = r.edits[G4_T0]
+        pre, post = r.edits[t0]
         iv = r.manifest["interventions_applied"][0]
         y = top + i * (cell + gap)
         d.text((10, y + 8), sid, fill=INK, font=font(16, True))
         d.text((10, y + 30), name, fill=DIM, font=font(12))
         d.text((10, y + 48), f"{100 * (1 - iv['mass_after'] / iv['mass_before']):.1f}% of mass cut", fill=DIM,
                font=font(12))
-        m_end = r.frames[steps[-1]].sum() / r.rule.R**2
-        fate = ("dies" if m_end == 0 else "one Orbium-mass body remains" if abs(m_end / 0.4358 - 1) < 0.01
-                else f"survives, mass {m_end:.3f}")
-        d.text((10, y + 66), fate, fill=INK, font=font(12, True))
+        d.text((10, y + 66), fate(r, r.frames[steps[-1]]), fill=INK, font=font(12, True))
         for j, t in enumerate(steps):
             c = cents[t]
             if j == 0:
@@ -470,49 +488,50 @@ def g004_shedding(reps: dict[str, Replay]) -> None:
             sheet.paste(Image.fromarray(rgb), (left + j * (cell + gap), y))
     d.text((10, H - 38), "vermillion: cells the cut emptied (opacity = value removed) · each tile 64x64 cells, "
            "camera follows the centroid", fill=DIM, font=font(12))
-    d.text((10, H - 20), f"Lane 4 I004 port injury, s = {G4_S:g}, at step {G4_T0} after settling; "
-           "heading by forward difference (see provenance)", fill=DIM, font=font(12))
-    sheet.save(folder / "port-injury-sheet.png", optimize=True)
+    d.text((10, H - 20), footer, fill=DIM, font=font(12))
+    sheet.save(folder / f"{stem}-sheet.png", optimize=True)
 
-    # The film: both creatures from 2 tu before the cut, camera following, same clock.
+    # The film: each creature from 2 tu before its cut, camera following, clocks aligned on the cut.
     stride, fps = 2, 20
-    t_end = min(G4_T0 + 600, G4_STEPS)
-    film_steps = list(range(G4_T0 - 20, t_end + 1, stride))
+    offsets = min((_film_offsets(t0, reps[k].manifest["timestep"]["steps"], stride) for k, _, _, t0 in rows), key=len)
     pw, head = cell + 0, 40
-    FW, FH = 2 * pw + 3 * gap, pw + head + 2 * gap + 22
+    FW, FH = len(rows) * pw + (len(rows) + 1) * gap, pw + head + 2 * gap + 22
     out = []
-    for t in film_steps:
+    for o in offsets:
         img = Image.new("RGB", (FW, FH), BG)
         d = ImageDraw.Draw(img)
-        for k, (sid, name) in enumerate(G4_SUBJECTS):
-            r = reps[f"G004:{sid}"]
+        for k, (key, sid, name, t0) in enumerate(rows):
+            r = reps[key]
+            t = t0 + o
             c = _ffill(r.centroids)[t]
             x0 = gap + k * (pw + gap)
             d.text((x0, gap), sid, fill=INK, font=font(14, True))
             d.text((x0, gap + 19), name, fill=DIM, font=font(11))
-            A = r.frames[t]
-            rgb = colorize(centred(A, c, size), scale)
-            if t == G4_T0:  # the cut frame shows what was removed
-                pre, post = r.edits[G4_T0]
+            rgb = colorize(centred(r.frames[t], c, size), scale)
+            if o == 0:  # the cut frame shows what was removed
+                pre, post = r.edits[t0]
                 rgb = _tint_removed(rgb, centred(pre, c, size), centred(post, c, size), scale)
             img.paste(Image.fromarray(rgb), (x0, gap + head))
-        label = ("before the cut" if t < G4_T0 else "the cut (held 1 s; vermillion = removed)" if t == G4_T0
-                 else f"+{(t - G4_T0) / 10:.1f} tu after the cut")
+        label = ("before the cut" if o < 0 else "the cut (held 1 s; vermillion = removed)" if o == 0
+                 else f"+{o / 10:.1f} tu after the cut")
         d.text((gap, FH - 20), label, fill=DIM, font=font(12))
-        out.extend([img] * (fps if t == G4_T0 else 1))
-    mp4 = write_video(out, folder / "port-injury.gif", folder / "port-injury.mp4", fps)
-    media = ["port-injury-sheet.png", "port-injury.gif"] + (["port-injury.mp4"] if mp4 else [])
+        out.extend([img] * (fps if o == 0 else 1))
+    mp4 = write_video(out, folder / f"{stem}.gif", folder / f"{stem}.mp4", fps)
+    media = [f"{stem}-sheet.png", f"{stem}.gif"] + ([f"{stem}.mp4"] if mp4 else [])
+    head_keys = ("exhibit", "title")
+    rest = {k: v for k, v in prov.items() if k not in head_keys and k != "extra_disclosures"}
     save_provenance(folder, {
-        "exhibit": "G004",
-        "title": "Same cut, two fates",
+        **{k: prov[k] for k in head_keys},
         "media": media,
-        "frames": {"sheet_steps": steps, "sheet_note": "columns 1-2 are the state at the cut step just before "
-                   "and just after the edit", "film_steps": [film_steps[0], film_steps[-1]], "film_stride_steps": stride,
-                   "playback_fps": fps},
-        "intervention": {"name": "gallery_port_injury", "lane4_id": "I004", "s": G4_S, "step": G4_T0,
-                         "definition": "alm.disturb.i004_port_injury (L4-001 protocol)",
-                         "heading": "forward difference over one probe step (Lane 4 uses the previous "
-                                    "step's centroid); see research/gallery/galintervene.py"},
+        "frames": {"sheet_steps": {key: _cut_steps(t0, reps[key].manifest["timestep"]["steps"])
+                                   for key, _, _, t0 in rows} if len({t0 for *_, t0 in rows}) > 1
+                   else _cut_steps(rows[0][3], reps[rows[0][0]].manifest["timestep"]["steps"]),
+                   "sheet_note": "columns 1-2 are the state at the cut step just before "
+                   "and just after the edit", **({"film_offsets_from_cut": [offsets[0], offsets[-1]]}
+                   if len({t0 for *_, t0 in rows}) > 1 else
+                   {"film_steps": [rows[0][3] + offsets[0], rows[0][3] + offsets[-1]]}),
+                   "film_stride_steps": stride, "playback_fps": fps},
+        **rest,
         "view": f"{size}x{size}-cell windows shifted by whole cells to centre the centroid (camera follows; "
                 "after death the camera holds its last position); 3x nearest-neighbour",
         "overlays": ["vermillion tint on cells emptied by the cut (sheet column 'cut'; the film's cut frame), "
@@ -520,8 +539,62 @@ def g004_shedding(reps: dict[str, Replay]) -> None:
         "disclosures": ["camera follows the centroid, so travel is hidden",
                         "the film holds the cut frame for one second (20 repeated frames); all other "
                         "frames are 2 steps apart",
-                        "GIF palette reduced to 128 colours; the MP4 is H.264 (lossy)"],
-    }, [reps[f"G004:{sid}"] for sid, _ in G4_SUBJECTS])
+                        "GIF palette reduced to 128 colours; the MP4 is H.264 (lossy)"] + prov.get("extra_disclosures", []),
+    }, [reps[key] for key, *_ in rows])
+
+
+def _orbium_fate(r, A) -> str:
+    m_end = A.sum() / r.rule.R**2
+    return ("dies" if m_end == 0 else "one Orbium-mass body remains" if abs(m_end / 0.4358 - 1) < 0.01
+            else f"survives, mass {m_end:.3f}")
+
+
+def g004_shedding(reps: dict[str, Replay]) -> None:
+    """G004: the same port injury on the bound pair and on a single Orbium (C041)."""
+    injury_exhibit(
+        reps, [(f"G004:{sid}", sid, name, G4_T0) for sid, name in G4_SUBJECTS],
+        EXHIBITS / "G004-port-injury", "port-injury", _orbium_fate,
+        f"Lane 4 I004 port injury, s = {G4_S:g}, at step {G4_T0} after settling; "
+        "heading by forward difference (see provenance)",
+        {"exhibit": "G004", "title": "Same cut, two fates",
+         "intervention": {"name": "gallery_port_injury", "lane4_id": "I004", "s": G4_S, "step": G4_T0,
+                          "definition": "alm.disturb.i004_port_injury (L4-001 protocol)",
+                          "heading": "forward difference over one probe step (Lane 4 uses the previous "
+                                     "step's centroid); see research/gallery/galintervene.py"}},
+    )
+
+
+def equals_up_to_shift(A: np.ndarray, B: np.ndarray) -> bool:
+    """True if A is B rolled by some whole-cell shift on the torus (exact float equality)."""
+    c = np.real(np.fft.ifft2(np.fft.fft2(A) * np.conj(np.fft.fft2(B))))
+    dy, dx = np.unravel_index(int(np.argmax(c)), c.shape)
+    return bool(np.array_equal(np.roll(np.roll(B, dy, 0), dx, 1), A))
+
+
+def _ring_fate(r, A) -> str:
+    m_end = A.sum() / r.rule.R**2
+    if m_end == 0:
+        return "dies"
+    if equals_up_to_shift(A, specimens.load("S103").place(A.shape)):
+        return "becomes S103 exactly"
+    return f"survives, mass {m_end:.4f}"
+
+
+def g005_circler_to_ring(reps: dict[str, Replay]) -> None:
+    """G005: the circler under the same port injury at two phases two steps apart (C040)."""
+    rows = [(f"G005:S102@{t0}", "S102", f"circler, cut at step {t0}", t0) for t0 in G5_T0S]
+    injury_exhibit(
+        reps, rows, EXHIBITS / "G005-circler-to-ring", "circler-ring", _ring_fate,
+        f"Lane 4 I004 port injury, s = {G5_S:g}, heading from the 10-step centroid chord (Lane 6 L6-005); "
+        "rows differ only in the cut step",
+        {"exhibit": "G005", "title": "Two steps apart",
+         "intervention": {"name": "gallery_port_injury_h", "lane4_id": "I004", "s": G5_S, "steps": list(G5_T0S),
+                          "definition": "alm.disturb.i004_port_injury (L4-001 protocol), frame centred on the "
+                                        "periodic centroid at the cut step",
+                          "heading": "unit vector of the unwrapped centroid shift over the previous 10 steps of "
+                                     "the uninterrupted run, as in Lane 6's disturb_switch.py; computed by "
+                                     "galintervene.chord_heading and stored in the run's intervention params"}},
+    )
 
 
 def render() -> None:
@@ -540,6 +613,13 @@ def render() -> None:
         g4[f"G004:{sid}"] = replay(runs[f"G004:{sid}"], keep4)
         print(f"G004:{sid}: replay of {runs[f'G004:{sid}']} matches its final_state_sha256")
     g004_shedding(g4)
+    g5 = {}
+    for t0 in G5_T0S:
+        key = f"G005:S102@{t0}"
+        n = G5_STEPS
+        g5[key] = replay(runs[key], set(_cut_steps(t0, n)) | {t0 + o for o in _film_offsets(t0, n)})
+        print(f"{key}: replay of {runs[key]} matches its final_state_sha256")
+    g005_circler_to_ring(g5)
 
 
 def main(argv=None) -> int:

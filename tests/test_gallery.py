@@ -23,6 +23,17 @@ def test_committed_gallery_runs_match_the_specimen_registry():
         assert spec.cells_sha256 == man["specimen"]["cells_sha256_int16le"], run_id
 
 
+def test_equals_up_to_shift():
+    import render
+
+    spec = specimens.load("S103")
+    A = spec.place(128)
+    assert render.equals_up_to_shift(np.roll(np.roll(A, 7, 0), -40, 1), A)
+    B = A.copy()
+    B[0, 0] += 1e-9
+    assert not render.equals_up_to_shift(B, A)
+
+
 def test_s103_is_a_fixed_point_for_a_few_steps():
     spec = specimens.load("S103")
     A0 = spec.place(128)
@@ -44,6 +55,8 @@ def _short_pipeline(tmp_path, monkeypatch):
     monkeypatch.setattr(render, "WINDOW", (20, 60))
     monkeypatch.setattr(render, "G4_STEPS", 60)
     monkeypatch.setattr(render, "G4_T0", 30)
+    monkeypatch.setattr(render, "G5_STEPS", 60)
+    monkeypatch.setattr(render, "G5_T0S", (30, 32))
     render.collect()
     return render
 
@@ -58,7 +71,7 @@ def test_render_pipeline_end_to_end(tmp_path, monkeypatch):
     render.render()
 
     folders = sorted((tmp_path / "exhibits").iterdir())
-    assert [f.name[:4] for f in folders] == ["G001", "G002", "G003", "G004"]
+    assert [f.name[:4] for f in folders] == ["G001", "G002", "G003", "G004", "G005"]
     for folder in folders:
         prov = json.loads((folder / "provenance.json").read_text())
         assert prov["media"]

@@ -45,3 +45,45 @@ if "gallery_port_injury" not in __import__("alm.interventions", fromlist=["REGIS
 
         def apply(self, A, sim, rng):
             return disturb.i004_port_injury(A, forward_frame(A, sim), self.s, sim.rule.R)
+
+
+def chord_heading(specimen_id: str, t0: int, chord: int = 10, size: int = 128) -> tuple[float, float]:
+    """Unit heading of the uninterrupted specimen run at step t0, from its unwrapped centroid
+    ``chord`` steps earlier: Lane 6's L6-005 recipe (``disturb_switch.py``: pos[t] - pos[t - 10])."""
+    from alm import measure, specimens
+
+    spec = specimens.load(specimen_id)
+    sim = Lenia(spec.rule, spec.place(size))
+    ny, nx = sim.A.shape
+    last = measure.periodic_centroid(sim.A)
+    pos = np.zeros((t0 + 1, 2))
+    p = np.array(last, dtype=float)
+    for t in range(1, t0 + 1):
+        sim.step()
+        c = measure.periodic_centroid(sim.A)
+        p += (measure.wrap(c[0] - last[0], nx), measure.wrap(c[1] - last[1], ny))
+        last = c
+        pos[t] = p
+    v = pos[t0] - pos[t0 - chord]
+    n = float(np.hypot(*v))
+    if n == 0:
+        raise ValueError("creature did not move over the chord; heading undefined")
+    return float(v[0] / n), float(v[1] / n)
+
+
+if "gallery_port_injury_h" not in __import__("alm.interventions", fromlist=["REGISTRY"]).REGISTRY:
+
+    @register
+    @dataclass(frozen=True)
+    class GalleryPortInjuryH(Intervention):
+        """L4-001 I004 port injury with the heading given as (hx, hy), centred on the current
+        periodic centroid. Use ``chord_heading`` to reproduce Lane 6's L6-005 cuts."""
+
+        name: ClassVar[str] = "gallery_port_injury_h"
+        s: float = 0.1
+        hx: float = 1.0
+        hy: float = 0.0
+
+        def apply(self, A, sim, rng):
+            cx, cy = disturb.periodic_centroid(A)
+            return disturb.i004_port_injury(A, disturb.Frame(cx, cy, self.hx, self.hy), self.s, sim.rule.R)
