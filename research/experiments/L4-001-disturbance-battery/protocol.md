@@ -135,7 +135,7 @@ non-recovery and are reported separately.
 ## Run IDs and reproduction
 
 Run ID format: `L4-001-<intervention>-s<strength, 4 decimals>-t<t0>-N<size>-<engine>`, e.g.
-`L4-001-I002-s0.4000-t1002-N128-ref`. Run IDs are deterministic, so the ID alone reproduces the run.
+`L4-001-I002-s0.4000-t1002-N128-ref`. (Changed to 6 decimals by amendment A2.) Run IDs are deterministic, so the ID alone reproduces the run.
 
 The runner script and exact commands are added in later commits next to this file; this protocol
 commit deliberately contains no code and no results.
@@ -161,3 +161,9 @@ T and R, the ±20 % bands for these two conditions are centred on that condition
 for the shift of s*: the result is reported as the measured s* per intervention under each
 discretisation next to the T10/R13 value, and a shift larger than the T10/R13 phase spread is
 called discretisation-sensitive.
+
+### A2 (2026-10-07, bookkeeping only)
+
+Run IDs use **6** strength decimals (`s0.103125`), because bisection midpoints have up to 6 decimals
+and a 4-decimal ID did not reproduce them exactly. Amendment A1 runs carry a `-T20` or `-R26`
+suffix. No definition or threshold changes.

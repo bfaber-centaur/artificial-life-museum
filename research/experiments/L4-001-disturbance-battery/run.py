@@ -133,7 +133,7 @@ def warm(engine_name, size, t0):
 
 def run_id(iv, s, t0, size, eng):
     tag = "" if COND == "base" else f"-{COND}"
-    return f"L4-001-{iv}-s{s:.4f}-t{t0}-N{size}-{eng}{tag}"
+    return f"L4-001-{iv}-s{s:.6f}-t{t0}-N{size}-{eng}{tag}"
 
 
 def aligned(A, frame):
