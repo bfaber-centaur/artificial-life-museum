@@ -4,7 +4,7 @@ Lane 5 (Morphometrics / Behaviour). Every function here is pure: it takes numpy
 arrays (and plain numbers) and returns numbers or arrays. Nothing steps the
 simulator, so Lane 2's runner, Lane 4's assay and Lane 3's cross-checks can all
 call the same definitions. It deliberately does not import the simulator or
-Lane 2's ``alm.features`` trace-column registry; a thin ``@register`` adapter
+Lane 2's ``alm.measure`` trace-column registry; a thin ``@register`` adapter
 there can expose :func:`snapshot` as a feature set.
 
 Conventions
