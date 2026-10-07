@@ -55,17 +55,28 @@ Readers should use the public links.
 
 Only `github.com` (over git), `raw.githubusercontent.com` and `pypi.org` were reachable.
 
-**What that leaves:**
+**What that left (round 1):** Hudcová, Davis and Cool were excerpt-only. Davis and Cool had
+their rules checked from code.
 
-- **Hudcová et al. (2026):** full text not obtained. No arXiv mirror is reachable, and the code
-  and data links in the paper are `bit.ly` short links, which are blocked. Excerpt-only.
-- **Davis (2024):** full text not obtained. The GitHub repositories hold code, not the paper.
-  They confirm only which rule the "Orbium" runs used (see the entry below).
-- **Cool et al. (2026):** full text not obtained. The repository confirms the rule, the numerics
-  and the intervention code. It does not confirm the reported results.
+### 2026-10-07 verification pass, round 2 (network opened by Bobby)
 
-To finish the pass, either allow `arxiv.org` in the project's network settings (optionally also
-`direct.mit.edu`) or upload the three PDFs to the project.
+Bobby widened the network policy. `curl -sS -L https://arxiv.org/pdf/2401.13111` then returned
+HTTP 200, and the arXiv pages listed only v1 for each paper below.
+
+| Source | Version | Local copy | Status |
+| --- | --- | --- | --- |
+| Hudcová et al. (2026) | arXiv 2601.01932**v1** (5 Jan 2026; 3 pp., Late Breaking Abstract) | `.refs/papers/hudcova2026.pdf` | Read in full |
+| Cool et al. (2026) | arXiv 2605.30708**v1** (29 May 2026; 10 pp.) | `.refs/papers/cool2026.pdf` | Cited sections read |
+| Davis (2024) | arXiv 2401.13111**v1** (23 Jan 2024; 49 pp.) | `.refs/papers/davis2024.pdf` | Methods, Lenia results and Fig. 5 read |
+| Kojima & Ikegami (2023) | arXiv 2305.13784**v1** (23 May 2023; 9 pp.) | `.refs/papers/kojima2023.pdf` | §1.2 and §2.1 read |
+| Hamon et al. (2024) | arXiv 2402.10236**v1** (24 pp.; preprint of the Science Advances paper) | `.refs/papers/hamon2024.pdf` | Introduction and supplementary movie list read |
+| Chan (2020) | arXiv 2005.03742**v1** (7 May 2020; 9 pp.) | `.refs/papers/chan2020.pdf` | Cited passages read |
+| Hoffman & Mallet-Paret (2010) | arXiv 0811.0093**v1** (55 pp.) | `.refs/papers/hoffman2010.pdf` | Abstract, §1 and Theorems 1.1–1.2 read |
+
+Still unread:
+
+- **Yevenko (2024):** excerpt only. `doi.org/10.1162/isal_a_00728` still returned 403.
+- **The journal version of Chan (2019):** not needed. All locators cite arXiv v3.
 
 ## Primary Lenia sources
 
@@ -123,12 +134,18 @@ To finish the pass, either allow `arxiv.org` in the project's network settings (
   (vol. 32), p. 221 onward. doi:[10.1162/isal_a_00297](https://doi.org/10.1162/isal_a_00297);
   arXiv:[2005.03742](https://arxiv.org/abs/2005.03742).
 
-  **Read:** *excerpt*; not part of this pass.
+  **Read:** arXiv v1, *full text*, for the passages below.
 
-  Used for: multiple phenotypes of aggregated solitons under multi-kernel and multi-channel
-  rules. These are expanded rules, not classic single-kernel Lenia.
+  - **p. 5:** "In multi-kernel or multi-channel rules, Orbium-like individuality becomes a
+    common phenomenon."
+  - **p. 6, "Differentiation":** in multi-channel "Aquarium" rules, "one genotype produces
+    multiple phenotypes of aggregated solitons, each having own stable structure and behavior".
+    The listed phenotypes include "gyrating (gyrans), stationary (lithos)". Each "can switch to
+    another phenotype in specific occasions, e.g. upon collision or after self-replication".
 
-  Cited by C038.
+  These are expanded rules, not classic single-kernel Lenia.
+
+  Cited by C038, C040, C042.
 
 - **[LeniaCatalog]** Chakazul/Lenia repository, `Python/animals.json` at commit
   [`adfc542`](https://github.com/Chakazul/Lenia/blob/adfc542939266de7f4bb7ebb552e8499701ee107/Python/animals.json)
@@ -152,94 +169,105 @@ To finish the pass, either allow `arxiv.org` in the project's network settings (
 - **[Hamon2025]** G. Hamon, M. Etcheverry, B. W.-C. Chan, C. Moulin-Frier, P.-Y. Oudeyer.
   *Discovering sensorimotor agency in cellular automata using diversity search.* Science
   Advances, 2025. doi:[10.1126/sciadv.adp0834](https://doi.org/10.1126/sciadv.adp0834);
-  arXiv:[2402.10236](https://arxiv.org/abs/2402.10236). Companion site:
-  <https://developmentalsystems.org/sensorimotor-lenia-companion/>.
+  arXiv:[2402.10236](https://arxiv.org/abs/2402.10236).
 
-  **Read:** *excerpt*; not a priority paper in this pass.
+  **Read:** arXiv v1, *full text* for the passages below. The journal version was not read.
 
-  Used for:
+  - **Introduction:** glider-like structures "typically remain quite fragile to external
+    perturbations such as collision with other patterns".
+  - **Supplementary movie list, pp. 23–24:**
+    - Movie S3: "Orbium … fragile to external perturbations … collision between several orbium
+      leading to death/explosion".
+    - Movie S4: "Orbium … dies from perturbations by obstacles".
 
-  - The companion site's statements that Orbium "dies from perturbations by obstacles" and
-    that collisions of several Orbium end in death or explosion.
-  - The paper's statement that discovered patterns are typically fragile to perturbation.
-
-  Note that the obstacles are an added environment channel, not a mass edit.
+  These are movies with no strength scale. The obstacles are an added environment channel, not a
+  mass edit.
 
   Cited by C023, C026.
 
 - **[Cool2026]** J. Cool, B. Hartl, M. Levin, S. Petti. *Agnosiophobia in a virtual agent:
   behavioral and dynamical architecture in Lenia.*
-  arXiv:[2605.30708](https://arxiv.org/abs/2605.30708), 2026. Preprint; the repository says
+  arXiv:[2605.30708](https://arxiv.org/abs/2605.30708) v1, 2026. Preprint; the repository says
   "to appear at ALIFE 2026". Code: [jessescool/lenia-umwelt](https://github.com/jessescool/lenia-umwelt)
   @ `58e8903`.
 
-  **Read:** paper *excerpt*; methods checked in *code*.
+  **Read:** arXiv v1, *full text* for the cited sections. Methods also checked in *code*.
 
-  Verified from the code:
+  **Paper:**
+  - **"System and Methods" (Eq. 1–2), p. 2.** Standard clipped Euler Lenia. The occlusion is
+    purely informational: occluded cells are excluded from the potential, and the potential is
+    renormalised. No mass is removed.
+  - **"Measuring recovery", p. 2.** The authors note that at finite resolution a creature's
+    pixels fluctuate "differently so depending on the creature's angle relative to the axes of
+    grid symmetry".
+  - **p. 3.** Creatures are "upscaled to higher resolution than Chan's originals".
+  - **"Lenia creatures avoid regions of occlusion", p. 4.** Depending on extent and location,
+    occlusion pushes creatures toward "death, metamorphosis, or explosion". O2u shows "the most
+    robust agnosiophobia" and survived longest.
+  - **"Sensitivity to occlusion is spatially structured", Fig. 4, pp. 4–5.** A **persistent 3×3
+    occluded region** is placed at each nonzero pixel. "Perturbations lethal to O2u are
+    concentrated thinly at the center of its leading edge and expand into its core."
 
-  - **Rule.** Creatures come from Chan's catalog. `O2u` uses kn = gn = 1, implemented as the
-    polynomial kernel (4r(1−r))⁴ and polynomial growth 2(1 − (u−μ)²/9σ²)⁴ − 1, with dt = 1/T
-    and a clip to [0, 1] (`substrate/lenia.py`). That is **S001's rule**.
-  - **Numerics.** Runs use `--scale 4`, so R = 52 on a 512² grid, in **float32**.
-  - **Occlusion.** An occlusion renormalises the potential as
-    U = K∗(A·(1−B)) / K∗(1−B) (README, `index.html`).
-  - **Interventions.** The sweep code supports four types:
-    - `erase`: zero an N×N square, which removes mass. This is the default, with a 2×2 square
-      at base resolution.
-    - `blind`: a persistent occlusion that removes no mass.
-    - `blind_erase` and `additive`.
-  - **Outcome classes.** "Recovered" means a return to a rotation-invariant "neighborhood" of
-    the sorted activation profile. "Dead" means total mass below 0.01.
-  - **Grid drift.** The README notes that "at finite grid resolution the creature's
-    morphology … drifts (heading relative to grid axes, small phase shifts)".
+  **Code:**
+  - `O2u` runs with S001's poly/poly rule (kn = gn = 1), dt = 1/T and a clip.
+  - Runs use `--scale 4` (R = 52) in float32.
 
-  Excerpt only (these are the paper's results):
+  Cited by C003, C013, C023, C026, C040.
 
-  - Occlusions push creatures to death, metamorphosis or explosion depending on their extent and
-    location.
-  - In the per-pixel sensitivity maps, small persistent occlusions on the leading edge or core
-    usually destroy the creature.
-  - O2u shows the most robust avoidance of the four creatures (O2u, S1s, K4s, K6s).
+- **[Davis2024]** Q. Tyrell Davis. *Discretization-Dependent Dissolution of Gliders in
+  (Dis)Continuous Systems: Non-Platonic Self-Organization in Complex Systems.*
+  arXiv:[2401.13111](https://arxiv.org/abs/2401.13111) v1, 2024. The paper's code is
+  [RiveSunder/DiscoGliders](https://github.com/RiveSunder/DiscoGliders). Related repositories
+  checked in round 1: [riveSunder/DisContinuous](https://github.com/riveSunder/DisContinuous) @
+  `53809de` and [riveSunder/yuca](https://github.com/riveSunder/yuca) @ `ab59bff`.
 
-  Which intervention type the paper's maps used is therefore not confirmed.
+  **Read:** arXiv v1, *full text* for the cited parts.
 
-  Cited by C013, C023, C026, C040.
+  - **p. 11 (Eq. 6) and Fig. 5 caption, p. 38.** The "Orbium" rule uses a Gaussian kernel shell
+    (μK 0.5, σK 0.15) and Gaussian growth (μG 0.15, σG 0.015). That is not S001's poly/poly rule.
+  - **p. 18, definition.** A pattern–rule pair is **non-Platonic** if, at some discretization
+    where it does not persist, a *coarser* discretization exists where it does. Otherwise it is
+    Platonic.
+  - **Methods, pp. 16–17.** A random walk over Δt ∈ [0.01, 1], kernel radius, and float16, 32
+    or 64.
+  - **"Lenia", p. 20.** Of five Lenia gliders in four rule sets:
+    - Orbium and the *H. natans* glider are **Platonic**: coarser discretization never restores
+      persistence.
+    - *Scutium gravidus*, *Triscutium solidus* and the *H. natans* wide wobble glider are
+      **non-Platonic**.
 
-- **[Davis2024]** Q. Tyrell Davis. *Discretization-Dependent Dissolution of (Dis)Continuous
-  Gliders: Non-Platonic Self-Organization in Complex Systems.*
-  arXiv:[2401.13111](https://arxiv.org/abs/2401.13111), 2024. Preliminary study:
-  arXiv:[2208.09444](https://arxiv.org/abs/2208.09444) (2022). Code:
-  [riveSunder/DisContinuous](https://github.com/riveSunder/DisContinuous) @ `53809de` and
-  [riveSunder/yuca](https://github.com/riveSunder/yuca) @ `ab59bff`.
-
-  **Read:** paper *excerpt*; rule checked in *code*.
-
-  Verified from the code: the "Orbium" in this work (`get_orbium_config` in `yuca/configs.py`)
-  uses a **Gaussian** kernel shell (μ 0.5, σ 0.15) and **Gaussian** growth (μ 0.15, σ 0.015) at
-  R = 13. That is the exponential/exponential family, not S001's poly/poly rule.
-
-  Excerpt only:
-
-  - "Non-Platonic" gliders, for example *Scutium gravidus*, lose persistence under finer
-    discretization.
-  - Orbium tolerates kernel radius 65 and float64, but fails at large step sizes.
+  Round 1's excerpt that "Orbium fails at large step sizes" comes from the 2022 preliminary study
+  (arXiv:[2208.09444](https://arxiv.org/abs/2208.09444)). It agrees with Orbium being Platonic,
+  because coarse runs failing is the Platonic case.
 
   Cited by C003, C039.
 
 - **[Kojima2023]** H. Kojima, T. Ikegami. *Implementation of Lenia as a Reaction-Diffusion
-  System.* arXiv:[2305.13784](https://arxiv.org/abs/2305.13784), 2023.
+  System.* arXiv:[2305.13784](https://arxiv.org/abs/2305.13784) v1, 2023.
 
-  **Read:** *excerpt*; not part of this pass.
+  **Read:** arXiv v1, *full text* for §1.2 and §2.1.
 
-  Used for: classic Lenia's clip prevents a pure differential-equation description.
+  - **§1.2, Eq. 3, p. 2.** Classic Lenia with a clip to [0, 1] and Gaussian growth. The paper
+    does not state the kernel, R or grid.
+  - **§2.1.1, p. 3.** The clip "cannot be expressed in a differential equation".
+  - **§2.1.2, Fig. 2, p. 4.** The Orbium pattern "disappeared both when the size of the time step
+    was large (dt = 0.5) and when it was small (**dt = 0.002**)".
+  - **§2.1.3, Fig. 3, pp. 4–5.** Removing the *upper* clip lets the pattern persist at
+    dt = 0.002, but at dt = 0.1 the clip is needed.
 
-  Cited by C042.
+  Kojima's small-dt disappearance sits uneasily with Chan 2019 Fig. 7(c), which runs Orbium to
+  T = 2560 (dt ≈ 0.0004). The two papers' kernels, horizons and survival criteria are not stated
+  well enough to reconcile them. That makes it a numerical-ecology question for us, not a ledger
+  dispute.
+
+  Cited by C009, C042.
 
 - **[Yevenko2024]** I. Yevenko. *Classifying the fractal parameter space of the Lenia Orbium.*
   ALIFE 2024 Proceedings, paper 14 (3 pp.).
   doi:[10.1162/isal_a_00728](https://doi.org/10.1162/isal_a_00728).
 
-  **Read:** *excerpt*; not part of this pass.
+  **Read:** *excerpt*. The full text was still unreachable after the network change
+  (`doi.org` returned 403).
 
   Used for: escape-time maps of Orbium stability over pairs of parameters, and Orbium variants
   that "fundamentally rely on discretization to survive".
@@ -247,24 +275,31 @@ To finish the pass, either allow `arxiv.org` in the project's network settings (
   Cited by C038, C039.
 
 - **[Hudcova2026]** B. Hudcová, F. Dušek, M. Tuccio, C. Hongler. *Visualizing the Structure of
-  Lenia Parameter Space.* arXiv:[2601.01932](https://arxiv.org/abs/2601.01932), 2026.
-  Website: `lenia-explorer.vercel.app` (unreachable from here).
+  Lenia Parameter Space.* arXiv:[2601.01932](https://arxiv.org/abs/2601.01932) v1, 2026. This is
+  a 3-page **Late Breaking Abstract**. Website: <https://lenia-explorer.vercel.app/>.
 
-  **Read:** *excerpt* only. The full text and code were blocked (see the retrieval log).
+  **Read:** arXiv v1, *full text* (all of it).
 
-  Excerpts say:
+  **Method (p. 1):**
+  - Classic single-channel Lenia, Δt = **0.1**, Gaussian growth G = 2e^(−(x−μ)²/2σ²) − 1.
+  - Initial configurations are uniform-noise patches shaped as random Voronoi polygons, of areas
+    10² … 90² on a 100×100 grid, with 64 configurations per area.
+  - Each configuration runs about 7000 steps and is classed as:
+    - stable: the trajectory enters a loop;
+    - metastable: the centre of mass settles;
+    - unclassified: neither.
 
-  - The paper studies classic single-channel Lenia with **Δt = 0.1** and a **Gaussian** growth
-    function; once the kernel is fixed, each system is set by (μ, σ).
-  - Each initial configuration is run for about 7000 steps and classed as one of:
-    - stable: enters a loop;
-    - metastable: centre of mass settles;
-    - unclassified: corresponds strongly to moving solitons.
-  - Fig. 3 shows, for each system across a μ–σ plane, the proportion of initial configurations
-    in each class.
+  **Results (p. 2):**
+  - Fig. 3: four system classes, defined by how the phase proportions change with patch size.
+    In Fig. 3(c–d) one system goes "from stable to metastable phase as the patches of noise
+    increase in size", with solitons "around the transition region".
+  - Fig. 4 shows the μ–σ plane for 8 kernels. The example kernel is the exponential bump at
+    R = 13.
+  - The authors report soliton families beyond Chan's Fig. 9 range.
 
-  Not confirmed: the kernel shape, R, the grid size, and how the initial configurations were
-  drawn.
+  **Limits:**
+  - "Exact algorithmic details … are provided in the documentation TODO".
+  - The phases describe whole-grid dynamics. They do not identify species.
 
   Cited by C038.
 
@@ -272,14 +307,16 @@ To finish the pass, either allow `arxiv.org` in the project's network settings (
 
 - **[HoffmanMalletParet2010]** A. Hoffman, J. Mallet-Paret. *Universality of crystallographic
   pinning.* J. Dynamics and Differential Equations 22:79–119, 2010. Pages are per Dialnet; the
-  journal and volume are from memory and not confirmed.
-  arXiv:[0811.0093](https://arxiv.org/abs/0811.0093).
+  journal and volume are from memory and not confirmed. arXiv:[0811.0093](https://arxiv.org/abs/0811.0093) v1.
 
-  **Read:** *excerpt*.
+  **Read:** arXiv v1, *full text* of the abstract, §1 and the theorem statements.
 
-  Used for: travelling fronts of bistable lattice reaction–diffusion equations on Z² are pinned
-  in some lattice directions while moving in nearby ones (Theorems 1.1–1.2). These are fronts,
-  not gliders, so this is an analogy only.
+  - Earlier work showed "crystallographic pinning occurs in every direction θ0 for which tan θ0
+    is rational" for a sawtooth-like nonlinearity (§1).
+  - Theorems 1.1–1.2 show that pinning occurs in the horizontal direction under a generic
+    condition (Condition B).
+
+  These are bistable travelling **fronts** on Z², not gliders, so the paper is an analogy only.
 
   Cited by C013.
 
@@ -312,3 +349,7 @@ Not searched:
 
 See the retrieval log above. Chan 2019 was re-read in full. Its Fig. 7 bears directly on C009 and
 C014, so those claims gained entries. No new literature search was run.
+
+### 2026-10-07: verification pass, round 2 (archivist)
+
+The network was opened, so every cited arXiv paper was read at v1. Yevenko (2024) is still excerpt-only. No new literature search was run.

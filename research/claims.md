@@ -236,9 +236,14 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
     at T = 10, Orbium's mass, gyradius and speed "remain constant". Each data point there is
     averaged over 300 steps, so a wobble would average out and was not measured.
     Similar outcome only: μ 0.15, σ 0.016, with core functions not stated.
-  - [Davis2024] *(excerpt; rule from code)*. **RELATED.** Glider persistence depends on
-    discretization, and Orbium tolerates finer grids. The paper is about persistence, not
-    wobble amplitude. Its Orbium uses Gaussian kernel and growth, not S001's rule.
+  - [Davis2024] p. 20 and Fig. 5 *(full text)*. **RELATED.** Davis classes its Orbium as
+    "Platonic": finer discretization does not destroy it. The paper is about persistence, not
+    wobble amplitude. Its Orbium uses a Gaussian kernel and Gaussian growth (p. 11), not S001's
+    rule.
+  - [Cool2026] "Measuring recovery", p. 2 *(full text)*. **RELATED.** At finite resolution a
+    creature's pixels "fluctuate slightly at each step, and differently so depending on the
+    creature's angle relative to the axes of grid symmetry". This is a qualitative remark about
+    S001's rule at higher resolution, not a measurement.
   - Wobble amplitude falling with R: **NO MATCH FOUND IN SEARCHED SOURCES.**
 - **History:**
   - 2026-10-07 — OBSERVED — Lane 1 proposed the lattice account from three start rotations.
@@ -246,6 +251,7 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
   - 2026-10-07 — caveat added — Lane 7 HR-005: amplitude–R relation confounded with heading; exponent dropped.
   - 2026-10-07 — Prior literature added (status unchanged) — archivist, literature-provenance mandate.
   - 2026-10-07 — Prior literature verified against Chan 2019 full text and authors' code (status unchanged) — archivist.
+  - 2026-10-07 — Prior literature re-verified against arXiv full texts after the network change (status unchanged) — archivist.
 
 ### C004 — S001 has a 4.32-step mass oscillation (as a property of the organism)
 
@@ -406,10 +412,19 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
     increases, approaching a limit. Chan reads Lenia as the Euler discretization of an ODE.
     Similar outcome only: μ 0.15, σ 0.016, with core functions not stated. The paper gives no
     percentage at T = 10, so our 16–17% speed deficit and 2.6% mass excess are not compared.
+  - [Kojima2023] §2.1.2–2.1.3 and Figs. 2–3, pp. 4–5 *(full text)*. **RELATED.**
+    - Classic Lenia's Orbium "disappeared both when the size of the time step was large
+      (dt = 0.5) and when it was small (dt = 0.002)". Removing the upper clip rescued it at small
+      dt.
+    - This is in tension with Chan 2019 Fig. 7(c), which runs to T = 2560. Kojima states neither
+      the kernel nor the horizon.
+    - Our T range stops at T = 320 (dt ≈ 0.003). Whether S001 survives at T ≥ 500 is an open
+      numerical-ecology test, not settled by either paper.
 - **History:**
   - 2026-10-07 — OBSERVED — Lane 3.
   - 2026-10-07 — refined — Lane 7 HR-005: deficit 16.6% under a geometric fit.
   - 2026-10-07 — Prior literature added (status unchanged) — archivist, literature-provenance mandate (from the Chan 2019 full-text pass).
+  - 2026-10-07 — Prior literature re-verified against arXiv full texts after the network change (status unchanged) — archivist.
 
 ### C010 — S001 travels at 0.479 R per time unit
 
@@ -517,11 +532,11 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
       77° at **R = 185** with exponential cores, showing "no visible effect".
     - It does not measure the long-run heading at R ≈ 13–26, so it neither supports nor
       contradicts a slow lock onto discrete headings.
-  - [Cool2026] repository README *(code)*. **RELATED.** It notes that at finite grid resolution
-    the creature's "morphology … drifts (heading relative to grid axes …)". That README uses
-    S001's rule at R = 52 in float32. This is documentation of the effect, not a measurement of
-    locking.
-  - [HoffmanMalletParet2010] Theorems 1.1–1.2 *(excerpt)*. **RELATED** (adjacent field).
+  - [Cool2026] "Measuring recovery", p. 2 *(full text)*, and repository README *(code)*.
+    **RELATED.** The authors note that a creature's pixels fluctuate "differently so depending on
+    the creature's angle relative to the axes of grid symmetry". They use S001's rule at R = 52
+    in float32. They describe the effect but do not measure heading lock.
+  - [HoffmanMalletParet2010] §1 and Theorems 1.1–1.2 *(full text)*. **RELATED** (adjacent field).
     Travelling fronts on the Z² lattice are pinned in some lattice directions while moving in
     nearby ones. These are fronts, not gliders: a candidate mechanism family, not prior evidence.
   - Heading lock of Lenia gliders to lattice directions: **NO MATCH FOUND IN SEARCHED SOURCES.**
@@ -532,6 +547,7 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
   - 2026-10-07 — D1 resolved — Lane 3's 32 000-step 1° sweep agrees; Lane 3 withdrew C012.
   - 2026-10-07 — Prior literature added (status unchanged) — archivist, literature-provenance mandate.
   - 2026-10-07 — Prior literature verified against Chan 2019 full text and authors' code (status unchanged) — archivist.
+  - 2026-10-07 — Prior literature re-verified against arXiv full texts after the network change (status unchanged) — archivist.
 
 ### C014 — R = 13 is resolution-converged for S001's mean mass, size and speed (but not for mean anisotropy)
 
@@ -815,13 +831,15 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
   - [Chan2019] §4.2.4, p. 39 *(full text)*. **RELATED.** Lenia patterns are "surprisingly
     resilient" and "absorb deformations". This is a qualitative remark with no intervention scale
     and no thresholds.
-  - [Hamon2025] companion site *(excerpt)*. **RELATED.** Orbium "dies from perturbations by
-    obstacles", and collisions of several Orbium end in death or explosion. Similar outcome only:
-    an added obstacle channel, no strength scale.
-  - [Cool2026] *(excerpt; methods from code)*. **RELATED.** Occlusions push creatures to death,
-    metamorphosis or explosion. The code confirms S001's rule but at R = 52 in float32, with
-    occlusion as well as erase interventions. The metamorphosis outcomes do not contradict C023's
-    lack of TRANSFORMED runs, because the perturbation differs.
+  - [Hamon2025] arXiv v1, Movies S3–S4, pp. 23–24 *(full text)*. **RELATED.** Orbium "dies from
+    perturbations by obstacles", and collisions of several Orbium lead "to death/explosion".
+    Similar outcome only: movies of an added obstacle channel, with no strength scale.
+  - [Cool2026] p. 4 *(full text)*. **RELATED.**
+    - Informational occlusions push creatures toward "death, metamorphosis, or explosion",
+      depending on their extent and location.
+    - Similar outcome only: S001's rule at R = 52 in float32, but no mass is removed.
+    - Their metamorphosis outcomes do not contradict C023's lack of TRANSFORMED runs, because
+      the perturbation differs.
   - Sharp, phase-stable kill edges for graded disturbances: **NO MATCH FOUND IN SEARCHED SOURCES.**
 - **History:**
   - 2026-10-07 — OBSERVED — archivist, from Lane 4's generated summary at `12d9265`.
@@ -833,6 +851,7 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
     A3 results added. Lane 4 proposed REPRODUCED + INDEPENDENTLY_CHECKED; status unchanged.
   - 2026-10-07 — Prior literature added (status unchanged) — archivist, literature-provenance mandate.
   - 2026-10-07 — Prior literature verified against Chan 2019 full text and authors' code (status unchanged) — archivist.
+  - 2026-10-07 — Prior literature re-verified against arXiv full texts after the network change (status unchanged) — archivist.
 
 ### C024 — S001's short-period (2–15 step) feature fluctuations on the diagonal plateaus shrink with resolution
 
@@ -906,16 +925,16 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
   measured the same mass edges. I004 shifts with T (C027). At R = 26 the I002 edge is
   −4.6 to −5.0% → −5.3 to −5.6% (Lane 3).
 - **Prior literature** (search and full-text verification 2026-10-07; grades and versions in `references.md`):
-  - [Cool2026] *(excerpt; methods from code)*. **CONSISTENT WITH** (excerpt-only, so provisional).
-    - Per-pixel sensitivity maps reportedly show that small persistent occlusions on the
-      leading edge or core usually destroy the creature.
-    - Verified from code: same rule as S001 (`O2u`, poly/poly, 0.15/0.015, T 10, clip), but at
-      R = 52 in float32. The code can erase 2×2-base-cell squares (mass removal) or occlude
-      without removing mass.
-    - Not verified: which of the two the paper's maps used. Neither variant gives mass-unit
-      edges.
-  - [Hamon2025] *(excerpt)*. **RELATED.** Orbium is fragile to obstacles. No location dependence
-    appears in the excerpt.
+  - [Cool2026] "Sensitivity to occlusion is spatially structured" and Fig. 4, pp. 4–5
+    *(full text)*. **RELATED** (downgraded from CONSISTENT WITH after the full-text read).
+    - What they found: a persistent 3×3 *informational* occlusion is lethal to O2u where
+      "concentrated thinly at the center of its leading edge and expand[ing] into its core". O2u
+      uses S001's rule, at R = 52 in float32.
+    - Why that is not support: the occlusion hides cells from the kernel and removes **no
+      mass**. C026 concerns where mass is removed, so the location dependence they report is a
+      different perturbation that happens to have a similar shape.
+  - [Hamon2025] Movies S3–S4 *(full text)*. **RELATED.** Orbium is fragile to obstacles and
+    collisions. No location dependence is reported.
   - Mass-unit edges by location (≈ 5% central vs 10% uniform at R = 13): **NO MATCH FOUND IN
     SEARCHED SOURCES.**
 - **History:**
@@ -923,6 +942,7 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
   - 2026-10-07 — Lane 4 proposes the same claim (README claim 2, `7bd1a42`).
   - 2026-10-07 — Prior literature added (status unchanged) — archivist, literature-provenance mandate.
   - 2026-10-07 — Prior literature verified against Chan 2019 full text and authors' code (status unchanged) — archivist.
+  - 2026-10-07 — Prior literature re-verified against arXiv full texts after the network change (status unchanged) — archivist.
 
 ### C027 — The frontal-addition (I003) and port-side-injury (I004) kill edges move 11–13% when the timestep is quartered (T = 10 → 40)
 
@@ -1250,16 +1270,24 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
     expands as T increases, so niche boundaries depend on T, as C038's σ band does.
   - [LeniaCatalog] **RELATED.** The catalog rules for `O2u` (0.15/0.015) and `OG2g` (0.156/0.0224)
     bracket the coexistence rule. Neither entry uses it.
-  - [Hudcova2026] Fig. 3 *(excerpt)*. **CONSISTENT WITH.** One rule falls into different
-    dynamical classes depending on the initial configuration. Similar outcome only: classic
-    Lenia with Gaussian growth and Δt = 0.1, not these species. The kernel and R are unconfirmed.
-  - [Chan2020] *(excerpt)*. **RELATED.** Multiple phenotypes under expanded multi-kernel or
-    multi-channel rules.
+  - [Hudcova2026] Method (p. 1) and Fig. 3(c–d), p. 2 *(full text)*. **CONSISTENT WITH.**
+    - At a fixed rule, the phase reached (stable, metastable or unclassified) depends on the
+      size of the initial noise patch, and solitons appear near the stable–metastable transition.
+    - Similar outcome only: whole-grid phases, not species. Gaussian growth, Δt = 0.1, an
+      exponential-bump kernel at R = 13, and a 100×100 grid.
+    - It is a 3-page abstract whose algorithm details are marked "TODO".
+  - [Chan2020] p. 6, "Differentiation" *(full text)*. **PREVIOUSLY REPORTED** (the phenomenon,
+    in expanded rules).
+    - In multi-channel "Aquarium" rules, "one genotype produces multiple phenotypes of aggregated
+      solitons", among them gyrating and stationary ones. Each phenotype can switch to another
+      "upon collision or after self-replication".
+    - Similar outcome only: multi-channel rules, not classic single-kernel Lenia.
   - [Yevenko2024] *(excerpt)*. **RELATED.** Maps Orbium stability around its rule.
 - **History:**
   - 2026-10-07 — REPRODUCED — Lane 6 (clean-process bitwise reruns); awaiting a second lane.
   - 2026-10-07 — Prior literature added (status unchanged) — archivist, literature-provenance mandate.
   - 2026-10-07 — Prior literature verified against Chan 2019 full text and authors' code (status unchanged) — archivist.
+  - 2026-10-07 — Prior literature re-verified against arXiv full texts after the network change (status unchanged) — archivist.
 
 ### C039 — The circler S102 at its registered rule (μ 0.155, σ 0.020) does not survive doubling the resolution
 
@@ -1282,15 +1310,20 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
   PR #11 has merged; the underlying claims are still single-lane (not yet reproduced by a second lane).
   - [Chan2019] Fig. 7(b), p. 17 *(full text)*. **RELATED.** Orbium's niche stays static over
     R = 9–55 at T = 10. That is Orbium, not the circler, so it is not a contradiction.
-  - [Davis2024] *(excerpt; rule from code)*. **CONSISTENT WITH** (excerpt-only, so provisional).
-    "Non-Platonic" gliders can lose persistence at finer discretization. Similar outcome only:
-    other species, Gaussian-family rules.
+  - [Davis2024] p. 18 (definition) and p. 20 *(full text)*. **CONSISTENT WITH.**
+    - Davis defines a pattern–rule pair as non-Platonic if it fails at some discretization but
+      persists at a coarser one. *Scutium gravidus*, *Triscutium solidus* and an *H. natans*
+      wobbler meet that definition.
+    - By that definition, S102 at its registered rule (alive at R = 13, dead at R = 26) is
+      non-Platonic with respect to R on our data.
+    - Similar outcome only: other species and Gaussian-family rules. Davis's Orbium is Platonic.
   - [Yevenko2024] *(excerpt)*. **CONSISTENT WITH** (excerpt-only, so provisional). Reports
     Orbium variants that "rely on discretization to survive".
 - **History:**
   - 2026-10-07 — NUMERICALLY_FRAGILE — Lane 6.
   - 2026-10-07 — Prior literature added (status unchanged) — archivist, literature-provenance mandate.
   - 2026-10-07 — Prior literature verified against Chan 2019 full text and authors' code (status unchanged) — archivist.
+  - 2026-10-07 — Prior literature re-verified against arXiv full texts after the network change (status unchanged) — archivist.
 
 ### C040 — At the coexistence rule, Lane 4's disturbances never switch a glider into a circler or back (0/316); a port injury switched the circler into the static ring S103 in 2 of 38 runs
 
@@ -1316,14 +1349,18 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
   - [Chan2019] §3.5.3 and Fig. 12(j), pp. 26–27 *(full text)*. **RELATED.** Spontaneous
     metamorphosis among morphological–behavioural templates in shape-shifting species. It is
     unprompted, not triggered by a disturbance.
-  - [Cool2026] *(excerpt)*. **RELATED.** Occlusions can push a creature into metamorphosis.
-    Different intervention and species.
+  - [Cool2026] pp. 4–5 *(full text)*. **RELATED.** Occlusions can push a creature into
+    metamorphosis; K4s "transforms into … an oscillating structure". Different intervention and
+    species.
+  - [Chan2020] p. 6 *(full text)*. **RELATED.** In multi-channel rules, a phenotype "can switch to
+    another phenotype … upon collision". Expanded rules.
   - Glider ↔ circler switching (or its absence) under graded disturbances: **NO MATCH FOUND IN
     SEARCHED SOURCES.**
 - **History:**
   - 2026-10-07 — OBSERVED — Lane 6.
   - 2026-10-07 — Prior literature added (status unchanged) — archivist, literature-provenance mandate.
   - 2026-10-07 — Prior literature verified against Chan 2019 full text and authors' code (status unchanged) — archivist.
+  - 2026-10-07 — Prior literature re-verified against arXiv full texts after the network change (status unchanged) — archivist.
 
 ### C041 — Under S001's own rule, a bound Orbium pair (S101) survives port injury of 10–50% by shedding to a single Orbium, where a single Orbium dies at 10%
 
@@ -1390,16 +1427,20 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
     catalogued species (C043).
   - [Chan2019] §3.5.2 (p. 27) and Table 2 (p. 28) *(full text)*. **RELATED.** The epithet *lithos* names
     the "Frozen" stationary gait (SF; "negligible or no fluctuation", example *Pentafolium
-    lithos*). Reading *Circium lithos* as frozen is the archivist's inference from the naming
-    scheme, not a statement in the paper. §3.3.1 calls Circium-type class-2 patterns "periodic
-    immobile".
-  - [Kojima2023] *(excerpt)*. **RELATED.** The clip is what stops classic Lenia from being a pure
-    ODE, which is consistent with a clip-held fixed point being possible.
+    lithos*). §3.3.1 calls Circium-type class-2 patterns "periodic immobile".
+  - [Chan2020] p. 6 *(full text)*. **RELATED.** It glosses the epithet *lithos* as "stationary".
+    That fits C0la being static, but neither paper says *Circium lithos* is an exact fixed point.
+  - [Kojima2023] §2.1.1 and §2.1.3, pp. 3–5 *(full text)*. **RELATED.**
+    - The clip "cannot be expressed in a differential equation".
+    - At dt = 0.1 the upper clip is "necessary to maintain the pattern".
+    - Both are consistent with a clip-held fixed point being possible, but say nothing about
+      static rings.
   - A bitwise fixed point held by the clip: **NO MATCH FOUND IN SEARCHED SOURCES.**
 - **History:**
   - 2026-10-07 — REPRODUCED — Lane 6.
   - 2026-10-07 — Prior literature added (status unchanged) — archivist, literature-provenance mandate.
   - 2026-10-07 — Prior literature verified against Chan 2019 full text and authors' code (status unchanged) — archivist.
+  - 2026-10-07 — Prior literature re-verified against arXiv full texts after the network change (status unchanged) — archivist.
 
 ### C043 — S101, S102 and S103 are catalogued species carried to nearby rules, not new forms
 
