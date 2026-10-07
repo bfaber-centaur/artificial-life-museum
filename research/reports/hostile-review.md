@@ -241,8 +241,10 @@ headings, and 0° and 45° are mirror images. Lane 3 found an axis-locked platea
 | 26 | 0° | 67.07° | 0.47966 | 0.43589 | 0.43755 | 0.2987 | 5.3e−4 |
 | 26 | 67° | −2.06° | 0.47969 | 0.43588 | 0.43759 | **0.2993** | 9.2e−4 |
 
-At R = 13 the axis-travelling S001 is 10% less elongated (0.265 vs 0.295) and 1.2% slower than
-on the 5/2 plateau. At R = 26 the same comparison agrees to 0.2%. Verdict: "feature means are
+At R = 13 the axis-travelling S001 is about 10% less elongated (0.265 vs 0.295) and 1.2% slower
+than on the 5/2 plateau. The same run on the CI runner gave 0.2664 (−9.8%; same numpy 2.5.3,
+different machine): the axis-locked state jitters, so its exact mean is not reproducible across
+machines to 4 digits, though the effect is. At R = 26 the same comparison agrees to 0.2%. Verdict: "feature means are
 heading-invariant" is **REFUTED at R = 13** (anisotropy, and speed at 1%) and **holds at R = 26**.
 Mass and gyradius means are invariant to 0.2% at both resolutions. Any anisotropy-based predictor
 at R = 13 must control for heading.
