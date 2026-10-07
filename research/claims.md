@@ -70,6 +70,7 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
 | Dispute | Claims | Lanes | State |
 | --- | --- | --- | --- |
 | D1: does S001's heading stay lattice-locked at R = 26? | C012 vs C013 | Lane 3 vs Lane 7 | **resolved 2026-10-07** in favour of C013. Lane 3's finer, longer sweep (PR #8 @ `5f316f3`, `heading-R26-fine-long.csv`) found 20 settled headings from 46 starts and Lane 3 withdrew C012. |
+| D2: does S102 at its registered rule survive refinement to R = 26? | C039 vs C047 | Lane 6 vs Lane 3 | **open** (2026-10-07). Agreed: the bilinearly resized seed dies at R 26, in `field.py` (Lane 6) and in `alm_check` (Lane 3, also at R 39). Contested: Lane 3's block, nearest and cubic seeds live 1000 tu at R 26 and 39 (`alm_check` only), so Lane 3 proposes narrowing C039 to the bilinear seed. Lane 6 has not responded. |
 
 ## Lane intake index
 
@@ -104,6 +105,7 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
 | Lane 6 L6-005 control runs at t0 = 3000/3002 | C023 caveat |
 | Lane 7 hostile-review HR-007 (C023 world size, thresholds) | C023, C026 |
 | Lane 6 | not started |
+| Lane 3 L3-002 README proposed claims 1 / 2 / 3 / 4 / 5 / 6 (PR #18 @ `4998d03`, open) | C046 / C047 (D2 with C039) / C048 / C049 / C050 / C051 |
 
 ## Claims
 
@@ -351,6 +353,8 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
 - **History:**
   - 2026-10-07 — OBSERVED — Lane 3.
   - 2026-10-07 — refined — Lane 7 HR-005: deficit 16.6% under a geometric fit.
+  - 2026-10-07 — supported — direct runs at T 640–2560 land on the extrapolated limit (C051, same
+    engine); L3-002 extends the timestep bias to S101 and S102 (C046). Status unchanged.
 
 ### C010 — S001 travels at 0.479 R per time unit
 
@@ -477,6 +481,7 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
 - **Known caveats:** T = 10 only. Fluctuations are not converged (C003).
 - **History:**
   - 2026-10-07 — mean mass INDEPENDENTLY_CHECKED, rest OBSERVED — archivist.
+  - 2026-10-07 — extended — L3-002 finds R 13 within 0.5% of R 39 for S101 and S102 too (C046). Status unchanged.
 
 ### C015 — At R = 13, S001's speed depends on its locked heading by up to 1.2%
 
@@ -1118,7 +1123,7 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
 - **Search / parameter bounds:** μ ∈ {0.150, 0.155, 0.160}; σ strip in 0.0005 steps; T ∈ {10, 40}; R ∈ {13, 26}
 - **Reproduction command:** `make_seeds.py`; `bistability.py` (~1 h on 4 cores); `persistence.py --T 10 --R 13`
 - **Known caveats:** the coexistence is robust, but its σ location is NUMERICALLY_FRAGILE (shifts by
-  0.0005–0.0015 with T or R). S102 at its registered rule dies at R = 26 (C039). At T = 40, Orbium at
+  0.0005–0.0015 with T or R). S102 at its registered rule dies at R = 26 from a bilinear seed (C039, disputed in D2 by C047). At T = 40, Orbium at
   this rule became a different static body (mass 0.3873, not S103's 0.3787), not followed up. All
   three phenotypes are catalogued species (C043). Lane 6's top suggested follow-up is a second-lane
   reproduction in `alm_check`.
@@ -1141,9 +1146,13 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
 - **Search / parameter bounds:** three numerical settings
 - **Reproduction command:** `persistence.py --T {10,40} --R {13,26}`
 - **Known caveats:** single lane. The phenotype persists at a nearby σ at R = 26, so this is a shift of
-  its band, not its absence.
+  its band, not its absence. Lane 6 resized the seed bilinearly (`persistence.py` line 49,
+  `ndimage.zoom(..., order=1)`).
+- **Dispute:** **D2** with C047 (Lane 3): other resize methods survive at R 26 and 39. See [Disputes](#disputes).
 - **History:**
   - 2026-10-07 — NUMERICALLY_FRAGILE — Lane 6.
+  - 2026-10-07 — disputed (D2) — Lane 3 L3-002 (PR #18). Lane 3 reproduces the bilinear-seed death in
+    `alm_check`; its block, nearest and cubic seeds survive. Status unchanged pending Lane 6.
 
 ### C040 — At the coexistence rule, Lane 4's disturbances never switch a glider into a circler or back (0/316); a port injury switched the circler into the static ring S103 in 2 of 38 runs
 
@@ -1213,6 +1222,8 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
   this form. The I001–I004 check used one phase.
 - **History:**
   - 2026-10-07 — REPRODUCED — Lane 6.
+  - 2026-10-07 — T-independence agrees with Lane 3's `alm_check` at T 10–80 (C048, INDEPENDENTLY_CHECKED
+    for that part). The attenuation part has no second lane, so the status is unchanged.
 
 ### C043 — S101, S102 and S103 are catalogued species carried to nearby rules, not new forms
 
@@ -1279,3 +1290,168 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
   `O2bi`, `O2p` or `O8?` as stable until checked.
 - **History:**
   - 2026-10-07 — OBSERVED — Lane 6.
+
+### C046 — At R = 13 and T = 10, the mean properties of S001, S101 and S102 are resolution-converged to 0.5%, but their speeds and turning rates are timestep-biased by 10–18%
+
+- **Status:** OBSERVED (preregistered; single engine)
+- **Owner lane:** Lane 3
+- **Sources:** `research/experiments/L3-002-property-persistence/README.md` proposed claim 1 and
+  label table; protocol `PREREGISTRATION.md` (PR #18 @ `4998d03`, open; preregistration `6c52536`
+  and runner `fc93152` committed before the runs)
+- **Specimen / version:** S001 (Orbium cells), S101 (`pair-seed-u8.csv`), S102 (`gyrator-seed-u8.csv`),
+  S103 (`static-seed-u8.csv`); seeds scaled to R = 26 and 39 by block replication
+- **Simulator / version:** `alm_check` (`src/alm_check/persistence.py` @ `fc93152`)
+- **Parameters:** each specimen's registered rule (S001, S101: μ 0.15, σ 0.015; S102, S103: μ 0.155,
+  σ 0.020); ladder T ∈ {10, 20, 40, 80} at R 13, R ∈ {13, 26, 39} at T 10, corner R 26 / T 40;
+  128 × (R/13) torus
+- **Intervention:** none
+- **Metric:** preregistered: e_R = |X(R13) − X(R39)| / X(R39); e_T = |X(T10) − X∞| / X∞ with
+  X∞ = 2·X(T80) − X(T40) (first-order Richardson); labels CONTINUUM-STABLE / DISCRETISATION-BIASED /
+  NOT-CONVERGED by the rule fixed in `PREREGISTRATION.md`
+- **Result:** e_R ≤ 0.47% for every mean property of the three moving specimens. e_T at T 10: S001
+  speed 15.3%, S101 speed 9.8%, S102 turning rate 18.0% (94.8 vs X∞ 115.5°/tu) and path speed
+  11.1%. All four specimens persisted and kept their registered phenotype class in all 28 runs.
+  The corner matches the sum of the separate T and R effects within 1% for every mean property
+  (not for the mass fluctuation).
+- **Run IDs:** `research/traces/lane3/L3-002/runs.csv`, `labels.csv` (one `.json` and `.npz` per run)
+- **Search / parameter bounds:** the seven conditions above; four specimens
+- **Reproduction command:** `.venv/bin/python -m alm_check.persistence`
+- **Known caveats:** single engine. The preregistered X∞ uses first-order Richardson from T 40/80,
+  which understates the limit when the effective order is below 1 (Lane 7 HR-005 on C009). For S001
+  the direct runs at T 2560 (C051) give speed 0.5714, so the T 10 deficit is 16.1%, not 15.3%
+  (archivist's arithmetic from `s001_small_dt.txt`). R-convergence is shown under block-replicated
+  seeds; S102 under bilinear seeds is the subject of D2.
+- **Prior literature** (bounded search 2026-10-07; entries in `references.md`, PR #15):
+  - [Chan2019] arXiv:1812.05433 v3, §3.1.1–3.1.2 and Fig. 7, p. 17. **CONSISTENT WITH**, similar
+    outcome only: Orbium's measures "remain constant" over R 9–55, while structure falls and
+    dynamics rise with T toward a limit. Chan's rule is μ 0.15, σ 0.016 with core functions not
+    stated in the caption, and covers Orbium only.
+- **History:**
+  - 2026-10-07 — OBSERVED — Lane 3 (L3-002); extends C009 and C014 to S101 and S102.
+
+### C047 — S102 at its registered rule persists at R = 26 and R = 39 from block-replicated, nearest-neighbour or cubic seeds; only the bilinear seed dies
+
+- **Status:** OBSERVED (single engine for the surviving seeds; exploratory, not preregistered)
+- **Owner lane:** Lane 3
+- **Sources:** L3-002 README proposed claim 2 and "Disagreement with C039"; `s102_resize_check.py`,
+  `s102_resize_check.txt` (PR #18 @ `4998d03`, open)
+- **Specimen / version:** S102 seed (`gyrator-seed-u8.csv`), resized by R/13 four ways
+- **Simulator / version:** `alm_check` (`World`, `Rule` from `alm_check.lenia`)
+- **Parameters:** μ 0.155, σ 0.020, T 10, R ∈ {26, 39}, 128 × (R/13) torus, 1000 tu
+- **Intervention:** none (seed resize method varied: block, `ndimage.zoom` order 0, 1, 3, clipped to [0, 1])
+- **Metric:** death = mass/R² < 0.01; otherwise mean mass over the last 100 tu
+- **Result:** block, nearest and cubic seeds alive at 1000 tu at both R (mass 0.5234–0.5235; 0.5223
+  at R 13). Bilinear seed died at t = 9 (R 26) and t = 6 (R 39). In L3-002 proper (block seeds)
+  S102 stayed a circler at R 26, R 39 and the corner (C046).
+- **Run IDs:** `s102_resize_check.txt`; L3-002 `runs.csv` S102 rows
+- **Search / parameter bounds:** four resize methods × two resolutions; one seed position
+- **Reproduction command:** `.venv/bin/python research/experiments/L3-002-property-persistence/s102_resize_check.py`
+- **Known caveats:** exploratory. The surviving seeds have only been run in `alm_check`. Lane 6's
+  `persistence.py` (`ndimage.zoom(..., order=1)`, line 49 on `main`) used bilinear, so on the
+  bilinear seed the two engines agree. Lane 3 reads the result as initial-condition sensitivity
+  and passes it to the attractor-geography expedition (Lane 6).
+- **Dispute:** **D2** with C039. See [Disputes](#disputes).
+- **Prior literature** (bounded search 2026-10-07; entries in `references.md`, PR #15):
+  - [Davis2024] arXiv:2401.13111 v1, definition p. 18. **RELATED**: Davis calls a pattern
+    "non-Platonic" if it fails at a finer discretization but persists at a coarser one. Whether
+    S102 meets that definition is what D2 is about. Davis's Lenia gliders use Gaussian rules and do
+    not include a circler.
+- **History:**
+  - 2026-10-07 — OBSERVED — Lane 3 (L3-002 exploratory follow-up); contests C039 (D2).
+
+### C048 — S103 is a bitwise fixed point at every timestep tested (T 10–80), but block-scaled to R = 26 or 39 it relaxes to a different static ring
+
+- **Status:** OBSERVED (R statement, single engine); INDEPENDENTLY_CHECKED (T statement, with C042:
+  `field.py`/`alm` and `alm_check`)
+- **Owner lane:** Lane 3
+- **Sources:** L3-002 README proposed claim 3 and label table (PR #18 @ `4998d03`, open)
+- **Specimen / version:** S103 seed (`static-seed-u8.csv`)
+- **Simulator / version:** `alm_check` (`persistence.py` @ `fc93152`)
+- **Parameters:** μ 0.155, σ 0.020; T ∈ {10, 20, 40, 80} at R 13; R ∈ {26, 39} at T 10; corner R 26 / T 40
+- **Intervention:** none
+- **Metric:** exact fixed point (final state equals seed); mass, gyradius
+- **Result:** fixed point at T 10, 20, 40 and 80 (mass 0.378698 at each). Block-scaled to R 26 it
+  settles static at mass 0.380599 (+0.5%) and to R 39 at 0.374835 (−1.0%), neither equal to the seed.
+  The preregistered rule labels mass and gyradius NOT-CONVERGED (R).
+- **Run IDs:** `research/traces/lane3/L3-002/labels.csv` S103 rows
+- **Search / parameter bounds:** seven conditions
+- **Reproduction command:** `.venv/bin/python -m alm_check.persistence`
+- **Known caveats:** the R-scaled ring depends on the seed resize too. Lane 6's bilinear seed at
+  R 26 settled static at mass 0.378748 (`persist-T10-R26.csv`), against 0.380599 from Lane 3's
+  block seed (archivist's comparison). The two lanes agree it stays static; they do not yet have a
+  common R 26 state to compare bitwise.
+- **History:**
+  - 2026-10-07 — T statement INDEPENDENTLY_CHECKED (agrees with Lane 6's C042 in a distinct
+    engine), R statement OBSERVED — archivist, from L3-002.
+
+### C049 — At T = 10, S001's and S101's mass and gyradius are within 2.3% of their Δt → 0 values; S102's are 6.7% and 4.6% high
+
+- **Status:** OBSERVED (preregistered; single engine)
+- **Owner lane:** Lane 3
+- **Sources:** L3-002 README proposed claim 4, label table and "Reading the labels honestly" (PR #18 @ `4998d03`, open)
+- **Specimen / version:** S001, S101, S102 (as C046)
+- **Simulator / version:** `alm_check` (`persistence.py` @ `fc93152`)
+- **Parameters:** as C046
+- **Intervention:** none
+- **Metric:** e_T as in C046
+- **Result:** e_T: S001 mass 2.3%, gyradius 0.05%; S101 mass 1.5%, gyradius 0.2%; S102 mass 6.7%,
+  gyradius 4.6%. Preregistered labels: S101 mass and gyradius CONTINUUM-STABLE; S001 mass and
+  gyradius NOT-CONVERGED (T); S102 mass and gyradius DISCRETISATION-BIASED (T).
+- **Run IDs:** `labels.csv`
+- **Search / parameter bounds:** as C046
+- **Reproduction command:** as C046
+- **Known caveats:** Lane 3's proposed wording ("S101 and S001 … continuum-stable within 2.5%") is
+  stronger than the preregistered labels, which call S001's NOT-CONVERGED (T). The archivist titles
+  the claim by the numbers and records both. Lane 3 attributes S001's label to a strict convergence
+  test (mass) and a missing flatness clause for T (gyradius), and proposes a 0.5% T-flatness clause
+  for later tests. The direct small-dt runs (C051) show S001 mass converging to 0.4249.
+- **History:**
+  - 2026-10-07 — OBSERVED — Lane 3 (L3-002); title set by the archivist to the measured values.
+
+### C050 — S101's relative mass fluctuation grows about 5× from T = 10 to T = 80 and has not converged
+
+- **Status:** OBSERVED (preregistered measurement; single engine)
+- **Owner lane:** Lane 3
+- **Sources:** L3-002 README proposed claim 5 and bottom line 5 (PR #18 @ `4998d03`, open)
+- **Specimen / version:** S101 (`pair-seed-u8.csv`)
+- **Simulator / version:** `alm_check` (`persistence.py` @ `fc93152`)
+- **Parameters:** S001 rule; T ∈ {10, 20, 40, 80} at R 13; R 26, R 39 at T 10
+- **Intervention:** none
+- **Metric:** sd/mean of mass over the measurement window
+- **Result:** 1.31e−3 (T 10), 1.02e−3 (T 20), 5.04e−3 (T 40), 6.28e−3 (T 80): ×4.8 from T 10 to 80,
+  not monotone. It shrinks with R (4.6e−4 at R 26, 1.3e−4 at R 39). Label NOT-CONVERGED (T).
+- **Run IDs:** `labels.csv` (S101 `mass_rel_sd`)
+- **Search / parameter bounds:** as C046
+- **Reproduction command:** as C046
+- **Known caveats:** cause not investigated; Lane 3 lists it as a follow-up candidate. The dip at
+  T 20 means "grows with T" is not monotone growth.
+- **History:**
+  - 2026-10-07 — OBSERVED — Lane 3 (L3-002).
+
+### C051 — S001 survives at T = 640, 1280 and 2560 and settles at mass 0.4249 and speed 0.571 R/tu, C009's extrapolated limit
+
+- **Status:** OBSERVED (single engine; exploratory, not preregistered)
+- **Owner lane:** Lane 3
+- **Sources:** L3-002 README proposed claim 6 and "S001 at very small timesteps"; `s001_small_dt.py`,
+  `s001_small_dt.txt` (PR #18 @ `4998d03`, open). Prompted by the archivist's Kojima 2023 note.
+- **Specimen / version:** S001, dossier commit `65c03cc`
+- **Simulator / version:** `alm_check`
+- **Parameters:** baseline with T ∈ {640, 1280, 2560} (dt 0.0016, 0.00078, 0.00039), 300 tu
+- **Intervention:** none
+- **Metric:** alive at t = 300; mass and speed
+- **Result:** alive at all three. Mass 0.4252 / 0.4250 / 0.4249; speed 0.5691 / 0.5707 / 0.5714 R/tu.
+  This matches C009's extrapolated limit (mass ≈ 0.4249, speed ≈ 0.572) directly.
+- **Run IDs:** `s001_small_dt.txt`
+- **Search / parameter bounds:** three timesteps; 300 tu horizon
+- **Reproduction command:** `.venv/bin/python research/experiments/L3-002-property-persistence/s001_small_dt.py`
+- **Known caveats:** same engine as C009, so this confirms C009's extrapolation but is not a second
+  lane. The 300 tu horizon is shorter than C009's 400.
+- **Prior literature** (bounded search 2026-10-07; entries in `references.md`, PR #15):
+  - [Chan2019] arXiv:1812.05433 v3, §3.1.2 and Fig. 7(c–d), p. 17. **CONSISTENT WITH**, similar
+    outcome only: Orbium runs to T = 2560 with measures approaching a limit, under μ 0.15, σ 0.016.
+  - [Kojima2023] arXiv:2305.13784 v1, §2.1.2 and Fig. 2, p. 4. **CONTRADICTORY**, similar outcome
+    only: an Orbium "disappeared … when [dt] was small (dt = 0.002)". Kojima uses Gaussian growth
+    and does not state the kernel, R or grid, so the conditions are not shown to match. Lane 3 did
+    not check which rule Kojima ran.
+- **History:**
+  - 2026-10-07 — OBSERVED — Lane 3 (L3-002 exploratory follow-up).
