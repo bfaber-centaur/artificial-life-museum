@@ -7,25 +7,50 @@ Baseline specimen dossier: [`research/specimens/S001-orbium.md`](../specimens/S0
 
 This dossier keeps three kinds of statement apart, and every section says which it is using:
 
-- **Paper says.** Taken from the Lenia paper (Chan 2019, *Complex Systems* 28(3), arXiv:1812.05433).
+- **Paper says.** Taken from the Lenia paper (Chan 2019, *Complex Systems* 28(3), arXiv:1812.05433v3).
+  Page and equation numbers refer to the arXiv v3 PDF.
 - **Author exposition says.** The equations Bert Chan typeset in the reference web app
-  (`JavaScript/Lenia.html`, lines ~455–700). This is the author's own write-up and the closest
-  thing to the paper this container could read.
+  (`JavaScript/Lenia.html`, lines ~455–700).
 - **Implementation does.** What `Python/LeniaND.py` actually computes, with line numbers. Unless
   marked otherwise, line references are to that file.
 
-## 0. Access caveat: the paper itself was not read
+## 0. Sources
 
-This container's network policy blocks `arxiv.org`, `ar5iv`, `alphaxiv`, `complex-systems.com`,
-Semantic Scholar and the Wayback Machine (CONNECT 403 / EGRESS_BLOCKED, 2026-10-07 06:39Z).
-GitHub raw is reachable, so the upstream code is primary-sourced. **No sentence below is
-labelled "paper says" unless it is also documented in the repository.** Where the paper's wording
-matters, the in-repo stand-in is the author's exposition in `Lenia.html` and the upstream commit
-`1538c33` ("Update Lenia.py to match the paper", 2019-01-31). If someone drops the PDF into the
-project files, a follow-up should check §1–§3 against it. The one item to verify first is the
-kernel-core/growth numbering in §3.2.
+The first version of this dossier was written without the paper, because this container's
+network policy blocks arXiv and its mirrors. Bobby uploaded arXiv:1812.05433v3 on 2026-10-07, and
+§1–§5 have since been checked against it. Paper-side statements now cite the PDF directly. The
+check confirmed the inferred kn/gn story (§3.2) and added a fifth Orbium rule to §3.1: the paper's
+own experiments use σ = 0.016 with exponential core functions.
 
 ## 1. Canonical update rule
+
+### Paper says (§2.1.2–2.1.7, Eqs. 5–16, pp. 6–8)
+
+- Discrete Lenia: Δx = 1/R, Δt = 1/T, Δp = 1/P. The neighbourhood is the closed discrete ball
+  ‖x‖₂ ≤ R, normalised to the unit ball B₁[0] (Eq. 5).
+- Potential: U = K ∗ A = Σ_n K(n) A(x+n) Δx² (Eq. 7). Growth: G = G(U) (Eq. 8). Update:
+  A ← clip(A + Δt·G, 0, 1) (Eq. 9).
+- Kernel core K_C (Eq. 10), listed **exponential first**: exp(α − α/(4r(1−r))), α = 4; then
+  polynomial (4r(1−r))^α, α = 4; then rectangular 1_[1/4,3/4](r).
+- Kernel shell K_S(r; β) = β_⌊Br⌋ · K_C(Br mod 1) (Eq. 11). Normalisation: K(n) = K_S(‖n‖)/|K_S| with
+  |K_S| = Σ_N K_S Δx² (Eq. 12), so K ∗ A ∈ [0, 1]. The Δx² factors cancel, so this equals dividing
+  the shell by its plain grid sum.
+- Growth mapping (Eq. 13), again **exponential first**: 2·exp(−(u−μ)²/(2σ²)) − 1; then polynomial
+  2·1_[μ±3σ](u)·(1 − (u−μ)²/(9σ²))^α − 1, α = 4; then rectangular 2·1_[μ±σ](u) − 1.
+- Pseudocode (§2.2.1, p. 10): the kernel is built over the whole grid, divided by its sum and
+  FFT'd. Each step is `clip(world + dt*growth_mapping(fftshift(real(ifft(K̂·Â)))), 0, 1)`. The
+  pseudocode has **no explicit r < 1 cutoff**; `beta[floor(Br)]` would index out of range outside
+  the unit disc. The implementation adds the cutoff.
+- FFT convolution "automatically produces a periodic boundary condition" (p. 9).
+- **The paper's own experiments used exponential/exponential at double precision** (§2.2.4,
+  p. 11: "Kernel core and growth mapping: exponential").
+- Euler framing (§3.1.2, Eqs. 19–20): DL is the Euler method for the ODE dA/dt = G(K∗A) clipped to
+  [−A/dt, (1−A)/dt]. As T grows, structure measures (m, r_m) fall and dynamics measures
+  (g, d_gm, s_m) rise towards a continuum limit (Fig. 7c–d).
+- Scale invariance holds for R > 12 (§3.1.1). For Orbium, R ∈ {9…55} at T = 10 leaves m, g, r_m,
+  d_gm and s_m constant (Fig. 7a–b).
+- Core functions "usually alter the textures of a pattern but not its overall structure and
+  dynamics". Orbium switched to polynomial shows "no visible effect" (§3.1.3, Fig. 6b).
 
 ### Author exposition says (`Lenia.html`)
 
@@ -78,9 +103,13 @@ A_{t+1} = clip( A_t + (1/T) · G( K ∗ A_t ; m, s ), 0, 1 )
 
 ### Agreement check
 
-Exposition and implementation agree on the rule shape: discrete kernel normalisation, ring shell
-with β peaks, both core and growth families, Euler step of size 1/T, and clip to [0, 1]. They
-differ in one place, the **numbering of the families** (§3.2).
+Paper, exposition and implementation agree on the rule shape: discrete kernel normalisation, ring
+shell with β peaks, both core and growth families, Euler step of size 1/T, clip to [0, 1], and
+periodic FFT boundaries. They differ in two places. The first is the **numbering of the families**
+(§3.2). The second is the **default family**: the paper ran exponential, while the Python catalog
+executes polynomial. A minor third difference is that the paper's neighbourhood is the closed
+ball ‖n‖ ≤ R and the implementation's is r < 1. It does not matter, because both cores vanish at
+r = 1.
 
 ## 2. Parameter conventions and catalog format
 
@@ -119,18 +148,20 @@ S001 for evidence that both versions survive with matching normalised mass.
 
 ## 3. Disputed semantics (resolve by experiment, not by reading)
 
-### 3.1 Which Orbium rule is canonical? There are four on record
+### 3.1 Which Orbium rule is canonical? There are five on record
 
-The same Orbium unicaudatus cells appear under different rules in different upstream sources:
+The same Orbium unicaudatus cells appear under different rules in different upstream sources, and the paper adds a rule of its own:
 
 | Source (pinned commit) | Core / growth | μ | σ | R, T | Cells |
 | --- | --- | --- | --- | --- | --- |
+| **Paper** Figs. 6–7 (arXiv v3) | **exponential/exponential** (§2.2.4) | 0.15 | **0.016** | Fig. 6: R = 185, T = 10; Fig. 7: R = 9…55 or T = 4…2560 | not published |
 | `Python/animals.json` (LeniaND, 2020), entry `O2u` | `kn=1, gn=1` → **polynomial/polynomial** as executed | 0.15 | **0.015** | 13, 10 | 20 × 20 RLE |
 | `Python/old/animals.json` (Lenia.py, 2018–19), entry `O2(a)` | no kn/gn; old code defaults to kn = gn = 1 → polynomial as executed | 0.15 | **0.017** | 13, 10 | byte-identical RLE to `O2u` (checked) |
 | `JavaScript/Lenia-LifeForms.js`, entry `O2(a)` | explicit `k=bump4; d=gaus` → **exponential/Gaussian** | 0.15 | **0.017** | 13, 10 | different encoding ("zip"), not compared |
 | `Jupyter/Lenia.ipynb`, `R/Lenia.Rmd` (O. *bicaudatus*, not unicaudatus) | type 0 = polynomial/polynomial | 0.15 | 0.014 | 13, dt = 0.1 | inline float table |
 
-**Our reproduction:** all four (core, σ) combinations keep O2u alive and gliding for 5000 steps on
+**Our reproduction:** every (core, σ) combination recorded above, the paper's exp/σ = 0.016
+included, keeps O2u alive and gliding for 5000 steps on
 a 128² torus. Mass and speed shift monotonically with σ (S001 §Rule-variant sweep). Orbium does not
 force a choice. The choice still changes every number Lane 4/5 will report, so ALM should fix one
 rule and record it with every run.
@@ -139,8 +170,10 @@ rule and record it with every run.
 polynomial core, polynomial growth, μ = 0.15, σ = 0.015, R = 13, T = 10, β = [1]. It is the newest
 catalog, the startup creature of the program (`ANIMAL_KEY_LIST['1'] = 'O2u'`, l.2017), and the
 only one whose execution semantics we can reproduce bit-for-bit against upstream code (S001
-§Cross-check). The exponential/σ = 0.017 rule is a good, cheap second rule for Lane 3/7 robustness
-checks.
+§Cross-check). The paper's published state is not available, so the catalog cells are still the
+only exact Orbium starting state. The paper's rule (exponential/exponential, σ = 0.016) applied to
+those cells is the natural second rule for Lane 3/7 robustness checks, because it connects our
+numbers to the paper's Figs. 6–7.
 
 ### 3.2 `kn`/`gn` numbering: the labels disagree with the code
 
@@ -151,9 +184,11 @@ checks.
   running.
 - **History:** in commit `1538c33` ("Update Lenia.py to match the paper") the label list was
   swapped from `["Polynomial","Exponential",...]`, which matched the code, to
-  `["Exponential","Polynomial",...]`. The lambda dictionaries were not reordered. A plausible
-  reading (*inferred*) is that the paper lists exponential first. If so, "kn = 1" in paper
-  numbering means exponential, while the catalog's `kn = 1` executes polynomial.
+  `["Exponential","Polynomial",...]`. The lambda dictionaries were not reordered.
+- **Paper says:** Eqs. 10 and 13 list exponential first, and §2.2.4 states the paper's runs used
+  exponential/exponential. That **confirms** the reading. In paper order, "first family" means
+  exponential, while the catalog's `kn = 1` executes polynomial. The paper does not use `kn`/`gn`
+  numbers itself.
 - **Consequence:** any ALM code that maps `kn = 1` → exponential by reading the paper or the UI
   will silently run a different rule from upstream. Lane 2 should key families by name
   (`poly`/`exp`), not by number, and should record the name in every trace.
@@ -166,6 +201,28 @@ period and amplitude move with it. Lane 5 should not report Orbium's mass period
 oscillation without this control.
 
 ## 4. What existing upstream statistics measure
+
+**Paper says (§2.4.2, pp. 13–14).** The measures are defined over A and the positive-growth field
+G|G>0, with integrals ∫·dx (dx² = 1/R² in DL):
+
+- mass m = ∫A [mg];
+- volume V_m = ∫_{A>0} dx [mm²]; density ρ_m = m/V_m;
+- growth g = ∫_{G>0} G [mg/s];
+- centroid x̄_m; growth centre x̄_g; growth-centroid distance d_gm = |x̄_g − x̄_m| [mm];
+- linear speed s_m = |dx̄_m/dt| [mm/s]; angular speed ω_m = d/dt arg(dx̄_m/dt) [**rad**/s];
+- mass asymmetry m_Δ = ∫_{c>0}A − ∫_{c<0}A with c = dx̄_m × (x − x̄_m);
+- angular mass I_m = ∫A (x − x̄_m)²; gyradius r_m = √(I_m/m);
+- Hu/Flusser moment invariants.
+
+The paper lists "degree of chaos (e.g. Lyapunov exponent, attractor dimension)" only as a
+**meta-measure** over time series, not as a per-step statistic. Survival vocabulary (§2.3.2,
+§3.5.4): a lifeform dies by **explosion** (mass expands without bound) or **evaporation** (mass
+shrinks away). Persistence classes (§4.2.1) are transient, quasi-stable, stable, metastable,
+chaotic and Markovian.
+
+**Implementation does** (below). It matches the paper for m, g, d_gm, s_m, m_Δ and r_m, up to the
+R² normalisation. It reports ω in degrees, not radians. It has no volume, density or moment
+invariants. Its "Lyapunov exponent" is not the paper's meta-measure.
 
 `Analyzer` (l.441–823) is run every step after `center_world()` (l.2489–2492). Units: length in
 kernel radii ("mm"), time in T-step units ("s"), mass in "mg" = Σ cell value / R².
@@ -212,8 +269,9 @@ Bookkeeping that matters for ALM:
   plus SmoothLife and Game-of-Life emulations (`kn = 3/4`).
 - Rules in the catalog: `(kn, gn)` = (1, 1) for 523 entries, (4, 3) for 16 (Life), (2, 2) for 5,
   and a handful of others. R values cluster at 27, 13, 18, 36 and 10.
-- Codes (*inferred*, about 90 % consistent): a leading digit is the number of kernel rings
-  `len(b)` (absent means 1), then genus letters, then a species/variant suffix. A `:n` suffix
+- Codes. **Paper says** (§3.2.4) the form is "BGUs": rank B, genus/family initial G, number of
+  units U, species initial s. In the catalog, the leading digit equals `len(b)` in about 90 % of
+  entries; when the digit is absent, rank is 1. A `:n` suffix
   selects the n-th entry sharing a code (`get_animal_id`, l.1115–1123).
 - Other upstream catalogs: `Python/found/*.json` (search results by rank), `animals3D.json`,
   `animals4D.json`, `old/animals.json`, and the JS `Lenia-LifeForms.js`. Multi-kernel and
