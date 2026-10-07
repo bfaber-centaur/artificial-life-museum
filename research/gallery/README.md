@@ -140,10 +140,10 @@ pointing down.
 | Specimen | Run ID (trace) | Steps | Final state sha256 | Seed cells from |
 | --- | --- | --- | --- | --- |
 | S001 | [`S001-7c75573885`](../traces/S001-7c75573885/) | 0–3000 | `b42e8fbb…` | main: `research/specimens/S001-orbium/` |
-| S101 | [`S101-9ea05a4377`](../traces/S101-9ea05a4377/) | 0–3000 | `6d3055fc…` | vendored from PR #11 ([`vendor/pr11/`](vendor/pr11/)) |
-| S102 | [`S102-12fd60e362`](../traces/S102-12fd60e362/) | 0–3000 | `12c6dcad…` | vendored from PR #11 |
-| S103 | [`S103-57feb4ccc4`](../traces/S103-57feb4ccc4/) | 0–3000 | `a81efdac…` | vendored from PR #11 |
-| S101 + I004 0.25 at step 3000 (G004) | [`S101-2ca50bbd39`](../traces/S101-2ca50bbd39/) | 0–5000 | `3db8b6da…` | vendored from PR #11 |
+| S101 | [`S101-9ea05a4377`](../traces/S101-9ea05a4377/) | 0–3000 | `6d3055fc…` | `research/specimens/S101-orbium-pair/` (vendored copy at run time) |
+| S102 | [`S102-12fd60e362`](../traces/S102-12fd60e362/) | 0–3000 | `12c6dcad…` | `research/specimens/S102-circler/` (vendored copy at run time) |
+| S103 | [`S103-57feb4ccc4`](../traces/S103-57feb4ccc4/) | 0–3000 | `a81efdac…` | `research/specimens/S103-static-ring/` (vendored copy at run time) |
+| S101 + I004 0.25 at step 3000 (G004) | [`S101-2ca50bbd39`](../traces/S101-2ca50bbd39/) | 0–5000 | `3db8b6da…` | `research/specimens/S101-orbium-pair/` (vendored copy at run time) |
 | S001 + I004 0.25 at step 3000 (G004) | [`S001-f51c4e7c2e`](../traces/S001-f51c4e7c2e/) | 0–5000 | `fa43239b…` | main |
 
 The G001–G003 runs were made with `alm.run` at commit `96cb86c`, and the G004 runs at `066878d`,
@@ -151,11 +151,11 @@ all with a clean `src/`. The full rule,
 grid, environment and hashes are in each trace's `manifest.json`. Each exhibit's `provenance.json`
 lists its frame range, view, overlays and disclosures.
 
-**Unmerged dependency.** S101–S103 are proposed in Lane 6's PR #11, which is not merged. Their
-seed cells and rules are vendored in one place, [`vendor/pr11/`](vendor/pr11/README.md), and
-registered by [`galspec.py`](galspec.py) only if main lacks them. If main later registers
-different cells under these IDs, the scripts refuse to run. The exact cleanup once #11 merges is
-listed in [`vendor/pr11/README.md`](vendor/pr11/README.md#cleanup-after-pr-11-merges).
+**Specimen sources.** S101–S103 came from Lane 6's PR #11. Until #11 merged, the gallery ran
+them from byte-identical copies of its seed files, which is why the traces' manifests name a
+`research/gallery/vendor/pr11/` source. Those copies were removed after #11 merged on 2026-10-07.
+`tests/test_gallery.py` checks that the cells registered on main still hash to the values
+recorded in every gallery run.
 
 ## How the pictures are made
 
@@ -176,8 +176,7 @@ listed in [`vendor/pr11/README.md`](vendor/pr11/README.md#cleanup-after-pr-11-me
 
 ```bash
 ./scripts/bootstrap.sh
-git checkout 066878d                                   # G004's commit; it has every gallery script
-.venv/bin/python research/gallery/render.py collect    # re-run the four simulations
+.venv/bin/python research/gallery/render.py collect    # run any configuration runs.json lacks
 .venv/bin/python research/gallery/render.py render     # replay, verify hashes, draw exhibits
 ```
 
@@ -189,18 +188,19 @@ in `runs.json` from its manifest and stops with an error unless the replay's fin
 
 ```bash
 .venv/bin/python -m alm.run --specimen S001 --steps 3000 --every 10
-.venv/bin/python research/gallery/run_specimen.py --specimen S102 --steps 3000 --every 10   # S101–S103
+.venv/bin/python -m alm.run --specimen S102 --steps 3000 --every 10
 .venv/bin/python research/gallery/run_specimen.py --specimen S101 --steps 5000 --every 10 \
     --intervene 3000:gallery_port_injury:s=0.25                                        # G004
 ```
 
 `tests/test_gallery.py` runs the whole pipeline end to end on short (60-step) real runs in a
-scratch folder. It collects, replays, verifies the hashes and renders G001–G003, then checks every
+scratch folder. It collects, replays, verifies the hashes and renders G001–G004, then checks every
 listed media file and provenance entry. It also checks that a run with a wrong final hash is
 refused. Re-running `render` on the committed runs reproduces the committed media byte for byte.
 
-`run_specimen.py` is `python -m alm.run` with the vendored specimens registered. Once PR #11 is
-merged, plain `alm.run` does the same.
+`run_specimen.py` is `python -m alm.run` with the gallery's `gallery_port_injury` intervention
+([`galintervene.py`](galintervene.py)) registered. The G004 S001 run uses the same flag with
+`--specimen S001`.
 
 ## Gallery conventions
 
@@ -223,6 +223,8 @@ merged, plain `alm.run` does the same.
 
 ## Cycle log
 
+- **2026-10-07, after PR #11 merged.** Retired the vendored S101–S103 copies and the
+  registration shim. The committed runs and media are unchanged.
 - **2026-10-07, cycle 2 (Lane 8).** G004: the bound pair and a single Orbium under the same port
   injury (C041), from two new runs with the injury at step 3000.
 - **2026-10-07, cycle 1 (Lane 8).** First gallery: G001–G003 from four new runs of S001 and

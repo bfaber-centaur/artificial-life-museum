@@ -1,4 +1,4 @@
-"""Gallery specimen shim: vendored PR #11 seeds load, match their pins, and run."""
+"""Gallery: committed runs match the registry, S103 is a fixed point, the render pipeline works."""
 
 import sys
 from pathlib import Path
@@ -7,21 +7,23 @@ import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "research" / "gallery"))
 
-import galspec  # noqa: E402
 from alm import provenance, specimens  # noqa: E402
 from alm.lenia import Lenia  # noqa: E402
 
 
-def test_vendored_specimens_register_and_match_pins():
-    galspec.ensure_registered()
-    galspec.ensure_registered()  # idempotent: second call checks instead of re-registering
-    for sid in galspec.PR11:
-        spec = specimens.load(sid)
-        assert spec.cells.dtype.kind == "i" and spec.cells.max() <= 255
+def test_committed_gallery_runs_match_the_specimen_registry():
+    """Every run the gallery shows was made from the cells now registered under its specimen ID."""
+    import json
+
+    root = Path(__file__).resolve().parents[1]
+    runs = json.loads((root / "research" / "gallery" / "runs.json").read_text())
+    for run_id in runs.values():
+        man = json.loads((root / "research" / "traces" / run_id / "manifest.json").read_text())
+        spec = specimens.load(man["specimen"]["id"])
+        assert spec.cells_sha256 == man["specimen"]["cells_sha256_int16le"], run_id
 
 
 def test_s103_is_a_fixed_point_for_a_few_steps():
-    galspec.ensure_registered()
     spec = specimens.load("S103")
     A0 = spec.place(128)
     sim = Lenia(spec.rule, A0)

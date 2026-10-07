@@ -34,7 +34,6 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 
 import galintervene  # noqa: E402
-import galspec  # noqa: E402
 from alm import interventions as ivs  # noqa: E402
 from alm import measure, provenance, specimens  # noqa: E402
 from alm import run as almrun  # noqa: E402
@@ -88,7 +87,6 @@ def run_configs() -> dict[str, almrun.RunConfig]:
 
 def collect() -> None:
     """Run every configuration not yet recorded in runs.json (recorded runs are kept)."""
-    galspec.ensure_registered()
     runs = json.loads(RUNS_JSON.read_text()) if RUNS_JSON.exists() else {}
     for key, cfg in run_configs().items():
         if key in runs and (TRACES / runs[key] / "manifest.json").exists():
@@ -242,7 +240,9 @@ def save_provenance(folder: Path, exhibit: dict, replays: list[Replay]) -> None:
 def _run_command(r: Replay) -> str:
     cmd = r.manifest["reproduction"]["command"]
     gallery_ivs = any(iv["name"].startswith("gallery_") for iv in r.manifest["config"]["interventions"])
-    if r.manifest["specimen"]["id"] in galspec.PR11 or gallery_ivs:
+    # Runs made from the pre-#11 vendored seeds need the wrapper at their own commit.
+    vendored = "research/gallery/vendor/" in r.manifest["specimen"]["source"]
+    if gallery_ivs or vendored:
         cmd = cmd.replace("python -m alm.run", "python research/gallery/run_specimen.py", 1)
     return f"git checkout {r.manifest['simulator']['git_commit'][:12]} && .venv/bin/{cmd}"
 
@@ -525,7 +525,6 @@ def g004_shedding(reps: dict[str, Replay]) -> None:
 
 
 def render() -> None:
-    galspec.ensure_registered()
     runs = json.loads(RUNS_JSON.read_text())
     keep = set(range(WINDOW[0], WINDOW[1] + 1))
     reps = {}
