@@ -112,8 +112,8 @@ are sharp. On the high-σ side there is glider, then death over one to three gri
 ### Reference check
 
 [`catalog-neighbours.csv`](catalog-neighbours.csv) lists the 17 single-shell entries in the box,
-run under their own rules. Under ALM semantics, four catalog entries do not persist under their
-own rule: `O2bi` and `O2p` die, and `OG2r` and `O8?` fill the world. This is a disagreement with
+run under their own rules. Under ALM semantics, five catalog entries do not persist under their
+own rule: `O2bi` and `O2p` die, and `OG2r`, `O8?` and `1P4odl` fill the world. This is a disagreement with
 the catalog, not resolved here. The catalog's cells may need settings the catalog does not
 record, or they may be transients. **Flag for Lanes 1 and 3.**
 
@@ -214,7 +214,7 @@ Traces are under [`../../traces/`](../../traces/).
   heals. The I002 "robustness" is the trivial case: the disc sits on the empty gap between the
   partners.
 - **L6-d (REFUTED as a novelty claim).** None of S101–S103 is uncatalogued (reference table above).
-- **L6-e (OBSERVED, flag).** Under ALM semantics, catalog `O2bi`, `O2p`, `OG2r` and `O8?` do not
+- **L6-e (OBSERVED, flag).** Under ALM semantics, catalog `O2bi`, `O2p`, `OG2r`, `O8?` and `1P4odl` do not
   persist under their own catalog rules.
 
 ## Discovery-protocol status
