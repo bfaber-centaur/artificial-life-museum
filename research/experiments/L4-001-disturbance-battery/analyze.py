@@ -1,0 +1,151 @@
+#!/usr/bin/env python3
+"""Summarize L4-001 results: outcome grids, transitions and a response-curve plot.
+
+    .venv/bin/python research/experiments/L4-001-disturbance-battery/analyze.py
+"""
+import csv
+import os
+from collections import defaultdict
+
+import matplotlib
+
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt  # noqa: E402
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+RES = os.path.join(HERE, "results")
+LETTER = {"RECOVERED": "R", "DIED": "D", "EXPLODED": "X", "TRANSFORMED": "T"}
+NAMES = {"I001": "Mass attenuation (fraction removed)",
+         "I002": "Central deletion (radius / R)",
+         "I003": "Frontal addition (peak amplitude)",
+         "I004": "Port-side injury (fraction removed)"}
+
+
+def load(name):
+    p = os.path.join(RES, name)
+    if not os.path.exists(p):
+        return []
+    with open(p) as f:
+        return list(csv.DictReader(f))
+
+
+def grid_table(rows, iv, key="class"):
+    by = defaultdict(dict)
+    for r in rows:
+        if r["intervention"] == iv:
+            by[float(r["strength"])][int(r["t0"])] = r
+    phases = sorted({t for d in by.values() for t in d})
+    out = ["| s | " + " | ".join(f"t0={t}" for t in phases) + " | mean ΔM/M₀ | mean win speed |",
+           "|" + " --- |" * (len(phases) + 3)]
+    for s in sorted(by):
+        d = by[s]
+        cells = [LETTER[d[t][key]] if t in d else "" for t in phases]
+        dm = sum(float(d[t]["achieved_dmass_frac"]) for t in d) / len(d)
+        vs = sum(float(d[t]["win_speed"]) for t in d) / len(d)
+        out.append(f"| {s:.2f} | " + " | ".join(cells) + f" | {dm:+.3f} | {vs:.3f} |")
+    return "\n".join(out)
+
+
+def dmass_at(rows, iv, t0, s):
+    for r in rows:
+        if r["intervention"] == iv and int(r["t0"]) == int(t0) and abs(float(r["strength"]) - s) < 1e-6:
+            return float(r["achieved_dmass_frac"])
+    return float("nan")
+
+
+def transition_table():
+    """Cross-condition transition table (also written to results/transitions.csv)."""
+    conds = [("N128 ref (5 phases)", "", "bisect"), ("N192 ref (5 phases)", "", "bisect-N192"),
+             ("T20 ref (t0=100 tu)", "T20/", "bisect"), ("R26 ref, N256 (t0=100 tu)", "R26/", "bisect")]
+    out = ["## Transition summary across conditions", "",
+           "s* = bracket midpoint (range over phase replicates). ΔM/M₀ = achieved mass change at "
+           "the last surviving / first dying strength (range over phases).", "",
+           "| Intervention | Condition | s* | ΔM/M₀ survive | ΔM/M₀ die |", "| --- | --- | --- | --- | --- |"]
+    csv_rows = []
+    for iv in ("I001", "I002", "I003", "I004"):
+        for label, sub, stem in conds:
+            br = [b for b in load(sub + stem + "-brackets.csv") if b["intervention"] == iv]
+            if not br:
+                continue
+            runs = load(sub + stem + ".csv") + load(sub + "coarse.csv")
+            ss = [float(b["s_star"]) for b in br]
+            ok = [dmass_at(runs, iv, b["t0"], float(b["s_ok"])) for b in br]
+            fa = [dmass_at(runs, iv, b["t0"], float(b["s_fail"])) for b in br]
+            rng = lambda v: f"{min(v):+.3f}" if max(v) - min(v) < 5e-4 else f"{min(v):+.3f} to {max(v):+.3f}"
+            srng = f"{min(ss):.4f}" if max(ss) == min(ss) else f"{min(ss):.4f} to {max(ss):.4f}"
+            out.append(f"| {iv} | {label} | {srng} | {rng(ok)} | {rng(fa)} |")
+            csv_rows.append([iv, label, min(ss), max(ss), min(ok), max(ok), min(fa), max(fa)])
+    with open(os.path.join(RES, "transitions.csv"), "w") as f:
+        f.write("intervention,condition,s_star_min,s_star_max,dmass_survive_min,dmass_survive_max,"
+                "dmass_die_min,dmass_die_max\n")
+        for r in csv_rows:
+            f.write(",".join([r[0], r[1]] + [f"{x:.6f}" for x in r[2:]]) + "\n")
+    agree = []
+    for name in ("check-alm-N128", "check-ref-N192", "check-ref-N128-H5000", "check-ref-N128-cL",
+                 "check-ref-N192-cL"):
+        rs = load(name + ".csv")
+        if not rs:
+            continue
+        exp = {"s_ok": "RECOVERED", "s_fail": "DIED"}
+        brs = load("bisect-brackets.csv")
+        n = bad = 0
+        flips = []
+        for r in rs:
+            b = next(b for b in brs if b["intervention"] == r["intervention"] and b["t0"] == r["t0"])
+            k = "s_ok" if abs(float(b["s_ok"]) - float(r["strength"])) < 1e-9 else "s_fail"
+            n += 1
+            if r["class"] != exp[k]:
+                bad += 1
+                flips.append(f"{r['intervention']} t0={r['t0']} {k}={float(r['strength']):.6f} → {r['class']}")
+        agree.append(f"- `{name}`: {n - bad}/{n} bracket ends match the N128 ref classification"
+                     + (" (" + "; ".join(flips) + ")" if flips else ""))
+    return out + [""] + ["Bracket-end re-runs:", ""] + agree + [""]
+
+
+def main():
+    coarse = load("coarse.csv")
+    brackets = load("bisect-brackets.csv")
+    lines = ["# L4-001 results summary (generated by analyze.py)", "",
+             "Letters: R = RECOVERED, D = DIED, X = EXPLODED, T = TRANSFORMED (±20 % bands).", ""]
+    ivs = sorted({r["intervention"] for r in coarse})
+    for iv in ivs:
+        lines += [f"## {iv}: {NAMES[iv]}", "", "Primary (±20 %) classes:", "",
+                  grid_table(coarse, iv), ""]
+        for band in ("class_band10", "class_band30"):
+            diff = [r for r in coarse if r["intervention"] == iv and r[band] != r["class"]]
+            lines.append(f"- {band}: {len(diff)} runs change class"
+                         + (": " + ", ".join(f"s={float(r['strength']):.2f}/t0={r['t0']}→{LETTER[r[band]]}"
+                                             for r in diff[:12]) if diff else ""))
+        b = [r for r in brackets if r["intervention"] == iv]
+        if b:
+            lines += ["", "Bisected transitions:", "", "| t0 | s_ok | s_fail | s* |", "| --- | --- | --- | --- |"]
+            for r in b:
+                lines.append(f"| {r['t0']} | {float(r['s_ok']):.4f} | {float(r['s_fail']):.4f} | {float(r['s_star']):.4f} |")
+            ss = [float(r["s_star"]) for r in b]
+            lines.append(f"\nPhase spread of s*: {min(ss):.4f} to {max(ss):.4f} (range {max(ss) - min(ss):.4f})")
+        lines.append("")
+    lines += transition_table()
+    with open(os.path.join(RES, "summary.md"), "w") as f:
+        f.write("\n".join(lines) + "\n")
+
+    fig, axes = plt.subplots(2, 2, figsize=(10, 7), constrained_layout=True)
+    colors = {"RECOVERED": "#2a9d8f", "DIED": "#264653", "EXPLODED": "#e76f51", "TRANSFORMED": "#e9c46a"}
+    for ax, iv in zip(axes.flat, ivs):
+        rs = [r for r in coarse if r["intervention"] == iv]
+        for r in rs:
+            ax.scatter(float(r["strength"]) + (int(r["t0"]) - 1002) * 0.004, float(r["final_mass"]),
+                       color=colors[r["class"]], s=14)
+        ax.axhspan(0.8 * 0.4358, 1.2 * 0.4358, color="#2a9d8f", alpha=0.1)
+        for r in (x for x in brackets if x["intervention"] == iv):
+            ax.axvline(float(r["s_star"]), color="k", lw=0.5, alpha=0.5)
+        ax.set_title(f"{iv}: {NAMES[iv]}", fontsize=9)
+        ax.set_xlabel("strength s")
+        ax.set_ylabel("mass at t0+2000 (ΣA/R²)")
+    handles = [plt.Line2D([], [], marker="o", ls="", color=c, label=k) for k, c in colors.items()]
+    fig.legend(handles=handles, loc="lower center", ncol=4, bbox_to_anchor=(0.5, -0.04))
+    fig.suptitle("S001 disturbance response (L4-001, ref engine, N=128, 5 phase replicates)")
+    fig.savefig(os.path.join(RES, "response.png"), dpi=110, bbox_inches="tight")
+
+
+if __name__ == "__main__":
+    main()
