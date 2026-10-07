@@ -1,0 +1,11 @@
+I001 s=0.1031: first <0.8m at step 36, first >1.2m at None, mass<0.01 at step 46, min/max mass 0.000/0.454
+I001 s=0.105: first <0.8m at step 30, first >1.2m at None, mass<0.01 at step 38, min/max mass 0.000/0.455
+I001 s=0.11: first <0.8m at step 28, first >1.2m at None, mass<0.01 at step 36, min/max mass 0.000/0.467
+I001 s=0.15: first <0.8m at step 19, first >1.2m at None, mass<0.01 at step 28, min/max mass 0.000/0.452
+I001 s=0.3: first <0.8m at step 1, first >1.2m at None, mass<0.01 at step 7, min/max mass 0.000/0.248
+I003 s=0.3094: first <0.8m at step 52, first >1.2m at None, mass<0.01 at step 74, min/max mass 0.000/0.478
+I003 s=0.32: first <0.8m at step 38, first >1.2m at None, mass<0.01 at step 59, min/max mass 0.000/0.481
+I003 s=0.4: first <0.8m at step 24, first >1.2m at None, mass<0.01 at step 33, min/max mass 0.000/0.508
+I004 s=0.0844: first <0.8m at step 38, first >1.2m at None, mass<0.01 at step 48, min/max mass 0.000/0.460
+I004 s=0.1: first <0.8m at step 29, first >1.2m at None, mass<0.01 at step 36, min/max mass 0.000/0.470
+I004 s=0.2: first <0.8m at step 12, first >1.2m at None, mass<0.01 at step 21, min/max mass 0.000/0.460

@@ -1,0 +1,6 @@
+I001: mass 0.4357, gyradius 0.4412
+I003: mass 0.4347, gyradius 0.4590
+control: mass 0.4344, gyradius 0.4413
+I001 vs I003: best corr 0.9016 at rotation -42 deg, rel L2 0.431
+I001 vs control: best corr 0.9135 at rotation 68 deg, rel L2 0.409
+I003 vs control: best corr 0.9008 at rotation -56 deg, rel L2 0.447
