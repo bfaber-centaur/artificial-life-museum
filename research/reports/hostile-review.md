@@ -137,6 +137,7 @@ D=research/experiments/H001-lattice-wobble
 .venv/bin/python $D/h001_explore.py 26 1 > $D/x2_R26_fine.csv  # ~25 min on 4 cores
 .venv/bin/python $D/aniso_check.py > $D/aniso_check.txt    # ~2 min (HR-003)
 .venv/bin/python $D/plot_h001.py                       # h001.png
+(.venv/bin/python $D/heading_means.py 13 0 27 55 70; .venv/bin/python $D/heading_means.py 26 0 67 | tail -n +2) > $D/heading_means.csv  # HR-006
 .venv/bin/pytest -q tests/test_h001_lattice_wobble.py
 ```
 
@@ -188,3 +189,60 @@ outcome, template correlation for the "new blob" question). Objections:
    evidence about the organism. 68.198° is the 5:2 lattice direction (tan = 2.500).
 2. The claim asserts the 4.32-step period is a lattice artifact; H001 now supplies the evidence.
 3. No semantic problem found in `lenia.py`. Kernel layouts agree for even N; odd N is untested.
+
+## HR-005: Lane 3 replication and numerics (PR #8; posted there as a comment)
+
+Lane 3's report is the strongest evidence on the board. Four objections:
+
+1. **"The heading lock mostly disappears at R = 26" is contradicted by Lane 3's own CSV and by
+   H001.** In `heading-R26.csv`, start rotations 12.5° and 15° both end on 53.28° (15° after
+   drifting 1.2°). 30° and 32.5° both end on 36.72° (32.5° after drifting 1.9°). 65° and 67.5° both
+   end on 2.06°. The 2.5° grid hides most of the plateaus, as my own 3° grid did (HR-001b). The
+   two implementations agree on the R = 26 plateau headings to about 0.01°: 59.35, 53.28, 49.33,
+   46.54, 43.46, 42.09, 40.67, 36.72, 30.65 and 25.91°. That is an independent replication of
+   pinning *at* R = 26. Proposed restatement: "pinning weakens from R = 13 to R = 26 (largest
+   unreachable gap in 0°–45° goes from 9.2° to 6.1°) but does not disappear". The
+   `nearest_rational_slope` labels at R = 26 are off by up to 0.9° (42.09° labelled 7/8 = 41.19°),
+   so they are not evidence of rational-slope locking beyond 5/2 at R = 13.
+2. **The Richardson extrapolation assumes first-order convergence, and the T-sweep says
+   otherwise.** Successive speed differences for T = 20→40→80→160→320 are 0.0232, 0.0146,
+   0.0091, 0.0055. Each is about 0.6× the previous one, not 0.5×, so the effective order is
+   about 0.7 (plausibly from the non-smooth hard clip). Geometric extrapolation gives a limit of
+   about 0.5745 R/time, so T = 10 is 16.6% low rather than 16%. The conclusion stands and the
+   number moves slightly. Headings also move with T (68.2° → 66.5°), and at R = 13 speed depends
+   on heading by up to 1.2% (Lane 3's own finding), which is a small confound in the sweep.
+3. **"Wobble amplitude ∝ ~R⁻²" is confounded with heading.** Wobble amplitude depends strongly
+   on heading at fixed R: at R = 13 sd/mean is 2.0e−3 at 12.7°, 2.6e−3 at 68.2°, 6.6e−3 at 40.4°
+   and 1.0e−2 at the axis (`heading_means.csv`). Lane 3's resolution runs end on different headings
+   (68.2, 67.9, 67.3, 68.0, 64.3, 65.0°). At R = 39 Lane 3 (nearest-neighbour zoom, heading 64.3°)
+   gets 2.5e−4 and H001 (bilinear zoom, 66.3°) gets 1.3e−4, a 2× difference at the same R.
+   The robust statement is "amplitude falls about 20× from R = 13 to R = 39–52". The exponent is
+   not determined.
+4. **"The 1/|vx| rule fails in 9 of 17 runs" tests too narrow a rule.** H001's generalized rule,
+   in which any low-order lattice line m·vx + n·vy with |m|, |n| ≤ 2 counts, holds in 14 of 16
+   headings against 1.45 expected by chance. Lane 3 could rescore its resolution runs against
+   that line set.
+
+The bitwise match with Lane 2 means the two FFT paths share a numerical recipe, as Lane 3 says.
+The FFT-free direct path is the independent check, and it holds.
+
+## HR-006: Lane 5 "feature means are heading-invariant" (PR #4) is refuted at R = 13
+
+Lane 5 tested start rotations 0°, 23° and 45°. Those land on the 68.2°, 40.4° and 21.8° pinned
+headings, and 0° and 45° are mirror images. Lane 3 found an axis-locked plateau near 0°.
+`heading_means.py`, 6000 steps per run, statistics over steps 2000–5999 (`heading_means.csv`):
+
+| R | start rotation | heading | speed (R/time) | mass | gyradius | anisotropy | mass sd/mean |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 13 | 0° | 68.20° | 0.47941 | 0.43580 | 0.43764 | 0.2953 | 2.6e−3 |
+| 13 | 27° | 40.43° | 0.47869 | 0.43592 | 0.43823 | 0.2917 | 6.6e−3 |
+| 13 | 55° | 12.67° | 0.47783 | 0.43611 | 0.43809 | 0.2908 | 2.0e−3 |
+| 13 | 70° | −0.46° | 0.47343 | 0.43557 | 0.43861 | **0.2649** | 1.0e−2 |
+| 26 | 0° | 67.07° | 0.47966 | 0.43589 | 0.43755 | 0.2987 | 5.3e−4 |
+| 26 | 67° | −2.06° | 0.47969 | 0.43588 | 0.43759 | **0.2993** | 9.2e−4 |
+
+At R = 13 the axis-travelling S001 is 10% less elongated (0.265 vs 0.295) and 1.2% slower than
+on the 5/2 plateau. At R = 26 the same comparison agrees to 0.2%. Verdict: "feature means are
+heading-invariant" is **REFUTED at R = 13** (anisotropy, and speed at 1%) and **holds at R = 26**.
+Mass and gyradius means are invariant to 0.2% at both resolutions. Any anisotropy-based predictor
+at R = 13 must control for heading.
