@@ -84,15 +84,19 @@ Found while running E2: start rotations 6° and 9° gave identical velocities to
 isotropic continuum heading is a neutral direction, so rotating the start by 3° should rotate the
 heading by about 3°. Follow-up (`h001_explore.py`, heading in 1000-step windows over 8000 steps):
 
-- **R = 13, 46 start rotations (0°–45° by 1°)** (`x1_R13.csv`): all runs converge to one of **11
-  headings**: 68.20, 62.14, 60.82, 51.58, 49.57, ≈45 (wanders ±1.3° with no lock), 40.42, 38.43,
-  29.18, 27.85, 21.80°. These form mirror pairs about 45°. No run ends between 51.6° and 60.8°,
-  or between 29.2° and 38.4°. Some runs take thousands of steps to snap (rotation 8°: 59.1° →
-  60.82° by step 7000; rotation 31°: still drifting at step 8000).
-- **R = 26, 16 start rotations (0°–45° by 3°)** (`x1_R26.csv`): **16 distinct headings**
-  (67.1, 63.4, 59.35, 58.7, 53.28, 49.33, 47.91, 43.46, 42.09, 40.67, 36.72, 31.4, 30.64, 25.9,
-  22.93, 20.7°), roughly following 67° − rotation, with a few still drifting slowly. Pinning is
-  much weaker at the finer resolution. The 1°-step R = 26 sweep (`x2_R26_fine.csv`) is below.
+![H001 evidence](../experiments/H001-lattice-wobble/h001.png)
+
+- **R = 13, 46 start rotations (0°–45° by 1°)** (`x1_R13.csv`): 40 runs settle (heading change
+  < 0.05° between the last two 1000-step windows) onto only **10 headings**: 68.20, 62.14, 60.82,
+  51.56, 49.57, 40.42, 38.42, 29.18, 27.84, 21.80°, in mirror pairs about 45°. The other 6 are
+  still moving at step 8000; the four near the diagonal (start 19°–22°) wander around 45° ± 1.3°
+  without locking. No run ends inside the 9° gaps 51.6°–60.8°, 29.2°–38.4° or 40.4°–49.6°. Some
+  runs take thousands of steps to snap (rotation 8°: 59.1° → 60.82° by step 7000).
+- **R = 26, same 46 start rotations** (`x2_R26_fine.csv`): pinning **persists but is weaker**.
+  37 runs settle onto **17 headings**, 9 are still drifting, and the largest empty gap shrinks to
+  6.1°. Plateaus of 2–4 consecutive start rotations still share one heading (rotations 10°–13° all
+  give 53.28°). A coarser 3°-step sweep (`x1_R26.csv`) hid this by giving 16 distinct headings for
+  16 starts; I first misread that as "pinning gone".
 - Speed varies by only ~0.2% across headings (0.4787–0.4798 R/time at R = 13).
 
 **Consequences for other lanes.**
@@ -116,9 +120,10 @@ heading by about 3°. Follow-up (`h001_explore.py`, heading in 1000-step windows
 - **S001 mass oscillation**: NUMERICALLY_FRAGILE. The 4.32-step wobble is a lattice-sampling
   artifact; its relative amplitude falls from 2.6e−3 (R = 13) to 1.3e−4 (R = 39). Run IDs:
   H001-E1-R{13,20,26,39}, H001-E2-rot{0..45}. Caveat: preregistered P2 failed as written (see above).
-- **S001 heading pinning at R = 13**: OBSERVED (exploratory). 46 start rotations → 11 headings at
-  R = 13; 16 start rotations → 16 headings at R = 26. Run IDs: H001-X1-R13-rot{0..45},
-  H001-X1-R26-rot{0..45 by 3}. Caveat: 8000-step horizon; some runs still drifting.
+- **S001 heading is lattice-pinned**: OBSERVED (exploratory, single execution path). 46 start
+  rotations settle on 10 headings at R = 13 and 17 at R = 26 (largest empty gap 9.2° → 6.1°).
+  Run IDs: H001-X1-R13-rot{0..45}, H001-X2-R26-rot{0..45}. Caveats: 8000-step horizon, 6 and 9
+  runs still drifting; not yet checked on Lane 2's `src/alm`.
 
 ### Reproduction
 
@@ -129,12 +134,15 @@ D=research/experiments/H001-lattice-wobble
 .venv/bin/python $D/h001.py e2 > $D/e2.csv             # ~45 s
 .venv/bin/python $D/h001_explore.py 13 1 > $D/x1_R13.csv   # ~5 min on 4 cores
 .venv/bin/python $D/h001_explore.py 26 3 > $D/x1_R26.csv   # ~8 min on 4 cores
+.venv/bin/python $D/h001_explore.py 26 1 > $D/x2_R26_fine.csv  # ~25 min on 4 cores
+.venv/bin/python $D/aniso_check.py > $D/aniso_check.txt    # ~2 min (HR-003)
+.venv/bin/python $D/plot_h001.py                       # h001.png
 .venv/bin/pytest -q tests/test_h001_lattice_wobble.py
 ```
 
 ---
 
-## HR-002: Lane 4 protocol L4-001 (branch `claude/night0-disturbance-np4adr`, no PR yet)
+## HR-002: Lane 4 protocol L4-001 (PR #5; posted there as a comment)
 
 The protocol is strong (preregistered, logs achieved ΔM, threshold-band sensitivity, delayed
 outcome, template correlation for the "new blob" question). Objections:
@@ -152,7 +160,7 @@ outcome, template correlation for the "new blob" question). Objections:
    on another pinned heading should be reported separately from one on the original heading.
 4. The 0.8–1.2 speed band is safe against the 0.2% heading dependence of speed. No change needed.
 
-## HR-003: Lane 5 `alm.features` (branch `claude/night0-morphometrics-1103d7`, no PR yet)
+## HR-003: Lane 5 `alm.morphometrics` and L5-baseline (PR #4; posted there as a comment)
 
 1. **`symmetry_order` reports lattice symmetry for an isotropic body.** A sampled isotropic
    Gaussian (σ = 6 cells, 128²) gets `symmetry_order` 8, 4 or 6 depending only on its sub-pixel
@@ -160,6 +168,23 @@ outcome, template correlation for the "new blob" question). Objections:
    harmonics are the lattice's own, not the body's. Suggested fix: document a noise floor measured
    from isotropic controls at the organism's size, and return "none" (0) when no harmonic exceeds
    it. Suggested test: an isotropic Gaussian must not report a symmetry order.
-2. **`dominant_period` on mass will return the lattice line.** The docstring already warns. Since
+2. **L5 proposed claim 2 ("every dominant period is a grid-crossing frequency") has a
+   counterexample in Lane 5's own `summary.csv`.** At rotation 0 the anisotropy period is 8.015
+   steps, and no lattice line with |m|, |n| ≤ 2 lies within 0.009 cycles/step of it (nearest:
+   (−2, 1), 8.64 steps). An independent second-moment computation (`aniso_check.py`,
+   `aniso_check.txt`) reproduces the peak. It is still lattice-driven: at R = 20 and 26 the 8.0-step
+   component is gone, peaks sit on lattice lines (7.12, 5.69 steps), and anisotropy sd falls
+   4.8e−3 → 3.1e−3 → 1.4e−3. Verdict: the claim's conclusion survives, but its evidence should be
+   the resolution test, not period matching.
+3. **Mean anisotropy is biased by 1.2% at R = 13** (0.2953 vs 0.2989 / 0.2987 at R = 20 / 26).
+   Other means (mass) are converged to 2e−4.
+4. **`dominant_period` on mass will return the lattice line.** The docstring already warns. Since
    HR-001 gives an explicit formula, a helper that lists the lattice lines m·vx + n·vy for a given
    velocity would let callers flag a period as artifact automatically.
+
+## HR-004: Lane 2 L2-S001 baseline claim (PR #6; posted there as a comment)
+
+1. "Translates along a fixed 68.2° heading" is expected from lattice pinning (HR-001b) and is not
+   evidence about the organism. 68.198° is the 5:2 lattice direction (tan = 2.500).
+2. The claim asserts the 4.32-step period is a lattice artifact; H001 now supplies the evidence.
+3. No semantic problem found in `lenia.py`. Kernel layouts agree for even N; odd N is untested.
