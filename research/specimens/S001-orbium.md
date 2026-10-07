@@ -13,6 +13,8 @@ Supporting files: [`S001-orbium/`](S001-orbium/). Semantics background:
 - Taxonomy (from catalog headers): class Exokernel → order Orbiformes → family Orbidae →
   subfamily Haplorbinae. Name "Orbium unicaudatus", Chinese/Japanese name 球虫(單尾).
 - It is the default 2-D startup creature of upstream `LeniaND.py` (`ANIMAL_KEY_LIST['1'] = 'O2u'`).
+- The paper (arXiv:1812.05433v3, Figs. 6–7) studies Orbium at μ = 0.15, σ = 0.016 with
+  exponential core functions. It does not publish the cells.
 - The same cells are byte-identical in `Python/old/animals.json` as `O2(a)`, but with σ = 0.017
   there. The JS catalog runs Orbium with an exponential core and Gaussian growth at σ = 0.017. See
   the reference dossier §3.1 for why S001 pins the LeniaND rule below.
@@ -99,6 +101,7 @@ Keep displacement per sample below N/2.
 | poly / poly | 0.016 | yes | 0.4457 | 0.4461 | 0.4994 |
 | poly / poly | 0.017 | yes | 0.4550 | 0.4553 | 0.5193 |
 | exp / exp | 0.015 | yes | 0.4208 | 0.4337 | 0.4730 |
+| exp / exp (paper rule) | 0.016 | yes | 0.4363 | 0.4433 | 0.4819 |
 | exp / exp | 0.017 | yes | 0.4495 | 0.4526 | 0.4939 |
 
 Command: `reconstruct.py --steps 5000 --every 50 --kernel {poly,exp} --growth {poly,exp} --sigma S`.
@@ -139,8 +142,9 @@ None entered in the ledger. Proposed for the coordinator:
 1. **S001 baseline glides stably** under the LeniaND rule for ≥ 5000 steps on 128² (mass 0.436 ±
    0.001, speed 0.480 R/time). OBSERVED; INDEPENDENTLY_CHECKED vs upstream `Automaton` CPU path
    for 2000 steps.
-2. **S001 survives all four upstream-recorded rule variants** (poly/exp × σ 0.015/0.017).
-   OBSERVED.
+2. **S001 survives every rule recorded for Orbium**: poly/exp × σ 0.015/0.017, plus the
+   paper's exp/σ = 0.016. OBSERVED. This is consistent with the paper's statement that switching
+   the core functions has "no visible effect" on Orbium (Fig. 6b).
 3. **S001's mass oscillation period is set by grid-crossing at its heading** (4.32 steps at 68.2°,
    14.3 steps at 40.4°). OBSERVED; a candidate for Lane 3/7 to try to kill. The obvious next test
    is to vary R and check that the period scales as 1/(speed in cells/step · cos heading).
