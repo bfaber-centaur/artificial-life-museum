@@ -2,8 +2,10 @@
 
 Claims illustrated: C023 (sharp all-or-nothing edges, INDEPENDENTLY_CHECKED),
 C026 (where mass is removed matters, INDEPENDENTLY_CHECKED), C027 (I003/I004 edges
-move with the timestep, NUMERICALLY_FRAGILE). Statuses are copied from
-research/claims.md, not computed here.
+move with the timestep, NUMERICALLY_FRAGILE). The statuses drawn come from
+research/claims.md at build time (figlib.ledger). If the ledger no longer gives a claim
+the status this figure's encoding assumes (EXPECTED below), the build stops. The figure
+is stamped with the ledger commit it was checked against.
 
 Reads only committed data (Lane 4 L4-001 results and saved states, Lane 3 traces).
 Runs no simulation. Writes, next to this file:
@@ -29,6 +31,7 @@ from matplotlib.patches import FancyArrowPatch, Patch
 HERE = pathlib.Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parent))
 from figlib import edges as E  # noqa: E402
+from figlib import ledger as L  # noqa: E402
 from figlib import provenance as P  # noqa: E402
 from figlib.style import (EDIT, GRID, INK, MUTED, OKABE_ITO, OUTCOME, STATUS,  # noqa: E402
                           UNRESOLVED, figure_style, status_badge)
@@ -54,9 +57,11 @@ STATE_PAIRS = {
     "I003": ("0.306250", "0.309375"),
     "I004": ("0.081250", "0.084375"),
 }
-# Ledger statuses (research/claims.md @ main). Edge *values* of I003/I004 are T-fragile (C027).
-EDGE_STATUS = {iv: ("C023", "INDEPENDENTLY_CHECKED") for iv in IVS}
-FRAGILE = {"I003": ("C027", "NUMERICALLY_FRAGILE"), "I004": ("C027", "NUMERICALLY_FRAGILE")}
+# Statuses this figure's encoding assumes. They are checked against claims.md, never drawn from here:
+# the blue badges need C023/C026 independently checked; the hatched T20/T40 rows of I003/I004
+# need C027 numerically fragile. A ledger change makes the build fail until the figure is revisited.
+EXPECTED = {"C023": "INDEPENDENTLY_CHECKED", "C026": "INDEPENDENTLY_CHECKED", "C027": "NUMERICALLY_FRAGILE"}
+FRAGILE_IVS = ("I003", "I004")  # the interventions C027 is about
 
 # Conditions in panel d, top to bottom: (source, condition, label, files, reader).
 CONDITIONS = [
@@ -247,7 +252,7 @@ def panel_timecourses(axs, inputs):
         ax.tick_params(labelleft=False)
 
 
-def panel_zoom(axs, edges_):
+def panel_zoom(axs, edges_, status):
     """d: the edge in |ΔM/M₀| per condition and phase, both lanes, two discretisations."""
     for ax, iv in zip(axs, IVS):
         y = 0
@@ -258,7 +263,7 @@ def panel_zoom(axs, edges_):
                          key=lambda e: e.phase)
             if not egs:
                 continue
-            fragile_row = iv in FRAGILE and cond.startswith(("T20", "T40"))
+            fragile_row = iv in FRAGILE_IVS and cond.startswith(("T20", "T40"))
             ys = []
             for e in egs:
                 ax.plot([e.survive_abs, e.die_abs], [y, y], color=UNRESOLVED, lw=2.4, solid_capstyle="butt")
@@ -271,7 +276,7 @@ def panel_zoom(axs, edges_):
                 ys.append(y)
                 y -= 1
             if fragile_row:
-                ax.axhspan(min(ys) - 0.5, max(ys) + 0.5, facecolor="none", edgecolor=STATUS["NUMERICALLY_FRAGILE"]["color"],
+                ax.axhspan(min(ys) - 0.5, max(ys) + 0.5, facecolor="none", edgecolor=STATUS[status["C027"]]["color"],
                            hatch="////", lw=0, alpha=0.35, zorder=0)
             yt.append(np.mean(ys))
             yl.append(label + (f" ({len(egs)} phases)" if len(egs) > 1 else " (1 phase)"))
@@ -291,17 +296,20 @@ def panel_zoom(axs, edges_):
         ax.locator_params(axis="x", nbins=3)
         verb = "added" if SIGN[iv] > 0 else "removed"
         ax.set_xlabel(f"|ΔM/M₀| {verb}")
-        ax.set_title(f"{iv} {NAMES[iv]}", fontsize=7, loc="left", pad=11)
-        if iv in FRAGILE:  # edge value moves with dt by more than the phase spread
-            fid, fst = FRAGILE[iv]
-            status_badge(ax, fid, fst, x=0.0, y=1.0, ha="left")
-            # the shift exceeds the T = 10 phase spread: that is what makes C027 fragile
+        ax.set_title(f"{iv} {NAMES[iv]}", fontsize=7, loc="left", pad=19)
+        status_badge(ax, "C023", status["C023"], x=0.0, y=1.035, ha="left", short=True, in_layout=False)
+        if iv in FRAGILE_IVS:  # edge value moves with dt by more than the phase spread
+            status_badge(ax, "C027", status["C027"], x=0.0, y=1.0, ha="left", short=True, in_layout=False)
 
 
 def build():
     runs, inputs = load_runs()
     edges_ = E.edges(runs)
     bad = [e for e in edges_ if not e.monotone]
+    led = L.snapshot(EXPECTED)  # raises LedgerMismatch if claims.md moved
+    status = {cid: c["status"] for cid, c in led["claims"].items()}
+    stamp = (f"Claim statuses checked against research/claims.md @ {led['ledger_commit']} "
+             f"({P.git('log', '-n', '1', '--format=%cs', '--', 'research/claims.md')})")
 
     with figure_style():
         fig = plt.figure(figsize=(7.2, 9.6), layout="constrained")
@@ -315,24 +323,26 @@ def build():
 
         panel_footprints(axa, inputs)
         sf[0].suptitle("a   Where the smallest lethal edit lands on the body", x=0.005, ha="left", fontsize=7.5, fontweight="bold")
+        sf[0].text(0.995, 0.985, stamp, transform=sf[0].transSubfigure, ha="right", va="top", fontsize=5.8,
+                   color=MUTED)
         off = panel_overview(axb, runs, edges_)
         sf[1].suptitle("b   Every tested edit on one mass axis: survival flips in a narrow band whose position "
                        "depends on where mass goes", x=0.005, ha="left", fontsize=7.5, fontweight="bold")
-        status_badge(axb, "C023 + C026", "INDEPENDENTLY_CHECKED", x=1.0, y=1.005)
+        assert status["C023"] == status["C026"]  # one shared badge (guaranteed by EXPECTED)
+        status_badge(axb, "C023 + C026", status["C023"], x=1.0, y=1.005)
         panel_timecourses(axc, inputs)
         sf[2].suptitle("c   All-or-nothing: mass after the edit for the two runs either side of each edge", x=0.005, ha="left", fontsize=7.5, fontweight="bold")
         sf[2].supxlabel("time after edit (time units; T = 10 steps per unit)", fontsize=6.8)
-        panel_zoom(axd, edges_)
+        panel_zoom(axd, edges_, status)
         sf[3].suptitle("d   Zoom on each edge: a second lane's code agrees; resolution barely moves it; "
                        "a finer timestep moves I003 and I004", x=0.005, ha="left", fontsize=7.5, fontweight="bold")
-        status_badge(axd[0], "T10 R13 rows: C023 + C026", "INDEPENDENTLY_CHECKED", x=0.0, y=1.0, ha="left")
 
         handles = [
             Line2D([], [], ls="", marker="o", color=OUTCOME["RECOVERED"]["color"], ms=3.5, label="recovered (run)"),
             Line2D([], [], ls="", marker="x", color=OUTCOME["DIED"]["color"], ms=4, mew=0.8, label="died (run)"),
             Line2D([], [], color=UNRESOLVED, lw=3, label="unresolved gap between the closest runs"),
             Patch(facecolor=OKABE_ITO["sky"], alpha=0.25, label="Lane 4 baseline envelope (T10 R13, 5 phases)"),
-            Patch(facecolor="none", edgecolor=STATUS["NUMERICALLY_FRAGILE"]["color"], hatch="////", lw=0,
+            Patch(facecolor="none", edgecolor=STATUS[status["C027"]]["color"], hatch="////", lw=0,
                   label="timestep-sensitive value (C027)"),
             Patch(facecolor=EDIT["removed"], label="mass removed"),
             Patch(facecolor=EDIT["added"], label="mass added"),
@@ -372,8 +382,7 @@ def build():
                  + ", ".join(f"{k[0]} {k[1]}={v}" for k, v in sorted(off.items())))
     man = P.manifest("A-survival-boundary", inputs, outs,
                      ".venv/bin/python research/figures/A-survival-boundary/make_figure.py",
-                     {"C023": "INDEPENDENTLY_CHECKED", "C026": "INDEPENDENTLY_CHECKED", "C027": "NUMERICALLY_FRAGILE"},
-                     notes)
+                     led, notes)
     P.write_manifest(HERE / "figure-A.provenance.json", man)
     for n in notes:
         print(n)

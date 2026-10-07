@@ -43,12 +43,12 @@ OUTCOME = {
 
 # Claim statuses (vocabulary of research/claims.md). Badge text is always printed.
 STATUS = {
-    "INDEPENDENTLY_CHECKED": dict(color=OKABE_ITO["blue"], hatch=None, badge="independently checked"),
-    "REPRODUCED": dict(color=OKABE_ITO["sky"], hatch=None, badge="reproduced"),
-    "OBSERVED": dict(color=MUTED, hatch=None, badge="observed"),
-    "CONJECTURED": dict(color=MUTED, hatch="..", badge="conjectured"),
-    "NUMERICALLY_FRAGILE": dict(color=OKABE_ITO["orange"], hatch="////", badge="numerically fragile"),
-    "REFUTED": dict(color=INK, hatch="xx", badge="refuted"),
+    "INDEPENDENTLY_CHECKED": dict(color=OKABE_ITO["blue"], hatch=None, badge="independently checked", short="indep. checked"),
+    "REPRODUCED": dict(color=OKABE_ITO["sky"], hatch=None, badge="reproduced", short="reproduced"),
+    "OBSERVED": dict(color=MUTED, hatch=None, badge="observed", short="observed"),
+    "CONJECTURED": dict(color=MUTED, hatch="..", badge="conjectured", short="conjectured"),
+    "NUMERICALLY_FRAGILE": dict(color=OKABE_ITO["orange"], hatch="////", badge="numerically fragile", short="num. fragile"),
+    "REFUTED": dict(color=INK, hatch="xx", badge="refuted", short="refuted"),
 }
 
 # Edits applied to a field: mass removed vs mass added (diverging, colour + sign).
@@ -91,10 +91,10 @@ def figure_style():
         yield
 
 
-def status_badge(ax, claim_id, status, x=1.0, y=1.02, ha="right", **kw):
+def status_badge(ax, claim_id, status, x=1.0, y=1.02, ha="right", short=False, **kw):
     """Print '<claim> · <status>' in the status colour (text, so not colour-only)."""
     st = STATUS[status]
-    return ax.text(x, y, f"{claim_id} · {st['badge']}", transform=ax.transAxes, ha=ha, va="bottom",
+    return ax.text(x, y, f"{claim_id} · {st['short' if short else 'badge']}", transform=ax.transAxes, ha=ha, va="bottom",
                    fontsize=6.3, color=st["color"], fontweight="bold", **kw)
 
 

@@ -37,3 +37,52 @@ def test_one_sided_group_gives_nan():
 
 def test_conventions_json_matches_style():
     assert json.loads((FIGS / "conventions.json").read_text()) == json.loads(json.dumps(style.as_json()))
+
+
+from figlib import ledger  # noqa: E402
+
+SAMPLE = """# Claims ledger
+
+### C001 — First
+- **Status:** OBSERVED; not yet reproduced by a second lane
+- **Owner lane:** Lane 1
+
+### C002 — Second
+- **Status:** INDEPENDENTLY_CHECKED at T = 10 (two codes). The values are
+  NUMERICALLY_FRAGILE in T (C003).
+- **Owner lane:** Lane 4
+"""
+
+
+def test_ledger_parse_primary_status_and_continuation(tmp_path):
+    p = tmp_path / "claims.md"
+    p.write_text(SAMPLE)
+    c = ledger.parse(p)
+    assert c["C001"]["status"] == "OBSERVED"
+    assert c["C002"]["status"] == "INDEPENDENTLY_CHECKED"
+    assert "NUMERICALLY_FRAGILE in T" in c["C002"]["status_text"]
+
+
+def test_ledger_require_raises_on_drift(tmp_path):
+    p = tmp_path / "claims.md"
+    p.write_text(SAMPLE)
+    ledger.require({"C001": "OBSERVED"}, p)
+    try:
+        ledger.require({"C001": "REPRODUCED", "C009": "OBSERVED"}, p)
+    except ledger.LedgerMismatch as e:
+        assert "C001" in str(e) and "C009" in str(e)
+    else:
+        raise AssertionError("drift not detected")
+
+
+def test_committed_figures_match_current_ledger():
+    """Every figure's recorded statuses must still be the ledger's; otherwise rebuild or revisit it."""
+    current = ledger.parse()
+    manifests = sorted(FIGS.glob("*/*.provenance.json"))
+    assert manifests
+    for m in manifests:
+        snap = json.loads(m.read_text())["ledger"]
+        for cid, c in snap["claims"].items():
+            assert current[cid]["status"] == c["status"], (
+                f"{m.parent.name}: {cid} is {current[cid]['status']} in claims.md, "
+                f"figure drawn with {c['status']} (ledger @ {snap['ledger_commit']})")

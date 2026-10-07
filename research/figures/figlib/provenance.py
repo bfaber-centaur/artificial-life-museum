@@ -32,13 +32,13 @@ def last_commit(path):
     return git("log", "-n", "1", "--format=%h", "--", str(path))
 
 
-def manifest(figure_id, inputs, outputs, command, claims, notes=()):
+def manifest(figure_id, inputs, outputs, command, ledger, notes=()):
     """Describe a figure build. Paths are recorded relative to the repo root."""
     rel = lambda p: str(pathlib.Path(p).resolve().relative_to(REPO))
     return {
         "figure": figure_id,
         "command": command,
-        "claims": claims,
+        "ledger": ledger,  # figlib.ledger.snapshot(): claims.md revision + statuses checked
         "inputs": [{"path": rel(p), "sha256": sha256(p), "last_commit": last_commit(p)}
                    for p in sorted(set(map(str, inputs)))],
         "outputs": [rel(p) for p in outputs],

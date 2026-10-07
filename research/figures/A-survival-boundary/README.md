@@ -14,7 +14,12 @@ provenance [`figure-A.provenance.json`](figure-A.provenance.json)
 | **C026**: where mass is removed matters more than how much | INDEPENDENTLY_CHECKED | a, b |
 | **C027**: the I003 and I004 edges move 11–13 % when the timestep is quartered | NUMERICALLY_FRAGILE | d (hatched rows) |
 
-The figure copies these statuses from the ledger. It does not assign or change any status.
+The build reads these statuses from `research/claims.md` and stops if any of them no longer
+matches what the figure's encoding assumes. The rendered figure is a snapshot: its top-right
+stamp names the ledger commit it was checked against. `figure-A.provenance.json` (`ledger`)
+records that commit, the ledger's SHA-256, and each claim's status text at that revision. A CI
+test fails if a later ledger change alters any of these statuses. The figure does not assign or
+change any status.
 
 ## Caption
 

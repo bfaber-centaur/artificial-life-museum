@@ -44,32 +44,38 @@
     "INDEPENDENTLY_CHECKED": {
       "color": "#0072B2",
       "hatch": null,
-      "badge": "independently checked"
+      "badge": "independently checked",
+      "short": "indep. checked"
     },
     "REPRODUCED": {
       "color": "#56B4E9",
       "hatch": null,
-      "badge": "reproduced"
+      "badge": "reproduced",
+      "short": "reproduced"
     },
     "OBSERVED": {
       "color": "#6b6b6b",
       "hatch": null,
-      "badge": "observed"
+      "badge": "observed",
+      "short": "observed"
     },
     "CONJECTURED": {
       "color": "#6b6b6b",
       "hatch": "..",
-      "badge": "conjectured"
+      "badge": "conjectured",
+      "short": "conjectured"
     },
     "NUMERICALLY_FRAGILE": {
       "color": "#E69F00",
       "hatch": "////",
-      "badge": "numerically fragile"
+      "badge": "numerically fragile",
+      "short": "num. fragile"
     },
     "REFUTED": {
       "color": "#222222",
       "hatch": "xx",
-      "badge": "refuted"
+      "badge": "refuted",
+      "short": "refuted"
     }
   },
   "edit": {
