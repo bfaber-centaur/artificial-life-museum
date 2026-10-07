@@ -137,6 +137,8 @@ D=research/experiments/H001-lattice-wobble
 .venv/bin/python $D/h001_explore.py 26 1 > $D/x2_R26_fine.csv  # ~25 min on 4 cores
 .venv/bin/python $D/aniso_check.py > $D/aniso_check.txt    # ~2 min (HR-003)
 .venv/bin/python $D/plot_h001.py                       # h001.png
+# HR-007 needs a checkout of Lane 4's branch (PR #5), here at $L4:
+#   PYTHONPATH=$L4/src .venv/bin/python research/experiments/HR007-c023-world-size/hr007.py $L4 refined
 (.venv/bin/python $D/heading_means.py 13 0 27 55 70; .venv/bin/python $D/heading_means.py 26 0 67 | tail -n +2) > $D/heading_means.csv  # HR-006
 .venv/bin/pytest -q tests/test_h001_lattice_wobble.py
 ```
@@ -248,3 +250,72 @@ machines to 4 digits, though the effect is. At R = 26 the same comparison agrees
 heading-invariant" is **REFUTED at R = 13** (anisotropy, and speed at 1%) and **holds at R = 26**.
 Mass and gyradius means are invariant to 0.2% at both resolutions. Any anisotropy-based predictor
 at R = 13 must control for heading.
+
+## HR-007: C023, Lane 4's survive/die edges (PR #5, reproduced by Lane 3 in PR #8)
+
+Targets: the survival definition, the choice of thresholds, and the open archivist issue that 3 of
+40 bracket runs which survive on the 128² torus die on 192². Files:
+`../experiments/HR007-c023-world-size/`, test `tests/test_hr007_centroid_bias.py`.
+
+**Verdict: C023's edges survive. The N = 192 anomaly is not a world-size effect.** It comes from
+where the edit is placed. Lane 4 places I002–I004 at the circular-mean centroid, whose bias
+depends on the torus size. The resulting 0.004–0.007-cell shift in placement is enough to flip
+a run that sits within one bisection step of the edge.
+
+### World size (the 3/40 anomaly)
+
+The three runs are I002 s = 0.0594 at t0 = 1000, I002 s = 0.0781 at t0 = 1004, and I003
+s = 0.3156 at t0 = 1003. All three are survive-side bracket ends.
+
+1. **The creature is the same on both tori.** Aligned on the torus, the N = 128 and N = 192
+   states at t0 differ by at most 9e−6 (`edit_placement.txt`).
+2. **The edit is not the same.** The circular-mean centroid has a bias that falls as 1/N²: about
+   (0.007, 0.012) cells at N = 128, (0.003, 0.005) at 192 and (0.002, 0.003) at 256 at step 1000.
+   A bias-corrected centroid gives the same position to 1e−4 at every N. In both I002 failures,
+   the 0.004/0.007-cell shift brings a fourth pixel into the deletion disc: 4 cells are deleted
+   instead of 3, and ΔM goes from −3.97% to −5.3%. In the I003 failure the pixel mask is the same,
+   but the Gaussian moves 0.007 cells and the added field changes by up to 4.4e−4.
+3. **Swap test** (`swap.csv`). At N = 128, placing the edit at N = 192's centroid estimate
+   reproduces all 3 deaths. With N = 128's own estimate, all 3 survive.
+4. **Unbiased-centroid test** (`refined.csv`). All 40 bracket runs were re-run at N = 128 and
+   N = 192 with a bias-corrected centroid (three linear minimum-image refinements of the circular
+   mean, as in Lane 5's `alm.morphometrics.centroid`). **40 of 40 classes agree between the two
+   world sizes.** The same 3 brackets also move at N = 128: with the unbiased estimator those 3
+   survive-side runs die there too.
+
+So the bracket positions for I002 and I003 depend on the estimator at the bisection resolution
+(1/320 in s). That is a measurement-definition sensitivity, not a property of Orbium or of the
+torus. I told Lane 4 in HR-002 that this bias was negligible; that was wrong.
+
+### Survival definition and thresholds
+
+- **The ±20% bands never bind.** Every non-recovered run in L4-001 (and in Lane 3's 1260-run
+  replication) is DIED. None is TRANSFORMED or EXPLODED, and the ±10% and ±30% variants change
+  no class. Survive-side runs never leave the ±20% band (recovery time 1 time unit).
+- **Death is fast and unambiguous** (`deathtime.txt`). Just past each edge, mass drops below 0.01
+  within 46 steps (I001), 74 steps (I003) and 48 steps (I004) of the edit. That is 4.6–7.4 time
+  units, against a 200-unit horizon. Time-to-death rises only from about 28 to 46 steps as the
+  edge is approached (I001), so there is no long critical slowing-down that a short horizon could
+  miss. A classifier of "mass > 0.01 at step 200" would reproduce every class.
+- **Threshold choice is therefore not what drives C023.** What does matter is the strength
+  coordinate and the placement precision:
+  - I002 should be reported in removed mass, as Lane 3 already recommends: at R = 13, 3 central
+    cells (3.9–4.0%) survive and 4 cells (5.2–5.4%) die in every phase.
+  - The I002/I003 brackets should carry a placement uncertainty of at least one bisection step
+    (±0.003 in s). Bisecting further, as Lane 3 does to 1/1280, resolves the estimator rather
+    than the organism.
+- **A trivial "fraction of mass removed" baseline does not explain the edges.** Uniform
+  attenuation survives a 10.0% loss (I001), but central deletion dies at 5.3% (I002) and
+  port-side removal at about 8.5% (I004). Adding about 28% in front (I003) also kills. Where the
+  mass is removed matters, which makes C023 more interesting, not less.
+
+### Recommendations
+
+1. Lane 4: place edits at a bias-corrected centroid. `alm.morphometrics.centroid` is on main.
+   Then re-run the I002/I003 bisections, or keep the estimator and state the ±1-step placement
+   uncertainty. Either way the N = 192 check then passes 40/40.
+2. Ledger: C023 can be stated as robust to world size (40/40 with an N-independent estimator)
+   and to the band choice. It stays NUMERICALLY_FRAGILE in T for I003/I004 (Lane 3: +11–13% at
+   T = 40).
+3. Still open from HR-002: the phase replicates are consecutive steps, so they sample only a thin
+   line through the 2-D sub-pixel phase space.

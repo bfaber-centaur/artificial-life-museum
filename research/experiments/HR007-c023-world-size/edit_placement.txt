@@ -1,0 +1,6 @@
+I002 s=0.0594 t0=1000: capt=1.000000 max|dA|=8.8e-06 centroid128=(40.4287,3.5201) centroid192-off=(40.4248,3.5133) heading diff=-0.0011deg edited cells 128/192=3/4 mask differs at 1 cells, max|dB|=1.00e+00
+I002 s=0.0781 t0=1004: capt=1.000000 max|dA|=9.3e-06 centroid128=(41.3965,5.8178) centroid192-off=(41.3926,5.8112) heading diff=-0.0005deg edited cells 128/192=3/4 mask differs at 1 cells, max|dB|=9.85e-01
+I003 s=0.3156 t0=1003: capt=1.000000 max|dA|=9.3e-06 centroid128=(41.1598,5.2537) centroid192-off=(41.1559,5.2472) heading diff=-0.0011deg edited cells 128/192=16379/16379 mask differs at 0 cells, max|dB|=4.44e-04
+I002 s=0.0844 t0=1001: capt=1.000000 max|dA|=7.8e-06 centroid128=(40.6818,4.1002) centroid192-off=(40.6779,4.0937) heading diff=-0.0010deg edited cells 128/192=3/3 mask differs at 0 cells, max|dB|=7.83e-06
+I003 s=0.3063 t0=1000: capt=1.000000 max|dA|=8.8e-06 centroid128=(40.4287,3.5201) centroid192-off=(40.4248,3.5133) heading diff=-0.0011deg edited cells 128/192=16377/16377 mask differs at 0 cells, max|dB|=4.44e-04
+I004 s=0.0813 t0=1000: capt=1.000000 max|dA|=8.8e-06 centroid128=(40.4287,3.5201) centroid192-off=(40.4248,3.5133) heading diff=-0.0011deg edited cells 128/192=23/23 mask differs at 0 cells, max|dB|=8.81e-06
