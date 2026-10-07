@@ -77,3 +77,11 @@ def test_classify_bands():
     assert disturb.classify(**{**ok, "final_mass": 1.0}) == "EXPLODED"
     assert disturb.classify(**{**ok, "window_speed": 0.0}) == "TRANSFORMED"
     assert disturb.classify(**{**ok, "window_speed": 0.9 * b["speed"]}, band=0.05) == "TRANSFORMED"
+
+
+def test_local_centroid_is_translation_exact_across_sizes():
+    a = blob(n=64, cx=20.3, cy=40.7, r=9.0)
+    b = blob(n=96, cx=52.3, cy=12.7, r=9.0)
+    ca, cb = disturb.local_centroid(a), disturb.local_centroid(b)
+    assert cb[0] - ca[0] == pytest.approx(32.0, abs=1e-9)
+    assert (cb[1] - ca[1]) % 96 == pytest.approx(68.0, abs=1e-9)

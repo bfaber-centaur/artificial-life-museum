@@ -167,3 +167,14 @@ called discretisation-sensitive.
 Run IDs use **6** strength decimals (`s0.103125`), because bisection midpoints have up to 6 decimals
 and a 4-decimal ID did not reproduce them exactly. Amendment A1 runs carry a `-T20` or `-R26`
 suffix. No definition or threshold changes.
+
+### A3 (2026-10-07, after the N = 192 bracket re-runs)
+
+**Optional size-independent centroid for intervention placement.** The protocol's circular-mean
+centroid has an N-dependent bias (0.004–0.007 cells for S001 between N = 128 and N = 192; found by
+Lane 4 and independently by Lane 7, HR-007). For the 0.8-cell critical disc of I002 that changes
+which pixels are deleted. `disturb.local_centroid` refines the circular mean with one linear
+mean of the wrapped offsets, which is exact under translation. Runs that use it carry a `-cL`
+suffix. The original N = 128 results stay the primary record, and the brackets are re-checked
+with `-cL` at N = 128 and N = 192. Deviation from the original protocol: the creature frame
+(not the classifier) changes for `-cL` runs.

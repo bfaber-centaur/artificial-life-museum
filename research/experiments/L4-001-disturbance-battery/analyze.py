@@ -46,6 +46,62 @@ def grid_table(rows, iv, key="class"):
     return "\n".join(out)
 
 
+def dmass_at(rows, iv, t0, s):
+    for r in rows:
+        if r["intervention"] == iv and int(r["t0"]) == int(t0) and abs(float(r["strength"]) - s) < 1e-6:
+            return float(r["achieved_dmass_frac"])
+    return float("nan")
+
+
+def transition_table():
+    """Cross-condition transition table (also written to results/transitions.csv)."""
+    conds = [("N128 ref (5 phases)", "", "bisect"), ("N192 ref (5 phases)", "", "bisect-N192"),
+             ("T20 ref (t0=100 tu)", "T20/", "bisect"), ("R26 ref, N256 (t0=100 tu)", "R26/", "bisect")]
+    out = ["## Transition summary across conditions", "",
+           "s* = bracket midpoint (range over phase replicates). ΔM/M₀ = achieved mass change at "
+           "the last surviving / first dying strength (range over phases).", "",
+           "| Intervention | Condition | s* | ΔM/M₀ survive | ΔM/M₀ die |", "| --- | --- | --- | --- | --- |"]
+    csv_rows = []
+    for iv in ("I001", "I002", "I003", "I004"):
+        for label, sub, stem in conds:
+            br = [b for b in load(sub + stem + "-brackets.csv") if b["intervention"] == iv]
+            if not br:
+                continue
+            runs = load(sub + stem + ".csv") + load(sub + "coarse.csv")
+            ss = [float(b["s_star"]) for b in br]
+            ok = [dmass_at(runs, iv, b["t0"], float(b["s_ok"])) for b in br]
+            fa = [dmass_at(runs, iv, b["t0"], float(b["s_fail"])) for b in br]
+            rng = lambda v: f"{min(v):+.3f}" if max(v) - min(v) < 5e-4 else f"{min(v):+.3f} to {max(v):+.3f}"
+            srng = f"{min(ss):.4f}" if max(ss) == min(ss) else f"{min(ss):.4f} to {max(ss):.4f}"
+            out.append(f"| {iv} | {label} | {srng} | {rng(ok)} | {rng(fa)} |")
+            csv_rows.append([iv, label, min(ss), max(ss), min(ok), max(ok), min(fa), max(fa)])
+    with open(os.path.join(RES, "transitions.csv"), "w") as f:
+        f.write("intervention,condition,s_star_min,s_star_max,dmass_survive_min,dmass_survive_max,"
+                "dmass_die_min,dmass_die_max\n")
+        for r in csv_rows:
+            f.write(",".join([r[0], r[1]] + [f"{x:.6f}" for x in r[2:]]) + "\n")
+    agree = []
+    for name in ("check-alm-N128", "check-ref-N192", "check-ref-N128-H5000", "check-ref-N128-cL",
+                 "check-ref-N192-cL"):
+        rs = load(name + ".csv")
+        if not rs:
+            continue
+        exp = {"s_ok": "RECOVERED", "s_fail": "DIED"}
+        brs = load("bisect-brackets.csv")
+        n = bad = 0
+        flips = []
+        for r in rs:
+            b = next(b for b in brs if b["intervention"] == r["intervention"] and b["t0"] == r["t0"])
+            k = "s_ok" if abs(float(b["s_ok"]) - float(r["strength"])) < 1e-9 else "s_fail"
+            n += 1
+            if r["class"] != exp[k]:
+                bad += 1
+                flips.append(f"{r['intervention']} t0={r['t0']} {k}={float(r['strength']):.6f} → {r['class']}")
+        agree.append(f"- `{name}`: {n - bad}/{n} bracket ends match the N128 ref classification"
+                     + (" (" + "; ".join(flips) + ")" if flips else ""))
+    return out + [""] + ["Bracket-end re-runs:", ""] + agree + [""]
+
+
 def main():
     coarse = load("coarse.csv")
     brackets = load("bisect-brackets.csv")
@@ -68,6 +124,7 @@ def main():
             ss = [float(r["s_star"]) for r in b]
             lines.append(f"\nPhase spread of s*: {min(ss):.4f} to {max(ss):.4f} (range {max(ss) - min(ss):.4f})")
         lines.append("")
+    lines += transition_table()
     with open(os.path.join(RES, "summary.md"), "w") as f:
         f.write("\n".join(lines) + "\n")
 

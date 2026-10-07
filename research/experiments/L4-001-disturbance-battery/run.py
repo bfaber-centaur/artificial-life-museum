@@ -46,12 +46,15 @@ COND = "base"
 ZOOM = 1
 SAMPLE = 10  # steps per trace sample (= 1 time unit)
 BASELINE = dict(disturb.BASELINE)
+CENTROID = "circular"  # amendment A3: "local" = disturb.local_centroid for the frame
 
 
-def set_cond(name, baseline=None):
+def set_cond(name, baseline=None, centroid=None):
     """Switch R, T, zoom and all step counts to condition `name` (times kept in time units)."""
-    global COND, R, T, ZOOM, PHASES, HORIZON, WINDOW, SAMPLE, BASELINE
+    global COND, R, T, ZOOM, PHASES, HORIZON, WINDOW, SAMPLE, BASELINE, CENTROID
     COND = name
+    if centroid is not None:
+        CENTROID = centroid
     R, T, ZOOM = CONDS[name]
     SAMPLE = T
     if name != "base":
@@ -129,10 +132,15 @@ def warm(engine_name, size, t0):
     return A, prev
 
 
+def get_frame(A, prev):
+    est = disturb.local_centroid if CENTROID == "local" else disturb.periodic_centroid
+    return disturb.frame_from(A, prev, centroid=est)
+
+
 # --- one run -------------------------------------------------------------------
 
 def run_id(iv, s, t0, size, eng):
-    tag = "" if COND == "base" else f"-{COND}"
+    tag = ("" if COND == "base" else f"-{COND}") + ("-cL" if CENTROID == "local" else "")
     return f"L4-001-{iv}-s{s:.6f}-t{t0}-N{size}-{eng}{tag}"
 
 
@@ -148,7 +156,7 @@ def run(iv, s, t0, size=128, eng="ref", horizon=None, save=None, keep_final=Fals
     horizon = HORIZON if horizon is None else horizon
     step = engine(eng, size, R, T)
     A, prev = warm(eng, size, t0)
-    frame = disturb.frame_from(A, prev)
+    frame = get_frame(A, prev)
     before = A
     M0 = A.sum()
     A = disturb.INTERVENTIONS[iv](A, frame, s, R)
@@ -271,7 +279,7 @@ def calibrate(out, size, eng):
 
 
 def pool(workers):
-    return Pool(workers, initializer=set_cond, initargs=(COND, BASELINE))
+    return Pool(workers, initializer=set_cond, initargs=(COND, BASELINE, CENTROID))
 
 
 def sweep(ivs, out, size, eng, workers):
@@ -295,7 +303,7 @@ def _bisect_job(args):
     dist = None
     if iv == "I002":
         A, prev = warm(eng, size, t0)
-        f = disturb.frame_from(A, prev)
+        f = get_frame(A, prev)
         dx, dy = disturb.offsets(A.shape, f.cx, f.cy)
         dist = np.sqrt(dx ** 2 + dy ** 2) / R
     while hi - lo > BISECT_WIDTH:
@@ -375,6 +383,7 @@ def main():
         p.add_argument("--engine", default="ref", choices=["ref", "alm"])
         p.add_argument("--workers", type=int, default=os.cpu_count())
         p.add_argument("--cond", default="base", choices=CONDS)
+        p.add_argument("--centroid", default="circular", choices=["circular", "local"])
     sw = sub.choices["sweep"]
     sw.add_argument("--ivs", default="I001,I002,I003,I004")
     sw.add_argument("--out", default=os.path.join(HERE, "results", "coarse.csv"))
@@ -387,7 +396,7 @@ def main():
     ck.add_argument("--phases", default=None)
     ck.add_argument("--out", required=True)
     a = ap.parse_args()
-    set_cond(a.cond)
+    set_cond(a.cond, centroid=a.centroid)
     if a.cmd == "one":
         r_ = run(a.iv, a.s, a.t0, a.size, a.engine, a.horizon, a.save)
         for k in FIELDS:

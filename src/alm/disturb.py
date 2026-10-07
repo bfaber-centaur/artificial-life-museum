@@ -38,6 +38,21 @@ def periodic_centroid(A):
     return cx, cy
 
 
+def local_centroid(A):
+    """Size-independent periodic centroid: linear mean of offsets about the circular mean.
+
+    The circular mean is biased by an amount that depends on the world size N (about
+    0.004-0.007 cells for S001 between N = 128 and 192); one linear refinement about it
+    removes that (protocol amendment A3)."""
+    cx0, cy0 = periodic_centroid(A)
+    m = A.sum()
+    if m <= 0:
+        return cx0, cy0
+    dx, dy = offsets(A.shape, cx0, cy0)
+    ny, nx = A.shape
+    return (cx0 + (dx * A).sum() / m) % nx, (cy0 + (dy * A).sum() / m) % ny
+
+
 def wrap(d, n):
     """Wrap a coordinate difference into [-n/2, n/2)."""
     return (d + n / 2) % n - n / 2
@@ -60,10 +75,10 @@ def gyradius(A, cx, cy):
     return float(np.sqrt(((dx ** 2 + dy ** 2) * A).sum() / m))
 
 
-def frame_from(A, prev_centroid):
+def frame_from(A, prev_centroid, centroid=periodic_centroid):
     """Frame of state A, heading from prev_centroid (cx, cy) to A's centroid."""
     ny, nx = A.shape
-    cx, cy = periodic_centroid(A)
+    cx, cy = centroid(A)
     vx = wrap(cx - prev_centroid[0], nx)
     vy = wrap(cy - prev_centroid[1], ny)
     n = np.hypot(vx, vy)

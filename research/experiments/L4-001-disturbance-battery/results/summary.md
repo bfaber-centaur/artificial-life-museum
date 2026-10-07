@@ -172,3 +172,34 @@ Bisected transitions:
 
 Phase spread of s*: 0.0797 to 0.0891 (range 0.0094)
 
+## Transition summary across conditions
+
+s* = bracket midpoint (range over phase replicates). ΔM/M₀ = achieved mass change at the last surviving / first dying strength (range over phases).
+
+| Intervention | Condition | s* | ΔM/M₀ survive | ΔM/M₀ die |
+| --- | --- | --- | --- | --- |
+| I001 | N128 ref (5 phases) | 0.1016 | -0.100 | -0.103 |
+| I001 | N192 ref (5 phases) | 0.1016 | -0.100 | -0.103 |
+| I001 | T20 ref (t0=100 tu) | 0.1047 | -0.103 | -0.106 |
+| I001 | R26 ref, N256 (t0=100 tu) | 0.0984 | -0.097 | -0.100 |
+| I002 | N128 ref (5 phases) | 0.0609 to 0.0859 | -0.040 to -0.039 | -0.054 to -0.052 |
+| I002 | N192 ref (5 phases) | 0.0578 to 0.0859 | -0.040 to -0.027 | -0.054 to -0.052 |
+| I002 | T20 ref (t0=100 tu) | 0.0828 | -0.039 | -0.052 |
+| I002 | R26 ref, N256 (t0=100 tu) | 0.0828 | -0.043 | -0.053 |
+| I003 | N128 ref (5 phases) | 0.3078 to 0.3172 | +0.275 to +0.285 | +0.278 to +0.287 |
+| I003 | N192 ref (5 phases) | 0.3078 to 0.3172 | +0.275 to +0.285 | +0.278 to +0.287 |
+| I003 | T20 ref (t0=100 tu) | 0.3422 | +0.309 | +0.312 |
+| I003 | R26 ref, N256 (t0=100 tu) | 0.3078 | +0.276 | +0.279 |
+| I004 | N128 ref (5 phases) | 0.0797 to 0.0891 | -0.088 to -0.078 | -0.091 to -0.083 |
+| I004 | N192 ref (5 phases) | 0.0797 to 0.0891 | -0.088 to -0.078 | -0.091 to -0.083 |
+| I004 | T20 ref (t0=100 tu) | 0.0922 | -0.093 | -0.094 |
+| I004 | R26 ref, N256 (t0=100 tu) | 0.0828 | -0.082 | -0.085 |
+
+Bracket-end re-runs:
+
+- `check-alm-N128`: 40/40 bracket ends match the N128 ref classification
+- `check-ref-N192`: 37/40 bracket ends match the N128 ref classification (I002 t0=1000 s_ok=0.059375 → DIED; I002 t0=1004 s_ok=0.078125 → DIED; I003 t0=1003 s_ok=0.315625 → DIED)
+- `check-ref-N128-H5000`: 8/8 bracket ends match the N128 ref classification
+- `check-ref-N128-cL`: 37/40 bracket ends match the N128 ref classification (I002 t0=1000 s_ok=0.059375 → DIED; I002 t0=1004 s_ok=0.078125 → DIED; I003 t0=1003 s_ok=0.315625 → DIED)
+- `check-ref-N192-cL`: 37/40 bracket ends match the N128 ref classification (I002 t0=1000 s_ok=0.059375 → DIED; I002 t0=1004 s_ok=0.078125 → DIED; I003 t0=1003 s_ok=0.315625 → DIED)
+

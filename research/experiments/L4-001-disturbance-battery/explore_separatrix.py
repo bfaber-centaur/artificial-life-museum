@@ -4,6 +4,8 @@ and record how long the creature survives just above the threshold.
 
 A saddle-type threshold predicts a transient that lengthens like log(1 / (s - s*)).
 Output: results/separatrix-I001-t1000.csv (s, died, death_step, min_mass_before_death).
+With --scan: a linear scan just below s*, results/separatrix-scan-I001-t1000-<engine>.csv.
+Engine from L4_ENGINE (ref by default; alm = Lane 2's src/alm simulator).
 """
 import os
 import sys
@@ -15,7 +17,7 @@ sys.path.insert(0, HERE)
 import run  # noqa: E402
 from alm import disturb  # noqa: E402
 
-IV, T0, H = sys.argv[1] if len(sys.argv) > 1 else "I001", 1000, 1500
+IV, T0, H = "I001", 1000, 1500
 ENGINE = os.environ.get("L4_ENGINE", "ref")  # "alm" needs Lane 2's simulator (see run.py)
 
 
@@ -56,5 +58,19 @@ def main():
             f.write("%.13f,%d,%s,%.6f\n" % r)
 
 
+def scan(s_star=0.10109887614125, lo=-4e-7, n=41):
+    """Linear scan of s* + d, d in [lo, 0], to map survival islands below the threshold."""
+    out = os.path.join(HERE, "results", f"separatrix-scan-{IV}-t{T0}-{ENGINE}.csv")
+    with open(out, "w") as f:
+        f.write("strength,offset,died,death_step\n")
+        for d in np.linspace(lo, 0, n):
+            died, k, _ = trial(s_star + d)
+            f.write(f"{s_star + d:.15f},{d:+.3e},{int(died)},{k if died else ''}\n")
+            print(f"{d:+.2e} {'D' if died else 'R'}", flush=True)
+
+
 if __name__ == "__main__":
-    main()
+    if "--scan" in sys.argv:
+        scan()
+    else:
+        main()
