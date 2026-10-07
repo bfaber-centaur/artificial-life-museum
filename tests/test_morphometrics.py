@@ -132,6 +132,15 @@ def test_rotational_harmonics_detect_k_fold_symmetry():
     assert max(h[1], h[2], h[4], h[5]) < 2e-2
 
 
+@pytest.mark.parametrize("center", [(64, 64), (64.5, 64.5), (64.3, 64.7)])
+def test_isotropic_blob_reports_no_symmetry_order(center):
+    # Lane 7 HR-003: unweighted harmonics reported 8-, 4- or 6-fold symmetry here.
+    h = f.rotational_harmonics(gaussian((128, 128), center, 6.0))
+    assert h[1] == pytest.approx(0, abs=1e-9)   # about the centroid, by construction
+    assert h[2:].max() < 0.01
+    assert f.symmetry_order(h) == 0
+
+
 def test_features_are_translation_invariant_on_s001():
     A = s001_state()
     B = np.roll(A, (70, -50), axis=(0, 1))
@@ -204,3 +213,26 @@ def test_recovery_time_cases():
     # recovered, but not long enough to satisfy hold
     assert f.recovery_time(dip, 1.0, 0.05, start=5, hold=6) == math.inf
     assert f.recovery_time(dip, 1.0, 0.05, start=5, hold=5) == 3
+
+
+# --- runner integration -----------------------------------------------------
+
+
+def test_morpho_feature_set_in_runner_trace():
+    from alm import run
+
+    res = run.run(run.RunConfig(steps=20, every=10, features=("basic", "morpho")), out_root=None)
+    row = res.rows[0]
+    assert row["morpho_gyradius"] == pytest.approx(0.455188, abs=2e-6)
+    assert row["morpho_symmetry_order"] == 2
+    assert "mass" in row and "morpho_mass" not in row
+    assert f.displacement((row["cy_cells"], row["cx_cells"]),
+                          (row["morpho_cy"], row["morpho_cx"]), (128, 128)) == pytest.approx((0, 0), abs=0.03)
+
+
+def test_harmonics_of_a_single_cell_are_defined():
+    A = np.zeros((16, 16))
+    A[3, 4] = 0.2
+    h = f.rotational_harmonics(A, kmax=4)
+    assert h.tolist() == [1, 0, 0, 0, 0]
+    assert f.symmetry_order(h) == 0

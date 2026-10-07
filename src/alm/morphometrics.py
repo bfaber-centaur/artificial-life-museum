@@ -195,35 +195,54 @@ def anisotropy(A: np.ndarray, center: Sequence[float] | None = None) -> tuple[fl
 def rotational_harmonics(
     A: np.ndarray, center: Sequence[float] | None = None, kmax: int = 8
 ) -> np.ndarray:
-    """Angular Fourier amplitudes of the mass distribution about ``center``.
+    """Radius-weighted angular Fourier amplitudes of the mass distribution about ``center``.
 
-    ``a[k] = |sum(A * exp(i k theta))| / sum(A)`` for ``k = 0..kmax`` where
-    ``theta`` is each cell's polar angle about the centroid (the centre cell
-    itself carries no angle and is excluded from the numerator). ``a[0]`` is 1
-    minus the centre cell's share. Small ``a[k]`` for every ``k >= 1`` means
-    near rotational symmetry; a body with exact k-fold symmetry has ``a[j] = 0``
-    for every j that is not a multiple of k. Orientation-free, so it does not
-    track heading.
+    ``a[k] = |sum(A r exp(i k theta))| / sum(A r)`` for ``k = 0..kmax``, where
+    ``r, theta`` are each cell's polar coordinates about the centroid. ``a[0]``
+    is 1, and ``a[1]`` is 0 about the centroid by construction. Small ``a[k]``
+    for every ``k >= 2`` means near rotational symmetry. A body with exact
+    k-fold symmetry has ``a[j] = 0`` for every j that is not a multiple of k.
+    The values are orientation-free, so they do not track heading.
+
+    The ``r`` weight suppresses the coarse angular sampling of the few cells
+    nearest the centre. Without it, a sampled isotropic Gaussian picks up
+    lattice harmonics of up to 0.02-0.08 (Lane 7 HR-003). With it, an
+    isotropic Gaussian of sd >= 3 cells stays below 0.03, and a hard-edged disk
+    of radius 8 stays below 0.04. See :data:`SYMMETRY_FLOOR`.
     """
     A = np.asarray(A, dtype=float)
     if center is None:
         center = centroid(A)
-    total = A.sum()
-    if not total > 0:
+    if not A.sum() > 0:
         raise ValueError("harmonics of an empty state are undefined")
     dy, dx = offsets(A.shape, center)
-    r = np.hypot(dx, dy)
+    w = A * np.hypot(dx, dy)
     theta = np.arctan2(dy, dx)
-    w = np.where(r > 1e-9, A, 0.0)
     ks = np.arange(kmax + 1)
+    if not w.sum() > 0:   # all mass on the centroid cell: no angular structure
+        return np.eye(1, kmax + 1).ravel()
     z = np.exp(1j * ks[:, None] * theta.ravel()[None, :]) @ w.ravel()
-    return np.abs(z) / total
+    return np.abs(z) / w.sum()
 
 
-def symmetry_order(harmonics: np.ndarray, kmin: int = 1) -> int:
-    """The ``k >= kmin`` with the largest rotational harmonic: the dominant angular mode."""
-    h = np.asarray(harmonics)
-    return int(kmin + np.argmax(h[kmin:]))
+# Largest radius-weighted harmonic (k = 2..8) seen on lattice-sampled
+# rotationally symmetric controls at random sub-pixel centres: Gaussians with
+# sd 3-8 cells (< 0.03) and hard disks of radius 8 (< 0.04). A harmonic below
+# this floor is not evidence of angular structure.
+SYMMETRY_FLOOR = 0.05
+
+
+def symmetry_order(harmonics: np.ndarray, kmin: int = 2, floor: float = SYMMETRY_FLOOR) -> int:
+    """The ``k >= kmin`` with the largest rotational harmonic, which is the dominant angular mode.
+
+    Returns 0 ("no detectable angular structure") when no harmonic reaches
+    ``floor``. Without the floor, the lattice's own 4- and 8-fold harmonics
+    would be reported for an isotropic body.
+    """
+    h = np.asarray(harmonics)[kmin:]
+    if not h.size or h.max() < floor:
+        return 0
+    return int(kmin + np.argmax(h))
 
 
 def wrap_extent(A: np.ndarray, center: Sequence[float] | None = None, threshold: float = 1e-3) -> float:
@@ -319,7 +338,7 @@ def snapshot(A: np.ndarray, R: float = 1.0, threshold: float = 0.1, kmax: int = 
 
     Keys: ``mass``, ``cy``, ``cx`` (cells), ``gyradius`` (R), ``anisotropy``,
     ``major_axis_deg``, ``area`` (R**2), ``symmetry_order``, ``harmonic_k`` for
-    k = 1..kmax, and ``wrap_extent``. An empty state returns mass 0 and NaN for
+    k = 2..kmax, and ``wrap_extent``. An empty state returns mass 0 and NaN for
     the rest.
     """
     A = np.asarray(A, dtype=float)
@@ -328,7 +347,7 @@ def snapshot(A: np.ndarray, R: float = 1.0, threshold: float = 0.1, kmax: int = 
         nan = float("nan")
         out.update(cy=nan, cx=nan, gyradius=nan, anisotropy=nan, major_axis_deg=nan,
                    symmetry_order=nan, wrap_extent=nan)
-        out.update({f"harmonic_{k}": nan for k in range(1, kmax + 1)})
+        out.update({f"harmonic_{k}": nan for k in range(2, kmax + 1)})
         return out
     c = centroid(A)
     e, ang = anisotropy(A, c)
@@ -342,7 +361,7 @@ def snapshot(A: np.ndarray, R: float = 1.0, threshold: float = 0.1, kmax: int = 
         symmetry_order=symmetry_order(h),
         wrap_extent=wrap_extent(A, c),
     )
-    out.update({f"harmonic_{k}": float(h[k]) for k in range(1, kmax + 1)})
+    out.update({f"harmonic_{k}": float(h[k]) for k in range(2, kmax + 1)})
     return out
 
 

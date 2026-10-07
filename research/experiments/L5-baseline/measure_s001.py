@@ -5,10 +5,10 @@ Run from repo root after ./scripts/bootstrap.sh:
 
     .venv/bin/python research/experiments/L5-baseline/measure_s001.py
 
-Interim stepping path: Lane 1's reference transcription
-(research/specimens/S001-orbium/reconstruct.py, poly/poly, R=13, T=10, mu=0.15,
-sigma=0.015, Euler + clip, float64, 128x128 torus). Re-run against Lane 2's
-src/alm runner when it lands; numbers should agree to float rounding.
+Stepping path: Lane 2's simulator (alm.Lenia with the S001 rule from
+alm.specimens: poly/poly, R=13, T=10, mu=0.15, sigma=0.015, Euler + clip,
+float64, 128x128 torus). The first version of this experiment stepped Lane 1's
+reference transcription instead; the two agree (see README).
 
 For start rotations 0, 23 and 45 degrees (bilinear, as in Lane 1's
 lattice_heading.py) it steps 4000 steps, records alm.morphometrics.snapshot every
@@ -24,20 +24,19 @@ import scipy.ndimage
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, "..", "..", ".."))
-sys.path.insert(0, os.path.join(ROOT, "research", "specimens", "S001-orbium"))
 sys.path.insert(0, os.path.join(ROOT, "src"))
-import reconstruct as rc  # noqa: E402
+from alm import Lenia, specimens  # noqa: E402
 from alm import morphometrics as F  # noqa: E402
 
-N, R, T, MU, SIGMA = 128, 13, 10, 0.15, 0.015
+SPEC = specimens.load("S001")
+N, R, T = 128, SPEC.rule.R, SPEC.rule.T
 STEPS, BURN = 4000, 1000
 ROTATIONS = (0, 23, 45)
-FEATURES = ["mass", "gyradius", "anisotropy", "area", "harmonic_1", "harmonic_2", "harmonic_3"]
+FEATURES = ["mass", "gyradius", "anisotropy", "area", "harmonic_2", "harmonic_3"]
 
 
 def start_state(rot):
-    cells = np.loadtxt(os.path.join(ROOT, "research/specimens/S001-orbium/initial-cells-u8.csv"),
-                       delimiter=",") / 255.0
+    cells = SPEC.cells / 255.0
     z = cells if rot == 0 else np.clip(scipy.ndimage.rotate(cells, rot, order=1, reshape=True), 0, 1)
     A = np.zeros((N, N))
     h, w = z.shape
@@ -46,12 +45,12 @@ def start_state(rot):
 
 
 def run(rot):
-    kfft, _ = rc.make_kernel_fft(N, R, [1.0], "poly")
-    A = start_state(rot)
+    sim = Lenia(SPEC.rule, start_state(rot))
     rows = []
     for t in range(STEPS + 1):
         if t:
-            A, _ = rc.step(A, kfft, MU, SIGMA, T, "poly")
+            sim.step()
+        A = sim.A
         s = F.snapshot(A, R=R)
         s["step"] = t
         rows.append(s)

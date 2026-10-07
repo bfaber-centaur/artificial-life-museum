@@ -77,6 +77,20 @@ def basic(A: np.ndarray, sim) -> dict:
     }
 
 
+@register("morpho")
+def morpho(A: np.ndarray, sim) -> dict:
+    """Lane 5 morphometrics (``alm.morphometrics.snapshot``) as ``morpho_*`` columns.
+
+    Mass and area duplicate ``basic`` and are left out. ``morpho_cy``/``morpho_cx``
+    and ``morpho_gyradius`` use the refined (bias-free) periodic centroid, so they
+    differ from ``cy_cells``/``cx_cells``/``gyradius`` by ~0.01 cell.
+    """
+    from . import morphometrics
+
+    snap = morphometrics.snapshot(A, R=sim.rule.R)
+    return {f"morpho_{k}": v for k, v in snap.items() if k not in ("mass", "area")}
+
+
 def compute(names, A, sim) -> dict:
     out = {}
     for n in names:
