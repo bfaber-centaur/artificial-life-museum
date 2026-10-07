@@ -99,6 +99,9 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
 | Lane 5 L5-002 README proposed claims 1 / 2 / 3, plus the exploratory 6 tu rule (PR #9 @ `bd86e76`; claims 1–2 reworded @ `f6239f6`) | C031 / C032 / C034, C033 |
 | Lane 7 hostile-review HR-008 (L5-002 review, edge-state λ) | C029, C031, C032 |
 | Lane 5 L5-003 README proposed claims 1 / 2 / 3 (PR #9 @ `f6239f6`) | C035 / C036 / C037 |
+| Lane 6 L6-field README proposed claims L6-a / L6-b / L6-c / L6-d / L6-e (PR #11 @ `83c8bff`) | C038, C039 / C040 / C041 / C043 / C045 |
+| Lane 6 S103 dossier (fixed point), L6-field negative results | C042, C044 |
+| Lane 6 L6-005 control runs at t0 = 3000/3002 | C023 caveat |
 | Lane 7 hostile-review HR-007 (C023 world size, thresholds) | C023, C026 |
 | Lane 6 | not started |
 
@@ -715,7 +718,13 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
   states. Report I002 as removed mass, not
   radius: at R = 13 three central cells (3.9–4.0% of mass) survive and four (5.2–5.4%) die at
   every phase (Lane 3, HR-007). I003 and I004 shift 11–13% at T = 40 (C027). Phase replicates
-  are consecutive steps and sample only a thin line through the 2-D sub-pixel phase (HR-002, open). Amendment A1 preregisters T = 20 and R = 26 re-runs, not yet reported. Lane 7
+  are consecutive steps and sample only a thin line through the 2-D sub-pixel phase (HR-002, open).
+  Lane 6's control runs (L6-005, `research/experiments/L6-field/switch-T10-R13.csv`, PR #11 @
+  `83c8bff`, own copy of the I001–I004 code and a batched stepper matching `alm` bitwise) apply
+  I001 s = 0.10 at t0 = 3000 and 3002: the creature survives at 3000 but **dies at 3002**
+  (archivist checked the CSV). That phase lies outside Lane 4's five, so the "survives 10.0% at
+  every phase" wording holds only for t0 = 1000–1004; the I001 edge sits within about 0.002 of
+  0.10 and its phase dependence is not fully sampled. Amendment A1 preregisters T = 20 and R = 26 re-runs, not yet reported. Lane 7
   (HR-002) objects that five consecutive t0 sample only a thin slice of the 2-D lattice phase,
   and that post-recovery heading should be recorded (C011). Recovery is judged against
   T = 10 / R = 13 baseline numbers, which are themselves discretisation-dependent (C009, C010).
@@ -1076,3 +1085,195 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
   both sides (R = 26) or an adjoint (left-eigenvector) projection.
 - **History:**
   - 2026-10-07 — OBSERVED — Lane 5.
+
+Claims C038–C045 come from Lane 6 (field exploration, PR #11 @ `83c8bff`, open). **None has been
+reproduced by a second lane yet.** Statuses below reflect Lane 6's own evidence only; clean-process
+bitwise reruns count as REPRODUCED, never as INDEPENDENTLY_CHECKED. Common setup unless stated:
+ALM semantics (poly/poly, β = [1], Euler + hard clip, float64, periodic), 128² at R = 13 (scaled
+with R), stepped by `research/experiments/L6-field/field.py` (batched; built from `alm.lenia.kernel`
+and `alm.lenia.growth`, bitwise equal to `alm.lenia.Lenia` at 300 steps for S001), with clean
+reruns through Lane 2's runner. Motion classes (fixed before the T = 40 and R = 26 reruns): died
+(mass < 0.01), filled (> 25% of cells above 0.1 or mass > 30 × Orbium), GLIDER (net speed > 0.2 R/tu),
+CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tables are recomputed by
+`tables.py`; an earlier aliasing-prone "ROTATOR" class in the raw CSVs is superseded.
+
+### C038 — One rule (S001's, with μ = 0.155, σ = 0.020) supports three phenotypes chosen by history: an Orbium glider, a circler (S102) and a static ring (S103)
+
+- **Status:** REPRODUCED (clean-process reruns); not yet reproduced by a second lane
+- **Owner lane:** Lane 6
+- **Sources:** `research/experiments/L6-field/README.md` proposed claim L6-a; specimen dossiers
+  `research/specimens/S102-circler.md`, `S103-static-ring.md` (PR #11 @ `83c8bff`, open)
+- **Specimen / version:** S001 (Orbium cells), S102 seed (`gyrator-seed-u8.csv`), S103 seed
+  (`static-seed-u8.csv`), rebuilt by `make_seeds.py`; catalog OG2g cells as a check
+- **Simulator / version:** `field.py` @ `83c8bff`; `alm.run` for clean reruns
+- **Parameters:** μ = 0.155, σ = 0.020, R = 13, T = 10, 128² (L6-004 also μ 0.150/0.160 over a σ strip)
+- **Intervention:** none (different starting seeds)
+- **Metric:** motion class after 1000 tu (T10/R13) or 500 tu (T40/R13, T10/R26)
+- **Result:** all three persist ≥ 500 tu at T10/R13. Glider and circler coexist at every numerical
+  setting tested, but the σ band moves: T10/R13 σ 0.0195–0.0205 (depending on μ); T10/R26 σ
+  0.0195–0.0205; T40/R13 σ 0.0185–0.0190. S103 is unchanged at every setting (C042).
+- **Run IDs:** `bistab-T10-R13.csv`, `bistab-T10-R26.csv`, `bistab-T40-R13.csv`, `persist-*.csv`;
+  traces `S102-5bfac8f95f` (T 10, final sha256 `10d65755…`, second process identical),
+  `S102-7b439113e1` (T 40), `S103-1d8c158cdd`, `S103-4982ff6f4d`
+- **Search / parameter bounds:** μ ∈ {0.150, 0.155, 0.160}; σ strip in 0.0005 steps; T ∈ {10, 40}; R ∈ {13, 26}
+- **Reproduction command:** `make_seeds.py`; `bistability.py` (~1 h on 4 cores); `persistence.py --T 10 --R 13`
+- **Known caveats:** the coexistence is robust, but its σ location is NUMERICALLY_FRAGILE (shifts by
+  0.0005–0.0015 with T or R). S102 at its registered rule dies at R = 26 (C039). At T = 40, Orbium at
+  this rule became a different static body (mass 0.3873, not S103's 0.3787), not followed up. All
+  three phenotypes are catalogued species (C043). Lane 6's top suggested follow-up is a second-lane
+  reproduction in `alm_check`.
+- **History:**
+  - 2026-10-07 — REPRODUCED — Lane 6 (clean-process bitwise reruns); awaiting a second lane.
+
+### C039 — The circler S102 at its registered rule (μ 0.155, σ 0.020) does not survive doubling the resolution
+
+- **Status:** NUMERICALLY_FRAGILE
+- **Owner lane:** Lane 6
+- **Sources:** L6-field README L6-004 and L6-006; `research/specimens/S102-circler.md` (PR #11 @ `83c8bff`, open)
+- **Specimen / version:** S102 seed (`gyrator-seed-u8.csv`)
+- **Simulator / version:** `field.py` @ `83c8bff`
+- **Parameters:** μ 0.155, σ 0.020; T10/R13, T40/R13, T10/R26
+- **Intervention:** none
+- **Metric:** motion class
+- **Result:** CIRCLER at T10/R13 (mass 0.523, turning 95°/tu) and T40/R13 (mass 0.497, 109°/tu);
+  **DIED** at T10/R26. At R = 26 the circler lives at σ 0.0205.
+- **Run IDs:** `persist-T10-R13.csv`, `persist-T40-R13.csv`, `persist-T10-R26.csv`, `bistab-T10-R26.csv`
+- **Search / parameter bounds:** three numerical settings
+- **Reproduction command:** `persistence.py --T {10,40} --R {13,26}`
+- **Known caveats:** single lane. The phenotype persists at a nearby σ at R = 26, so this is a shift of
+  its band, not its absence.
+- **History:**
+  - 2026-10-07 — NUMERICALLY_FRAGILE — Lane 6.
+
+### C040 — At the coexistence rule, Lane 4's disturbances never switch a glider into a circler or back (0/316); a port injury switched the circler into the static ring S103 in 2 of 38 runs
+
+- **Status:** OBSERVED; not yet reproduced by a second lane
+- **Owner lane:** Lane 6
+- **Sources:** L6-field README proposed claim L6-b, L6-005 (PR #11 @ `83c8bff`, open)
+- **Specimen / version:** Orbium and S102 seed at the coexistence rule; S001-rule Orbium as control
+- **Simulator / version:** `field.py`; I001–I004 copied from Lane 4 (`claude/night0-disturbance-np4adr`
+  @ `7bd1a42`, `src/alm/disturb.py`) into `disturb_helpers.py`
+- **Parameters:** μ 0.155, σ 0.020, T 10, R 13, 128²; t0 = 3000 and 3002 steps; 500 tu horizon
+- **Intervention:** L4-001 I001–I004 full coarse grids × 2 phases (strengths and classes fixed before these runs)
+- **Metric:** Lane 6 motion class after the horizon
+- **Result:** across the Orbium-at-coex and circler-at-coex cases, no GLIDER ↔ CIRCLER switch. Circler
+  + I004 at s = 0.15 and 0.25, t0 = 3002 → STATIC with mass 0.378698 = S103 (archivist checked
+  `switch-T10-R13.csv` via `tables.py`). Orbium at coex + I003 ≥ 0.45 FILLED the world in 22/40 runs
+  instead of dying. Robustness to I001: ring 20%, glider 10%, circler < 5% in every phase.
+- **Run IDs:** `research/experiments/L6-field/switch-T10-R13.csv`
+- **Search / parameter bounds:** two phases; T10/R13 only
+- **Reproduction command:** `disturb_switch.py` (~1 h); `tables.py bistab-T10-R13.csv switch-T10-R13.csv`
+- **Known caveats:** single T/R and two phases only. The circler → ring switch occurred in one phase only.
+- **History:**
+  - 2026-10-07 — OBSERVED — Lane 6.
+
+### C041 — Under S001's own rule, a bound Orbium pair (S101) survives port injury of 10–50% by shedding to a single Orbium, where a single Orbium dies at 10%
+
+- **Status:** OBSERVED; not yet reproduced by a second lane
+- **Owner lane:** Lane 6
+- **Sources:** L6-field README proposed claim L6-c and L6-002/003; `research/specimens/S101-orbium-pair.md` (PR #11 @ `83c8bff`, open)
+- **Specimen / version:** S101 seed (`pair-seed-u8.csv`), formed from 7 of 175 two-Orbium starts
+  (4 different relative rotations); equals catalog `O4i` Synorbium ignis under the S001 rule
+- **Simulator / version:** `field.py`; clean reruns via `alm.run`
+- **Parameters:** S001 baseline rule (μ 0.15, σ 0.015, R 13, T 10), 128²
+- **Intervention:** L4-001 I004 port injury, s = 0.10–0.50, two phases; other interventions as in the README table
+- **Metric:** Lane 6 motion class and final mass
+- **Result:** pair: 18/18 runs at I004 0.10–0.50 end as one Orbium (mass 0.4358). Single Orbium control:
+  36/36 die at I004 ≥ 0.10 (archivist checked the control rows). The pair glides at gyradius 0.813 R,
+  mass 0.8736, 0.472 R/tu; it persists at T 40 (mass 0.8642, 0.508 R/tu) and R 26 (0.8738, 0.472).
+- **Run IDs:** `S101-3ffd856fba` (T 10, final sha256 `107c9d26…`, second process identical),
+  `S101-046982cbd6` (T 40); `seeds-pairs` outputs; L6-005 pair rows
+- **Search / parameter bounds:** 175 pair starts (5 rotations × 35 offsets); I004 grid × 2 phases
+- **Reproduction command:** `make_seeds.py`; `disturb_switch.py`; `python -m alm.run --specimen S101 …`
+- **Known caveats (Lane 6's own trivial baseline):** I004 cuts along the heading and the partners sit side
+  by side, so the cut mostly removes one partner. The claim is only that the coupling does not drag
+  the uninjured partner down, not that the pair heals. I002 "robustness" is trivial (the disc sits
+  in the gap). Disturbance runs at T10/R13 only. The pair's speed is ~7% lower at T 10 than T 40 (cf. C009).
+- **History:**
+  - 2026-10-07 — OBSERVED — Lane 6.
+
+### C042 — S103 is an exact fixed point of the clipped Lenia map: it is T-independent and returns bitwise to itself after attenuation up to 20%
+
+- **Status:** REPRODUCED (clean-process reruns); not yet reproduced by a second lane
+- **Owner lane:** Lane 6
+- **Sources:** `research/specimens/S103-static-ring.md` (PR #11 @ `83c8bff`, open)
+- **Specimen / version:** S103 seed (`static-seed-u8.csv`; = catalog `C0la` resized from R 15 to 13)
+- **Simulator / version:** `alm.run` (Lane 2 runner) and `field.py`
+- **Parameters:** μ 0.155, σ 0.020, R 13; T 10 and T 40; R 26 (resized seed)
+- **Intervention:** none; L6-005 quick check with I001–I004 at one phase
+- **Metric:** final-state sha256 vs initial; mass
+- **Result:** final sha256 = initial sha256 (`a81efdac…`) at T 10 (10 000 steps) and T 40 (20 000 steps);
+  a second process agrees. Mass 0.3787, gyradius 0.387 R. Mechanism: every full cell has G(U) ≥ +0.028
+  and is held at 1 by the clip; every empty cell has G(U) ≤ −0.125 and is held at 0. After I001 ≤ 0.20 it
+  returns bitwise; it dies at ≥ 0.30. Static with the same mass at R 26.
+- **Run IDs:** `S103-1d8c158cdd` (T 10), `S103-4982ff6f4d` (T 40); `persist-*.csv`; `tests/test_lane6_specimens.py`
+- **Search / parameter bounds:** T ∈ {10, 40}, R ∈ {13, 26}
+- **Reproduction command:** `.venv/bin/python -m alm.run --specimen S103 --steps 10000 --every 10 --burn-in 5000`
+- **Known caveats:** a creature of the hard clip; a Lenia variant without clipping would not have it in
+  this form. The I001–I004 check used one phase.
+- **History:**
+  - 2026-10-07 — REPRODUCED — Lane 6.
+
+### C043 — S101, S102 and S103 are catalogued species carried to nearby rules, not new forms
+
+- **Status:** OBSERVED (any novelty claim for S101–S103 is REFUTED)
+- **Owner lane:** Lane 6
+- **Sources:** L6-field README proposed claim L6-d and "Reference check" (PR #11 @ `83c8bff`, open)
+- **Specimen / version:** S101–S103 seeds; catalog cells `O4i`, `OG2g`, `C0la` (`.refs/Lenia` @ `adfc542`)
+- **Simulator / version:** `field.py`
+- **Parameters:** each candidate's rule
+- **Intervention:** none (catalog cells placed in the candidate's rule)
+- **Metric:** settled mass, gyradius, speed / path speed
+- **Result:** S101 vs `O4i`: mass 0.8736 / 0.8737, gyradius 0.8152 / 0.8154, speed 0.4727 / 0.4723. S102 vs
+  `OG2g`: 0.5223 / 0.5228, 0.5158 / 0.5155, path 0.497 / 0.498. S103 vs `C0la` (resized): 0.378698 /
+  0.378698, both static. No nickname proposed (discovery-protocol criterion 5 fails for all three).
+- **Run IDs:** `persist-*.csv`, `catalog-neighbours.csv`
+- **Search / parameter bounds:** single-shell catalog entries with μ ∈ [0.09, 0.21], σ ∈ [0.006, 0.030]
+- **Reproduction command:** `persistence.py`; `catalog_neighbours.py`
+- **Known caveats:** single lane.
+- **History:**
+  - 2026-10-07 — OBSERVED — Lane 6; novelty REFUTED by its own reference check.
+
+### C044 — Around S001, Orbium's μ × σ neighbourhood is one continuum: no other phenotype arises from Orbium cells, soups or rescaled Orbia except a circler at two rules and the bound pair
+
+- **Status:** OBSERVED; not yet reproduced by a second lane
+- **Owner lane:** Lane 6
+- **Sources:** L6-field README L6-001, L6-002, L6-003 (PR #11 @ `83c8bff`, open)
+- **Specimen / version:** S001 cells; random soups; resized/rescaled S001; two-Orbium starts
+- **Simulator / version:** `field.py` @ `83c8bff`
+- **Parameters:** L6-001: μ 0.100–0.200 (0.005) × σ 0.008–0.028 (0.001), 441 rules, T 10, R 13, 500 tu.
+  L6-002/003: S001 rule.
+- **Intervention:** none (initial-condition search)
+- **Metric:** motion class over the last 100 tu
+- **Result:** 441 rules: 212 died, 165 filled, 64 localized, of which 62 are Orbium (mass 0.322–0.493,
+  speed 0.43–0.59 R/tu, varying smoothly). Two circlers: μ 0.155/σ 0.022 (= `OG2g`, ≥ 2000 tu) and
+  μ 0.135/σ 0.018 (`OG2r`-like, fills the world at ≈ 850 tu, a transient). Soups: 96/96 died. Resize ×
+  rescale: Orbium or death (135 starts). Pairs: 7/175 bound (S101), 14 two separate Orbia, 67 one
+  Orbium, 84 both died, 2 filled, 1 chaotic merged blob alive at 500 tu (not followed up).
+- **Run IDs:** `musigma-T10.csv`, `soup-*.csv`, `seeds-*.csv`
+- **Search / parameter bounds:** as Parameters; one T, one R; 500 tu horizon
+- **Reproduction command:** `sweep_musigma.py`, `sweep_soup.py`, `sweep_seeds.py zoom|pairs`
+- **Known caveats:** a bounded negative: one specimen's cells, one resolution, one timestep, a 500 tu
+  horizon. Lane 5's component count splits Orbium's tail, so it was not used as a phenotype test.
+- **History:**
+  - 2026-10-07 — OBSERVED — Lane 6.
+
+### C045 — Under ALM semantics, four catalog entries (`O2bi`, `O2p`, `OG2r`, `O8?`) do not persist under their own catalog rules
+
+- **Status:** OBSERVED; not yet reproduced by a second lane
+- **Owner lane:** Lane 6
+- **Sources:** L6-field README proposed claim L6-e and "Reference check" (PR #11 @ `83c8bff`, open)
+- **Specimen / version:** catalog cells from `.refs/Lenia/Python/animals.json` @ `adfc542`
+- **Simulator / version:** `field.py` (ALM semantics as in `research/specimens/S001-orbium/reconstruct.py`)
+- **Parameters:** each entry's own catalog rule (R, T, μ, σ, β)
+- **Intervention:** none
+- **Metric:** motion class
+- **Result:** `O2bi` and `O2p` die; `OG2r` and `O8?` fill the world. The other 13 single-shell entries in the box persist.
+- **Run IDs:** `research/experiments/L6-field/catalog-neighbours.csv`
+- **Search / parameter bounds:** 17 single-shell entries with μ ∈ [0.09, 0.21], σ ∈ [0.006, 0.030]
+- **Reproduction command:** `catalog_neighbours.py`
+- **Known caveats:** a disagreement with the upstream catalog, not resolved. The cells may need settings
+  the catalog does not record, or may be transients. Flagged for Lanes 1 and 3; do not cite `OG2r`,
+  `O2bi`, `O2p` or `O8?` as stable until checked.
+- **History:**
+  - 2026-10-07 — OBSERVED — Lane 6.
