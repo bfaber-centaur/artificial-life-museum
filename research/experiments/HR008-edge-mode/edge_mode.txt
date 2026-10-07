@@ -1,0 +1,9 @@
+iv,s_star,bracket,lambda_a_per_tu,lambda_b_per_tu,linger_step,death_scaling
+I001,0.101098876142,1.5e-12,1.549,1.822,97,1e-03:47 1e-04:54 1e-05:63 1e-06:75 1e-07:106 1e-08:111 1e-09:124 1e-10:148 1e-11:160
+I003,0.308763771041,1.5e-12,1.776,1.642,111,1e-03:72 1e-04:89 1e-05:83 1e-06:94 1e-07:132 1e-08:123 1e-09:138 1e-10:170 1e-11:171
+I004,0.081601951489,1.5e-12,n/a,n/a,n/a,pair differs by 0.17 at step 1 (discrete edit); death step 1e-03:48 1e-04:48 1e-05:48 1e-06:48 1e-07:48 1e-08:48 1e-09:48 1e-10:48 1e-11:48
+
+lingering state (aligned): mass sum/R^2, and pairwise Pearson correlation / max|diff|
+  I001: mass 0.4357
+  I003: mass 0.4347
+  I001 vs I003: corr 0.7796, max|diff| 0.662, rel L2 0.647

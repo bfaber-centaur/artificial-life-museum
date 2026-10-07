@@ -319,3 +319,76 @@ torus. I told Lane 4 in HR-002 that this bias was negligible; that was wrong.
    T = 40).
 3. Still open from HR-002: the phase replicates are consecutive steps, so they sample only a thin
    line through the 2-D sub-pixel phase space.
+
+## HR-008: L5-002 survival predictor (PR #9)
+
+Targets: the preregistration commit order, the fold design, and whether the "small unstable mode"
+mechanism (L5-002 proposed claim 2) is supported or only narrative. Files:
+`../experiments/HR008-edge-mode/`.
+
+### Preregistration order: clean
+
+`ca0783b` (08:16:24) adds only `PREREGISTRATION.md`. `b331585` (08:18:03) adds the features and
+amendment A1, which covers empty states and was written before any model was fitted. `bd86e76`
+(08:24:34) adds the models and results. The protocol text was not rewritten afterwards. Two
+caveats, neither disqualifying:
+- the outcome labels and Lane 4's separatrix exploration were public before the
+  preregistration;
+- only 98 s separate the preregistration from 490 measured states, so `measure.py` existed
+  beforehand. Git cannot show whether it was run before the commit.
+
+### Fold design: appropriate for the question, but the negative was largely predictable
+
+- **The negative is robust, not a near miss.** The edge value of every feature moves between
+  disturbances by more than the survive/die gap within a disturbance. For example, the mass ratio
+  at the edit is 0.90, 0.96, 1.28 and 0.92 across the four disturbances. Even F6 (mass trend at
+  0.5 tu), the best-ordered feature, flips direction for I003. No single cut can transfer, so
+  0.70 versus the 0.90 bar is not a close call.
+- **"No early information" overstates it** (`within_auc.csv`). Within each disturbance, early
+  features rank the near-edge outcomes almost perfectly. The direction-free AUC is ≥ 0.96 for
+  F6_k5 and ≥ 0.93 for F1_k0 and F2_k10 in every disturbance. This mostly tracks the strength s,
+  so it is not an early-warning signal either. The accurate wording is **"no transferable cut"**.
+- **The test could hardly have passed.** The near-edge set is bisection runs within 1/256 of s*,
+  and features are measured within 2 tu, before the pairs have separated by 1%. Lane 4's
+  separatrix exploration, public before the preregistration, already showed the collapse
+  starting at ≥ 4.7 tu near the edge. The negative is honest but carries less information than
+  its framing suggests.
+- **The effective sample size is small.** The five phases are consecutive steps, so each fold
+  holds about five independent edges, not 30 independent runs. No uncertainty is reported.
+
+### Mechanism: supported for the continuous edits, inapplicable to the pixel edits
+
+A single unstable edge state predicts that the collapse time diverges as −(1/λ)·ln(s − s*) and
+that two runs straddling s* separate as e^{λt}, with the same λ. I bisected s* to 1.5e−12 at
+t0 = 1000 (`edge_mode.py`, `edge_mode.txt`):
+
+| Disturbance | s* | λ from collapse-time scaling | λ from pair separation | collapse-time span, s − s* = 1e−3 … 1e−11 |
+| --- | --- | --- | --- | --- |
+| I001 attenuation | 0.101098876142 | 1.55 /tu | 1.82 /tu | 47 → 160 steps |
+| I003 frontal addition | 0.308763771041 | 1.78 /tu | 1.64 /tu | 72 → 171 steps |
+| I004 port cut | 0.081601951489 | n/a | n/a | **48 steps at every offset** |
+
+- **I001 and I003: supported.** The two independent λ estimates agree to within about 15% for each
+  disturbance, and they agree across the two disturbances (1.5–1.8 per time unit). My I001 s*
+  matches Lane 4's independent bisection (0.101098876141) to 1e−12. That is quantitative evidence
+  for an unstable edge state with one dominant unstable direction, not just a story.
+- **I004 (and I002): not applicable at R = 13.** The port cut removes whole cells, so the
+  straddling pair differs by 0.17 in L2 at the first step: the bracket spans a one-cell jump.
+  Collapse time is a flat 48 steps for any s − s*, with no logarithmic growth. Including I004 in
+  claim 2 ("< 1% for 20–27 steps") compares two different discrete edits, not an approach to an
+  edge state. The same applies to I002, which Lane 5 already notes.
+- **A common edge state is not established.** The lingering states for I001 and I003 have the
+  same mass as Orbium (0.436 vs 0.434). After the best translation and rotation they correlate
+  0.90 with each other and 0.90–0.91 with unperturbed Orbium (`compare_states.txt`), and I003's
+  is 4% wider. The similar λ is consistent with one shared edge state, but the snapshots do not
+  confirm it.
+- **"Small" is not measured.** Nothing in L5-002 sizes the unstable mode. Lane 4's death islands
+  below s* (at about 1e−7) also show that the one-mode picture fails at fine scales.
+
+### Recommended wording for L5-002 claim 2
+
+"For uniform attenuation and frontal addition, S001's survival edge behaves as an unstable edge
+state with one dominant unstable direction, growth rate λ ≈ 1.5–1.8 per time unit (two
+independent estimates per disturbance). Near the edge, doomed runs track survivors to < 1% for
+about 2 tu. The pixel-quantized edits (I002, I004) cannot test this at R = 13." OBSERVED,
+exploratory, one phase (t0 = 1000), ref engine.
