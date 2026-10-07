@@ -69,7 +69,7 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
 
 | Dispute | Claims | Lanes | State |
 | --- | --- | --- | --- |
-| D1: does S001's heading stay lattice-locked at R = 26? | C012 vs C013 | Lane 3 vs Lane 7 | open; Lane 3 rechecking (2026-10-07) |
+| D1: does S001's heading stay lattice-locked at R = 26? | C012 vs C013 | Lane 3 vs Lane 7 | open on wording, not data. Lane 7 (HR-005) points to repeated plateaus in Lane 3's own `heading-R26.csv`; the archivist confirmed that 14 of Lane 3's 19 R = 26 headings in 0–45° match a Lane 7 heading to ≤ 0.01° (12.5°/15° → 53.28°, 30°/32.5° → 36.72°). Lane 3 has not yet restated its claim; rechecking (2026-10-07). |
 
 ## Lane intake index
 
@@ -87,7 +87,9 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
 | Lane 5 L5-baseline, finding 3 (major axis along heading) | C020 |
 | Lane 7 hostile-review HR-001 (wobble), HR-001b (heading pinning) | C003, C004, C006, C011, C013 |
 | Lane 7 hostile-review HR-003 (Lane 5 tooling, anisotropy bias) | C008, C014, C021 |
-| Lane 4 L4-001 (PR #5, open) | protocol only, no results yet; nothing to ledger |
+| Lane 7 hostile-review HR-005 (Lane 3 numerics) | C003, C006, C009, C013 (D1) |
+| Lane 7 hostile-review HR-006 (heading-dependent means) | C007, C015, C022 |
+| Lane 4 L4-001 results at commit `12d9265` (PR #5, open; no claim proposed yet) | C023 |
 | Lane 6 | not started |
 
 ## Claims
@@ -171,10 +173,14 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
 - **Known caveats:** Lane 7's preregistered verdict is formally **MIXED** because P2 (period changes
   > 10% from R 13 to 39) failed as written (4.32 vs 4.03 steps); Lane 7 argues P2 was badly
   designed. The two lanes' amplitudes differ at R = 39 (1.27e−4 vs 2.5e−4); zoom method and
-  window differ, and both show the same strong decrease. Recorded, not reconciled.
+  window differ, and both show the same strong decrease. Lane 7 (HR-005) attributes the gap to
+  heading: at fixed R = 13 the amplitude ranges 2.0e−3 (12.7°) to 1.0e−2 (axis) with heading,
+  and Lane 3's resolution runs end on headings 64.3°–68.2°. So the R⁻² exponent is **not
+  determined**; the robust statement is "falls about 20× from R = 13 to R = 39–52".
 - **History:**
   - 2026-10-07 — OBSERVED — Lane 1 proposed the lattice account from three start rotations.
   - 2026-10-07 — INDEPENDENTLY_CHECKED — archivist, on agreement of Lane 7 (`ref`) and Lane 3 (`alm_check`).
+  - 2026-10-07 — caveat added — Lane 7 HR-005: amplitude–R relation confounded with heading; exponent dropped.
 
 ### C004 — S001 has a 4.32-step mass oscillation (as a property of the organism)
 
@@ -235,13 +241,14 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
 - **Search / parameter bounds:** |m|, |n| ≤ 2; R = 13–39; headings 21.8°–68.2°
 - **Reproduction command:** `h001.py e1`, `h001.py e2`; `pytest -q tests/test_h001_lattice_wobble.py`
 - **Known caveats:** single execution path. The account does not predict *which* line dominates.
-  Not yet checked against Lane 3's 9 runs that missed the single-axis rule (C005).
+  Not yet checked against Lane 3's 9 runs that missed the single-axis rule (C005); Lane 7
+  (HR-005) asks Lane 3 to rescore them against this line set.
 - **History:**
   - 2026-10-07 — OBSERVED — Lane 7, preregistered (`5f0326f`).
 
 ### C007 — S001's baseline morphometric means are heading-invariant
 
-- **Status:** REPRODUCED
+- **Status:** REFUTED (at R = 13, for anisotropy and speed; see C022 for what survives)
 - **Owner lane:** Lane 5
 - **Sources:** `research/experiments/L5-baseline/README.md` proposed claim 1 (PR #4 merged; re-run
   on `alm` in PR #9, open); objections in Lane 7 HR-001 (point 1) and HR-003
@@ -260,10 +267,20 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
 - **Known caveats:** the 0° and 45° rows are lattice mirror images, so only **two** independent
   headings were tested (Lane 7). All three headings lie in 21.8°–68.2°; Lane 3 finds speed
   1.2% lower at axis-locked headings (C015). Mean anisotropy at R = 13 is biased 1.2% vs R ≥ 20
-  (C014). The two paths share the feature code, so this is REPRODUCED, not independently checked.
+  (C014). The two paths share the feature code, so the original result is REPRODUCED, not
+  independently checked.
+- **Refuting evidence (Lane 7 HR-006, PR #7 @ `0fd42ee`):** `heading_means.py` (`ref`), 6000 steps,
+  stats over steps 2000–5999, start rotations 0°, 27°, 55°, 70° at R = 13. The axis-travelling
+  creature (heading −0.46°) has mean anisotropy **0.2649** vs 0.2953 at 68.2° (10% less
+  elongated) and speed 0.4734 vs 0.4794 R/time (1.2% slower; Lane 3 independently finds the same
+  speed drop, C015). Lane 5's three rotations all landed on 5/2-type or near-diagonal plateaus,
+  so they never sampled the axis plateau. Output: `research/experiments/H001-lattice-wobble/heading_means.csv`.
+  Lane 5 has not yet responded.
 - **History:**
   - 2026-10-07 — OBSERVED — Lane 5, `ref` path.
   - 2026-10-07 — REPRODUCED — Lane 5, re-run on `alm` (PR #9).
+  - 2026-10-07 — REFUTED — archivist, on Lane 7 HR-006 (axis-locked heading at R = 13); the
+    statement holds at R = 26 and for mass and gyradius (C022).
 
 ### C008 — Every S001 baseline feature oscillation has a grid-crossing period (or its alias or beat)
 
@@ -301,15 +318,22 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
 - **Intervention:** none
 - **Metric:** mass, gyradius, speed over t = 100–400 time units; Richardson extrapolation
   (first-order Euler) from T = 160/320
-- **Result:** speed 0.4794 R/time at T = 10 → limit ≈ 0.572 (0.570 from T = 80/160). Mass 0.4358
+- **Result:** speed 0.4794 R/time at T = 10 → limit ≈ 0.572 (0.570 from T = 80/160) by Lane 3's
+  first-order Richardson extrapolation, i.e. 16% low. Lane 7 (HR-005) notes the successive
+  differences shrink by ≈ 0.6×, not 0.5× (effective order ≈ 0.7, plausibly from the hard clip);
+  geometric extrapolation gives ≈ 0.5745, i.e. 16.6% low (archivist rechecked the arithmetic
+  from `timestep.csv`). Either way about 16–17%. Mass 0.4358
   → ≈ 0.4249. Gyradius stable to 0.1%. Heading also moves with T (68.2° at T = 10–15, 66.5–66.8°
   at T ≥ 80).
 - **Run IDs:** `research/traces/lane3/timestep.csv` (`python -m alm_check.sweeps timestep`)
 - **Search / parameter bounds:** T = 1–320
 - **Reproduction command:** `python -m alm_check.sweeps timestep`
-- **Known caveats:** single execution path; extrapolation assumes first-order convergence.
+- **Known caveats:** single execution path; the limit depends on the assumed convergence order
+  (above). Heading also changes with T, and speed depends on heading at R = 13 by up to 1.2%
+  (C015), a small confound in the sweep.
 - **History:**
   - 2026-10-07 — OBSERVED — Lane 3.
+  - 2026-10-07 — refined — Lane 7 HR-005: deficit 16.6% under a geometric fit.
 
 ### C010 — S001 travels at 0.479 R per time unit
 
@@ -359,7 +383,9 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
 ### C012 — At R = 26 the heading lock mostly disappears
 
 - **Status:** OBSERVED
-- **Dispute:** D1, contradicted by C013. Lane 3 is rechecking.
+- **Dispute:** D1, contradicted by C013. Lane 3 is rechecking. Lane 7 (HR-005) points out that
+  Lane 3's own CSV repeats plateau headings at R = 26 (rotations 12.5°/15° → 53.28°, 30°/32.5° →
+  36.72°, 65°/67.5° → 2.06°); the archivist confirmed these rows.
 - **Owner lane:** Lane 3
 - **Sources:** lane3/README claim 3 (PR #8, open)
 - **Specimen / version:** S001, dossier commit `65c03cc`; cells upscaled bilinearly to R = 26, then rotated
@@ -379,7 +405,7 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
 
 ### C013 — At R = 26 the heading lock persists, weaker: 46 start rotations settle on 17 headings
 
-- **Status:** OBSERVED
+- **Status:** INDEPENDENTLY_CHECKED (the plateau headings); the interpretation is disputed (D1)
 - **Dispute:** D1, contradicts C012.
 - **Owner lane:** Lane 7
 - **Sources:** hostile-review HR-001b (PR #7, open)
@@ -393,9 +419,18 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
 - **Run IDs:** `H001-X2-R26-rot{0..45}` (`x2_R26_fine.csv`); coarse sweep `x1_R26.csv`
 - **Search / parameter bounds:** 1° rotation step, 0–45°
 - **Reproduction command:** `h001_explore.py 26 1` (~25 min on 4 cores)
-- **Known caveats:** exploratory, not preregistered; single path; not yet run on `alm`.
+- **Independent check:** Lane 3's `alm_check` sweep (`heading-R26.csv`, distinct code and 2.5°
+  grid) lands on the same plateau headings: 59.35, 53.28, 49.33, 46.54, 43.46, 42.09, 40.67,
+  36.72, 30.65, 25.91°. The archivist compared the two files: 14 of Lane 3's 19 runs in 0–45°
+  end within 0.01° of a Lane 7 final heading; the other 5 differ by 0.04–0.9° (3 of them still
+  drifting by Lane 3's own measure).
+- **Known caveats:** exploratory, not preregistered; not yet run on `alm`. Lane 3's
+  `nearest_rational_slope` labels at R = 26 are off by up to 0.9°, so they are not evidence of
+  rational-slope locking at R = 26 (HR-005).
 - **History:**
   - 2026-10-07 — OBSERVED — Lane 7.
+  - 2026-10-07 — INDEPENDENTLY_CHECKED — archivist, plateau headings matched in Lane 3's data
+    (HR-005). D1 stays open until Lane 3 restates or defends C012.
 
 ### C014 — R = 13 is resolution-converged for S001's mean mass, size and speed (but not for mean anisotropy)
 
@@ -419,7 +454,7 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
 
 ### C015 — At R = 13, S001's speed depends on its locked heading by up to 1.2%
 
-- **Status:** OBSERVED
+- **Status:** INDEPENDENTLY_CHECKED
 - **Owner lane:** Lane 3
 - **Sources:** lane3/README "Heading lock" (PR #8); Lane 7 HR-001b and HR-002 point 4 report ~0.2%
 - **Specimen / version:** S001, dossier commit `65c03cc`
@@ -432,12 +467,12 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
 - **Run IDs:** `research/traces/lane3/heading-R13.csv`, `heading-R26.csv`
 - **Search / parameter bounds:** rotations 0–90° by 2.5°
 - **Reproduction command:** `python -m alm_check.heading --R 13`
-- **Known caveats:** Lane 7 reports only ~0.2% variation (0.4787–0.4798) over headings
-  21.8°–68.2°. Lane 3's lower speeds are at ±12.68° and near the axis, which Lane 7's 0–45°
-  rotation range did not reach; within the overlapping range the two are not in conflict. Not
-  entered as a dispute.
+- **Independent check:** Lane 7 `heading_means.py` (`ref`, HR-006): 0.47941 at 68.2°, 0.47783 at
+  12.67°, 0.47343 at −0.46° (R = 13); 0.47966 vs 0.47969 at 67.1° and −2.1° (R = 26).
+- **Known caveats:** Lane 7's earlier ~0.2% figure (HR-001b) covered only headings 21.8°–68.2°.
 - **History:**
   - 2026-10-07 — OBSERVED — Lane 3.
+  - 2026-10-07 — INDEPENDENTLY_CHECKED — archivist, on Lane 7 HR-006.
 
 ### C016 — S001 dies from the catalog cells at R ≤ 7 or T ≤ 3; survival at R = 8–10 is non-monotone and depends on how the cells are resampled
 
@@ -551,3 +586,58 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
 - **Known caveats:** tooling claim. Any symmetry-order result needs a noise floor from isotropic controls.
 - **History:**
   - 2026-10-07 — OBSERVED — Lane 7.
+
+### C022 — S001's mass and gyradius means are heading-invariant to 0.2% at R = 13 and 26; at R = 26 anisotropy and speed are too
+
+- **Status:** OBSERVED
+- **Owner lane:** Lane 7 (with Lane 5's original data)
+- **Sources:** hostile-review HR-006 (PR #7 @ `0fd42ee`, open); L5-baseline (C007)
+- **Specimen / version:** S001, dossier commit `65c03cc`; start states rotated (bilinear), zoomed for R = 26
+- **Simulator / version:** `ref` via `heading_means.py` @ `0fd42ee`
+- **Parameters:** baseline rule, T = 10; R = 13 (rotations 0°, 27°, 55°, 70°) and R = 26 (0°, 67°)
+- **Intervention:** none
+- **Metric:** means over steps 2000–5999 of mass, gyradius, anisotropy, speed
+- **Result:** R = 13: mass 0.43557–0.43611, gyradius 0.43764–0.43861 across headings −0.5°…68.2°.
+  R = 26 (67.1° vs −2.1°): mass 0.43589/0.43588, gyradius 0.43755/0.43759, anisotropy
+  0.2987/0.2993, speed 0.47966/0.47969.
+- **Run IDs:** `research/experiments/H001-lattice-wobble/heading_means.csv`
+- **Search / parameter bounds:** four headings at R = 13, two at R = 26
+- **Reproduction command:** `heading_means.py 13 0 27 55 70; heading_means.py 26 0 67`
+- **Known caveats:** single path; only two headings at R = 26; T = 10 only.
+- **History:**
+  - 2026-10-07 — OBSERVED — Lane 7.
+
+### C023 — Each of four standardized disturbances has a single sharp RECOVERED → DIED edge for S001, at small strength, with no intermediate outcomes
+
+- **Status:** OBSERVED
+- **Owner lane:** Lane 4
+- **Sources:** `research/experiments/L4-001-disturbance-battery/protocol.md` (preregistered at
+  `aa4cd5c`) and `results/summary.md`, `results/bisect-brackets.csv` (commit `12d9265`, PR #5,
+  open). Lane 4 has **not** yet proposed a claim; this entry was written by the archivist from the
+  generated summary and will be replaced by Lane 4's own wording.
+- **Specimen / version:** S001, dossier commit `65c03cc`
+- **Simulator / version:** `ref` (`reconstruct.py`), interventions in `src/alm/disturb.py` @ `12d9265`
+- **Parameters:** baseline rule, 128² torus; intervention at t0 = 1000…1004 (five phase replicates),
+  horizon 2000 steps
+- **Intervention:** I001 mass attenuation A ← (1 − s)A; I002 central disc deletion, radius s·R;
+  I003 frontal Gaussian addition, peak s, at 1.0 R ahead, w = 0.25 R; I004 port-side cut removing
+  fraction s of mass. Placed in the creature frame at t0.
+- **Metric:** preregistered classes on the last 500 steps: DIED (mass < 0.01), EXPLODED, RECOVERED
+  (mass, gyradius, window speed within ±20% of the dossier baseline), TRANSFORMED. Sharp = all five
+  phase s* within 0.05 and the coarse sweep monotone.
+- **Result:** 410 coarse + 160 bisection runs; every run is RECOVERED or DIED, none TRANSFORMED or
+  EXPLODED, and no run changes class under ±10% or ±30% bands. Transition s* (bisected to 1/256):
+  I001 0.1016 at every phase (≈ 10% mass removed kills); I002 radius 0.061–0.086 R (1.6–7% mass);
+  I003 peak 0.308–0.317 (≈ +28% mass); I004 0.080–0.089 of mass. All four are sharp by the
+  preregistered rule (largest phase spread 0.025, I002).
+- **Run IDs:** `L4-001-<intervention>-s<strength>-t<t0>-N128-ref` (deterministic), rows in
+  `results/coarse.csv` and `results/bisect.csv`
+- **Search / parameter bounds:** coarse grids 0–0.95 or 0–1.00 by 0.05; phases t0 = 1000–1004
+- **Reproduction command:** see `research/experiments/L4-001-disturbance-battery/run.py` and `analyze.py`
+- **Known caveats:** single execution path (`alm` re-run and N = 192 re-run are still to come per the
+  protocol). Amendment A1 preregisters T = 20 and R = 26 re-runs, not yet reported. Lane 7
+  (HR-002) objects that five consecutive t0 sample only a thin slice of the 2-D lattice phase,
+  and that post-recovery heading should be recorded (C011). Recovery is judged against
+  T = 10 / R = 13 baseline numbers, which are themselves discretisation-dependent (C009, C010).
+- **History:**
+  - 2026-10-07 — OBSERVED — archivist, from Lane 4's generated summary at `12d9265`.
