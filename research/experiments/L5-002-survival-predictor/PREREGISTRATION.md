@@ -91,3 +91,18 @@ definitions apply. Lane 4 will be told about it.
   optimistically biased. The I005 check is the guard against that bias.
 - R = 13 lattice effects (L5-axis-breathing) mean anisotropy-based features may depend on
   heading. All Lane 4 runs share the 68.2° plateau, so that confound is held fixed, not tested.
+
+## Amendments
+
+### A1 (2026-10-07, after measuring features and before fitting any model)
+
+**Empty states.** Many heavily damaged runs are completely empty (mass exactly 0) within a few
+steps: 14 runs at lag 0, 73 at lag 5, 179 at lag 10 and 236 at lag 20. For these, the shape
+features (F2, F4, F5) are undefined, while F1, F3 and F6 are 0. The rule, fixed before any
+model is fitted: a run whose state is empty at the feature's lag is **predicted "die"** by every
+model, and it is excluded from fitting the stump cut or the logistic weights. An empty state is
+dead under any reading. These runs still count in every accuracy. The sanity gate passed: the max
+|rebuilt − Lane 4| post-edit mass is 5.0e−7, at Lane 4's 6-significant-digit CSV precision.
+
+Also fixed in passing: `rotational_harmonics` returned NaN when all mass sat on the centroid
+cell. It now returns [1, 0, 0, …], and a test covers this.

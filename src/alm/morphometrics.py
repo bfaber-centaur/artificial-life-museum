@@ -219,6 +219,8 @@ def rotational_harmonics(
     w = A * np.hypot(dx, dy)
     theta = np.arctan2(dy, dx)
     ks = np.arange(kmax + 1)
+    if not w.sum() > 0:   # all mass on the centroid cell: no angular structure
+        return np.eye(1, kmax + 1).ravel()
     z = np.exp(1j * ks[:, None] * theta.ravel()[None, :]) @ w.ravel()
     return np.abs(z) / w.sum()
 

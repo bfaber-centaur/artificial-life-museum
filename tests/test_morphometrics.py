@@ -228,3 +228,11 @@ def test_morpho_feature_set_in_runner_trace():
     assert "mass" in row and "morpho_mass" not in row
     assert f.displacement((row["cy_cells"], row["cx_cells"]),
                           (row["morpho_cy"], row["morpho_cx"]), (128, 128)) == pytest.approx((0, 0), abs=0.03)
+
+
+def test_harmonics_of_a_single_cell_are_defined():
+    A = np.zeros((16, 16))
+    A[3, 4] = 0.2
+    h = f.rotational_harmonics(A, kmax=4)
+    assert h.tolist() == [1, 0, 0, 0, 0]
+    assert f.symmetry_order(h) == 0
