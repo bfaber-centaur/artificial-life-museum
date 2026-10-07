@@ -1,0 +1,164 @@
+{
+  "figure": "A-survival-boundary",
+  "command": ".venv/bin/python research/figures/A-survival-boundary/make_figure.py",
+  "claims": {
+    "C023": "INDEPENDENTLY_CHECKED",
+    "C026": "INDEPENDENTLY_CHECKED",
+    "C027": "NUMERICALLY_FRAGILE"
+  },
+  "inputs": [
+    {
+      "path": "research/experiments/L4-001-disturbance-battery/results/R26/bisect.csv",
+      "sha256": "4a6be86d54e8835bf160e9c5d373cdc85e4c63cd6677288f63169593941dba17",
+      "last_commit": "3d8bf7a"
+    },
+    {
+      "path": "research/experiments/L4-001-disturbance-battery/results/R26/coarse.csv",
+      "sha256": "38d82fba50a62651b0563a4ce8ba493743b79e4246c0153fb9b3831904de263f",
+      "last_commit": "3d8bf7a"
+    },
+    {
+      "path": "research/experiments/L4-001-disturbance-battery/results/T20/bisect.csv",
+      "sha256": "773fe5e3d24b766c4d3db42213190f1c1f52ec616950ee00304cdb0925092c83",
+      "last_commit": "3d8bf7a"
+    },
+    {
+      "path": "research/experiments/L4-001-disturbance-battery/results/T20/coarse.csv",
+      "sha256": "38c0225744857f829e3f0fc159e039eb37b18171c1c4a13ef9c4e47e99608f47",
+      "last_commit": "7bd1a42"
+    },
+    {
+      "path": "research/experiments/L4-001-disturbance-battery/results/bisect.csv",
+      "sha256": "7e1ae8729f3d117b95ae20ebd3f0660784c4f7645b2cfa16b90439ca8b633dbf",
+      "last_commit": "7bd1a42"
+    },
+    {
+      "path": "research/experiments/L4-001-disturbance-battery/results/coarse.csv",
+      "sha256": "37f8efc0c7cc1b2ee43b68d41fe271421592dce44a6a2bd85f8939441b210e65",
+      "last_commit": "7bd1a42"
+    },
+    {
+      "path": "research/experiments/L4-001-disturbance-battery/states/L4-001-I001-s0.100000-t1000-N128-ref.trace.csv",
+      "sha256": "c37a033324219ed7a96fdd9d41ee694917117ad5032bad45b4a3b92b5a86a50f",
+      "last_commit": "7bd1a42"
+    },
+    {
+      "path": "research/experiments/L4-001-disturbance-battery/states/L4-001-I001-s0.103125-t1000-N128-ref.npz",
+      "sha256": "ff6ab48e0e696c5f788ce2b149baff9d34bfaae0a6d5b641ec9a787888a66845",
+      "last_commit": "7bd1a42"
+    },
+    {
+      "path": "research/experiments/L4-001-disturbance-battery/states/L4-001-I001-s0.103125-t1000-N128-ref.trace.csv",
+      "sha256": "844ff841a3cb6945c19a5fc7ef53d37084cb8b32f6207b35856c23cb05435237",
+      "last_commit": "7bd1a42"
+    },
+    {
+      "path": "research/experiments/L4-001-disturbance-battery/states/L4-001-I002-s0.059375-t1000-N128-ref.trace.csv",
+      "sha256": "244f0ce610cacf329c39dd1af751c6c329fc6540fd04313ec4366bb94d90a0d5",
+      "last_commit": "7bd1a42"
+    },
+    {
+      "path": "research/experiments/L4-001-disturbance-battery/states/L4-001-I002-s0.062500-t1000-N128-ref.npz",
+      "sha256": "de0e668a00ab86b41bfb35528216b067a3ca7174df0ee10c78333430658abe42",
+      "last_commit": "7bd1a42"
+    },
+    {
+      "path": "research/experiments/L4-001-disturbance-battery/states/L4-001-I002-s0.062500-t1000-N128-ref.trace.csv",
+      "sha256": "8a33d2d5db0636ddce5346a321f116506e520a4b16e5e6477880ebc32283cd4b",
+      "last_commit": "7bd1a42"
+    },
+    {
+      "path": "research/experiments/L4-001-disturbance-battery/states/L4-001-I003-s0.306250-t1000-N128-ref.trace.csv",
+      "sha256": "18c5e8c9dca6fedca0a3013d14b06e3e999b0d63208866d7c602027120e1a1e3",
+      "last_commit": "7bd1a42"
+    },
+    {
+      "path": "research/experiments/L4-001-disturbance-battery/states/L4-001-I003-s0.309375-t1000-N128-ref.npz",
+      "sha256": "d3d7db3a238ecf8d2dc12847ef08698b4072bff61f4323ad6ccd3de2696d1820",
+      "last_commit": "7bd1a42"
+    },
+    {
+      "path": "research/experiments/L4-001-disturbance-battery/states/L4-001-I003-s0.309375-t1000-N128-ref.trace.csv",
+      "sha256": "03a090fd09002e13f3ce9ddf3f0afea78db341e04aa375cf1452f6747a3092bc",
+      "last_commit": "7bd1a42"
+    },
+    {
+      "path": "research/experiments/L4-001-disturbance-battery/states/L4-001-I004-s0.081250-t1000-N128-ref.trace.csv",
+      "sha256": "4aba7ce077e51fb20eb551e5a5f3db79a4b77e73207dc11fa7fa7361ca5819ae",
+      "last_commit": "7bd1a42"
+    },
+    {
+      "path": "research/experiments/L4-001-disturbance-battery/states/L4-001-I004-s0.084375-t1000-N128-ref.npz",
+      "sha256": "fce9e71bad8d5eaac67aeaebe37c8113b333cc07b54dc627e30942dc4141695e",
+      "last_commit": "7bd1a42"
+    },
+    {
+      "path": "research/experiments/L4-001-disturbance-battery/states/L4-001-I004-s0.084375-t1000-N128-ref.trace.csv",
+      "sha256": "75676fc97f6e21c9bdc8507653e38e5aebc04978bf31fb35264eebfa591ae31b",
+      "last_commit": "7bd1a42"
+    },
+    {
+      "path": "research/experiments/L4-001-disturbance-battery/states/index.csv",
+      "sha256": "ab6d96b37c2315020976d9c2d427306160e2fd99526042af65011281cce8f5c7",
+      "last_commit": "7bd1a42"
+    },
+    {
+      "path": "research/figures/A-survival-boundary/make_figure.py",
+      "sha256": "b1c7e3f74e87531bc5ef1c70b363f9ee9c287873c215a2168e2ee19cdef7485e",
+      "last_commit": ""
+    },
+    {
+      "path": "research/figures/figlib/__init__.py",
+      "sha256": "23d1dd07a43a84f1f441481050b2daa508a69658e3b71bb3bd1d6da0fa9f7b70",
+      "last_commit": ""
+    },
+    {
+      "path": "research/figures/figlib/edges.py",
+      "sha256": "f66c531fc0d3f4471076e550384a8dc06797c1eb831574c9376ab63c8a84ef62",
+      "last_commit": ""
+    },
+    {
+      "path": "research/figures/figlib/provenance.py",
+      "sha256": "6b18dd10badb1e2fa51ed7faa954fe720ae7c22dd4fe6d7079e701ee685fff50",
+      "last_commit": ""
+    },
+    {
+      "path": "research/figures/figlib/style.py",
+      "sha256": "67a34eeb75b587e72ad5ba5f076f5e0d47fbbec40a81a99e9b16c510657ef4dd",
+      "last_commit": ""
+    },
+    {
+      "path": "research/traces/lane3/disturb-T10-R13.csv",
+      "sha256": "82225e611bba95bc76f0bf75205c9a04329e9fcad3e3be65bbd2e009b327e078",
+      "last_commit": "5f316f3"
+    },
+    {
+      "path": "research/traces/lane3/disturb-T10-R26.csv",
+      "sha256": "e8c38e5eef2f785c1a06667900b4469f6cab2eee76d3376d6df1808ae2974781",
+      "last_commit": "5f316f3"
+    },
+    {
+      "path": "research/traces/lane3/disturb-T40-R13.csv",
+      "sha256": "984529715048e69a54ec0adfbf6a3ce06601214e4e22cb4ea7fbbda8ac0f7a1e",
+      "last_commit": "5f316f3"
+    }
+  ],
+  "outputs": [
+    "research/figures/A-survival-boundary/figure-A.png",
+    "research/figures/A-survival-boundary/figure-A.svg",
+    "research/figures/A-survival-boundary/figure-A.pdf",
+    "research/figures/A-survival-boundary/figure-A-edges.csv",
+    "research/figures/A-survival-boundary/figure-A-runs.csv"
+  ],
+  "code_commit": "194b33f",
+  "code_dirty": true,
+  "versions": {
+    "python": "3.13.16",
+    "numpy": "2.5.3",
+    "matplotlib": "3.11.2"
+  },
+  "notes": [
+    "non-monotone groups: 0",
+    "off-axis runs in panel b (all listed in figure-A-runs.csv): I001 DIED=80, I002 DIED=86, I003 DIED=65, I004 DIED=80"
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "palette": {
+    "black": "#000000",
+    "orange": "#E69F00",
+    "sky": "#56B4E9",
+    "green": "#009E73",
+    "yellow": "#F0E442",
+    "blue": "#0072B2",
+    "vermillion": "#D55E00",
+    "purple": "#CC79A7"
+  },
+  "ink": "#222222",
+  "muted": "#6b6b6b",
+  "grid": "#d9d9d9",
+  "paper": "#ffffff",
+  "unresolved": "#bdbdbd",
+  "outcome": {
+    "RECOVERED": {
+      "color": "#009E73",
+      "marker": "o",
+      "fill": true,
+      "label": "recovered"
+    },
+    "DIED": {
+      "color": "#D55E00",
+      "marker": "x",
+      "fill": false,
+      "label": "died"
+    },
+    "TRANSFORMED": {
+      "color": "#CC79A7",
+      "marker": "s",
+      "fill": false,
+      "label": "transformed"
+    },
+    "EXPLODED": {
+      "color": "#E69F00",
+      "marker": "^",
+      "fill": false,
+      "label": "exploded"
+    }
+  },
+  "status": {
+    "INDEPENDENTLY_CHECKED": {
+      "color": "#0072B2",
+      "hatch": null,
+      "badge": "independently checked"
+    },
+    "REPRODUCED": {
+      "color": "#56B4E9",
+      "hatch": null,
+      "badge": "reproduced"
+    },
+    "OBSERVED": {
+      "color": "#6b6b6b",
+      "hatch": null,
+      "badge": "observed"
+    },
+    "CONJECTURED": {
+      "color": "#6b6b6b",
+      "hatch": "..",
+      "badge": "conjectured"
+    },
+    "NUMERICALLY_FRAGILE": {
+      "color": "#E69F00",
+      "hatch": "////",
+      "badge": "numerically fragile"
+    },
+    "REFUTED": {
+      "color": "#222222",
+      "hatch": "xx",
+      "badge": "refuted"
+    }
+  },
+  "edit": {
+    "removed": "#D55E00",
+    "added": "#0072B2"
+  },
+  "field_cmap": "Greys"
+}

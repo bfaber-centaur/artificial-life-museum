@@ -1,0 +1,64 @@
+# Figures (Lane 9, Scientific Illustrator)
+
+Figures that show what the museum has learned, each generated from committed data, with
+parameters, provenance, a reproduction command and the claim IDs it illustrates.
+Specimen portraits and motion belong to Lane 8's gallery (`research/gallery/`). This
+directory shows evidence: edges, sweeps, sensitivity, and the limits of each result.
+
+| Figure | Shows | Claims | Status shown |
+| --- | --- | --- | --- |
+| [A: survival boundary](A-survival-boundary/README.md) | four disturbance kill edges; uniform vs localized injury; independent replication; T/R sensitivity | C023, C026, C027 | independently checked; I003/I004 values numerically fragile |
+| B: the lattice masquerading as biology | resolution dependence of the mass wobble and heading locking | C003, C004, C011–C013 (planned) | planned |
+| C: phenotypes under one rule | glider / circler / static ring in parameter space | C038–C045 (planned) | waits for Lane 6 PR #11 to merge |
+
+## Rules every figure follows
+
+1. **Committed data only.** A figure script reads files on `main` (or its own PR's base), never
+   re-simulates, and records every input's SHA-256 and last commit in `<figure>.provenance.json`.
+   Its own code is hashed as an input too.
+2. **Statuses come from `research/claims.md`.** A figure copies a claim's status and prints it as a
+   text badge. It never upgrades a status, and when the data look different from the ledger,
+   Lane 9 reports that to the coordinator rather than redrawing the claim.
+3. **Sampled means sampled.** Points are drawn where runs exist. Gaps between sampled points are
+   drawn as unresolved (grey) and never interpolated. Brackets are shown as brackets.
+4. **Limits are part of the figure.** Phase spread, resolution and timestep checks, estimator
+   caveats and open objections are either plotted or listed under "How to read the limits".
+5. **Deterministic output.** Re-running a script reproduces the same PNG/SVG/PDF bytes.
+6. **Accessible.** Okabe–Ito colours. No meaning carried by colour alone (marker shape, hatching
+   or text always accompanies it). Every figure has alt text and its plotted data as CSV.
+
+## Shared conventions (for Lane 8 and anyone plotting)
+
+Machine-readable: [`conventions.json`](conventions.json) (written by `python -m figlib.style --write-json`
+from `research/figures/`). Python: `figlib/style.py`.
+
+| Meaning | Encoding |
+| --- | --- |
+| recovered run | green `#009E73`, filled circle |
+| died run | vermillion `#D55E00`, cross |
+| transformed / exploded | purple square / orange triangle |
+| unresolved gap between sampled runs | light grey `#bdbdbd` bar |
+| mass removed / added by an edit | vermillion / blue `#0072B2` |
+| INDEPENDENTLY_CHECKED | blue badge text |
+| NUMERICALLY_FRAGILE | orange `#E69F00` badge, `////` hatching |
+| OBSERVED / CONJECTURED | grey badge (dotted hatch for conjectured) |
+| REFUTED | black badge, `xx` hatching |
+| Lenia field in scientific panels | plain greyscale (`Greys`), so tints for edits stay readable |
+
+Lane 8 owns the cinematic look of specimens (its own colormaps). When a gallery piece and a figure
+show the same run, both should cite the same run ID and source file.
+
+## Library
+
+- `figlib/style.py`: palette, outcome and status encodings, rc context, `status_badge()`
+- `figlib/provenance.py`: input hashing and manifest writing
+- `figlib/edges.py`: reads Lane 4 and Lane 3 disturbance tables and extracts the survive/die
+  bracket per (source, condition, phase), flagging any non-monotone group
+
+## Reproduce everything
+
+```bash
+python3 -m venv .venv && .venv/bin/pip install -e '.[dev]'
+research/figures/reproduce.sh
+.venv/bin/python -m pytest tests/test_figlib.py
+```
