@@ -22,7 +22,8 @@ and checks out the pinned upstream reference `Chakazul/Lenia@adfc542` under
 
 - `src/alm/` — ALM's own headless Lenia kernel and instruments
 - `tests/` — pytest suite
-- `research/` — charter, claims ledger, specimens, experiments, traces, reports
+- `research/` — charter, claims ledger, specimens, experiments, traces, reports, and the
+  illustrated specimen gallery ([`research/gallery/`](research/gallery/README.md))
 
 ## Running the simulator
 
