@@ -1268,7 +1268,9 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
 - **Parameters:** each entry's own catalog rule (R, T, μ, σ, β)
 - **Intervention:** none
 - **Metric:** motion class
-- **Result:** `O2bi` and `O2p` die; `OG2r` and `O8?` fill the world. The other 13 single-shell entries in the box persist.
+- **Result:** `O2bi` and `O2p` die; `OG2r` and `O8?` fill the world. The archivist's read of
+  `catalog-neighbours.csv` finds a **fifth** non-persisting entry that the claim does not name: `1P4odl`
+  (fate `filled`). The remaining 12 of the 17 entries are `localized`.
 - **Run IDs:** `research/experiments/L6-field/catalog-neighbours.csv`
 - **Search / parameter bounds:** 17 single-shell entries with μ ∈ [0.09, 0.21], σ ∈ [0.006, 0.030]
 - **Reproduction command:** `catalog_neighbours.py`
