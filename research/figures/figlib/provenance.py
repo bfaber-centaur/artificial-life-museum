@@ -43,7 +43,7 @@ def manifest(figure_id, inputs, outputs, command, claims, notes=()):
                    for p in sorted(set(map(str, inputs)))],
         "outputs": [rel(p) for p in outputs],
         "code_commit": git("rev-parse", "--short", "HEAD"),
-        "code_dirty": bool(git("status", "--porcelain", "--", "research/figures")),
+        "code_dirty": bool(git("status", "--porcelain", "--", "research/figures", ":!*.provenance.json")),
         "versions": {"python": platform.python_version(), "numpy": numpy.__version__,
                      "matplotlib": matplotlib.__version__},
         "notes": list(notes),
