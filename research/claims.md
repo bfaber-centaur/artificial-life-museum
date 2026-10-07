@@ -33,6 +33,7 @@ Copy this block for each new claim.
 - **Search / parameter bounds:**
 - **Reproduction command:**
 - **Known caveats:**
+- **Prior literature:** (optional; see Literature provenance)
 - **History:**
   - YYYY-MM-DD — CONJECTURED — <who, why>
 ```
@@ -50,6 +51,37 @@ Ledger conventions (added by the claims archivist, Lane 0):
 - Where lanes disagree, each side gets its own claim and both carry a **Dispute** line pointing
   at the other and at the [Disputes](#disputes) table. The archivist does not pick a
   winner; the status changes only when new evidence lands.
+
+### Literature provenance
+
+The claims archivist keeps a **Prior literature** field on substantive claims. It records what
+published work already says about the same behaviour.
+
+- **When:** a claim reaches REPRODUCED or INDEPENDENTLY_CHECKED, or a lane proposes something as
+  new. The archivist runs one bounded search when that finding lands. There is no timed sweep and
+  no exhaustive survey.
+- **Where:** the searches cover the original Lenia papers, the Chakazul catalog, later Lenia
+  papers, and adjacent fields where a mechanism might already be known. Every source gets a key
+  in [`references.md`](references.md), which also logs each search's date, queries and gaps.
+- **Each entry gives:** the reference key, a precise locator (section, figure or page; marked
+  *excerpt* if the full text was not read), one relationship class, and a **conditions** note.
+  The note says either *same conditions* (same rule, specimen and intervention) or *similar
+  outcome only*, and names what differs.
+
+| Relationship | Meaning |
+| --- | --- |
+| `PREVIOUSLY REPORTED` | The source describes the same behaviour. A *similar outcome only* note says how far the conditions match. |
+| `CONSISTENT WITH` | The source reports something our claim agrees with or would predict, but not the claim itself. |
+| `RELATED` | The source covers the same question or a nearby mechanism without bearing directly on the claim. |
+| `CONTRADICTORY` | The source reports, under conditions it names, something our claim says should not happen. The disagreement is recorded, not resolved, as with lane disputes. |
+| `NO MATCH FOUND IN SEARCHED SOURCES` | Nothing was found in the logged search. This is never evidence of novelty. |
+
+Rules:
+
+- Literature never changes a claim's status. Agreement with a paper is not reproduction of our
+  experiment, and only our own runs move a status.
+- A failed search supports no novelty claim. "New" needs a positive comparison, such as C043's
+  catalog check, and even then is worded as "not found in …".
 
 ### Execution paths referred to below
 
@@ -190,10 +222,20 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
   heading: at fixed R = 13 the amplitude ranges 2.0e−3 (12.7°) to 1.0e−2 (axis) with heading,
   and Lane 3's resolution runs end on headings 64.3°–68.2°. So the R⁻² exponent is **not
   determined**; the robust statement is "falls about 20× from R = 13 to R = 39–52".
+- **Prior literature** (search 2026-10-07; see `references.md`):
+  - [Chan2019] arXiv Fig. 6(d–g) / journal Fig. 5(d–g), and journal Fig. 6(a–b) *(excerpt)*.
+    **CONSISTENT WITH.** Chan reports that for R > 12 patterns are minimally affected by shift
+    and rotation, and that Orbium's time-averaged statistics stay constant over R = 9–55 at
+    T = 10. Similar outcome only: the paper's Orbium rule (σ = 0.016, exponential), and averaged
+    statistics rather than the amplitude of mass oscillation.
+  - [Davis2024] **RELATED.** Glider persistence depends on discretization; Orbium tolerates finer
+    space grids. That paper is about persistence, not wobble amplitude.
+  - Wobble amplitude falling with R: **NO MATCH FOUND IN SEARCHED SOURCES.**
 - **History:**
   - 2026-10-07 — OBSERVED — Lane 1 proposed the lattice account from three start rotations.
   - 2026-10-07 — INDEPENDENTLY_CHECKED — archivist, on agreement of Lane 7 (`ref`) and Lane 3 (`alm_check`).
   - 2026-10-07 — caveat added — Lane 7 HR-005: amplitude–R relation confounded with heading; exponent dropped.
+  - 2026-10-07 — Prior literature added (status unchanged) — archivist, literature-provenance mandate.
 
 ### C004 — S001 has a 4.32-step mass oscillation (as a property of the organism)
 
@@ -452,11 +494,22 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
 - **Known caveats:** exploratory, not preregistered; not yet run on `alm`. Lane 3's
   `nearest_rational_slope` labels at R = 26 are off by up to 0.9°, so they are not evidence of
   rational-slope locking at R = 26 (HR-005).
+- **Prior literature** (search 2026-10-07; see `references.md`):
+  - [Chan2019] arXiv Fig. 6(d–g) / journal Fig. 5(d–g) *(excerpt)*. **RELATED.** "Minimally
+    affected by rotation" for R > 12 concerns pattern shape and statistics. It is not a
+    measurement of the long-run heading, so it is not a contradiction of a slow lock onto
+    discrete headings.
+  - [HoffmanMalletParet2010] Theorems 1.1–1.2 *(excerpt)*. **RELATED** (adjacent field):
+    travelling fronts on the Z² lattice are pinned in some lattice directions and move in nearby
+    ones. Fronts in bistable lattice equations, not Lenia gliders, so this is a candidate
+    mechanism family and not prior evidence.
+  - Heading lock of Lenia gliders to lattice directions: **NO MATCH FOUND IN SEARCHED SOURCES.**
 - **History:**
   - 2026-10-07 — OBSERVED — Lane 7.
   - 2026-10-07 — INDEPENDENTLY_CHECKED — archivist, plateau headings matched in Lane 3's data
     (HR-005). D1 stays open until Lane 3 restates or defends C012.
   - 2026-10-07 — D1 resolved — Lane 3's 32 000-step 1° sweep agrees; Lane 3 withdrew C012.
+  - 2026-10-07 — Prior literature added (status unchanged) — archivist, literature-provenance mandate.
 
 ### C014 — R = 13 is resolution-converged for S001's mean mass, size and speed (but not for mean anisotropy)
 
@@ -728,6 +781,15 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
   (HR-002) objects that five consecutive t0 sample only a thin slice of the 2-D lattice phase,
   and that post-recovery heading should be recorded (C011). Recovery is judged against
   T = 10 / R = 13 baseline numbers, which are themselves discretisation-dependent (C009, C010).
+- **Prior literature** (search 2026-10-07; see `references.md`):
+  - [Hamon2025] companion site *(excerpt)*. **RELATED.** Orbium "dies from perturbations by
+    obstacles", and collisions of several Orbium end in death or explosion. Similar outcome
+    only: an added obstacle channel, no strength scale, no thresholds.
+  - [Cool2026] (preprint) *(excerpt)*. **RELATED.** Informational occlusions push creatures to
+    death, metamorphosis or explosion depending on extent and location. Different intervention.
+    Their metamorphosis outcomes do not contradict C023's lack of TRANSFORMED runs, because the
+    perturbation differs.
+  - Sharp, phase-stable kill edges for graded disturbances: **NO MATCH FOUND IN SEARCHED SOURCES.**
 - **History:**
   - 2026-10-07 — OBSERVED — archivist, from Lane 4's generated summary at `12d9265`.
   - 2026-10-07 — REPRODUCED — archivist, `alm` bracket re-runs match 40/40 (`0e2cbe2`); N = 192
@@ -736,6 +798,7 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
     N = 192 shift explained as centroid-estimator bias (HR-007, `a2a1d2a`).
   - 2026-10-07 — restated — Lane 4 proposed claim 1 (`7bd1a42`) adopted as the statement; A1 and
     A3 results added. Lane 4 proposed REPRODUCED + INDEPENDENTLY_CHECKED; status unchanged.
+  - 2026-10-07 — Prior literature added (status unchanged) — archivist, literature-provenance mandate.
 
 ### C024 — S001's short-period (2–15 step) feature fluctuations on the diagonal plateaus shrink with resolution
 
@@ -808,9 +871,19 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
   proposed REPRODUCED; the archivist keeps INDEPENDENTLY_CHECKED because Lane 3's separate code
   measured the same mass edges. I004 shifts with T (C027). At R = 26 the I002 edge is
   −4.6 to −5.0% → −5.3 to −5.6% (Lane 3).
+- **Prior literature** (search 2026-10-07; see `references.md`):
+  - [Cool2026] (preprint) *(excerpt)*. **CONSISTENT WITH.** Whether an occlusion kills depends
+    on where it lands; hits on the leading edge or core are often lethal. Their O2u has S001's
+    rule ([LeniaCatalog]). Similar outcome only: informational occlusion, not mass removal, with
+    no mass-unit edges and an unknown stepper.
+  - [Hamon2025] *(excerpt)*. **RELATED.** Orbium is fragile to obstacles; no location dependence
+    is reported in the excerpt.
+  - Mass-unit edges by location (≈ 5% central vs 10% uniform at R = 13): **NO MATCH FOUND IN
+    SEARCHED SOURCES.**
 - **History:**
   - 2026-10-07 — INDEPENDENTLY_CHECKED — archivist, on C023's two-implementation data.
   - 2026-10-07 — Lane 4 proposes the same claim (README claim 2, `7bd1a42`).
+  - 2026-10-07 — Prior literature added (status unchanged) — archivist, literature-provenance mandate.
 
 ### C027 — The frontal-addition (I003) and port-side-injury (I004) kill edges move 11–13% when the timestep is quartered (T = 10 → 40)
 
@@ -1122,8 +1195,24 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
   this rule became a different static body (mass 0.3873, not S103's 0.3787), not followed up. All
   three phenotypes are catalogued species (C043). Lane 6's top suggested follow-up is a second-lane
   reproduction in `alm_check`.
+- **Prior literature** (search 2026-10-07; see `references.md`):
+  Provisional: PR #11 is still under review, so these entries may change with it.
+  - [LeniaCatalog] **RELATED.** The catalog rules for `O2u` (0.15/0.015) and `OG2g` (0.156/0.0224)
+    bracket the coexistence rule (0.155/0.020). Neither entry uses that rule.
+  - [Chan2019] niche and locus definitions; μ–σ niche map *(excerpt)*. **RELATED.** Chan notes
+    that slightly different initial configurations give slightly different patterns within a
+    species. **To check against the full text:** whether the Orbium and Gyrorbium niches overlap
+    on the map. If they do, this becomes PREVIOUSLY REPORTED.
+  - [Hudcova2026] Fig. 3 *(excerpt)*. **CONSISTENT WITH.** One rule falls into different
+    dynamical classes depending on the initial configuration. Similar outcome only: not these
+    three species.
+  - [Chan2020] *(excerpt)*. **RELATED.** Multiple phenotypes under expanded multi-kernel or
+    multi-channel rules. Not classic single-kernel Lenia.
+  - [Yevenko2024] *(excerpt)*. **RELATED.** Maps Orbium stability around its rule and finds
+    familiar species and Orbium variants there.
 - **History:**
   - 2026-10-07 — REPRODUCED — Lane 6 (clean-process bitwise reruns); awaiting a second lane.
+  - 2026-10-07 — Prior literature added (status unchanged) — archivist, literature-provenance mandate.
 
 ### C039 — The circler S102 at its registered rule (μ 0.155, σ 0.020) does not survive doubling the resolution
 
@@ -1142,8 +1231,18 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
 - **Reproduction command:** `persistence.py --T {10,40} --R {13,26}`
 - **Known caveats:** single lane. The phenotype persists at a nearby σ at R = 26, so this is a shift of
   its band, not its absence.
+- **Prior literature** (search 2026-10-07; see `references.md`):
+  Provisional: PR #11 is still under review, so these entries may change with it.
+  - [Davis2024] *(excerpt)*. **CONSISTENT WITH.** "Non-Platonic" gliders can lose persistence
+    at finer discretization (for example *Scutium gravidus*). Similar outcome only: a different
+    species and rule.
+  - [Yevenko2024] *(excerpt)*. **CONSISTENT WITH.** Orbium variants that "rely on discretization
+    to survive".
+  - [Chan2019] journal Fig. 6(a–b) *(excerpt)*. **RELATED.** Orbium's niche stays static over
+    R = 9–55. That is Orbium, not the circler, so it is not a contradiction.
 - **History:**
   - 2026-10-07 — NUMERICALLY_FRAGILE — Lane 6.
+  - 2026-10-07 — Prior literature added (status unchanged) — archivist, literature-provenance mandate.
 
 ### C040 — At the coexistence rule, Lane 4's disturbances never switch a glider into a circler or back (0/316); a port injury switched the circler into the static ring S103 in 2 of 38 runs
 
@@ -1164,8 +1263,15 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
 - **Search / parameter bounds:** two phases; T10/R13 only
 - **Reproduction command:** `disturb_switch.py` (~1 h); `tables.py bistab-T10-R13.csv switch-T10-R13.csv`
 - **Known caveats:** single T/R and two phases only. The circler → ring switch occurred in one phase only.
+- **Prior literature** (search 2026-10-07; see `references.md`):
+  Provisional: PR #11 is still under review, so these entries may change with it.
+  - [Cool2026] (preprint) *(excerpt)*. **RELATED.** Perturbations can push a creature into
+    metamorphosis. Different intervention and species.
+  - Glider ↔ circler switching (or its absence) under graded disturbances: **NO MATCH FOUND IN
+    SEARCHED SOURCES.**
 - **History:**
   - 2026-10-07 — OBSERVED — Lane 6.
+  - 2026-10-07 — Prior literature added (status unchanged) — archivist, literature-provenance mandate.
 
 ### C041 — Under S001's own rule, a bound Orbium pair (S101) survives port injury of 10–50% by shedding to a single Orbium, where a single Orbium dies at 10%
 
@@ -1189,8 +1295,16 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
   by side, so the cut mostly removes one partner. The claim is only that the coupling does not drag
   the uninjured partner down, not that the pair heals. I002 "robustness" is trivial (the disc sits
   in the gap). Disturbance runs at T10/R13 only. The pair's speed is ~7% lower at T 10 than T 40 (cf. C009).
+- **Prior literature** (search 2026-10-07; see `references.md`):
+  Provisional: PR #11 is still under review, so these entries may change with it.
+  - [LeniaCatalog] `O4i` *Synorbium ignis*. **PREVIOUSLY REPORTED** for the pair's existence as a
+    species (see C043). The catalog rule is 0.152/0.0156, not S001's.
+  - [Hamon2025] companion site *(excerpt)*. **RELATED.** Collisions of several Orbium end in
+    death or explosion. A different situation.
+  - Pair surviving port injury by shedding to one Orbium: **NO MATCH FOUND IN SEARCHED SOURCES.**
 - **History:**
   - 2026-10-07 — OBSERVED — Lane 6.
+  - 2026-10-07 — Prior literature added (status unchanged) — archivist, literature-provenance mandate.
 
 ### C042 — S103 is an exact fixed point of the clipped Lenia map: it is T-independent and returns bitwise to itself after attenuation up to 20%
 
@@ -1211,8 +1325,16 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
 - **Reproduction command:** `.venv/bin/python -m alm.run --specimen S103 --steps 10000 --every 10 --burn-in 5000`
 - **Known caveats:** a creature of the hard clip; a Lenia variant without clipping would not have it in
   this form. The I001–I004 check used one phase.
+- **Prior literature** (search 2026-10-07; see `references.md`):
+  Provisional: PR #11 is still under review, so these entries may change with it.
+  - [LeniaCatalog] `C0la` *Circium lithos apertus* (R 15, 0.16/0.022). **PREVIOUSLY REPORTED** as a
+    catalogued species (C043). Its fixed-point character is not stated in the catalog.
+  - [Kojima2023] *(excerpt)*. **RELATED.** The clip is what keeps classic Lenia from being a pure
+    differential equation, which is consistent with a clip-held fixed point being possible.
+  - Bitwise fixed point held by the clip: **NO MATCH FOUND IN SEARCHED SOURCES.**
 - **History:**
   - 2026-10-07 — REPRODUCED — Lane 6.
+  - 2026-10-07 — Prior literature added (status unchanged) — archivist, literature-provenance mandate.
 
 ### C043 — S101, S102 and S103 are catalogued species carried to nearby rules, not new forms
 
@@ -1231,8 +1353,16 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
 - **Search / parameter bounds:** single-shell catalog entries with μ ∈ [0.09, 0.21], σ ∈ [0.006, 0.030]
 - **Reproduction command:** `persistence.py`; `catalog_neighbours.py`
 - **Known caveats:** single lane.
+- **Prior literature** (search 2026-10-07; see `references.md`):
+  Provisional: PR #11 is still under review, so these entries may change with it.
+  - [LeniaCatalog] `O4i`, `OG2g`, `C0la`. **PREVIOUSLY REPORTED.** These are the catalog entries the
+    claim matches. Similar outcome only: the catalog rules sit near but not at S101–S103's
+    rules (S101 at 0.15/0.015 vs 0.152/0.0156; S102 at 0.155/0.020 vs 0.156/0.0224; S103 at R 13,
+    0.155/0.020 vs R 15, 0.16/0.022). The claim's own wording, "carried to nearby rules", already
+    says this.
 - **History:**
   - 2026-10-07 — OBSERVED — Lane 6; novelty REFUTED by its own reference check.
+  - 2026-10-07 — Prior literature added (status unchanged) — archivist, literature-provenance mandate.
 
 ### C044 — Around S001, Orbium's μ × σ neighbourhood is one continuum: no other phenotype arises from Orbium cells, soups or rescaled Orbia except a circler at two rules and the bound pair
 
