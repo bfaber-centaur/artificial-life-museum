@@ -18,6 +18,7 @@ made of, ten times per unit of time. Some of them travel; one of them never chan
 | [G001](#g001--four-ways-to-move) | Four ways to move (animated) | S001, S101, S102, S103 | 2026-10-07 |
 | [G002](#g002--portraits) | Portraits | S001, S101, S102, S103 | 2026-10-07 |
 | [G003](#g003--contact-sheet-half-a-time-unit-at-a-time) | Contact sheet | S001, S101, S102, S103 | 2026-10-07 |
+| [G004](#g004--same-cut-two-fates) | Same cut, two fates (before and after) | S101, S001 | 2026-10-07 |
 
 ### G001 — Four ways to move
 
@@ -72,6 +73,36 @@ travel. Provenance: [`provenance.json`](exhibits/G003-contact-sheet/provenance.j
 - **Not a claim.** Eight frames do not establish a period. S102's turning rate (about 95° per
   time unit, one lap per ~3.8 time units) comes from Lane 6's dossier, not from this sheet.
 
+### G004 — Same cut, two fates
+
+![The same side injury on a bound Orbium pair and on a single Orbium, before and after](exhibits/G004-port-injury/port-injury-sheet.png)
+
+![Film of both creatures through the cut](exhibits/G004-port-injury/port-injury.gif)
+
+Video: [`port-injury.mp4`](exhibits/G004-port-injury/port-injury.mp4) · provenance:
+[`provenance.json`](exhibits/G004-port-injury/provenance.json)
+
+Both creatures settle for 300 time units. Then each gets the same injury: Lane 4's I004 "port
+injury" removes about a quarter of the mass, taken from the left-hand side relative to the
+direction of travel (s = 0.25). In the "cut" column, the vermillion cells are what was removed.
+After that the world runs on with no further help. The camera follows each creature. The film
+covers 2 time units before the cut to 60 after it and holds on the cut frame for one second.
+
+- **Observation.** In the pair, the cut takes most of one partner. What is left of that partner
+  is a small fragment at half a time unit and is gone by 2 time units. The other partner
+  glides on, and from then on it looks like an ordinary single Orbium. Its mass at the end of
+  the run, 200 time units later, is 0.437 (a single Orbium's is 0.4358). The single Orbium
+  loses the same share of itself and is gone (zero mass) 13 steps after the cut.
+- **Interpretation, from the ledger.** This matches Lane 6's C041 (*observed*, not yet reproduced
+  by a second lane). There, 18 of 18 pair runs at injuries of 10–50% ended as one Orbium, and every
+  single-Orbium control died at 10% or more. Lane 6's own caveat applies here too: the cut lands
+  mostly on one partner because they sit side by side. So the pair is not healing. The coupling
+  just does not drag the uninjured partner down.
+- **Disclosed difference.** Lane 4 takes the direction of travel from the previous step. The
+  gallery's wrapper ([`galintervene.py`](galintervene.py)) takes it from one probe step forward,
+  because the runner's intervention hook does not see the previous state. The cut itself is Lane
+  4's `i004_port_injury` unchanged.
+
 ## Field note, 7 October 2026
 
 > *What I saw.* Four animals, four temperaments. The Orbium set off at once along a line it never
@@ -112,8 +143,11 @@ pointing down.
 | S101 | [`S101-9ea05a4377`](../traces/S101-9ea05a4377/) | 0–3000 | `6d3055fc…` | vendored from PR #11 ([`vendor/pr11/`](vendor/pr11/)) |
 | S102 | [`S102-12fd60e362`](../traces/S102-12fd60e362/) | 0–3000 | `12c6dcad…` | vendored from PR #11 |
 | S103 | [`S103-57feb4ccc4`](../traces/S103-57feb4ccc4/) | 0–3000 | `a81efdac…` | vendored from PR #11 |
+| S101 + I004 0.25 at step 3000 (G004) | [`S101-2ca50bbd39`](../traces/S101-2ca50bbd39/) | 0–5000 | `3db8b6da…` | vendored from PR #11 |
+| S001 + I004 0.25 at step 3000 (G004) | [`S001-f51c4e7c2e`](../traces/S001-f51c4e7c2e/) | 0–5000 | `fa43239b…` | main |
 
-All four runs were made with `alm.run` at commit `96cb86c` with a clean `src/`. The full rule,
+The G001–G003 runs were made with `alm.run` at commit `96cb86c`, and the G004 runs at `066878d`,
+all with a clean `src/`. The full rule,
 grid, environment and hashes are in each trace's `manifest.json`. Each exhibit's `provenance.json`
 lists its frame range, view, overlays and disclosures.
 
@@ -142,19 +176,22 @@ listed in [`vendor/pr11/README.md`](vendor/pr11/README.md#cleanup-after-pr-11-me
 
 ```bash
 ./scripts/bootstrap.sh
-git checkout 96cb86c                                   # the commit the runs were made at
+git checkout 066878d                                   # G004's commit; it has every gallery script
 .venv/bin/python research/gallery/render.py collect    # re-run the four simulations
 .venv/bin/python research/gallery/render.py render     # replay, verify hashes, draw exhibits
 ```
 
-`collect` writes `research/traces/<run_id>/` and `runs.json`. At `96cb86c` it reproduces the run
-IDs above, and on any commit it reproduces the final-state hashes. `render` replays each run listed
+`collect` writes `research/traces/<run_id>/` and `runs.json`, running only the configurations
+`runs.json` does not already list. Run IDs include the commit, so a fresh `collect` gives new IDs,
+but it reproduces the final-state hashes above on any commit. `render` replays each run listed
 in `runs.json` from its manifest and stops with an error unless the replay's final state matches
 `final_state_sha256`. A single run can also be repeated on its own:
 
 ```bash
 .venv/bin/python -m alm.run --specimen S001 --steps 3000 --every 10
 .venv/bin/python research/gallery/run_specimen.py --specimen S102 --steps 3000 --every 10   # S101–S103
+.venv/bin/python research/gallery/run_specimen.py --specimen S101 --steps 5000 --every 10 \
+    --intervene 3000:gallery_port_injury:s=0.25                                        # G004
 ```
 
 `tests/test_gallery.py` runs the whole pipeline end to end on short (60-step) real runs in a
@@ -186,5 +223,7 @@ merged, plain `alm.run` does the same.
 
 ## Cycle log
 
+- **2026-10-07, cycle 2 (Lane 8).** G004: the bound pair and a single Orbium under the same port
+  injury (C041), from two new runs with the injury at step 3000.
 - **2026-10-07, cycle 1 (Lane 8).** First gallery: G001–G003 from four new runs of S001 and
   S101–S103.
