@@ -1,0 +1,3 @@
+job_id,n,R,T,mu,sigma,core,growth,path,boundary,dtype,zoom_order,steps,final_t,alive,fate,mass,mass_rel_sd,mass_min,mass_max,gyradius,speed,speed_cells_per_step,heading_deg,mass_period_steps,mass_period_tu,mass_period_power,wall_s
+float64,128,13,10,0.15,0.015,poly,poly,fft,wrap,float64,0,4000,400,1,persists,0.435803,0.00255784,0.433186,0.438019,0.437641,0.479421,0.623248,68.198,4.31799,0.431799,0.19757,2.4
+float32,128,13,10,0.15,0.015,poly,poly,fft,wrap,float32,0,4000,400,1,persists,0.435755,0.00299264,0.432696,0.438325,0.437601,0.479524,0.623381,68.037,9.06647,0.906647,0.165671,2.3
