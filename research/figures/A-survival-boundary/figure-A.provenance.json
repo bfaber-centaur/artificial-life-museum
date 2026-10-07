@@ -122,7 +122,7 @@
     {
       "path": "research/figures/A-survival-boundary/make_figure.py",
       "sha256": "2eff1c20e4a09fb07b6238608964faee0908f4a7ecc884b90c7267c2ac91f4e8",
-      "last_commit": "08b074f"
+      "last_commit": "31b6c9a"
     },
     {
       "path": "research/figures/figlib/__init__.py",
@@ -137,17 +137,17 @@
     {
       "path": "research/figures/figlib/ledger.py",
       "sha256": "6d9176c9df0c7f7f941d656fbc71435ecd3106c425bbb83d0ac6e998f21f1657",
-      "last_commit": ""
+      "last_commit": "31b6c9a"
     },
     {
       "path": "research/figures/figlib/provenance.py",
       "sha256": "fced7dc12e57f5f1642c914ab03142aa69d41d7f6c99170d6f73c8cca5124c9e",
-      "last_commit": "6265847"
+      "last_commit": "31b6c9a"
     },
     {
       "path": "research/figures/figlib/style.py",
       "sha256": "18259845efd0dd71925eca72538946a34771901f1b8227aa4e66ecff86b088e1",
-      "last_commit": "08b074f"
+      "last_commit": "31b6c9a"
     },
     {
       "path": "research/traces/lane3/disturb-T10-R13.csv",
@@ -172,8 +172,8 @@
     "research/figures/A-survival-boundary/figure-A-edges.csv",
     "research/figures/A-survival-boundary/figure-A-runs.csv"
   ],
-  "code_commit": "a03236d",
-  "code_dirty": true,
+  "code_commit": "31b6c9a",
+  "code_dirty": false,
   "versions": {
     "python": "3.13.16",
     "numpy": "2.5.3",
