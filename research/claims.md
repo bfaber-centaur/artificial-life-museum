@@ -48,7 +48,7 @@ Ledger conventions (added by the claims archivist, Lane 0):
 - `INDEPENDENTLY_CHECKED` is used only where two lanes ran **distinct implementations** and got
   the same answer. Two lanes running the same stepper count as `REPRODUCED`.
 - Where lanes disagree, each side gets its own claim and both carry a **Dispute** line pointing
-  at the other and at the [Open disputes](#open-disputes) table. The archivist does not pick a
+  at the other and at the [Disputes](#disputes) table. The archivist does not pick a
   winner; the status changes only when new evidence lands.
 
 ### Execution paths referred to below
@@ -65,11 +65,11 @@ Unless a claim says otherwise, the rule is the S001 baseline: Orbium O2u cells f
 core and polynomial growth, R = 13, T = 10 (dt = 0.1), μ = 0.15, σ = 0.015, β = [1],
 Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, deterministic (no seed).
 
-## Open disputes
+## Disputes
 
 | Dispute | Claims | Lanes | State |
 | --- | --- | --- | --- |
-| D1: does S001's heading stay lattice-locked at R = 26? | C012 vs C013 | Lane 3 vs Lane 7 | open on wording, not data. Lane 7 (HR-005) points to repeated plateaus in Lane 3's own `heading-R26.csv`; the archivist confirmed that 14 of Lane 3's 19 R = 26 headings in 0–45° match a Lane 7 heading to ≤ 0.01° (12.5°/15° → 53.28°, 30°/32.5° → 36.72°). Lane 3 has not yet restated its claim; rechecking (2026-10-07). 07:58: Lane 3 reported (relayed by the coordinator) that a 1° sweep over 32 000 steps settles 46 starts on 20 headings and that it is correcting PR #8; D1 closes when that correction lands. |
+| D1: does S001's heading stay lattice-locked at R = 26? | C012 vs C013 | Lane 3 vs Lane 7 | **resolved 2026-10-07** in favour of C013. Lane 3's finer, longer sweep (PR #8 @ `5f316f3`, `heading-R26-fine-long.csv`) found 20 settled headings from 46 starts and Lane 3 withdrew C012. |
 
 ## Lane intake index
 
@@ -93,6 +93,8 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
 | Lane 5 L5-axis-breathing proposed claim (PR #9 @ `c5d2435`) | C025 |
 | Lane 5 `symmetry_order` noise-floor fix (PR #9 @ `c5d2435`) | C021 history |
 | Lane 4 L4-001 results at commit `12d9265` (PR #5, open; no claim proposed yet) | C023 |
+| Lane 3 PR #8 @ `5f316f3`: corrected claim 3, new claim 7 (L4-001 replication) | C012, C013, C023, C026, C027 |
+| Lane 7 hostile-review HR-007 (C023 world size, thresholds) | C023, C026 |
 | Lane 6 | not started |
 
 ## Claims
@@ -382,15 +384,15 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
 - **Reproduction command:** `python -m alm_check.heading --R 13`; `h001_explore.py 13 1`
 - **Known caveats:** heading at R = 13 is a grid property, so **heading and anything measured in
   the creature's frame are NUMERICALLY_FRAGILE as organism traits**. Some runs still drift after
-  thousands of steps. The baseline heading also depends on T (C009). Behaviour at R = 26 is
-  disputed (C012, C013).
+  thousands of steps. The baseline heading also depends on T (C009). The lock weakens but
+  persists at R = 26 (C013).
 - **History:**
   - 2026-10-07 — INDEPENDENTLY_CHECKED — archivist, on agreement of Lane 3 and Lane 7 at R = 13.
 
 ### C012 — At R = 26 the heading lock mostly disappears
 
-- **Status:** OBSERVED
-- **Dispute:** D1, contradicted by C013. Lane 3 is rechecking. Lane 7 (HR-005) points out that
+- **Status:** REFUTED (withdrawn by Lane 3)
+- **Dispute:** D1, resolved in favour of C013. Lane 7 (HR-005) points out that
   Lane 3's own CSV repeats plateau headings at R = 26 (rotations 12.5°/15° → 53.28°, 30°/32.5° →
   36.72°, 65°/67.5° → 2.06°); the archivist confirmed these rows.
 - **Owner lane:** Lane 3
@@ -409,10 +411,12 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
   reports that a coarse 3° sweep hid the plateaus in its own data; Lane 3's step is 2.5°.
 - **History:**
   - 2026-10-07 — OBSERVED — Lane 3.
+  - 2026-10-07 — REFUTED — Lane 3 (PR #8 @ `5f316f3`): with 1° steps over 32 000 steps the 46
+    starts settle on 20 headings, on plateaus 2–5° wide; the 2.5° sweep had stepped over them.
 
 ### C013 — At R = 26 the heading lock persists, weaker: 46 start rotations settle on 17 headings
 
-- **Status:** INDEPENDENTLY_CHECKED (the plateau headings); the interpretation is disputed (D1)
+- **Status:** INDEPENDENTLY_CHECKED
 - **Dispute:** D1, contradicts C012.
 - **Owner lane:** Lane 7
 - **Sources:** hostile-review HR-001b (PR #7, open)
@@ -431,6 +435,12 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
   36.72, 30.65, 25.91°. The archivist compared the two files: 14 of Lane 3's 19 runs in 0–45°
   end within 0.01° of a Lane 7 final heading; the other 5 differ by 0.04–0.9° (3 of them still
   drifting by Lane 3's own measure).
+- **Second independent sweep (Lane 3, PR #8 @ `5f316f3`):** `alm_check`, 1° steps over 0–45°,
+  3200 time units (32 000 steps). Distinct headings within 0.1°: 22 at t = 800, 20 at t = 1600,
+  2400 and 3200; 39 of 46 starts share a heading with a neighbour; largest empty gap 5.6°
+  (9.3° at R = 13). Settled headings hold to ±0.03° from t = 1600 to 3200. The 17-vs-20 count
+  difference is clustering tolerance and horizon. Data: `research/traces/lane3/heading-R26-fine-long.csv`;
+  command `python -m alm_check.heading --R 26 --step 1 --max-angle 45 --horizon 3200 --tag=-fine-long`.
 - **Known caveats:** exploratory, not preregistered; not yet run on `alm`. Lane 3's
   `nearest_rational_slope` labels at R = 26 are off by up to 0.9°, so they are not evidence of
   rational-slope locking at R = 26 (HR-005).
@@ -438,6 +448,7 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
   - 2026-10-07 — OBSERVED — Lane 7.
   - 2026-10-07 — INDEPENDENTLY_CHECKED — archivist, plateau headings matched in Lane 3's data
     (HR-005). D1 stays open until Lane 3 restates or defends C012.
+  - 2026-10-07 — D1 resolved — Lane 3's 32 000-step 1° sweep agrees; Lane 3 withdrew C012.
 
 ### C014 — R = 13 is resolution-converged for S001's mean mass, size and speed (but not for mean anisotropy)
 
@@ -629,7 +640,9 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
 
 ### C023 — Each of four standardized disturbances has a single sharp RECOVERED → DIED edge for S001, at small strength, with no intermediate outcomes
 
-- **Status:** REPRODUCED (classifications at every bracket end on `ref` and `alm`)
+- **Status:** INDEPENDENTLY_CHECKED at T = 10, R = 13 (Lane 4 on `ref` + `alm`; Lane 3 on
+  `alm_check` with its own battery code). The exact I003 and I004 edge values are
+  NUMERICALLY_FRAGILE in T (C027).
 - **Owner lane:** Lane 4
 - **Sources:** `research/experiments/L4-001-disturbance-battery/protocol.md` (preregistered at
   `aa4cd5c`) and `results/summary.md`, `results/bisect-brackets.csv` (commit `12d9265`, PR #5,
@@ -662,10 +675,29 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
     I002 s = 0.0594 at t0 = 1000, I002 s = 0.0781 at t0 = 1004, I003 s = 0.3156 at t0 = 1003. So the
     edge sits up to one bisection step lower on the larger torus for some phases. Lane 4 has not
     commented on this yet.
-- **Known caveats:** the `ref`/`alm` agreement shares Lane 4's intervention and classifier code, so
-  it is REPRODUCED, not independently checked. Lane 3 reported (relayed by the coordinator,
-  07:58) that its own implementation matches all 20 transition points at T = 10, R = 13; that
-  evidence is not yet pushed, and the status moves to INDEPENDENTLY_CHECKED when it is. Amendment A1 preregisters T = 20 and R = 26 re-runs, not yet reported. Lane 7
+- **Independent replication (Lane 3, PR #8 @ `5f316f3`):** `alm_check.disturb` re-implements the
+  battery from `protocol.md` alone (no Lane 2 or Lane 4 code), bisected to 1/1280. The archivist
+  checked `disturb-T10-R13-brackets.csv` against Lane 4's `bisect-brackets.csv`: **all 20 of
+  Lane 3's s\* fall inside Lane 4's brackets.** Across 1260 runs (T10/R13, T40/R13, T10/R26) every
+  failure is DIED. At R = 26 every edge stays put and the phase spread shrinks 3–6× (I003
+  0.0078 → 0.0023, I004 0.0094 → 0.0016): I001 0.0988–0.0996, I002 0.0809–0.0902 R,
+  I003 0.3074–0.3098, I004 0.0801–0.0816.
+- **World size (Lane 7 HR-007, PR #7 @ `a2a1d2a`):** the 3 N = 192 deaths are not a torus effect.
+  The creature states at t0 agree to 9e−6. The circular-mean centroid used to place I002–I004
+  has an N-dependent bias (≈ 0.007/0.012 cells at N = 128, 0.003/0.005 at 192). Moving the edit
+  by that much adds a fourth pixel to the I002 disc (ΔM −3.97% → −5.3%) or shifts the I003
+  Gaussian. Swap test: at N = 128 with N = 192's centroid, all 3 die. With a bias-corrected
+  centroid, **40 of 40 classes agree between N = 128 and 192**; the same 3 survive-side runs then
+  die at N = 128 too. Files: `research/experiments/HR007-c023-world-size/` (`swap.csv`, `refined.csv`).
+- **Thresholds (HR-007):** the ±20% bands never bind. Survive-side runs stay inside the band;
+  failures reach mass < 0.01 within 46 (I001), 74 (I003) and 48 (I004) steps of the edit, with
+  no long slowing-down near the edge (`deathtime.txt`).
+- **Known caveats:** the I002/I003 bracket positions depend on the centroid estimator at the
+  bisection resolution, so they carry a placement uncertainty of at least ±1 step (±0.003 in s);
+  Lane 4 has not yet re-run with a bias-corrected centroid. Report I002 as removed mass, not
+  radius: at R = 13 three central cells (3.9–4.0% of mass) survive and four (5.2–5.4%) die at
+  every phase (Lane 3, HR-007). I003 and I004 shift 11–13% at T = 40 (C027). Phase replicates
+  are consecutive steps and sample only a thin line through the 2-D sub-pixel phase (HR-002, open). Amendment A1 preregisters T = 20 and R = 26 re-runs, not yet reported. Lane 7
   (HR-002) objects that five consecutive t0 sample only a thin slice of the 2-D lattice phase,
   and that post-recovery heading should be recorded (C011). Recovery is judged against
   T = 10 / R = 13 baseline numbers, which are themselves discretisation-dependent (C009, C010).
@@ -673,6 +705,8 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
   - 2026-10-07 — OBSERVED — archivist, from Lane 4's generated summary at `12d9265`.
   - 2026-10-07 — REPRODUCED — archivist, `alm` bracket re-runs match 40/40 (`0e2cbe2`); N = 192
     shifts 3 of 40 bracket ends.
+  - 2026-10-07 — INDEPENDENTLY_CHECKED — archivist, on Lane 3's 20/20 replication (`5f316f3`);
+    N = 192 shift explained as centroid-estimator bias (HR-007, `a2a1d2a`).
 
 ### C024 — S001's short-period (2–15 step) feature fluctuations on the diagonal plateaus shrink with resolution
 
@@ -722,3 +756,48 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
   resolution criterion).
 - **History:**
   - 2026-10-07 — NUMERICALLY_FRAGILE — Lane 5 proposed; archivist ledgered.
+
+### C026 — Where mass is removed matters more than how much: S001 survives losing 10% uniformly but dies from about 5% removed at its centre
+
+- **Status:** INDEPENDENTLY_CHECKED
+- **Owner lane:** Lane 4 (data), Lane 3 (replication), Lane 7 (statement, HR-007)
+- **Sources:** L4-001 `results/coarse.csv` (achieved ΔM/M₀), Lane 3 lane3/README "Lane 4 disturbance
+  battery, replicated" (PR #8 @ `5f316f3`), hostile-review HR-007 (PR #7 @ `a2a1d2a`)
+- **Specimen / version:** S001, dossier commit `65c03cc`
+- **Simulator / version:** `ref` and `alm` (Lane 4); `alm_check` (Lane 3)
+- **Parameters:** baseline rule, T = 10, R = 13, 128²; t0 = 1000–1004
+- **Intervention:** I001 uniform attenuation; I002 central disc deletion; I004 port-side cut; I003 frontal addition
+- **Metric:** achieved mass change ΔM/M₀ at the RECOVERED → DIED edge (C023 classes)
+- **Result:** edges in mass units: uniform −10.0% (I001), central −5.2 to −5.4% (I002; −3.9 to
+  −4.0% survives), port side ≈ −8 to −9% (I004). **Adding** ≈ +28% mass ahead of the creature
+  also kills (I003). A "fraction of mass lost" predictor cannot explain these edges.
+- **Run IDs:** as C023 (`L4-001-*-N128-ref`, `-alm`); Lane 3 `research/traces/lane3/disturb-T10-R13*.csv`
+- **Search / parameter bounds:** four interventions, five phases, R = 13 (R = 26 and T = 40 in C023/C027)
+- **Reproduction command:** as C023; `python -m alm_check.disturb --T 10 --R 13`
+- **Known caveats:** one specimen; the comparison spans different body regions, so it does not
+  isolate which region matters. I004 shifts with T (C027). At R = 26 the I002 edge is
+  −4.6 to −5.0% → −5.3 to −5.6% (Lane 3).
+- **History:**
+  - 2026-10-07 — INDEPENDENTLY_CHECKED — archivist, on C023's two-implementation data.
+
+### C027 — The frontal-addition (I003) and port-side-injury (I004) kill edges move 11–13% when the timestep is quartered (T = 10 → 40)
+
+- **Status:** NUMERICALLY_FRAGILE
+- **Owner lane:** Lane 3
+- **Sources:** lane3/README claim 7 and table (PR #8 @ `5f316f3`, open)
+- **Specimen / version:** S001, dossier commit `65c03cc`
+- **Simulator / version:** `alm_check.disturb` @ `5f316f3`
+- **Parameters:** R = 13, 128²; T = 10 vs T = 40; bands centred on each condition's own s = 0
+  control (L4-001 amendment A1)
+- **Intervention:** L4-001 battery I001–I004, t0 = 100 time units + five 0.1-unit offsets
+- **Metric:** bisected transition s\* (bracket 1/1280)
+- **Result:** I003 0.3090–0.3168 → 0.3348–0.3566 (+11%); I004 0.0793–0.0887 → 0.0887–0.1004
+  (+13%). Both shifts exceed the T = 10 phase spread, so they are discretisation-sensitive by A1's
+  rule. I001 0.1004–0.1027 → 0.1020–0.1082 (+4%) and I002 0.0598–0.0871 → 0.0605–0.0871 barely move.
+- **Run IDs:** `research/traces/lane3/disturb-T40-R13.csv`, `disturb-T40-R13-brackets.csv`
+- **Search / parameter bounds:** T ∈ {10, 40}
+- **Reproduction command:** `python -m alm_check.disturb --T 40 --R 13`
+- **Known caveats:** single path; Lane 4's own A1 run (T = 20, R = 26) is not yet reported. Consistent
+  with C009: the T = 10 creature is slower and, by this measure, more fragile than the Δt → 0 one.
+- **History:**
+  - 2026-10-07 — NUMERICALLY_FRAGILE — Lane 3; archivist ledgered.
