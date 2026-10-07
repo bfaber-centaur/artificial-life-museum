@@ -70,7 +70,7 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
 | Dispute | Claims | Lanes | State |
 | --- | --- | --- | --- |
 | D1: does S001's heading stay lattice-locked at R = 26? | C012 vs C013 | Lane 3 vs Lane 7 | **resolved 2026-10-07** in favour of C013. Lane 3's finer, longer sweep (PR #8 @ `5f316f3`, `heading-R26-fine-long.csv`) found 20 settled headings from 46 starts and Lane 3 withdrew C012. |
-| D2: does S102 at its registered rule survive refinement to R = 26? | C039 vs C047 | Lane 6 vs Lane 3 | **open** (2026-10-07). Agreed: the bilinearly resized seed dies at R 26, in `field.py` (Lane 6) and in `alm_check` (Lane 3, also at R 39). Contested: Lane 3's block, nearest and cubic seeds live 1000 tu at R 26 and 39 (`alm_check` only), so Lane 3 proposes narrowing C039 to the bilinear seed. Lane 6 has not responded. |
+| D2: does S102 at its registered rule survive refinement to R = 26? | C039 vs C047 | Lane 6 vs Lane 3 | **resolved 2026-10-07** in favour of C047. Lane 6 reran Lane 3's four seed resizes in `field.py` (`d2_resize.py`, `d2-resize.csv` in `research/experiments/L6-007-attractor-geography/` (branch `claude/night0-field-tmbx06` @ `413003d`, no PR yet)): block, nearest and cubic seeds are healthy circlers at R 26 and 39 for 1000 tu, and only the bilinear seed dies (8.3 and 6.0 tu). Two distinct engines now agree, and Lane 6 conceded C039 and proposed REFUTED. |
 
 ## Lane intake index
 
@@ -106,6 +106,7 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
 | Lane 7 hostile-review HR-007 (C023 world size, thresholds) | C023, C026 |
 | Lane 6 | not started |
 | Lane 3 L3-002 README proposed claims 1 / 2 / 3 / 4 / 5 / 6 (PR #18 @ `4998d03`, open) | C046 / C047 (D2 with C039) / C048 / C049 / C050 / C051 |
+| Lane 6 L6-007 D2 rerun of the S102 seed resizes (`claude/night0-field-tmbx06` @ `413003d`) and Lane 6's concession of C039 | C039, C047 (D2 resolved) |
 
 ## Claims
 
@@ -1123,7 +1124,7 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
 - **Search / parameter bounds:** μ ∈ {0.150, 0.155, 0.160}; σ strip in 0.0005 steps; T ∈ {10, 40}; R ∈ {13, 26}
 - **Reproduction command:** `make_seeds.py`; `bistability.py` (~1 h on 4 cores); `persistence.py --T 10 --R 13`
 - **Known caveats:** the coexistence is robust, but its σ location is NUMERICALLY_FRAGILE (shifts by
-  0.0005–0.0015 with T or R). S102 at its registered rule dies at R = 26 from a bilinear seed (C039, disputed in D2 by C047). At T = 40, Orbium at
+  0.0005–0.0015 with T or R). S102 at its registered rule dies at R = 26 only from a bilinear seed; block, nearest and cubic seeds survive (C047; C039 REFUTED, D2). At T = 40, Orbium at
   this rule became a different static body (mass 0.3873, not S103's 0.3787), not followed up. All
   three phenotypes are catalogued species (C043). Lane 6's top suggested follow-up is a second-lane
   reproduction in `alm_check`.
@@ -1132,7 +1133,8 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
 
 ### C039 — The circler S102 at its registered rule (μ 0.155, σ 0.020) does not survive doubling the resolution
 
-- **Status:** NUMERICALLY_FRAGILE
+- **Status:** REFUTED as worded (superseded by C047). The narrower fact, that the *bilinearly resized* seed
+  dies at R 26 and 39, is INDEPENDENTLY_CHECKED (`field.py` and `alm_check`).
 - **Owner lane:** Lane 6
 - **Sources:** L6-field README L6-004 and L6-006; `research/specimens/S102-circler.md` (PR #11 @ `83c8bff`, open)
 - **Specimen / version:** S102 seed (`gyrator-seed-u8.csv`)
@@ -1148,11 +1150,15 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
 - **Known caveats:** single lane. The phenotype persists at a nearby σ at R = 26, so this is a shift of
   its band, not its absence. Lane 6 resized the seed bilinearly (`persistence.py` line 49,
   `ndimage.zoom(..., order=1)`).
-- **Dispute:** **D2** with C047 (Lane 3): other resize methods survive at R 26 and 39. See [Disputes](#disputes).
+- **Dispute:** **D2** with C047 (Lane 3), resolved 2026-10-07 in favour of C047. See [Disputes](#disputes).
 - **History:**
   - 2026-10-07 — NUMERICALLY_FRAGILE — Lane 6.
   - 2026-10-07 — disputed (D2) — Lane 3 L3-002 (PR #18). Lane 3 reproduces the bilinear-seed death in
     `alm_check`; its block, nearest and cubic seeds survive. Status unchanged pending Lane 6.
+  - 2026-10-07 — REFUTED — Lane 6 reran the four resizes in `field.py` (`d2_resize.py`, `d2-resize.csv` in `research/experiments/L6-007-attractor-geography/` (branch `claude/night0-field-tmbx06` @ `413003d`, no PR yet)) and got Lane 3's result:
+    only the bilinear seed dies. Lane 6 conceded and proposed REFUTED (relayed by the coordinator). The
+    "circler lives at σ 0.0205 at R 26" result and the C038 band shift were measured from bilinear seeds
+    and have not been rerun with other resizes.
 
 ### C040 — At the coexistence rule, Lane 4's disturbances never switch a glider into a circler or back (0/316); a port injury switched the circler into the static ring S103 in 2 of 38 runs
 
@@ -1320,7 +1326,7 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
   which understates the limit when the effective order is below 1 (Lane 7 HR-005 on C009). For S001
   the direct runs at T 2560 (C051) give speed 0.5714, so the T 10 deficit is 16.1%, not 15.3%
   (archivist's arithmetic from `s001_small_dt.txt`). R-convergence is shown under block-replicated
-  seeds; S102 under bilinear seeds is the subject of D2.
+  seeds; S102 from bilinear seeds dies at R ≥ 26 (C047, D2 resolved).
 - **Prior literature** (bounded search 2026-10-07; entries in `references.md`, PR #15):
   - [Chan2019] arXiv:1812.05433 v3, §3.1.1–3.1.2 and Fig. 7, p. 17. **CONSISTENT WITH**, similar
     outcome only: Orbium's measures "remain constant" over R 9–55, while structure falls and
@@ -1331,33 +1337,36 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
 
 ### C047 — S102 at its registered rule persists at R = 26 and R = 39 from block-replicated, nearest-neighbour or cubic seeds; only the bilinear seed dies
 
-- **Status:** OBSERVED (single engine for the surviving seeds; exploratory, not preregistered)
+- **Status:** INDEPENDENTLY_CHECKED (`alm_check` and `field.py`; exploratory, not preregistered)
 - **Owner lane:** Lane 3
 - **Sources:** L3-002 README proposed claim 2 and "Disagreement with C039"; `s102_resize_check.py`,
-  `s102_resize_check.txt` (PR #18 @ `4998d03`, open)
+  `s102_resize_check.txt` (PR #18 @ `4998d03`, open); Lane 6 rerun `d2_resize.py`, `d2-resize.csv` in `research/experiments/L6-007-attractor-geography/` (branch `claude/night0-field-tmbx06` @ `413003d`, no PR yet)
 - **Specimen / version:** S102 seed (`gyrator-seed-u8.csv`), resized by R/13 four ways
-- **Simulator / version:** `alm_check` (`World`, `Rule` from `alm_check.lenia`)
+- **Simulator / version:** `alm_check` (`World`, `Rule` from `alm_check.lenia`); Lane 6 `field.py` (`Batch`)
 - **Parameters:** μ 0.155, σ 0.020, T 10, R ∈ {26, 39}, 128 × (R/13) torus, 1000 tu
 - **Intervention:** none (seed resize method varied: block, `ndimage.zoom` order 0, 1, 3, clipped to [0, 1])
 - **Metric:** death = mass/R² < 0.01; otherwise mean mass over the last 100 tu
 - **Result:** block, nearest and cubic seeds alive at 1000 tu at both R (mass 0.5234–0.5235; 0.5223
   at R 13). Bilinear seed died at t = 9 (R 26) and t = 6 (R 39). In L3-002 proper (block seeds)
-  S102 stayed a circler at R 26, R 39 and the corner (C046).
-- **Run IDs:** `s102_resize_check.txt`; L3-002 `runs.csv` S102 rows
+  S102 stayed a circler at R 26, R 39 and the corner (C046). Lane 6's `field.py` rerun of the same eight
+  seeds: block, nearest and cubic are CIRCLER at 1000 tu (mass 0.5234–0.5235, path speed ≈ 0.50 R/tu);
+  bilinear DIED at 8.3 tu (R 26) and 6.0 tu (R 39).
+- **Run IDs:** `s102_resize_check.txt`; L3-002 `runs.csv` S102 rows; Lane 6 `d2-resize.csv`
 - **Search / parameter bounds:** four resize methods × two resolutions; one seed position
 - **Reproduction command:** `.venv/bin/python research/experiments/L3-002-property-persistence/s102_resize_check.py`
-- **Known caveats:** exploratory. The surviving seeds have only been run in `alm_check`. Lane 6's
-  `persistence.py` (`ndimage.zoom(..., order=1)`, line 49 on `main`) used bilinear, so on the
-  bilinear seed the two engines agree. Lane 3 reads the result as initial-condition sensitivity
+- **Known caveats:** exploratory in both lanes; one seed position. Lane 6's original
+  `persistence.py` (`ndimage.zoom(..., order=1)`, line 49 on `main`) used bilinear, which is why C039
+  saw a death. Lane 6's rerun is on a branch with no PR yet. Lane 3 reads the result as initial-condition sensitivity
   and passes it to the attractor-geography expedition (Lane 6).
-- **Dispute:** **D2** with C039. See [Disputes](#disputes).
+- **Dispute:** **D2** with C039, resolved 2026-10-07 in favour of this claim. See [Disputes](#disputes).
 - **Prior literature** (bounded search 2026-10-07; entries in `references.md`, PR #15):
   - [Davis2024] arXiv:2401.13111 v1, definition p. 18. **RELATED**: Davis calls a pattern
-    "non-Platonic" if it fails at a finer discretization but persists at a coarser one. Whether
-    S102 meets that definition is what D2 is about. Davis's Lenia gliders use Gaussian rules and do
+    "non-Platonic" if it fails at a finer discretization but persists at a coarser one. S102 at
+    its registered rule does not meet it with respect to R, except from the bilinear seed. Davis's Lenia gliders use Gaussian rules and do
     not include a circler.
 - **History:**
   - 2026-10-07 — OBSERVED — Lane 3 (L3-002 exploratory follow-up); contests C039 (D2).
+  - 2026-10-07 — INDEPENDENTLY_CHECKED — Lane 6 reproduced all eight outcomes in `field.py` (`413003d`); D2 resolved.
 
 ### C048 — S103 is a bitwise fixed point at every timestep tested (T 10–80), but block-scaled to R = 26 or 39 it relaxes to a different static ring
 
