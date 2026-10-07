@@ -15,14 +15,19 @@ Tests: [`tests/replication/`](../../../tests/replication/).
    a property of continuous Lenia.
 3. **S001's heading locks to lattice directions at R = 13.** After a start rotation the travel
    heading falls on a staircase of plateaus (for example 68.20° = atan(5/2) for start
-   rotations 0–5°, and 21.80° = atan(2/5) for 42.5–50°). At R = 26 the staircase mostly
-   flattens onto the continuum line. Heading is therefore a grid property at the baseline
-   resolution, not an organism trait.
+   rotations 0–5°, and 21.80° = atan(2/5) for 42.5–50°). At R = 26 the lock is weaker but
+   still there: 46 start rotations 1° apart settle onto 20 headings, on plateaus 2–5° wide.
+   Heading is a grid property at both resolutions, not an organism trait. (An earlier
+   version of this report said the lock "mostly disappears" at R = 26. That came from a
+   2.5° sweep that stepped over the narrower plateaus; see "Heading lock".)
 4. **Resolution is otherwise fine at R = 13.** Mass, size and speed at R = 13 are within 0.1%
    of their values at R = 52. The mass wobble shrinks roughly as R⁻², which supports Lane 1's
    claim that it is a lattice artifact. Orbium dies at R ≤ 7, and survival is non-monotone
    from R = 8 to 10.
-5. **Boundaries.** Any periodic torus from 32² to 256² gives the same statistics to 1e-6, so
+5. **Lane 4's disturbance edges reproduce.** On the independent stepper, all 20 survive/die
+   transitions of L4-001 fall inside Lane 4's brackets. They hold at R = 26 with less phase
+   scatter. Two of the four (frontal addition, port-side injury) move 11–13% at T = 40.
+6. **Boundaries.** Any periodic torus from 32² to 256² gives the same statistics to 2e−5, so
    128² has no self-interaction. A dead (zero-padded) edge does not kill Orbium: it slides
    along the wall into the corner and parks there, alive.
 
@@ -140,14 +145,78 @@ The plateau set is symmetric under the lattice's reflections (68.20 ↔ 21.80 ac
 ±12.68 across 0°), which a property of the organism would not be. Speed also depends on
 the locked direction at R = 13: 0.4794 on the 5/2 and 2/5 plateaus, 0.4778 at ±12.68°, and
 0.474 near the axis (a 1.2% anisotropy; Lane 1 saw no difference because its three test
-angles all landed on 5/2-type plateaus). At R = 26 the heading follows the continuum line
-with only a few short plateaus left, and speed is 0.4794–0.4798 at every angle. Some runs
-were still drifting slowly at t = 800 (up to 4.5° between t = 100–200 and t = 700–800), so
-a few plateau values may not be final.
+angles all landed on 5/2-type plateaus). At R = 26 speed is 0.4794–0.4798 at every angle.
+
+**R = 26, settled by a finer and longer sweep.** Lane 7 (PR #7) found 17 headings for 46 start
+rotations at R = 26, while the 2.5° sweep above looked close to the continuum line. To tell
+sweep resolution from run length apart, I reran R = 26 with 1° steps over 0–45° for 3200
+time units (32 000 steps, 4× Lane 7's horizon) and recorded the heading at t = 800, 1600,
+2400 and 3200 (`python -m alm_check.heading --R 26 --step 1 --max-angle 45 --horizon 3200
+--tag=-fine-long`; data in `heading-R26-fine-long.csv`).
+
+| Window ending at t = | 800 | 1600 | 2400 | 3200 |
+| --- | --- | --- | --- | --- |
+| distinct headings (within 0.1°) of 46 starts | 22 | 20 | 20 | 20 |
+| starts sharing a heading with a neighbour | 38 | 39 | 39 | 39 |
+| largest empty gap | 5.6° | 5.6° | 5.6° | 5.6° |
+
+The gap was **sweep resolution**. Plateaus at R = 26 are 2–5 start-degrees wide (11–15° all
+give 53.28°, 16–18° give 49.33°, 29–32° give 36.72°), so 2.5° steps landed at most one or
+two starts on each and hid them. Run length matters only for the last few runs: two more
+starts snapped between t = 800 and 1600 (rotation 4°: 63.39° → 64.10°; rotation 10°:
+58.95° → 59.36°), and nothing changed after t = 1600. Every settled heading then holds to
+±0.03° for 1600+ time units, so these are real attractors, not slow drift. My count (20)
+and Lane 7's (17) differ only in the clustering tolerance and horizon; the conclusions
+match: pinning persists at R = 26, with narrower plateaus (2–5° vs up to ~17° at R = 13)
+and a smaller largest gap (5.6° vs 9.3°).
 
 The heading of the baseline run, 68.198°, sits on the atan(5/2) plateau at T = 10 and 15, but
 moves to 68.6° at T = 20 and to 66.5–66.8° at T ≥ 80. The baseline heading is selected
 jointly by the grid and the timestep.
+
+## Lane 4 disturbance battery, replicated (L4-001)
+
+Lane 4's first result (PR #5, ledger C023) is a sharp survive/die edge for each of four
+disturbances, from Lane 1/2 code only. `alm_check.disturb` re-implements the battery from
+Lane 4's pre-registered `protocol.md` (including amendment A1), without reading Lane 4's or
+Lane 2's code, and runs it on the `alm_check` stepper: the same coarse grids, five phase
+replicates (t0 = 1000–1004 steps at T = 10, i.e. 100 time units + 0.1-unit offsets), the same
+±20% outcome bands and window, and bisection to a bracket of 1/1280 (Lane 4 used 1/320).
+At T ≠ 10 or R ≠ 13 the bands are centred on that condition's own s = 0 control, as A1
+specifies. Commands: `python -m alm_check.disturb --T 10 --R 13`, `--T 40 --R 13`,
+`--T 10 --R 26`. Data: `disturb-<condition>.csv` and `disturb-<condition>-brackets.csv`.
+
+**Baseline (T = 10, R = 13): reproduced.** All 20 of my transition estimates s* (4
+interventions × 5 phases) fall inside Lane 4's bisection brackets. The coarse class pattern
+is identical, every failure is DIED (no EXPLODED or TRANSFORMED anywhere in 1260 runs
+across the three conditions), and no strength above a transition recovers.
+
+Transition s* across the five phases (min–max), by discretisation:
+
+| Intervention (strength unit) | Lane 4, T10 R13 | Lane 3, T10 R13 | Lane 3, **T40** R13 | Lane 3, T10 **R26** |
+| --- | --- | --- | --- | --- |
+| I001 mass attenuation (fraction) | 0.1016 (all phases) | 0.1004–0.1027 | 0.1020–0.1082 | 0.0988–0.0996 |
+| I002 central deletion (radius/R) | 0.0609–0.0859 | 0.0598–0.0871 | 0.0605–0.0871 | 0.0809–0.0902 |
+| I003 frontal addition (peak) | 0.3078–0.3172 | 0.3090–0.3168 | **0.3348–0.3566** | 0.3074–0.3098 |
+| I004 port-side injury (fraction) | 0.0797–0.0891 | 0.0793–0.0887 | **0.0887–0.1004** | 0.0801–0.0816 |
+
+What this says:
+
+- **The edges are real at the finer grid.** At R = 26 every transition sits where it was at
+  R = 13, and the phase spread shrinks 3–6× (I003 0.0078 → 0.0023, I004 0.0094 → 0.0016).
+  The phase smear Lane 4 saw at R = 13 is mostly lattice, not organism.
+- **I002's smear is pixel quantisation.** At R = 13 the critical disc is 0.8–1.1 cells across,
+  so the bisection is really choosing which pixel shell is included. In mass units every
+  phase behaves the same: Orbium survives losing 3.9–4.0% of its mass from the centre and
+  dies at 5.2–5.4% (the next shell). At R = 26 the threshold is 4.6–5.0% → 5.3–5.6%.
+  Report I002 by removed mass (≈ 5%), not by radius.
+- **I001's ~10% edge is robust**: 0.099 at R = 26, 0.105 at T = 40 (+4%).
+- **I003 and I004 move with the timestep.** At T = 40 the frontal-addition edge rises 11%
+  (0.313 → 0.347 mean) and the port-injury edge 13% (0.083 → 0.094). Both shifts are larger
+  than the T10/R13 phase spread, so by A1's rule they are **discretisation-sensitive (T)**.
+  This matches the baseline finding above that speed is 16% off at T = 10: the creature at
+  T = 10 is a slightly different, more fragile organism than the Δt → 0 one. I001 and I002
+  barely move.
 
 ## Boundary and precision
 
@@ -174,15 +243,23 @@ jointly by the grid and the timestep.
 2. **S001 speed at T = 10 (0.479 R/time) is 16% below its Δt → 0 limit (≈ 0.572).** Mass is
    2.6% high; gyradius is stable to 0.1%. OBSERVED, by Richardson extrapolation over
    T = 4–320. Status for any speed claim at T = 10: NUMERICALLY_FRAGILE (timestep).
-3. **At R = 13 S001's heading locks to a discrete set of lattice directions, and the lock
-   mostly disappears at R = 26.** OBSERVED (37 start angles at each R). The baseline
-   heading of 68.2° is a lattice plateau (atan 5/2). Heading is NUMERICALLY_FRAGILE.
+3. **S001's heading locks to a discrete set of lattice directions; the lock weakens but
+   persists at R = 26.** OBSERVED and INDEPENDENTLY_CHECKED with Lane 7: 46 starts give 20
+   settled headings at R = 26 (plateaus 2–5° wide, stable from t = 1600 to 3200), versus
+   about 10 at R = 13. The baseline heading of 68.2° is a lattice plateau (atan 5/2).
+   Heading is NUMERICALLY_FRAGILE.
 4. **Lane 1 claim 3 (mass wobble is a lattice artifact)**: amplitude ∝ ~R⁻² supports it. The
    specific period rule 1/|v_x| holds in 6 of 17 runs (8 counting beats) and fails in the rest. Suggest
    rewording to "amplitude vanishes with resolution".
 5. **S001 survives on a 32² torus and parks in a corner of a dead-edge box.** OBSERVED.
 6. **S001 needs R ≥ 8–11 and T ≥ 4 to survive** from the catalog cells. OBSERVED; the
    R = 8–10 band is non-monotone and depends on the resampling method.
+7. **Lane 4's survive/die edges (C023) reproduce on an independent implementation.** All 20
+   T = 10, R = 13 transitions fall inside Lane 4's brackets; INDEPENDENTLY_CHECKED. They
+   also hold at R = 26 with 3–6× less phase spread. Mass attenuation (≈ 10%) and central
+   deletion (≈ 5% of mass) are robust to T; frontal addition and port-side injury shift
+   11–13% at T = 40, so their exact values are NUMERICALLY_FRAGILE (timestep). Every failure
+   is death; no intermediate TRANSFORMED state appears.
 
 ## Caveats
 

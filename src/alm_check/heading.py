@@ -23,6 +23,7 @@ from .lenia import REPO, Rule, World, periodic_centroid, place
 from .sweeps import OUT, R0, scaled_orbium
 
 EVERY = 5
+CHECKPOINTS = (800, 1600, 2400)  # extra heading windows (time units) for long runs
 
 
 def rotated_cells(angle: float, R: float) -> np.ndarray:
@@ -58,9 +59,10 @@ def headings(job):
 
     early, v_e = head(100, 200)
     late, v_l = head(horizon - 100, horizon)
+    checkpoints = {f"heading_t{int(t)}": head(t - 100, t)[0] for t in CHECKPOINTS if t < horizon}
     frac = Fraction(np.tan(np.radians(late))).limit_denominator(8) if abs(late) < 89 else None
     return dict(angle=angle, R=R, n=n, alive=1, heading_early=early, heading_late=late,
-                drift_deg=late - early, speed_late=v_l,
+                drift_deg=late - early, speed_late=v_l, **checkpoints,
                 nearest_rational_slope=str(frac) if frac is not None else "inf",
                 rational_heading=float(np.degrees(np.arctan(float(frac)))) if frac is not None else 90.0)
 
@@ -70,13 +72,15 @@ def main(argv=None):
     ap.add_argument("--R", type=float, default=13)
     ap.add_argument("--horizon", type=float, default=800)
     ap.add_argument("--step", type=float, default=2.5)
+    ap.add_argument("--max-angle", type=float, default=90)
+    ap.add_argument("--tag", default="")
     a = ap.parse_args(argv)
-    angles = np.arange(0, 90 + 1e-9, a.step)
+    angles = np.arange(0, a.max_angle + 1e-9, a.step)
     os.environ.setdefault("OMP_NUM_THREADS", "1")
     with Pool(os.cpu_count()) as p:
         rows = p.map(headings, [(float(x), a.R, a.horizon) for x in angles], chunksize=1)
     OUT.mkdir(parents=True, exist_ok=True)
-    path = OUT / f"heading-R{a.R:g}.csv"
+    path = OUT / f"heading-R{a.R:g}{a.tag}.csv"
     with open(path, "w", newline="") as f:
         wr = csv.DictWriter(f, list(dict.fromkeys(k for r in rows for k in r)))
         wr.writeheader()

@@ -75,3 +75,25 @@ def test_lane2_baseline_trace_agrees(tmp_path):
     for k in ("mass", "growth", "gyradius", "speed"):
         assert res[k] < 1e-6, (k, res[k])
     assert res["cx"] < 1e-4 and res["cy"] < 1e-4
+
+
+def test_port_side_injury_removes_requested_mass():
+    from alm_check.disturb import apply
+
+    A = c.place(c.load_orbium(), 64)
+    cy, cx = c.lenia.periodic_centroid(A)
+    E = apply("I004", 0.3, A, np.array([cy, cx]), np.array([1.0, 0.0]), 13)
+    removed = 1 - E.sum() / A.sum()
+    assert 0.3 <= removed < 0.4
+    # heading +y (down): port normal points to -x, so the cut is on the left half
+    assert E[:, : int(cx) - 2].sum() < A[:, : int(cx) - 2].sum()
+    assert np.array_equal(E[:, int(cx) + 2 :], A[:, int(cx) + 2 :])
+
+
+def test_mass_attenuation_edge_matches_lane4_bracket():
+    """L4-001 I001 at phase t0 = 1000: survives 10.00% removal, dies at 10.31%."""
+    from alm_check import disturb as d
+
+    d._init(dict(T=10, R=13), 128)
+    assert d.classify(d._job(("I001", 0, 0.100)), d.REF_T10_R13) == "R"
+    assert d.classify(d._job(("I001", 0, 0.103125)), d.REF_T10_R13) == "D"

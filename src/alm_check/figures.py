@@ -65,9 +65,9 @@ def main():
     style(ax, "Mass wobble amplitude vs resolution (T=10)", "kernel radius R (cells)", "mass sd / mean")
     ax = axs[1, 1]
     for Rk, c in (("13", BLUE), ("26", ORANGE)):
-        h = load(f"heading-R{Rk}")
+        h = load("heading-R13" if Rk == "13" else "heading-R26-fine-long")
         a, late = num(h, "angle"), num(h, "heading_late")
-        ax.plot(a, late, "-o", color=c, lw=1.5, ms=4, label=f"R = {Rk}")
+        ax.plot(a, late, "-o", color=c, lw=1.5, ms=4, label=f"R = {Rk}" + (" (1° steps, t = 3200)" if Rk == "26" else " (2.5° steps, t = 800)"))
         if Rk == "26":
             ax.plot(a, late[0] - a, "--", color=MUTED, lw=1, label="no-lattice prediction")
     ax.legend(frameon=False, fontsize=8)
