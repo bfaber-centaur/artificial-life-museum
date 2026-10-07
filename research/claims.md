@@ -69,7 +69,7 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
 
 | Dispute | Claims | Lanes | State |
 | --- | --- | --- | --- |
-| D1: does S001's heading stay lattice-locked at R = 26? | C012 vs C013 | Lane 3 vs Lane 7 | open on wording, not data. Lane 7 (HR-005) points to repeated plateaus in Lane 3's own `heading-R26.csv`; the archivist confirmed that 14 of Lane 3's 19 R = 26 headings in 0–45° match a Lane 7 heading to ≤ 0.01° (12.5°/15° → 53.28°, 30°/32.5° → 36.72°). Lane 3 has not yet restated its claim; rechecking (2026-10-07). |
+| D1: does S001's heading stay lattice-locked at R = 26? | C012 vs C013 | Lane 3 vs Lane 7 | open on wording, not data. Lane 7 (HR-005) points to repeated plateaus in Lane 3's own `heading-R26.csv`; the archivist confirmed that 14 of Lane 3's 19 R = 26 headings in 0–45° match a Lane 7 heading to ≤ 0.01° (12.5°/15° → 53.28°, 30°/32.5° → 36.72°). Lane 3 has not yet restated its claim; rechecking (2026-10-07). 07:58: Lane 3 reported (relayed by the coordinator) that a 1° sweep over 32 000 steps settles 46 starts on 20 headings and that it is correcting PR #8; D1 closes when that correction lands. |
 
 ## Lane intake index
 
@@ -629,7 +629,7 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
 
 ### C023 — Each of four standardized disturbances has a single sharp RECOVERED → DIED edge for S001, at small strength, with no intermediate outcomes
 
-- **Status:** OBSERVED
+- **Status:** REPRODUCED (classifications at every bracket end on `ref` and `alm`)
 - **Owner lane:** Lane 4
 - **Sources:** `research/experiments/L4-001-disturbance-battery/protocol.md` (preregistered at
   `aa4cd5c`) and `results/summary.md`, `results/bisect-brackets.csv` (commit `12d9265`, PR #5,
@@ -654,13 +654,25 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
   `results/coarse.csv` and `results/bisect.csv`
 - **Search / parameter bounds:** coarse grids 0–0.95 or 0–1.00 by 0.05; phases t0 = 1000–1004
 - **Reproduction command:** see `research/experiments/L4-001-disturbance-battery/run.py` and `analyze.py`
-- **Known caveats:** single execution path (`alm` re-run and N = 192 re-run are still to come per the
-  protocol). Amendment A1 preregisters T = 20 and R = 26 re-runs, not yet reported. Lane 7
+- **Robustness re-runs (commit `0e2cbe2`, `results/check-*.csv`):** the archivist compared each
+  re-run's class with the `ref` bisection bracket (`s_ok` → RECOVERED, `s_fail` → DIED):
+  - `alm` engine, N = 128 (`check-alm-N128.csv`): **40 of 40 bracket ends match.**
+  - 5000-step horizon on `ref` (`check-ref-N128-H5000.csv`): 8 of 8 match; no late class changes.
+  - N = 192 torus on `ref` (`check-ref-N192.csv`): 37 of 40 match. Three `s_ok` runs DIE at N = 192:
+    I002 s = 0.0594 at t0 = 1000, I002 s = 0.0781 at t0 = 1004, I003 s = 0.3156 at t0 = 1003. So the
+    edge sits up to one bisection step lower on the larger torus for some phases. Lane 4 has not
+    commented on this yet.
+- **Known caveats:** the `ref`/`alm` agreement shares Lane 4's intervention and classifier code, so
+  it is REPRODUCED, not independently checked. Lane 3 reported (relayed by the coordinator,
+  07:58) that its own implementation matches all 20 transition points at T = 10, R = 13; that
+  evidence is not yet pushed, and the status moves to INDEPENDENTLY_CHECKED when it is. Amendment A1 preregisters T = 20 and R = 26 re-runs, not yet reported. Lane 7
   (HR-002) objects that five consecutive t0 sample only a thin slice of the 2-D lattice phase,
   and that post-recovery heading should be recorded (C011). Recovery is judged against
   T = 10 / R = 13 baseline numbers, which are themselves discretisation-dependent (C009, C010).
 - **History:**
   - 2026-10-07 — OBSERVED — archivist, from Lane 4's generated summary at `12d9265`.
+  - 2026-10-07 — REPRODUCED — archivist, `alm` bracket re-runs match 40/40 (`0e2cbe2`); N = 192
+    shifts 3 of 40 bracket ends.
 
 ### C024 — S001's short-period (2–15 step) feature fluctuations on the diagonal plateaus shrink with resolution
 
