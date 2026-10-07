@@ -105,27 +105,27 @@
     {
       "path": "research/figures/A-survival-boundary/make_figure.py",
       "sha256": "b1c7e3f74e87531bc5ef1c70b363f9ee9c287873c215a2168e2ee19cdef7485e",
-      "last_commit": ""
+      "last_commit": "08b074f"
     },
     {
       "path": "research/figures/figlib/__init__.py",
       "sha256": "23d1dd07a43a84f1f441481050b2daa508a69658e3b71bb3bd1d6da0fa9f7b70",
-      "last_commit": ""
+      "last_commit": "08b074f"
     },
     {
       "path": "research/figures/figlib/edges.py",
       "sha256": "f66c531fc0d3f4471076e550384a8dc06797c1eb831574c9376ab63c8a84ef62",
-      "last_commit": ""
+      "last_commit": "08b074f"
     },
     {
       "path": "research/figures/figlib/provenance.py",
-      "sha256": "6b18dd10badb1e2fa51ed7faa954fe720ae7c22dd4fe6d7079e701ee685fff50",
-      "last_commit": ""
+      "sha256": "e3f837d7d157d3a297cfeb479caa77195f93727062ff0d81163c4f9212f09a07",
+      "last_commit": "6265847"
     },
     {
       "path": "research/figures/figlib/style.py",
       "sha256": "67a34eeb75b587e72ad5ba5f076f5e0d47fbbec40a81a99e9b16c510657ef4dd",
-      "last_commit": ""
+      "last_commit": "08b074f"
     },
     {
       "path": "research/traces/lane3/disturb-T10-R13.csv",
@@ -150,8 +150,8 @@
     "research/figures/A-survival-boundary/figure-A-edges.csv",
     "research/figures/A-survival-boundary/figure-A-runs.csv"
   ],
-  "code_commit": "194b33f",
-  "code_dirty": true,
+  "code_commit": "6265847",
+  "code_dirty": false,
   "versions": {
     "python": "3.13.16",
     "numpy": "2.5.3",
