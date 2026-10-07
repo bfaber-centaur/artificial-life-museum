@@ -63,3 +63,14 @@ def test_heading_is_pinned_by_the_lattice_at_R13():
     h6, h9 = _heading(13, 6), _heading(13, 9)
     assert abs(h6 - 60.82) < 0.1
     assert abs(h9 - 60.82) < 0.1
+
+
+def test_axis_heading_distorts_shape_at_R13():
+    # HR-006: Lane 5's "feature means are heading-invariant" fails at R = 13. S001 locked to
+    # the lattice axis (start rotation 70 deg) is ~10% less elongated than on the 5:2 plateau.
+    import heading_means
+
+    on_plateau = heading_means.measure((13, 0))
+    on_axis = heading_means.measure((13, 70))
+    assert abs(on_axis[2]) < 3  # really travelling along the axis
+    assert on_axis[6] < 0.9 * on_plateau[6]
