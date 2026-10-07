@@ -1,0 +1,161 @@
+{
+  "exhibit": "G003",
+  "title": "Contact sheet: half a time unit at a time",
+  "media": [
+    "contact-sheet.png"
+  ],
+  "frames": {
+    "steps": [
+      2965,
+      2970,
+      2975,
+      2980,
+      2985,
+      2990,
+      2995,
+      3000
+    ]
+  },
+  "view": "48x48-cell windows, each shifted by whole cells to centre the centroid (the camera follows, so travel is hidden; G001 shows travel); 3x nearest-neighbour",
+  "overlays": [
+    "text labels"
+  ],
+  "disclosures": [
+    "camera follows the centroid in every tile"
+  ],
+  "sources": [
+    {
+      "specimen": "S001",
+      "specimen_name": "Orbium unicaudatus (O2u)",
+      "specimen_source": "research/specimens/S001-orbium.md; Chakazul/Lenia@adfc542 Python/animals.json code O2u",
+      "run_id": "S001-7c75573885",
+      "trace": "research/traces/S001-7c75573885/",
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.15,
+        "sigma": 0.015,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "grid": {
+        "shape": [
+          128,
+          128
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "simulator_commit": "96cb86c28e05cf8720ce1a66acb266dd7fc156d3",
+      "final_state_sha256": "b42e8fbba00be5f9c1bf114238250225a9481b0214268143c81c5b398987e581",
+      "replay_verified": true,
+      "reproduce_run": "git checkout 96cb86c28e05 && .venv/bin/python -m alm.run --specimen S001 --steps 3000 --every 10 --size 128 --seed 0 --burn-in 1000"
+    },
+    {
+      "specimen": "S101",
+      "specimen_name": "bound Orbium pair (Synorbium-like) under the S001 rule",
+      "specimen_source": "research/gallery/vendor/pr11/S101-orbium-pair-initial-cells-u8.csv (vendored from unmerged PR #11 @ f40f303, research/specimens/S101-orbium-pair/initial-cells-u8.csv)",
+      "run_id": "S101-9ea05a4377",
+      "trace": "research/traces/S101-9ea05a4377/",
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.15,
+        "sigma": 0.015,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "grid": {
+        "shape": [
+          128,
+          128
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "simulator_commit": "96cb86c28e05cf8720ce1a66acb266dd7fc156d3",
+      "final_state_sha256": "6d3055fc639f8fd58f487770c33c5e26f67bdfb081fcd895cff05883bfaa8f20",
+      "replay_verified": true,
+      "reproduce_run": "git checkout 96cb86c28e05 && .venv/bin/python research/gallery/run_specimen.py --specimen S101 --steps 3000 --every 10 --size 128 --seed 0 --burn-in 1000"
+    },
+    {
+      "specimen": "S102",
+      "specimen_name": "Gyrorbium-like circler under the coexistence rule",
+      "specimen_source": "research/gallery/vendor/pr11/S102-circler-initial-cells-u8.csv (vendored from unmerged PR #11 @ f40f303, research/specimens/S102-circler/initial-cells-u8.csv)",
+      "run_id": "S102-12fd60e362",
+      "trace": "research/traces/S102-12fd60e362/",
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.155,
+        "sigma": 0.02,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "grid": {
+        "shape": [
+          128,
+          128
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "simulator_commit": "96cb86c28e05cf8720ce1a66acb266dd7fc156d3",
+      "final_state_sha256": "12c6dcade3c6b63d9cded15d203651e79c3ae46f07bbaa44c721067e2a84510d",
+      "replay_verified": true,
+      "reproduce_run": "git checkout 96cb86c28e05 && .venv/bin/python research/gallery/run_specimen.py --specimen S102 --steps 3000 --every 10 --size 128 --seed 0 --burn-in 1000"
+    },
+    {
+      "specimen": "S103",
+      "specimen_name": "Circium-like static ring under the coexistence rule",
+      "specimen_source": "research/gallery/vendor/pr11/S103-static-ring-initial-cells-u8.csv (vendored from unmerged PR #11 @ f40f303, research/specimens/S103-static-ring/initial-cells-u8.csv)",
+      "run_id": "S103-57feb4ccc4",
+      "trace": "research/traces/S103-57feb4ccc4/",
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.155,
+        "sigma": 0.02,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "grid": {
+        "shape": [
+          128,
+          128
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "simulator_commit": "96cb86c28e05cf8720ce1a66acb266dd7fc156d3",
+      "final_state_sha256": "a81efdacfda98e0fe41063dbcebda08fd746e99ee8c5cd59e4f78d700dd72745",
+      "replay_verified": true,
+      "reproduce_run": "git checkout 96cb86c28e05 && .venv/bin/python research/gallery/run_specimen.py --specimen S103 --steps 3000 --every 10 --size 128 --seed 0 --burn-in 1000"
+    }
+  ],
+  "render": {
+    "script": "research/gallery/render.py render",
+    "colormap": "matplotlib inferno, A in [0,1] mapped linearly",
+    "upscaling": "nearest neighbour (one block per cell)"
+  }
+}
