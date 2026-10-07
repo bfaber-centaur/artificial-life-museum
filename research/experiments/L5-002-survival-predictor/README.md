@@ -4,11 +4,17 @@ Lane 5, 2026-10-07. Pre-registration: [`PREREGISTRATION.md`](PREREGISTRATION.md)
 `ca0783b` before any feature was computed on a disturbed state. Amendment A1 (empty states) was
 committed in `b331585`, before any model was fitted.
 
-**Answer: no.** No `alm.morphometrics` feature, and no pair of features, measured within 2
-time units of the edit predicts survive vs die across Lane 4's four disturbances. A feature does
-separate the outcomes later, but only once the dying creature is visibly collapsing. Near the
-edge, a creature that will die and one that will survive have the same bulk shape, to under 1%,
-for about 2 time units after the edit.
+**Answer: no transferable cut.** No `alm.morphometrics` feature, and no pair of features,
+measured within 2 time units of the edit, gives a survive/die cutoff learned on three of Lane 4's
+disturbances that works on the fourth. Within a single disturbance, early features do rank the
+near-edge outcomes almost perfectly. Lane 7 (HR-008) measured a direction-free AUC ≥ 0.93–0.96
+for several features. But that mostly tracks strength, and the edge value moves between
+disturbances by more than the survive/die gap within one. A feature does separate outcomes
+across disturbances later, but only once the dying creature is visibly collapsing.
+
+*Revised after Lane 7's review (HR-008, on PR #9). The pre-registration order was checked and
+found clean. Claim 1 now names what failed (a transferable cut). Claim 2 is narrowed to the two
+disturbances with a measured edge state.*
 
 ## Setup (as pre-registered)
 
@@ -92,17 +98,23 @@ RECOVERED or DIED, and there are no intermediate outcomes. The edge has not been
 
 ## Proposed claims (for the coordinator)
 
-1. **No early bulk-morphometric predictor of S001 survival transfers across disturbances.** No
-   single feature and no pair from the 23 pre-registered `alm.morphometrics` features at 0–2 time
-   units after the edit reaches 0.90 held-out balanced accuracy near the edge in
+1. **No survive/die cut on an early bulk morphometric transfers between S001 disturbances.**
+   This covers single features and pairs from the 23 pre-registered `alm.morphometrics` features
+   at 0–2 time units after the edit. None reaches 0.90 held-out near-edge balanced accuracy in
    leave-one-disturbance-out tests. The best is the area ratio at 2 tu, with a worst fold of 0.70.
-   OBSERVED (pre-registered negative). Single engine (`ref`), single resolution (R = 13).
-2. **Near the edge, the creature that will die looks like the survivor until about 2 time units
-   after the edit.** For I001, I003 and I004 the edge pair differs by < 1% in mass and gyradius
-   for the first 20–27 steps, and the dying run regrows to 99% of control mass first. OBSERVED,
-   exploratory. This fits Lane 4's report that collapse time grows logarithmically near the
-   edge, which suggests an unstable edge state. The outcome is carried by a small unstable
-   mode, not by bulk morphology.
+   Within a disturbance, the same features rank outcomes almost perfectly (Lane 7 HR-008). The
+   failure is that the cut does not transfer. The phases are consecutive steps, so each fold
+   holds about 5 independent edges, not 30 independent runs. OBSERVED (pre-registered
+   negative). Single engine (`ref`), single resolution (R = 13).
+2. **For attenuation (I001) and frontal addition (I003), the edge behaves like an unstable edge
+   state.** The run that will die first regrows to 99% of control mass and matches its survivor
+   twin to < 1% in mass and gyradius for 20–40 steps. Lane 7 measured one dominant unstable
+   rate, λ ≈ 1.5–1.8 per time unit, two ways for each disturbance. OBSERVED; exploratory here,
+   independently checked by Lane 7. **This does not apply to the port cut (I004) or central
+   deletion (I002).** Those edits remove whole cells. Their edge pairs are two different
+   discrete edits, and I004's doomed runs always die at step 48, with no approach to an edge
+   state at R = 13. The "< 1% for 20–27 steps" comparison for I004 in the divergence table
+   therefore compares two discrete edits.
 3. **S001's edge under rear deletion lies between about 5% and 7% mass loss** (I005, 5
    phases, coarse grid only). OBSERVED. New disturbance; Lane 4's code and classifier.
 
