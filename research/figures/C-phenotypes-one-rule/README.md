@@ -33,11 +33,16 @@ rule. Nothing is interpolated between grid points. The glider region is one conn
 two rules give a circler. At μ 0.135, σ 0.018 the circler fills the world at about 850 tu, so it
 is a transient. At μ 0.155, σ 0.022 it is still circling at 2000 tu and equals catalog OG2g.
 
-**b.** L6-004: three seeds on a σ strip around the coexistence rule (Orbium cells, the S102
-circler seed, and catalog OG2g cells), at three numerical settings. Hatched boxes mark σ samples
-where, at the same μ, the Orbium cells glide *and* the S102 seed circles. The dashed line is
-σ = 0.020, the rule S102 and S103 are registered under. Coexistence of glider and circler appears
-at every setting, but at different σ:
+**b. Resolution and timestep sensitivity.** L6-004: three seeds (Orbium cells, the S102 circler
+seed, catalog OG2g cells) on a σ strip at μ 0.150 and μ 0.155. Each seed's base run (T10 R13) sits
+directly above its resolution re-run (R 26: grid 2× finer, bold) and its timestep re-run (T 40:
+step 4× finer), so shifts read vertically. The bottom three rows of each panel give, per setting,
+the σ samples where the Orbium cells glide *and* the S102 seed circles (hatched). Grey ticks are
+sampled σ without coexistence. The dashed line is σ = 0.020, the rule S102 and S103 are registered
+under. Glider/circler coexistence appears at every setting, but its σ moves. At μ 0.155 the
+circler's lower edge rises from σ 0.020 to 0.0205 at R 26, so **at R 26 the circler seed dies at its
+own registered rule** (circled, C039). μ 0.160 was run only at T10 R13. It shows no coexistence and
+is listed in `figure-C-data.csv` but not drawn.
 
 | μ | T10 R13 | T10 R26 | T40 R13 |
 | --- | --- | --- | --- |
@@ -78,10 +83,10 @@ kind:
 Three-part figure, marked provisional. (a) A grid of 441 markers over μ (0.10–0.20) and
 σ (0.008–0.028). Blue gliders form a diagonal band from low μ and σ up to about μ 0.16 and
 σ 0.020. Grey dots (died) lie to the left, and dark squares (filled the world) to the right. Two
-pink diamonds mark circlers at μ 0.135/σ 0.018 and μ 0.155/σ 0.022. (b) Three strip plots for
-T10 R13, T10 R26 and T40 R13. In each, rows of glider and circler markers along σ overlap in one
-or two hatched columns. The overlap sits at σ ≈ 0.020 at T = 10 and moves down to ≈ 0.019 at
-T = 40. (c) A 3 × 7 table for the glider, circler S102 and static ring S103. The glider becomes a
+pink diamonds mark circlers at μ 0.135/σ 0.018 and μ 0.155/σ 0.022. (b) Two strip plots, for μ 0.150 and 0.155. Each seed's base run sits above
+its R 26 and T 40 re-runs. Hatched boxes at the bottom mark where glider and circler coexist. At
+μ 0.155 the band moves from σ 0.0200–0.0205 (base) to 0.0205 (R 26) and 0.019 (T 40). A red circle
+marks the S102 seed dying at σ 0.020 at R 26. (c) A 3 × 7 table for the glider, circler S102 and static ring S103. The glider becomes a
 different static body at T40. The circler dies at R26 and loses its phenotype at 5% attenuation
 in one of two phases. The ring persists everywhere and returns bitwise after attenuation. The
 "second lane reproduces" column reads "not yet" for all three.

@@ -41,8 +41,8 @@
   "inputs": [
     {
       "path": "research/figures/C-phenotypes-one-rule/make_figure.py",
-      "sha256": "b8860dd5df2795db5f1a7ed4ba554f4a8ee1ffa1942f243fcfc8a9a3190cbebe",
-      "last_commit": ""
+      "sha256": "d166c1fb3a19e3b8606313f83b89bf130f3080abd1e55d6527ac27aa82955ed5",
+      "last_commit": "642c576"
     },
     {
       "path": "research/figures/figlib/__init__.py",
@@ -57,7 +57,7 @@
     {
       "path": "research/figures/figlib/gitsource.py",
       "sha256": "cb9d65796293697f4cd173bc81f6a290d1097713c490534b50c88f37c197ad57",
-      "last_commit": ""
+      "last_commit": "642c576"
     },
     {
       "path": "research/figures/figlib/ledger.py",
@@ -67,12 +67,12 @@
     {
       "path": "research/figures/figlib/provenance.py",
       "sha256": "51b8064e6178735aa4dabaecde17d347291cb56821aa370adaae9e5f7dfd6623",
-      "last_commit": "31b6c9a"
+      "last_commit": "642c576"
     },
     {
       "path": "research/figures/figlib/style.py",
       "sha256": "37cf3aecfc105a526fd915a26e0c9ea300d7e1660b7bbc09fa942eb78db120ac",
-      "last_commit": "31b6c9a"
+      "last_commit": "642c576"
     }
   ],
   "pinned_inputs": [
@@ -168,7 +168,7 @@
     "research/figures/C-phenotypes-one-rule/figure-C-data.csv",
     "research/figures/C-phenotypes-one-rule/figure-C-matrix.csv"
   ],
-  "code_commit": "b84e2a8",
+  "code_commit": "642c576",
   "code_dirty": true,
   "versions": {
     "python": "3.13.16",

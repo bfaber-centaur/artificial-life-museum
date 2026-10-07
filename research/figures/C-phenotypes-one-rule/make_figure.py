@@ -117,65 +117,83 @@ def panel_map(ax, src, rows_out):
             bbox=dict(fc="white", ec=GRID, pad=2, lw=0.5), zorder=6)
 
 
+NUM_LABEL = {"T10 R13": "T10 R13 (base)", "T10 R26": "R 26: grid 2× finer", "T40 R13": "T 40: step 4× finer"}
+
+
 def panel_strips(axs, src, rows_out, status):
-    """b: L6-004 σ strips at three numerical settings, three seeds per μ."""
-    for ax, (num, fname, horizon) in zip(axs, NUMERICS):
-        rows = src.csv(f"{D6}/{fname}")
-        have = {float(r["mu"]) for r in rows}
-        mus = [0.150, 0.155, 0.160]  # same rows in every panel; a μ not run is labelled, not left out
-        y = 0
-        yt, yl = [], []
-        sig_all = sorted({float(r["sigma"]) for r in rows})
-        step = 0.0005
-        for mu in mus:
-            ys = {}
-            if mu not in have:
-                for seed, lab in SEEDS:
-                    yt.append(y)
-                    yl.append(f"μ {mu:.3f} · {lab}")
-                    y -= 1
-                ax.text(0.0217, y + 2, f"μ {mu:.3f} not run at {num}", ha="center", va="center", fontsize=6,
-                        color=MUTED, style="italic")
-                y -= 0.8
-                continue
-            for seed, lab in SEEDS:
-                ys[seed] = y
+    """b: L6-004 σ strips. One axis per μ; for each seed, the base run directly above its
+    resolution (R 26) and timestep (T 40) re-runs, so shifts read vertically."""
+    data = {}
+    for num, fname, _ in NUMERICS:
+        for r in src.csv(f"{D6}/{fname}"):
+            data[num, r["seed"], float(r["mu"]), float(r["sigma"])] = r
+    step = 0.0005
+    for ax, mu in zip(axs, (0.150, 0.155)):
+        y, yt, yl, ycol = 0, [], [], []
+        for seed, lab in SEEDS:
+            for num, fname, horizon in NUMERICS:
                 yt.append(y)
-                yl.append(f"μ {mu:.3f} · {lab}")
-                for r in rows:
-                    if r["seed"] == seed and float(r["mu"]) == mu:
+                yl.append(f"{lab} · {NUM_LABEL[num]}")
+                ycol.append(num)
+                for (n, sd, m, sg), r in data.items():
+                    if (n, sd, m) == (num, seed, mu):
                         ph = phenotype(r)
-                        mark(ax, float(r["sigma"]), y, ph, s=20)
-                        rows_out.append(["b", f"L6-004 {fname}", seed, mu, float(r["sigma"]), num, ph,
-                                         r["mass_mean"], r["speed"], r["path_speed"]])
+                        mark(ax, sg, y, ph, s=20)
+                        rows_out.append(["b", f"L6-004 {fname}", seed, mu, sg, num, ph, r["mass_mean"], r["speed"],
+                                         r["path_speed"]])
+                if (num, seed) == ("T10 R26", "gyrator") and mu == COEX[0]:
+                    ax.scatter([COEX[1]], [y], s=120, facecolors="none", edgecolors=OKABE_ITO["vermillion"],
+                               linewidths=1.0, zorder=5)
+                    ax.annotate("S102's own rule:\ndies at R 26 (C039)", (COEX[1], y), xytext=(0.0236, y),
+                                fontsize=5.8, color=OKABE_ITO["vermillion"], fontweight="bold", va="center",
+                                arrowprops=dict(arrowstyle="-", lw=0.6, color=OKABE_ITO["vermillion"]),
+                                bbox=dict(fc="white", ec="none", pad=1), zorder=6)
                 y -= 1
-            # coexistence: σ samples where Orbium cells glide AND the S102 seed circles at this μ
-            by = {(r["seed"], float(r["sigma"])): phenotype(r) for r in rows if float(r["mu"]) == mu}
-            for sg in sig_all:
-                if by.get(("orbium", sg)) == "GLIDER" and by.get(("gyrator", sg)) == "CIRCLER":
-                    ax.add_patch(Rectangle((sg - step * 0.45, ys["gyrator"] - 0.45), step * 0.9,
-                                           ys["orbium"] - ys["gyrator"] + 0.9, facecolor="none",
-                                           edgecolor=STATUS["NUMERICALLY_FRAGILE"]["color"], hatch="////",
-                                           lw=0.9, zorder=1))
-            y -= 0.8
+            y -= 0.6
+        # coexistence rows: σ where Orbium cells glide AND the S102 seed circles, per numerics
+        y -= 0.2
+        for num, _, _ in NUMERICS:
+            yt.append(y)
+            yl.append(f"glider + circler coexist · {NUM_LABEL[num]}")
+            ycol.append(num)
+            sigmas = sorted({sg for (n, sd, m, sg) in data if n == num and m == mu})
+            for sg in sigmas:
+                g = data.get((num, "orbium", mu, sg))
+                c = data.get((num, "gyrator", mu, sg))
+                if g and c and phenotype(g) == "GLIDER" and phenotype(c) == "CIRCLER":
+                    ax.add_patch(Rectangle((sg - step * 0.45, y - 0.4), step * 0.9, 0.8, facecolor="none",
+                                           edgecolor=STATUS["NUMERICALLY_FRAGILE"]["color"], hatch="////", lw=0.9,
+                                           zorder=2))
+                else:
+                    ax.plot([sg], [y], marker="|", ms=4, mew=0.8, color="#a8a8a8", ls="", zorder=1)
+            y -= 1
         ax.axvline(COEX[1], color=MUTED, lw=0.6, ls=(0, (2, 2)), zorder=0)
         ax.set_xlim(0.0176, 0.0259)
-        ax.set_ylim(y + 0.5, 0.8)
+        ax.set_ylim(y + 0.4, 0.7)
         ax.set_yticks(yt, yl if ax is axs[0] else [""] * len(yl), fontsize=5.8)
+        if ax is axs[0]:
+            for t, num in zip(ax.get_yticklabels(), ycol):
+                if num == "T10 R26":
+                    t.set_fontweight("bold")
         ax.tick_params(axis="y", length=0)
         ax.spines["left"].set_visible(False)
-        ax.set_xticks([0.018, 0.020, 0.022, 0.024])
+        ax.set_xticks([0.018, 0.019, 0.020, 0.021, 0.022, 0.023, 0.024, 0.025])
         ax.xaxis.set_major_formatter(lambda v, _: f"{v:.3f}")
+        ax.tick_params(axis="x", labelsize=5.8)
         ax.grid(axis="x", color=GRID, lw=0.4, zorder=0)
         ax.set_xlabel("σ")
-        ax.set_title(f"{num}  ({horizon})", fontsize=7, loc="left", pad=11)
-        if num == "T10 R26":
-            status_badge(ax, "C039", status["C039"], x=0.0, y=1.0, ha="left", short=True, in_layout=False)
+        ax.set_title(f"μ = {mu:.3f}" + ("  (the coexistence rule's μ)" if mu == COEX[0] else ""), fontsize=7,
+                     loc="left", pad=11)
+    for (n, sd, m, sg), r in sorted(data.items()):  # μ 0.160 (T10 R13 only): kept in the data CSV, not drawn
+        if m not in (0.150, 0.155):
+            rows_out.append(["b (not drawn)", f"L6-004 {dict((x[0], x[1]) for x in NUMERICS)[n]}", sd, m, sg, n,
+                             phenotype(r), r["mass_mean"], r["speed"], r["path_speed"]])
     status_badge(axs[0], "C038", status["C038"], x=0.0, y=1.0, ha="left", short=True, in_layout=False)
+    status_badge(axs[1], "C039", status["C039"], x=0.0, y=1.0, ha="left", short=True, in_layout=False)
 
 
 EVIDENCE_COLS = [
-    ("T10 R13", "persist"), ("T40 R13", "persist"), ("T10 R26", "persist"),
+    ("T10 R13", "persist"), ("T10 R26", "persist"), ("T40 R13", "persist"),
     ("clean rerun", "rerun"), ("returns after\nI001 attenuation", "return"),
     ("second lane\nreproduces", "second"), ("catalog\nidentity", "catalog"),
 ]
@@ -289,10 +307,10 @@ def build():
     rows_out = []
     cells = evidence(src, led["claims"], rows_out)
     with figure_style():
-        fig = plt.figure(figsize=(7.2, 9.0), layout="constrained")
+        fig = plt.figure(figsize=(7.2, 9.6), layout="constrained")
         fig.suptitle("Figure C. Several phenotypes under one rule: what is observed, and how far it is checked",
                      x=0.005, ha="left", fontsize=9, fontweight="bold")
-        sf = fig.subfigures(3, 1, height_ratios=[2.7, 3.2, 1.75], hspace=0.02)
+        sf = fig.subfigures(3, 1, height_ratios=[2.5, 3.6, 1.75], hspace=0.02)
         sf[0].text(0.005, 0.975, f"PROVISIONAL: evidence from Lane 6's unmerged PR #11 @ {PR11[:7]}; one lane, "
                    f"no second-lane reproduction yet.\nClaim statuses checked against research/claims.md @ "
                    f"{led['ledger_commit']}.",
@@ -304,9 +322,10 @@ def build():
         sf[0].supylabel(" ", fontsize=2)
         status_badge(axa, "C044", status["C044"], x=1.0, y=1.005, short=True)
 
-        axb = sf[1].subplots(1, 3, sharex=True)
+        axb = sf[1].subplots(1, 2, sharex=True)
         panel_strips(axb, src, rows_out, status)
-        sf[1].suptitle("b   Near the coexistence rule: three seeds on a σ strip, at three numerical settings",
+        sf[1].suptitle("b   Resolution and timestep checks: the coexistence band moves, and at R 26 the circler's own "
+                       "rule falls outside it",
                        x=0.005, ha="left", fontsize=7.3,
                        fontweight="bold")
 
@@ -321,7 +340,9 @@ def build():
                    for k in phs]
         handles += [Rectangle((0, 0), 1, 1, facecolor="none", edgecolor=STATUS["NUMERICALLY_FRAGILE"]["color"],
                               hatch="////", label="glider + circler coexist (location shifts with T, R)"),
-                    Line2D([], [], color=MUTED, lw=0.6, ls=(0, (2, 2)), label="σ = 0.020 (coexistence rule)")]
+                    Line2D([], [], color=MUTED, lw=0.6, ls=(0, (2, 2)), label="σ = 0.020 (coexistence rule)"),
+                    Line2D([], [], ls="", marker="|", ms=5, mew=0.8, color="#a8a8a8",
+                           label="sampled σ without coexistence")]
         fig.legend(handles=handles, loc="outside lower center", ncol=4, fontsize=6.3, handlelength=1.6,
                    columnspacing=1.2)
         axa.set_title("a   Orbium cells in 441 rules (T10 R13, 500 tu): every marker is one run; no interpolation",
