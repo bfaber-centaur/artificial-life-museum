@@ -350,8 +350,8 @@ caveats, neither disqualifying:
   so it is not an early-warning signal either. The accurate wording is **"no transferable cut"**.
 - **The test could hardly have passed.** The near-edge set is bisection runs within 1/256 of s*,
   and features are measured within 2 tu, before the pairs have separated by 1%. Lane 4's
-  separatrix exploration, public before the preregistration, already showed the collapse
-  starting at ≥ 4.7 tu near the edge. The negative is honest but carries less information than
+  separatrix exploration, public before the preregistration, already showed that near the edge the
+  collapse starts no earlier than about 5 tu (49 steps at s − s* = 4.5e−4). The negative is honest but carries less information than
   its framing suggests.
 - **The effective sample size is small.** The five phases are consecutive steps, so each fold
   holds about five independent edges, not 30 independent runs. No uncertainty is reported.
