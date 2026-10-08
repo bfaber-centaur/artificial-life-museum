@@ -55,3 +55,9 @@ def test_undeclared_claim_and_missing_file_are_refused(tmp_path, monkeypatch):
     monkeypatch.setattr(M, "ROOMS", _room(tmp_path / "b", "{{src:research/no-such-file.md}}", {}))
     with pytest.raises(M.MuseumBuildError, match="no such file"):
         M.build(tmp_path / "out")
+
+
+def test_pr_links_need_a_provisional_room(tmp_path, monkeypatch):
+    monkeypatch.setattr(M, "ROOMS", _room(tmp_path, "{{pr:27}} {{src:research/claims.md}}", {}))
+    with pytest.raises(M.MuseumBuildError, match="under_review"):
+        M.build(tmp_path / "out")

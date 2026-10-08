@@ -1,0 +1,88 @@
+<!--meta {
+  "slug": "under-review", "order": 60, "title": "Still being argued", "nav_label": "6 · Still being argued (provisional)",
+  "kicker": "Room 6 · Provisional · S102 and S101",
+  "summary": "Two exhibits in progress: a circler that eventually disappears, and a pair for which being together is sometimes worse.",
+  "provisional": true,
+  "under_review": [27, 29, 30],
+  "expect": {"C038": "REPRODUCED", "C041": "OBSERVED", "C047": "INDEPENDENTLY_CHECKED"}
+} -->
+<h1>Still being argued</h1>
+<p class="lede">This room is built while the science is still moving. Two Night 1
+experiments turned up results that are more interesting than the specimens' first descriptions,
+and the hostile reviewer has already pushed back on parts of both. What follows is what each lane
+reports, side by side, with nothing promoted to fact until the ledger says so.</p>
+
+<h2>The creature that eventually disappears</h2>
+<div class="pair">
+  <figure class="vitrine" style="margin:0">
+    <img src="{{asset:research/gallery/exhibits/G002-portraits/S102-portrait.png}}" width="512" height="576"
+         alt="The circler S102: a lopsided, swirling body.">
+    <figcaption><strong>S102, the circler</strong>, at step 3000 of a recorded run, still
+    circling. Lane 8, exhibit G002 ·
+    {{src:research/gallery/exhibits/G002-portraits/provenance.json|provenance}}.</figcaption>
+  </figure>
+  <div>
+    <p>Room 4 introduced the circler as one of three animals sharing one rule
+    {{claim:C038}}, and showed that it survives being drawn at finer resolution
+    {{claim:C047}}. Both statements were measured over at most a few thousand time units.
+    Watched for longer, the circler changes the story.</p>
+    <div class="label">
+      <p class="obs">In the field explorer's longer runs, the registered circler stopped
+      circling and died after roughly four thousand time units, and slightly disturbed copies
+      died at very different times, while others were still circling when the runs ended
+      ({{pr:27|Lane 6, PR #27}}).</p>
+      <p class="open">The hostile reviewer found that copies differing by one part in a trillion
+      drift apart exponentially, and die at times scattered across the whole run, so no single
+      death time belongs to the creature ({{pr:30|Lane 7, PR #30}}). The replication lane is
+      now measuring the spread of lifetimes in its own independent engine
+      ({{pr:29|Lane 3, PR #29}}).</p>
+    </div>
+  </div>
+</div>
+<div class="pending"><strong>Exhibit in preparation.</strong> Many circlers started almost
+identically, each followed until it dies or the run ends, so the visitor sees a spread of
+lifetimes and the runs still alive at the end, not one canonical death. It will be drawn from
+the lifetime data once the ledger records it, by the wildlife photographer and the scientific
+illustrator.</div>
+<div class="caveat"><strong>Why this matters</strong> A pattern can look perfectly stable for
+thousands of time units and still be on its way out. "Survived everything we tried" is a
+statement about how long we watched, not necessarily about the animal.</div>
+
+<h2>When together is worse</h2>
+<p>The bound pair S101 is two Orbium bodies sharing one shell. The obvious question is whether
+the binding helps them.</p>
+
+<figure class="vitrine">
+  <span class="label-tag">Same cut, two fates · exhibit G004</span>
+  <img src="{{asset:research/gallery/exhibits/G004-port-injury/port-injury-sheet.png}}" width="1572" height="470" loading="lazy"
+       alt="Before-and-after frames of the same side cut applied to the bound pair and to a single Orbium. In the pair, the cut removes most of one partner and the other glides on as an ordinary Orbium. The single Orbium fades away after the same cut.">
+  <figcaption><strong>Losing a partner looks like rescue, but is not.</strong> The same side cut,
+  about a quarter of the mass, applied to the pair and to a single Orbium. Vermillion marks what
+  was removed. The pair ends as one ordinary Orbium; the single Orbium dies {{claim:C041}}. The
+  cut lands mostly on one partner, so the survivor is simply the partner that was not hit. Lane 8 ·
+  {{src:research/gallery/exhibits/G004-port-injury/port-injury.mp4|film}} ·
+  {{src:research/gallery/exhibits/G004-port-injury/provenance.json|provenance}}.</figcaption>
+</figure>
+
+<div class="label">
+  <p class="obs">The field explorer compared the pair with each of its halves run alone. For the
+  side cut, the pair ends exactly as its two halves would on their own, in 58 of 60 runs. For a
+  pulse of extra mass added in front, the pair sometimes dies where each half alone survives
+  ({{pr:27|Lane 6, PR #27}}).</p>
+  <p class="open">The hostile reviewer re-ran the halves with the full pulse rather than half
+  of it each. The drag-down held at pulse strengths 0.2 and 0.3 and was explained by exposure at
+  0.4. Its preregistered verdict is inconclusive overall, with a narrower positive observation
+  at 0.2–0.3 only. It advises against reading the stronger-pulse "rescues" and world-filling
+  outcomes as coupling ({{pr:30|Lane 7, PR #30}}).</p>
+</div>
+<div class="pending"><strong>Exhibit in preparation.</strong> The pair and its two halves side
+by side under the same frontal pulse at strength 0.2–0.3, beside the side cut above: an
+ordinary response to losing a partner, and a narrow window where being bound is worse. It will
+be drawn once the reconciled results reach the ledger.</div>
+
+<aside class="sources"><h2>Sources</h2><ul>
+  <li>Under review: {{pr:27|L6-007 and L6-008}} (Lane 6), {{pr:30|HR-009}} (Lane 7), {{pr:29|L3-003 lifetime replication}} (Lane 3)</li>
+  <li>{{src:research/specimens/S101-orbium-pair.md|S101 dossier}} and {{src:research/specimens/S102-circler.md|S102 dossier}}</li>
+  <li>{{src:research/gallery/README.md|Gallery notes}} for G002 and G004 (Lane 8)</li>
+  <li>{{src:research/claims.md|Claims ledger}}: this room changes only when it does</li>
+</ul></aside>

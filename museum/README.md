@@ -24,6 +24,7 @@ Opening `museum/site/index.html` straight from disk works too. Pages load images
 | `edges.html` | 3 · How much can it take? | Figure A, L4-001, C023, C026–C029 |
 | `one-rule.html` | 4 · Three animals, one rule | S101–S103 dossiers, G002, G003, C038–C044 |
 | `how-we-know.html` | 5 · How we know | charter, ledger, hostile review, gallery and figure rules |
+| `under-review.html` | 6 · Still being argued (provisional) | S102 lifetimes and S101 coupling from PRs #27, #29, #30 under review; G002, G004, C038, C041, C047 |
 | `collection.html` | Reference: the four specimens | dossiers, gallery runs |
 | `claims.html` | Reference: every claim on display | generated from the ledger |
 
@@ -43,8 +44,9 @@ Opening `museum/site/index.html` straight from disk works too. Pages load images
 5. **Nothing is re-encoded.** Lane 8's photographs and Lane 9's figures are shown as committed,
    in their own colours. Specimen imagery sits in dark vitrines (`#0b0b0f`, matching Lane 8's
    frames); evidence figures sit on white paper, as Lane 9 draws them.
-6. **Only what is on `main`.** Work in open PRs (Figure C, gallery G004) appears as "in
-   preparation" until it is merged.
+6. **Only what is on `main`, unless the room says otherwise.** A room marked provisional may
+   describe work in open PRs, with a banner, attributing each finding to its lane and PR; it gets
+   no badge until the ledger records it.
 7. **No nicknames, no new species.** Registered names only, per the charter's discovery protocol.
 
 ## Build
@@ -78,5 +80,6 @@ then an HTML fragment using these directives:
 | `{{src:path\|label}}` | link to a repository file or folder on GitHub |
 | `{{asset:path}}` | relative URL of a repository file, for `<img>` or `<video>` |
 | `{{page:slug\|label}}` | link to another museum page |
+| `{{pr:27\|label}}` | link to an open pull request; only in a room with `"provisional": true` that lists it in `"under_review"` |
 
 `"tour": false` keeps a page out of the Back/Next walk; `order` sets its position.

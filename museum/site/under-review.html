@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Still being argued · ALM museum</title>
+<meta name="description" content="Two exhibits in progress: a circler that eventually disappears, and a pair for which being together is sometimes worse.">
+<link rel="stylesheet" href="museum.css">
+</head>
+<body class="room-under-review">
+<header class="site">
+  <a class="brand" href="index.html">ALM <span>an artificial-life natural history museum</span></a>
+  <details class="map"><summary>Rooms</summary><ol>
+<li><a href="index.html">Entrance</a></li>
+<li><a href="orbium.html">1 · The ruler: Orbium</a></li>
+<li><a href="wobbles.html">2 · The wobble that wasn&#x27;t</a></li>
+<li><a href="edges.html">3 · How much can it take?</a></li>
+<li><a href="one-rule.html">4 · Three animals, one rule</a></li>
+<li><a href="how-we-know.html">5 · How we know</a></li>
+<li><a class="here" href="under-review.html">6 · Still being argued (provisional)</a></li>
+<li><a href="collection.html">Reference · The collection</a></li>
+<li><a href="claims.html">Reference · Claims on display</a></li>
+  </ol></details>
+</header>
+<main>
+<p class="kicker">Room 6 · Provisional · S102 and S101</p><div class="provisional-banner"><strong>Provisional room.</strong> Parts of these exhibits come from work still under review (<a href="https://github.com/bfaber-centaur/artificial-life-museum/pull/27">#27</a>, <a href="https://github.com/bfaber-centaur/artificial-life-museum/pull/29">#29</a>, <a href="https://github.com/bfaber-centaur/artificial-life-museum/pull/30">#30</a>) and not yet in the claims ledger. Badges appear only for ledger claims; everything else is attributed to the lane and pull request it comes from, and may change.</div>
+<h1>Still being argued</h1>
+<p class="lede">This room is built while the science is still moving. Two Night 1
+experiments turned up results that are more interesting than the specimens' first descriptions,
+and the hostile reviewer has already pushed back on parts of both. What follows is what each lane
+reports, side by side, with nothing promoted to fact until the ledger says so.</p>
+
+<h2>The creature that eventually disappears</h2>
+<div class="pair">
+  <figure class="vitrine" style="margin:0">
+    <img src="../../research/gallery/exhibits/G002-portraits/S102-portrait.png" width="512" height="576"
+         alt="The circler S102: a lopsided, swirling body.">
+    <figcaption><strong>S102, the circler</strong>, at step 3000 of a recorded run, still
+    circling. Lane 8, exhibit G002 ·
+    <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G002-portraits/provenance.json">provenance</a>.</figcaption>
+  </figure>
+  <div>
+    <p>Room 4 introduced the circler as one of three animals sharing one rule
+    <a class="claim" href="claims.html#C038" title="One rule (S001&#x27;s, with μ = 0.155, σ = 0.020) supports three phenotypes chosen by history: an Orbium glider, a circler (S102) and a static ring (S103)"><span class="cid">C038</span><span class="badge s-REPRODUCED" title="REPRODUCED (clean-process reruns); not yet reproduced by a second lane">reproduced</span></a>, and showed that it survives being drawn at finer resolution
+    <a class="claim" href="claims.html#C047" title="S102 at its registered rule persists at R = 26 and R = 39 from block-replicated, nearest-neighbour or cubic seeds; only the bilinear seed dies"><span class="cid">C047</span><span class="badge s-INDEPENDENTLY_CHECKED" title="INDEPENDENTLY_CHECKED for the eight seeds tested (block, nearest, bilinear and cubic resizes × R 26 and 39; μ 0.155, σ 0.020, T 10; one seed position; 1000 tu): Lane 3 `alm_check` (PR #18) and Lane 6 `field.py` (PR #23) give the same eight outcomes. Exploratory in both lanes; only the block seeds through 300 tu are preregistered (C046).">indep. checked</span></a>. Both statements were measured over at most a few thousand time units.
+    Watched for longer, the circler changes the story.</p>
+    <div class="label">
+      <p class="obs">In the field explorer's longer runs, the registered circler stopped
+      circling and died after roughly four thousand time units, and slightly disturbed copies
+      died at very different times, while others were still circling when the runs ended
+      (<a class="pr" href="https://github.com/bfaber-centaur/artificial-life-museum/pull/27">Lane 6, PR #27</a>).</p>
+      <p class="open">The hostile reviewer found that copies differing by one part in a trillion
+      drift apart exponentially, and die at times scattered across the whole run, so no single
+      death time belongs to the creature (<a class="pr" href="https://github.com/bfaber-centaur/artificial-life-museum/pull/30">Lane 7, PR #30</a>). The replication lane is
+      now measuring the spread of lifetimes in its own independent engine
+      (<a class="pr" href="https://github.com/bfaber-centaur/artificial-life-museum/pull/29">Lane 3, PR #29</a>).</p>
+    </div>
+  </div>
+</div>
+<div class="pending"><strong>Exhibit in preparation.</strong> Many circlers started almost
+identically, each followed until it dies or the run ends, so the visitor sees a spread of
+lifetimes and the runs still alive at the end, not one canonical death. It will be drawn from
+the lifetime data once the ledger records it, by the wildlife photographer and the scientific
+illustrator.</div>
+<div class="caveat"><strong>Why this matters</strong> A pattern can look perfectly stable for
+thousands of time units and still be on its way out. "Survived everything we tried" is a
+statement about how long we watched, not necessarily about the animal.</div>
+
+<h2>When together is worse</h2>
+<p>The bound pair S101 is two Orbium bodies sharing one shell. The obvious question is whether
+the binding helps them.</p>
+
+<figure class="vitrine">
+  <span class="label-tag">Same cut, two fates · exhibit G004</span>
+  <img src="../../research/gallery/exhibits/G004-port-injury/port-injury-sheet.png" width="1572" height="470" loading="lazy"
+       alt="Before-and-after frames of the same side cut applied to the bound pair and to a single Orbium. In the pair, the cut removes most of one partner and the other glides on as an ordinary Orbium. The single Orbium fades away after the same cut.">
+  <figcaption><strong>Losing a partner looks like rescue, but is not.</strong> The same side cut,
+  about a quarter of the mass, applied to the pair and to a single Orbium. Vermillion marks what
+  was removed. The pair ends as one ordinary Orbium; the single Orbium dies <a class="claim" href="claims.html#C041" title="Under S001&#x27;s own rule, a bound Orbium pair (S101) survives port injury of 10–50% by shedding to a single Orbium, where a single Orbium dies at 10%"><span class="cid">C041</span><span class="badge s-OBSERVED" title="OBSERVED; not yet reproduced by a second lane">observed</span></a>. The
+  cut lands mostly on one partner, so the survivor is simply the partner that was not hit. Lane 8 ·
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G004-port-injury/port-injury.mp4">film</a> ·
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G004-port-injury/provenance.json">provenance</a>.</figcaption>
+</figure>
+
+<div class="label">
+  <p class="obs">The field explorer compared the pair with each of its halves run alone. For the
+  side cut, the pair ends exactly as its two halves would on their own, in 58 of 60 runs. For a
+  pulse of extra mass added in front, the pair sometimes dies where each half alone survives
+  (<a class="pr" href="https://github.com/bfaber-centaur/artificial-life-museum/pull/27">Lane 6, PR #27</a>).</p>
+  <p class="open">The hostile reviewer re-ran the halves with the full pulse rather than half
+  of it each. The drag-down held at pulse strengths 0.2 and 0.3 and was explained by exposure at
+  0.4. Its preregistered verdict is inconclusive overall, with a narrower positive observation
+  at 0.2–0.3 only. It advises against reading the stronger-pulse "rescues" and world-filling
+  outcomes as coupling (<a class="pr" href="https://github.com/bfaber-centaur/artificial-life-museum/pull/30">Lane 7, PR #30</a>).</p>
+</div>
+<div class="pending"><strong>Exhibit in preparation.</strong> The pair and its two halves side
+by side under the same frontal pulse at strength 0.2–0.3, beside the side cut above: an
+ordinary response to losing a partner, and a narrow window where being bound is worse. It will
+be drawn once the reconciled results reach the ledger.</div>
+
+<aside class="sources"><h2>Sources</h2><ul>
+  <li>Under review: <a class="pr" href="https://github.com/bfaber-centaur/artificial-life-museum/pull/27">L6-007 and L6-008</a> (Lane 6), <a class="pr" href="https://github.com/bfaber-centaur/artificial-life-museum/pull/30">HR-009</a> (Lane 7), <a class="pr" href="https://github.com/bfaber-centaur/artificial-life-museum/pull/29">L3-003 lifetime replication</a> (Lane 3)</li>
+  <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/specimens/S101-orbium-pair.md">S101 dossier</a> and <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/specimens/S102-circler.md">S102 dossier</a></li>
+  <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/README.md">Gallery notes</a> for G002 and G004 (Lane 8)</li>
+  <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/claims.md">Claims ledger</a>: this room changes only when it does</li>
+</ul></aside>
+
+<nav class="walk" aria-label="Tour"><a class="prev" href="how-we-know.html"><small>Back</small>How we know</a><span></span></nav>
+</main>
+<footer class="site">
+  <p>Claim statuses read from <code>research/claims.md</code> (sha256 <code>df1e7b0ae26f</code>) when this page was built.</p>
+  <p>Every picture here is a recorded simulation or a figure drawn from committed data. Statuses
+  are the claims ledger's, not the museum's: a badge never says more than
+  <a href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/claims.md">research/claims.md</a> does.</p>
+</footer>
+</body>
+</html>
