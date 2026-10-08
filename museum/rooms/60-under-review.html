@@ -3,7 +3,7 @@
   "kicker": "Room 6 · Provisional · S102 and S101",
   "summary": "Two exhibits in progress: a circler that eventually disappears, but only at one numerical setting, and a pair for which being together looked worse, until the world was made bigger.",
   "provisional": true,
-  "under_review": [27, 29, 30],
+  "under_review": [27],
   "expect": {"C038": "REPRODUCED", "C041": "OBSERVED", "C047": "INDEPENDENTLY_CHECKED"}
 } -->
 <h1>Still being argued</h1>
@@ -33,7 +33,7 @@ reports, side by side, with nothing promoted to fact until the ledger says so.</
       ({{pr:27|Lane 6, PR #27}}).</p>
       <p class="open">The hostile reviewer found that copies differing by one part in a trillion
       drift apart exponentially, and die at times scattered across the whole run, so no single
-      death time belongs to the creature ({{pr:30|Lane 7, PR #30}}).</p>
+      death time belongs to the creature ({{src:research/reports/hostile-review.md|Lane 7, HR-009}}).</p>
       <p class="open">The replication lane reproduced this exactly on the same grid, with the same
       death step and the same four early deaths, and 10 of 24 copies nudged by one part in a trillion
       stopped circling within 5000 time units. But change the numerical setting and none died. On
@@ -42,7 +42,7 @@ reports, side by side, with nothing promoted to fact until the ledger says so.</
       watched for 8000 time units. So on this evidence the disappearing belongs to the simulation
       settings, R 13 with T 10, not to the creature's rule. It does not show that the circler lives
       forever at any other setting, only that it outlasted these runs
-      ({{pr:29|Lane 3, PR #29}}).</p>
+      ({{src:research/experiments/L3-003-circler-lifetime/README.md|Lane 3, L3-003}}).</p>
     </div>
   </div>
 </div>
@@ -55,8 +55,8 @@ reports, side by side, with nothing promoted to fact until the ledger says so.</
   a run still circling when it ended, which tells us only that it lived at least that long.
   Panel d is the fraction still alive over time, with its uncertainty, counting those unfinished
   runs honestly rather than guessing their ends. Panels a and b belong to the pair, below. The
-  data are read from {{pr:27|PR #27}} and {{pr:30|PR #30}}; Lane 3's independent lifetimes
-  ({{pr:29|PR #29}}) are not in it yet. Every run in panels c and d is on the
+  data are read from {{pr:27|PR #27}} and Lane 7's review; Lane 3's independent lifetimes
+  are not in it yet. Every run in panels c and d is on the
   standard setting, R 13 with T 10, and the red warning on them says so. Lane 3 saw no deaths
   on finer grids or with smaller time steps, so the disappearance looks like an effect of that
   numerical setting, not a property of the rule. Only C038 and C041 carry ledger statuses. Read the
@@ -92,30 +92,48 @@ the binding helps them.</p>
   side cut, the pair ends exactly as its two halves would on their own, in 58 of 60 runs. For a
   pulse of extra mass added in front, the pair sometimes dies where each half alone survives
   ({{pr:27|Lane 6, PR #27}}).</p>
-  <p class="open">The hostile reviewer first narrowed this to pulse strengths 0.2 and 0.3, then
-  withdrew even that. In the standard 128-wide world, a pulse into the gap between the partners
-  splits the pair into two whole Orbium, and the later deaths come when those two meet again
-  around the wrap-around world and collide. The reviewer reran the same 10 split states, at 0.2
-  and 0.3 in five phases each, in a world twice as wide: all 10 ended as two living Orbium. So
-  the partners do not die of the pulse; whether they survive depends on the size of the world,
-  not on the bond ({{pr:30|Lane 7, PR #30}}; {{pr:27|Lane 6, PR #27}}).</p>
-  <p class="open">What may remain depends on where the pulse lands. The field explorer reports
-  that a pulse at 0.3 placed slightly off the gap kills the pair in 4 of 5 phases in both world
-  sizes. That result is exploratory and has not been checked independently or proposed as a
-  claim yet.</p>
+  <p class="open">The hostile reviewer re-ran the halves with the full pulse rather than half
+  of it each. The drag-down held at strengths 0.2 and 0.3, and for a while that narrow window
+  looked like the first sign that the bond itself can be a liability ({{src:research/reports/hostile-review.md|Lane 7, HR-009 E2}}).</p>
 </div>
-<div class="caveat"><strong>Disputed</strong> "Together is worse" is not established. The
-headline window at 0.2 to 0.3 turned out to be a split pair colliding with itself in a small
-world. Only a narrower, placement-dependent effect at 0.3 is still open. This exhibit stays
-provisional until it is tested.</div>
-<p>Figure D above sets the two side by side. Panel a is the side cut: the pair ends exactly as its
-two partners do alone. Panel b is the frontal pulse in the 128-wide world: the shaded columns at
-0.2 and 0.3 are where the pair died while both partners survived. Its red warning says it holds
-only in that world, and after the wider-world reruns those columns no longer show a weakness of
-the bond.</p>
+
+<h3>A mistake, and what it taught us</h3>
+<p>The window was not about the bond. It was about the size of the world.</p>
+<ol>
+  <li><strong>The pulse frees two whole animals.</strong> A pulse into the gap between the
+  partners does not wound the pair; it unbinds it. Forty time units later the world holds the mass
+  of two intact Orbium, at both strengths and in all five phases.</li>
+  <li><strong>The world wraps around.</strong> Lenia's world is a torus: an animal leaving one edge
+  comes back at the opposite edge. In the standard 128-wide world, the two freed Orbium head off,
+  wrap around, and meet again.</li>
+  <li><strong>They die in the collision, not from the pulse.</strong> Of the 10 freed pairs, 7 were
+  dead at 300 time units in the 128-wide world. The reviewer re-ran the same 10 states in a world
+  twice as wide, where they have room to pass: all 10 ended as two living Orbium.</li>
+</ol>
+<div class="label">
+  <p class="obs">Same states, same pulse, two world sizes: 7 of 10 dead in the small world, 0 of 10
+  in the large one ({{src:research/reports/hostile-review.md|Lane 7, HR-009c}};
+  {{src:tests/test_hr009_pair_pulse.py|the test that pins one case on both sizes}}).</p>
+  <p class="int">None yet. The reviewer withdrew the "coupling at 0.2 to 0.3" reading and recommends
+  replacing it with: an on-gap pulse splits the pair into two intact Orbium, and whether they then
+  survive depends on the world, not on coupling. The field explorer is correcting its own report
+  to match ({{pr:27|Lane 6, PR #27}}).</p>
+  <p class="open">What may remain depends on where the pulse lands. The field explorer reports that
+  a pulse at 0.3 placed slightly off the gap kills the pair in 4 of 5 phases in both world sizes.
+  That is exploratory and not yet checked independently.</p>
+</div>
+<div class="caveat"><strong>Why this matters</strong> Every experiment happens inside a world,
+and the world's own edges can do things that look like biology. The original runs are kept, not
+erased: they are how we found out. "Together is worse" is not established.</div>
+<p>Figure D above shows the original runs. Panel a is the side cut: the pair ends exactly as its
+two partners do alone. Panel b is the frontal pulse in the 128-wide world, where the shaded columns
+at 0.2 and 0.3 mark the deaths that turned out to be collisions. Its red warning says it holds only
+in that world.</p>
 
 <aside class="sources"><h2>Sources</h2><ul>
-  <li>Under review: {{pr:27|L6-007 and L6-008}} (Lane 6), {{pr:30|HR-009}} (Lane 7), {{pr:29|L3-003 lifetime replication}} (Lane 3)</li>
+  <li>Under review: {{pr:27|L6-007 and L6-008}} (Lane 6)</li>
+  <li>On <code>main</code>: {{src:research/reports/hostile-review.md|hostile review HR-009, HR-009b and HR-009c}} (Lane 7) ·
+  {{src:research/experiments/L3-003-circler-lifetime/README.md|L3-003 lifetime replication}} (Lane 3)</li>
   <li>{{src:research/specimens/S101-orbium-pair.md|S101 dossier}} and {{src:research/specimens/S102-circler.md|S102 dossier}}</li>
   <li>{{src:research/gallery/README.md|Gallery notes}} for G002 and G004 (Lane 8)</li>
   <li>{{src:research/claims.md|Claims ledger}}: this room changes only when it does</li>

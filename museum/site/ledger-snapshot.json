@@ -267,6 +267,7 @@
     ],
     "under-review": [
       "research/claims.md",
+      "research/experiments/L3-003-circler-lifetime/README.md",
       "research/figures/D-pair-and-circler/README.md",
       "research/figures/D-pair-and-circler/figure-D-lifetimes.csv",
       "research/figures/D-pair-and-circler/figure-D-pair.csv",
@@ -275,8 +276,10 @@
       "research/gallery/exhibits/G002-portraits/provenance.json",
       "research/gallery/exhibits/G004-port-injury/port-injury.mp4",
       "research/gallery/exhibits/G004-port-injury/provenance.json",
+      "research/reports/hostile-review.md",
       "research/specimens/S101-orbium-pair.md",
-      "research/specimens/S102-circler.md"
+      "research/specimens/S102-circler.md",
+      "tests/test_hr009_pair_pulse.py"
     ],
     "collection": [
       "research/experiments/L6-field/make_seeds.py",

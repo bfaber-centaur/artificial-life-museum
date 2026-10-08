@@ -24,7 +24,7 @@ Opening `museum/site/index.html` straight from disk works too. Pages load images
 | `edges.html` | 3 · How much can it take? | Figure A, L4-001, C023, C026–C029 |
 | `one-rule.html` | 4 · Three animals, one rule | S101–S103 dossiers, G002, G003, C038–C044 |
 | `how-we-know.html` | 5 · How we know | charter, ledger, hostile review, gallery and figure rules |
-| `under-review.html` | 6 · Still being argued (provisional) | S102 lifetimes and S101 coupling from PRs #27, #29, #30 under review; G002, G004, C038, C041, C047 |
+| `under-review.html` | 6 · Still being argued (provisional) | S102 lifetimes and S101 coupling: PR #27 under review, L3-003 and HR-009 on main; G002, G004, C038, C041, C047 |
 | `collection.html` | Reference: the four specimens | dossiers, gallery runs |
 | `claims.html` | Reference: every claim on display | generated from the ledger |
 
