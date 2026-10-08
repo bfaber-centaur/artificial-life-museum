@@ -267,6 +267,10 @@
     ],
     "under-review": [
       "research/claims.md",
+      "research/figures/D-pair-and-circler/README.md",
+      "research/figures/D-pair-and-circler/figure-D-lifetimes.csv",
+      "research/figures/D-pair-and-circler/figure-D-pair.csv",
+      "research/figures/D-pair-and-circler/figure-D.provenance.json",
       "research/gallery/README.md",
       "research/gallery/exhibits/G002-portraits/provenance.json",
       "research/gallery/exhibits/G004-port-injury/port-injury.mp4",
