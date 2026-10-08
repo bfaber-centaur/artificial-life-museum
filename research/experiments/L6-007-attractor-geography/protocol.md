@@ -95,3 +95,6 @@ No P-value machinery: runs are deterministic. Thresholds above are the decision 
   methods (block, nearest, bilinear, cubic) at R 26 and R 39 in Lane 6's engine, requested for
   dispute D2 (C039 vs C047). It does not change P1–P4. Part A's R26 variant keeps the bilinear
   seeds as pre-registered.
+- 2026-10-08 02:00 UTC, after Part A results were read: added `followup_circler.py`, an
+  exploratory (not pre-registered) 5000 tu rerun of the unperturbed circler and its ε 0.01 and
+  0.03 starts, to time the late deaths seen in Part A. It does not change how P1–P4 are scored.
