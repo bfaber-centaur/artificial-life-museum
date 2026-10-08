@@ -1,8 +1,8 @@
 {
   "ledger": "research/claims.md",
-  "ledger_sha256": "0418569939b8dd91a1a1e80aa4485824f1768eccb171fcc0213374d8b283b001",
-  "ledger_commit": "a9ff918",
-  "conventions_sha256": "227df043de8fff733da0840fd8297b01f064007a2320a944a5b743733f0ff1bb",
+  "ledger_sha256": "3bb1eeb7e08639ccdcf24cd1b32055c7515e224297d2b732eae8e3b65b4e1b68",
+  "ledger_commit": "5363da2",
+  "conventions_sha256": "0e237384e0425b3c325229cf650ab6f9807fb08c1bedc991433b54b13c2eb02f",
   "claims": {
     "C001": {
       "status": "INDEPENDENTLY_CHECKED",
@@ -188,8 +188,8 @@
       ]
     },
     "C047": {
-      "status": "OBSERVED",
-      "status_text": "OBSERVED (Lane 3, `alm_check`, merged). Block seeds through 300 tu are preregistered (C046); the four-method comparison through 1000 tu is exploratory. Lane 6 matched all eight outcomes in `field.py` (`413003d`), which is not yet on `main`; the archivist will mark this claim INDEPENDENTLY_CHECKED, for these eight seeds only, when that evidence lands.",
+      "status": "INDEPENDENTLY_CHECKED",
+      "status_text": "INDEPENDENTLY_CHECKED for the eight seeds tested (block, nearest, bilinear and cubic resizes × R 26 and 39; μ 0.155, σ 0.020, T 10; one seed position; 1000 tu): Lane 3 `alm_check` (PR #18) and Lane 6 `field.py` (PR #23) give the same eight outcomes. Exploratory in both lanes; only the block seeds through 300 tu are preregistered (C046).",
       "rooms": [
         "collection",
         "one-rule"
@@ -240,6 +240,7 @@
     "one-rule": [
       "research/experiments/L3-002-property-persistence/README.md",
       "research/experiments/L3-002-property-persistence/s102_resize_check.txt",
+      "research/experiments/L6-007-attractor-geography/d2-resize.csv",
       "research/experiments/L6-field/README.md",
       "research/figures/README.md",
       "research/gallery/README.md",
