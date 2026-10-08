@@ -2,7 +2,7 @@
   "slug": "one-rule", "order": 40, "title": "Three animals, one rule", "nav_label": "4 · Three animals, one rule",
   "kicker": "Room 4 · Specimens S101, S102, S103",
   "summary": "A glider, a circler and a static ring living under the same physics, and a bound pair that survives a wound by shedding a partner.",
-  "expect": {"C038": "REPRODUCED", "C039": "REFUTED", "C047": "OBSERVED", "C040": "OBSERVED", "C041": "OBSERVED",
+  "expect": {"C038": "REPRODUCED", "C039": "REFUTED", "C047": "INDEPENDENTLY_CHECKED", "C040": "OBSERVED", "C041": "OBSERVED",
              "C042": "REPRODUCED", "C043": "OBSERVED", "C044": "OBSERVED"}
 } -->
 <h1>Three animals, one rule</h1>
@@ -37,10 +37,10 @@ depends on how the world started, not on the rule.</p>
     whose radius is about a quarter of a kernel radius, about one lap every 3.8 time units, and goes nowhere.
     Wounds kill it more easily than the other two. It does not, as first reported, die when drawn
     at finer resolution. Copies enlarged to R = 26 and R = 39 by block, nearest-neighbour or cubic
-    resizing stayed healthy circlers for the full 1000 time units of an exploratory check by the
-    replication lane {{claim:C047}}; the field explorer's matching rerun is not yet in the
-    repository. Only the copy enlarged by bilinear smoothing dies, and that death is confirmed in
-    both lanes' engines. So what failed was the resize method, not the creature at higher
+    resizing stayed healthy circlers for the full 1000 time units, and only the copy enlarged by
+    bilinear smoothing died. The replication lane and the field explorer got the same result for
+    all eight copies in two independent engines {{claim:C047}}, in an exploratory check of one
+    seed placement under this one rule. So what failed was the resize method, not the creature at higher
     resolution, and the original claim is {{claim:C039}}.</figcaption>
   </figure>
   <figure class="vitrine" style="margin:0">
@@ -95,6 +95,7 @@ is mapping the same region in more detail.</div>
 <aside class="sources"><h2>Sources</h2><ul>
   <li>Dossiers: {{src:research/specimens/S101-orbium-pair.md|S101}}, {{src:research/specimens/S102-circler.md|S102}}, {{src:research/specimens/S103-static-ring.md|S103}} (Lane 6)</li>
   <li>{{src:research/experiments/L3-002-property-persistence/README.md|Numerical ecology L3-002}} and its {{src:research/experiments/L3-002-property-persistence/s102_resize_check.txt|circler resize check}} (Lane 3)</li>
+  <li>{{src:research/experiments/L6-007-attractor-geography/d2-resize.csv|Lane 6's rerun of the circler resize check}}</li>
   <li>{{src:research/experiments/L6-field/README.md|Field exploration L6}}: sweeps, coexistence, disturbance switching (Lane 6)</li>
   <li>{{src:research/gallery/README.md|Gallery notes}} with run IDs and hashes, exhibits {{src:research/gallery/exhibits/G002-portraits|G002}} and {{src:research/gallery/exhibits/G003-contact-sheet|G003}} (Lane 8)</li>
   <li>{{src:research/figures/README.md|Figures index}}, where Figure C will appear (Lane 9)</li>
