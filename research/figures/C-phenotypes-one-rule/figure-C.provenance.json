@@ -52,7 +52,7 @@
     {
       "path": "research/figures/C-phenotypes-one-rule/make_figure.py",
       "sha256": "e076400d369633a4bf368d9dfcd2fd0dbaa31d0eea77c9c6fd5f745a9cfd6bbf",
-      "last_commit": "b667c34"
+      "last_commit": "57f57b5"
     },
     {
       "path": "research/figures/figlib/__init__.py",
@@ -199,8 +199,8 @@
     "research/figures/C-phenotypes-one-rule/figure-C-data.csv",
     "research/figures/C-phenotypes-one-rule/figure-C-matrix.csv"
   ],
-  "code_commit": "0bf6cb3",
-  "code_dirty": true,
+  "code_commit": "57f57b5",
+  "code_dirty": false,
   "versions": {
     "python": "3.13.16",
     "numpy": "2.5.3",
