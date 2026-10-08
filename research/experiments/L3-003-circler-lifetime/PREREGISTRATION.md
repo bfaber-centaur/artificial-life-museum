@@ -116,4 +116,31 @@ later commit, before any run. Command: `.venv/bin/python -m alm_check.lifetime`.
 
 ## Amendments
 
-_None yet._
+### Amendment 1 (2026-10-08, written while the main runs were in progress, before any result was read)
+
+Reason: Lane 7's HR-009 (PR #30) shows the circler is chaotic at R 13: copies differing by 1e-14 to
+1e-10 on the support die anywhere from 292 tu to more than 5000 tu. A single death step is then a
+property of one floating-point trajectory, not of the rule. The coordinator asked that this
+replication target the lifetime distribution, i.e. the transient-not-attractor conclusion.
+
+Changes (additions only; Q1 to Q5 and their rules stand and are still reported):
+
+- Q1 and Q2 are reinterpreted. A match shows that `alm_check` performs the same arithmetic as Lane
+  6's engine; a mismatch is **not** evidence against Lane 6's conclusion. Neither outcome bears on
+  whether the circler is an attractor.
+- Q3 to Q5 single runs are read as one draw each from a lifetime distribution, not as "the" lifetime
+  at that setting. The Q3 "differs by more than 10%" rule is dropped as uninformative.
+- **Q6 (new, primary for the conclusion).** Lifetime distribution under δ = 1e-12 perturbations:
+  start = clip(base + δ·ξ·support, 0, 1), ξ = `np.random.default_rng(7000 + 100·i_R + k)`
+  `.uniform(-1, 1, base.shape)`, support as above (dilation 3·R//13). Independent seeds from
+  Lane 6 (1000+) and Lane 7 (9000+).
+  - Q6-13: R 13, T 10, native seed, k = 0..23 (i_R = 0), horizon 5000 tu.
+  - Q6-26: R 26, T 10, block seed, k = 0..11 (i_R = 1), horizon 8000 tu.
+  - Reported: number dead by the horizon, sorted death times, median (if more than half die).
+  - Label for each R: **TRANSIENT** if at least one copy dies within the horizon (an attractor
+    basin containing the seed would not lose copies to 1e-12 noise); **NO DEATH OBSERVED** if all
+    copies are alive at the horizon (this does not show an attractor).
+  - Q6-13 is compared with Lane 7's E1 δ = 1e-12 row (5 of 8 dead by 5000 tu, 292–3556 tu)
+    descriptively (counts and ranges), no test.
+- Q6 runs are written to the same `lifetimes.csv` schema in `research/traces/lane3/L3-003/q6.csv`,
+  by `.venv/bin/python -m alm_check.lifetime --q6`, added to the runner before Q6 is run.
