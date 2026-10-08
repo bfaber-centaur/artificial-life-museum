@@ -107,7 +107,7 @@ def noise(variant):
                 starts.append(np.clip(base + e * xi * support, 0, 1))
                 meta.append((s, e, k))
     t0 = time.time()
-    res = run_batch(starts, R, T, sigma, horizon, cps, tag=f"noise-{variant}")
+    res = run_batch(starts, R, T, sigma, horizon, cps, chunk=40 if variant == "primary" else 8, tag=f"noise-{variant}")
     ref = {m[0]: r for m, r in zip(meta, res) if m[2] == -1}
     phen = {"orbium": "GLIDER", "circler": "CIRCLER", "ring": "STATIC"}
     rows = []
