@@ -1,0 +1,19 @@
+{
+ "run_id": "L3-002-S102-C",
+ "specimen": "S102",
+ "condition": "C",
+ "R": 26,
+ "T": 40,
+ "n": 256,
+ "mu": 0.155,
+ "sigma": 0.02,
+ "final_mass": 0.5066423968900844,
+ "mass": 0.4966992001294264,
+ "gyradius": 0.49794267216032406,
+ "net_speed": 3.0664705624986165e-05,
+ "path_speed": 0.48478416573494193,
+ "turning_rate": 109.8059546685557,
+ "mass_rel_sd": 0.01465610543586427,
+ "fixed_point": false,
+ "cls": "circler"
+}

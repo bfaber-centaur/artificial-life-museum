@@ -1,0 +1,19 @@
+{
+ "run_id": "L3-002-S103-R26",
+ "specimen": "S103",
+ "condition": "R26",
+ "R": 26,
+ "T": 10,
+ "n": 256,
+ "mu": 0.155,
+ "sigma": 0.02,
+ "final_mass": 0.38103680970917575,
+ "mass": 0.3805985876561603,
+ "gyradius": 0.3859296928360611,
+ "net_speed": 7.250562318854938e-06,
+ "path_speed": 8.58858970601797e-05,
+ "turning_rate": 6.331658359796434,
+ "mass_rel_sd": 0.003454377381579212,
+ "fixed_point": false,
+ "cls": "static"
+}

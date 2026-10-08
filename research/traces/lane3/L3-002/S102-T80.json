@@ -1,0 +1,19 @@
+{
+ "run_id": "L3-002-S102-T80",
+ "specimen": "S102",
+ "condition": "T80",
+ "R": 13,
+ "T": 80,
+ "n": 128,
+ "mu": 0.155,
+ "sigma": 0.02,
+ "final_mass": 0.500360186648379,
+ "mass": 0.4933853665096194,
+ "gyradius": 0.49578657973255164,
+ "net_speed": 0.003863342627840689,
+ "path_speed": 0.4903794326305141,
+ "turning_rate": 112.49607284579677,
+ "mass_rel_sd": 0.0174664904934275,
+ "fixed_point": false,
+ "cls": "circler"
+}
