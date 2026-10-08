@@ -155,7 +155,8 @@ the two cuts. Both films are aligned on their own cut.
 > ([L3-002](../experiments/L3-002-property-persistence/README.md)), and Lane 6 got the
 > same eight outcomes in its own engine
 > ([L6-007 D2](../experiments/L6-007-attractor-geography/README.md)). The ledger lists C039 as
-> *refuted* as worded, superseded by [C047](../claims.md) (*observed*).
+> *refuted* as worded, superseded by [C047](../claims.md), which is *independently checked* for
+> the eight seeds tested (four resize methods at R 26 and 39, one rule, 1000 time units).
 > The method used to resize a seed is a choice, and here it decided the outcome. That is a
 > different fragility from resolution itself.
 
@@ -168,7 +169,7 @@ rules, not new forms ([C043](../claims.md)).
 | --- | --- | --- | --- | --- |
 | S001 | Orbium unicaudatus (O2u) | R 13, T 10, μ 0.15, σ 0.015 | mass 0.4358, speed 0.479 R/tu, heading 68.2° | dossier [`S001-orbium.md`](../specimens/S001-orbium.md); C001–C016 |
 | S101 | bound Orbium pair (Synorbium-like) | S001's rule | mass 0.8736, speed 0.473 R/tu, heading 35.5° | C041 *observed*; C043 *observed* (not yet reproduced by a second lane) |
-| S102 | Gyrorbium-like circler | R 13, T 10, μ 0.155, σ 0.020 | mass 0.522 (sd 0.010), net speed 0.003 R/tu | C038 *reproduced*; C039 *refuted* as worded, superseded by C047 *observed* (L3-002: survives 2× and 3× resolution unless the seed is resized bilinearly); C040, C043 *observed* |
+| S102 | Gyrorbium-like circler | R 13, T 10, μ 0.155, σ 0.020 | mass 0.522 (sd 0.010), net speed 0.003 R/tu | C038 *reproduced*; C039 *refuted* as worded, superseded by C047 *independently checked* for the eight seeds tested (L3-002 and L6-007 D2: survives 2× and 3× resolution unless the seed is resized bilinearly); C040, C043 *observed* |
 | S103 | Circium-like static ring | same as S102 | mass 0.3787, final state = initial state | C038, C042 *reproduced*; C043 *observed* |
 
 All four use the poly kernel core and poly growth, β [1], Euler steps with a hard clip to
@@ -270,7 +271,7 @@ heading values come from `galintervene.chord_heading("S102", 3002)`. The G004 S0
 
 - **2026-10-08, ledger follow-up.** Ledger PR #22 and Lane 6's rerun (PR #23) merged. The
   field note and specimens table now quote the ledger as it stands: C039 *refuted* as worded,
-  C047 *observed*. No pictures changed.
+  C047 *independently checked* for the eight seeds tested (ledger PR #25). No pictures changed.
 - **2026-10-08, correction.** C039's broad claim was refuted by L3-002 (merged); the ledger
   update is ledger PR #22 (open). The field note and specimens table no longer say that S102
   dies at twice the resolution; its death there depended on bilinear seed resizing. No
