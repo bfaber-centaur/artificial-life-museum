@@ -1,0 +1,2 @@
+R26 True
+R39 False

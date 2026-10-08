@@ -97,3 +97,17 @@ def test_mass_attenuation_edge_matches_lane4_bracket():
     d._init(dict(T=10, R=13), 128)
     assert d.classify(d._job(("I001", 0, 0.100)), d.REF_T10_R13) == "R"
     assert d.classify(d._job(("I001", 0, 0.103125)), d.REF_T10_R13) == "D"
+
+
+def test_l3003_start_recipes():
+    """L3-003 starts: nearest == block at R26, Lane 6 noise and 1e-12 copies stay on the support."""
+    from alm_check import lifetime as lt
+
+    assert np.array_equal(lt.seed(26, "nearest"), lt.seed(26, "block"))
+    base = lt.starts("A0")[0][2]
+    noisy = lt.starts("A1")
+    assert len(noisy) == 12 and noisy[0][:2] == (0.01, 0)
+    d = np.abs(noisy[0][2] - base)
+    assert 0.009 < d.max() <= 0.01
+    q6 = lt.starts("Q6-13")
+    assert len(q6) == 24 and np.abs(q6[0][2] - base).max() <= 1e-12
