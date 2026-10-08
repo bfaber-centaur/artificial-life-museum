@@ -1,0 +1,19 @@
+{
+ "run_id": "L3-002-S103-T40",
+ "specimen": "S103",
+ "condition": "T40",
+ "R": 13,
+ "T": 40,
+ "n": 128,
+ "mu": 0.155,
+ "sigma": 0.02,
+ "final_mass": 0.378698224852071,
+ "mass": 0.3786982248520711,
+ "gyradius": 0.3873065605142678,
+ "net_speed": 0.0,
+ "path_speed": 0.0,
+ "turning_rate": 0.0,
+ "mass_rel_sd": 2.931682674400803e-16,
+ "fixed_point": true,
+ "cls": "static"
+}
