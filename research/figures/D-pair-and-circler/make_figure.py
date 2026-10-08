@@ -33,7 +33,7 @@ from figlib.gitsource import Pinned  # noqa: E402
 from figlib.style import GRID, INK, MUTED, OKABE_ITO, figure_style, status_badge  # noqa: E402
 
 OUT = HERE / "figure-D"
-PR27 = "e1f8760c5055f671dc07ef9a4f9ff782da6bdfa6"  # Lane 6, L6-007/L6-008 results (unmerged)
+PR27 = "968d330235e234fae4c6818a07c2b9eeee265113"  # Lane 6, L6-007/L6-008 results (unmerged)
 PR30 = "0b9b47f8d7c48847219441cd15152792adbd45de"  # Lane 7, HR-009: PR #30 merge commit on main
 PR29 = "20bdff9f3827290cff6646fae6bc8f283e5aa373"  # Lane 3, L3-003: PR #29 merge commit on main; cited for the refinement caveat only
 L3_003 = "research/experiments/L3-003-circler-lifetime/README.md"

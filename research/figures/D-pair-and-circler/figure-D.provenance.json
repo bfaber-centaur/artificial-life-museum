@@ -21,8 +21,8 @@
   "inputs": [
     {
       "path": "research/figures/D-pair-and-circler/make_figure.py",
-      "sha256": "848a84bee97920e8914f925bccb6177b445dcbb904126077e1f418ccc72e0e95",
-      "last_commit": "04a3914"
+      "sha256": "53fb9a0f9dc7eb657a2c8313eda2c3b2ccd71227fea6156d77bc8a44cc647ef0",
+      "last_commit": "4fec924"
     },
     {
       "path": "research/figures/figlib/__init__.py",
@@ -57,21 +57,21 @@
   ],
   "pinned_inputs": [
     {
-      "commit": "e1f8760c5055f671dc07ef9a4f9ff782da6bdfa6",
+      "commit": "968d330235e234fae4c6818a07c2b9eeee265113",
       "source": "PR #27 (Lane 6, L6-007/L6-008), unmerged",
       "path": "research/experiments/L6-007-attractor-geography/circler-lifetimes.csv",
       "blob": "a3b22df612babba5e1f45cd1fe138eb9f60abbc6",
       "sha256": "9671495b005deb16f432d0b0b975fc8ad5cda767593fa6368e4f8ed7bbe1255f"
     },
     {
-      "commit": "e1f8760c5055f671dc07ef9a4f9ff782da6bdfa6",
+      "commit": "968d330235e234fae4c6818a07c2b9eeee265113",
       "source": "PR #27 (Lane 6, L6-007/L6-008), unmerged",
       "path": "research/experiments/L6-008-pair-coupling/README.md",
-      "blob": "123fb451a54893c4bcc43ea3402f13f35d581a83",
-      "sha256": "f8fcb99a5c3c85985ffce8180b44283ddcfd3eaaba964f8402447e160eda17b3"
+      "blob": "16c48ef9c0eab9537fefa8f40af198a3d7f1b44a",
+      "sha256": "108b9e51b1b8006eb473c1fd67256f00ffeb404dac63867f38a28752b81a9b56"
     },
     {
-      "commit": "e1f8760c5055f671dc07ef9a4f9ff782da6bdfa6",
+      "commit": "968d330235e234fae4c6818a07c2b9eeee265113",
       "source": "PR #27 (Lane 6, L6-007/L6-008), unmerged",
       "path": "research/experiments/L6-008-pair-coupling/pair-coupling.csv",
       "blob": "9ecf69a72f2bc56d23746e51882d579ad3c79e8e",
@@ -113,8 +113,8 @@
     "research/figures/D-pair-and-circler/figure-D-pair.csv",
     "research/figures/D-pair-and-circler/figure-D-lifetimes.csv"
   ],
-  "code_commit": "04a3914",
-  "code_dirty": false,
+  "code_commit": "4fec924",
+  "code_dirty": true,
   "versions": {
     "python": "3.13.16",
     "numpy": "2.5.3",
