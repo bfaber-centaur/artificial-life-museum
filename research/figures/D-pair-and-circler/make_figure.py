@@ -35,6 +35,8 @@ from figlib.style import GRID, INK, MUTED, OKABE_ITO, figure_style, status_badge
 OUT = HERE / "figure-D"
 PR27 = "ad9ac03a03d7599bc57535f11a8470349cd2156a"  # Lane 6, L6-007/L6-008 results (unmerged)
 PR30 = "4e7482277714c909501692626b1c998bdd23c073"  # Lane 7, HR-009 (unmerged)
+PR29 = "5288e08597e707aaa7930932ff9ded6cbb783b4a"  # Lane 3, L3-003 (unmerged): cited for the refinement caveat only
+L3_003 = "research/experiments/L3-003-circler-lifetime/README.md"
 L8 = "research/experiments/L6-008-pair-coupling/pair-coupling.csv"
 L7 = "research/experiments/L6-007-attractor-geography/circler-lifetimes.csv"
 E1 = "research/experiments/HR009-l6-review/e1.csv"
@@ -243,6 +245,8 @@ def panel_d(ax, runs):
 def build():
     l6 = Pinned(PR27, "PR #27 (Lane 6, L6-007/L6-008), unmerged")
     l7 = Pinned(PR30, "PR #30 (Lane 7, HR-009), unmerged")
+    l3 = Pinned(PR29, "PR #29 (Lane 3, L3-003), unmerged")
+    l3.text(L3_003)  # not plotted: logged so the caveat names exactly what it rests on
     led = L.snapshot(EXPECTED)
     status = {cid: c["status"] for cid, c in led["claims"].items()}
     runs = pair_runs(l6)
@@ -271,8 +275,13 @@ def build():
         axc, axd = sf[1].subplots(1, 2, width_ratios=[1.15, 1])
         panel_c(axc, life, ref)
         km = panel_d(axd, life)
-        sf[1].suptitle("c, d   S102, the circler at its registered rule: a chaotic transient with a spread of lifetimes, "
-                       "not one death time", x=0.005, ha="left", fontsize=7.3, fontweight="bold")
+        sf[1].suptitle("c, d   S102 at its registered rule (R 13, T 10 only): a chaotic transient, not one death time"
+                       "\n \n \n ", x=0.005, ha="left", fontsize=7.3, fontweight="bold")
+        sf[1].text(0.005, 0.925, f"R 13, T 10 ONLY; REFINEMENT DISPUTED. Lane 3 (PR #29 @ {PR29[:7]}) reproduces these deaths at "
+                   "R 13,\nbut sees none at R 26 (0 of 29 runs, to 8000 tu) or R 39 (0 of 3). The finite lifetime may be "
+                   "an effect\nof the R 13 grid; a timestep test is running. Not a lifetime of the rule.",
+                   transform=sf[1].transSubfigure, ha="left", va="top", fontsize=6.2, color=OKABE_ITO["vermillion"],
+                   fontweight="bold")
         status_badge(axd, "C038", status["C038"], x=1.0, y=1.0, short=True, in_layout=False)
 
         handles = [Patch(facecolor=COUNT_FILL[k], edgecolor=GRID, hatch="////" if k == "o" else None, label=lab)
@@ -318,8 +327,10 @@ def build():
                      ["PROVISIONAL: evidence read from unmerged PRs #27 and #30 at pinned commits; see pinned_inputs.",
                       "Proposed claims L6-c, L6-d, L6-f are not in the ledger; no status is drawn for them.",
                       "Kaplan-Meier with Greenwood log-log 95% band; HR-009's rerun of the unperturbed seed is not "
-                      "counted as a separate start."],
-                     pinned_inputs=l6.manifest() + l7.manifest())
+                      "counted as a separate start.",
+                      "Panels c-d are R 13, T 10 only; PR #29 (L3-003) sees no death at R 26 or R 39, so refinement is "
+                      "disputed. L3-003 is cited, not plotted."],
+                     pinned_inputs=l6.manifest() + l7.manifest() + l3.manifest())
     P.write_manifest(HERE / "figure-D.provenance.json", man)
 
 

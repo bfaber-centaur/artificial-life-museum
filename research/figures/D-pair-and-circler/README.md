@@ -10,6 +10,12 @@ pair runs [`figure-D-pair.csv`](figure-D-pair.csv) · lifetimes and survival est
 > - Lane 6's PR #27 (L6-007 and L6-008), read at `ad9ac03`;
 > - Lane 7's hostile review HR-009, PR #30, read at `4e74822`.
 >
+> **Panels c and d are R 13, T 10 only, and refinement is disputed.** Lane 3's independent
+> replication (PR #29 @ `5288e08`, L3-003) reproduces these R 13 deaths exactly. But no copy died
+> at R 26 (0 of 29 runs, up to 8000 tu) or at R 39 (0 of 3), so the finite lifetime may be an
+> effect of the R 13 grid rather than of the rule. A timestep test that separates grid from step
+> is running. L3-003 is cited here, not plotted.
+>
 > Both are read with `git show`, and nothing is copied here. The findings shown are *proposed* claims
 > (L6-c, L6-d, L6-f) as Lane 6 revised them after HR-009. They are not in `research/claims.md`, so the
 > figure prints no status for them. If #27 or #30 change, this figure must be rebuilt at their new heads.
@@ -20,7 +26,7 @@ pair runs [`figure-D-pair.csv`](figure-D-pair.csv) · lifetimes and survival est
 | --- | --- | --- |
 | **L6-c**: under port injury, the pair survives because the uninjured partner does | proposed (PR #27); accepted as written by HR-009 | a |
 | **L6-d**: under frontal addition, the bound pair dies where each partner alone survives | proposed (PR #27), narrowed by Lane 6 after HR-009 to s 0.2–0.3; preregistered verdict INCONCLUSIVE | b |
-| **L6-f**: S102 is a long, chaotic transient, not an attractor | proposed (PR #27), revised by Lane 6 after HR-009: a chaotic transient whose lifetime distribution is the target | c, d |
+| **L6-f**: S102 is a long, chaotic transient, not an attractor | proposed (PR #27), revised by Lane 6 after HR-009: a chaotic transient whose lifetime distribution is the target. Lane 3's PR #29 replicates it at R 13, T 10 but sees no death at R 26 or R 39 | c, d |
 | **C041**: S101 survives port injury of 10–50% by shedding to a single Orbium | OBSERVED (ledger) | a |
 | **C038**: one rule supports a glider, a circler (S102) and a static ring | REPRODUCED (ledger) | c, d |
 
@@ -57,7 +63,7 @@ survive the full-pulse control, against a threshold of 8. The narrower observati
 stands within that verdict.
 
 **c. S102 lifelines.** 37 starts of the circler at its registered rule (μ 0.155, σ 0.020, R 13,
-T 10, 128²), each run for 5000 tu. Each line is one start, and a cross marks the time its mass fell
+T 10, 128²), each run for 5000 tu. Everything in c and d is at R 13, T 10 only (see the limits). Each line is one start, and a cross marks the time its mass fell
 below 0.01.
 - The unperturbed seed (black) dies at 3979.9 tu. HR-009's rerun on the same engine gives 3980
   at 10-step sampling. That is one floating-point trajectory, not the creature's lifetime.
@@ -77,9 +83,15 @@ under half at 5000 tu. 10 of the 20 deaths come before 1000 tu, so the hazard is
   s 0.2–0.3 survives both baselines.
 - **One rule, one grid, five phases.** Every pair run is at S001's rule, R 13, T 10. The phases are
   consecutive steps.
+- **R 13, T 10 only; refinement disputed.** Lane 3's L3-003 (PR #29 @ `5288e08`) reproduces
+  Lane 6's death step and all 12 noisy fates at R 13, and finds 10 of 24 δ = 1e−12 copies ending
+  within 5000 tu, which agrees with Lane 7. At R 26 none of 29 runs died (to 8000 tu), and at R 39
+  none of 3. So the transient replicates across implementations but not across resolution. Whether
+  the collapse comes from the grid or the timestep is not yet known (T 20 and T 40 are one run
+  each, both alive). The exhibit should not present a lifetime as a property of the rule.
 - **Lifetimes are a sample, not a law.** 37 starts with three perturbation recipes are pooled, as
   HR-009 pools them. The band reflects only the sampling of these starts. It does not cover another
-  engine, timestep or grid. Lane 3's independent lifetime study (PR #29) has not reported.
+  engine, timestep or grid.
 - **Death detection differs slightly.** Lane 6 records the first step with mass below 0.01, and
   HR-009 the first 10-step sample. The difference is at most 1 tu.
 - **No mechanism is shown.** The figure does not say why the pair is fragile to frontal mass, or
@@ -87,7 +99,8 @@ under half at 5000 tu. 10 of the 20 deaths come before 1000 tu, so the hazard is
 
 ## Alt text
 
-Four-part figure, marked provisional.
+Four-part figure, marked provisional. Parts c and d carry a red warning that they hold only at
+R 13, T 10, because a replication saw no deaths at finer resolution.
 (a) A grid of small tiles, 12 strengths of port injury by five phases, for the bound pair above and
 the two partners run alone below. Almost every tile reads 1 in both blocks up to s 0.5 and 0 beyond,
 so the pair behaves like its partners alone.
@@ -107,6 +120,7 @@ a shaded uncertainty band.
 | HR-009 E2 full-pulse halves | `research/experiments/HR009-l6-review/e2.csv` | PR #30 head `4e74822` | b |
 | L6-007 circler lifetimes (exploratory follow-up) | `research/experiments/L6-007-attractor-geography/circler-lifetimes.csv` | `ad9ac03` | c, d |
 | HR-009 E1 twin and δ-perturbed circlers | `research/experiments/HR009-l6-review/e1.csv` | `4e74822` | c, d |
+| L3-003 refinement result (cited, not plotted) | `research/experiments/L3-003-circler-lifetime/README.md` | PR #29 head `5288e08` | c, d caveat |
 | Claim statuses | `research/claims.md` | stamped on the figure | badges |
 
 Blob IDs and SHA-256s of every file read are in `figure-D.provenance.json` (`pinned_inputs`).
@@ -114,7 +128,7 @@ Blob IDs and SHA-256s of every file read are in `figure-D.provenance.json` (`pin
 ## Reproduce
 
 ```bash
-git fetch origin claude/night0-field-tmbx06 claude/night0-hostile-review-o3avnq
+git fetch origin claude/night0-field-tmbx06 claude/night0-hostile-review-o3avnq claude/night0-replication-13cz1b
 .venv/bin/python research/figures/D-pair-and-circler/make_figure.py
 ```
 
