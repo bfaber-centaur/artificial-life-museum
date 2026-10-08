@@ -21,8 +21,8 @@
   "inputs": [
     {
       "path": "research/figures/D-pair-and-circler/make_figure.py",
-      "sha256": "830fe12214ae2a56059fe6398318b2a1a129d663158d74906194e73cb6a915cb",
-      "last_commit": "62c0857"
+      "sha256": "848a84bee97920e8914f925bccb6177b445dcbb904126077e1f418ccc72e0e95",
+      "last_commit": "04a3914"
     },
     {
       "path": "research/figures/figlib/__init__.py",
@@ -57,43 +57,50 @@
   ],
   "pinned_inputs": [
     {
-      "commit": "efa899901c8051d24e70b9836c23386ef693c43d",
+      "commit": "e1f8760c5055f671dc07ef9a4f9ff782da6bdfa6",
       "source": "PR #27 (Lane 6, L6-007/L6-008), unmerged",
       "path": "research/experiments/L6-007-attractor-geography/circler-lifetimes.csv",
       "blob": "a3b22df612babba5e1f45cd1fe138eb9f60abbc6",
       "sha256": "9671495b005deb16f432d0b0b975fc8ad5cda767593fa6368e4f8ed7bbe1255f"
     },
     {
-      "commit": "efa899901c8051d24e70b9836c23386ef693c43d",
+      "commit": "e1f8760c5055f671dc07ef9a4f9ff782da6bdfa6",
       "source": "PR #27 (Lane 6, L6-007/L6-008), unmerged",
       "path": "research/experiments/L6-008-pair-coupling/README.md",
       "blob": "123fb451a54893c4bcc43ea3402f13f35d581a83",
       "sha256": "f8fcb99a5c3c85985ffce8180b44283ddcfd3eaaba964f8402447e160eda17b3"
     },
     {
-      "commit": "efa899901c8051d24e70b9836c23386ef693c43d",
+      "commit": "e1f8760c5055f671dc07ef9a4f9ff782da6bdfa6",
       "source": "PR #27 (Lane 6, L6-007/L6-008), unmerged",
       "path": "research/experiments/L6-008-pair-coupling/pair-coupling.csv",
       "blob": "9ecf69a72f2bc56d23746e51882d579ad3c79e8e",
       "sha256": "5e5d388d2a49bacce7adc165cf8323001fb83e921f3f7e6d0a9ee11d9181a34f"
     },
     {
-      "commit": "4e7482277714c909501692626b1c998bdd23c073",
-      "source": "PR #30 (Lane 7, HR-009), unmerged",
+      "commit": "0b9b47f8d7c48847219441cd15152792adbd45de",
+      "source": "PR #30 (Lane 7, HR-009), merged to main",
       "path": "research/experiments/HR009-l6-review/e1.csv",
       "blob": "70ec689443c77696e01ac082a6b80dc1685f41ba",
       "sha256": "577ea543ccc5f2a8fc0f5ac78414c914820a9ec0402e6a61955118f549060c5d"
     },
     {
-      "commit": "4e7482277714c909501692626b1c998bdd23c073",
-      "source": "PR #30 (Lane 7, HR-009), unmerged",
+      "commit": "0b9b47f8d7c48847219441cd15152792adbd45de",
+      "source": "PR #30 (Lane 7, HR-009), merged to main",
       "path": "research/experiments/HR009-l6-review/e2.csv",
       "blob": "3d56ff6a2f968b55ac6acee588db90269d9d2ae4",
       "sha256": "4e1321f5b2080d3cd83746c37f877481023759bd7485df632c2336138c2cdb97"
     },
     {
-      "commit": "8c3c082c16181a942ec12b1d555c74d4b32beded",
-      "source": "PR #29 (Lane 3, L3-003), unmerged",
+      "commit": "0b9b47f8d7c48847219441cd15152792adbd45de",
+      "source": "PR #30 (Lane 7, HR-009), merged to main",
+      "path": "research/reports/hostile-review.md",
+      "blob": "cefcab93e6f9113156be63155bc2bfb0cd42dcbd",
+      "sha256": "8ec9533236531553b6670b162c8e49a7564ced56eb1d1e397ccab9e194b8cda2"
+    },
+    {
+      "commit": "20bdff9f3827290cff6646fae6bc8f283e5aa373",
+      "source": "PR #29 (Lane 3, L3-003), merged to main",
       "path": "research/experiments/L3-003-circler-lifetime/README.md",
       "blob": "0d8a2eb4c841e38f95476ecf689698ae6dcfc80b",
       "sha256": "ecbca4e133131cb93d9925280c6f4a94549d58305b55cf55074e005b7301f6ed"
@@ -106,7 +113,7 @@
     "research/figures/D-pair-and-circler/figure-D-pair.csv",
     "research/figures/D-pair-and-circler/figure-D-lifetimes.csv"
   ],
-  "code_commit": "62c0857",
+  "code_commit": "04a3914",
   "code_dirty": false,
   "versions": {
     "python": "3.13.16",
@@ -114,10 +121,10 @@
     "matplotlib": "3.11.2"
   },
   "notes": [
-    "PROVISIONAL: evidence read from unmerged PRs #27 and #30 at pinned commits; see pinned_inputs.",
+    "PROVISIONAL: evidence read from unmerged PR #27 and from merged PRs #29 and #30 at pinned commits; see pinned_inputs.",
     "Proposed claims L6-c, L6-d, L6-f are not in the ledger; no status is drawn for them.",
     "Kaplan-Meier with Greenwood log-log 95% band; HR-009's rerun of the unperturbed seed is not counted as a separate start.",
     "Panels c-d are R 13, T 10 only; PR #29 (L3-003) sees no end at R 26, R 39, T 20 or T 40, so the collapse is a discretisation effect. L3-003 is cited, not plotted.",
-    "Panel b is 128\u00b2 world only; Lane 6's L6-009 note (L6-008 README @ PR #27) finds the s 0.2 drag-down is a collision artefact at 128\u00b2 and s 0.3 placement-dependent. Cited, not plotted."
+    "Panel b's s 0.2-0.3 window is withdrawn: HR-009c (PR #30) and L6-009 (PR #27 L6-008 README) show the on-gap pulse frees two Orbia that collide only on 128\u00b2. Cited, not plotted."
   ]
 }

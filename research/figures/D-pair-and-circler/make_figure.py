@@ -6,7 +6,7 @@ for I003, alone with the full pulse (Lane 7's HR-009 E2 control). (c, d) S102, t
 lifetimes of 37 starts at its registered rule (Lane 6's L6-007 follow-up and HR-009 E1), drawn as
 individual lifelines and as a Kaplan-Meier survival estimate with censoring at 5000 tu.
 
-Evidence is read with `git show` at pinned commits of two unmerged PRs (figlib.gitsource):
+Evidence is read with `git show` at pinned commits (figlib.gitsource): unmerged PR #27, and #29 and #30 at their merge commits on main:
 Lane 6's PR #27 and Lane 7's PR #30. Nothing is copied into this branch. The new findings are
 proposed claims (L6-c, L6-d, L6-f), not ledger entries, so the figure prints no status for them.
 Ledger statuses are drawn only for the claims already recorded (C038, C041). Runs no simulation.
@@ -33,9 +33,9 @@ from figlib.gitsource import Pinned  # noqa: E402
 from figlib.style import GRID, INK, MUTED, OKABE_ITO, figure_style, status_badge  # noqa: E402
 
 OUT = HERE / "figure-D"
-PR27 = "efa899901c8051d24e70b9836c23386ef693c43d"  # Lane 6, L6-007/L6-008 results (unmerged)
-PR30 = "4e7482277714c909501692626b1c998bdd23c073"  # Lane 7, HR-009 (unmerged)
-PR29 = "8c3c082c16181a942ec12b1d555c74d4b32beded"  # Lane 3, L3-003 (unmerged): cited for the refinement caveat only
+PR27 = "e1f8760c5055f671dc07ef9a4f9ff782da6bdfa6"  # Lane 6, L6-007/L6-008 results (unmerged)
+PR30 = "0b9b47f8d7c48847219441cd15152792adbd45de"  # Lane 7, HR-009: PR #30 merge commit on main
+PR29 = "20bdff9f3827290cff6646fae6bc8f283e5aa373"  # Lane 3, L3-003: PR #29 merge commit on main; cited for the refinement caveat only
 L3_003 = "research/experiments/L3-003-circler-lifetime/README.md"
 L8 = "research/experiments/L6-008-pair-coupling/pair-coupling.csv"
 L7 = "research/experiments/L6-007-attractor-geography/circler-lifetimes.csv"
@@ -167,11 +167,12 @@ def panel_b(ax, runs, full):
     y = tile_panel(ax, runs, "I003", svals, [("bound pair", "pair"), ("partners alone,\ntheir share of pulse\n(L6-008)", "split"),
                                              ("partners alone,\nfull pulse\n(HR-009 E2)", "full")], full=full)
     j = {s: i for i, s in enumerate(svals)}
-    ax.add_patch(Rectangle((j[0.2], -y + 0.4), 2, y - 0.3, facecolor=DRAG, alpha=0.10, edgecolor="none", zorder=0))
+    ax.add_patch(Rectangle((j[0.2], -y + 0.4), 2, y - 0.3, facecolor="none", edgecolor=MUTED, hatch="\\\\",
+                           lw=0, alpha=0.35, zorder=0))
     ax.add_patch(Rectangle((j[0.5], -y + 0.4), len(svals) - j[0.5], y - 0.3, facecolor="white", alpha=0.62,
                            edgecolor="none", zorder=5))
     top = 0.35
-    ax.text(j[0.2] + 1, top, "both baselines hold,\n128² world only", ha="center", va="bottom", fontsize=6,
+    ax.text(j[0.2] + 1, top, "withdrawn: a 128²\nworld-size effect", ha="center", va="bottom", fontsize=6,
             color=DRAG, fontweight="bold")
     ax.text(j[0.4] + 0.5, top, "explained by\nexposure", ha="center", va="bottom", fontsize=6, color=MUTED)
     ax.text((j[0.5] + len(svals)) / 2, top, "not interpreted: no baseline brackets the pair\n"
@@ -244,10 +245,11 @@ def panel_d(ax, runs):
 
 def build():
     l6 = Pinned(PR27, "PR #27 (Lane 6, L6-007/L6-008), unmerged")
-    l7 = Pinned(PR30, "PR #30 (Lane 7, HR-009), unmerged")
-    l3 = Pinned(PR29, "PR #29 (Lane 3, L3-003), unmerged")
+    l7 = Pinned(PR30, "PR #30 (Lane 7, HR-009), merged to main")
+    l3 = Pinned(PR29, "PR #29 (Lane 3, L3-003), merged to main")
     l3.text(L3_003)  # not plotted: logged so the caveat names exactly what it rests on
     l6.text("research/experiments/L6-008-pair-coupling/README.md")  # L6-009 world-size note, cited for panel b
+    l7.text("research/reports/hostile-review.md")  # HR-009c withdrawal, cited for panel b
     led = L.snapshot(EXPECTED)
     status = {cid: c["status"] for cid, c in led["claims"].items()}
     runs = pair_runs(l6)
@@ -256,11 +258,11 @@ def build():
 
     with figure_style():
         fig = plt.figure(figsize=(7.2, 8.6), layout="constrained")
-        fig.suptitle("Figure D. When together is worse, and the creature that eventually disappears",
+        fig.suptitle("Figure D. A withdrawn 'together is worse', and a circler that disappears only at R 13, T 10",
                      x=0.005, ha="left", fontsize=9, fontweight="bold")
         sf = fig.subfigures(2, 1, height_ratios=[5.0, 2.9], hspace=0.03)
-        sf[0].text(0.005, 0.985, f"PROVISIONAL: evidence from unmerged PR #27 (Lane 6) @ {PR27[:7]} and PR #30 (Lane 7, HR-009) @ "
-                   f"{PR30[:7]}.\nThe new findings are proposed claims, not ledger entries. Ledger statuses (C038, C041) "
+        sf[0].text(0.005, 0.985, f"PROVISIONAL: evidence from unmerged PR #27 (Lane 6) @ {PR27[:7]}, with PR #30 (Lane 7, HR-009) and #29 merged "
+                   f"(main @ {PR30[:7]}).\nThe new findings are proposed claims, not ledger entries. Ledger statuses (C038, C041) "
                    f"checked against research/claims.md @ {led['ledger_commit']}.",
                    transform=sf[0].transSubfigure, ha="left", va="top", fontsize=6.2, color=OKABE_ITO["vermillion"],
                    fontweight="bold")
@@ -269,12 +271,12 @@ def build():
         panel_a(axa, runs)
         panel_b(axb, runs, full)
         axa.set_title("a   S101 under port injury (I004): an ordinary response (cells: Orbia alive at the end)", loc="left", fontsize=7.3, fontweight="bold", pad=4)
-        axb.set_title("b   S101 under frontal addition (I003): worse together at s 0.2–0.3, in a 128² world",
+        axb.set_title("b   S101 under frontal addition (I003): the 'worse together' window is withdrawn",
                       loc="left", fontsize=7.3, fontweight="bold", pad=56)
-        axb.annotate(f"128² WORLD ONLY. Lane 6 (PR #27 @ {PR27[:7]}; L6-009, not yet proposed): the gap pulse splits "
-                     "the pair into two free Orbia.\nAt s 0.2 they die when they later collide on the 128² torus; in a "
-                     "256² world they end as two Orbia (5 of 5,\nexploratory). So s 0.2 is a finite-world artefact, and "
-                     "s 0.3 is world- and placement-dependent.", xy=(0, 1), xycoords="axes fraction",
+        axb.annotate(f"WITHDRAWN. Lane 7's HR-009c (PR #30, main @ {PR30[:7]}) with Lane 6's L6-009: the on-gap pulse splits the pair "
+                     "into two\nintact Orbia. On the 128² torus they later collide; zero-padded to 256², all 10 s 0.2–0.3 "
+                     "states end as two Orbia.\nThe red-outlined runs are a world-size effect, not coupling. Only an "
+                     "off-gap s 0.3 result (L6-009, exploratory) remains open.", xy=(0, 1), xycoords="axes fraction",
                      xytext=(0, 25), textcoords="offset points", ha="left", va="bottom", fontsize=6.2,
                      color=OKABE_ITO["vermillion"], fontweight="bold")
         status_badge(axa, "C041", status["C041"], x=1.0, y=1.0, short=True, in_layout=False)
@@ -284,7 +286,7 @@ def build():
         km = panel_d(axd, life)
         sf[1].suptitle("c, d   S102 at its registered rule (R 13, T 10 only): a chaotic transient, not one death time"
                        "\n \n \n ", x=0.005, ha="left", fontsize=7.3, fontweight="bold")
-        sf[1].text(0.005, 0.925, f"R 13, T 10 ONLY. Lane 3 (PR #29 @ {PR29[:7]}) reproduces these deaths at R 13, T 10, but "
+        sf[1].text(0.005, 0.925, f"R 13, T 10 ONLY. Lane 3 (PR #29, main @ {PR29[:7]}) reproduces these deaths at R 13, T 10, but "
                    "no copy ends when either knob is refined:\n0 of 29 runs at R 26 and 0 of 3 at R 39 (T 10); 0 of 24 "
                    "at T 20 and 0 of 24 at T 40 (R 13), to 8000 tu. The collapse is\nan effect of the R 13, T 10 "
                    "discretisation, not a lifetime of the rule. Refined runs are censored, not shown to be attractors.",
@@ -332,14 +334,14 @@ def build():
     inputs = [pathlib.Path(__file__).resolve(), *sorted((HERE.parent / "figlib").glob("*.py"))]
     man = P.manifest("D-pair-and-circler", inputs, outs,
                      ".venv/bin/python research/figures/D-pair-and-circler/make_figure.py", led,
-                     ["PROVISIONAL: evidence read from unmerged PRs #27 and #30 at pinned commits; see pinned_inputs.",
+                     ["PROVISIONAL: evidence read from unmerged PR #27 and from merged PRs #29 and #30 at pinned commits; see pinned_inputs.",
                       "Proposed claims L6-c, L6-d, L6-f are not in the ledger; no status is drawn for them.",
                       "Kaplan-Meier with Greenwood log-log 95% band; HR-009's rerun of the unperturbed seed is not "
                       "counted as a separate start.",
                       "Panels c-d are R 13, T 10 only; PR #29 (L3-003) sees no end at R 26, R 39, T 20 or T 40, so the "
                       "collapse is a discretisation effect. L3-003 is cited, not plotted.",
-                      "Panel b is 128² world only; Lane 6's L6-009 note (L6-008 README @ PR #27) finds the s 0.2 "
-                      "drag-down is a collision artefact at 128² and s 0.3 placement-dependent. Cited, not plotted."],
+                      "Panel b's s 0.2-0.3 window is withdrawn: HR-009c (PR #30) and L6-009 (PR #27 L6-008 README) show the "
+                      "on-gap pulse frees two Orbia that collide only on 128². Cited, not plotted."],
                      pinned_inputs=l6.manifest() + l7.manifest() + l3.manifest())
     P.write_manifest(HERE / "figure-D.provenance.json", man)
 
