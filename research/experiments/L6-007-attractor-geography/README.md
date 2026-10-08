@@ -162,7 +162,8 @@ G glider, C circler, S static, D died, F filled. ¹ circler at 1000 tu, died bef
   λ 0.90–1) the classes are draws from the circler's lifetime distribution, and a rerun on
   another machine could flip them. The interleaving that does not depend on the circler is on
   the Orbium → ring path: the dead zones, the filled point and the static island at λ 0.20.
-  Orbium and the ring are attractors and death is final, so those are stable classifications.
+  Their end states are absorbing (Orbium and the ring are attractors here, and death is final).
+  Whether the λ assignments are sensitive to rounding was not checked in this experiment.
 - The ring has the widest basin along both paths that reach it (λ ≥ 0.55–0.60). Orbium's reaches
   λ 0.05–0.10, and the circler's is no wider than one or two grid points.
 
