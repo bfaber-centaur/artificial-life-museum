@@ -271,6 +271,11 @@ Responsibilities:
 - require run IDs and reproduction commands;
 - assign fresh-context reproduction when a claim becomes interesting;
 - produce the morning report.
+- keep literature provenance for substantive claims: when a claim is reproduced, independently
+  checked or proposed as new, run one bounded search of the Lenia literature, the catalog and
+  adjacent work, and record it in the claim's **Prior literature** field and in
+  `research/references.md` (rules in `claims.md`, "Literature provenance"). Literature agreement
+  is never reproduction, and a failed search is never novelty.
 
 Do not become the main implementer.
 
