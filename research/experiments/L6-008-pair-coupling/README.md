@@ -6,7 +6,33 @@ their strengths × 5 phases, plus 5 controls), [`validity.csv`](validity.csv).
 
     python research/experiments/L6-008-pair-coupling/run.py
 
-## Revision after hostile review HR-009 (PR #30)
+## Current interpretation (after HR-009 and HR-009c; both on main)
+
+This section governs. The pre-registered verdicts and the raw results below are kept as the
+historical outcome of the experiment. Interpretive passages that no longer hold are marked
+*superseded*.
+
+- **I004 port injury: H0 (58/60).** S101 survives a port injury because the uninjured partner
+  does. Accepted by HR-009.
+- **I001 attenuation: H0 not rejected.** The one strong mismatch (s 0.08) comes from the split-half
+  baseline, not from coupling.
+- **I003 frontal pulse: the coupling interpretation (L6-d) is withdrawn.** The pre-registered
+  rule recorded H1, and that historical verdict stands. But HR-009c (Lane 7, independent check)
+  and L6-009 show that the on-gap pulse at s 0.2–0.3 does not kill the pair. It **splits S101 into
+  two intact Orbia** (0.868–0.873 mass at 40 tu, 10/10). Those two later collide on the 128²
+  periodic world, and whether that kills them depends on world size: on 256², all 10 of Lane 7's
+  states end as two Orbia. In Lane 6's own 256² rerun (frames per phase), 5/5 survive at s 0.2,
+  and 3/5 at s 0.3, where the 2 deaths come late. The halves-alone baseline cannot show this
+  because each half has no partner to collide with. What L6-008 counted as drag-down is a
+  world-size effect, not coupling.
+- **Off-gap candidates (exploratory, unverified):** L6-009 reports that at s 0.3 a pulse slightly
+  off the gap kills the pair in 4/5 phases on both world sizes, and that a pulse on one partner
+  lets the pair keep a partner that dies alone (8/15). Neither is preregistered as a coupling
+  test or independently checked. They are leads, not claims.
+- **s ≥ 0.4** outcomes (pulse exposure at 0.4, "rescue" to one Orbium and filled worlds at
+  s ≥ 0.5) are not interpreted as coupling.
+
+## Revision after hostile review HR-009 (PR #30) — *superseded* by the section above
 
 HR-009 E2 (Lane 7, preregistered) found a flaw I missed. The I003 pulse is centred in the gap
 between the partners, so after the split each half receives only its own truncated half of the
@@ -24,7 +50,8 @@ are unchanged. The I003 reading is narrowed:
   full-pulse baseline; its threshold was 8). That verdict stands. The narrower observation is a
   drag-down at s 0.2–0.3 under both baselines.
 
-**Further caveat (2026-10-08, from L6-009, in a separate PR).** On a 128² world the gap pulse
+**Further caveat (2026-10-08, from L6-009, in a separate PR)** — *now folded into "Current
+interpretation".* On a 128² world the gap pulse
 splits the pair into two free Orbia, and the s 0.2 deaths happen when those two later collide on
 the torus. On a 256² world the same edited states end as two Orbia in 5/5 phases (exploratory).
 So the s 0.2 drag-down above is a finite-world artefact, and the s 0.3 deaths at the gap are
@@ -37,12 +64,12 @@ near-field effects at s 0.3.
 | --- | --- | --- | --- |
 | I004 port injury | 2 of 60 (none) | **H0** | The pair survives because the uninjured partner does. |
 | I001 attenuation | 8 of 50 (only s = 0.08) | **H0 not rejected** | The one strong mismatch comes from the split-half baseline, not from coupling (see below). |
-| I003 frontal mass | 24 of 50 (s = 0.2, 0.3, 0.4, 0.5, 0.9, 1.0) | **H1, coupling** (by L6-008's rule); HR-009 full-pulse check **INCONCLUSIVE** | Drag-down survives both baselines only at s 0.2–0.3. |
+| I003 frontal mass | 24 of 50 (s = 0.2, 0.3, 0.4, 0.5, 0.9, 1.0) | **H1** by L6-008's rule (historical); HR-009 full-pulse check **INCONCLUSIVE** | **Coupling interpretation withdrawn.** The on-gap pulse splits the pair, and the deaths are periodic-world collisions (HR-009c). |
 
 So **C041's fission under port injury is the trivial explanation**: the cut removes the port
-partner and the starboard partner carries on as it would alone. The coupling that does show is
-in the opposite direction from "binding protects". At s 0.2–0.3, a frontal mass pulse that each
-partner survives on its own, even at full strength, kills or degrades the bound pair.
+partner and the starboard partner carries on as it would alone. No disturbance tested here shows
+coupling that survives scrutiny. The frontal-pulse "drag-down" turned out to be the pair being
+split into two Orbia that later collide on the finite periodic world.
 
 My expectation, written before the run, was H0 for I004 (confirmed) and coupling most likely
 under I001 (not supported). I003 coupling was not predicted.
@@ -109,7 +136,7 @@ bodies. Against the lone baseline the pair is close to independent: lone gives n
 pre-registered rule H1 is not claimed. This is a limitation of the split-half design: it is a
 conservative baseline for drag-down and a biased one for rescue.
 
-### I003: coupling, in the drag-down direction
+### I003 — *superseded*: the coupling reading below is withdrawn (see "Current interpretation")
 
 At s = 0.2, 0.3 and 0.4 each half, given exactly its share of the same added mass (the edit is
 applied before the split), survives in 14 of 15 runs. Yet the pair dies or degrades in 10 of 15.
@@ -132,11 +159,10 @@ side-by-side pair is the gap between the partners, where both kernels overlap.
 - **L6-c.** Under I004 port injury (s 0.05–0.60, 5 phases) S101's survival matches the
   independent-partner baseline in 58/60 runs. Its fission to one Orbium (C041) is the uninjured
   partner surviving, not coupling.
-- **L6-d** (narrowed after HR-009). Under I003 frontal mass addition at s 0.2–0.3, the bound pair
-  dies or degrades in 6/10 runs while each partner alone survives, both with its half of the
-  pulse (L6-008) and with the full pulse (HR-009). At s ≥ 0.4 the outcome is explained by pulse
-  exposure or is not bracketed by either baseline. HR-009's preregistered verdict on this test is
-  INCONCLUSIVE, and the s 0.2–0.3 drag-down is a narrower observation within it.
+- **L6-d — withdrawn as a coupling claim.** Replacement, as an observation (wording after
+  HR-009c): an on-gap I003 pulse at s 0.2–0.3 splits S101 into two intact Orbia. Whether they then
+  survive depends on the world (collisions on 128²), not on coupling. The pre-registered H1 verdict
+  and HR-009's INCONCLUSIVE verdict are kept as historical records of what each test measured.
 - **I001, H0 not rejected.** The s = 0.08 mismatch (5/5) is attributed to the split-half baseline,
   based on Lane 4's lone baseline, not to coupling. Design limitation, to stay with the claim:
   split halves start unrelaxed and are more fragile than a lone Orbium. That makes the split a
@@ -145,5 +171,6 @@ side-by-side pair is the gap between the partners, where both kernels overlap.
 ## Not tested
 
 Other pair geometries or the 7 other pairs found in L6-003. Resolutions other than R 13 and time
-steps other than T 10. Whether the I003 drag-down depends on where the pulse lands. What
-mechanism makes the pair fragile at s 0.2–0.3.
+steps other than T 10. World sizes other than 128² in the pre-registered runs; HR-009c and L6-009
+add 256² checks of the on-gap pulse only. The off-gap effects in L6-009 have not been
+independently checked.

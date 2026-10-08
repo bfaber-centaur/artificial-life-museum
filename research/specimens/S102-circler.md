@@ -81,8 +81,9 @@ differing by 1e−12 separate at about 0.2 per tu, and that tiny-noise copies di
 292 tu to beyond 5000 tu. In Lane 6's follow-up, 4 of 12 starts with 1–3% noise die between 934
 and 1291 tu, and 8 still circle at 5000 tu. Treat the lifetime as a distribution with censored
 survivors. Lane 3's independent check (PR #29) reproduces this at R 13, T 10. But no copy died at
-R 13 with T 20 or T 40 (0/48, to 8000 tu), or at R 26 (0/29) or R 39 (0/3). **The finite lifetime
-belongs to the R 13, T 10 discretisation specifically.** At finer settings S102 is not shown to die,
-and not shown to be an attractor (all runs censored). See
+R 13 with T 20 or T 40 (0/48, to 8000 tu), or at R 26 (0/29) or R 39 (0/3). **Collapse was observed
+only at R 13, T 10.** At finer settings S102 was not seen to die within the horizons tested, which
+does not show it is stable (all runs censored). Its trajectory is chaotic at every setting tested
+(HR-009b), so exponential divergence of twins is not by itself evidence of collapse. See
 [`L6-007`](../experiments/L6-007-attractor-geography/README.md). Night 0's runs (20 000 steps)
 were too short to see this.

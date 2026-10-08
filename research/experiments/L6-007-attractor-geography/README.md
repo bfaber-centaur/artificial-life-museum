@@ -8,7 +8,26 @@ plus two numerical variants, R 26 (σ 0.0205) and T 40 (σ 0.019).
     python research/experiments/L6-007-attractor-geography/run.py paths
     python research/experiments/L6-007-attractor-geography/followup_circler.py   # exploratory
 
-## Revision after hostile review HR-009 (PR #30)
+## Current interpretation (after HR-009, HR-009b and L3-003; all now on main)
+
+This section governs. The pre-registered P1–P4 scoring below is unchanged, failed predictions
+included. Older interpretive passages are kept and marked where they are superseded.
+
+- **Divergence and collapse are different things.** Twin circlers that differ by 1e−12 diverge
+  exponentially: about 0.20 per tu at R 13, T 10 (HR-009), slower at T 20 and T 40 (0.08–0.10),
+  and much slower at R 26 (about 0.015, HR-009b). So the circler's trajectory is chaotic at every
+  setting tested. **Collapse** (the circler dying or filling the world) was observed only at
+  **R 13, T 10**. L3-003 saw no collapse at R 13 with T 20 or T 40 (0 of 48 copies, to 8000 tu),
+  at R 26 (0 of 29) or at R 39 (0 of 3), within the horizons tested.
+- **What this README claims about S102** is limited to that: at R 13, T 10 the circler collapses
+  after widely varying times, so there it is a transient, not an attractor. It does not claim
+  the circler is a transient in the continuum rule or at other settings. It does not claim
+  indefinite stability anywhere either, because every run at refined settings is censored.
+- **The death at step 39 799** is one floating-point trajectory at R 13, T 10, not a
+  characteristic lifetime. Independent engines reproduce it (L3-003) because they do the same
+  arithmetic from the same start; a 1e−14 nudge moves it by thousands of tu (HR-009).
+
+## Revision after hostile review HR-009 (PR #30) — partly superseded by the section above
 
 Lane 7's HR-009 (preregistered, run on this PR's code at `3ccb804`) showed that twin circlers
 differing by 1e−12 separate at about 0.2 per tu, and that death times at that tiny noise scatter
@@ -22,11 +41,12 @@ unchanged. What changes is the interpretation:
   circler ends of Part B) is a draw from that distribution. It is not evidence of a basin.
 - The claims at the end are rewritten to match (L6-f, L6-g and the replication target).
 
-**Discretisation caveat (Lane 3, L3-003, PR #29, not yet merged).** An independent engine
+**Discretisation caveat (Lane 3, L3-003, PR #29, now merged).** An independent engine
 reproduces step 39 799 and the transient at R 13, T 10. Lane 3's discriminating runs at μ 0.155,
 σ 0.020 found **no deaths** in 0 of 48 copies at R 13 with T 20 or T 40 (to 8000 tu), and in 0 of 29
-at R 26 (R 39: 0 of 3). So the finite lifetime belongs to the **R 13, T 10 discretisation
-specifically**, not to the rule. Every S102 "transient" statement in this README (L6-f, the
+at R 26 (R 39: 0 of 3). So collapse was seen only in the **R 13, T 10 discretisation**. At
+refined settings it was not observed within the horizons tested, which is not the same as
+showing it never happens. Every S102 "transient" statement in this README (L6-f, the
 lifetime follow-up, the circler rows of Part A and Part B) is scoped to R 13, T 10. At other
 settings all runs are censored, so the circler is not shown to be an attractor there either. My
 own T 40 variant (σ 0.019, not 0.020) did see circler deaths at noise ε ≥ 0.01. That is a different
@@ -48,12 +68,14 @@ What this does to C038 ("one rule hosts three phenotypes"):
 - **The S103 ring is an exact, robust fixed point at the primary rule**: every perturbed start up
   to ε 0.3 (24/24) relaxes back to the same binary state, bitwise. At R 26 and T 40 it is not one
   state but a family. Every perturbed start settles on its own distinct static body.
-- **At R 13, T 10, the S102 circler is a chaotic transient, not an attractor.** (Lane 3 finds no
-  deaths at finer T or R; see the discretisation caveat above.) A 1% perturbation kills it in
+- **At R 13, T 10, the S102 circler is a transient, not an attractor.** Its trajectory is chaotic,
+  and it collapses after widely varying times. At finer T or R no collapse was observed within
+  the tested horizons (see "Current interpretation"). A 1% perturbation kills it in
   2 of 6 runs, and the unperturbed seed dies too in a longer exploratory run. HR-009 shows that
   even a 1e−14 perturbation changes when it dies, so lifetimes are spread widely (292 tu to more
-  than 5000 tu over 37 starts pooled by Lane 7). C038 should be narrowed: under this rule the
-  circler is a long transient, not a third stable phenotype.
+  than 5000 tu over 37 starts pooled by Lane 7). C038 should be narrowed: at R 13, T 10 the
+  circler is a long transient, not a third stable phenotype. At refined settings its status is
+  open.
 
 ## Part A: noise around each seed
 
@@ -89,8 +111,8 @@ sampling different points of a chaotic orbit, and a 1% gate is too tight for a c
 **Exploratory follow-up** (not pre-registered; [`followup_circler.py`](followup_circler.py),
 [`circler-lifetimes.csv`](circler-lifetimes.csv)). **The registered S102 seed itself dies, at t = 3979.9 tu.**
 Of the 12 perturbed starts, 4 die at 933.7, 977.6, 988.8 and 1291.0 tu (the same 4 that died in
-Part A), and 8 are still circlers at 5000 tu (mass 0.5221–0.5232). So the circler is a long-lived
-state with a broad, start-dependent lifetime, not a stable one. The 2000 tu horizon of Part A,
+Part A), and 8 are still circlers at 5000 tu (mass 0.5221–0.5232). So at R 13, T 10 the circler
+is a long-lived state with a broad, start-dependent lifetime, not a stable one. The 2000 tu horizon of Part A,
 and Night 0's 20 000-step runs, were too short to see the reference die. The project engine
 `alm.lenia.Lenia` (single world, `specimens.load("S102").place(128)`) gives the same death step,
 39 799. That is a second engine within Lane 6, not an independent replication. *After HR-009:*
@@ -162,17 +184,19 @@ G glider, C circler, S static, D died, F filled. ¹ circler at 1000 tu, died bef
 - **L6-e.** At the coexistence rule (R 13, T 10), Orbium returns from 18/18 noise perturbations
   up to ε 0.1, and S103 returns bitwise from 24/24 up to ε 0.3. Both are attractors in this
   test.
-- **L6-f** (revised after HR-009 and L3-003; scoped to **R 13, T 10 only**). At μ 0.155,
-  σ 0.020, R 13, T 10, 128², S102 is a chaotic transient, not an attractor. 1% noise kills it in 2/6 runs within
-  2000 tu. Twin runs separate at about 0.2 per tu (HR-009), and lifetimes range from 292 tu to
-  beyond 5000 tu. The unperturbed seed's death at step 39 799 is one floating-point trajectory,
-  specific to this arithmetic, and not a lifetime of the rule. The finite lifetime is a property
-  of the R 13, T 10 discretisation. Lane 3 saw no deaths at R 13 with T 20 or T 40 (0/48), or at
-  R 26 or R 39 (PR #29).
+- **L6-f** (scoped to **R 13, T 10**). Observation: at μ 0.155, σ 0.020, R 13, T 10, 128², 1%
+  noise kills S102 in 2/6 runs within 2000 tu, and the circler's lifetime from tiny-noise starts
+  ranges from 292 tu to beyond 5000 tu (HR-009, L3-003). The unperturbed seed's death at step
+  39 799 is one floating-point trajectory, not a characteristic lifetime. Interpretation: at this
+  setting S102 is a transient, not an attractor. Separately, its trajectory diverges
+  exponentially from a 1e−12 twin at every setting tested (HR-009b). That divergence is not
+  collapse. No collapse was observed at R 13 with T 20 or T 40 (0/48), or at R 26 (0/29) or R 39
+  (0/3), within 5000–8000 tu (L3-003). So neither "transient" nor "stable" is claimed at those
+  settings.
 - **L6-g** (narrowed). Blends between the three seeds never switch directly between phenotypes
   within 2000 tu. On the Orbium → ring path the classes interleave (dead zones, a filled point
   and a static island at λ 0.20). Classes near the circler ends are horizon samples of a chaotic
   transient, not basin geography.
-- **Replication target (Lane 3, PR #29):** the S102 lifetime *distribution*, for example the
-  fraction dead by 1000 and by 5000 tu over at least 20 tiny-noise starts, at more than one
-  numerical setting. Censored runs should be reported. Matching step 39 799 is not the target.
+- **Replication (done, L3-003, merged):** Lane 3 measured the lifetime distribution, as
+  proposed, rather than matching step 39 799. It replicated the R 13, T 10 collapse and found
+  none at refined settings.
