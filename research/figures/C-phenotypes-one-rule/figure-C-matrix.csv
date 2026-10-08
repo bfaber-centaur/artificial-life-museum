@@ -4,7 +4,7 @@ gyrator,T10 R26,fail,died
 gyrator,T40 R13,pass,circler m 0.497
 gyrator,catalog,none,OG2g
 gyrator,clean rerun,pass,bitwise S102- 5bfac8f95f
-gyrator,resize,pass,"circler, all 3, R 26 and 39 (Lane 3; Lane 6 match pending)"
+gyrator,resize,pass,"circler, all 3, R 26 and 39 (Lane 3; Lane 6 rerun matches)"
 gyrator,return,fail,at 5%: kept in 1 of 2 phases
 gyrator,second,none,not yet
 orbium,T10 R13,pass,glider m 0.487

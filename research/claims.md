@@ -111,7 +111,7 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
 | Dispute | Claims | Lanes | State |
 | --- | --- | --- | --- |
 | D1: does S001's heading stay lattice-locked at R = 26? | C012 vs C013 | Lane 3 vs Lane 7 | **resolved 2026-10-07** in favour of C013. Lane 3's finer, longer sweep (PR #8 @ `5f316f3`, `heading-R26-fine-long.csv`) found 20 settled headings from 46 starts and Lane 3 withdrew C012. |
-| D2: does S102 at its registered rule survive refinement to R = 26? | C039 vs C047 | Lane 6 vs Lane 3 | **resolved 2026-10-07** in favour of C047. Lane 6 reran Lane 3's four seed resizes in `field.py` (`d2_resize.py`, `d2-resize.csv` in `research/experiments/L6-007-attractor-geography/` (branch `claude/night0-field-tmbx06` @ `413003d`, **not yet on `main`**)): block, nearest and cubic seeds are healthy circlers at R 26 and 39 for 1000 tu, and only the bilinear seed dies (8.3 and 6.0 tu). Lane 6 conceded C039 and proposed REFUTED. The refutation rests on Lane 3's merged evidence (PR #18); Lane 6's rerun corroborates it for these eight seeds but is not yet on `main`. The death is resize-method dependence, not resolution dependence. |
+| D2: does S102 at its registered rule survive refinement to R = 26? | C039 vs C047 | Lane 6 vs Lane 3 | **resolved 2026-10-07** in favour of C047. Lane 6 reran Lane 3's four seed resizes in `field.py` (`d2_resize.py`, `d2-resize.csv` in `research/experiments/L6-007-attractor-geography/` (PR #23 @ `413003d`, merged as `7a4ea3b`)): block, nearest and cubic seeds are healthy circlers at R 26 and 39 for 1000 tu, and only the bilinear seed dies (8.3 and 6.0 tu). Lane 6 conceded C039 and proposed REFUTED. The refutation rests on Lane 3's merged evidence (PR #18); Lane 6's rerun (merged in PR #23) independently checks it for these eight seeds. The death is resize-method dependence, not resolution dependence. |
 
 ## Lane intake index
 
@@ -148,7 +148,7 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
 | Lane 9 wording note (C026 title overstates the 10% uniform survival) | C026 |
 | Lane 6 | not started |
 | Lane 3 L3-002 README proposed claims 1 / 2 / 3 / 4 / 5 / 6 (PR #18, merged as `56ae421`; wording scoped in `ab125c4`) | C046 / C047 (D2 with C039) / C048 / C049 / C050 / C051 |
-| Lane 6 L6-007 D2 rerun of the S102 seed resizes (`claude/night0-field-tmbx06` @ `413003d`, not yet on `main`) and Lane 6's concession of C039 | C039, C047 (D2 resolved; C047 upgrade pending) |
+| Lane 6 L6-007 D2 rerun of the S102 seed resizes (PR #23 @ `413003d`, merged as `7a4ea3b`) and Lane 6's concession of C039 | C039, C047 (D2 resolved; C047 INDEPENDENTLY_CHECKED for the eight seeds) |
 | Lane 4 L4-002 lone-Orbium baselines (PR #20, merged as `560472c`) | none: a reference dataset with no claim proposed; not evidence for or against pair coupling (that is Lane 6's L6-008) |
 
 ## Claims
@@ -1339,7 +1339,7 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
       persists at a coarser one. *Scutium gravidus*, *Triscutium solidus* and an *H. natans*
       wobbler meet that definition.
     - The R = 26 death in this claim comes from the *bilinearly resized* seed. Block, nearest and
-      cubic seeds of S102 persist at R = 26 and 39 (C047: Lane 3's merged runs, corroborated by Lane 6's rerun, not yet on `main`). So the death is
+      cubic seeds of S102 persist at R = 26 and 39 (C047: Lane 3 `alm_check` and Lane 6 `field.py`). So the death is
       a resize-method dependence of the initial condition, not a resolution dependence of the
       rule–pattern pair, and S102 does not meet Davis's definition with respect to R on our data.
     - Similar outcome only: other species and Gaussian-family rules. Davis's Orbium is Platonic.
@@ -1354,7 +1354,7 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
   - 2026-10-07 — Prior literature re-verified against arXiv full texts after the network change (status unchanged) — archivist.
   - 2026-10-07 — disputed (D2) — Lane 3 L3-002 (PR #18). Lane 3 reproduces the bilinear-seed death in
     `alm_check`; its block, nearest and cubic seeds survive. Status unchanged pending Lane 6.
-  - 2026-10-07 — REFUTED — Lane 6 reran the four resizes in `field.py` (`d2_resize.py`, `d2-resize.csv` in `research/experiments/L6-007-attractor-geography/` (branch `claude/night0-field-tmbx06` @ `413003d`, **not yet on `main`**)) and got Lane 3's result:
+  - 2026-10-07 — REFUTED — Lane 6 reran the four resizes in `field.py` (`d2_resize.py`, `d2-resize.csv` in `research/experiments/L6-007-attractor-geography/` (PR #23 @ `413003d`, merged to `main` as `7a4ea3b`)) and got Lane 3's result:
     only the bilinear seed dies. Lane 6 conceded and proposed REFUTED (relayed by the coordinator). The
     "circler lives at σ 0.0205 at R 26" result and the C038 band shift were measured from bilinear seeds
     and have not been rerun with other resizes.
@@ -1363,7 +1363,8 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
   - 2026-10-08 — REFUTED (basis restated) — PR #18 merged (`56ae421`). The refutation rests on Lane 3's merged
     evidence: preregistered block seeds persist at R 26 and 39 through 300 tu, and in the exploratory
     follow-up block, nearest and cubic seeds persist through 1000 tu. Lane 6's `field.py` rerun
-    (`413003d`) corroborates the eight outcomes but is not yet on `main`.
+    (`413003d`) corroborates the eight outcomes; it is on `main` via PR #23 (`7a4ea3b`).
+  - 2026-10-08 — Lane 6's rerun merged in PR #23 (`7a4ea3b`); C047 is now INDEPENDENTLY_CHECKED for those eight seeds (status unchanged) — archivist.
 
 ### C040 — At the coexistence rule, Lane 4's disturbances never switch a glider into a circler or back (0/316); a port injury switched the circler into the static ring S103 in 2 of 38 runs
 
@@ -1612,13 +1613,13 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
 
 ### C047 — S102 at its registered rule persists at R = 26 and R = 39 from block-replicated, nearest-neighbour or cubic seeds; only the bilinear seed dies
 
-- **Status:** OBSERVED (Lane 3, `alm_check`, merged). Block seeds through 300 tu are preregistered (C046);
-  the four-method comparison through 1000 tu is exploratory. Lane 6 matched all eight outcomes in
-  `field.py` (`413003d`), which is not yet on `main`; the archivist will mark this claim
-  INDEPENDENTLY_CHECKED, for these eight seeds only, when that evidence lands.
+- **Status:** INDEPENDENTLY_CHECKED for the eight seeds tested (block, nearest, bilinear and cubic
+  resizes × R 26 and 39; μ 0.155, σ 0.020, T 10; one seed position; 1000 tu): Lane 3 `alm_check`
+  (PR #18) and Lane 6 `field.py` (PR #23) give the same eight outcomes. Exploratory in both lanes;
+  only the block seeds through 300 tu are preregistered (C046).
 - **Owner lane:** Lane 3
 - **Sources:** L3-002 README proposed claim 2 and "Disagreement with C039"; `s102_resize_check.py`,
-  `s102_resize_check.txt` (PR #18, merged as `56ae421`; wording scoped in `ab125c4`); Lane 6 rerun `d2_resize.py`, `d2-resize.csv` in `research/experiments/L6-007-attractor-geography/` (branch `claude/night0-field-tmbx06` @ `413003d`, **not yet on `main`**)
+  `s102_resize_check.txt` (PR #18, merged as `56ae421`; wording scoped in `ab125c4`); Lane 6 rerun `d2_resize.py`, `d2-resize.csv` in `research/experiments/L6-007-attractor-geography/` (PR #23 @ `413003d`, merged as `7a4ea3b`)
 - **Specimen / version:** S102 seed (`gyrator-seed-u8.csv`), resized by R/13 four ways
 - **Simulator / version:** `alm_check` (`World`, `Rule` from `alm_check.lenia`); Lane 6 `field.py` (`Batch`)
 - **Parameters:** μ 0.155, σ 0.020, T 10, R ∈ {26, 39}, 128 × (R/13) torus, 1000 tu
@@ -1648,6 +1649,8 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
   - 2026-10-07 — INDEPENDENTLY_CHECKED — Lane 6 reproduced all eight outcomes in `field.py` (`413003d`); D2 resolved.
   - 2026-10-08 — held at OBSERVED — archivist: Lane 6's evidence is not yet on `main`, and Bobby asked that
     dependent claims not land before their evidence. Upgrade when L6-007's D2 rerun merges.
+  - 2026-10-08 — INDEPENDENTLY_CHECKED (eight seeds only) — archivist: Lane 6's rerun merged in PR #23 (`7a4ea3b`).
+    Not a check of any other seed position, rule, horizon or of the rest of L3-002.
 
 ### C048 — S103 is a bitwise fixed point at every timestep tested (T 10–80), but block-scaled to R = 26 or 39 it relaxes to a different static body
 
