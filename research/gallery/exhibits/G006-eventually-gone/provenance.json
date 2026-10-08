@@ -140,7 +140,7 @@
   },
   "view": "film: 64x64-cell windows shifted by whole cells to centre the centroid (camera follows; after death it holds its last position), 3x nearest-neighbour in the MP4, 2x in the GIF preview; sheet thumbnails: the central 32x32 cells of the same windows, 4x",
   "overlays": [
-    "lifeline bars, Lane 9 'died' x marker (#D55E00) and a grey arrow for runs still above the threshold at the horizon",
+    "lifeline bars, Lane 9 'died' x marker (#D55E00) and a Lane 9 'muted' (#6b6b6b) arrow for runs still above the threshold at the horizon",
     "per-tile mass readout",
     "text labels"
   ],

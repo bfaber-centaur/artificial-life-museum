@@ -171,8 +171,10 @@ One starts from the registered seed. The other eleven are twins: the same seed p
   exponential predicts). Our twelve are a picture of the spread, not a lifetime estimate; seven of
   them say only "still alive at 5000 tu". The matching step 39 799 is not an independent check:
   HR-009 attributes that agreement to engines that perform the same FFT operations. Lane 3's
-  L3-003 (PR #29) is measuring the lifetime distribution in an independent engine. When the
-  ledger records a claim, this caption will cite it and drop the provisional label.
+  L3-003 (PR #29) reproduces the R 13 deaths in an independent engine but sees none on finer
+  grids (box above). Lane 9's Figure D (`research/figures/D-pair-and-circler/`, PR #33, provisional) pools 37 starts into a survival
+  curve. When the ledger records a claim, this caption will cite it and drop the provisional
+  label.
 - **Why it is here.** One canonical death time would be the wrong picture. Twelve near-identical
   starts show what the evidence so far supports at this resolution: the circler can last
   thousands of time units and then fall apart abruptly, and when it goes is not predictable from

@@ -680,7 +680,7 @@ def g006_eventually_gone(jobs: list[dict]) -> None:
             d.line([(xe - 6, mid - 6), (xe + 6, mid + 6)], fill=REMOVED, width=3)
             d.line([(xe - 6, mid + 6), (xe + 6, mid - 6)], fill=REMOVED, width=3)
         else:
-            d.polygon([(xe, mid - 6), (xe + 10, mid), (xe, mid + 6)], fill=(189, 189, 189))
+            d.polygon([(xe, mid - 6), (xe + 10, mid), (xe, mid + 6)], fill=(107, 107, 107))  # Lane 9 muted
         for c, t in enumerate(j["last"]):
             tile = Image.fromarray(colorize(j["crops"][t][G6_CROP // 4: 3 * G6_CROP // 4,
                                                           G6_CROP // 4: 3 * G6_CROP // 4], 4))
@@ -748,8 +748,8 @@ def g006_eventually_gone(jobs: list[dict]) -> None:
                 f"follows; after death it holds its last position), {G6_SCALE}x nearest-neighbour in the MP4, "
                 "2x in the GIF preview; sheet "
                 f"thumbnails: the central 32x32 cells of the same windows, 4x",
-        "overlays": ["lifeline bars, Lane 9 'died' x marker (#D55E00) and a grey arrow for runs still above the "
-                     "threshold at the horizon", "per-tile mass readout", "text labels"],
+        "overlays": ["lifeline bars, Lane 9 'died' x marker (#D55E00) and a Lane 9 'muted' (#6b6b6b) arrow for "
+                     "runs still above the threshold at the horizon", "per-tile mass readout", "text labels"],
         "disclosures": [
             "the MP4 samples one frame every 10 tu and the GIF every 20 tu; the circler turns about 95 "
             "degrees per tu, so its pose from frame to frame is not continuous motion",
