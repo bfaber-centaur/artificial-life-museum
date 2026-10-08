@@ -22,7 +22,7 @@
     {
       "path": "research/figures/D-pair-and-circler/make_figure.py",
       "sha256": "734e2b052e0e89d7c8f177d86ac8a3b6956f5c72a59e5c0f153846596179213c",
-      "last_commit": "5615a6f"
+      "last_commit": "b7892ec"
     },
     {
       "path": "research/figures/figlib/__init__.py",
@@ -106,8 +106,8 @@
     "research/figures/D-pair-and-circler/figure-D-pair.csv",
     "research/figures/D-pair-and-circler/figure-D-lifetimes.csv"
   ],
-  "code_commit": "8afd45f",
-  "code_dirty": true,
+  "code_commit": "b7892ec",
+  "code_dirty": false,
   "versions": {
     "python": "3.13.16",
     "numpy": "2.5.3",
