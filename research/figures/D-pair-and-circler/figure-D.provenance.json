@@ -21,7 +21,7 @@
   "inputs": [
     {
       "path": "research/figures/D-pair-and-circler/make_figure.py",
-      "sha256": "d29995d1d10558f5752f585988ebcf26a587af9ae21aaafed089c94e41543b7b",
+      "sha256": "848a84bee97920e8914f925bccb6177b445dcbb904126077e1f418ccc72e0e95",
       "last_commit": "59ca430"
     },
     {
@@ -78,29 +78,29 @@
       "sha256": "5e5d388d2a49bacce7adc165cf8323001fb83e921f3f7e6d0a9ee11d9181a34f"
     },
     {
-      "commit": "c063d7377dffed70fafe460c3a10fec4205e0169",
-      "source": "PR #30 (Lane 7, HR-009), unmerged",
+      "commit": "0b9b47f8d7c48847219441cd15152792adbd45de",
+      "source": "PR #30 (Lane 7, HR-009), merged to main",
       "path": "research/experiments/HR009-l6-review/e1.csv",
       "blob": "70ec689443c77696e01ac082a6b80dc1685f41ba",
       "sha256": "577ea543ccc5f2a8fc0f5ac78414c914820a9ec0402e6a61955118f549060c5d"
     },
     {
-      "commit": "c063d7377dffed70fafe460c3a10fec4205e0169",
-      "source": "PR #30 (Lane 7, HR-009), unmerged",
+      "commit": "0b9b47f8d7c48847219441cd15152792adbd45de",
+      "source": "PR #30 (Lane 7, HR-009), merged to main",
       "path": "research/experiments/HR009-l6-review/e2.csv",
       "blob": "3d56ff6a2f968b55ac6acee588db90269d9d2ae4",
       "sha256": "4e1321f5b2080d3cd83746c37f877481023759bd7485df632c2336138c2cdb97"
     },
     {
-      "commit": "c063d7377dffed70fafe460c3a10fec4205e0169",
-      "source": "PR #30 (Lane 7, HR-009), unmerged",
+      "commit": "0b9b47f8d7c48847219441cd15152792adbd45de",
+      "source": "PR #30 (Lane 7, HR-009), merged to main",
       "path": "research/reports/hostile-review.md",
       "blob": "cefcab93e6f9113156be63155bc2bfb0cd42dcbd",
       "sha256": "8ec9533236531553b6670b162c8e49a7564ced56eb1d1e397ccab9e194b8cda2"
     },
     {
-      "commit": "8c3c082c16181a942ec12b1d555c74d4b32beded",
-      "source": "PR #29 (Lane 3, L3-003), unmerged",
+      "commit": "20bdff9f3827290cff6646fae6bc8f283e5aa373",
+      "source": "PR #29 (Lane 3, L3-003), merged to main",
       "path": "research/experiments/L3-003-circler-lifetime/README.md",
       "blob": "0d8a2eb4c841e38f95476ecf689698ae6dcfc80b",
       "sha256": "ecbca4e133131cb93d9925280c6f4a94549d58305b55cf55074e005b7301f6ed"
@@ -113,7 +113,7 @@
     "research/figures/D-pair-and-circler/figure-D-pair.csv",
     "research/figures/D-pair-and-circler/figure-D-lifetimes.csv"
   ],
-  "code_commit": "59ca430",
+  "code_commit": "65265dc",
   "code_dirty": true,
   "versions": {
     "python": "3.13.16",
@@ -121,7 +121,7 @@
     "matplotlib": "3.11.2"
   },
   "notes": [
-    "PROVISIONAL: evidence read from unmerged PRs #27 and #30 at pinned commits; see pinned_inputs.",
+    "PROVISIONAL: evidence read from unmerged PR #27 and from merged PRs #29 and #30 at pinned commits; see pinned_inputs.",
     "Proposed claims L6-c, L6-d, L6-f are not in the ledger; no status is drawn for them.",
     "Kaplan-Meier with Greenwood log-log 95% band; HR-009's rerun of the unperturbed seed is not counted as a separate start.",
     "Panels c-d are R 13, T 10 only; PR #29 (L3-003) sees no end at R 26, R 39, T 20 or T 40, so the collapse is a discretisation effect. L3-003 is cited, not plotted.",

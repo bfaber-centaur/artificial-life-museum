@@ -1,4 +1,4 @@
-# Figure D: when together is worse, and the creature that eventually disappears (PROVISIONAL)
+# Figure D: a withdrawn "together is worse", and a circler that disappears only at R 13, T 10 (PROVISIONAL)
 
 ![Figure D](figure-D.png)
 
@@ -6,20 +6,20 @@
 pair runs [`figure-D-pair.csv`](figure-D-pair.csv) · lifetimes and survival estimate
 [`figure-D-lifetimes.csv`](figure-D-lifetimes.csv) · provenance [`figure-D.provenance.json`](figure-D.provenance.json)
 
-> **Provisional exhibit draft.** Everything plotted comes from two unmerged PRs:
+> **Provisional exhibit draft.** Everything plotted comes from Lane 6's PR #27, still unmerged, and Lane 7's PR #30, now on `main`:
 > - Lane 6's PR #27 (L6-007 and L6-008), read at `e1f8760`;
-> - Lane 7's hostile review HR-009, PR #30, read at `c063d73`.
+> - Lane 7's hostile review HR-009 (with HR-009b/c), PR #30, read at its merge commit on `main`, `0b9b47f`.
 >
 > **Panel b's "together is worse" window is withdrawn.** Lane 6's L6-009 note (in PR #27) found
 > that the on-gap pulse splits the pair into two free Orbia, which later collide on the 128² torus.
-> Lane 7 checked this independently (HR-009c, PR #30 @ `c063d73`): from the same edited states,
+> Lane 7 checked this independently (HR-009c, PR #30, merged as `0b9b47f`): from the same edited states,
 > zero-padded to 256², all 10 s 0.2–0.3 states end as two Orbia, while 7 of them are dead at 300 tu
 > on 128². HR-009c withdraws E2's "coupling stands at s 0.2–0.3" reading; the preregistered verdict
 > stays INCONCLUSIVE. The red-outlined runs are a world-size effect, not coupling. L6-009's
 > placement-dependent results (an off-gap drag-down at s 0.3; rescue of a directly hit partner) are
 > separate, exploratory and not drawn here. The figure will be redrawn when L6-009 is in its own PR.
 >
-> **Panels c and d are R 13, T 10 only.** Lane 3's independent replication (PR #29 @ `8c3c082`,
+> **Panels c and d are R 13, T 10 only.** Lane 3's independent replication (PR #29, merged as `20bdff9`,
 > L3-003) reproduces these R 13, T 10 deaths exactly. But no copy ends when either discretisation
 > knob is refined: 0 of 29 runs at R 26 and 0 of 3 at R 39 (T 10), and 0 of 24 at T 20 and 0 of 24
 > at T 40 (R 13), all to 8000 tu. So the collapse is an effect of the R 13, T 10 discretisation, not
@@ -28,7 +28,7 @@ pair runs [`figure-D-pair.csv`](figure-D-pair.csv) · lifetimes and survival est
 >
 > Both are read with `git show`, and nothing is copied here. The findings shown are *proposed* claims
 > (L6-c, L6-d, L6-f) as Lane 6 revised them after HR-009. They are not in `research/claims.md`, so the
-> figure prints no status for them. If #27 or #30 change, this figure must be rebuilt at their new heads.
+> figure prints no status for them. When #27 merges, this figure will be repinned to its merge commit.
 
 ## What it shows
 
@@ -98,7 +98,7 @@ under half at 5000 tu. 10 of the 20 deaths come before 1000 tu, so the hazard is
   result, which is exploratory and not independently checked.
 - **One rule, one grid, five phases.** Every pair run is at S001's rule, R 13, T 10. The phases are
   consecutive steps.
-- **R 13, T 10 only; a discretisation effect.** Lane 3's L3-003 (PR #29 @ `8c3c082`) reproduces
+- **R 13, T 10 only; a discretisation effect.** Lane 3's L3-003 (PR #29, merged as `20bdff9`) reproduces
   Lane 6's death step and all 12 noisy fates at R 13, T 10, and finds 10 of 24 δ = 1e−12 copies
   ending within 5000 tu, which agrees with Lane 7. Refining either knob removes the collapse within
   8000 tu: none of 29 runs at R 26, 3 at R 39, 24 at T 20 or 24 at T 40 ended. So the transient
@@ -134,12 +134,12 @@ a shaded uncertainty band.
 | Data | Path | Commit | Panel |
 | --- | --- | --- | --- |
 | L6-008 pair runs and split baseline | `research/experiments/L6-008-pair-coupling/pair-coupling.csv` | PR #27 head `e1f8760` | a, b |
-| HR-009 E2 full-pulse halves | `research/experiments/HR009-l6-review/e2.csv` | PR #30 head `c063d73` | b |
+| HR-009 E2 full-pulse halves | `research/experiments/HR009-l6-review/e2.csv` | PR #30 merge `0b9b47f` | b |
 | L6-007 circler lifetimes (exploratory follow-up) | `research/experiments/L6-007-attractor-geography/circler-lifetimes.csv` | `e1f8760` | c, d |
-| HR-009 E1 twin and δ-perturbed circlers | `research/experiments/HR009-l6-review/e1.csv` | `c063d73` | c, d |
-| HR-009c withdrawal (cited, not plotted) | `research/reports/hostile-review.md` | PR #30 head `c063d73` | b caveat |
+| HR-009 E1 twin and δ-perturbed circlers | `research/experiments/HR009-l6-review/e1.csv` | `0b9b47f` | c, d |
+| HR-009c withdrawal (cited, not plotted) | `research/reports/hostile-review.md` | PR #30 merge `0b9b47f` | b caveat |
 | L6-009 world-size note (cited, not plotted) | `research/experiments/L6-008-pair-coupling/README.md` | PR #27 head `e1f8760` | b caveat |
-| L3-003 refinement result (cited, not plotted) | `research/experiments/L3-003-circler-lifetime/README.md` | PR #29 head `8c3c082` | c, d caveat |
+| L3-003 refinement result (cited, not plotted) | `research/experiments/L3-003-circler-lifetime/README.md` | PR #29 merge `20bdff9` | c, d caveat |
 | Claim statuses | `research/claims.md` | stamped on the figure | badges |
 
 Blob IDs and SHA-256s of every file read are in `figure-D.provenance.json` (`pinned_inputs`).
