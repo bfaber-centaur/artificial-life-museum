@@ -35,10 +35,10 @@ It moves about as fast as Orbium but in a tight circle, so it goes nowhere.
 
 | Metric | T 10, R 13 | T 40, R 13 | T 10, R 26 |
 | --- | --- | --- | --- |
-| mass | 0.522 (sd 0.010, 1.9%) | 0.497 | **died** |
+| mass | 0.522 (sd 0.010, 1.9%) | 0.497 | 0.5234 (block/nearest/cubic seed); bilinear seed died |
 | gyradius (R) | 0.516 | 0.499 | — |
-| net speed (R/tu) | 0.0008 | 0.0004 | — |
-| path speed, 1-tu velocity (R/tu) | 0.44–0.50 | 0.48–0.57 | — |
+| net speed (R/tu) | 0.0008 | 0.0004 | 0.0055 |
+| path speed, 1-tu velocity (R/tu) | 0.44–0.50 | 0.48–0.57 | 0.500 (window mean) |
 | turning rate | 95°/tu (one lap per ~3.8 tu) | 109–113°/tu | — |
 | circle radius | ~0.27 R | ~0.25 R | — |
 
@@ -62,7 +62,13 @@ ring** (2 of 38 I004 runs). It never turned into a glider.
 
 ## Numerical-stability notes
 
-**NUMERICALLY_FRAGILE at its registered rule:** at R 26 the resized seed dies at μ 0.155,
-σ 0.020, though it lives from σ 0.0205 up. At T 40 it persists, turning ~15% faster. The
+**Correction (2026-10-08, dispute D2): S102 survives doubling the resolution.** Night 0 reported
+that it died at R 26 at its own rule. That came from the seed, not the resolution: the seed had
+been enlarged with bilinear interpolation (`ndimage.zoom` order 1). Lane 3 (C047, PR #18) found
+that block, nearest-neighbour and cubic enlargements survive. Lane 6's engine reproduces this
+([`d2-resize.csv`](../experiments/L6-007-attractor-geography/d2-resize.csv)): those three seeds
+stay circlers at R 26 and R 39 for 1000 tu (mass 0.5234–0.5235), and the bilinear seed dies at
+t = 8.3 tu (R 26) and 6.0 tu (R 39). So the claim of fragility under resolution is withdrawn.
+What remains is sensitivity to the initial condition. At T 40 it persists, turning ~15% faster. The
 coexistence band with Orbium exists at all three settings but sits at different σ
 (L6-004 table).
