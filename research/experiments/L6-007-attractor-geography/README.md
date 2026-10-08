@@ -22,6 +22,13 @@ unchanged. What changes is the interpretation:
   circler ends of Part B) is a draw from that distribution. It is not evidence of a basin.
 - The claims at the end are rewritten to match (L6-f, L6-g and the replication target).
 
+**Resolution caveat (Lane 3, L3-003, PR #29, not yet merged).** An independent engine reproduces
+step 39 799 and the transient at R 13, T 10. At **R 26** no circler died: 0 of 24 perturbed copies
+over 5000–8000 tu, and 2 unperturbed seeds were alive at 8000 tu. At R 39, 0 of 3 died. So the
+finite lifetime may be an R 13 (discretisation) effect rather than a property of the continuum
+rule. L6-f below is stated for R 13, T 10 only. Whether the circler is an attractor at finer
+resolution is open (all censored). Lane 3 proposes the discriminating experiment.
+
 ## Verdict
 
 | Prediction | Result |
@@ -155,7 +162,8 @@ G glider, C circler, S static, D died, F filled. ¹ circler at 1000 tu, died bef
   128², S102 is a chaotic transient, not an attractor. 1% noise kills it in 2/6 runs within
   2000 tu. Twin runs separate at about 0.2 per tu (HR-009), and lifetimes range from 292 tu to
   beyond 5000 tu. The unperturbed seed's death at step 39 799 is one floating-point trajectory,
-  specific to this arithmetic, and not a lifetime of the rule.
+  specific to this arithmetic, and not a lifetime of the rule. At R 26 and R 39, Lane 3 saw no
+  deaths in up to 8000 tu (PR #29), so the transient is established at R 13 only.
 - **L6-g** (narrowed). Blends between the three seeds never switch directly between phenotypes
   within 2000 tu. On the Orbium → ring path the classes interleave (dead zones, a filled point
   and a static island at λ 0.20). Classes near the circler ends are horizon samples of a chaotic
