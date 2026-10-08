@@ -70,7 +70,7 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
 | Dispute | Claims | Lanes | State |
 | --- | --- | --- | --- |
 | D1: does S001's heading stay lattice-locked at R = 26? | C012 vs C013 | Lane 3 vs Lane 7 | **resolved 2026-10-07** in favour of C013. Lane 3's finer, longer sweep (PR #8 @ `5f316f3`, `heading-R26-fine-long.csv`) found 20 settled headings from 46 starts and Lane 3 withdrew C012. |
-| D2: does S102 at its registered rule survive refinement to R = 26? | C039 vs C047 | Lane 6 vs Lane 3 | **resolved 2026-10-07** in favour of C047. Lane 6 reran Lane 3's four seed resizes in `field.py` (`d2_resize.py`, `d2-resize.csv` in `research/experiments/L6-007-attractor-geography/` (branch `claude/night0-field-tmbx06` @ `413003d`, no PR yet)): block, nearest and cubic seeds are healthy circlers at R 26 and 39 for 1000 tu, and only the bilinear seed dies (8.3 and 6.0 tu). Two distinct engines now agree, and Lane 6 conceded C039 and proposed REFUTED. |
+| D2: does S102 at its registered rule survive refinement to R = 26? | C039 vs C047 | Lane 6 vs Lane 3 | **resolved 2026-10-07** in favour of C047. Lane 6 reran Lane 3's four seed resizes in `field.py` (`d2_resize.py`, `d2-resize.csv` in `research/experiments/L6-007-attractor-geography/` (branch `claude/night0-field-tmbx06` @ `413003d`, no PR yet)): block, nearest and cubic seeds are healthy circlers at R 26 and 39 for 1000 tu, and only the bilinear seed dies (8.3 and 6.0 tu). Two distinct engines now agree, and Lane 6 conceded C039 and proposed REFUTED. The death is resize-method dependence, not resolution dependence. |
 
 ## Lane intake index
 
@@ -1131,7 +1131,11 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
 - **Search / parameter bounds:** μ ∈ {0.150, 0.155, 0.160}; σ strip in 0.0005 steps; T ∈ {10, 40}; R ∈ {13, 26}
 - **Reproduction command:** `make_seeds.py`; `bistability.py` (~1 h on 4 cores); `persistence.py --T 10 --R 13`
 - **Known caveats:** the coexistence is robust, but its σ location is NUMERICALLY_FRAGILE (shifts by
-  0.0005–0.0015 with T or R). S102 at its registered rule dies at R = 26 only from a bilinear seed; block, nearest and cubic seeds survive (C047; C039 REFUTED, D2). At T = 40, Orbium at
+  0.0005–0.0015 with T or R). The T shift is a timestep dependence. The R = 26 shift was measured
+  from bilinearly resized seeds, so it may mix resolution dependence with resize-method
+  dependence; it has not been rerun with other resizes. S102 at its registered rule dies at
+  R = 26 only from a bilinear seed; block, nearest and cubic seeds survive (C047; C039 REFUTED,
+  D2). At T = 40, Orbium at
   this rule became a different static body (mass 0.3873, not S103's 0.3787), not followed up. All
   three phenotypes are catalogued species (C043). Lane 6's top suggested follow-up is a second-lane
   reproduction in `alm_check`.
@@ -1141,7 +1145,10 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
 ### C039 — The circler S102 at its registered rule (μ 0.155, σ 0.020) does not survive doubling the resolution
 
 - **Status:** REFUTED as worded (superseded by C047). The narrower fact, that the *bilinearly resized* seed
-  dies at R 26 and 39, is INDEPENDENTLY_CHECKED (`field.py` and `alm_check`).
+  dies at R 26 and 39, is INDEPENDENTLY_CHECKED (`field.py` and `alm_check`). That is a
+  resize-method dependence of the initial condition, not a resolution dependence: from block,
+  nearest or cubic seeds S102 persists at R 26 and 39, with mean properties within 0.5% of
+  R 13 (C046).
 - **Owner lane:** Lane 6
 - **Sources:** L6-field README L6-004 and L6-006; `research/specimens/S102-circler.md` (PR #11 @ `83c8bff`, open)
 - **Specimen / version:** S102 seed (`gyrator-seed-u8.csv`)
@@ -1395,7 +1402,8 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
 - **Known caveats:** the R-scaled ring depends on the seed resize too. Lane 6's bilinear seed at
   R 26 settled static at mass 0.378748 (`persist-T10-R26.csv`), against 0.380599 from Lane 3's
   block seed (archivist's comparison). The two lanes agree it stays static; they do not yet have a
-  common R 26 state to compare bitwise.
+  common R 26 state to compare bitwise. So the R statement mixes resolution dependence with
+  resize-method dependence; the T statement involves no resize.
 - **History:**
   - 2026-10-07 — T statement INDEPENDENTLY_CHECKED (agrees with Lane 6's C042 in a distinct
     engine), R statement OBSERVED — archivist, from L3-002.
