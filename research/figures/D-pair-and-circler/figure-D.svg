@@ -4431,9 +4431,9 @@ L 512.401768 564.737725
     <text style="font-weight: 700; font-size: 7.3px; font-family: 'DejaVu Sans'" transform="translate(2.592 419.629354)"> </text>
    </g>
    <g id="text_340">
-    <text style="font-weight: 700; font-size: 6.2px; font-family: 'DejaVu Sans'; fill: #d55e00" transform="translate(2.592 405.049247)">R 13, T 10 ONLY; REFINEMENT DISPUTED. Lane 3 (PR #29 @ 5288e08) reproduces these deaths at R 13,</text>
-    <text style="font-weight: 700; font-size: 6.2px; font-family: 'DejaVu Sans'; fill: #d55e00" transform="translate(2.592 412.490943)">but sees none at R 26 (0 of 29 runs, to 8000 tu) or R 39 (0 of 3). The finite lifetime may be an effect</text>
-    <text style="font-weight: 700; font-size: 6.2px; font-family: 'DejaVu Sans'; fill: #d55e00" transform="translate(2.592 419.932638)">of the R 13 grid; a timestep test is running. Not a lifetime of the rule.</text>
+    <text style="font-weight: 700; font-size: 6.2px; font-family: 'DejaVu Sans'; fill: #d55e00" transform="translate(2.592 405.049247)">R 13, T 10 ONLY. Lane 3 (PR #29 @ 8c3c082) reproduces these deaths at R 13, T 10, but no copy ends when either knob is refined:</text>
+    <text style="font-weight: 700; font-size: 6.2px; font-family: 'DejaVu Sans'; fill: #d55e00" transform="translate(2.592 412.490943)">0 of 29 runs at R 26 and 0 of 3 at R 39 (T 10); 0 of 24 at T 20 and 0 of 24 at T 40 (R 13), to 8000 tu. The collapse is</text>
+    <text style="font-weight: 700; font-size: 6.2px; font-family: 'DejaVu Sans'; fill: #d55e00" transform="translate(2.592 419.932638)">an effect of the R 13, T 10 discretisation, not a lifetime of the rule. Refined runs are censored, not shown to be attractors.</text>
    </g>
   </g>
   <g id="text_341">

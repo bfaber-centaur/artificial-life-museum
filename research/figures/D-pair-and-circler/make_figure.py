@@ -35,7 +35,7 @@ from figlib.style import GRID, INK, MUTED, OKABE_ITO, figure_style, status_badge
 OUT = HERE / "figure-D"
 PR27 = "efa899901c8051d24e70b9836c23386ef693c43d"  # Lane 6, L6-007/L6-008 results (unmerged)
 PR30 = "4e7482277714c909501692626b1c998bdd23c073"  # Lane 7, HR-009 (unmerged)
-PR29 = "5288e08597e707aaa7930932ff9ded6cbb783b4a"  # Lane 3, L3-003 (unmerged): cited for the refinement caveat only
+PR29 = "8c3c082c16181a942ec12b1d555c74d4b32beded"  # Lane 3, L3-003 (unmerged): cited for the refinement caveat only
 L3_003 = "research/experiments/L3-003-circler-lifetime/README.md"
 L8 = "research/experiments/L6-008-pair-coupling/pair-coupling.csv"
 L7 = "research/experiments/L6-007-attractor-geography/circler-lifetimes.csv"
@@ -284,9 +284,10 @@ def build():
         km = panel_d(axd, life)
         sf[1].suptitle("c, d   S102 at its registered rule (R 13, T 10 only): a chaotic transient, not one death time"
                        "\n \n \n ", x=0.005, ha="left", fontsize=7.3, fontweight="bold")
-        sf[1].text(0.005, 0.925, f"R 13, T 10 ONLY; REFINEMENT DISPUTED. Lane 3 (PR #29 @ {PR29[:7]}) reproduces these deaths at "
-                   "R 13,\nbut sees none at R 26 (0 of 29 runs, to 8000 tu) or R 39 (0 of 3). The finite lifetime may be "
-                   "an effect\nof the R 13 grid; a timestep test is running. Not a lifetime of the rule.",
+        sf[1].text(0.005, 0.925, f"R 13, T 10 ONLY. Lane 3 (PR #29 @ {PR29[:7]}) reproduces these deaths at R 13, T 10, but "
+                   "no copy ends when either knob is refined:\n0 of 29 runs at R 26 and 0 of 3 at R 39 (T 10); 0 of 24 "
+                   "at T 20 and 0 of 24 at T 40 (R 13), to 8000 tu. The collapse is\nan effect of the R 13, T 10 "
+                   "discretisation, not a lifetime of the rule. Refined runs are censored, not shown to be attractors.",
                    transform=sf[1].transSubfigure, ha="left", va="top", fontsize=6.2, color=OKABE_ITO["vermillion"],
                    fontweight="bold")
         status_badge(axd, "C038", status["C038"], x=1.0, y=1.0, short=True, in_layout=False)
@@ -335,8 +336,8 @@ def build():
                       "Proposed claims L6-c, L6-d, L6-f are not in the ledger; no status is drawn for them.",
                       "Kaplan-Meier with Greenwood log-log 95% band; HR-009's rerun of the unperturbed seed is not "
                       "counted as a separate start.",
-                      "Panels c-d are R 13, T 10 only; PR #29 (L3-003) sees no death at R 26 or R 39, so refinement is "
-                      "disputed. L3-003 is cited, not plotted.",
+                      "Panels c-d are R 13, T 10 only; PR #29 (L3-003) sees no end at R 26, R 39, T 20 or T 40, so the "
+                      "collapse is a discretisation effect. L3-003 is cited, not plotted.",
                       "Panel b is 128² world only; Lane 6's L6-009 note (L6-008 README @ PR #27) finds the s 0.2 "
                       "drag-down is a collision artefact at 128² and s 0.3 placement-dependent. Cited, not plotted."],
                      pinned_inputs=l6.manifest() + l7.manifest() + l3.manifest())
