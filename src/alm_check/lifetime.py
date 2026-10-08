@@ -3,12 +3,14 @@
 Protocol: research/experiments/L3-003-circler-lifetime/PREREGISTRATION.md
 (fixed before this code was run). Writes research/traces/lane3/L3-003/.
 
-    .venv/bin/python -m alm_check.lifetime
+    .venv/bin/python -m alm_check.lifetime        # Q1-Q5
+    .venv/bin/python -m alm_check.lifetime --q6   # Q6 (amendment 1): lifetime distribution
 """
 
 from __future__ import annotations
 
 import csv
+import sys
 from multiprocessing import Pool
 
 import numpy as np
@@ -36,7 +38,12 @@ CONDITIONS = {
     "D20": (13, 20, "native", False, 8000),
     "D40": (13, 40, "native", False, 8000),
     "E26": (26, 10, "block", True, 5000),
+    # amendment 1: delta = 1e-12 copies, rng 7000 + 100 i_R + k
+    "Q6-13": (13, 10, "native", True, 5000),
+    "Q6-26": (26, 10, "block", True, 8000),
 }
+Q6 = {"Q6-13": (0, 24), "Q6-26": (1, 12)}  # cond: (i_R, replicates)
+DELTA = 1e-12
 
 
 def seed(R: int, resize: str) -> np.ndarray:
@@ -54,6 +61,11 @@ def starts(cond: str) -> list[tuple[float, int, np.ndarray]]:
     if not noisy:
         return [(0.0, -1, base)]
     support = ndimage.binary_dilation(base > 0, iterations=3 * R // 13)
+    if cond in Q6:
+        i_r, reps = Q6[cond]
+        return [(DELTA, k, np.clip(base + DELTA * np.random.default_rng(7000 + 100 * i_r + k)
+                                   .uniform(-1, 1, base.shape) * support, 0, 1))
+                for k in range(reps)]
     out = []
     for i_e, e in enumerate(EPS):
         for k in range(REPS):
@@ -89,22 +101,35 @@ def run_one(job) -> dict:
     return row
 
 
-def main() -> None:
-    OUT.mkdir(parents=True, exist_ok=True)
-    same = np.array_equal(seed(26, "nearest"), seed(26, "block")), \
-        np.array_equal(seed(39, "nearest"), seed(39, "block"))
-    print("nearest == block bitwise at R26, R39:", same, flush=True)
-    skip = {c for c, s in zip(("B26-nearest", "B39-nearest"), same) if s}
-    jobs = [(c, e, k, A) for c in CONDITIONS if c not in skip for e, k, A in starts(c)]
-    jobs.sort(key=lambda j: -CONDITIONS[j[0]][0] ** 2 * CONDITIONS[j[0]][1] * CONDITIONS[j[0]][4])
+def run_all(jobs) -> list[dict]:
     with Pool(4) as pool:
         rows = pool.map(run_one, jobs, chunksize=1)
     order = list(CONDITIONS)
     rows.sort(key=lambda r: (order.index(r["condition"]), r["eps"], r["rep"]))
-    with open(OUT / "lifetimes.csv", "w", newline="") as f:
+    return rows
+
+
+def write(rows: list[dict], name: str) -> None:
+    with open(OUT / name, "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=list(rows[0]))
         w.writeheader()
         w.writerows(rows)
+
+
+def main() -> None:
+    OUT.mkdir(parents=True, exist_ok=True)
+    if "--q6" in sys.argv:
+        jobs = [(c, e, k, A) for c in Q6 for e, k, A in starts(c)]
+        jobs.sort(key=lambda j: -CONDITIONS[j[0]][0])
+        write(run_all(jobs), "q6.csv")
+        return
+    same = np.array_equal(seed(26, "nearest"), seed(26, "block")), \
+        np.array_equal(seed(39, "nearest"), seed(39, "block"))
+    print("nearest == block bitwise at R26, R39:", same, flush=True)
+    skip = {c for c, s in zip(("B26-nearest", "B39-nearest"), same) if s}
+    jobs = [(c, e, k, A) for c in CONDITIONS if c not in skip | set(Q6) for e, k, A in starts(c)]
+    jobs.sort(key=lambda j: -CONDITIONS[j[0]][0] ** 2 * CONDITIONS[j[0]][1] * CONDITIONS[j[0]][4])
+    write(run_all(jobs), "lifetimes.csv")
     with open(OUT / "nearest-equals-block.txt", "w") as f:
         f.write(f"R26 {same[0]}\nR39 {same[1]}\n")
 
