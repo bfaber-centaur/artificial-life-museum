@@ -268,6 +268,8 @@
     "under-review": [
       "research/claims.md",
       "research/experiments/L3-003-circler-lifetime/README.md",
+      "research/experiments/L6-007-attractor-geography/README.md",
+      "research/experiments/L6-008-pair-coupling/README.md",
       "research/figures/D-pair-and-circler/README.md",
       "research/figures/D-pair-and-circler/figure-D-lifetimes.csv",
       "research/figures/D-pair-and-circler/figure-D-pair.csv",

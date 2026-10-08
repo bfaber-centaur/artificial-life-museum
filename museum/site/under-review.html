@@ -23,7 +23,7 @@
   </ol></details>
 </header>
 <main>
-<p class="kicker">Room 6 · Provisional · S102 and S101</p><div class="provisional-banner"><strong>Provisional room.</strong> Parts of these exhibits come from work still under review (<a href="https://github.com/bfaber-centaur/artificial-life-museum/pull/27">#27</a>) and not yet in the claims ledger. Badges appear only for ledger claims; everything else is attributed to the lane and pull request it comes from, and may change.</div>
+<p class="kicker">Room 6 · Provisional · S102 and S101</p><div class="provisional-banner"><strong>Provisional room.</strong> Parts of these exhibits come from work merged on <code>main</code> but not yet in the claims ledger. Badges appear only for ledger claims; everything else is attributed to the lane and report it comes from, and may change.</div>
 <h1>Still being argued</h1>
 <p class="lede">This room is built while the science is still moving. Two Night 1
 experiments turned up results that are more interesting than the specimens' first descriptions,
@@ -48,7 +48,7 @@ reports, side by side, with nothing promoted to fact until the ledger says so.</
       <p class="obs">On the standard grid (R 13), in the field explorer's longer runs, the registered circler stopped
       circling and died after roughly four thousand time units, and slightly disturbed copies
       died at very different times, while others were still circling when the runs ended
-      (<a class="pr" href="https://github.com/bfaber-centaur/artificial-life-museum/pull/27">Lane 6, PR #27</a>).</p>
+      (<a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/L6-007-attractor-geography/README.md">Lane 6, L6-007</a>).</p>
       <p class="open">The hostile reviewer found that copies differing by one part in a trillion
       drift apart exponentially, and die at times scattered across the whole run, so no single
       death time belongs to the creature (<a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/reports/hostile-review.md">Lane 7, HR-009</a>).</p>
@@ -65,7 +65,7 @@ reports, side by side, with nothing promoted to fact until the ledger says so.</
   </div>
 </div>
 <figure class="evidence">
-  <span class="label-tag">Figure D · Lane 9 · provisional, drawn from PRs #27 and #30</span>
+  <span class="label-tag">Figure D · Lane 9 · provisional, drawn from L6-007 and HR-009</span>
   <a href="../../research/figures/D-pair-and-circler/figure-D.png" title="Open full size"><img src="../../research/figures/D-pair-and-circler/figure-D.png" width="2160" height="2580" loading="lazy"
        alt="Four-part figure, marked provisional. Part b carries a red warning that its hatched "worse together" columns are withdrawn as a 128-wide world-size effect. Parts c and d carry a red warning that they hold only at R 13, T 10, because a replication saw no deaths at a finer grid or a finer timestep. (a) Tiles for port injury: the bound pair above and its two partners run alone below read the same almost everywhere. (b) The same for frontal addition, with a third block for partners given the full pulse; at strengths 0.2 and 0.3 several pair tiles read 0 with red outlines while every lone-partner tile reads 2; at 0.4 the full-pulse partners also die; columns from 0.5 are faded. (c) 37 circler lifelines from time 0: about half end in a red cross between 292 and 3980 time units, the rest run to an arrow at 5000. (d) A stepped survival curve falling to about 0.73 at 1000 time units and 0.46 at 5000, inside a shaded uncertainty band."></a>
   <figcaption><strong>Many circlers, many fates.</strong> Panel c follows 37 nearly identical
@@ -73,7 +73,7 @@ reports, side by side, with nothing promoted to fact until the ledger says so.</
   a run still circling when it ended, which tells us only that it lived at least that long.
   Panel d is the fraction still alive over time, with its uncertainty, counting those unfinished
   runs honestly rather than guessing their ends. Panels a and b belong to the pair, below. The
-  data are read from <a class="pr" href="https://github.com/bfaber-centaur/artificial-life-museum/pull/27">PR #27</a> and Lane 7's review; Lane 3's independent lifetimes
+  data are read from Lane 6's L6-007 and Lane 7's review; Lane 3's independent lifetimes
   are not in it yet. Every run in panels c and d is on the
   standard setting, R 13 with T 10, and the red warning on them says so. Lane 3 saw no deaths
   on finer grids or with smaller time steps, so the disappearance looks like an effect of that
@@ -109,7 +109,7 @@ the binding helps them.</p>
   <p class="obs">The field explorer compared the pair with each of its halves run alone. For the
   side cut, the pair ends exactly as its two halves would on their own, in 58 of 60 runs. For a
   pulse of extra mass added in front, the pair sometimes dies where each half alone survives
-  (<a class="pr" href="https://github.com/bfaber-centaur/artificial-life-museum/pull/27">Lane 6, PR #27</a>).</p>
+  (<a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/L6-008-pair-coupling/README.md">Lane 6, L6-008</a>).</p>
   <p class="open">The hostile reviewer re-ran the halves with the full pulse rather than half
   of it each. The drag-down held at strengths 0.2 and 0.3, and for a while that narrow window
   looked like the first sign that the bond itself can be a liability (<a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/reports/hostile-review.md">Lane 7, HR-009 E2</a>).</p>
@@ -134,8 +134,8 @@ the binding helps them.</p>
   <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/tests/test_hr009_pair_pulse.py">the test that pins one case on both sizes</a>).</p>
   <p class="int">None yet. The reviewer withdrew the "coupling at 0.2 to 0.3" reading and recommends
   replacing it with: an on-gap pulse splits the pair into two intact Orbium, and whether they then
-  survive depends on the world, not on coupling. The field explorer is correcting its own report
-  to match (<a class="pr" href="https://github.com/bfaber-centaur/artificial-life-museum/pull/27">Lane 6, PR #27</a>).</p>
+  survive depends on the world, not on coupling. The field explorer has withdrawn its own coupling
+  reading to match (<a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/L6-008-pair-coupling/README.md">Lane 6, L6-008</a>).</p>
   <p class="open">What may remain depends on where the pulse lands. The field explorer reports that
   a pulse at 0.3 placed slightly off the gap kills the pair in 4 of 5 phases in both world sizes.
   That is exploratory and not yet checked independently.</p>
@@ -149,8 +149,7 @@ at 0.2 and 0.3 mark the deaths that turned out to be collisions. Its red warning
 withdrawn.</p>
 
 <aside class="sources"><h2>Sources</h2><ul>
-  <li>Under review: <a class="pr" href="https://github.com/bfaber-centaur/artificial-life-museum/pull/27">L6-007 and L6-008</a> (Lane 6)</li>
-  <li>On <code>main</code>: <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/reports/hostile-review.md">hostile review HR-009, HR-009b and HR-009c</a> (Lane 7) ·
+  <li>On <code>main</code>: <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/L6-007-attractor-geography/README.md">L6-007</a> and <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/L6-008-pair-coupling/README.md">L6-008</a> (Lane 6) · <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/reports/hostile-review.md">hostile review HR-009, HR-009b and HR-009c</a> (Lane 7) ·
   <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/L3-003-circler-lifetime/README.md">L3-003 lifetime replication</a> (Lane 3)</li>
   <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/specimens/S101-orbium-pair.md">S101 dossier</a> and <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/specimens/S102-circler.md">S102 dossier</a></li>
   <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/README.md">Gallery notes</a> for G002 and G004 (Lane 8)</li>

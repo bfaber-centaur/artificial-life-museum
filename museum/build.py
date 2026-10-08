@@ -185,10 +185,12 @@ def page(rooms, room, body, stamp, prev_next):
     kicker = f'<p class="kicker">{html.escape(room["kicker"])}</p>' if room["kicker"] else ""
     if room.get("provisional"):
         prs = ", ".join(f'<a href="{GITHUB}/pull/{n}">#{n}</a>' for n in room["under_review"])
+        source = (f"work still under review ({prs})" if prs
+                  else "work merged on <code>main</code> but")
         kicker += (f'<div class="provisional-banner"><strong>Provisional room.</strong> Parts of these '
-                   f'exhibits come from work still under review ({prs}) and not yet in the claims '
+                   f'exhibits come from {source} not yet in the claims '
                    f'ledger. Badges appear only for ledger claims; everything else is attributed to the '
-                   f'lane and pull request it comes from, and may change.</div>')
+                   f'lane and report it comes from, and may change.</div>')
     return f"""<!doctype html>
 <html lang="en">
 <head>
