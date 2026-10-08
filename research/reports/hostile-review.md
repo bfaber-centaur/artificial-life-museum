@@ -392,3 +392,155 @@ state with one dominant unstable direction, growth rate λ ≈ 1.5–1.8 per tim
 independent estimates per disturbance). Near the edge, doomed runs track survivors to < 1% for
 about 2 tu. The pixel-quantized edits (I002, I004) cannot test this at R = 13." OBSERVED,
 exploratory, one phase (t0 = 1000), ref engine.
+
+---
+
+## HR-009: L6-007 attractor geography and L6-008 pair coupling (PR #27)
+
+Targets: attractor evidence vs finite-horizon survival (L6-f, the S102 circler), and coupling vs
+a surviving unaffected partner (L6-c, L6-d, S101). Files: `../experiments/HR009-l6-review/`,
+preregistered in `027e185` before any run. Engine: Lane 6's `field.py` and helpers, unchanged, at
+PR #27 head `3ccb804`.
+
+### Preregistration order: clean
+
+`08f6ee5` adds only the two protocols, and `d915f8f` adds the runners with no results. Both
+amendments to L6-007 are dated and labelled exploratory, and neither changes how P1–P4 are
+scored. L6-008 has no amendments. Failed predictions are listed rather than re-scored, including
+the ring's bitwise P4 failure that Lane 6 could easily have waved away.
+
+### E1: the S102 circler is chaotic, so "dies at step 39 799" cannot be replicated (`e1.csv`)
+
+I ran the registered seed plus 24 copies perturbed by δ ∈ {1e−14, 1e−12, 1e−10} on its support,
+for 5000 tu. This machine reproduces the reference death (first 10-step sample below mass 0.01:
+step 39 800).
+
+- **The separation grows exponentially at 0.20 per tu** (0.197–0.201 for δ ≤ 1e−12), one
+  e-fold every 5 tu. A 1e−16 rounding difference reaches 1e−3 in about 150 tu.
+- **Death times scatter over the whole horizon at any δ.** At δ = 1e−12 they are 292, 383, 2927,
+  3333 and 3556 tu, and 3 of 8 copies are still alive at 5000 tu. At δ = 1e−14, 7 of 8 die,
+  between 802 and 3101 tu. **E1-P1 holds**: the death step is a property of this floating-point
+  trajectory, not of the rule. Lane 6's two engines agree on it because they perform the same
+  pocketfft operations. An independent engine (another FFT library, or float32) is not expected
+  to reproduce step 39 799. The replication target should be the lifetime distribution.
+- **The lifetime distribution, pooled with Lane 6's 13 runs** (37 runs, 20 deaths): censored
+  exponential MLE gives a mean of about 5900 tu (median ≈ 4100). But 10 deaths fall before
+  1000 tu where an exponential predicts 5.8, so the hazard is front-loaded. The earliest death is
+  at 292 tu, so L6-f's "every death comes after at least 500 tu" is a property of the sample. The
+  front-loading, together with Lane 6's 8 survivors whose gyradius is 1–2.4% smaller, suggests
+  (untested) two circling states: a fragile one and a longer-lived one.
+- **Consequences for L6-007.**
+  - L6-f's conclusion ("not an attractor, a long transient") is **strengthened**: deaths happen
+    from perturbations 12 orders of magnitude below Lane 6's smallest ε, so no small basin can
+    save the attractor reading.
+  - P1's "2 of 6 die at ε 0.01" and Part B's circler-end classes are draws from the lifetime
+    distribution at a fixed horizon. Part B's "interleaving" near the circler end (circler→ring
+    λ 0.05; Orbium→circler λ 0.95) is therefore **not geography**. Rerunning it from another
+    machine could flip those points. The Orbium→ring static island at λ 0.20 and the dead zone
+    are unaffected.
+  - The R 26 circler "passing" P4 (18/18 to ε 0.1) used a 1000 tu horizon, but at the primary
+    rule 10 of 20 deaths occur before 1000 tu, so the horizon cannot separate an attractor from a
+    transient of this length. It is weak evidence that R 26 is more robust.
+  - The 8 "non-returning" survivors with a smaller gyradius may simply be sampled at different
+    points of a chaotic orbit. A 1% gyradius gate is too tight for a chaotic state, which also
+    weakens P1 as a return criterion for the circler (the deaths alone still refute P1).
+
+### E2: the I003 drag-down mostly survives a full-pulse baseline (`e2.csv`)
+
+L6-008 applies the I003 pulse before splitting, and the pulse centre falls in the gap between
+the partners. Each partner alone therefore gets only its own half of the Gaussian, truncated at
+ℓ = 0, while in the pair world each partner is within kernel range of the whole pulse. I reran
+each undisturbed half with the **full** pulse added.
+
+| s | Pair = split halves (L6-008) · full-pulse halves (HR-009), phases 0–4 |
+| --- | --- |
+| 0.2 | 0=1+1·1+1, 0=1+1·1+1, o=1+1·1+1, 2=1+1·1+1, 2=1+1·1+1 |
+| 0.3 | 0=1+1·1+1, 1=1+1·1+1, 2=1+1·1+1, 2=1+1·1+1, 0=1+1·1+1 |
+| 0.4 | 2=1+1·0+0, 1=1+1·0+0, 1=1+1·0+0, 0=1+0·1+0, 0=1+1·1+0 |
+
+- **s 0.2 and 0.3: coupling stands.** In all 6 drag-down runs, both partners alone survive even
+  with the full pulse, yet the pair dies or degrades. Against the full-pulse baseline, Lane 6's
+  own rule (≥ 2 strengths, each ≥ 3 of 5 phases) is still met.
+- **s 0.4: explained by exposure.** With the full pulse the halves die in 3 phases and lose one
+  partner in 2, so the pair's 0–2 units are no longer a drag-down (phase 0 even reads as rescue).
+- Preregistered verdict: **INCONCLUSIVE** (6 of the 10 drag-down runs survive the full-pulse
+  baseline; the thresholds were 8 for each side). The substance: L6-d's coupling is real but
+  narrow, at s 0.2–0.3 only.
+- At s ≥ 0.8, full-pulse halves sometimes survive where split halves and the pair die. Neither
+  baseline brackets the pair cleanly there, so I would not interpret the "rescue" and "filled"
+  outcomes at s ≥ 0.5 as coupling without a further test.
+
+### L6-008 I004 and I001
+
+- **L6-c (I004, H0 in 58/60) is accepted.** The split is the correct null for a lateral cut, and
+  V1–V3 pass. The 2 mismatches at s 0.05 sit at the split-half fragility edge, as Lane 6 says.
+- **The I001 argument is asymmetric.** Lane 6 discards the s 0.08 "rescue" because split halves
+  are more fragile than relaxed Orbia, but uses the same fragility to argue the I003 drag-down
+  is conservative. Both readings are right, and the asymmetry is not a contradiction. "H0 not
+  rejected" is the correct status for I001, and the halves' fragility should be stated as a
+  design limitation in the claim, not only in the README.
+
+### Recommended wording
+
+- **L6-f.** "At μ 0.155, σ 0.020, R 13, T 10, 128², S102 is a chaotic transient, not an
+  attractor. Twin runs separate at about 0.2 per tu. Lifetimes from 37 starts range from 292 tu
+  to beyond 5000 tu (20 deaths, censored mean about 5900 tu, front-loaded hazard). The
+  unperturbed seed's death at step 39 799 is one draw and is engine-specific." The replication
+  target for Lane 3 is the lifetime distribution, for example the fraction dead by 1000 and by
+  5000 tu over ≥ 20 tiny-noise starts.
+- **L6-g.** Restrict "interleaving" to the Orbium→ring and circler→ring dead and static zones.
+  Circler-end classes are horizon samples.
+- **L6-d.** "Under I003 at s 0.2–0.3, the bound pair dies or degrades in 6/10 runs while each
+  partner alone survives even the full pulse (HR-009). At s ≥ 0.4 the outcome is explained by
+  pulse exposure or is unbracketed."
+- **L6-c** as written.
+
+### HR-009b: L3-003 (PR #29), chaos vs collapse under refinement (exploratory, not preregistered)
+
+Lane 3 reproduces the R 13 transient bit for bit. At R 13, T 10, 9 of 24 independent 1e−12 copies
+die and 1 fills the world. But 0 of 29 R 26 runs and 0 of 3 R 39 runs die within 5000–8000 tu.
+My HR-009 wording was scoped to R 13, T 10, 128², and I accept that it does not carry over to
+refined grids. L3-003 proposes my twin-separation rate as a cheap discriminator, so I ran it
+(`hr009b_sep.py`, `hr009b_sep.csv`, `hr009b_sep_R26_long.csv`; 1e−12 twins, μ and σ fixed at
+0.155 and 0.020, separation per R):
+
+| Setting | Growth rate (per tu) | Separation at 600 tu | Both alive |
+| --- | --- | --- | --- |
+| R 13, T 10 | 0.198–0.201 | 0.46–0.56 (saturated) | 3/3 at 600 tu |
+| R 13, T 20 | 0.096 | 0.48–0.61 (saturated) | 3/3 |
+| R 13, T 40 | 0.076–0.079 | 0.46–0.57 (saturated) | 3/3 |
+| R 26, T 10, block seed | 0.015 early; separation reaches 0.17–0.42 by 3000 tu | 2e−9 to 1e−8 | 4/4 at 3000 tu |
+
+- **Chaos survives refinement in both knobs, but weakens.** Halving the step halves the rate, and
+  further halving changes it by only 20%. Doubling R cuts it about 13-fold, yet R 26 twins still
+  decorrelate within about 3000 tu.
+- **So chaos and collapse are separable.** The R 26 circler is chaotic but shows no collapse in
+  Lane 3's 172 000 tu of exposure. The collapse needs something the R 13 grid adds. The likely
+  candidate is the larger lattice-driven mass fluctuation (L3-003 traces: 0.49–0.547 at R 13 vs
+  0.511–0.540 at R 26), which fits H001's lattice-amplitude scaling. This is untested.
+- **L3-003's post-hoc probability for "no R 26 death"** (≈ 1e−9) uses a constant hazard. With the
+  front-loaded R 13 hazard and only the early window, Q6-13's 4 of 24 ends before 1000 tu give
+  (20/24)^24 ≈ 0.01 for 24 R 26 copies with no early end. The contrast holds, but it is about
+  1%, not 1e−9.
+
+### HR-009c: correction to E2, the s 0.2 "drag-down" is a 128² collision artefact (L6-009)
+
+Lane 6's L6-009 tracks show that the gap pulse **unbinds** S101 into two free Orbia, which
+collide later on the 128² torus. E2's full-pulse baseline could not catch this because each half
+runs alone. I checked it independently from the same edited states (pulse 1 R ahead, heading from
+the phase-3000 frame), with zero-padding to 256²:
+- At 40 tu the pair world holds 0.868–0.873 mass, i.e. two intact Orbia (2 × 0.4358), at
+  s 0.2 and 0.3, in all 5 phases.
+- Of those 10 states, 7 are dead at 300 tu on 128². All 10 end as two Orbia on 256².
+
+My phase 1–4 frames reuse the phase-0 heading, so their 128² outcomes do not match L6-008
+one for one. Phase 0 matches exactly, and `tests/test_hr009_pair_pulse.py` now pins that case
+on both world sizes.
+
+**E2's "coupling stands at s 0.2–0.3" is withdrawn** for the on-gap pulse. Its preregistered verdict
+(INCONCLUSIVE) is unchanged. What it measured is a world-size effect: the two freed partners do not
+die of the pulse. The placement-dependent effects in L6-009 are separate claims (off-gap
+drag-down at s 0.3, f 0.25, in 4/5 phases on both world sizes, and rescue of a directly hit
+partner in 8/15). They are exploratory, and I have not checked them independently.
+Recommended L6-d replacement: "An on-gap pulse at s 0.2–0.3 splits S101 into two intact Orbia.
+Whether they survive then depends on the world (collisions on 128²), not on coupling."
