@@ -21,8 +21,8 @@
   "inputs": [
     {
       "path": "research/figures/D-pair-and-circler/make_figure.py",
-      "sha256": "371697fd47d2b2a889ab2b93f3a2a542b7284ca79a846f5a2f0c056c73a0cbd2",
-      "last_commit": "5615a6f"
+      "sha256": "734e2b052e0e89d7c8f177d86ac8a3b6956f5c72a59e5c0f153846596179213c",
+      "last_commit": "b7892ec"
     },
     {
       "path": "research/figures/figlib/__init__.py",
@@ -57,14 +57,21 @@
   ],
   "pinned_inputs": [
     {
-      "commit": "ad9ac03a03d7599bc57535f11a8470349cd2156a",
+      "commit": "efa899901c8051d24e70b9836c23386ef693c43d",
       "source": "PR #27 (Lane 6, L6-007/L6-008), unmerged",
       "path": "research/experiments/L6-007-attractor-geography/circler-lifetimes.csv",
       "blob": "a3b22df612babba5e1f45cd1fe138eb9f60abbc6",
       "sha256": "9671495b005deb16f432d0b0b975fc8ad5cda767593fa6368e4f8ed7bbe1255f"
     },
     {
-      "commit": "ad9ac03a03d7599bc57535f11a8470349cd2156a",
+      "commit": "efa899901c8051d24e70b9836c23386ef693c43d",
+      "source": "PR #27 (Lane 6, L6-007/L6-008), unmerged",
+      "path": "research/experiments/L6-008-pair-coupling/README.md",
+      "blob": "123fb451a54893c4bcc43ea3402f13f35d581a83",
+      "sha256": "f8fcb99a5c3c85985ffce8180b44283ddcfd3eaaba964f8402447e160eda17b3"
+    },
+    {
+      "commit": "efa899901c8051d24e70b9836c23386ef693c43d",
       "source": "PR #27 (Lane 6, L6-007/L6-008), unmerged",
       "path": "research/experiments/L6-008-pair-coupling/pair-coupling.csv",
       "blob": "9ecf69a72f2bc56d23746e51882d579ad3c79e8e",
@@ -99,8 +106,8 @@
     "research/figures/D-pair-and-circler/figure-D-pair.csv",
     "research/figures/D-pair-and-circler/figure-D-lifetimes.csv"
   ],
-  "code_commit": "5615a6f",
-  "code_dirty": true,
+  "code_commit": "b7892ec",
+  "code_dirty": false,
   "versions": {
     "python": "3.13.16",
     "numpy": "2.5.3",
@@ -110,6 +117,7 @@
     "PROVISIONAL: evidence read from unmerged PRs #27 and #30 at pinned commits; see pinned_inputs.",
     "Proposed claims L6-c, L6-d, L6-f are not in the ledger; no status is drawn for them.",
     "Kaplan-Meier with Greenwood log-log 95% band; HR-009's rerun of the unperturbed seed is not counted as a separate start.",
-    "Panels c-d are R 13, T 10 only; PR #29 (L3-003) sees no death at R 26 or R 39, so refinement is disputed. L3-003 is cited, not plotted."
+    "Panels c-d are R 13, T 10 only; PR #29 (L3-003) sees no death at R 26 or R 39, so refinement is disputed. L3-003 is cited, not plotted.",
+    "Panel b is 128\u00b2 world only; Lane 6's L6-009 note (L6-008 README @ PR #27) finds the s 0.2 drag-down is a collision artefact at 128\u00b2 and s 0.3 placement-dependent. Cited, not plotted."
   ]
 }
