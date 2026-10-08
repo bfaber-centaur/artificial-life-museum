@@ -78,4 +78,8 @@ tracks), written by `run.py`. `README.md` reports the verdicts.
 
 ## Amendments
 
-_None._
+- 2026-10-08 03:22 UTC, after the main results were read: added `followup_bigworld.py`, an
+  exploratory (not pre-registered) rerun of the f = 0 and f = 0.25 pair worlds on a 256² torus.
+  The tracks showed the gap pulse splitting the pair, with deaths that looked like later
+  collisions on the 128² torus. It does not change how (a)–(c) are scored. I also record that (b)
+  could not be scored as written (see README).
