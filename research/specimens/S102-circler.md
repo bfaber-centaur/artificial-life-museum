@@ -73,9 +73,13 @@ What remains is sensitivity to the initial condition. At T 40 it persists, turni
 coexistence band with Orbium exists at all three settings but sits at different σ
 (L6-004 table).
 
-**Lifetime (2026-10-08, L6-007 follow-up, exploratory): S102 is a long transient, not a stable
+**Lifetime (2026-10-08, L6-007 follow-up and HR-009): S102 is a chaotic transient, not a stable
 state.** At its registered rule on 128², the registered seed circles until step 39 799
-(t = 3979.9 tu) and then dies. Both `field.py` and `alm.lenia` give the same step. In the same
-follow-up, 4 of 12 starts with 1–3% noise die between 934 and 1291 tu, and 8 still circle at
-5000 tu. See [`L6-007`](../experiments/L6-007-attractor-geography/README.md). Night 0's runs
-(20 000 steps) were too short to see this.
+(t = 3979.9 tu) and then dies. Both `field.py` and `alm.lenia` give that step, but that is **one
+floating-point trajectory, not the lifetime of S102**. Lane 7 (HR-009, PR #30) showed that twins
+differing by 1e−12 separate at about 0.2 per tu, and that tiny-noise copies die anywhere from
+292 tu to beyond 5000 tu. In Lane 6's follow-up, 4 of 12 starts with 1–3% noise die between 934
+and 1291 tu, and 8 still circle at 5000 tu. Treat the lifetime as a distribution with censored
+survivors. An independent estimate is in progress (Lane 3, PR #29). See
+[`L6-007`](../experiments/L6-007-attractor-geography/README.md). Night 0's runs (20 000 steps)
+were too short to see this.

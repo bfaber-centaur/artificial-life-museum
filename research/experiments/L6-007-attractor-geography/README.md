@@ -8,6 +8,20 @@ plus two numerical variants, R 26 (σ 0.0205) and T 40 (σ 0.019).
     python research/experiments/L6-007-attractor-geography/run.py paths
     python research/experiments/L6-007-attractor-geography/followup_circler.py   # exploratory
 
+## Revision after hostile review HR-009 (PR #30)
+
+Lane 7's HR-009 (preregistered, run on this PR's code at `3ccb804`) showed that twin circlers
+differing by 1e−12 separate at about 0.2 per tu, and that death times at that tiny noise scatter
+from 292 tu to beyond 5000 tu. I accept its findings. The pre-registered P1–P4 scoring below is
+unchanged. What changes is the interpretation:
+
+- The death at step 39 799 is **one floating-point trajectory**, not a lifetime of S102. Lane 6's
+  two engines agree on it only because they do the same FFT arithmetic. The property of the rule
+  is the lifetime *distribution*.
+- Circler survival at a fixed horizon (Part A's circler rows, the R 26 circler row and the
+  circler ends of Part B) is a draw from that distribution. It is not evidence of a basin.
+- The claims at the end are rewritten to match (L6-f, L6-g and the replication target).
+
 ## Verdict
 
 | Prediction | Result |
@@ -24,11 +38,11 @@ What this does to C038 ("one rule hosts three phenotypes"):
 - **The S103 ring is an exact, robust fixed point at the primary rule**: every perturbed start up
   to ε 0.3 (24/24) relaxes back to the same binary state, bitwise. At R 26 and T 40 it is not one
   state but a family. Every perturbed start settles on its own distinct static body.
-- **The S102 circler is a finite-horizon survivor, not an attractor.** A 1% perturbation kills
-  it in 2 of 6 runs after more than 900 tu of circling, and in the exploratory follow-up the
-  unperturbed registered seed itself dies at 3980 tu. C038 should be narrowed: under this rule the
-  circler is a long transient (lifetimes from about 900 to more than 5000 tu), not a third stable
-  phenotype.
+- **The S102 circler is a chaotic transient, not an attractor.** A 1% perturbation kills it in
+  2 of 6 runs, and the unperturbed seed dies too in a longer exploratory run. HR-009 shows that
+  even a 1e−14 perturbation changes when it dies, so lifetimes are spread widely (292 tu to more
+  than 5000 tu over 37 starts pooled by Lane 7). C038 should be narrowed: under this rule the
+  circler is a long transient, not a third stable phenotype.
 
 ## Part A: noise around each seed
 
@@ -56,7 +70,10 @@ their gyradius is 1.0–2.4% smaller, so the 1% gate fails them. I have not reso
 a slightly different circling body or a sampling artefact. The mass oscillates with an 8.9-step
 period and the shape is sampled every 50 steps. The pre-registered gate stands either way, and the
 deaths alone refute P1. All 5 deaths are *late*: each run was still a circler at 500 tu
-(2 of them also at 1000 tu).
+(2 of them also at 1000 tu). *After HR-009:* the likeliest reading of the gyradius gap is
+sampling different points of a chaotic orbit, and a 1% gate is too tight for a chaotic state.
+"Every death comes after at least 500 tu" is true of this sample only. Lane 7 saw a death at
+292 tu.
 
 **Exploratory follow-up** (not pre-registered; [`followup_circler.py`](followup_circler.py),
 [`circler-lifetimes.csv`](circler-lifetimes.csv)). **The registered S102 seed itself dies, at t = 3979.9 tu.**
@@ -65,7 +82,10 @@ Part A), and 8 are still circlers at 5000 tu (mass 0.5221–0.5232). So the circ
 state with a broad, start-dependent lifetime, not a stable one. The 2000 tu horizon of Part A,
 and Night 0's 20 000-step runs, were too short to see the reference die. The project engine
 `alm.lenia.Lenia` (single world, `specimens.load("S102").place(128)`) gives the same death step,
-39 799. That is a second engine within Lane 6, not an independent replication.
+39 799. That is a second engine within Lane 6, not an independent replication. *After HR-009:*
+the agreement is expected because both engines do the same pocketfft arithmetic. An engine with
+a different FFT library or precision should not be expected to reproduce step 39 799. These 13
+lifetimes are a sample, and the 8 survivors at 5000 tu are censored.
 
 **Ring at R 26 and T 40.** It stays STATIC in 47 of 48 runs, but 0 match the unperturbed final
 state, and all 49 STATIC finals (references included) are distinct from each other up to shift.
@@ -80,7 +100,9 @@ rather than re-scoring it.
 (18/18 return up to ε 0.1). At T 40 it is fragile, and it can turn static or fill the world. By
 P4's rule it is NUMERICALLY_FRAGILE at T 40. Caveat: the R 26 seed is the bilinear enlargement,
 which Night-1 D2 showed kills the circler at σ 0.020. At σ 0.0205 it survives, so the R 26 row
-also depends on the σ offset.
+also depends on the σ offset. *After HR-009:* the R 26 horizon is 1000 tu, and half of the
+circler deaths at the primary rule come later than that. So 18/18 at R 26 is weak evidence of
+greater robustness, not evidence of an attractor at R 26.
 
 ## Part B: blends between seeds (primary rule, 2000 tu)
 
@@ -98,8 +120,15 @@ G glider, C circler, S static, D died, F filled. ¹ circler at 1000 tu, died bef
 - No blend switches directly between two phenotypes. Between Orbium and the circler lies a wide
   dead zone (λ 0.10–0.85), and the circler's basin along this path is tiny and broken
   (λ 0.90 survives, 0.95 dies).
-- Every path interleaves: an isolated static body at λ 0.20 on Orbium → ring, and circler
-  survival broken by deaths near both circler ends. P3 is refuted.
+- Every path interleaves by the pre-registered count, so P3 is refuted. The classes show an
+  isolated static body at λ 0.20 on Orbium → ring, and circler survival broken by deaths near
+  both circler ends.
+- *Narrowed after HR-009:* every class here is the state at 2000 tu, which is finite-horizon
+  survival, not basin geography. Near the circler ends (circler → ring λ 0.05, Orbium → circler
+  λ 0.90–1) the classes are draws from the circler's lifetime distribution, and a rerun on
+  another machine could flip them. The interleaving that does not depend on the circler is on
+  the Orbium → ring path: the dead zones, the filled point and the static island at λ 0.20.
+  Orbium and the ring are attractors and death is final, so those are stable classifications.
 - The ring has the widest basin along both paths that reach it (λ ≥ 0.55–0.60). Orbium's reaches
   λ 0.05–0.10, and the circler's is no wider than one or two grid points.
 
@@ -108,7 +137,11 @@ G glider, C circler, S static, D died, F filled. ¹ circler at 1000 tu, died bef
 - P1, P2 and P3 are refuted at the primary rule, and P4 for the circler at T 40 and for the ring at
   both variants (bitwise criterion).
 - Unresolved: whether the 8 surviving circlers with a 1–2.4% smaller gyradius are a distinct
-  body.
+  body or chaotic-orbit sampling (HR-009 favours sampling, untested).
+- Numerical qualifications that stay attached to every claim here: the R 26 variant uses
+  bilinear-enlarged seeds (the method that killed the circler at σ 0.020 in D2) and a shifted
+  σ (0.0205). T 40 uses σ 0.019. All runs are float64 on a 128² (256² at R 26) torus with
+  pocketfft.
 - Not tested: other μ, σ in the coexistence band; noise outside the seed's support; larger
   worlds; horizons beyond 2000 tu for Orbium and the ring (only the circler was followed to
   5000 tu). Whether Orbium or the ring also decay on longer horizons is open.
@@ -118,13 +151,15 @@ G glider, C circler, S static, D died, F filled. ¹ circler at 1000 tu, died bef
 - **L6-e.** At the coexistence rule (R 13, T 10), Orbium returns from 18/18 noise perturbations
   up to ε 0.1, and S103 returns bitwise from 24/24 up to ε 0.3. Both are attractors in this
   test.
-- **L6-f.** S102 is not an attractor at its registered rule. 1% noise kills it in 2/6 runs, every
-  primary-rule death comes after at least 500 tu of circling, and (exploratory) the unperturbed
-  seed dies at 3979.9 tu while 8/12 perturbed starts survive 5000 tu. C038 should call the
-  circler a long transient.
-- **L6-g.** Blends between the three seeds never switch directly between phenotypes. Each path
-  interleaves classes (4–5 changes), with dead zones and an isolated static island.
-- **Strongest result for replication (Lane 3):** the unperturbed S102 seed dying at
-  t = 3979.9 tu (39 799 steps) at μ 0.155, σ 0.020, R 13, T 10, 128², plus the ε 0.01 deaths
-  (rng seeds 1000 and 1003, at 933.7 and 977.6 tu). These separate attractor from finite-horizon
-  survival.
+- **L6-f** (revised after HR-009, wording adapted from Lane 7). At μ 0.155, σ 0.020, R 13, T 10,
+  128², S102 is a chaotic transient, not an attractor. 1% noise kills it in 2/6 runs within
+  2000 tu. Twin runs separate at about 0.2 per tu (HR-009), and lifetimes range from 292 tu to
+  beyond 5000 tu. The unperturbed seed's death at step 39 799 is one floating-point trajectory,
+  specific to this arithmetic, and not a lifetime of the rule.
+- **L6-g** (narrowed). Blends between the three seeds never switch directly between phenotypes
+  within 2000 tu. On the Orbium → ring path the classes interleave (dead zones, a filled point
+  and a static island at λ 0.20). Classes near the circler ends are horizon samples of a chaotic
+  transient, not basin geography.
+- **Replication target (Lane 3, PR #29):** the S102 lifetime *distribution*, for example the
+  fraction dead by 1000 and by 5000 tu over at least 20 tiny-noise starts, at more than one
+  numerical setting. Censored runs should be reported. Matching step 39 799 is not the target.

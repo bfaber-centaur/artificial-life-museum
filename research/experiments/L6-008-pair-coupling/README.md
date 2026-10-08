@@ -6,18 +6,36 @@ their strengths × 5 phases, plus 5 controls), [`validity.csv`](validity.csv).
 
     python research/experiments/L6-008-pair-coupling/run.py
 
+## Revision after hostile review HR-009 (PR #30)
+
+HR-009 E2 (Lane 7, preregistered) found a flaw I missed. The I003 pulse is centred in the gap
+between the partners, so after the split each half receives only its own truncated half of the
+Gaussian, while in the pair world each partner is within kernel range of the whole pulse. Lane 7
+reran each undisturbed half with the **full** pulse. The pre-registered L6-008 verdicts below
+are unchanged. The I003 reading is narrowed:
+
+- **s 0.2 and 0.3:** in all 6 drag-down runs both halves survive even the full pulse, yet the
+  pair dies or degrades. The drag-down stands at these two strengths.
+- **s 0.4:** with the full pulse the halves also die or lose a partner, so the drag-down there is
+  explained by pulse exposure.
+- **s ≥ 0.5** ("rescue" to one Orbium, filled torus): neither baseline brackets the pair, and I
+  no longer interpret these as coupling.
+- HR-009's own pre-registered verdict on E2 is **INCONCLUSIVE** (6 of 10 drag-down runs survive the
+  full-pulse baseline; its threshold was 8). That verdict stands. The narrower observation is a
+  drag-down at s 0.2–0.3 under both baselines.
+
 ## Verdict
 
 | Disturbance | Mismatches (strengths with ≥ 3 of 5 phases) | Pre-registered verdict | Reading |
 | --- | --- | --- | --- |
 | I004 port injury | 2 of 60 (none) | **H0** | The pair survives because the uninjured partner does. |
 | I001 attenuation | 8 of 50 (only s = 0.08) | **H0 not rejected** | The one strong mismatch comes from the split-half baseline, not from coupling (see below). |
-| I003 frontal mass | 24 of 50 (s = 0.2, 0.3, 0.4, 0.5, 0.9, 1.0) | **H1, coupling** | Being bound makes the pair *more* fragile to added mass. |
+| I003 frontal mass | 24 of 50 (s = 0.2, 0.3, 0.4, 0.5, 0.9, 1.0) | **H1, coupling** (by L6-008's rule); HR-009 full-pulse check **INCONCLUSIVE** | Drag-down survives both baselines only at s 0.2–0.3. |
 
 So **C041's fission under port injury is the trivial explanation**: the cut removes the port
 partner and the starboard partner carries on as it would alone. The coupling that does show is
-in the opposite direction from "binding protects". A frontal mass pulse that each partner
-survives on its own kills the bound pair.
+in the opposite direction from "binding protects". At s 0.2–0.3, a frontal mass pulse that each
+partner survives on its own, even at full strength, kills or degrades the bound pair.
 
 My expectation, written before the run, was H0 for I004 (confirmed) and coupling most likely
 under I001 (not supported). I003 coupling was not predicted.
@@ -88,12 +106,16 @@ conservative baseline for drag-down and a biased one for rescue.
 
 At s = 0.2, 0.3 and 0.4 each half, given exactly its share of the same added mass (the edit is
 applied before the split), survives in 14 of 15 runs. Yet the pair dies or degrades in 10 of 15.
-Because split halves are, if anything, more fragile than relaxed Orbia (I001 above), this
-drag-down cannot be a baseline artefact. At s = 0.5–0.7 the halves die but the pair often ends as
+I first argued that because split halves are, if anything, more fragile than relaxed Orbia
+(I001 above), this drag-down could not be a baseline artefact. That missed the half-pulse
+exposure. After HR-009 the drag-down holds at s 0.2–0.3 only (see the revision at the top).
+The observations below at s ≥ 0.5 are recorded but not interpreted as coupling. At s = 0.5–0.7 the halves die but the pair often ends as
 **one** Orbium (6 runs, mismatch "rescue"). It reaches single mass only after 5–18 tu, which
 suggests the two damaged partners fuse into one body rather than one partner surviving. At
 s ≥ 0.7 the pair world fills the torus in 8 runs where both halves die. Under the S001 rule, the
-pair's combined mass plus the pulse can tip the world into growth, and neither partner alone can.
+pair's combined mass plus the pulse can tip the world into growth, and neither partner alone
+can. HR-009 found that at s ≥ 0.8 full-pulse halves sometimes survive where the split halves and
+the pair die, so neither baseline brackets these outcomes.
 
 Possible mechanism, not tested: the pulse lands 1 R ahead of the pair centroid, which for a
 side-by-side pair is the gap between the partners, where both kernels overlap.
@@ -103,14 +125,18 @@ side-by-side pair is the gap between the partners, where both kernels overlap.
 - **L6-c.** Under I004 port injury (s 0.05–0.60, 5 phases) S101's survival matches the
   independent-partner baseline in 58/60 runs. Its fission to one Orbium (C041) is the uninjured
   partner surviving, not coupling.
-- **L6-d.** Under I003 frontal mass addition at s 0.2–0.4, the bound pair dies or degrades in 10/15
-  runs where each partner alone survives (drag-down), and at s 0.5–0.7 the pair can end as one
-  Orbium or a filled torus where both partners alone die. This meets the pre-registered coupling
-  rule.
-- **Recorded inconclusive:** the I001 s = 0.08 mismatch (5/5) is attributed to the split-half
-  baseline, based on Lane 4's lone baseline, not to coupling.
+- **L6-d** (narrowed after HR-009). Under I003 frontal mass addition at s 0.2–0.3, the bound pair
+  dies or degrades in 6/10 runs while each partner alone survives, both with its half of the
+  pulse (L6-008) and with the full pulse (HR-009). At s ≥ 0.4 the outcome is explained by pulse
+  exposure or is not bracketed by either baseline. HR-009's preregistered verdict on this test is
+  INCONCLUSIVE, and the s 0.2–0.3 drag-down is a narrower observation within it.
+- **I001, H0 not rejected.** The s = 0.08 mismatch (5/5) is attributed to the split-half baseline,
+  based on Lane 4's lone baseline, not to coupling. Design limitation, to stay with the claim:
+  split halves start unrelaxed and are more fragile than a lone Orbium. That makes the split a
+  conservative null for drag-down and a biased one for rescue.
 
 ## Not tested
 
 Other pair geometries or the 7 other pairs found in L6-003. Resolutions other than R 13 and time
-steps other than T 10. Whether the I003 drag-down depends on where the pulse lands.
+steps other than T 10. Whether the I003 drag-down depends on where the pulse lands. What
+mechanism makes the pair fragile at s 0.2–0.3.
