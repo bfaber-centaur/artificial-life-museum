@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How much can it take? · ALM museum</title>
+<meta name="description" content="Orbium survives an injury or dies, with nothing in between, and where the injury lands matters more than its size.">
+<link rel="stylesheet" href="museum.css">
+</head>
+<body class="room-edges">
+<header class="site">
+  <a class="brand" href="index.html">ALM <span>an artificial-life natural history museum</span></a>
+  <details class="map"><summary>Rooms</summary><ol>
+<li><a href="index.html">Entrance</a></li>
+<li><a href="orbium.html">1 · The ruler: Orbium</a></li>
+<li><a href="wobbles.html">2 · The wobble that wasn&#x27;t</a></li>
+<li><a class="here" href="edges.html">3 · How much can it take?</a></li>
+<li><a href="one-rule.html">4 · Three animals, one rule</a></li>
+<li><a href="how-we-know.html">5 · How we know</a></li>
+<li><a href="collection.html">Reference · The collection</a></li>
+<li><a href="claims.html">Reference · Claims on display</a></li>
+  </ol></details>
+</header>
+<main>
+<p class="kicker">Room 3 · Wounds and survival</p>
+<h1>How much can it take?</h1>
+<p class="lede">A living thing is partly defined by what it recovers from. So the disturbance
+laboratory (Lane 4) and the replication lane (Lane 3) wounded Orbium, carefully and
+reproducibly, more than two thousand times between them. They
+dimmed the whole body, cut a hole in its centre, sliced its flank, or added material in front of
+it, then waited to see whether it recovered.</p>
+
+<div class="label">
+  <p class="obs">Every single run either came back to the normal Orbium or faded to nothing;
+  even the runs closest to the edge collapsed within 3 to 8 time units. None turned into something else. For each kind of wound
+  there is one sharp threshold between the two.</p>
+  <p class="int">S001 has a single, sharp, all-or-nothing survival edge for each of four
+  standard disturbances <a class="claim" href="claims.html#C023" title="S001 has a single sharp, all-or-nothing survival edge for each of four standardized disturbances"><span class="cid">C023</span><span class="badge s-INDEPENDENTLY_CHECKED" title="INDEPENDENTLY_CHECKED at T = 10, R = 13 (Lane 4 on `ref` + `alm`; Lane 3 on `alm_check` with its own battery code). The exact I003 and I004 edge values are NUMERICALLY_FRAGILE in T (C027).">indep. checked</span></a>, confirmed by Lane 3's separate implementation of the
+  whole protocol.</p>
+</div>
+
+<h2>Where matters more than how much</h2>
+<p>The surprise is the position of the edges. Orbium shrugs off losing a tenth of its mass when
+the loss is spread evenly. Take about half as much from its centre and it dies.</p>
+<table class="facts">
+  <tr><th>Wound</th><th>Lethal at about</th></tr>
+  <tr><td>Central hole</td><td>−5% of mass</td></tr>
+  <tr><td>Slice from one flank</td><td>−8 to −9%</td></tr>
+  <tr><td>Uniform dimming</td><td>−10%</td></tr>
+  <tr><td>Material added in front</td><td>+28%</td></tr>
+</table>
+<p>Where mass is removed matters more than how much <a class="claim" href="claims.html#C026" title="Where mass is removed matters more than how much: at R = 13 (t0 = 1000–1004) S001 survives losing 10% uniformly but dies from about 5% removed at its centre"><span class="cid">C026</span><span class="badge s-INDEPENDENTLY_CHECKED" title="INDEPENDENTLY_CHECKED">indep. checked</span></a>. Total mass after the wound
+does not predict survival across wound types at all <a class="claim" href="claims.html#C028" title="Post-edit total mass does not predict S001&#x27;s survival across disturbance types"><span class="cid">C028</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>. Near the dimming threshold,
+doomed runs linger before collapsing, and the delay grows the closer they start to the edge, as
+if passing near an unstable balance point <a class="claim" href="claims.html#C029" title="Near the uniform-attenuation edge, S001&#x27;s collapse time grows like −7.0·ln(s − s*) steps (passage near an unstable edge state)"><span class="cid">C029</span><span class="badge s-REPRODUCED" title="REPRODUCED">reproduced</span></a>.</p>
+
+<figure class="evidence">
+  <span class="label-tag">Figure A · Lane 9, Scientific Illustrator</span>
+  <a href="../../research/figures/A-survival-boundary/figure-A.png" title="Open full size"><img src="../../research/figures/A-survival-boundary/figure-A.png" width="2160" height="2880" loading="lazy"
+       alt="Four-part figure. (a) Four small greyscale maps of Orbium, each with the lethal edit tinted: a small central spot removed, a sliver from its left flank, the whole body dimmed, and a blue blob added ahead of it. (b) Dot plot of mass change per run for each disturbance; green circles (survived) and orange crosses (died) meet at about -5% for central deletion, -8 to -9% for the side cut, -10% for dimming and +28% for frontal addition. (c) Mass over 30 time units for the closest surviving and dying runs: one stays at 1.0, the other drops to 0 within 3 to 8 time units. (d) Zoomed strips of each edge for Lane 4, Lane 3's independent code, two resolutions and two timesteps; the finer-timestep rows for side cut and frontal addition are hatched and shifted."></a>
+  <figcaption><strong>Orbium survives an edit or dies; which one depends on where the edit
+  lands, not only on how much mass it changes.</strong> (a) Where each lethal wound acts:
+  vermillion is mass removed, blue is mass added. (b) Every baseline run placed by the mass
+  change it actually made; green circles recovered, crosses died, grey bars are the unsampled
+  gap between them. (c) The two runs either side of each edge. (d) Each edge zoomed, by who ran
+  it and at which resolution and timestep. Read the
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/figures/A-survival-boundary/README.md">full caption and its limits</a> ·
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/figures/A-survival-boundary/figure-A-edges.csv">plotted edges</a> ·
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/figures/A-survival-boundary/figure-A-runs.csv">plotted runs</a> ·
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/figures/A-survival-boundary/figure-A.provenance.json">provenance</a> ·
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/figures/A-survival-boundary/figure-A.pdf">PDF</a>.</figcaption>
+</figure>
+
+<div class="caveat"><strong>Where the numbers bend</strong> The thresholds are brackets measured on
+one grid at one timestep, not constants of nature. Quarter the timestep and the flank-slice and
+frontal-addition edges move by 11 to 13% <a class="claim" href="claims.html#C027" title="The frontal-addition (I003) and port-side-injury (I004) kill edges move 11–13% when the timestep is quartered (T = 10 → 40)"><span class="cid">C027</span><span class="badge s-NUMERICALLY_FRAGILE" title="NUMERICALLY_FRAGILE">num. fragile</span></a>: the hatched rows in panel d. The central
+hole cannot be measured more finely at R = 13, because three missing cells survive and four do
+not. And the five wound timings used are consecutive steps, a thin sample of the creature's
+cycle; Lane 6 found one later timing at which a 10% dimming kills.</div>
+
+<p>Room 4 returns to wounds with a different animal, a bound pair, where the same flank slice
+has a very different outcome.</p>
+
+<aside class="sources"><h2>Sources</h2><ul>
+  <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/L4-001-disturbance-battery/README.md">L4-001 disturbance battery</a>: preregistered protocol and results (Lane 4)</li>
+  <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/lane3/README.md">Independent replication of the battery</a> (Lane 3) and its <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/tree/main/research/traces/lane3">data</a></li>
+  <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/reports/hostile-review.md">Hostile review</a> HR-002 and HR-007 (Lane 7)</li>
+  <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/figures/A-survival-boundary/make_figure.py">Figure A source code</a> (Lane 9)</li>
+</ul></aside>
+
+<nav class="walk" aria-label="Tour"><a class="prev" href="wobbles.html"><small>Back</small>The wobble that wasn&#x27;t</a><a class="next" href="one-rule.html"><small>Next room</small>Three animals, one rule</a></nav>
+</main>
+<footer class="site">
+  <p>Claim statuses read from <code>research/claims.md</code> (sha256 <code>0418569939b8</code>) when this page was built.</p>
+  <p>Every picture here is a recorded simulation or a figure drawn from committed data. Statuses
+  are the claims ledger's, not the museum's: a badge never says more than
+  <a href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/claims.md">research/claims.md</a> does.</p>
+</footer>
+</body>
+</html>

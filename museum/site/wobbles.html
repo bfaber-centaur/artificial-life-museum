@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The wobble that wasn&#x27;t · ALM museum</title>
+<meta name="description" content="Orbium&#x27;s steady 4.32-step mass pulse, why it is a lattice artifact, and the first explanation that was refuted.">
+<link rel="stylesheet" href="museum.css">
+</head>
+<body class="room-wobbles">
+<header class="site">
+  <a class="brand" href="index.html">ALM <span>an artificial-life natural history museum</span></a>
+  <details class="map"><summary>Rooms</summary><ol>
+<li><a href="index.html">Entrance</a></li>
+<li><a href="orbium.html">1 · The ruler: Orbium</a></li>
+<li><a class="here" href="wobbles.html">2 · The wobble that wasn&#x27;t</a></li>
+<li><a href="edges.html">3 · How much can it take?</a></li>
+<li><a href="one-rule.html">4 · Three animals, one rule</a></li>
+<li><a href="how-we-know.html">5 · How we know</a></li>
+<li><a href="collection.html">Reference · The collection</a></li>
+<li><a href="claims.html">Reference · Claims on display</a></li>
+  </ol></details>
+</header>
+<main>
+<p class="kicker">Room 2 · A heartbeat that was the grid</p>
+<h1>The wobble that wasn't</h1>
+<p class="lede">On the first night, every measurement of Orbium showed a pulse. Its mass rose
+and fell by about a quarter of a percent, regularly, every 4.32 steps. A creature with a
+heartbeat is a much better story than a creature without one, and in a project searching for
+something worth calling Sir Wobbles, a wobble was hard to resist.</p>
+
+<figure class="evidence">
+  <span class="label-tag">Working plot · Lane 2 baseline run</span>
+  <a href="../../research/traces/S001-37369303c7/overview.png" title="Open full size"><img src="../../research/traces/S001-37369303c7/overview.png" width="900" height="630"
+       alt="Four plots from Orbium's 20,000-step baseline run. Top left: mass every step, a thick band between about 0.433 and 0.438 that never drifts. Top right: speed, a noisy band around 0.48. Bottom left: the centroid path, a straight line. Bottom right: the final world with the creature near the bottom edge."></a>
+  <figcaption><strong>The wobble, as first seen.</strong> Top left: Orbium's mass at every step
+  for 2000 time units. The thick band is the pulse, too fast to resolve at this zoom; it never
+  grows, shrinks or drifts. Diagnostic plot from run
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/tree/main/research/traces/S001-37369303c7">S001-37369303c7</a> (Lane 2), shown as recorded.</figcaption>
+</figure>
+
+<h2>Three tests a heartbeat should pass</h2>
+<p>If the pulse belonged to the animal, it should look the same whichever way the animal faces
+and however finely we draw it. Lane 1 suspected the grid; Lane 7, the project's hostile
+reviewer, wrote down in advance what result would count against that idea, then ran it.</p>
+
+<figure class="evidence">
+  <span class="label-tag">Working plot · Lane 7, experiment H001</span>
+  <a href="../../research/experiments/H001-lattice-wobble/h001.png" title="Open full size"><img src="../../research/experiments/H001-lattice-wobble/h001.png" width="1300" height="546"
+       alt="Two plots. Left: heading against start rotation. The points fall in flat steps below a dashed diagonal, for both R = 13 and R = 26. Right: mass wobble size against kernel radius on log axes, falling from 2.6e-3 at R = 13 to 1.3e-4 at R = 39."></a>
+  <figcaption><strong>(a)</strong> Turn the starting pattern by a few degrees and the heading
+  does not follow smoothly; it jumps between preferred lattice directions, at R = 13 and still at
+  R = 26 <a class="claim" href="claims.html#C011" title="At R = 13, S001&#x27;s travel heading locks onto a discrete set of lattice directions"><span class="cid">C011</span><span class="badge s-INDEPENDENTLY_CHECKED" title="INDEPENDENTLY_CHECKED">indep. checked</span></a> <a class="claim" href="claims.html#C013" title="At R = 26 the heading lock persists, weaker: 46 start rotations settle on 17 headings"><span class="cid">C013</span><span class="badge s-INDEPENDENTLY_CHECKED" title="INDEPENDENTLY_CHECKED">indep. checked</span></a>. <strong>(b)</strong> Draw the same creature on a finer
+  grid and the wobble shrinks about twentyfold between R = 13 and R = 39, while the average mass
+  stays put <a class="claim" href="claims.html#C014" title="R = 13 is resolution-converged for S001&#x27;s mean mass, size and speed (but not for mean anisotropy)"><span class="cid">C014</span><span class="badge s-INDEPENDENTLY_CHECKED" title="INDEPENDENTLY_CHECKED (mean mass); OBSERVED (speed, gyradius, anisotropy)">indep. checked</span></a>. A real breathing mode would not lose 95% of its size because we
+  looked more closely. Lane 7's plot, drawn from <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/H001-lattice-wobble/e1.csv">e1.csv</a>
+  and <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/H001-lattice-wobble/e2.csv">e2.csv</a>.</figcaption>
+</figure>
+
+<div class="label">
+  <p class="obs">The pulse's size and period change with the creature's heading and with the
+  grid's resolution, and the size falls towards zero as the grid gets finer.</p>
+  <p class="int">The wobble is a lattice-sampling artifact <a class="claim" href="claims.html#C003" title="S001&#x27;s mass wobble is a lattice-sampling artifact: its relative amplitude vanishes as the creature is resolved more finely"><span class="cid">C003</span><span class="badge s-INDEPENDENTLY_CHECKED" title="INDEPENDENTLY_CHECKED">indep. checked</span></a>: two lanes, with two
+  different programs, found the same collapse. As a property of the organism, the 4.32-step
+  oscillation is <a class="claim" href="claims.html#C004" title="S001 has a 4.32-step mass oscillation (as a property of the organism)"><span class="cid">C004</span><span class="badge s-NUMERICALLY_FRAGILE" title="NUMERICALLY_FRAGILE">num. fragile</span></a>.</p>
+</div>
+
+<h2>The first explanation was wrong, and stays on display</h2>
+<p>Lane 1's first account was neat: the period is just the time Orbium takes to cross one grid
+column, 1/|v<sub>x</sub>|. At R = 13 and the catalogue heading that gives exactly 4.32 steps. It
+was proposed with a test attached, and the test failed.</p>
+<div class="label">
+  <p class="obs">Across resolutions, the single-column rule held in only 6 of 17 runs (Lane 3).
+  At R = 20 and R = 26 the strongest line in the spectrum was a mixture of x and y crossings,
+  not the x crossing alone (Lane 7).</p>
+  <p class="int">That wording is <a class="claim" href="claims.html#C005" title="S001&#x27;s dominant mass period equals the single-axis grid-crossing period 1/|v_x| (or a simple x–y beat) at its heading"><span class="cid">C005</span><span class="badge s-REFUTED" title="REFUTED">refuted</span></a>. The broader lattice account survives: the
+  period sits on some low-order combination of the two crossing rates in 14 of 16 headings,
+  against 1.45 expected by chance <a class="claim" href="claims.html#C006" title="S001&#x27;s dominant mass period lies on a low-order lattice line f = m·v_x + n·v_y (|m|, |n| ≤ 2), folded into [0, 0.5] cycles/step"><span class="cid">C006</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>. Nobody yet knows which combination will
+  dominate at a given heading.</p>
+</div>
+<div class="caveat"><strong>Why keep a refuted idea?</strong> Because it was a good idea, honestly
+tested. The ledger never deletes a claim: the refutation, its counterexamples and the claim it
+was replaced by stay side by side, so a later visitor can check the reasoning instead of trusting
+the conclusion.</div>
+
+<p>So this wobble is not a heartbeat. It is the grid, showing through the animal, and it
+does not earn anyone a name. The search goes on; the Night 1 numerical-ecology expedition is now asking which of Orbium's other traits
+survive when resolution and timestep change.</p>
+
+<aside class="sources"><h2>Sources</h2><ul>
+  <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/reports/hostile-review.md">Hostile review</a> HR-001 and HR-005 (Lane 7)</li>
+  <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/H001-lattice-wobble/PREREGISTRATION.md">H001 preregistration</a>, written before any run, and <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/tree/main/research/experiments/H001-lattice-wobble">its data and scripts</a></li>
+  <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/lane3/README.md">Lane 3 resolution sweep</a>, data <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/traces/lane3/resolution.csv">resolution.csv</a></li>
+  <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/specimens/S001-orbium.md">S001 dossier</a>, "Lattice-heading observation" (Lane 1)</li>
+</ul></aside>
+
+<nav class="walk" aria-label="Tour"><a class="prev" href="orbium.html"><small>Back</small>The ruler</a><a class="next" href="edges.html"><small>Next room</small>How much can it take?</a></nav>
+</main>
+<footer class="site">
+  <p>Claim statuses read from <code>research/claims.md</code> (sha256 <code>0418569939b8</code>) when this page was built.</p>
+  <p>Every picture here is a recorded simulation or a figure drawn from committed data. Statuses
+  are the claims ledger's, not the museum's: a badge never says more than
+  <a href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/claims.md">research/claims.md</a> does.</p>
+</footer>
+</body>
+</html>
