@@ -138,6 +138,12 @@ the two cuts. Both films are aligned on their own cut.
 > **Provisional.** Built while Lane 6's L6-007 results (PR #27) and Lane 7's hostile review
 > HR-009 (PR #30) are under review. The ledger holds no claim on S102's lifetime yet. The
 > pictures are verified replays; the reading of them below is not settled.
+>
+> **Shown at R 13, T 10 only, and disputed under refinement.** Lane 3's L3-003 (PR #29, open)
+> sees no S102 deaths at twice the resolution (0 of 29 runs at R 26, to 5000–8000 tu) or three
+> times (0 of 3 at R 39, 8000 tu). Its test of smaller timesteps is still running; so far one run
+> each at T 20 and T 40 is alive at 8000 tu, which is inconclusive. The disappearance below may
+> be a feature of this grid resolution rather than of the creature.
 
 ![Twelve circlers from starts 1e-12 apart: five fall apart at different times, seven are still circling at 5000 tu](exhibits/G006-eventually-gone/lifelines-sheet.png)
 
@@ -168,8 +174,9 @@ One starts from the registered seed. The other eleven are twins: the same seed p
   L3-003 (PR #29) is measuring the lifetime distribution in an independent engine. When the
   ledger records a claim, this caption will cite it and drop the provisional label.
 - **Why it is here.** One canonical death time would be the wrong picture. Twelve near-identical
-  starts show what the evidence so far supports: the circler can last thousands of time units
-  and then fall apart abruptly, and when it goes is not predictable from how it looks.
+  starts show what the evidence so far supports at this resolution: the circler can last
+  thousands of time units and then fall apart abruptly, and when it goes is not predictable from
+  how it looks. Whether it falls apart at all on a finer grid is the open question above.
 
 ## Field note, 7 October 2026
 
@@ -313,7 +320,7 @@ heading values come from `galintervene.chord_heading("S102", 3002)`. The G004 S0
 
 - **2026-10-08, G006 (Lane 8).** The circler from twelve starts 10⁻¹² apart, run to 5000 tu:
   five fall apart at different times, seven are still circling. Provisional, pending PRs #27,
-  #29 and #30.
+  #29 and #30; shown at R 13, T 10 only, since L3-003 sees no deaths at R 26 or R 39.
 - **2026-10-08, ledger follow-up.** Ledger PR #22 and Lane 6's rerun (PR #23) merged. The
   field note and specimens table now quote the ledger as it stands: C039 *refuted* as worded,
   C047 *independently checked* for the eight seeds tested (ledger PR #25). No pictures changed.
