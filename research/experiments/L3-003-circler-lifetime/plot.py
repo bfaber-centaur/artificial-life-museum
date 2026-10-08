@@ -12,7 +12,7 @@ import numpy as np  # noqa: E402
 
 HERE = Path(__file__).resolve().parent
 TR = HERE.parents[2] / "research" / "traces" / "lane3" / "L3-003"
-rows = list(csv.DictReader(open(TR / "lifetimes.csv"))) + list(csv.DictReader(open(TR / "q6.csv")))
+rows = [r for f in ("lifetimes.csv", "q6.csv", "q7.csv") for r in csv.DictReader(open(TR / f))]
 
 
 def ends(cond):
@@ -36,7 +36,9 @@ fig, (a, b) = plt.subplots(1, 2, figsize=(12, 4.5))
 groups = [("Q6-13", "R13 T10, δ=1e-12 copies (n=24)", "C3"),
           ("A1", "R13 T10, Lane 6 noise ε 0.01/0.03 (n=12)", "C1"),
           ("Q6-26", "R26 T10, δ=1e-12 copies (n=12)", "C0"),
-          ("E26", "R26 T10, ε 0.01/0.03 noise (n=12)", "C9")]
+          ("E26", "R26 T10, ε 0.01/0.03 noise (n=12)", "C9"),
+          ("Q7-T20", "R13 T20, δ=1e-12 copies (n=24)", "C4"),
+          ("Q7-T40", "R13 T40, δ=1e-12 copies (n=24)", "C6")]
 for cond, lab, col in groups:
     e = ends(cond)
     t = np.linspace(0, 8000, 801)
