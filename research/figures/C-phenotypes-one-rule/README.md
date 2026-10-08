@@ -29,12 +29,6 @@ provenance [`figure-C.provenance.json`](figure-C.provenance.json)
 The statuses are read from the ledger at build time (`figlib.ledger`). The build stops if any
 of them changes. The figure is stamped with the ledger commit it was checked against.
 
-**Ledger revision.** This build is checked against `research/claims.md` as updated in the
-archivist's PR #25 (`5363da2`, not yet merged), which marks C047 INDEPENDENTLY_CHECKED for the eight
-seeds tested. The manifest also stores `main`'s status for each claim (`base_status`), and the CI
-test accepts only those two states. Once #25 merges, the figure should be rebuilt so it is stamped
-with `main`.
-
 ## Caption
 
 **a.** L6-001: S001's Orbium cells, run once under each of 441 rules (μ 0.100–0.200 by 0.005,
@@ -71,7 +65,7 @@ is listed in `figure-C-data.csv` but not drawn.
 kind:
 - **Persistence at a second T or R.** Resolution and seed resize get separate columns. At R 26
   from bilinear seeds, the glider and S103 persist and the S102 seed dies. At R 26 from block,
-  nearest or cubic seeds, S102 circles (also at R 39) in Lane 3's check, matched by Lane 6's unmerged rerun (C047). S103 block-scaled to
+  nearest or cubic seeds, S102 circles (also at R 39) in Lane 3's check and Lane 6's rerun (C047). S103 block-scaled to
   R 26 stays static but settles at mass 0.381, not the seed's 0.379 (Lane 3, C048). The glider was
   not rerun with other resizes. At T 40 the Orbium cells settle into a *different* static body
   (mass 0.387, not S103's 0.379), so at T 40 the three phenotypes do not coexist at this exact
@@ -135,7 +129,7 @@ All Lane 6 L6-field data is read at the PR #11 merge commit `f72db9e`.
 | D2 seed-resize rerun (Lane 6, `field.py`) | `research/experiments/L6-007-attractor-geography/d2-resize.csv` at the PR #23 merge commit `7a4ea3b` | c |
 | Seed-resize check (Lane 3, `alm_check`), cross-checked against the row above | `research/experiments/L3-002-property-persistence/s102_resize_check.txt` at the PR #18 merge commit `56ae421` | c |
 | S103 block-scaled to R 26 (Lane 3) | `research/traces/lane3/L3-002/labels.csv` at `56ae421` | c |
-| Claim statuses | `research/claims.md` at the archivist's PR #25 head `5363da2` (unmerged) | all |
+| Claim statuses | `research/claims.md` (commit stamped on the figure) | all |
 
 Blob IDs and SHA-256s of every file read are in `figure-C.provenance.json` (`pinned_inputs`).
 
