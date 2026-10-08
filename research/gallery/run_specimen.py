@@ -1,9 +1,10 @@
-"""``python -m alm.run`` with the gallery's vendored specimens (S101-S103) registered.
+"""``python -m alm.run`` with the gallery's interventions registered.
 
-    .venv/bin/python research/gallery/run_specimen.py --specimen S102 --steps 3000 --every 10
+    .venv/bin/python research/gallery/run_specimen.py --specimen S101 --steps 5000 --every 10 \
+        --intervene 3000:gallery_port_injury:s=0.25
 
-Takes exactly the arguments of ``python -m alm.run``. Once PR #11 is merged, plain
-``python -m alm.run`` gives the same run.
+Takes exactly the arguments of ``python -m alm.run``, plus the ``gallery_port_injury``
+intervention (``galintervene.py``) for ``--intervene``.
 """
 
 import sys
@@ -11,9 +12,8 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-import galspec  # noqa: E402
+import galintervene  # noqa: E402,F401  (registers gallery_port_injury)
 from alm import run  # noqa: E402
 
 if __name__ == "__main__":
-    galspec.ensure_registered()
     sys.exit(run.main())

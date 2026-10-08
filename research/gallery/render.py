@@ -33,7 +33,8 @@ import numpy as np
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 
-import galspec  # noqa: E402
+import galintervene  # noqa: E402
+from alm import interventions as ivs  # noqa: E402
 from alm import measure, provenance, specimens  # noqa: E402
 from alm import run as almrun  # noqa: E402
 from alm.lenia import Lenia, Rule  # noqa: E402
@@ -58,6 +59,15 @@ class Subject:
     name: str  # display name, taken from the specimen registry / ledger
 
 
+# G004: Lane 4's I004 port injury, same strength, on the bound pair and on a single Orbium
+# (ledger C041). Both runs settle for G4_T0 steps first, as in L6-005.
+G4_STEPS, G4_T0, G4_S = 5000, 3000, 0.25
+G4_SUBJECTS = [("S101", "bound Orbium pair"), ("S001", "Orbium (O2u)")]
+
+# G005: the circler under the same cut one and two steps apart (ledger C040). Lane 6's L6-005
+# heading (10-step chord) and phases t0 = 3000 and 3002; Lane 6 saw circler -> S103 only at 3002.
+G5_STEPS, G5_T0S, G5_S = 5002, (3000, 3002), 0.25
+
 SUBJECTS = [
     Subject("S001", "glides", "Orbium (O2u)"),
     Subject("S101", "glides as a bound pair", "bound Orbium pair"),
@@ -68,14 +78,32 @@ SUBJECTS = [
 
 # --- collection -------------------------------------------------------------------------------
 
+def run_configs() -> dict[str, almrun.RunConfig]:
+    """Every run the gallery shows, keyed as in runs.json."""
+    cfgs = {s.specimen: almrun.RunConfig(specimen=s.specimen, steps=STEPS, every=EVERY) for s in SUBJECTS}
+    for sid, _ in G4_SUBJECTS:
+        cfgs[f"G004:{sid}"] = almrun.RunConfig(
+            specimen=sid, steps=G4_STEPS, every=EVERY,
+            interventions=[(G4_T0, galintervene.GalleryPortInjury(s=G4_S))],
+        )
+    for t0 in G5_T0S:
+        hx, hy = galintervene.chord_heading("S102", t0)
+        cfgs[f"G005:S102@{t0}"] = almrun.RunConfig(
+            specimen="S102", steps=G5_STEPS, every=EVERY,
+            interventions=[(t0, galintervene.GalleryPortInjuryH(s=G5_S, hx=hx, hy=hy))],
+        )
+    return cfgs
+
+
 def collect() -> None:
-    galspec.ensure_registered()
-    runs = {}
-    for s in SUBJECTS:
-        cfg = almrun.RunConfig(specimen=s.specimen, steps=STEPS, every=EVERY)
+    """Run every configuration not yet recorded in runs.json (recorded runs are kept)."""
+    runs = json.loads(RUNS_JSON.read_text()) if RUNS_JSON.exists() else {}
+    for key, cfg in run_configs().items():
+        if key in runs and (TRACES / runs[key] / "manifest.json").exists():
+            continue
         res = almrun.run(cfg, out_root=TRACES)
-        runs[s.specimen] = res.run_id
-        print(f"{s.specimen}: {res.run_id} final {res.manifest['final_state_sha256'][:12]}")
+        runs[key] = res.run_id
+        print(f"{key}: {res.run_id} final {res.manifest['final_state_sha256'][:12]}")
     RUNS_JSON.write_text(json.dumps(runs, indent=2) + "\n")
 
 
@@ -87,6 +115,7 @@ class Replay:
     manifest: dict
     rule: Rule
     frames: dict[int, np.ndarray]  # step -> state, for the requested steps
+    edits: dict[int, tuple[np.ndarray, np.ndarray]]  # step -> (pre, post) of each intervention
     centroids: np.ndarray  # (steps + 1, 2) wrapped periodic centroid (cx, cy) per step
 
 
@@ -94,8 +123,10 @@ def replay(run_id: str, keep: set[int]) -> Replay:
     """Re-run ``run_id`` from its manifest, keeping states at ``keep``; verify the final hash."""
     man = json.loads((TRACES / run_id / "manifest.json").read_text())
     cfg = man["config"]
-    if cfg["interventions"]:
-        raise ValueError(f"{run_id}: replay of intervention runs is not implemented")
+    schedule: dict[int, list] = {}
+    for iv in cfg["interventions"]:
+        schedule.setdefault(iv["step"], []).append(ivs.make(iv["name"], **iv["params"]))
+    rng = np.random.default_rng(cfg["seed"])
     spec = specimens.load(cfg["specimen"])
     if spec.cells_sha256 != man["specimen"]["cells_sha256_int16le"]:
         raise ValueError(f"{run_id}: specimen cells differ from the run's")
@@ -105,17 +136,21 @@ def replay(run_id: str, keep: set[int]) -> Replay:
         raise ValueError(f"{run_id}: initial state differs from the run's")
     sim = Lenia(rule, A0)
     n = man["timestep"]["steps"]
-    frames, cents = {}, np.empty((n + 1, 2))
+    frames, edits, cents = {}, {}, np.empty((n + 1, 2))
     for t in range(n + 1):
         if t > 0:
             sim.step()
+        for iv in schedule.get(t, []):  # as alm.run: after the step, then re-clip
+            pre = sim.A.copy()
+            sim.A = np.clip(np.asarray(iv.apply(pre.copy(), sim, rng), dtype=np.float64), 0.0, 1.0)
+            edits[t] = (pre, sim.A.copy())
         cents[t] = measure.periodic_centroid(sim.A)
         if t in keep:
             frames[t] = sim.A.copy()
     final = provenance.state_sha256(sim.A)
     if final != man["final_state_sha256"]:
         raise ValueError(f"{run_id}: replay final sha256 {final} != manifest {man['final_state_sha256']}")
-    return Replay(run_id, man, rule, frames, cents)
+    return Replay(run_id, man, rule, frames, edits, cents)
 
 
 # --- drawing primitives -----------------------------------------------------------------------
@@ -214,7 +249,10 @@ def save_provenance(folder: Path, exhibit: dict, replays: list[Replay]) -> None:
 
 def _run_command(r: Replay) -> str:
     cmd = r.manifest["reproduction"]["command"]
-    if r.manifest["specimen"]["id"] in galspec.PR11:
+    gallery_ivs = any(iv["name"].startswith("gallery_") for iv in r.manifest["config"]["interventions"])
+    # Runs made from the pre-#11 vendored seeds need the wrapper at their own commit.
+    vendored = "research/gallery/vendor/" in r.manifest["specimen"]["source"]
+    if gallery_ivs or vendored:
         cmd = cmd.replace("python -m alm.run", "python research/gallery/run_specimen.py", 1)
     return f"git checkout {r.manifest['simulator']['git_commit'][:12]} && .venv/bin/{cmd}"
 
@@ -372,8 +410,194 @@ def g003_contact_sheet(reps: dict[str, Replay]) -> None:
     }, [reps[s.specimen] for s in SUBJECTS])
 
 
+REMOVED = (213, 94, 0)  # Lane 9's "mass removed" vermillion, #D55E00
+
+
+def _ffill(cents: np.ndarray) -> np.ndarray:
+    """Centroids with NaN (empty world) replaced by the last defined one, so the camera stays put."""
+    out = cents.copy()
+    for t in range(1, len(out)):
+        if np.isnan(out[t, 0]):
+            out[t] = out[t - 1]
+    return out
+
+
+def _tint_removed(img_rgb: np.ndarray, pre: np.ndarray, post: np.ndarray, scale: int) -> np.ndarray:
+    """Overlay cells the edit emptied, in vermillion with opacity = mass removed from that cell."""
+    lost = np.clip(pre - post, 0, 1)
+    a = np.repeat(np.repeat(lost, scale, 0), scale, 1)[..., None]
+    a = np.where(a > 0, 0.35 + 0.65 * a, 0.0)
+    return (img_rgb * (1 - a) + np.array(REMOVED) * a).astype(np.uint8)
+
+
+AFTER = (5, 20, 100, 500, 2000)  # sheet columns: 0.5, 2, 10, 50 and 200 time units after the cut
+
+
+def g4_steps() -> list[int]:
+    """Tile steps: the cut step twice (just before and just after the edit), then 0.5, 2, 10, 50
+    and 200 time units after (capped at the run's length)."""
+    return [G4_T0, G4_T0] + [G4_T0 + k for k in AFTER if G4_T0 + k <= G4_STEPS]
+
+
+def _cut_steps(t0: int, n: int) -> list[int]:
+    return [t0, t0] + [t0 + k for k in AFTER if t0 + k <= n]
+
+
+def _film_offsets(t0: int, n: int, stride: int = 2) -> list[int]:
+    return list(range(-20, min(600, n - t0) + 1, stride))
+
+
+def injury_exhibit(reps, rows, folder: Path, stem: str, fate, footer: str, prov: dict) -> None:
+    """Before/after sheet and film for injury runs. ``rows`` are (runs key, specimen ID, name, t0);
+    each row's columns and film frames are timed from its own cut step."""
+    from PIL import Image, ImageDraw
+
+    folder.mkdir(parents=True, exist_ok=True)
+    size, scale = 64, 3
+    cell = size * scale
+    ncols = max(len(_cut_steps(t0, reps[k].manifest["timestep"]["steps"])) for k, _, _, t0 in rows)
+    left, top, gap = 200, 34, 4
+    W = left + ncols * (cell + gap)
+    H = top + len(rows) * (cell + gap) + 44
+    sheet = Image.new("RGB", (W, H), BG)
+    d = ImageDraw.Draw(sheet)
+    heads = ["before", "cut"] + [f"+{k / 10:g} tu" for k in AFTER][: ncols - 2]
+    for j, h in enumerate(heads):
+        d.text((left + j * (cell + gap) + 4, 10), h, fill=DIM, font=font(13))
+    for i, (key, sid, name, t0) in enumerate(rows):
+        r = reps[key]
+        steps = _cut_steps(t0, r.manifest["timestep"]["steps"])
+        cents = _ffill(r.centroids)
+        pre, post = r.edits[t0]
+        iv = r.manifest["interventions_applied"][0]
+        y = top + i * (cell + gap)
+        d.text((10, y + 8), sid, fill=INK, font=font(16, True))
+        d.text((10, y + 30), name, fill=DIM, font=font(12))
+        d.text((10, y + 48), f"{100 * (1 - iv['mass_after'] / iv['mass_before']):.1f}% of mass cut", fill=DIM,
+               font=font(12))
+        d.text((10, y + 66), fate(r, r.frames[steps[-1]]), fill=INK, font=font(12, True))
+        for j, t in enumerate(steps):
+            c = cents[t]
+            if j == 0:
+                rgb = colorize(centred(pre, c, size), scale)
+            elif j == 1:
+                rgb = _tint_removed(colorize(centred(post, c, size), scale), centred(pre, c, size),
+                                    centred(post, c, size), scale)
+            else:
+                rgb = colorize(centred(r.frames[t], c, size), scale)
+            sheet.paste(Image.fromarray(rgb), (left + j * (cell + gap), y))
+    d.text((10, H - 38), "vermillion: cells the cut emptied (opacity = value removed) · each tile 64x64 cells, "
+           "camera follows the centroid", fill=DIM, font=font(12))
+    d.text((10, H - 20), footer, fill=DIM, font=font(12))
+    sheet.save(folder / f"{stem}-sheet.png", optimize=True)
+
+    # The film: each creature from 2 tu before its cut, camera following, clocks aligned on the cut.
+    stride, fps = 2, 20
+    offsets = min((_film_offsets(t0, reps[k].manifest["timestep"]["steps"], stride) for k, _, _, t0 in rows), key=len)
+    pw, head = cell + 0, 40
+    FW, FH = len(rows) * pw + (len(rows) + 1) * gap, pw + head + 2 * gap + 22
+    out = []
+    for o in offsets:
+        img = Image.new("RGB", (FW, FH), BG)
+        d = ImageDraw.Draw(img)
+        for k, (key, sid, name, t0) in enumerate(rows):
+            r = reps[key]
+            t = t0 + o
+            c = _ffill(r.centroids)[t]
+            x0 = gap + k * (pw + gap)
+            d.text((x0, gap), sid, fill=INK, font=font(14, True))
+            d.text((x0, gap + 19), name, fill=DIM, font=font(11))
+            rgb = colorize(centred(r.frames[t], c, size), scale)
+            if o == 0:  # the cut frame shows what was removed
+                pre, post = r.edits[t0]
+                rgb = _tint_removed(rgb, centred(pre, c, size), centred(post, c, size), scale)
+            img.paste(Image.fromarray(rgb), (x0, gap + head))
+        label = ("before the cut" if o < 0 else "the cut (held 1 s; vermillion = removed)" if o == 0
+                 else f"+{o / 10:.1f} tu after the cut")
+        d.text((gap, FH - 20), label, fill=DIM, font=font(12))
+        out.extend([img] * (fps if o == 0 else 1))
+    mp4 = write_video(out, folder / f"{stem}.gif", folder / f"{stem}.mp4", fps)
+    media = [f"{stem}-sheet.png", f"{stem}.gif"] + ([f"{stem}.mp4"] if mp4 else [])
+    head_keys = ("exhibit", "title")
+    rest = {k: v for k, v in prov.items() if k not in head_keys and k != "extra_disclosures"}
+    save_provenance(folder, {
+        **{k: prov[k] for k in head_keys},
+        "media": media,
+        "frames": {"sheet_steps": {key: _cut_steps(t0, reps[key].manifest["timestep"]["steps"])
+                                   for key, _, _, t0 in rows} if len({t0 for *_, t0 in rows}) > 1
+                   else _cut_steps(rows[0][3], reps[rows[0][0]].manifest["timestep"]["steps"]),
+                   "sheet_note": "columns 1-2 are the state at the cut step just before "
+                   "and just after the edit", **({"film_offsets_from_cut": [offsets[0], offsets[-1]]}
+                   if len({t0 for *_, t0 in rows}) > 1 else
+                   {"film_steps": [rows[0][3] + offsets[0], rows[0][3] + offsets[-1]]}),
+                   "film_stride_steps": stride, "playback_fps": fps},
+        **rest,
+        "view": f"{size}x{size}-cell windows shifted by whole cells to centre the centroid (camera follows; "
+                "after death the camera holds its last position); 3x nearest-neighbour",
+        "overlays": ["vermillion tint on cells emptied by the cut (sheet column 'cut'; the film's cut frame), "
+                     "opacity 0.35 + 0.65 x value removed", "text labels"],
+        "disclosures": ["camera follows the centroid, so travel is hidden",
+                        "the film holds the cut frame for one second (20 repeated frames); all other "
+                        "frames are 2 steps apart",
+                        "GIF palette reduced to 128 colours; the MP4 is H.264 (lossy)"] + prov.get("extra_disclosures", []),
+    }, [reps[key] for key, *_ in rows])
+
+
+def _orbium_fate(r, A) -> str:
+    m_end = A.sum() / r.rule.R**2
+    return ("dies" if m_end == 0 else "one Orbium-mass body remains" if abs(m_end / 0.4358 - 1) < 0.01
+            else f"survives, mass {m_end:.3f}")
+
+
+def g004_shedding(reps: dict[str, Replay]) -> None:
+    """G004: the same port injury on the bound pair and on a single Orbium (C041)."""
+    injury_exhibit(
+        reps, [(f"G004:{sid}", sid, name, G4_T0) for sid, name in G4_SUBJECTS],
+        EXHIBITS / "G004-port-injury", "port-injury", _orbium_fate,
+        f"Lane 4 I004 port injury, s = {G4_S:g}, at step {G4_T0} after settling; "
+        "heading by forward difference (see provenance)",
+        {"exhibit": "G004", "title": "Same cut, two fates",
+         "intervention": {"name": "gallery_port_injury", "lane4_id": "I004", "s": G4_S, "step": G4_T0,
+                          "definition": "alm.disturb.i004_port_injury (L4-001 protocol)",
+                          "heading": "forward difference over one probe step (Lane 4 uses the previous "
+                                     "step's centroid); see research/gallery/galintervene.py"}},
+    )
+
+
+def equals_up_to_shift(A: np.ndarray, B: np.ndarray) -> bool:
+    """True if A is B rolled by some whole-cell shift on the torus (exact float equality)."""
+    c = np.real(np.fft.ifft2(np.fft.fft2(A) * np.conj(np.fft.fft2(B))))
+    dy, dx = np.unravel_index(int(np.argmax(c)), c.shape)
+    return bool(np.array_equal(np.roll(np.roll(B, dy, 0), dx, 1), A))
+
+
+def _ring_fate(r, A) -> str:
+    m_end = A.sum() / r.rule.R**2
+    if m_end == 0:
+        return "dies"
+    if equals_up_to_shift(A, specimens.load("S103").place(A.shape)):
+        return "becomes S103 exactly"
+    return f"survives, mass {m_end:.4f}"
+
+
+def g005_circler_to_ring(reps: dict[str, Replay]) -> None:
+    """G005: the circler under the same port injury at two phases two steps apart (C040)."""
+    rows = [(f"G005:S102@{t0}", "S102", f"circler, cut at step {t0}", t0) for t0 in G5_T0S]
+    injury_exhibit(
+        reps, rows, EXHIBITS / "G005-circler-to-ring", "circler-ring", _ring_fate,
+        f"Lane 4 I004 port injury, s = {G5_S:g}, heading from the 10-step centroid chord (Lane 6 L6-005); "
+        "same recipe, cut two steps apart",
+        {"exhibit": "G005", "title": "Two steps apart",
+         "intervention": {"name": "gallery_port_injury_h", "lane4_id": "I004", "s": G5_S, "steps": list(G5_T0S),
+                          "definition": "alm.disturb.i004_port_injury (L4-001 protocol), frame centred on the "
+                                        "periodic centroid at the cut step",
+                          "heading": "unit vector of the unwrapped centroid shift over the previous 10 steps of "
+                                     "the uninterrupted run, as in Lane 6's disturb_switch.py; computed by "
+                                     "galintervene.chord_heading and stored in the run's intervention params"}},
+    )
+
+
 def render() -> None:
-    galspec.ensure_registered()
     runs = json.loads(RUNS_JSON.read_text())
     keep = set(range(WINDOW[0], WINDOW[1] + 1))
     reps = {}
@@ -383,6 +607,19 @@ def render() -> None:
     g001_four_ways(reps)
     g002_portraits(reps)
     g003_contact_sheet(reps)
+    g4 = {}
+    keep4 = set(g4_steps()) | set(range(G4_T0 - 20, min(G4_T0 + 600, G4_STEPS) + 1))
+    for sid, _ in G4_SUBJECTS:
+        g4[f"G004:{sid}"] = replay(runs[f"G004:{sid}"], keep4)
+        print(f"G004:{sid}: replay of {runs[f'G004:{sid}']} matches its final_state_sha256")
+    g004_shedding(g4)
+    g5 = {}
+    for t0 in G5_T0S:
+        key = f"G005:S102@{t0}"
+        n = G5_STEPS
+        g5[key] = replay(runs[key], set(_cut_steps(t0, n)) | {t0 + o for o in _film_offsets(t0, n)})
+        print(f"{key}: replay of {runs[key]} matches its final_state_sha256")
+    g005_circler_to_ring(g5)
 
 
 def main(argv=None) -> int:

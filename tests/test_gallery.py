@@ -1,4 +1,4 @@
-"""Gallery specimen shim: vendored PR #11 seeds load, match their pins, and run."""
+"""Gallery: committed runs match the registry, S103 is a fixed point, the render pipeline works."""
 
 import sys
 from pathlib import Path
@@ -7,21 +7,34 @@ import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "research" / "gallery"))
 
-import galspec  # noqa: E402
 from alm import provenance, specimens  # noqa: E402
 from alm.lenia import Lenia  # noqa: E402
 
 
-def test_vendored_specimens_register_and_match_pins():
-    galspec.ensure_registered()
-    galspec.ensure_registered()  # idempotent: second call checks instead of re-registering
-    for sid in galspec.PR11:
-        spec = specimens.load(sid)
-        assert spec.cells.dtype.kind == "i" and spec.cells.max() <= 255
+def test_committed_gallery_runs_match_the_specimen_registry():
+    """Every run the gallery shows was made from the cells now registered under its specimen ID."""
+    import json
+
+    root = Path(__file__).resolve().parents[1]
+    runs = json.loads((root / "research" / "gallery" / "runs.json").read_text())
+    for run_id in runs.values():
+        man = json.loads((root / "research" / "traces" / run_id / "manifest.json").read_text())
+        spec = specimens.load(man["specimen"]["id"])
+        assert spec.cells_sha256 == man["specimen"]["cells_sha256_int16le"], run_id
+
+
+def test_equals_up_to_shift():
+    import render
+
+    spec = specimens.load("S103")
+    A = spec.place(128)
+    assert render.equals_up_to_shift(np.roll(np.roll(A, 7, 0), -40, 1), A)
+    B = A.copy()
+    B[0, 0] += 1e-9
+    assert not render.equals_up_to_shift(B, A)
 
 
 def test_s103_is_a_fixed_point_for_a_few_steps():
-    galspec.ensure_registered()
     spec = specimens.load("S103")
     A0 = spec.place(128)
     sim = Lenia(spec.rule, A0)
@@ -40,6 +53,10 @@ def _short_pipeline(tmp_path, monkeypatch):
     monkeypatch.setattr(render, "RUNS_JSON", tmp_path / "runs.json")
     monkeypatch.setattr(render, "STEPS", 60)
     monkeypatch.setattr(render, "WINDOW", (20, 60))
+    monkeypatch.setattr(render, "G4_STEPS", 60)
+    monkeypatch.setattr(render, "G4_T0", 30)
+    monkeypatch.setattr(render, "G5_STEPS", 60)
+    monkeypatch.setattr(render, "G5_T0S", (30, 32))
     render.collect()
     return render
 
@@ -50,17 +67,17 @@ def test_render_pipeline_end_to_end(tmp_path, monkeypatch):
 
     render = _short_pipeline(tmp_path, monkeypatch)
     runs = json.loads((tmp_path / "runs.json").read_text())
-    assert sorted(runs) == sorted(s.specimen for s in render.SUBJECTS)
+    assert sorted(runs) == sorted(render.run_configs())
     render.render()
 
     folders = sorted((tmp_path / "exhibits").iterdir())
-    assert [f.name[:4] for f in folders] == ["G001", "G002", "G003"]
+    assert [f.name[:4] for f in folders] == ["G001", "G002", "G003", "G004", "G005"]
     for folder in folders:
         prov = json.loads((folder / "provenance.json").read_text())
         assert prov["media"]
         for name in prov["media"]:
             assert (folder / name).stat().st_size > 0, f"{folder.name}/{name} missing"
-        assert {src["run_id"] for src in prov["sources"]} == set(runs.values())
+        assert {src["run_id"] for src in prov["sources"]} <= set(runs.values())
         for src in prov["sources"]:
             man = json.loads((tmp_path / "traces" / src["run_id"] / "manifest.json").read_text())
             assert src["final_state_sha256"] == man["final_state_sha256"]

@@ -18,6 +18,8 @@ made of, ten times per unit of time. Some of them travel; one of them never chan
 | [G001](#g001--four-ways-to-move) | Four ways to move (animated) | S001, S101, S102, S103 | 2026-10-07 |
 | [G002](#g002--portraits) | Portraits | S001, S101, S102, S103 | 2026-10-07 |
 | [G003](#g003--contact-sheet-half-a-time-unit-at-a-time) | Contact sheet | S001, S101, S102, S103 | 2026-10-07 |
+| [G004](#g004--same-cut-two-fates) | Same cut, two fates (before and after) | S101, S001 | 2026-10-07 |
+| [G005](#g005--two-steps-apart) | Two steps apart: the circler becomes the ring | S102 → S103 | 2026-10-07 |
 
 ### G001 — Four ways to move
 
@@ -72,6 +74,64 @@ travel. Provenance: [`provenance.json`](exhibits/G003-contact-sheet/provenance.j
 - **Not a claim.** Eight frames do not establish a period. S102's turning rate (about 95° per
   time unit, one lap per ~3.8 time units) comes from Lane 6's dossier, not from this sheet.
 
+### G004 — Same cut, two fates
+
+![The same side injury on a bound Orbium pair and on a single Orbium, before and after](exhibits/G004-port-injury/port-injury-sheet.png)
+
+![Film of both creatures through the cut](exhibits/G004-port-injury/port-injury.gif)
+
+Video: [`port-injury.mp4`](exhibits/G004-port-injury/port-injury.mp4) · provenance:
+[`provenance.json`](exhibits/G004-port-injury/provenance.json)
+
+Both creatures settle for 300 time units. Then each gets the same injury: Lane 4's I004 "port
+injury" removes about a quarter of the mass, taken from the left-hand side relative to the
+direction of travel (s = 0.25). In the "cut" column, the vermillion cells are what was removed.
+After that the world runs on with no further help. The camera follows each creature. The film
+covers 2 time units before the cut to 60 after it and holds on the cut frame for one second.
+
+- **Observation.** In the pair, the cut takes most of one partner. What is left of that partner
+  is a small fragment at half a time unit and is gone by 2 time units. The other partner
+  glides on, and from then on it looks like an ordinary single Orbium. Its mass at the end of
+  the run, 200 time units later, is 0.437 (a single Orbium's is 0.4358). The single Orbium
+  loses the same share of itself and is gone (zero mass) 13 steps after the cut.
+- **Interpretation, from the ledger.** This matches Lane 6's C041 (*observed*, not yet reproduced
+  by a second lane). There, 18 of 18 pair runs at injuries of 10–50% ended as one Orbium, and every
+  single-Orbium control died at 10% or more. Lane 6's own caveat applies here too: the cut lands
+  mostly on one partner because they sit side by side. So the pair is not healing. The coupling
+  just does not drag the uninjured partner down.
+- **Disclosed difference.** Lane 4 takes the direction of travel from the previous step. The
+  gallery's wrapper ([`galintervene.py`](galintervene.py)) takes it from one probe step forward,
+  because the runner's intervention hook does not see the previous state. The cut itself is Lane
+  4's `i004_port_injury` unchanged.
+
+### G005 — Two steps apart
+
+![The circler cut at step 3000 dies; cut at step 3002 it becomes the static ring S103](exhibits/G005-circler-to-ring/circler-ring-sheet.png)
+
+![Film of both cuts, aligned on the cut](exhibits/G005-circler-to-ring/circler-ring.gif)
+
+Video: [`circler-ring.mp4`](exhibits/G005-circler-to-ring/circler-ring.mp4) · provenance:
+[`provenance.json`](exhibits/G005-circler-to-ring/provenance.json)
+
+Two copies of the circler S102 get the same injury: Lane 4's I004 port injury at s = 0.25. The
+only difference is timing. One is cut at step 3000, the other two steps later at step 3002. The
+cut follows Lane 6's own recipe from L6-005. "Port" is taken from the direction the circler moved
+over the previous 10 steps. A circler turns fast, so that direction differs by about 15° between
+the two cuts. Both films are aligned on their own cut.
+
+- **Observation.** Cut at step 3000, the circler falls apart and is gone 25 steps later. Cut at
+  step 3002, it shrinks into a small bright ring within about 10 time units. From 46 time units
+  after the cut, it stops changing at all. Its final state is S103 exactly: cell for cell the
+  same values, shifted on the grid (checked by `equals_up_to_shift` in `render.py`).
+- **Interpretation, from the ledger.** This is Lane 6's C040 (*observed*, not yet reproduced by a
+  second lane). There, a port injury turned the circler into S103 in 2 of 38 I004 runs, both in
+  this phase. The gallery's run repeats Lane 6's numbers exactly through `alm.run`. That stepper is
+  bitwise equal to Lane 6's (C038), so this is a rerun, not an independent check. Two runs
+  cannot show how often the switch happens or why one phase and not the other.
+- **Why it is here.** One exhibit has the gallery's three behaviours in a single lineage: a
+  circler, a death, and a still ring. It also shows how much the outcome depends on two steps
+  of timing.
+
 ## Field note, 7 October 2026
 
 > *What I saw.* Four animals, four temperaments. The Orbium set off at once along a line it never
@@ -84,9 +144,20 @@ travel. Provenance: [`provenance.json`](exhibits/G003-contact-sheet/provenance.j
 > *What I think it means (unverified).* The ring is the strangest of the four. It is alive only
 > in the sense that the rule keeps rebuilding it. Lane 6 says every full cell is pushed back up
 > to 1 and every empty one back down to 0 by the hard clip ([C042](../claims.md)), so a version of
-> Lenia without the clip might not have this animal at all. The circler's tight loop is just as
-> fragile: at twice the resolution it dies at this rule ([C039](../claims.md)). I photographed
+> Lenia without the clip might not have this animal at all. ~~The circler's tight loop is just as
+> fragile: at twice the resolution it dies at this rule ([C039](../claims.md)).~~ I photographed
 > them because they are beautiful, not because they are settled.
+>
+> *Correction, 8 October.* The struck sentence was wrong. The circler did not die because the
+> resolution doubled. It died because of how its starting pattern was enlarged. Enlarged by
+> bilinear interpolation, it dies at 2× and 3× resolution. Enlarged by block copying,
+> nearest-neighbour or cubic resizing, it keeps circling at both. Lane 3 measured this
+> ([L3-002](../experiments/L3-002-property-persistence/README.md), on main), and Lane 6 got the
+> same eight outcomes in its own engine (branch not yet merged). The ledger change (C039
+> *refuted* as worded, superseded by C047 *observed*) is proposed in ledger PR #22
+> and not yet merged; until it is, the ledger on main still lists C039 as *numerically fragile*.
+> The method used to resize a seed is a choice, and here it decided the outcome. That is a
+> different fragility from resolution itself.
 
 ## Specimens shown
 
@@ -97,7 +168,7 @@ rules, not new forms ([C043](../claims.md)).
 | --- | --- | --- | --- | --- |
 | S001 | Orbium unicaudatus (O2u) | R 13, T 10, μ 0.15, σ 0.015 | mass 0.4358, speed 0.479 R/tu, heading 68.2° | dossier [`S001-orbium.md`](../specimens/S001-orbium.md); C001–C016 |
 | S101 | bound Orbium pair (Synorbium-like) | S001's rule | mass 0.8736, speed 0.473 R/tu, heading 35.5° | C041 *observed*; C043 *observed* (not yet reproduced by a second lane) |
-| S102 | Gyrorbium-like circler | R 13, T 10, μ 0.155, σ 0.020 | mass 0.522 (sd 0.010), net speed 0.003 R/tu | C038 *reproduced*; C039 *numerically fragile*; C040, C043 *observed* |
+| S102 | Gyrorbium-like circler | R 13, T 10, μ 0.155, σ 0.020 | mass 0.522 (sd 0.010), net speed 0.003 R/tu | C038 *reproduced*; C039 on main *numerically fragile*, proposed *refuted* as worded and superseded by C047 *observed* (Lane 6's rerun not yet on main) in ledger PR #22 (L3-002: survives 2× and 3× resolution unless the seed is resized bilinearly); C040, C043 *observed* |
 | S103 | Circium-like static ring | same as S102 | mass 0.3787, final state = initial state | C038, C042 *reproduced*; C043 *observed* |
 
 All four use the poly kernel core and poly growth, β [1], Euler steps with a hard clip to
@@ -109,19 +180,24 @@ pointing down.
 | Specimen | Run ID (trace) | Steps | Final state sha256 | Seed cells from |
 | --- | --- | --- | --- | --- |
 | S001 | [`S001-7c75573885`](../traces/S001-7c75573885/) | 0–3000 | `b42e8fbb…` | main: `research/specimens/S001-orbium/` |
-| S101 | [`S101-9ea05a4377`](../traces/S101-9ea05a4377/) | 0–3000 | `6d3055fc…` | vendored from PR #11 ([`vendor/pr11/`](vendor/pr11/)) |
-| S102 | [`S102-12fd60e362`](../traces/S102-12fd60e362/) | 0–3000 | `12c6dcad…` | vendored from PR #11 |
-| S103 | [`S103-57feb4ccc4`](../traces/S103-57feb4ccc4/) | 0–3000 | `a81efdac…` | vendored from PR #11 |
+| S101 | [`S101-9ea05a4377`](../traces/S101-9ea05a4377/) | 0–3000 | `6d3055fc…` | `research/specimens/S101-orbium-pair/` (vendored copy at run time) |
+| S102 | [`S102-12fd60e362`](../traces/S102-12fd60e362/) | 0–3000 | `12c6dcad…` | `research/specimens/S102-circler/` (vendored copy at run time) |
+| S103 | [`S103-57feb4ccc4`](../traces/S103-57feb4ccc4/) | 0–3000 | `a81efdac…` | `research/specimens/S103-static-ring/` (vendored copy at run time) |
+| S101 + I004 0.25 at step 3000 (G004) | [`S101-2ca50bbd39`](../traces/S101-2ca50bbd39/) | 0–5000 | `3db8b6da…` | `research/specimens/S101-orbium-pair/` (vendored copy at run time) |
+| S001 + I004 0.25 at step 3000 (G004) | [`S001-f51c4e7c2e`](../traces/S001-f51c4e7c2e/) | 0–5000 | `fa43239b…` | main |
+| S102 + I004 0.25 at step 3000 (G005) | [`S102-3769097a3c`](../traces/S102-3769097a3c/) | 0–5002 | `fa43239b…` (empty world) | main |
+| S102 + I004 0.25 at step 3002 (G005) | [`S102-ab87e3d6e0`](../traces/S102-ab87e3d6e0/) | 0–5002 | `8f6edaba…` | main |
 
-All four runs were made with `alm.run` at commit `96cb86c` with a clean `src/`. The full rule,
+The G001–G003 runs were made with `alm.run` at commit `96cb86c`, the G004 runs at `066878d` and
+the G005 runs at `de6f69c`, all with a clean `src/`. The full rule,
 grid, environment and hashes are in each trace's `manifest.json`. Each exhibit's `provenance.json`
 lists its frame range, view, overlays and disclosures.
 
-**Unmerged dependency.** S101–S103 are proposed in Lane 6's PR #11, which is not merged. Their
-seed cells and rules are vendored in one place, [`vendor/pr11/`](vendor/pr11/README.md), and
-registered by [`galspec.py`](galspec.py) only if main lacks them. If main later registers
-different cells under these IDs, the scripts refuse to run. The exact cleanup once #11 merges is
-listed in [`vendor/pr11/README.md`](vendor/pr11/README.md#cleanup-after-pr-11-merges).
+**Specimen sources.** S101–S103 came from Lane 6's PR #11. Until #11 merged, the gallery ran
+them from byte-identical copies of its seed files, which is why the traces' manifests name a
+`research/gallery/vendor/pr11/` source. Those copies were removed after #11 merged on 2026-10-07.
+`tests/test_gallery.py` checks that the cells registered on main still hash to the values
+recorded in every gallery run.
 
 ## How the pictures are made
 
@@ -142,28 +218,34 @@ listed in [`vendor/pr11/README.md`](vendor/pr11/README.md#cleanup-after-pr-11-me
 
 ```bash
 ./scripts/bootstrap.sh
-git checkout 96cb86c                                   # the commit the runs were made at
-.venv/bin/python research/gallery/render.py collect    # re-run the four simulations
+.venv/bin/python research/gallery/render.py collect    # run any configuration runs.json lacks
 .venv/bin/python research/gallery/render.py render     # replay, verify hashes, draw exhibits
 ```
 
-`collect` writes `research/traces/<run_id>/` and `runs.json`. At `96cb86c` it reproduces the run
-IDs above, and on any commit it reproduces the final-state hashes. `render` replays each run listed
+`collect` writes `research/traces/<run_id>/` and `runs.json`, running only the configurations
+`runs.json` does not already list. Run IDs include the commit, so a fresh `collect` gives new IDs,
+but it reproduces the final-state hashes above on any commit. `render` replays each run listed
 in `runs.json` from its manifest and stops with an error unless the replay's final state matches
 `final_state_sha256`. A single run can also be repeated on its own:
 
 ```bash
 .venv/bin/python -m alm.run --specimen S001 --steps 3000 --every 10
-.venv/bin/python research/gallery/run_specimen.py --specimen S102 --steps 3000 --every 10   # S101–S103
+.venv/bin/python -m alm.run --specimen S102 --steps 3000 --every 10
+.venv/bin/python research/gallery/run_specimen.py --specimen S101 --steps 5000 --every 10 \
+    --intervene 3000:gallery_port_injury:s=0.25                                        # G004
+.venv/bin/python research/gallery/run_specimen.py --specimen S102 --steps 5002 --every 10 \
+    --intervene 3002:gallery_port_injury_h:s=0.25,hx=-0.9988910184063488,hy=0.047082197772908396  # G005
 ```
 
 `tests/test_gallery.py` runs the whole pipeline end to end on short (60-step) real runs in a
-scratch folder. It collects, replays, verifies the hashes and renders G001–G003, then checks every
+scratch folder. It collects, replays, verifies the hashes and renders G001–G005, then checks every
 listed media file and provenance entry. It also checks that a run with a wrong final hash is
 refused. Re-running `render` on the committed runs reproduces the committed media byte for byte.
 
-`run_specimen.py` is `python -m alm.run` with the vendored specimens registered. Once PR #11 is
-merged, plain `alm.run` does the same.
+`run_specimen.py` is `python -m alm.run` with the gallery's `gallery_port_injury` and
+`gallery_port_injury_h` interventions ([`galintervene.py`](galintervene.py)) registered. G005's
+heading values come from `galintervene.chord_heading("S102", 3002)`. The G004 S001 run uses the same flag with
+`--specimen S001`.
 
 ## Gallery conventions
 
@@ -186,5 +268,15 @@ merged, plain `alm.run` does the same.
 
 ## Cycle log
 
+- **2026-10-08, correction.** C039's broad claim was refuted by L3-002 (merged); the ledger
+  update is ledger PR #22 (open). The field note and specimens table no longer say that S102
+  dies at twice the resolution; its death there depended on bilinear seed resizing. No
+  pictures changed.
+- **2026-10-07, cycle 3 (Lane 8).** G005: the circler cut at two phases two steps apart. One
+  dies, the other becomes S103 exactly (C040).
+- **2026-10-07, after PR #11 merged.** Retired the vendored S101–S103 copies and the
+  registration shim. The committed runs and media are unchanged.
+- **2026-10-07, cycle 2 (Lane 8).** G004: the bound pair and a single Orbium under the same port
+  injury (C041), from two new runs with the injury at step 3000.
 - **2026-10-07, cycle 1 (Lane 8).** First gallery: G001–G003 from four new runs of S001 and
   S101–S103.

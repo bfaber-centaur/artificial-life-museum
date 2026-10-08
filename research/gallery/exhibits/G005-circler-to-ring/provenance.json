@@ -1,0 +1,130 @@
+{
+  "exhibit": "G005",
+  "title": "Two steps apart",
+  "media": [
+    "circler-ring-sheet.png",
+    "circler-ring.gif",
+    "circler-ring.mp4"
+  ],
+  "frames": {
+    "sheet_steps": {
+      "G005:S102@3000": [
+        3000,
+        3000,
+        3005,
+        3020,
+        3100,
+        3500,
+        5000
+      ],
+      "G005:S102@3002": [
+        3002,
+        3002,
+        3007,
+        3022,
+        3102,
+        3502,
+        5002
+      ]
+    },
+    "sheet_note": "columns 1-2 are the state at the cut step just before and just after the edit",
+    "film_offsets_from_cut": [
+      -20,
+      600
+    ],
+    "film_stride_steps": 2,
+    "playback_fps": 20
+  },
+  "intervention": {
+    "name": "gallery_port_injury_h",
+    "lane4_id": "I004",
+    "s": 0.25,
+    "steps": [
+      3000,
+      3002
+    ],
+    "definition": "alm.disturb.i004_port_injury (L4-001 protocol), frame centred on the periodic centroid at the cut step",
+    "heading": "unit vector of the unwrapped centroid shift over the previous 10 steps of the uninterrupted run, as in Lane 6's disturb_switch.py; computed by galintervene.chord_heading and stored in the run's intervention params"
+  },
+  "view": "64x64-cell windows shifted by whole cells to centre the centroid (camera follows; after death the camera holds its last position); 3x nearest-neighbour",
+  "overlays": [
+    "vermillion tint on cells emptied by the cut (sheet column 'cut'; the film's cut frame), opacity 0.35 + 0.65 x value removed",
+    "text labels"
+  ],
+  "disclosures": [
+    "camera follows the centroid, so travel is hidden",
+    "the film holds the cut frame for one second (20 repeated frames); all other frames are 2 steps apart",
+    "GIF palette reduced to 128 colours; the MP4 is H.264 (lossy)"
+  ],
+  "sources": [
+    {
+      "specimen": "S102",
+      "specimen_name": "Gyrorbium-like circler under the coexistence rule",
+      "specimen_source": "research/specimens/S102-circler.md (Lane 6 field exploration)",
+      "run_id": "S102-3769097a3c",
+      "trace": "research/traces/S102-3769097a3c/",
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.155,
+        "sigma": 0.02,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "grid": {
+        "shape": [
+          128,
+          128
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "simulator_commit": "de6f69cbfaf17c34394c230c98a3f4efc6fb0c55",
+      "final_state_sha256": "fa43239bcee7b97ca62f007cc68487560a39e19f74f3dde7486db3f98df8e471",
+      "replay_verified": true,
+      "reproduce_run": "git checkout de6f69cbfaf1 && .venv/bin/python research/gallery/run_specimen.py --specimen S102 --steps 5002 --every 10 --size 128 --seed 0 --burn-in 1000 --intervene 3000:gallery_port_injury_h:s=0.25,hx=-0.9554048448956108,hy=0.29529914044912753"
+    },
+    {
+      "specimen": "S102",
+      "specimen_name": "Gyrorbium-like circler under the coexistence rule",
+      "specimen_source": "research/specimens/S102-circler.md (Lane 6 field exploration)",
+      "run_id": "S102-ab87e3d6e0",
+      "trace": "research/traces/S102-ab87e3d6e0/",
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.155,
+        "sigma": 0.02,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "grid": {
+        "shape": [
+          128,
+          128
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "simulator_commit": "de6f69cbfaf17c34394c230c98a3f4efc6fb0c55",
+      "final_state_sha256": "8f6edaba78b267f0ed4f52ccfa1a17717750e5c09d3f1874d41e83f84386657a",
+      "replay_verified": true,
+      "reproduce_run": "git checkout de6f69cbfaf1 && .venv/bin/python research/gallery/run_specimen.py --specimen S102 --steps 5002 --every 10 --size 128 --seed 0 --burn-in 1000 --intervene 3002:gallery_port_injury_h:s=0.25,hx=-0.9988910184063488,hy=0.047082197772908396"
+    }
+  ],
+  "render": {
+    "script": "research/gallery/render.py render",
+    "colormap": "matplotlib inferno, A in [0,1] mapped linearly",
+    "upscaling": "nearest neighbour (one block per cell)"
+  }
+}
