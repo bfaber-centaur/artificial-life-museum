@@ -7,7 +7,7 @@ pair runs [`figure-D-pair.csv`](figure-D-pair.csv) · lifetimes and survival est
 [`figure-D-lifetimes.csv`](figure-D-lifetimes.csv) · provenance [`figure-D.provenance.json`](figure-D.provenance.json)
 
 > **Provisional exhibit draft.** Everything plotted comes from Lane 6's PR #27, still unmerged, and Lane 7's PR #30, now on `main`:
-> - Lane 6's PR #27 (L6-007 and L6-008), read at `e1f8760`;
+> - Lane 6's PR #27 (L6-007 and L6-008), read at `968d330`;
 > - Lane 7's hostile review HR-009 (with HR-009b/c), PR #30, read at its merge commit on `main`, `0b9b47f`.
 >
 > **Panel b's "together is worse" window is withdrawn.** Lane 6's L6-009 note (in PR #27) found
@@ -35,8 +35,8 @@ pair runs [`figure-D-pair.csv`](figure-D-pair.csv) · lifetimes and survival est
 | Finding | Where it stands | Panel |
 | --- | --- | --- |
 | **L6-c**: under port injury, the pair survives because the uninjured partner does | proposed (PR #27); accepted as written by HR-009 | a |
-| **L6-d**: under frontal addition, the bound pair dies where each partner alone survives | proposed (PR #27); the on-gap s 0.2–0.3 window is withdrawn (HR-009c, L6-009: a 128² collision effect); preregistered verdict INCONCLUSIVE; only an off-gap s 0.3 result (L6-009, exploratory) remains open | b |
-| **L6-f**: S102 is a long, chaotic transient, not an attractor | proposed (PR #27), revised by Lane 6 after HR-009: a chaotic transient whose lifetime distribution is the target. Lane 3's PR #29 replicates it at R 13, T 10 but sees no end at R 26, R 39, T 20 or T 40 | c, d |
+| **L6-d**: under frontal addition, the bound pair dies where each partner alone survives | withdrawn as a coupling claim by Lane 6 in PR #27 (after HR-009c, L6-009: the on-gap pulse frees two Orbia that collide on 128²); H1 kept as the historical preregistered verdict, HR-009 E2 INCONCLUSIVE; off-gap s 0.3 candidates (L6-009) exploratory and unverified | b |
+| **L6-f**: S102 is a long, chaotic transient, not an attractor | proposed (PR #27), scoped by Lane 6 to R 13, T 10: a chaotic transient there; Lane 3's PR #29 sees no end at R 26, R 39, T 20 or T 40 | c, d |
 | **C041**: S101 survives port injury of 10–50% by shedding to a single Orbium | OBSERVED (ledger) | a |
 | **C038**: one rule supports a glider, a circler (S102) and a static ring | REPRODUCED (ledger) | c, d |
 
@@ -133,12 +133,12 @@ a shaded uncertainty band.
 
 | Data | Path | Commit | Panel |
 | --- | --- | --- | --- |
-| L6-008 pair runs and split baseline | `research/experiments/L6-008-pair-coupling/pair-coupling.csv` | PR #27 head `e1f8760` | a, b |
+| L6-008 pair runs and split baseline | `research/experiments/L6-008-pair-coupling/pair-coupling.csv` | PR #27 head `968d330` | a, b |
 | HR-009 E2 full-pulse halves | `research/experiments/HR009-l6-review/e2.csv` | PR #30 merge `0b9b47f` | b |
-| L6-007 circler lifetimes (exploratory follow-up) | `research/experiments/L6-007-attractor-geography/circler-lifetimes.csv` | `e1f8760` | c, d |
+| L6-007 circler lifetimes (exploratory follow-up) | `research/experiments/L6-007-attractor-geography/circler-lifetimes.csv` | `968d330` | c, d |
 | HR-009 E1 twin and δ-perturbed circlers | `research/experiments/HR009-l6-review/e1.csv` | `0b9b47f` | c, d |
 | HR-009c withdrawal (cited, not plotted) | `research/reports/hostile-review.md` | PR #30 merge `0b9b47f` | b caveat |
-| L6-009 world-size note (cited, not plotted) | `research/experiments/L6-008-pair-coupling/README.md` | PR #27 head `e1f8760` | b caveat |
+| L6-009 world-size note (cited, not plotted) | `research/experiments/L6-008-pair-coupling/README.md` | PR #27 head `968d330` | b caveat |
 | L3-003 refinement result (cited, not plotted) | `research/experiments/L3-003-circler-lifetime/README.md` | PR #29 merge `20bdff9` | c, d caveat |
 | Claim statuses | `research/claims.md` | stamped on the figure | badges |
 
