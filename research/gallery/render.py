@@ -646,7 +646,6 @@ def g006_eventually_gone(jobs: list[dict]) -> None:
 
     folder = EXHIBITS / "G006-eventually-gone"
     folder.mkdir(parents=True, exist_ok=True)
-    cell = G6_CROP * G6_SCALE
     n = jobs[0]["steps"]
     T = jobs[0]["rule"].T
     died = [j for j in jobs if j["death"] is not None]
@@ -698,30 +697,36 @@ def g006_eventually_gone(jobs: list[dict]) -> None:
            "128x128 torus", fill=DIM, font=font(11))
     sheet.save(folder / "lifelines-sheet.png", optimize=True)
 
-    # The film: all runs side by side, sampled every G6_FILM_STRIDE steps, camera following.
-    cols = 4
-    rows = math.ceil(len(jobs) / cols)
-    head = 36
-    FW = cols * cell + (cols + 1) * gap
-    FH = rows * (cell + head + gap) + gap + 24
+    # The film: all runs side by side, sampled every G6_FILM_STRIDE steps, camera following. The MP4
+    # is drawn at G6_SCALE; the GIF preview at 2x with every other frame, to keep it small.
     fps = 25
-    out = []
-    for f, t in enumerate(jobs[0]["film"]):
-        img = Image.new("RGB", (FW, FH), BG)
-        d = ImageDraw.Draw(img)
-        for i, j in enumerate(jobs):
-            x0 = gap + (i % cols) * (cell + gap)
-            y0 = gap + (i // cols) * (cell + head + gap)
-            d.text((x0, y0), name(i), fill=INK, font=font(13, True))
-            gone = j["death"] is not None and t >= j["death"]
-            d.text((x0, y0 + 17), f"mass < {G6_DEAD:g} since {j['death'] / T:g} tu" if gone
-                   else f"mass {j['mass'][f]:.3f}", fill=REMOVED if gone else DIM, font=font(11))
-            img.paste(Image.fromarray(colorize(j["crops"][t], G6_SCALE)), (x0, y0 + head))
-        d.text((gap, FH - 20), f"t = {t / T:6.0f} tu (step {t}) · one frame every {G6_FILM_STRIDE / T:g} tu: "
-               "the circler turns many times between frames", fill=DIM, font=font(12))
-        out.append(img)
-    out.extend([out[-1]] * fps * 2)  # hold the last frame for two seconds
-    mp4 = write_video(out, folder / "eventually-gone.gif", folder / "eventually-gone.mp4", fps)
+
+    def film(scale: int, every: int) -> list:
+        cols, head = 4, 36
+        cell = G6_CROP * scale
+        rows = math.ceil(len(jobs) / cols)
+        FW = cols * cell + (cols + 1) * gap
+        FH = rows * (cell + head + gap) + gap + 24
+        out = []
+        for f, t in list(enumerate(jobs[0]["film"]))[::every]:
+            img = Image.new("RGB", (FW, FH), BG)
+            d = ImageDraw.Draw(img)
+            for i, j in enumerate(jobs):
+                x0 = gap + (i % cols) * (cell + gap)
+                y0 = gap + (i // cols) * (cell + head + gap)
+                d.text((x0, y0), name(i), fill=INK, font=font(13, True))
+                gone = j["death"] is not None and t >= j["death"]
+                d.text((x0, y0 + 17), f"mass < {G6_DEAD:g} since {j['death'] / T:g} tu" if gone
+                       else f"mass {j['mass'][f]:.3f}", fill=REMOVED if gone else DIM, font=font(11))
+                img.paste(Image.fromarray(colorize(j["crops"][t], scale)), (x0, y0 + head))
+            d.text((gap, FH - 20), f"t = {t / T:6.0f} tu · one frame every {every * G6_FILM_STRIDE / T:g} tu",
+                   fill=DIM, font=font(12))
+            out.append(img)
+        return out + [out[-1]] * fps * 2  # hold the last frame for two seconds
+
+    write_video(film(2, 2), folder / "eventually-gone.gif", None, fps)
+    mp4 = write_video(film(G6_SCALE, 1), folder / "eventually-gone-mp4.gif", folder / "eventually-gone.mp4", fps)
+    (folder / "eventually-gone-mp4.gif").unlink()
     save_provenance(folder, {
         "exhibit": "G006",
         "title": "The circler that eventually disappears",
@@ -734,17 +739,20 @@ def g006_eventually_gone(jobs: list[dict]) -> None:
                   "censored_at_step": None if j["death"] is not None else n} for i, j in enumerate(jobs)],
         "death_definition": f"first step whose total mass / R^2 is below {G6_DEAD:g}, from the replay's "
                             "per-step mass (checked against the run's series.npz)",
-        "frames": {"film_stride_steps": G6_FILM_STRIDE, "film_steps": [0, n], "playback_fps": fps,
+        "frames": {"film_stride_steps": {"mp4": G6_FILM_STRIDE, "gif": 2 * G6_FILM_STRIDE},
+                   "film_steps": [0, n], "playback_fps": fps,
                    "film_hold_last_frame_s": 2,
                    "sheet_offsets_from_end_steps": list(G6_LAST)},
         "view": f"film: {G6_CROP}x{G6_CROP}-cell windows shifted by whole cells to centre the centroid (camera "
-                f"follows; after death it holds its last position), {G6_SCALE}x nearest-neighbour; sheet "
+                f"follows; after death it holds its last position), {G6_SCALE}x nearest-neighbour in the MP4, "
+                "2x in the GIF preview; sheet "
                 f"thumbnails: the central 32x32 cells of the same windows, 4x",
         "overlays": ["lifeline bars, Lane 9 'died' x marker (#D55E00) and a grey arrow for runs still above the "
                      "threshold at the horizon", "per-tile mass readout", "text labels"],
         "disclosures": [
-            "the film samples one frame every 10 tu; the circler turns about 95 degrees per tu, so its pose "
-            "between frames is not continuous motion",
+            "the MP4 samples one frame every 10 tu and the GIF every 20 tu; the circler turns about 95 "
+            "degrees per tu, so its pose from frame to frame is not continuous motion",
+            "the film holds its last frame for two seconds",
             "twins are our own draws of HR-009's recipe (noise U(-1,1) x 1e-12 on cells within 3 of the "
             "seed's support) in alm.lenia; they are not HR-009's or Lane 6's runs, and their death times "
             "are not expected to match those runs'",
