@@ -62,7 +62,7 @@
     {
       "path": "research/figures/C-phenotypes-one-rule/make_figure.py",
       "sha256": "d2c850053ef0e7d3027d92a58d2a3c93534a18f8175d796b6e8ac2c16088c9ae",
-      "last_commit": "3d81089"
+      "last_commit": "78406e9"
     },
     {
       "path": "research/figures/figlib/__init__.py",
@@ -82,7 +82,7 @@
     {
       "path": "research/figures/figlib/ledger.py",
       "sha256": "b711afa1e9bdc057d5dd2fdb2d55f9ff802f5f6c8f621619da164b94a5bcddf7",
-      "last_commit": "31b6c9a"
+      "last_commit": "78406e9"
     },
     {
       "path": "research/figures/figlib/provenance.py",
@@ -209,8 +209,8 @@
     "research/figures/C-phenotypes-one-rule/figure-C-data.csv",
     "research/figures/C-phenotypes-one-rule/figure-C-matrix.csv"
   ],
-  "code_commit": "67b34a2",
-  "code_dirty": true,
+  "code_commit": "e75f9ce",
+  "code_dirty": false,
   "versions": {
     "python": "3.13.16",
     "numpy": "2.5.3",
