@@ -732,7 +732,8 @@ def g006_eventually_gone(jobs: list[dict]) -> None:
         "title": "The circler that eventually disappears",
         "status": "provisional: built while PR #27 (L6-007), PR #29 (L3-003) and PR #30 (HR-009) are under "
                   "review; the ledger holds no claim on S102's lifetime yet. The disappearance is shown at R 13, "
-                  "T 10 only; L3-003 sees no deaths at R 26 or R 39, so it is disputed under refinement",
+                  "T 10 only; L3-003 sees no deaths at R 26, R 39 (finer grid) or T 20, T 40 (smaller step), so "
+                  "the collapse is specific to the R 13, T 10 discretization",
         "media": ["lifelines-sheet.png", "eventually-gone.gif"] + (["eventually-gone.mp4"] if mp4 else []),
         "runs": [{"label": name(i), "run_id": j["run_id"], "seed": j["manifest"]["seed"],
                   "noise_delta": G6_DELTA if i else 0.0,
@@ -758,9 +759,9 @@ def g006_eventually_gone(jobs: list[dict]) -> None:
             "seed's support) in alm.lenia; they are not HR-009's or Lane 6's runs, and their death times "
             "are not expected to match those runs'",
             "12 runs show spread, not a lifetime distribution; HR-009 pools 37 runs",
-            "all runs are at R 13, T 10 on a 128x128 grid; L3-003 (PR #29 @ bdf20bf) finds no deaths in 29 "
-            "runs at R 26 (to 5000-8000 tu) or 3 at R 39 (8000 tu), and its timestep test is inconclusive "
-            "so far, so the finite lifetime may be a feature of this resolution",
+            "all runs are at R 13, T 10 on a 128x128 grid; L3-003 (PR #29 @ 8c3c082) finds no deaths in 29 "
+            "runs at R 26 (to 5000-8000 tu), 3 at R 39 (8000 tu), 24 at R 13 T 20 or 24 at R 13 T 40 "
+            "(8000 tu each), so the finite lifetime is specific to the R 13, T 10 discretization",
             "GIF palette reduced to 128 colours; the MP4 is H.264 (lossy)",
         ],
         "sources_of_interpretation": {
