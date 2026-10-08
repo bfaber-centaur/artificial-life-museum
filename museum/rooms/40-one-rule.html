@@ -2,7 +2,7 @@
   "slug": "one-rule", "order": 40, "title": "Three animals, one rule", "nav_label": "4 · Three animals, one rule",
   "kicker": "Room 4 · Specimens S101, S102, S103",
   "summary": "A glider, a circler and a static ring living under the same physics, and a bound pair that survives a wound by shedding a partner.",
-  "expect": {"C038": "REPRODUCED", "C039": "NUMERICALLY_FRAGILE", "C040": "OBSERVED", "C041": "OBSERVED",
+  "expect": {"C038": "REPRODUCED", "C039": "REFUTED", "C047": "INDEPENDENTLY_CHECKED", "C040": "OBSERVED", "C041": "OBSERVED",
              "C042": "REPRODUCED", "C043": "OBSERVED", "C044": "OBSERVED"}
 } -->
 <h1>Three animals, one rule</h1>
@@ -35,9 +35,11 @@ depends on how the world started, not on the rule.</p>
          alt="The circler S102 at step 3000: a lopsided, swirling body with a hollow at one side.">
     <figcaption><strong>S102, the circler.</strong> As fast as Orbium, but it runs round a circle
     whose radius is about a quarter of a kernel radius, about one lap every 3.8 time units, and goes nowhere.
-    It is the most fragile of the three. A copy smoothly resized to twice the resolution died at
-    this rule {{claim:C039}}, but the replication lane reports that copies resized in other ways
-    survive, so whether the creature or the resizing failed is still being argued out.</figcaption>
+    Wounds kill it more easily than the other two. It does not, as first reported, die when drawn
+    at finer resolution: copies enlarged to R = 26 and R = 39 by block, nearest-neighbour or cubic
+    resizing stay healthy circlers, in two independent engines {{claim:C047}}. Only the copy
+    enlarged by bilinear smoothing dies, so what failed was that resize method, not the creature at
+    higher resolution, and the original claim is {{claim:C039}}.</figcaption>
   </figure>
   <figure class="vitrine" style="margin:0">
     <img src="{{asset:research/gallery/exhibits/G002-portraits/S103-portrait.png}}" width="512" height="576"

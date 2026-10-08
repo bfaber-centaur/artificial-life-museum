@@ -53,9 +53,11 @@ depends on how the world started, not on the rule.</p>
          alt="The circler S102 at step 3000: a lopsided, swirling body with a hollow at one side.">
     <figcaption><strong>S102, the circler.</strong> As fast as Orbium, but it runs round a circle
     whose radius is about a quarter of a kernel radius, about one lap every 3.8 time units, and goes nowhere.
-    It is the most fragile of the three. A copy smoothly resized to twice the resolution died at
-    this rule <a class="claim" href="claims.html#C039" title="The circler S102 at its registered rule (μ 0.155, σ 0.020) does not survive doubling the resolution"><span class="cid">C039</span><span class="badge s-NUMERICALLY_FRAGILE" title="NUMERICALLY_FRAGILE">num. fragile</span></a>, but the replication lane reports that copies resized in other ways
-    survive, so whether the creature or the resizing failed is still being argued out.</figcaption>
+    Wounds kill it more easily than the other two. It does not, as first reported, die when drawn
+    at finer resolution: copies enlarged to R = 26 and R = 39 by block, nearest-neighbour or cubic
+    resizing stay healthy circlers, in two independent engines <a class="claim" href="claims.html#C047" title="S102 at its registered rule persists at R = 26 and R = 39 from block-replicated, nearest-neighbour or cubic seeds; only the bilinear seed dies"><span class="cid">C047</span><span class="badge s-INDEPENDENTLY_CHECKED" title="INDEPENDENTLY_CHECKED (`alm_check` and `field.py`; exploratory, not preregistered)">indep. checked</span></a>. Only the copy
+    enlarged by bilinear smoothing dies, so what failed was that resize method, not the creature at
+    higher resolution, and the original claim is <a class="claim" href="claims.html#C039" title="The circler S102 at its registered rule (μ 0.155, σ 0.020) does not survive doubling the resolution"><span class="cid">C039</span><span class="badge s-REFUTED" title="REFUTED as worded (superseded by C047). The narrower fact, that the *bilinearly resized* seed dies at R 26 and 39, is INDEPENDENTLY_CHECKED (`field.py` and `alm_check`).">refuted</span></a>.</figcaption>
   </figure>
   <figure class="vitrine" style="margin:0">
     <img src="../../research/gallery/exhibits/G002-portraits/S103-portrait.png" width="512" height="576"
@@ -116,7 +118,7 @@ is mapping the same region in more detail.</div>
 <nav class="walk" aria-label="Tour"><a class="prev" href="edges.html"><small>Back</small>How much can it take?</a><a class="next" href="how-we-know.html"><small>Next room</small>How we know</a></nav>
 </main>
 <footer class="site">
-  <p>Claim statuses read from <code>research/claims.md</code> (sha256 <code>99fc1c1c4c0a</code>) when this page was built.</p>
+  <p>Claim statuses read from <code>research/claims.md</code> (sha256 <code>b523c6924b76</code>) when this page was built.</p>
   <p>Every picture here is a recorded simulation or a figure drawn from committed data. Statuses
   are the claims ledger's, not the museum's: a badge never says more than
   <a href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/claims.md">research/claims.md</a> does.</p>

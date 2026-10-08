@@ -1,7 +1,7 @@
 {
   "ledger": "research/claims.md",
-  "ledger_sha256": "99fc1c1c4c0a0977fe72bca3e561b4c5b7132ab2043ec361839feb1fcd6c7664",
-  "ledger_commit": "76a8dc9",
+  "ledger_sha256": "b523c6924b76bb3a15a885e76758641b55be8d4aed62145cb82f1768cbf88c5c",
+  "ledger_commit": "db4b894",
   "conventions_sha256": "227df043de8fff733da0840fd8297b01f064007a2320a944a5b743733f0ff1bb",
   "claims": {
     "C001": {
@@ -141,10 +141,9 @@
       ]
     },
     "C039": {
-      "status": "NUMERICALLY_FRAGILE",
-      "status_text": "NUMERICALLY_FRAGILE",
+      "status": "REFUTED",
+      "status_text": "REFUTED as worded (superseded by C047). The narrower fact, that the *bilinearly resized* seed dies at R 26 and 39, is INDEPENDENTLY_CHECKED (`field.py` and `alm_check`).",
       "rooms": [
-        "collection",
         "one-rule"
       ]
     },
@@ -185,6 +184,14 @@
       "status": "OBSERVED",
       "status_text": "OBSERVED; not yet reproduced by a second lane",
       "rooms": [
+        "one-rule"
+      ]
+    },
+    "C047": {
+      "status": "INDEPENDENTLY_CHECKED",
+      "status_text": "INDEPENDENTLY_CHECKED (`alm_check` and `field.py`; exploratory, not preregistered)",
+      "rooms": [
+        "collection",
         "one-rule"
       ]
     }
