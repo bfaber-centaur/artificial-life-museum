@@ -5,6 +5,7 @@
 """
 import argparse
 import csv
+import pickle
 import sys
 import time
 from pathlib import Path
@@ -48,12 +49,22 @@ def classify(d):
     return d["fate"].upper() if d["fate"] != "localized" else phenotype({k: str(v) for k, v in d.items()})
 
 
-def run_batch(starts, R, T, sigma, horizon, checkpoints, chunk=40):
+CACHE = Path("/tmp/claude-0/l6-cache")  # per-chunk results, so a restarted container resumes
+
+
+def run_batch(starts, R, T, sigma, horizon, checkpoints, chunk=40, tag=""):
     """Returns per-world lists of (class at each checkpoint), final summary, final state."""
     steps = int(round(horizon * T))
     win = int(round(100 * T))
     out = []
+    CACHE.mkdir(parents=True, exist_ok=True)
     for k in range(0, len(starts), chunk):
+        cf = CACHE / f"l6007-{tag}-{k}.pkl"
+        if tag and cf.exists():
+            out += pickle.loads(cf.read_bytes())
+            print(f"  {k}: cached", flush=True)
+            continue
+        n0 = len(out)
         S = np.array(starts[k : k + chunk])
         b = Batch(R=R, T=T, mu=[MU] * len(S), sigma=[sigma] * len(S))
         cps = [int(round(c * T)) for c in checkpoints]
@@ -69,6 +80,8 @@ def run_batch(starts, R, T, sigma, horizon, checkpoints, chunk=40):
         for i, d in enumerate(fin):
             per[i].append(classify(d))
             out.append((per[i], d, res["final"][i]))
+        if tag:
+            cf.write_bytes(pickle.dumps(out[n0:]))
         print(f"  {k + len(S)}/{len(starts)}", flush=True)
     return out
 
@@ -94,7 +107,7 @@ def noise(variant):
                 starts.append(np.clip(base + e * xi * support, 0, 1))
                 meta.append((s, e, k))
     t0 = time.time()
-    res = run_batch(starts, R, T, sigma, horizon, cps)
+    res = run_batch(starts, R, T, sigma, horizon, cps, tag=f"noise-{variant}")
     ref = {m[0]: r for m, r in zip(meta, res) if m[2] == -1}
     phen = {"orbium": "GLIDER", "circler": "CIRCLER", "ring": "STATIC"}
     rows = []

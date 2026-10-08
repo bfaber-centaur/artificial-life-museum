@@ -3,6 +3,7 @@
     python research/experiments/L6-008-pair-coupling/run.py
 """
 import csv
+import pickle
 import sys
 import time
 from pathlib import Path
@@ -89,11 +90,20 @@ def main():
         idx.append(j)
     t0 = time.time()
     outs = []
+    cache = Path("/tmp/claude-0/l6-cache")  # per-chunk results, so a restarted container resumes
+    cache.mkdir(parents=True, exist_ok=True)
     for k in range(0, len(starts), 48):
+        cf = cache / f"l6008-{k}.pkl"
+        if cf.exists():
+            outs += pickle.loads(cf.read_bytes())
+            print(f"{k}: cached", flush=True)
+            continue
+        n0 = len(outs)
         B = np.array(starts[k : k + 48])
         res = Batch(R, T, [MU] * len(B), [SIGMA] * len(B)).run(B, HORIZON, snap_every=50, snap_from=HORIZON - WIN)
         for i, d in enumerate(summarize(res, R, T, WIN)):
             outs.append((d, res["final"][i], res["mass"][:, i]))
+        cf.write_bytes(pickle.dumps(outs[n0:]))
         print(f"{k + len(B)}/{len(starts)} {time.time() - t0:.0f}s", flush=True)
     rows = []
     for j, (kind, s, ph, E, port, dm) in enumerate(jobs):
