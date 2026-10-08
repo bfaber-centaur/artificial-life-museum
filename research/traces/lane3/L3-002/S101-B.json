@@ -1,0 +1,19 @@
+{
+ "run_id": "L3-002-S101-B",
+ "specimen": "S101",
+ "condition": "B",
+ "R": 13,
+ "T": 10,
+ "n": 192,
+ "mu": 0.15,
+ "sigma": 0.015,
+ "final_mass": 0.8744330543933101,
+ "mass": 0.8736346607698695,
+ "gyradius": 0.8150662382317294,
+ "net_speed": 0.4726563477994139,
+ "path_speed": 0.4726660901689286,
+ "turning_rate": 0.5709162922095251,
+ "mass_rel_sd": 0.001308530146038961,
+ "fixed_point": false,
+ "cls": "glider"
+}
