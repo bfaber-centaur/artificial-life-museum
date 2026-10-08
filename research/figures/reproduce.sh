@@ -8,7 +8,7 @@ PY=${PY:-.venv/bin/python}
 # Figure C reads Lane 6's data at the PR #11 merge commit on main (git show; no checkout).
 # It also reads pinned commits from Lane 6's D2 rerun and the PR #22 ledger (Lane 3's data is on main).
 for c in 413003da752922e61be8a220abff8d86600e6aee \
-         db4b8946d9e1d964540b7b436496b836b156cde9; do
+         a9ff91867b4dd6cad080fe7ae3f0cc4a6ef9f006; do
   git cat-file -e "$c" 2>/dev/null || git fetch -q origin \
     claude/night0-field-tmbx06 claude/night1-claims-l3002-w1iy56
 done

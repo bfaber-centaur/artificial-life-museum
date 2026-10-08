@@ -10,7 +10,7 @@ stops if they no longer match EXPECTED.
 
 Resolution and resize method are kept apart. All of Lane 6's R 26 runs start from bilinearly
 resized seeds (ndimage.zoom order=1). The R 26 death at the circler's own rule is a resize
-effect (C047, two engines), so it is not drawn as a resolution effect. The R 26 band shift in
+effect (C047: Lane 3, merged; Lane 6's matching rerun is not yet on main), so it is not drawn as a resolution effect. The R 26 band shift in
 panel b was measured only from bilinear seeds, and the figure says so.
 
 Evidence is Lane 6's PR #11, read with `git show` (figlib.gitsource) at the commit that merged
@@ -45,7 +45,7 @@ from figlib.style import (GRID, INK, MUTED, OKABE_ITO, OUTCOME, PHENOTYPE, STATU
 OUT = HERE / "figure-C"
 PR11 = "f72db9ef9584fffc10af0fcbbc6491c8f22a6d9c"  # merge of PR #11 into main (its data equals the f40f303 head Figure C was first drawn from)
 D6 = "research/experiments/L6-field"
-LEDGER_REF = "db4b8946d9e1d964540b7b436496b836b156cde9"  # PR #22 head: C039 refuted, C047 added (unmerged)
+LEDGER_REF = "a9ff91867b4dd6cad080fe7ae3f0cc4a6ef9f006"  # PR #22 head: C039 refuted, C047 OBSERVED (unmerged)
 L6_D2 = ("413003da752922e61be8a220abff8d86600e6aee",  # Lane 6 field.py rerun of the four resizes (branch, no PR)
          "research/experiments/L6-007-attractor-geography/d2-resize.csv")
 L3_002 = "56ae4210a225a9dc0c7d38cee9c833b48096307f"  # merge of PR #18 (Lane 3) into main; same blobs as its 4998d03 head
@@ -61,7 +61,7 @@ EXPECTED = {
     "C042": "REPRODUCED",
     "C043": "OBSERVED",
     "C044": "OBSERVED",
-    "C047": "INDEPENDENTLY_CHECKED",
+    "C047": "OBSERVED",  # INDEPENDENTLY_CHECKED once Lane 6's rerun is on main (PR #22)
     "C048": "OBSERVED",
 }
 NUMERICS = [("T10 R13", "bistab-T10-R13.csv", "1000 tu"), ("T10 R26", "bistab-T10-R26.csv", "500 tu"),
@@ -226,7 +226,7 @@ CELL_BG = {PASS: "#e3f1ec", FAIL: "#f8e1d5", CHANGED: "#fbefd4", NONE: "#eeeeee"
 def evidence(src, ledger_claims, rows_out, l6d2, l3):
     """The evidence matrix. Every cell cites where its value comes from."""
     cells = {}
-    # R 26 from other seed resizes (C047, C048): Lane 6 field.py rerun, cross-checked against Lane 3
+    # R 26 from other seed resizes (C047, C048): Lane 3 (merged), and Lane 6's field.py rerun (branch, not on main)
     d2 = [r for r in l6d2.csv(L6_D2[1])]
     l3txt = l3.text(L3_RESIZE)
     for r in d2:
@@ -238,7 +238,7 @@ def evidence(src, ledger_claims, rows_out, l6d2, l3):
                          r["net_speed"], r["path_speed"]])
     others = [r for r in d2 if r["method"] != "bilinear"]
     assert others and all(r["class_1000tu"] == "CIRCLER" for r in others)
-    cells["gyrator", "resize"] = (PASS, f"circler, all 3\nat R 26 and 39\n(2 engines)")
+    cells["gyrator", "resize"] = (PASS, "circler, all 3,\nR 26 and 39\n(Lane 3; Lane 6\nmatch pending)")
     cells["orbium", "resize"] = (UNTESTED, "not run")
     lab = {r["property"]: r for r in l3.csv(L3_LABELS) if r["specimen"] == "S103"}
     assert lab["fixed_point"]["R26"] == "False"

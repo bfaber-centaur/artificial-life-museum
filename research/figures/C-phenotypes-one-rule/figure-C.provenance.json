@@ -3,9 +3,9 @@
   "command": ".venv/bin/python research/figures/C-phenotypes-one-rule/make_figure.py",
   "ledger": {
     "ledger": "research/claims.md",
-    "ledger_commit": "db4b894",
-    "ledger_full_commit": "db4b8946d9e1d964540b7b436496b836b156cde9",
-    "ledger_sha256": "b523c6924b76bb3a15a885e76758641b55be8d4aed62145cb82f1768cbf88c5c",
+    "ledger_commit": "a9ff918",
+    "ledger_full_commit": "a9ff91867b4dd6cad080fe7ae3f0cc4a6ef9f006",
+    "ledger_sha256": "0418569939b8dd91a1a1e80aa4485824f1768eccb171fcc0213374d8b283b001",
     "pending": "PR #22 (archivist ledger update), unmerged",
     "claims": {
       "C038": {
@@ -16,7 +16,7 @@
       },
       "C039": {
         "status": "REFUTED",
-        "status_text": "REFUTED as worded (superseded by C047). The narrower fact, that the *bilinearly resized* seed dies at R 26 and 39, is INDEPENDENTLY_CHECKED (`field.py` and `alm_check`).",
+        "status_text": "REFUTED as worded (superseded by C047). The narrower fact, that the *bilinearly resized* seed dies at R 26 and 39, is INDEPENDENTLY_CHECKED (Lane 6 `field.py`, PR #11, at R 26; Lane 3 `alm_check`, PR #18, at R 26 and 39). That is a resize-method dependence of the initial condition, not a resolution dependence: from block, nearest or cubic seeds S102 persists at R 26 and 39 (C047), with mean properties within 0.5% of R 13 over 300 tu (C046).",
         "title": "The circler S102 at its registered rule (\u03bc 0.155, \u03c3 0.020) does not survive doubling the resolution",
         "base_status": "NUMERICALLY_FRAGILE"
       },
@@ -45,15 +45,15 @@
         "base_status": "OBSERVED"
       },
       "C047": {
-        "status": "INDEPENDENTLY_CHECKED",
-        "status_text": "INDEPENDENTLY_CHECKED (`alm_check` and `field.py`; exploratory, not preregistered)",
+        "status": "OBSERVED",
+        "status_text": "OBSERVED (Lane 3, `alm_check`, merged). Block seeds through 300 tu are preregistered (C046); the four-method comparison through 1000 tu is exploratory. Lane 6 matched all eight outcomes in `field.py` (`413003d`), which is not yet on `main`; the archivist will mark this claim INDEPENDENTLY_CHECKED, for these eight seeds only, when that evidence lands.",
         "title": "S102 at its registered rule persists at R = 26 and R = 39 from block-replicated, nearest-neighbour or cubic seeds; only the bilinear seed dies",
         "base_status": null
       },
       "C048": {
         "status": "OBSERVED",
         "status_text": "OBSERVED (R statement, single engine); INDEPENDENTLY_CHECKED (T statement, with C042: `field.py`/`alm` and `alm_check`)",
-        "title": "S103 is a bitwise fixed point at every timestep tested (T 10\u201380), but block-scaled to R = 26 or 39 it relaxes to a different static ring",
+        "title": "S103 is a bitwise fixed point at every timestep tested (T 10\u201380), but block-scaled to R = 26 or 39 it relaxes to a different static body",
         "base_status": null
       }
     }
@@ -61,7 +61,7 @@
   "inputs": [
     {
       "path": "research/figures/C-phenotypes-one-rule/make_figure.py",
-      "sha256": "042868269d877e5c5360e511996f9f3be065917649bba6185c2c417903c42c2d",
+      "sha256": "c8d7bd309b6626f94bf75389b32f7d2fbe17d9713aed8292590a8e482f48a05e",
       "last_commit": "29311ce"
     },
     {
@@ -209,8 +209,8 @@
     "research/figures/C-phenotypes-one-rule/figure-C-data.csv",
     "research/figures/C-phenotypes-one-rule/figure-C-matrix.csv"
   ],
-  "code_commit": "29311ce",
-  "code_dirty": false,
+  "code_commit": "67dc802",
+  "code_dirty": true,
   "versions": {
     "python": "3.13.16",
     "numpy": "2.5.3",
