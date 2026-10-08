@@ -6,7 +6,7 @@ for I003, alone with the full pulse (Lane 7's HR-009 E2 control). (c, d) S102, t
 lifetimes of 37 starts at its registered rule (Lane 6's L6-007 follow-up and HR-009 E1), drawn as
 individual lifelines and as a Kaplan-Meier survival estimate with censoring at 5000 tu.
 
-Evidence is read with `git show` at pinned commits (figlib.gitsource): unmerged PR #27, and #29 and #30 at their merge commits on main:
+Evidence is read with `git show` at pinned commits (figlib.gitsource): PRs #27, #29 and #30 at their merge commits on main:
 Lane 6's PR #27 and Lane 7's PR #30. Nothing is copied into this branch. The new findings are
 proposed claims (L6-c, L6-d, L6-f), not ledger entries, so the figure prints no status for them.
 Ledger statuses are drawn only for the claims already recorded (C038, C041). Runs no simulation.
@@ -33,7 +33,7 @@ from figlib.gitsource import Pinned  # noqa: E402
 from figlib.style import GRID, INK, MUTED, OKABE_ITO, figure_style, status_badge  # noqa: E402
 
 OUT = HERE / "figure-D"
-PR27 = "968d330235e234fae4c6818a07c2b9eeee265113"  # Lane 6, L6-007/L6-008 results (unmerged)
+PR27 = "7cbf5aedcb8111973c6cffdb4c6bcf5b34f4ae0e"  # Lane 6, L6-007/L6-008: PR #27 merge commit on main
 PR30 = "0b9b47f8d7c48847219441cd15152792adbd45de"  # Lane 7, HR-009: PR #30 merge commit on main
 PR29 = "20bdff9f3827290cff6646fae6bc8f283e5aa373"  # Lane 3, L3-003: PR #29 merge commit on main; cited for the refinement caveat only
 L3_003 = "research/experiments/L3-003-circler-lifetime/README.md"
@@ -244,7 +244,7 @@ def panel_d(ax, runs):
 # ---------------------------------------------------------------- build
 
 def build():
-    l6 = Pinned(PR27, "PR #27 (Lane 6, L6-007/L6-008), unmerged")
+    l6 = Pinned(PR27, "PR #27 (Lane 6, L6-007/L6-008), merged to main")
     l7 = Pinned(PR30, "PR #30 (Lane 7, HR-009), merged to main")
     l3 = Pinned(PR29, "PR #29 (Lane 3, L3-003), merged to main")
     l3.text(L3_003)  # not plotted: logged so the caveat names exactly what it rests on
@@ -261,8 +261,8 @@ def build():
         fig.suptitle("Figure D. A withdrawn 'together is worse', and a circler that disappears only at R 13, T 10",
                      x=0.005, ha="left", fontsize=9, fontweight="bold")
         sf = fig.subfigures(2, 1, height_ratios=[5.0, 2.9], hspace=0.03)
-        sf[0].text(0.005, 0.985, f"PROVISIONAL: evidence from unmerged PR #27 (Lane 6) @ {PR27[:7]}, with PR #30 (Lane 7, HR-009) and #29 merged "
-                   f"(main @ {PR30[:7]}).\nThe new findings are proposed claims, not ledger entries. Ledger statuses (C038, C041) "
+        sf[0].text(0.005, 0.985, f"PROVISIONAL exhibit: evidence from merged PRs #27 (Lane 6, main @ {PR27[:7]}), #29 and #30 (Lane 7, HR-009). "
+                   f"\nThe new findings are proposed claims, not ledger entries. Ledger statuses (C038, C041) "
                    f"checked against research/claims.md @ {led['ledger_commit']}.",
                    transform=sf[0].transSubfigure, ha="left", va="top", fontsize=6.2, color=OKABE_ITO["vermillion"],
                    fontweight="bold")
@@ -334,7 +334,7 @@ def build():
     inputs = [pathlib.Path(__file__).resolve(), *sorted((HERE.parent / "figlib").glob("*.py"))]
     man = P.manifest("D-pair-and-circler", inputs, outs,
                      ".venv/bin/python research/figures/D-pair-and-circler/make_figure.py", led,
-                     ["PROVISIONAL: evidence read from unmerged PR #27 and from merged PRs #29 and #30 at pinned commits; see pinned_inputs.",
+                     ["PROVISIONAL: evidence read from merged PRs #27, #29 and #30 at their merge commits; see pinned_inputs.",
                       "Proposed claims L6-c, L6-d, L6-f are not in the ledger; no status is drawn for them.",
                       "Kaplan-Meier with Greenwood log-log 95% band; HR-009's rerun of the unperturbed seed is not "
                       "counted as a separate start.",
