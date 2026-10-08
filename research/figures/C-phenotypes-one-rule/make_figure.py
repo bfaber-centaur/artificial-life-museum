@@ -1,10 +1,17 @@
 """Figure C: several phenotypes under one rule. Single-lane evidence (Lane 6, PR #11).
 
 Claims illustrated: C038 (glider, circler and static ring under one rule), C039 (the circler
-fails at R = 26 at its own rule), C040 (no glider/circler switching under disturbance), C042
+fails at R = 26 at its own rule: REFUTED as worded; only the bilinearly resized seed dies),
+C047 (block, nearest and cubic seeds circle at R 26 and 39), C048 (S103 block-scaled to R 26), C040 (no glider/circler switching under disturbance), C042
 (S103 is an exact fixed point), C043 (all three are catalogued species), C044 (the Orbium
-μ × σ neighbourhood). Statuses are read from research/claims.md (figlib.ledger), and the
-build stops if they no longer match EXPECTED.
+μ × σ neighbourhood). Statuses are read from research/claims.md as updated by the archivist's
+PR #22 (pinned at LEDGER_REF, not yet merged; figlib.ledger.snapshot_pending), and the build
+stops if they no longer match EXPECTED.
+
+Resolution and resize method are kept apart. All of Lane 6's R 26 runs start from bilinearly
+resized seeds (ndimage.zoom order=1). The R 26 death at the circler's own rule is a resize
+effect (C047, two engines), so it is not drawn as a resolution effect. The R 26 band shift in
+panel b was measured only from bilinear seeds, and the figure says so.
 
 Evidence is Lane 6's PR #11, read with `git show` (figlib.gitsource) at the commit that merged
 it into main, so the figure names exactly which revision of the data it plotted. Runs no
@@ -38,16 +45,24 @@ from figlib.style import (GRID, INK, MUTED, OKABE_ITO, OUTCOME, PHENOTYPE, STATU
 OUT = HERE / "figure-C"
 PR11 = "f72db9ef9584fffc10af0fcbbc6491c8f22a6d9c"  # merge of PR #11 into main (its data equals the f40f303 head Figure C was first drawn from)
 D6 = "research/experiments/L6-field"
+LEDGER_REF = "db4b8946d9e1d964540b7b436496b836b156cde9"  # PR #22 head: C039 refuted, C047 added (unmerged)
+L6_D2 = ("413003da752922e61be8a220abff8d86600e6aee",  # Lane 6 field.py rerun of the four resizes (branch, no PR)
+         "research/experiments/L6-007-attractor-geography/d2-resize.csv")
+L3_002 = "4998d0328a2fbb9d889496c441df59a20a084945"  # PR #18 head (Lane 3, unmerged)
+L3_RESIZE = "research/experiments/L3-002-property-persistence/s102_resize_check.txt"
+L3_LABELS = "research/traces/lane3/L3-002/labels.csv"
 COEX = (0.155, 0.020)  # registered rule of S102 and S103
 S001_RULE = (0.150, 0.015)
 
 EXPECTED = {
     "C038": "REPRODUCED",
-    "C039": "NUMERICALLY_FRAGILE",
+    "C039": "REFUTED",
     "C040": "OBSERVED",
     "C042": "REPRODUCED",
     "C043": "OBSERVED",
     "C044": "OBSERVED",
+    "C047": "INDEPENDENTLY_CHECKED",
+    "C048": "OBSERVED",
 }
 NUMERICS = [("T10 R13", "bistab-T10-R13.csv", "1000 tu"), ("T10 R26", "bistab-T10-R26.csv", "500 tu"),
             ("T40 R13", "bistab-T40-R13.csv", "500 tu")]
@@ -117,7 +132,7 @@ def panel_map(ax, src, rows_out):
             bbox=dict(fc="white", ec=GRID, pad=2, lw=0.5), zorder=6)
 
 
-NUM_LABEL = {"T10 R13": "T10 R13 (base)", "T10 R26": "R 26: grid 2× finer", "T40 R13": "T 40: step 4× finer"}
+NUM_LABEL = {"T10 R13": "T10 R13 (base)", "T10 R26": "R 26 (bilinear seed)", "T40 R13": "T 40: step 4× finer"}
 
 
 def panel_strips(axs, src, rows_out, status):
@@ -144,7 +159,8 @@ def panel_strips(axs, src, rows_out, status):
                 if (num, seed) == ("T10 R26", "gyrator") and mu == COEX[0]:
                     ax.scatter([COEX[1]], [y], s=120, facecolors="none", edgecolors=OKABE_ITO["vermillion"],
                                linewidths=1.0, zorder=5)
-                    ax.annotate("S102's own rule:\ndies at R 26 (C039)", (COEX[1], y), xytext=(0.0236, y),
+                    ax.annotate("bilinear seed dies;\nother resizes circle\n(C039 refuted, C047)",
+                                (COEX[1], y), xytext=(0.0236, y),
                                 fontsize=5.8, color=OKABE_ITO["vermillion"], fontweight="bold", va="center",
                                 arrowprops=dict(arrowstyle="-", lw=0.6, color=OKABE_ITO["vermillion"]),
                                 bbox=dict(fc="white", ec="none", pad=1), zorder=6)
@@ -190,24 +206,46 @@ def panel_strips(axs, src, rows_out, status):
                              phenotype(r), r["mass_mean"], r["speed"], r["path_speed"]])
     status_badge(axs[0], "C038", status["C038"], x=0.0, y=1.0, ha="left", short=True, in_layout=False)
     status_badge(axs[1], "C039", status["C039"], x=0.0, y=1.0, ha="left", short=True, in_layout=False)
+    status_badge(axs[1], "C047", status["C047"], x=1.0, y=1.0, ha="right", short=True, in_layout=False)
 
 
 EVIDENCE_COLS = [
-    ("T10 R13", "persist"), ("T10 R26", "persist"), ("T40 R13", "persist"),
+    ("T10 R13", "persist"), ("R 26,\nbilinear seed", "T10 R26"), ("R 26, block /\nnearest / cubic", "resize"),
+    ("T40 R13", "persist"),
     ("clean rerun", "rerun"), ("returns after\nI001 attenuation", "return"),
     ("second lane\nreproduces", "second"), ("catalog\nidentity", "catalog"),
 ]
-GROUPS = [("persistence at the coexistence rule (one lane)", 0, 3), ("same lane, stronger tests", 3, 5),
-          ("independent", 5, 7)]
+GROUPS = [("persistence at the coexistence rule", 0, 4), ("same lane, stronger tests", 4, 6),
+          ("independent", 6, 8)]
 SPECIMENS = [("orbium", "glider (Orbium cells)", "GLIDER", None), ("gyrator", "circler S102", "CIRCLER", "S102"),
              ("static", "static ring S103", "STATIC", "S103")]
 PASS, FAIL, CHANGED, NONE, UNTESTED = "pass", "fail", "changed", "none", "untested"
 CELL_BG = {PASS: "#e3f1ec", FAIL: "#f8e1d5", CHANGED: "#fbefd4", NONE: "#eeeeee", UNTESTED: "#ffffff"}
 
 
-def evidence(src, ledger_claims, rows_out):
+def evidence(src, ledger_claims, rows_out, l6d2, l3):
     """The evidence matrix. Every cell cites where its value comes from."""
     cells = {}
+    # R 26 from other seed resizes (C047, C048): Lane 6 field.py rerun, cross-checked against Lane 3
+    d2 = [r for r in l6d2.csv(L6_D2[1])]
+    l3txt = l3.text(L3_RESIZE)
+    for r in d2:
+        alive = r["class_1000tu"] == "CIRCLER"
+        l3line = next(l for l in l3txt.splitlines() if l.startswith(f"({r['R']}, '{r['method']}'"))
+        assert ("alive" in l3line) == alive, (r, l3line)  # both engines agree on every resize
+        rows_out.append(["c", "L6-007 d2-resize.csv @ 413003d", f"gyrator ({r['method']})", COEX[0], COEX[1],
+                         f"T10 R{r['R']}", r["class_1000tu"] if alive else "died", r["mass_last100"],
+                         r["net_speed"], r["path_speed"]])
+    others = [r for r in d2 if r["method"] != "bilinear"]
+    assert others and all(r["class_1000tu"] == "CIRCLER" for r in others)
+    cells["gyrator", "resize"] = (PASS, f"circler, all 3\nat R 26 and 39\n(2 engines)")
+    cells["orbium", "resize"] = (UNTESTED, "not run")
+    lab = {r["property"]: r for r in l3.csv(L3_LABELS) if r["specimen"] == "S103"}
+    assert lab["fixed_point"]["R26"] == "False"
+    cells["static", "resize"] = (CHANGED, f"static, block seed\nm {float(lab['mass']['R26']):.3f}, ≠ seed\n"
+                                          f"(Lane 3, C048)")
+    rows_out.append(["c", "L3-002 labels.csv @ 4998d03", "static (block)", COEX[0], COEX[1], "T10 R26", "STATIC",
+                     lab["mass"]["R26"], "", ""])
     for num in ("T10 R13", "T40 R13", "T10 R26"):
         fname = f"persist-{num.replace(' ', '-')}.csv"
         rows = {r["seed"]: r for r in src.csv(f"{D6}/{fname}")
@@ -231,7 +269,7 @@ def evidence(src, ledger_claims, rows_out):
         src.text(f"research/traces/{run}/summary.json")  # the trace exists at the pinned commit
         line = next(l for l in readme.splitlines() if f"`{run}`" in l and "final sha256" in l)
         assert "| identical |" in line, line  # Lane 6's table: second process, same config
-        cells[seed, "clean rerun"] = (PASS, f"bitwise\n{run}")
+        cells[seed, "clean rerun"] = (PASS, "bitwise\n" + run.replace("-", "-\n"))
     # recovery after I001 (both phases keep the phenotype), from L6-005; S103 from its dossier table
     sw = src.csv(f"{D6}/switch-T10-R13.csv")
     for seed, case in (("orbium", "orb@coex"), ("gyrator", "gyr@coex")):
@@ -255,7 +293,7 @@ def evidence(src, ledger_claims, rows_out):
             cells[seed, "return"] = (FAIL, f"at {s:.0%}: kept in\n{k} of {n} phases")
     dossier = src.text("research/specimens/S103-static-ring.md")
     assert "I001 attenuation 0.05–0.20 | returns **bitwise**" in dossier
-    cells["static", "return"] = (PASS, "bitwise, ≤ 20%\n(1 phase, dossier)")
+    cells["static", "return"] = (PASS, "bitwise, ≤ 20%\n(1 phase,\ndossier)")
     # second lane: read from the ledger's own status text for C038 / C042
     for seed, cid in (("orbium", "C038"), ("gyrator", "C038"), ("static", "C042")):
         txt = ledger_claims[cid]["status_text"]
@@ -272,7 +310,7 @@ def panel_matrix(ax, cells, status):
         ax.text(j + 0.5, nrow + 0.08, head, ha="center", va="bottom", fontsize=6.0, color=INK)
         for i, (seed, label, _, _) in enumerate(SPECIMENS):
             y = nrow - 1 - i
-            k = head if key in ("persist", "rerun") and head in ("T10 R13", "T40 R13", "T10 R26", "clean rerun") else key
+            k = head if key in ("persist", "rerun") and head in ("T10 R13", "T40 R13", "clean rerun") else key
             if key == "rerun":
                 k = "clean rerun"
             kind, txt = cells[seed, k]
@@ -291,10 +329,10 @@ def panel_matrix(ax, cells, status):
         ax.text((a + b) / 2, nrow + 0.68, title, ha="center", va="bottom", fontsize=6.0, color=INK, fontweight="bold")
     # every claim this panel draws on, statuses as read from the ledger
     x = -2.0
-    for cid in ("C038", "C039", "C040", "C042", "C043"):
+    for cid in ("C038", "C039", "C040", "C042", "C043", "C048", "C047"):
         t = status_badge(ax, cid, status[cid], x=x, y=nrow + 1.12, ha="left", short=True, in_layout=False)
         t.set_transform(ax.transData)
-        x += 1.55
+        x += 1.42
     ax.set_xlim(-2.0, ncol)
     ax.set_ylim(-0.05, nrow + 1.15)
     ax.axis("off")
@@ -302,18 +340,20 @@ def panel_matrix(ax, cells, status):
 
 def build():
     src = Pinned(PR11, "PR #11 (Lane 6), merged to main")
-    led = L.snapshot(EXPECTED)
+    l6d2 = Pinned(L6_D2[0], "Lane 6 L6-007 D2 rerun, branch claude/night0-field-tmbx06 (no PR)")
+    l3 = Pinned(L3_002, "PR #18 (Lane 3 L3-002), unmerged")
+    led = L.snapshot_pending(EXPECTED, LEDGER_REF, "PR #22 (archivist ledger update), unmerged")
     status = {cid: c["status"] for cid, c in led["claims"].items()}
     rows_out = []
-    cells = evidence(src, led["claims"], rows_out)
+    cells = evidence(src, led["claims"], rows_out, l6d2, l3)
     with figure_style():
         fig = plt.figure(figsize=(7.2, 9.6), layout="constrained")
         fig.suptitle("Figure C. Several phenotypes under one rule: what is observed, and how far it is checked",
                      x=0.005, ha="left", fontsize=9, fontweight="bold")
         sf = fig.subfigures(3, 1, height_ratios=[2.5, 3.6, 1.75], hspace=0.02)
         sf[0].text(0.005, 0.975, f"ONE LANE: evidence from Lane 6 (PR #11, merged @ {src.commit[:7]}); "
-                   f"no second-lane reproduction yet.\nClaim statuses checked against research/claims.md @ "
-                   f"{led['ledger_commit']}.",
+                   f"no second-lane reproduction of the coexistence yet.\nClaim statuses checked against "
+                   f"research/claims.md as updated in PR #22 @ {led['ledger_commit']} (unmerged; C039 refuted, D2).",
                    transform=sf[0].transSubfigure, ha="left", va="top", fontsize=6.2, color=OKABE_ITO["vermillion"],
                    fontweight="bold")
         axa = sf[0].subplots(1, 1)
@@ -324,8 +364,8 @@ def build():
 
         axb = sf[1].subplots(1, 2, sharex=True)
         panel_strips(axb, src, rows_out, status)
-        sf[1].suptitle("b   Resolution and timestep checks: the coexistence band moves, and at R 26 the circler's own "
-                       "rule falls outside it",
+        sf[1].suptitle("b   Timestep and resolution checks: the coexistence band moves. Every R 26 row starts "
+                       "from a bilinearly resized seed",
                        x=0.005, ha="left", fontsize=7.3,
                        fontweight="bold")
 
@@ -339,7 +379,7 @@ def build():
                           ms=4.5 * PHENOTYPE[k].get("size", 1) ** 0.5 if k != "died" else 5, label=PHENOTYPE[k]["label"])
                    for k in phs]
         handles += [Rectangle((0, 0), 1, 1, facecolor="none", edgecolor=STATUS["NUMERICALLY_FRAGILE"]["color"],
-                              hatch="////", label="glider + circler coexist (location shifts with T, R)"),
+                              hatch="////", label="glider + circler coexist (σ location moves with the numerics)"),
                     Line2D([], [], color=MUTED, lw=0.6, ls=(0, (2, 2)), label="σ = 0.020 (coexistence rule)"),
                     Line2D([], [], ls="", marker="|", ms=5, mew=0.8, color="#a8a8a8",
                            label="sampled σ without coexistence")]
@@ -373,8 +413,10 @@ def build():
     man = P.manifest("C-phenotypes-one-rule", inputs, outs,
                      ".venv/bin/python research/figures/C-phenotypes-one-rule/make_figure.py", led,
                      ["Single-lane evidence: Lane 6 data read at the PR #11 merge commit; see pinned_inputs.",
+                      "Resize evidence (C047, C048) read from Lane 6's D2 rerun commit and Lane 3's PR #18 head.",
+                      "Statuses checked against the PR #22 ledger update (pending); base_status is main's at build.",
                       "Phenotypes recomputed with Lane 6's tables.py classifier; switch CSV 'outcome' column unused."],
-                     pinned_inputs=src.manifest())
+                     pinned_inputs=src.manifest() + l6d2.manifest() + l3.manifest())
     P.write_manifest(HERE / "figure-C.provenance.json", man)
 
 
