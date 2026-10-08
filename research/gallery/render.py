@@ -766,7 +766,7 @@ def g006_eventually_gone(jobs: list[dict]) -> None:
             "GIF palette reduced to 128 colours; the MP4 is H.264 (lossy)",
         ],
         "sources_of_interpretation": {
-            "L6-007 follow-up": "PR #27 @ 3ccb804 (under review), research/experiments/L6-007-attractor-geography/",
+            "L6-007 follow-up": "PR #27 @ 968d330 (under review; corrected text agrees: divergence at all settings, collapse at R 13, T 10 only), research/experiments/L6-007-attractor-geography/",
             "L3-003": "PR #29, merged at 20bdff9, research/experiments/L3-003-circler-lifetime/",
             "HR-009 E1 and HR-009b": "PR #30, merged at 0b9b47f, research/reports/hostile-review.md and "
                          "research/experiments/HR009-l6-review/e1.csv",
