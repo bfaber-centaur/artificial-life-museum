@@ -151,8 +151,11 @@ the two cuts. Both films are aligned on their own cut.
 > *Correction, 8 October.* The struck sentence was wrong. The circler did not die because the
 > resolution doubled. It died because of how its starting pattern was enlarged. Enlarged by
 > bilinear interpolation, it dies at 2× and 3× resolution. Enlarged by block copying,
-> nearest-neighbour or cubic resizing, it keeps circling at both. Two independent simulators
-> agree ([C047](../claims.md), *independently checked*; C039 *refuted* as worded; ledger PR #22).
+> nearest-neighbour or cubic resizing, it keeps circling at both. Lane 3 measured this
+> ([L3-002](../experiments/L3-002-property-persistence/README.md), on main), and Lane 6 got the
+> same eight outcomes in its own engine (branch not yet merged). The ledger change (C039
+> *refuted* as worded, superseded by C047 *independently checked*) is proposed in ledger PR #22
+> and not yet merged; until it is, the ledger on main still lists C039 as *numerically fragile*.
 > The method used to resize a seed is a choice, and here it decided the outcome. That is a
 > different fragility from resolution itself.
 
@@ -165,7 +168,7 @@ rules, not new forms ([C043](../claims.md)).
 | --- | --- | --- | --- | --- |
 | S001 | Orbium unicaudatus (O2u) | R 13, T 10, μ 0.15, σ 0.015 | mass 0.4358, speed 0.479 R/tu, heading 68.2° | dossier [`S001-orbium.md`](../specimens/S001-orbium.md); C001–C016 |
 | S101 | bound Orbium pair (Synorbium-like) | S001's rule | mass 0.8736, speed 0.473 R/tu, heading 35.5° | C041 *observed*; C043 *observed* (not yet reproduced by a second lane) |
-| S102 | Gyrorbium-like circler | R 13, T 10, μ 0.155, σ 0.020 | mass 0.522 (sd 0.010), net speed 0.003 R/tu | C038 *reproduced*; C039 *refuted* as worded, superseded by C047 *independently checked* (survives 2× and 3× resolution unless the seed is resized bilinearly); C040, C043 *observed* |
+| S102 | Gyrorbium-like circler | R 13, T 10, μ 0.155, σ 0.020 | mass 0.522 (sd 0.010), net speed 0.003 R/tu | C038 *reproduced*; C039 on main *numerically fragile*, proposed *refuted* as worded and superseded by C047 *independently checked* in ledger PR #22 (L3-002: survives 2× and 3× resolution unless the seed is resized bilinearly); C040, C043 *observed* |
 | S103 | Circium-like static ring | same as S102 | mass 0.3787, final state = initial state | C038, C042 *reproduced*; C043 *observed* |
 
 All four use the poly kernel core and poly growth, β [1], Euler steps with a hard clip to
@@ -265,9 +268,10 @@ heading values come from `galintervene.chord_heading("S102", 3002)`. The G004 S0
 
 ## Cycle log
 
-- **2026-10-08, correction.** C039 was refuted (ledger PR #22). The field note and specimens
-  table no longer say that S102 dies at twice the resolution; its death there depended on
-  bilinear seed resizing (C047). No pictures changed.
+- **2026-10-08, correction.** C039's broad claim was refuted by L3-002 (merged); the ledger
+  update is ledger PR #22 (open). The field note and specimens table no longer say that S102
+  dies at twice the resolution; its death there depended on bilinear seed resizing. No
+  pictures changed.
 - **2026-10-07, cycle 3 (Lane 8).** G005: the circler cut at two phases two steps apart. One
   dies, the other becomes S103 exactly (C040).
 - **2026-10-07, after PR #11 merged.** Retired the vendored S101–S103 copies and the
