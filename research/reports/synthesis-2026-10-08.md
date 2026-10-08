@@ -1,8 +1,18 @@
 # Synthesis, 2026-10-08
 
 The periodic synthesis described in [`../roadmap.md`](../roadmap.md). Written at `main` `517f2b6`
-(after PR #28). Statuses are the ledger's ([`../claims.md`](../claims.md)); anything marked
-*proposed* is still in an open PR and has no ledger status yet.
+(after PR #28) and refreshed at 03:50 UTC with the open-PR heads below. Statuses are the ledger's
+([`../claims.md`](../claims.md)). Anything marked *proposed* is still in an open PR and has no
+ledger status yet.
+
+| Open PR | Head read |
+| --- | --- |
+| #27 L6-007/L6-008 | `e1f8760` |
+| #29 L3-003 | `8c3c082` |
+| #30 HR-009 | `c063d73` |
+| #32 museum Room 6 | `c5527d6` |
+| #33 Figure D | `8f1236e` |
+| #34 gallery G006 | `32e0167` |
 
 ## New evidence
 
@@ -22,86 +32,122 @@ The periodic synthesis described in [`../roadmap.md`](../roadmap.md). Written at
 
 **Open, proposed only**
 
-- **Attractor geography, L6-007 (PR #27).** Orbium at the coexistence rule returns from noise up to
-  ε 0.1 (18/18), and S103 returns bitwise up to ε 0.3 (24/24). S102 is not an attractor: P1 and P2
-  are refuted. In an exploratory follow-up the unperturbed seed died at step 39 799, and 8 of 12
-  perturbed starts survived past 5000 tu.
+- **S102's lifetime belongs to R 13, T 10 (L3-003, PR #29, complete).**
+  - At R 13, T 10, Lane 6's death step (39 799) and all 12 of Lane 6's noisy fates reproduce
+    exactly. Of 24 copies perturbed by 1e−12, 10 stop circling within 5000 tu: 9 die and 1 fills the
+    world. **TRANSIENT**, in agreement with Lane 7.
+  - Refining either knob removes the collapse within the preregistered horizons. At R 26, 0 of 29
+    runs end; at R 39, 0 of 3. At R 13 with T 20 and with T 40 (Q7, Amendment 2), 0 of 24 copies
+    end in 8000 tu at each setting.
+  - Every refined run is censored, so no refined setting is shown to be an attractor.
+  - The exact match at R 13 shows that `alm_check` and `field.py` perform the same floating-point
+    arithmetic (both are numpy `rfft2` steppers). It does not make the death step a property of the
+    rule.
+- **Attractor geography, L6-007 (PR #27, revised after HR-009).**
+  - Orbium at the coexistence rule returns from noise up to ε 0.1 (18/18).
+  - S103 returns bitwise up to ε 0.3 (24/24) at the primary rule.
+  - S102 is a chaotic transient at R 13, T 10, not an attractor (P1 and P2 refuted). The step 39 799
+    death is framed as one floating-point trajectory, and the transient claim is scoped to R 13, T 10
+    after L3-003.
 - **Pair coupling, L6-008 (PR #27).**
   - I004 port injury: H0 holds in 58/60 runs. C041's "fission" is the uninjured partner surviving.
-  - I001 attenuation: H0 is not rejected.
-  - I003 frontal mass: H1, the partners drag each other down, at s 0.2–0.4.
-- **Hostile review, HR-009 (PR #30).**
-  - **E1 (S102 lifetimes).** Copies perturbed by 1e−14 to 1e−10 separate at about 0.20 per tu.
-    Their death times scatter from 292 tu to beyond 5000 tu. S102 is therefore a chaotic transient,
-    and its exact death step belongs to one floating-point trajectory rather than to the rule.
-  - **E2 (S101 frontal mass).** Each partner alone survives even the full I003 pulse at s 0.2–0.3,
-    yet the pair dies or degrades, so coupling stands there. At s 0.4 the drag-down is explained by
-    pulse exposure. The preregistered verdict is **INCONCLUSIVE** (6 of 10 runs, threshold 8).
-- **Independent lifetime study, L3-003 (PR #29, draft).** The preregistration, Amendment 1 (the Q6
-  lifetime distribution under δ = 1e−12) and the runner are committed. No results yet.
+  - I001 attenuation: H0 is not rejected. The split-half fragility is stated as a design limit.
+  - I003 frontal mass: H1 by L6-008's own rule. The narrower reading after HR-009 is a drag-down at
+    s 0.2–0.3 only. #27 now caveats this with L6-009, below.
+- **The s 0.2 pair death is a 128² artifact (L6-009, Lane 6, independently confirmed in HR-009c,
+  PR #30).**
+  - A pulse aimed at the gap unbinds S101 into two intact Orbia. At 40 tu the world holds 0.868–0.873
+    mass, two Orbia's worth.
+  - On the 128² torus those two Orbia later collide and die (7 of 10 states dead at 300 tu). On a
+    256² world all 10 end as two Orbia.
+  - HR-009c withdraws E2's "coupling stands at s 0.2–0.3" for the on-gap pulse. E2's preregistered
+    INCONCLUSIVE verdict is unchanged.
+  - L6-009's own PR is not open yet. Its write-up is a caveat in #27's L6-008 README.
+- **Chaos weakens under refinement (HR-009b, exploratory, PR #30).** Twin circlers separate at 0.20
+  per tu at T 10, 0.096 at T 20, 0.077 at T 40 and about 0.01 at R 26. Chaos and collapse are
+  separable: the refined circlers are still chaotic but have not collapsed. Whether weaker chaos
+  causes the absence of collapse is untested.
 
 ## Refutations, narrowings and failed predictions
 
 - **C039 is REFUTED as worded** (dispute D2, resolved in favour of C047). The narrower fact, that
   the bilinear seed dies, stands.
-- **S102 is not an attractor** (proposed, #27, and strengthened by HR-009 E1). L6-007's P1 and P2
-  are refuted. C038 still calls S102 a phenotype that "persists" and has not been reworded.
+- **S102 is not an attractor at R 13, T 10, and its collapse does not survive refinement**
+  (proposed, #27, #29, #30). C038 still calls S102 a phenotype that "persists" and has not been
+  reworded.
+- **S102's death time is not a rule-level property.** The step 39 799 death is one floating-point
+  trajectory (HR-009 E1), and the finite lifetime itself is specific to R 13, T 10 (L3-003).
 - **P3 is refuted on all three blend paths.** P4 fails for the circler at T 40, and for the ring
-  under the bitwise criterion at both variants (#27). HR-009 adds that the class sequence near
-  the circler end of each blend path reflects the observation horizon, not basin geography.
+  under the bitwise criterion at both variants (#27). Classes near the circler end of each blend
+  path reflect the observation horizon, not basin geography.
 - **C041's resilience is mostly a trivial effect** (proposed, #27, accepted by HR-009). The cut
   removes one partner, and the other survives as any lone Orbium would.
-- **L6-f's claim that every death comes after at least 500 tu** is a property of the sample: HR-009
-  saw a death at 292 tu.
-- **The I003 coupling verdict is INCONCLUSIVE** under HR-009's preregistered rule, with a narrower
-  positive observation at s 0.2–0.3.
+- **The I003 "together is worse" result at s 0.2 is withdrawn** as a 128² collision artifact
+  (L6-009, HR-009c). E2 stays INCONCLUSIVE.
+- **L6-f's claim that every death comes after at least 500 tu** is a property of the sample. HR-009
+  saw a death at 292 tu and L3-003 one at 164 tu.
 
 ## Outstanding disagreements
 
-| Topic | Lane 6 (#27) | Lane 7 (#30) | How it closes |
+| Topic | Lane 6 (#27) | Lane 7 (#30) / Lane 3 (#29) | How it closes |
 | --- | --- | --- | --- |
-| What to replicate for S102 | the death at step 39 799 | the lifetime distribution, since the exact step depends on the engine | Lane 6 revision; L3-003 Q6 already targets the distribution |
-| Blend paths (P3) | class interleaving | circler-end classes are horizon samples; only the Orbium→ring and dead zones read as geography | Lane 6 revision |
-| I003 coupling | H1 at s 0.2–0.4 | real at s 0.2–0.3 only; s 0.4 explained by exposure; s ≥ 0.5 unbracketed; overall INCONCLUSIVE | Lane 6 revision |
-| I001 split-half fragility | used to discount the s 0.08 rescue and to call I003 conservative | both readings hold, but the fragility belongs in the claim as a design limit | Lane 6 revision |
+| What remains of I003 coupling (L6-d) | the on-gap s 0.3 deaths are world-dependent too; L6-009 narrows L6-d to placement-dependent, near-field effects at s 0.3 (off-gap drag-down in 4/5 phases on both world sizes) | HR-009c: all 10 on-gap s 0.2–0.3 states end as two Orbia on 256², so recommends "an on-gap pulse splits S101 into two intact Orbia; survival depends on the world, not on coupling". The off-gap effects are exploratory and not independently checked | L6-009's own PR, then a Lane 7 check of the off-gap drag-down |
+| #27's headline | the PR title still reads "S101 drag-down at I003 s 0.2–0.3" | HR-009c withdraws the s 0.2–0.3 on-gap reading | Lane 6 retitles, or the ledger wording settles it |
+| Why S102 collapses only at R 13, T 10 | not addressed | L3-003: the T 10 step is necessary at R 13, and R 26 shows the grid matters too; HR-009b: chaos weakens with refinement | a discriminating experiment, not yet proposed |
+
+The earlier disagreements over the replication target (death step vs lifetime distribution), blend
+paths, and I001 fragility are settled by #27's revision.
 
 There is also an untested hypothesis from HR-009: the front-loaded hazard and the smaller gyradius
-of long survivors suggest that S102 has a fragile and a longer-lived circling state. No
-experiment addresses it yet.
+of long survivors suggest that S102 has a fragile and a longer-lived circling state. No experiment
+addresses it yet.
 
 ## PR dependencies
 
 | PR | State | Waits on | Unblocks |
 | --- | --- | --- | --- |
-| #27 L6-007/L6-008 results | open | Lane 6's targeted revisions per HR-009. Bobby reported a merge conflict, but a local merge into `main` `517f2b6` was clean when this was written | ledger entries for L6-f, L6-g, L6-c, L6-d; rewording of C038 and C041 |
-| #30 HR-009 | open | Lane 7 finalizing the review and its test | the scoped wording for #27; the lifetime comparison row for #29 |
-| #29 L3-003 | draft, running | its own runs, stopping at the preregistered horizons (5000 tu at R 13, 8000 tu at R 26) | independent evidence on the S102 transient; whether that transient survives numerical refinement |
-| Exhibit "the creature that eventually disappears" | not started | HR-009 E1 data (#30); #29 for an independent check | a museum room |
-| Exhibit "when together is worse" | not started | L6-008 (#27) as scoped by HR-009 E2 (#30) | a museum room |
+| #27 L6-007/L6-008 | open, revised after HR-009 and L3-003 | Bobby's review; L6-009's own PR for the final L6-d wording | ledger entries for L6-f, L6-g, L6-c, L6-d; rewording of C038 and C041 |
+| #29 L3-003 | open, complete | Bobby's review | the ledger's scoping of the S102 transient to R 13, T 10 |
+| #30 HR-009 (with HR-009b, HR-009c) | open | Bobby's review | the scoped wording for #27 |
+| L6-009 | no PR yet | Lane 6 | the final L6-d claim |
+| #33 Figure D (provisional) | open | nothing for merge; redrawn when L6-009 and the ledger land | #32 |
+| #32 museum Room 6 (provisional) | open | #33 merging first (it carries #33's figure) | — |
+| #34 gallery G006 (provisional) | open | nothing for merge | — |
 
-#27 and #30 change different files and can merge in either order. #29 runs on its own clock and
-does not block #27 or #30. The archivist does not ledger anything from #27, #29 or #30 until
-those PRs land.
+#27, #29 and #30 change different files and can merge in any order. The archivist does not ledger
+anything from #27, #29, #30 or L6-009 until those PRs land.
 
 ## Exhibits
 
-- **Merged since the roadmap:** G004 "Same cut, two fates" (C041) and G005 "Two steps apart"
-  (C040) in the gallery (#17); Figure C, phenotypes under one rule, restamped against `main`
-  (#16, #24, #28); the five-room museum tour in `museum/site/` (#21); the gallery's C039
-  correction (#26).
-- **Note for the curators:** G004's caption and museum Room 4 present S101's survival under port
-  injury as C041 does. Once #27 lands, the "obvious objection" (the unaffected partner)
-  becomes the finding.
-- **Next, both explicitly provisional:** the two exhibits in the table above. They show several
-  trajectories and their spread, not one canonical death time.
+- **Merged since the roadmap:**
+  - G004 "Same cut, two fates" (C041) and G005 "Two steps apart" (C040) in the gallery (#17);
+  - Figure C, phenotypes under one rule, restamped against `main` (#16, #24, #28);
+  - the five-room museum tour in `museum/site/` (#21);
+  - the gallery's C039 correction (#26).
+- **Open, all marked provisional:**
+  - **Figure D (#33).** S101 under port injury and frontal addition, beside its lone partners. S102
+    lifelines and a survival estimate. Red caveats on the figure for the 128² artifact and for
+    R 13, T 10 only.
+  - **Museum Room 6, "Still being argued" (#32).** Bobby's two exhibits, built on Figure D, plus
+    Figure C in Room 4.
+  - **Gallery G006, "the circler that eventually disappears" (#34).** Twelve 5000 tu circlers at
+    R 13, T 10, five of which collapse.
+- **Note for the curators:** the "when together is worse" story is now mostly a finite-world
+  effect. Room 6's text and Figure D panel b predate HR-009c's withdrawal. Figure D draws the caveat,
+  but Room 6 still presents the s 0.2–0.3 window as the case where only the pair dies. G004's
+  caption and Room 4 still present S101's port-injury survival as C041 does.
 
 ## Decisions for Bobby
 
-1. **#27 and #30:** once Lane 6 has revised, accept HR-009's recommended wording for L6-f, L6-g
-   and L6-d (and L6-c as written)?
-2. **C038 and C041:** should the archivist narrow them as soon as #27 and #30 merge, or wait for
-   L3-003 (#29) to give independent support for S102 as a transient?
-3. **Next bounded questions:** the research lanes propose them after reconciliation. Candidates
-   from your list: whether S102 has distinguishable short-lived and long-lived regimes (which
-   HR-009 already hints at), what mechanism drives the pair's frontal-mass vulnerability, and the
-   basin boundaries between the nearby Orbium and static-ring attractors.
+1. **#27, #29 and #30:** review and merge? The wording they now agree on is that S102 is a chaotic
+   transient at R 13, T 10 that does not collapse at refined settings within the horizons tested,
+   and that C041's resilience is the uninjured partner.
+2. **Room 6 and Figure D before L6-009:** merge them as provisional now, with the caveat drawn, or
+   hold them until the "together is worse" text is revised?
+3. **C038 and C041:** with #29 complete, should the archivist narrow them as soon as #27, #29 and
+   #30 merge?
+4. **Next bounded questions:** the research lanes propose them after reconciliation. From your
+   list, the S102 question has changed: rather than short-lived vs long-lived regimes at R 13, T 10,
+   the sharper question is why collapse needs the T 10 step. The pair's frontal-mass
+   "vulnerability" may reduce to the placement-dependent near-field effect in L6-009. The basin
+   boundaries between Orbium and the static ring are untouched.
