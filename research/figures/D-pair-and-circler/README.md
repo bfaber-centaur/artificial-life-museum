@@ -7,11 +7,11 @@ pair runs [`figure-D-pair.csv`](figure-D-pair.csv) · lifetimes and survival est
 [`figure-D-lifetimes.csv`](figure-D-lifetimes.csv) · provenance [`figure-D.provenance.json`](figure-D.provenance.json)
 
 > **Provisional exhibit draft.** Everything plotted comes from two unmerged PRs:
-> - Lane 6's PR #27 (L6-007 and L6-008), read at `3ccb804`;
-> - Lane 7's hostile review HR-009, PR #30, read at `9fc48b4`.
+> - Lane 6's PR #27 (L6-007 and L6-008), read at `ad9ac03`;
+> - Lane 7's hostile review HR-009, PR #30, read at `4e74822`.
 >
 > Both are read with `git show`, and nothing is copied here. The findings shown are *proposed* claims
-> (L6-c, L6-d, L6-f) with HR-009's recommended wording. They are not in `research/claims.md`, so the
+> (L6-c, L6-d, L6-f) as Lane 6 revised them after HR-009. They are not in `research/claims.md`, so the
 > figure prints no status for them. If #27 or #30 change, this figure must be rebuilt at their new heads.
 
 ## What it shows
@@ -19,8 +19,8 @@ pair runs [`figure-D-pair.csv`](figure-D-pair.csv) · lifetimes and survival est
 | Finding | Where it stands | Panel |
 | --- | --- | --- |
 | **L6-c**: under port injury, the pair survives because the uninjured partner does | proposed (PR #27); accepted as written by HR-009 | a |
-| **L6-d**: under frontal addition, the bound pair dies where each partner alone survives | proposed (PR #27); HR-009 narrows it to s 0.2–0.3, preregistered verdict INCONCLUSIVE | b |
-| **L6-f**: S102 is a long, chaotic transient, not an attractor | proposed (PR #27); HR-009 strengthens it and makes the lifetime distribution the target | c, d |
+| **L6-d**: under frontal addition, the bound pair dies where each partner alone survives | proposed (PR #27), narrowed by Lane 6 after HR-009 to s 0.2–0.3; preregistered verdict INCONCLUSIVE | b |
+| **L6-f**: S102 is a long, chaotic transient, not an attractor | proposed (PR #27), revised by Lane 6 after HR-009: a chaotic transient whose lifetime distribution is the target | c, d |
 | **C041**: S101 survives port injury of 10–50% by shedding to a single Orbium | OBSERVED (ledger) | a |
 | **C038**: one rule supports a glider, a circler (S102) and a static ring | REPRODUCED (ledger) | c, d |
 
@@ -103,10 +103,10 @@ a shaded uncertainty band.
 
 | Data | Path | Commit | Panel |
 | --- | --- | --- | --- |
-| L6-008 pair runs and split baseline | `research/experiments/L6-008-pair-coupling/pair-coupling.csv` | PR #27 head `3ccb804` | a, b |
-| HR-009 E2 full-pulse halves | `research/experiments/HR009-l6-review/e2.csv` | PR #30 head `9fc48b4` | b |
-| L6-007 circler lifetimes (exploratory follow-up) | `research/experiments/L6-007-attractor-geography/circler-lifetimes.csv` | `3ccb804` | c, d |
-| HR-009 E1 twin and δ-perturbed circlers | `research/experiments/HR009-l6-review/e1.csv` | `9fc48b4` | c, d |
+| L6-008 pair runs and split baseline | `research/experiments/L6-008-pair-coupling/pair-coupling.csv` | PR #27 head `ad9ac03` | a, b |
+| HR-009 E2 full-pulse halves | `research/experiments/HR009-l6-review/e2.csv` | PR #30 head `4e74822` | b |
+| L6-007 circler lifetimes (exploratory follow-up) | `research/experiments/L6-007-attractor-geography/circler-lifetimes.csv` | `ad9ac03` | c, d |
+| HR-009 E1 twin and δ-perturbed circlers | `research/experiments/HR009-l6-review/e1.csv` | `4e74822` | c, d |
 | Claim statuses | `research/claims.md` | stamped on the figure | badges |
 
 Blob IDs and SHA-256s of every file read are in `figure-D.provenance.json` (`pinned_inputs`).

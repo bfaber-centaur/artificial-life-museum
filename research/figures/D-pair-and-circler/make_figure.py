@@ -33,8 +33,8 @@ from figlib.gitsource import Pinned  # noqa: E402
 from figlib.style import GRID, INK, MUTED, OKABE_ITO, figure_style, status_badge  # noqa: E402
 
 OUT = HERE / "figure-D"
-PR27 = "3ccb8045d83427510671c5e283f933f3513c10e7"  # Lane 6, L6-007/L6-008 results (unmerged)
-PR30 = "9fc48b423b7cef51033dbb0855e212790cc018f2"  # Lane 7, HR-009 (unmerged)
+PR27 = "ad9ac03a03d7599bc57535f11a8470349cd2156a"  # Lane 6, L6-007/L6-008 results (unmerged)
+PR30 = "4e7482277714c909501692626b1c998bdd23c073"  # Lane 7, HR-009 (unmerged)
 L8 = "research/experiments/L6-008-pair-coupling/pair-coupling.csv"
 L7 = "research/experiments/L6-007-attractor-geography/circler-lifetimes.csv"
 E1 = "research/experiments/HR009-l6-review/e1.csv"
