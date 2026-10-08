@@ -72,3 +72,18 @@ t = 8.3 tu (R 26) and 6.0 tu (R 39). So the claim of fragility under resolution 
 What remains is sensitivity to the initial condition. At T 40 it persists, turning ~15% faster. The
 coexistence band with Orbium exists at all three settings but sits at different σ
 (L6-004 table).
+
+**Lifetime (2026-10-08, L6-007 follow-up and HR-009): at R 13, T 10, S102 is a chaotic transient,
+not a stable state.** At its registered rule on 128², the registered seed circles until step 39 799
+(t = 3979.9 tu) and then dies. Both `field.py` and `alm.lenia` give that step, but that is **one
+floating-point trajectory, not the lifetime of S102**. Lane 7 (HR-009, PR #30) showed that twins
+differing by 1e−12 separate at about 0.2 per tu, and that tiny-noise copies die anywhere from
+292 tu to beyond 5000 tu. In Lane 6's follow-up, 4 of 12 starts with 1–3% noise die between 934
+and 1291 tu, and 8 still circle at 5000 tu. Treat the lifetime as a distribution with censored
+survivors. Lane 3's independent check (PR #29) reproduces this at R 13, T 10. But no copy died at
+R 13 with T 20 or T 40 (0/48, to 8000 tu), or at R 26 (0/29) or R 39 (0/3). **Collapse was observed
+only at R 13, T 10.** At finer settings S102 was not seen to die within the horizons tested, which
+does not show it is stable (all runs censored). Its trajectory is chaotic at every setting tested
+(HR-009b), so exponential divergence of twins is not by itself evidence of collapse. See
+[`L6-007`](../experiments/L6-007-attractor-geography/README.md). Night 0's runs (20 000 steps)
+were too short to see this.
