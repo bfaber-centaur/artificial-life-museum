@@ -1,7 +1,7 @@
 {
   "ledger": "research/claims.md",
-  "ledger_sha256": "b523c6924b76bb3a15a885e76758641b55be8d4aed62145cb82f1768cbf88c5c",
-  "ledger_commit": "db4b894",
+  "ledger_sha256": "0ebb34a100c5a7c5efac6d3276c74af587aedb3eb252e1dcffb953d22f8b67be",
+  "ledger_commit": "4b2db26",
   "conventions_sha256": "227df043de8fff733da0840fd8297b01f064007a2320a944a5b743733f0ff1bb",
   "claims": {
     "C001": {
@@ -142,7 +142,7 @@
     },
     "C039": {
       "status": "REFUTED",
-      "status_text": "REFUTED as worded (superseded by C047). The narrower fact, that the *bilinearly resized* seed dies at R 26 and 39, is INDEPENDENTLY_CHECKED (`field.py` and `alm_check`).",
+      "status_text": "REFUTED as worded (superseded by C047). The narrower fact, that the *bilinearly resized* seed dies at R 26 and 39, is INDEPENDENTLY_CHECKED (`field.py` and `alm_check`). That is a resize-method dependence of the initial condition, not a resolution dependence: from block, nearest or cubic seeds S102 persists at R 26 and 39, with mean properties within 0.5% of R 13 (C046).",
       "rooms": [
         "one-rule"
       ]
@@ -238,6 +238,8 @@
       "research/traces/lane3"
     ],
     "one-rule": [
+      "research/experiments/L3-002-property-persistence/README.md",
+      "research/experiments/L3-002-property-persistence/s102_resize_check.txt",
       "research/experiments/L6-field/README.md",
       "research/figures/README.md",
       "research/gallery/README.md",

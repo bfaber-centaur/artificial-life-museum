@@ -55,9 +55,10 @@ depends on how the world started, not on the rule.</p>
     whose radius is about a quarter of a kernel radius, about one lap every 3.8 time units, and goes nowhere.
     Wounds kill it more easily than the other two. It does not, as first reported, die when drawn
     at finer resolution: copies enlarged to R = 26 and R = 39 by block, nearest-neighbour or cubic
-    resizing stay healthy circlers, in two independent engines <a class="claim" href="claims.html#C047" title="S102 at its registered rule persists at R = 26 and R = 39 from block-replicated, nearest-neighbour or cubic seeds; only the bilinear seed dies"><span class="cid">C047</span><span class="badge s-INDEPENDENTLY_CHECKED" title="INDEPENDENTLY_CHECKED (`alm_check` and `field.py`; exploratory, not preregistered)">indep. checked</span></a>. Only the copy
+    resizing stay healthy circlers for the full 1000 time units tested, in two independent
+    engines, from one seed placement in an exploratory check <a class="claim" href="claims.html#C047" title="S102 at its registered rule persists at R = 26 and R = 39 from block-replicated, nearest-neighbour or cubic seeds; only the bilinear seed dies"><span class="cid">C047</span><span class="badge s-INDEPENDENTLY_CHECKED" title="INDEPENDENTLY_CHECKED (`alm_check` and `field.py`; exploratory, not preregistered)">indep. checked</span></a>. Only the copy
     enlarged by bilinear smoothing dies, so what failed was that resize method, not the creature at
-    higher resolution, and the original claim is <a class="claim" href="claims.html#C039" title="The circler S102 at its registered rule (μ 0.155, σ 0.020) does not survive doubling the resolution"><span class="cid">C039</span><span class="badge s-REFUTED" title="REFUTED as worded (superseded by C047). The narrower fact, that the *bilinearly resized* seed dies at R 26 and 39, is INDEPENDENTLY_CHECKED (`field.py` and `alm_check`).">refuted</span></a>.</figcaption>
+    higher resolution, and the original claim is <a class="claim" href="claims.html#C039" title="The circler S102 at its registered rule (μ 0.155, σ 0.020) does not survive doubling the resolution"><span class="cid">C039</span><span class="badge s-REFUTED" title="REFUTED as worded (superseded by C047). The narrower fact, that the *bilinearly resized* seed dies at R 26 and 39, is INDEPENDENTLY_CHECKED (`field.py` and `alm_check`). That is a resize-method dependence of the initial condition, not a resolution dependence: from block, nearest or cubic seeds S102 persists at R 26 and 39, with mean properties within 0.5% of R 13 (C046).">refuted</span></a>.</figcaption>
   </figure>
   <figure class="vitrine" style="margin:0">
     <img src="../../research/gallery/exhibits/G002-portraits/S103-portrait.png" width="512" height="576"
@@ -110,6 +111,7 @@ is mapping the same region in more detail.</div>
 
 <aside class="sources"><h2>Sources</h2><ul>
   <li>Dossiers: <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/specimens/S101-orbium-pair.md">S101</a>, <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/specimens/S102-circler.md">S102</a>, <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/specimens/S103-static-ring.md">S103</a> (Lane 6)</li>
+  <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/L3-002-property-persistence/README.md">Numerical ecology L3-002</a> and its <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/L3-002-property-persistence/s102_resize_check.txt">circler resize check</a> (Lane 3)</li>
   <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/L6-field/README.md">Field exploration L6</a>: sweeps, coexistence, disturbance switching (Lane 6)</li>
   <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/README.md">Gallery notes</a> with run IDs and hashes, exhibits <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/tree/main/research/gallery/exhibits/G002-portraits">G002</a> and <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/tree/main/research/gallery/exhibits/G003-contact-sheet">G003</a> (Lane 8)</li>
   <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/figures/README.md">Figures index</a>, where Figure C will appear (Lane 9)</li>
@@ -118,7 +120,7 @@ is mapping the same region in more detail.</div>
 <nav class="walk" aria-label="Tour"><a class="prev" href="edges.html"><small>Back</small>How much can it take?</a><a class="next" href="how-we-know.html"><small>Next room</small>How we know</a></nav>
 </main>
 <footer class="site">
-  <p>Claim statuses read from <code>research/claims.md</code> (sha256 <code>b523c6924b76</code>) when this page was built.</p>
+  <p>Claim statuses read from <code>research/claims.md</code> (sha256 <code>0ebb34a100c5</code>) when this page was built.</p>
   <p>Every picture here is a recorded simulation or a figure drawn from committed data. Statuses
   are the claims ledger's, not the museum's: a badge never says more than
   <a href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/claims.md">research/claims.md</a> does.</p>
