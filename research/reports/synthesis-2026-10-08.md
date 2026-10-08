@@ -2,7 +2,7 @@
 
 This is the closing synthesis for October 8, the periodic synthesis described in
 [`../roadmap.md`](../roadmap.md). It was written in closeout mode: no new questions, experiments,
-exhibits or lanes. It reflects `main` at `7cbf5ae` (after PRs #29, #30 and #27). Claim statuses are the ledger's ([`../claims.md`](../claims.md)). Anything marked *proposed*
+exhibits or lanes. It reflects `main` at `96b0051` (after PRs #29, #30, #27, #33, #34 and #32). Claim statuses are the ledger's ([`../claims.md`](../claims.md)). Anything marked *proposed*
 has no ledger entry yet.
 
 ## New evidence
@@ -87,9 +87,9 @@ has no ledger entry yet.
 | #29 L3-003 | merged | |
 | #30 HR-009 | merged | |
 | #27 L6-007/L6-008 | merged (`7cbf5ae`) | revised per Bobby's and Lane 7's reviews |
-| #33 Figure D (provisional) | open | retitled to "a withdrawn 'together is worse'" |
-| #32 museum Room 6 (provisional) | open | merges after #33 |
-| #34 gallery G006 (provisional) | open | shown at R 13, T 10 only |
+| #33 Figure D (provisional) | merged (`984354a`) | stays provisional |
+| #32 museum Room 6 (provisional) | merged (`96b0051`) | stays provisional |
+| #34 gallery G006 (provisional) | merged (`f29d733`) | stays provisional; shown at R 13, T 10 only |
 | #35 L6-009 / L6-010 | draft, parked | exploratory work preserved; not to be resolved in closeout |
 | ledger | not updated | C038 and C041 wording, and claims for L6-f, L6-c and L6-d, are for the archivist on resume |
 
@@ -97,6 +97,6 @@ has no ledger entry yet.
 
 1. **C038 and C041.** Should the archivist narrow them on resume, now that #27, #29 and #30 have
    merged?
-2. **#32, #33 and #34.** Each merges as provisional once it is consistent with the merged evidence.
+2. **Provisional exhibits (#32, #33, #34).** All three merged in closeout and stay labelled provisional. Revisit their text when the ledger records the Night 1 claims.
 3. **Resuming.** The four open questions above are candidates for the next bounded tests, but
    none should run until you say so.
