@@ -730,9 +730,10 @@ def g006_eventually_gone(jobs: list[dict]) -> None:
     save_provenance(folder, {
         "exhibit": "G006",
         "title": "The circler that eventually disappears",
-        "status": "provisional: built while PR #27 (L6-007), PR #29 (L3-003) and PR #30 (HR-009) are under "
-                  "review; the ledger holds no claim on S102's lifetime yet. The disappearance is shown at R 13, "
-                  "T 10 only; L3-003 sees no deaths at R 26, R 39 (finer grid) or T 20, T 40 (smaller step), so "
+        "status": "provisional: L6-007 (PR #27) is under review and the ledger holds no claim on S102's "
+                  "lifetime yet; L3-003 (PR #29, merged 20bdff9) and HR-009 (PR #30, merged 0b9b47f) are on "
+                  "main. The disappearance is shown at R 13, T 10 only; L3-003 sees no deaths at R 26, R 39 "
+                  "(finer grid) or T 20, T 40 (smaller step), so "
                   "the collapse is specific to the R 13, T 10 discretization",
         "media": ["lifelines-sheet.png", "eventually-gone.gif"] + (["eventually-gone.mp4"] if mp4 else []),
         "runs": [{"label": name(i), "run_id": j["run_id"], "seed": j["manifest"]["seed"],
@@ -759,14 +760,15 @@ def g006_eventually_gone(jobs: list[dict]) -> None:
             "seed's support) in alm.lenia; they are not HR-009's or Lane 6's runs, and their death times "
             "are not expected to match those runs'",
             "12 runs show spread, not a lifetime distribution; HR-009 pools 37 runs",
-            "all runs are at R 13, T 10 on a 128x128 grid; L3-003 (PR #29 @ 8c3c082) finds no deaths in 29 "
+            "all runs are at R 13, T 10 on a 128x128 grid; L3-003 (PR #29, merged at 20bdff9) finds no deaths in 29 "
             "runs at R 26 (to 5000-8000 tu), 3 at R 39 (8000 tu), 24 at R 13 T 20 or 24 at R 13 T 40 "
             "(8000 tu each), so the finite lifetime is specific to the R 13, T 10 discretization",
             "GIF palette reduced to 128 colours; the MP4 is H.264 (lossy)",
         ],
         "sources_of_interpretation": {
-            "L6-007 follow-up": "PR #27 @ 3ccb804, research/experiments/L6-007-attractor-geography/",
-            "HR-009 E1": "PR #30 @ 9fc48b4, research/reports/hostile-review.md and "
+            "L6-007 follow-up": "PR #27 @ 3ccb804 (under review), research/experiments/L6-007-attractor-geography/",
+            "L3-003": "PR #29, merged at 20bdff9, research/experiments/L3-003-circler-lifetime/",
+            "HR-009 E1 and HR-009b": "PR #30, merged at 0b9b47f, research/reports/hostile-review.md and "
                          "research/experiments/HR009-l6-review/e1.csv",
         },
     }, [_Src(j) for j in jobs])

@@ -135,11 +135,13 @@ the two cuts. Both films are aligned on their own cut.
 
 ### G006 — The circler that eventually disappears (*provisional*)
 
-> **Provisional.** Built while Lane 6's L6-007 results (PR #27) and Lane 7's hostile review
-> HR-009 (PR #30) are under review. The ledger holds no claim on S102's lifetime yet. The
+> **Provisional.** The evidence it quotes from Lane 3's
+> [L3-003](../experiments/L3-003-circler-lifetime/README.md) (PR #29) and Lane 7's
+> [HR-009](../reports/hostile-review.md) (PR #30) is merged on main. Lane 6's L6-007 results
+> (PR #27) are still under review, and the ledger holds no claim on S102's lifetime yet. The
 > pictures are verified replays; the reading of them below is not settled.
 >
-> **Shown at R 13, T 10 only; not seen under refinement.** Lane 3's L3-003 (PR #29, open)
+> **Shown at R 13, T 10 only; not seen under refinement.** Lane 3's L3-003 (merged)
 > reproduces Lane 6's R 13, T 10 deaths in an independent engine, but sees none when the grid is
 > finer (0 of 29 runs at R 26, to 5000–8000 tu; 0 of 3 at R 39, 8000 tu) or the timestep smaller
 > (0 of 24 at T 20 and 0 of 24 at T 40, R 13, 8000 tu each). So the disappearance below is
@@ -166,15 +168,21 @@ One starts from the registered seed. The other eleven are twins: the same seed p
   is gone, so the collapse takes under 2 tu. We could not see any sign in the film of which runs
   would go. The registered seed is gone at step 39 799 (3979.9 tu), the same step as in Lane 6's
   L6-007 follow-up.
-- **Interpretation, provisional.** HR-009 reads S102 at this rule as a chaotic transient, not an
-  attractor: twins that start 10⁻¹² apart separate about e-fold every 5 tu, so the step at which
-  one run dies belongs to that floating-point trajectory, not to the rule. Lane 7 pools 37 runs
+- **Interpretation, provisional.** Two things are going on, and the refinement results separate
+  them. *Divergence:* twins that start 10⁻¹² apart separate about e-fold every 5 tu at R 13, T 10
+  (HR-009 E1), so the step at which one run dies belongs to that floating-point trajectory, not to
+  the rule. *Collapse:* at R 13, T 10 some of those trajectories fall apart; Lane 7 pools 37 runs
   (20 deaths, earliest at 292 tu, censored mean about 5900 tu, more early deaths than an
-  exponential predicts). Our twelve are a picture of the spread, not a lifetime estimate; seven of
-  them say only "still alive at 5000 tu". The matching step 39 799 is not an independent check:
-  HR-009 attributes that agreement to engines that perform the same FFT operations. Lane 3's
-  L3-003 (PR #29) reproduces the R 13 deaths in an independent engine but sees none on a finer
-  grid or with a smaller timestep (box above). Lane 9's Figure D (`research/figures/D-pair-and-circler/`, PR #33, provisional) pools 37 starts into a survival
+  exponential predicts). Under refinement the divergence persists but weakens (HR-009b: half the
+  rate at T 20, about 13 times slower at R 26), while the collapse was not observed at all within
+  L3-003's horizons. So the collapse needs something the R 13, T 10 discretization adds; HR-009b
+  names lattice-driven mass fluctuation as a candidate, untested. None of this shows the circler
+  lasts forever on a finer grid, only that no run there ended before it was stopped. Our twelve
+  are a picture of the spread, not a lifetime estimate; seven of them say only "still alive at
+  5000 tu". The matching step 39 799 is not an independent check: HR-009 attributes that
+  agreement to engines that perform the same FFT operations, while L3-003 reproduces Lane 6's
+  R 13 deaths in an independent engine. Lane 9's Figure D
+  (`research/figures/D-pair-and-circler/`, PR #33, provisional) pools 37 starts into a survival
   curve. When the ledger records a claim, this caption will cite it and drop the provisional
   label.
 - **Why it is here.** One canonical death time would be the wrong picture. Twelve near-identical
@@ -323,8 +331,9 @@ heading values come from `galintervene.chord_heading("S102", 3002)`. The G004 S0
 ## Cycle log
 
 - **2026-10-08, G006 (Lane 8).** The circler from twelve starts 10⁻¹² apart, run to 5000 tu:
-  five fall apart at different times, seven are still circling. Provisional, pending PRs #27,
-  #29 and #30; shown at R 13, T 10 only, since L3-003 sees no deaths at R 26, R 39, T 20 or T 40.
+  five fall apart at different times, seven are still circling. Provisional, pending PR #27
+  and a ledger claim; shown at R 13, T 10 only, since L3-003 (merged) sees no deaths at R 26,
+  R 39, T 20 or T 40.
 - **2026-10-08, ledger follow-up.** Ledger PR #22 and Lane 6's rerun (PR #23) merged. The
   field note and specimens table now quote the ledger as it stands: C039 *refuted* as worded,
   C047 *independently checked* for the eight seeds tested (ledger PR #25). No pictures changed.
