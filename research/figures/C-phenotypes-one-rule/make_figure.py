@@ -4,7 +4,8 @@ Claims illustrated: C038 (glider, circler and static ring under one rule), C039 
 fails at R = 26 at its own rule: REFUTED as worded; only the bilinearly resized seed dies),
 C047 (block, nearest and cubic seeds circle at R 26 and 39), C048 (S103 block-scaled to R 26), C040 (no glider/circler switching under disturbance), C042
 (S103 is an exact fixed point), C043 (all three are catalogued species), C044 (the Orbium
-μ × σ neighbourhood). Statuses are read from research/claims.md (figlib.ledger), and the build
+μ × σ neighbourhood). Statuses are read from research/claims.md as updated by the archivist's
+PR #25 (pinned at LEDGER_REF, not yet merged; figlib.ledger.snapshot_pending), and the build
 stops if they no longer match EXPECTED.
 
 Resolution and resize method are kept apart. All of Lane 6's R 26 runs start from bilinearly
@@ -44,6 +45,7 @@ from figlib.style import (GRID, INK, MUTED, OKABE_ITO, OUTCOME, PHENOTYPE, STATU
 OUT = HERE / "figure-C"
 PR11 = "f72db9ef9584fffc10af0fcbbc6491c8f22a6d9c"  # merge of PR #11 into main (its data equals the f40f303 head Figure C was first drawn from)
 D6 = "research/experiments/L6-field"
+LEDGER_REF = "5363da22c0230bea8257589d5903e3a4f9ea8275"  # PR #25 head: C047 INDEPENDENTLY_CHECKED for the eight seeds (unmerged)
 L6_D2 = ("7a4ea3b963fbfc3c952fadb2eb25193f4b1be207",  # merge of PR #23: Lane 6 field.py rerun of the four resizes
          "research/experiments/L6-007-attractor-geography/d2-resize.csv")
 L3_002 = "56ae4210a225a9dc0c7d38cee9c833b48096307f"  # merge of PR #18 (Lane 3) into main; same blobs as its 4998d03 head
@@ -59,7 +61,7 @@ EXPECTED = {
     "C042": "REPRODUCED",
     "C043": "OBSERVED",
     "C044": "OBSERVED",
-    "C047": "OBSERVED",
+    "C047": "INDEPENDENTLY_CHECKED",  # for the eight seeds tested only (PR #25)
     "C048": "OBSERVED",
 }
 NUMERICS = [("T10 R13", "bistab-T10-R13.csv", "1000 tu"), ("T10 R26", "bistab-T10-R26.csv", "500 tu"),
@@ -340,7 +342,7 @@ def build():
     src = Pinned(PR11, "PR #11 (Lane 6), merged to main")
     l6d2 = Pinned(L6_D2[0], "PR #23 (Lane 6 L6-007 D2 rerun), merged to main")
     l3 = Pinned(L3_002, "PR #18 (Lane 3 L3-002), merged to main")
-    led = L.snapshot(EXPECTED)
+    led = L.snapshot_pending(EXPECTED, LEDGER_REF, "PR #25 (archivist: C047 upgrade), unmerged")
     status = {cid: c["status"] for cid, c in led["claims"].items()}
     rows_out = []
     cells = evidence(src, led["claims"], rows_out, l6d2, l3)
@@ -351,7 +353,7 @@ def build():
         sf = fig.subfigures(3, 1, height_ratios=[2.5, 3.6, 1.75], hspace=0.02)
         sf[0].text(0.005, 0.975, f"ONE LANE: evidence from Lane 6 (PR #11, merged @ {src.commit[:7]}); "
                    f"no second-lane reproduction of the coexistence yet.\nClaim statuses checked against "
-                   f"research/claims.md @ {led['ledger_commit']} (C039 refuted, D2).",
+                   f"research/claims.md as updated in PR #25 @ {led['ledger_commit']} (unmerged; C039 refuted, D2).",
                    transform=sf[0].transSubfigure, ha="left", va="top", fontsize=6.2, color=OKABE_ITO["vermillion"],
                    fontweight="bold")
         axa = sf[0].subplots(1, 1)

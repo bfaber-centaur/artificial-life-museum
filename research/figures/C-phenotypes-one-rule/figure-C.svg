@@ -2553,7 +2553,7 @@ z
    </g>
    <g id="text_23">
     <text style="font-weight: 700; font-size: 6.2px; font-family: 'DejaVu Sans'; fill: #d55e00" transform="translate(2.592 25.429885)">ONE LANE: evidence from Lane 6 (PR #11, merged @ f72db9e); no second-lane reproduction of the coexistence yet.</text>
-    <text style="font-weight: 700; font-size: 6.2px; font-family: 'DejaVu Sans'; fill: #d55e00" transform="translate(2.592 32.87158)">Claim statuses checked against research/claims.md @ 1056e39 (C039 refuted, D2).</text>
+    <text style="font-weight: 700; font-size: 6.2px; font-family: 'DejaVu Sans'; fill: #d55e00" transform="translate(2.592 32.87158)">Claim statuses checked against research/claims.md as updated in PR #25 @ 5363da2 (unmerged; C039 refuted, D2).</text>
    </g>
    <g id="text_24">
     <text style="font-size: 6.2px; font-family: 'DejaVu Sans'" transform="translate(258.214781 23.332575)"> </text>
@@ -4506,7 +4506,7 @@ L 493.448203 489.782478
      <text style="font-weight: 700; font-size: 6.3px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #222222" x="325.257467" y="254.598499" transform="rotate(-0 325.257467 254.598499)">C039 · refuted</text>
     </g>
     <g id="text_59">
-     <text style="font-weight: 700; font-size: 6.3px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #6b6b6b" x="493.448203" y="254.598499" transform="rotate(-0 493.448203 254.598499)">C047 · observed</text>
+     <text style="font-weight: 700; font-size: 6.3px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #0072b2" x="493.448203" y="254.598499" transform="rotate(-0 493.448203 254.598499)">C047 · indep. checked</text>
     </g>
     <g id="text_60">
      <text style="font-size: 7px; font-family: 'DejaVu Sans'; text-anchor: start" x="325.257467" y="245.111976" transform="rotate(-0 325.257467 245.111976)">μ = 0.155  (the coexistence rule's μ)</text>
@@ -4970,7 +4970,7 @@ z
      <text style="font-weight: 700; font-size: 6.3px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #6b6b6b" x="366.803899" y="537.360077" transform="rotate(-0 366.803899 537.360077)">C048 · observed</text>
     </g>
     <g id="text_107">
-     <text style="font-weight: 700; font-size: 6.3px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #6b6b6b" x="439.564631" y="537.360077" transform="rotate(-0 439.564631 537.360077)">C047 · observed</text>
+     <text style="font-weight: 700; font-size: 6.3px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #0072b2" x="439.564631" y="537.360077" transform="rotate(-0 439.564631 537.360077)">C047 · indep. checked</text>
     </g>
    </g>
    <g id="text_108">

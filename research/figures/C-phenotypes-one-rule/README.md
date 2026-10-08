@@ -10,7 +10,8 @@ provenance [`figure-C.provenance.json`](figure-C.provenance.json)
 > `git show` at the merge commit `f72db9e`, whose files are identical (same blob ids) to the
 > `f40f303` head this figure was first drawn from. The coexistence itself (C038) has one lane
 > behind it and has not been reproduced by a second lane. The seed-resize check at R 26 (C047)
-> is Lane 3's, and Lane 6's rerun matches it; the ledger lists C047 as OBSERVED.
+> is Lane 3's, and Lane 6's rerun matches it on all eight seeds; C047 is INDEPENDENTLY_CHECKED for
+> those eight seeds only.
 
 ## What it shows
 
@@ -19,7 +20,7 @@ provenance [`figure-C.provenance.json`](figure-C.provenance.json)
 | **C044**: Orbium's μ × σ neighbourhood is one continuum, apart from two circlers | OBSERVED | a |
 | **C038**: one rule (μ 0.155, σ 0.020) supports a glider, a circler (S102) and a static ring (S103) | REPRODUCED (clean-process reruns, one lane) | b, c |
 | **C039**: the circler dies at R = 26 at its own rule | REFUTED as worded; only the bilinearly resized seed dies (that narrower fact is INDEPENDENTLY_CHECKED) | b, c |
-| **C047**: from block, nearest or cubic seeds, S102 circles at R = 26 and 39 | OBSERVED (Lane 3 `alm_check`; Lane 6's `field.py` rerun matches) | b (note), c |
+| **C047**: from block, nearest or cubic seeds, S102 circles at R = 26 and 39 | INDEPENDENTLY_CHECKED for the eight seeds tested (Lane 3 `alm_check`, Lane 6 `field.py`; one seed position, exploratory) | b (note), c |
 | **C048**: S103 is a fixed point at every T, but block-scaled to R 26 it relaxes to a different static ring | OBSERVED (R statement) | c |
 | **C040**: disturbances never switch glider and circler | OBSERVED | c (recovery column uses its runs) |
 | **C042**: S103 is an exact fixed point of the clipped map | REPRODUCED (one lane) | c |
@@ -27,6 +28,12 @@ provenance [`figure-C.provenance.json`](figure-C.provenance.json)
 
 The statuses are read from the ledger at build time (`figlib.ledger`). The build stops if any
 of them changes. The figure is stamped with the ledger commit it was checked against.
+
+**Ledger revision.** This build is checked against `research/claims.md` as updated in the
+archivist's PR #25 (`5363da2`, not yet merged), which marks C047 INDEPENDENTLY_CHECKED for the eight
+seeds tested. The manifest also stores `main`'s status for each claim (`base_status`), and the CI
+test accepts only those two states. Once #25 merges, the figure should be rebuilt so it is stamped
+with `main`.
 
 ## Caption
 
@@ -49,7 +56,7 @@ down by 0.001 to 0.0015 in σ. At R 26 (bilinear seeds) the circler's lower edge
 σ 0.020 to 0.0205, so the bilinearly resized S102 seed dies at its registered rule (circled).
 **That death is a resize effect, not a resolution effect:** the same seed resized by block
 replication, nearest-neighbour or cubic interpolation circles at R 26 and R 39 for 1000 tu, in
-Lane 3's check, and Lane 6's rerun matches it (C047, OBSERVED; C039 refuted as worded). The rest of the R 26 band
+Lane 3's check, and Lane 6's rerun matches it (C047, independently checked for these eight seeds; C039 refuted as worded). The rest of the R 26 band
 shift has been measured only from bilinear seeds and has not been rerun with other resizes, so
 how much of it is resolution is open. μ 0.160 was run only at T10 R13. It shows no coexistence and
 is listed in `figure-C-data.csv` but not drawn.
@@ -128,7 +135,7 @@ All Lane 6 L6-field data is read at the PR #11 merge commit `f72db9e`.
 | D2 seed-resize rerun (Lane 6, `field.py`) | `research/experiments/L6-007-attractor-geography/d2-resize.csv` at the PR #23 merge commit `7a4ea3b` | c |
 | Seed-resize check (Lane 3, `alm_check`), cross-checked against the row above | `research/experiments/L3-002-property-persistence/s102_resize_check.txt` at the PR #18 merge commit `56ae421` | c |
 | S103 block-scaled to R 26 (Lane 3) | `research/traces/lane3/L3-002/labels.csv` at `56ae421` | c |
-| Claim statuses | `research/claims.md` (stamped commit in the figure) | all |
+| Claim statuses | `research/claims.md` at the archivist's PR #25 head `5363da2` (unmerged) | all |
 
 Blob IDs and SHA-256s of every file read are in `figure-C.provenance.json` (`pinned_inputs`).
 
