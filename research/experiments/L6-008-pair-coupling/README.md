@@ -24,6 +24,13 @@ are unchanged. The I003 reading is narrowed:
   full-pulse baseline; its threshold was 8). That verdict stands. The narrower observation is a
   drag-down at s 0.2–0.3 under both baselines.
 
+**Further caveat (2026-10-08, from L6-009, in a separate PR).** On a 128² world the gap pulse
+splits the pair into two free Orbia, and the s 0.2 deaths happen when those two later collide on
+the torus. On a 256² world the same edited states end as two Orbia in 5/5 phases (exploratory).
+So the s 0.2 drag-down above is a finite-world artefact, and the s 0.3 deaths at the gap are
+world-dependent too. L6-009 (to be proposed after this PR) narrows L6-d to placement-dependent,
+near-field effects at s 0.3.
+
 ## Verdict
 
 | Disturbance | Mismatches (strengths with ≥ 3 of 5 phases) | Pre-registered verdict | Reading |
