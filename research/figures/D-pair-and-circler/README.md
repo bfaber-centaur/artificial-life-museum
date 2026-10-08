@@ -6,8 +6,8 @@
 pair runs [`figure-D-pair.csv`](figure-D-pair.csv) · lifetimes and survival estimate
 [`figure-D-lifetimes.csv`](figure-D-lifetimes.csv) · provenance [`figure-D.provenance.json`](figure-D.provenance.json)
 
-> **Provisional exhibit draft.** Everything plotted comes from Lane 6's PR #27, still unmerged, and Lane 7's PR #30, now on `main`:
-> - Lane 6's PR #27 (L6-007 and L6-008), read at `968d330`;
+> **Provisional exhibit.** Everything plotted comes from Lane 6's PR #27 and Lane 7's PR #30, both merged to `main`:
+> - Lane 6's PR #27 (L6-007 and L6-008), read at its merge commit, `7cbf5ae`;
 > - Lane 7's hostile review HR-009 (with HR-009b/c), PR #30, read at its merge commit on `main`, `0b9b47f`.
 >
 > **Panel b's "together is worse" window is withdrawn.** Lane 6's L6-009 note (in PR #27) found
@@ -17,7 +17,7 @@ pair runs [`figure-D-pair.csv`](figure-D-pair.csv) · lifetimes and survival est
 > on 128². HR-009c withdraws E2's "coupling stands at s 0.2–0.3" reading; the preregistered verdict
 > stays INCONCLUSIVE. The red-outlined runs are a world-size effect, not coupling. L6-009's
 > placement-dependent results (an off-gap drag-down at s 0.3; rescue of a directly hit partner) are
-> separate, exploratory and not drawn here. The figure will be redrawn when L6-009 is in its own PR.
+> separate, exploratory and not drawn here. They are not drawn until L6-009 is reviewed.
 >
 > **Panels c and d are R 13, T 10 only.** Lane 3's independent replication (PR #29, merged as `20bdff9`,
 > L3-003) reproduces these R 13, T 10 deaths exactly. But no copy ends when either discretisation
@@ -28,7 +28,7 @@ pair runs [`figure-D-pair.csv`](figure-D-pair.csv) · lifetimes and survival est
 >
 > Both are read with `git show`, and nothing is copied here. The findings shown are *proposed* claims
 > (L6-c, L6-d, L6-f) as Lane 6 revised them after HR-009. They are not in `research/claims.md`, so the
-> figure prints no status for them. When #27 merges, this figure will be repinned to its merge commit.
+> figure prints no status for them. The ledger does not yet record these findings; the figure will be restamped when it does.
 
 ## What it shows
 
@@ -133,12 +133,12 @@ a shaded uncertainty band.
 
 | Data | Path | Commit | Panel |
 | --- | --- | --- | --- |
-| L6-008 pair runs and split baseline | `research/experiments/L6-008-pair-coupling/pair-coupling.csv` | PR #27 head `968d330` | a, b |
+| L6-008 pair runs and split baseline | `research/experiments/L6-008-pair-coupling/pair-coupling.csv` | PR #27 merge `7cbf5ae` | a, b |
 | HR-009 E2 full-pulse halves | `research/experiments/HR009-l6-review/e2.csv` | PR #30 merge `0b9b47f` | b |
-| L6-007 circler lifetimes (exploratory follow-up) | `research/experiments/L6-007-attractor-geography/circler-lifetimes.csv` | `968d330` | c, d |
+| L6-007 circler lifetimes (exploratory follow-up) | `research/experiments/L6-007-attractor-geography/circler-lifetimes.csv` | `7cbf5ae` | c, d |
 | HR-009 E1 twin and δ-perturbed circlers | `research/experiments/HR009-l6-review/e1.csv` | `0b9b47f` | c, d |
 | HR-009c withdrawal (cited, not plotted) | `research/reports/hostile-review.md` | PR #30 merge `0b9b47f` | b caveat |
-| L6-009 world-size note (cited, not plotted) | `research/experiments/L6-008-pair-coupling/README.md` | PR #27 head `968d330` | b caveat |
+| L6-009 world-size note (cited, not plotted) | `research/experiments/L6-008-pair-coupling/README.md` | PR #27 merge `7cbf5ae` | b caveat |
 | L3-003 refinement result (cited, not plotted) | `research/experiments/L3-003-circler-lifetime/README.md` | PR #29 merge `20bdff9` | c, d caveat |
 | Claim statuses | `research/claims.md` | stamped on the figure | badges |
 
@@ -147,7 +147,7 @@ Blob IDs and SHA-256s of every file read are in `figure-D.provenance.json` (`pin
 ## Reproduce
 
 ```bash
-git fetch origin claude/night0-field-tmbx06 claude/night0-hostile-review-o3avnq claude/night0-replication-13cz1b
+git fetch origin main
 .venv/bin/python research/figures/D-pair-and-circler/make_figure.py
 ```
 

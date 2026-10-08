@@ -3489,7 +3489,7 @@ z
     </g>
    </g>
    <g id="text_308">
-    <text style="font-weight: 700; font-size: 6.2px; font-family: 'DejaVu Sans'; fill: #d55e00" transform="translate(2.592 25.729491)">PROVISIONAL: evidence from unmerged PR #27 (Lane 6) @ 968d330, with PR #30 (Lane 7, HR-009) and #29 merged (main @ 0b9b47f).</text>
+    <text style="font-weight: 700; font-size: 6.2px; font-family: 'DejaVu Sans'; fill: #d55e00" transform="translate(2.592 25.729491)">PROVISIONAL exhibit: evidence from merged PRs #27 (Lane 6, main @ 7cbf5ae), #29 and #30 (Lane 7, HR-009). </text>
     <text style="font-weight: 700; font-size: 6.2px; font-family: 'DejaVu Sans'; fill: #d55e00" transform="translate(2.592 33.171186)">The new findings are proposed claims, not ledger entries. Ledger statuses (C038, C041) checked against research/claims.md @ 76ee3a6.</text>
    </g>
    <g id="text_309">
