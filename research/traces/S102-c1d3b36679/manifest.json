@@ -1,0 +1,114 @@
+{
+  "run_id": "S102-c1d3b36679",
+  "created_utc": "2026-10-08T03:12:28Z",
+  "wall_seconds": 28.459,
+  "simulator": {
+    "package": "alm",
+    "version": "0.1.0",
+    "git_commit": "63fb8166c07ca3305e492709b820fb615110ade8",
+    "git_dirty": false,
+    "git_dirty_paths": []
+  },
+  "upstream_reference": {
+    "repo": "Chakazul/Lenia",
+    "commit": "adfc542939266de7f4bb7ebb552e8499701ee107"
+  },
+  "specimen": {
+    "id": "S102",
+    "name": "Gyrorbium-like circler under the coexistence rule",
+    "source": "research/specimens/S102-circler.md (Lane 6 field exploration)",
+    "cells_shape": [
+      21,
+      24
+    ],
+    "cells_level_sum": 24129,
+    "cells_sha256_int16le": "b7a8abafcd2e00c5f2afeeff85eec0169b5cd714b297c87309fc1c91c5a9056e",
+    "rule": {
+      "R": 13,
+      "T": 10,
+      "mu": 0.155,
+      "sigma": 0.02,
+      "beta": [
+        1.0
+      ],
+      "kernel": "poly",
+      "growth": "poly",
+      "dt": 0.1
+    }
+  },
+  "rule": {
+    "R": 13,
+    "T": 10,
+    "mu": 0.155,
+    "sigma": 0.02,
+    "beta": [
+      1.0
+    ],
+    "kernel": "poly",
+    "growth": "poly",
+    "dt": 0.1
+  },
+  "grid": {
+    "shape": [
+      128,
+      128
+    ],
+    "boundary": "periodic",
+    "dtype": "float64"
+  },
+  "integrator": "euler+clip[0,1]",
+  "timestep": {
+    "T": 10,
+    "dt": 0.1,
+    "steps": 50000,
+    "total_time": 5000.0
+  },
+  "seed": 0,
+  "config": {
+    "specimen": "S102",
+    "steps": 50000,
+    "every": 10,
+    "size": 128,
+    "seed": 0,
+    "burn_in": 1000,
+    "rule_overrides": {},
+    "interventions": [],
+    "features": [
+      "basic"
+    ]
+  },
+  "interventions_applied": [],
+  "measurements": {
+    "file": "trace.csv",
+    "every": 10,
+    "columns": [
+      "step",
+      "time",
+      "mass",
+      "peak",
+      "area",
+      "gyradius",
+      "cx_cells",
+      "cy_cells",
+      "alive",
+      "growth",
+      "x_cells",
+      "y_cells",
+      "speed"
+    ]
+  },
+  "initial_state_sha256": "5b0f285f966871c50d022fe02dc84257dcab628931c871cb9de3b7babfc50a2b",
+  "final_state_sha256": "fa43239bcee7b97ca62f007cc68487560a39e19f74f3dde7486db3f98df8e471",
+  "environment": {
+    "python": "3.13.16",
+    "numpy": "2.5.3",
+    "scipy": "1.18.1",
+    "platform": "Linux-6.18.44-fc-v80-x86_64-with-glibc2.39",
+    "machine": "x86_64"
+  },
+  "reproduction": {
+    "checkout": "63fb8166c07ca3305e492709b820fb615110ade8",
+    "command": "python -m alm.run --specimen S102 --steps 50000 --every 10 --size 128 --seed 0 --burn-in 1000",
+    "note": "run from repo root after ./scripts/bootstrap.sh; same commit + command reproduces final_state_sha256 on the same platform"
+  }
+}

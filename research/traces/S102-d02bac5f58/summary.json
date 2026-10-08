@@ -1,0 +1,19 @@
+{
+  "window_steps": [
+    1000,
+    50000
+  ],
+  "alive_final": true,
+  "first_dead_step": null,
+  "mass_mean": 0.5224782516072574,
+  "mass_sd": 0.009688440309065948,
+  "mass_min": 0.49038665596380737,
+  "mass_max": 0.5490408824239464,
+  "mass_dominant_period_steps": 8.854235603690695,
+  "speed_R_per_time": 0.00014177197687316548,
+  "speed_cells_per_step": 0.0001843035699351151,
+  "heading_deg_image": 18.120226898616323,
+  "net_displacement_cells": 9.03087492682064,
+  "gyradius_mean": 0.5157468656679852,
+  "notes": "heading measured from +x toward +y with y pointing down (image rows)"
+}

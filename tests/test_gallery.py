@@ -57,6 +57,9 @@ def _short_pipeline(tmp_path, monkeypatch):
     monkeypatch.setattr(render, "G4_T0", 30)
     monkeypatch.setattr(render, "G5_STEPS", 60)
     monkeypatch.setattr(render, "G5_T0S", (30, 32))
+    monkeypatch.setattr(render, "G6_STEPS", 60)
+    monkeypatch.setattr(render, "G6_RUNS", 3)
+    monkeypatch.setattr(render, "G6_FILM_STRIDE", 10)
     render.collect()
     return render
 
@@ -71,7 +74,7 @@ def test_render_pipeline_end_to_end(tmp_path, monkeypatch):
     render.render()
 
     folders = sorted((tmp_path / "exhibits").iterdir())
-    assert [f.name[:4] for f in folders] == ["G001", "G002", "G003", "G004", "G005"]
+    assert [f.name[:4] for f in folders] == ["G001", "G002", "G003", "G004", "G005", "G006"]
     for folder in folders:
         prov = json.loads((folder / "provenance.json").read_text())
         assert prov["media"]
@@ -98,3 +101,15 @@ def test_render_refuses_a_run_whose_hash_does_not_match(tmp_path, monkeypatch):
     with pytest.raises(ValueError, match="replay final sha256"):
         render.render()
     assert not (tmp_path / "exhibits").exists()
+
+
+def test_tiny_noise_touches_only_the_support_and_stays_tiny():
+    import galintervene  # noqa: F401
+    from alm import interventions as ivs
+
+    A = specimens.load("S102").place(128)
+    B = ivs.make("gallery_tiny_noise", delta=1e-12).apply(A.copy(), None, np.random.default_rng(1))
+    assert 0 < np.abs(B - A).max() <= 1e-12
+    from scipy import ndimage
+
+    assert not np.any((B != A) & ~ndimage.binary_dilation(A > 0, iterations=3))

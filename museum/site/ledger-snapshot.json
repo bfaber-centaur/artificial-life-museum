@@ -1,7 +1,7 @@
 {
   "ledger": "research/claims.md",
-  "ledger_sha256": "3bb1eeb7e08639ccdcf24cd1b32055c7515e224297d2b732eae8e3b65b4e1b68",
-  "ledger_commit": "5363da2",
+  "ledger_sha256": "df1e7b0ae26f8fe574fe54301e63f5f7da0663b4f56ee33ab631a722521964f2",
+  "ledger_commit": "76ee3a6",
   "conventions_sha256": "0e237384e0425b3c325229cf650ab6f9807fb08c1bedc991433b54b13c2eb02f",
   "claims": {
     "C001": {
@@ -137,7 +137,8 @@
       "rooms": [
         "collection",
         "index",
-        "one-rule"
+        "one-rule",
+        "under-review"
       ]
     },
     "C039": {
@@ -159,7 +160,8 @@
       "status_text": "OBSERVED; not yet reproduced by a second lane",
       "rooms": [
         "collection",
-        "one-rule"
+        "one-rule",
+        "under-review"
       ]
     },
     "C042": {
@@ -192,7 +194,8 @@
       "status_text": "INDEPENDENTLY_CHECKED for the eight seeds tested (block, nearest, bilinear and cubic resizes × R 26 and 39; μ 0.155, σ 0.020, T 10; one seed position; 1000 tu): Lane 3 `alm_check` (PR #18) and Lane 6 `field.py` (PR #23) give the same eight outcomes. Exploratory in both lanes; only the block seeds through 300 tu are preregistered (C046).",
       "rooms": [
         "collection",
-        "one-rule"
+        "one-rule",
+        "under-review"
       ]
     }
   },
@@ -242,6 +245,9 @@
       "research/experiments/L3-002-property-persistence/s102_resize_check.txt",
       "research/experiments/L6-007-attractor-geography/d2-resize.csv",
       "research/experiments/L6-field/README.md",
+      "research/figures/C-phenotypes-one-rule/README.md",
+      "research/figures/C-phenotypes-one-rule/figure-C-data.csv",
+      "research/figures/C-phenotypes-one-rule/figure-C.provenance.json",
       "research/figures/README.md",
       "research/gallery/README.md",
       "research/gallery/exhibits/G002-portraits",
@@ -258,6 +264,24 @@
       "research/figures/README.md",
       "research/gallery/README.md",
       "research/reports/hostile-review.md"
+    ],
+    "under-review": [
+      "research/claims.md",
+      "research/experiments/L3-003-circler-lifetime/README.md",
+      "research/experiments/L6-007-attractor-geography/README.md",
+      "research/experiments/L6-008-pair-coupling/README.md",
+      "research/figures/D-pair-and-circler/README.md",
+      "research/figures/D-pair-and-circler/figure-D-lifetimes.csv",
+      "research/figures/D-pair-and-circler/figure-D-pair.csv",
+      "research/figures/D-pair-and-circler/figure-D.provenance.json",
+      "research/gallery/README.md",
+      "research/gallery/exhibits/G002-portraits/provenance.json",
+      "research/gallery/exhibits/G004-port-injury/port-injury.mp4",
+      "research/gallery/exhibits/G004-port-injury/provenance.json",
+      "research/reports/hostile-review.md",
+      "research/specimens/S101-orbium-pair.md",
+      "research/specimens/S102-circler.md",
+      "tests/test_hr009_pair_pulse.py"
     ],
     "collection": [
       "research/experiments/L6-field/make_seeds.py",

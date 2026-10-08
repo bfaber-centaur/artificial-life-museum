@@ -131,3 +131,7 @@ table.claims tr:target { background: #fffbe0; }
 .walk small { display: block; font: .72rem var(--sans); text-transform: uppercase; letter-spacing: .12em; color: var(--muted); }
 .walk .next { text-align: right; margin-left: auto; }
 .pending { border: 2px dashed var(--unresolved); border-radius: 10px; padding: 1rem 1.2rem; color: var(--muted); max-width: 44rem; }
+.provisional-banner { border: 2px dashed #E69F00; background: #fff8e1; border-radius: 8px; padding: .8rem 1rem; margin: .8rem 0 1.4rem; max-width: 46rem; font-size: .95rem; }
+.provisional-banner strong { color: #8a6d00; }
+a.pr { white-space: nowrap; }
+.pending { margin: 1.5rem 0; }

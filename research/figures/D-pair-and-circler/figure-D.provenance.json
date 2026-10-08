@@ -1,0 +1,130 @@
+{
+  "figure": "D-pair-and-circler",
+  "command": ".venv/bin/python research/figures/D-pair-and-circler/make_figure.py",
+  "ledger": {
+    "ledger": "research/claims.md",
+    "ledger_commit": "76ee3a6",
+    "ledger_sha256": "df1e7b0ae26f8fe574fe54301e63f5f7da0663b4f56ee33ab631a722521964f2",
+    "claims": {
+      "C038": {
+        "status": "REPRODUCED",
+        "status_text": "REPRODUCED (clean-process reruns); not yet reproduced by a second lane",
+        "title": "One rule (S001's, with \u03bc = 0.155, \u03c3 = 0.020) supports three phenotypes chosen by history: an Orbium glider, a circler (S102) and a static ring (S103)"
+      },
+      "C041": {
+        "status": "OBSERVED",
+        "status_text": "OBSERVED; not yet reproduced by a second lane",
+        "title": "Under S001's own rule, a bound Orbium pair (S101) survives port injury of 10\u201350% by shedding to a single Orbium, where a single Orbium dies at 10%"
+      }
+    }
+  },
+  "inputs": [
+    {
+      "path": "research/figures/D-pair-and-circler/make_figure.py",
+      "sha256": "cb717a1dfc587e501c7f3000b11291b4617e374412afb1620d4550c0bc56fff1",
+      "last_commit": "161a471"
+    },
+    {
+      "path": "research/figures/figlib/__init__.py",
+      "sha256": "23d1dd07a43a84f1f441481050b2daa508a69658e3b71bb3bd1d6da0fa9f7b70",
+      "last_commit": "08b074f"
+    },
+    {
+      "path": "research/figures/figlib/edges.py",
+      "sha256": "f66c531fc0d3f4471076e550384a8dc06797c1eb831574c9376ab63c8a84ef62",
+      "last_commit": "08b074f"
+    },
+    {
+      "path": "research/figures/figlib/gitsource.py",
+      "sha256": "cb9d65796293697f4cd173bc81f6a290d1097713c490534b50c88f37c197ad57",
+      "last_commit": "4c7dd20"
+    },
+    {
+      "path": "research/figures/figlib/ledger.py",
+      "sha256": "b711afa1e9bdc057d5dd2fdb2d55f9ff802f5f6c8f621619da164b94a5bcddf7",
+      "last_commit": "78406e9"
+    },
+    {
+      "path": "research/figures/figlib/provenance.py",
+      "sha256": "51b8064e6178735aa4dabaecde17d347291cb56821aa370adaae9e5f7dfd6623",
+      "last_commit": "4c7dd20"
+    },
+    {
+      "path": "research/figures/figlib/style.py",
+      "sha256": "37cf3aecfc105a526fd915a26e0c9ea300d7e1660b7bbc09fa942eb78db120ac",
+      "last_commit": "4c7dd20"
+    }
+  ],
+  "pinned_inputs": [
+    {
+      "commit": "7cbf5aedcb8111973c6cffdb4c6bcf5b34f4ae0e",
+      "source": "PR #27 (Lane 6, L6-007/L6-008), merged to main",
+      "path": "research/experiments/L6-007-attractor-geography/circler-lifetimes.csv",
+      "blob": "a3b22df612babba5e1f45cd1fe138eb9f60abbc6",
+      "sha256": "9671495b005deb16f432d0b0b975fc8ad5cda767593fa6368e4f8ed7bbe1255f"
+    },
+    {
+      "commit": "7cbf5aedcb8111973c6cffdb4c6bcf5b34f4ae0e",
+      "source": "PR #27 (Lane 6, L6-007/L6-008), merged to main",
+      "path": "research/experiments/L6-008-pair-coupling/README.md",
+      "blob": "16c48ef9c0eab9537fefa8f40af198a3d7f1b44a",
+      "sha256": "108b9e51b1b8006eb473c1fd67256f00ffeb404dac63867f38a28752b81a9b56"
+    },
+    {
+      "commit": "7cbf5aedcb8111973c6cffdb4c6bcf5b34f4ae0e",
+      "source": "PR #27 (Lane 6, L6-007/L6-008), merged to main",
+      "path": "research/experiments/L6-008-pair-coupling/pair-coupling.csv",
+      "blob": "9ecf69a72f2bc56d23746e51882d579ad3c79e8e",
+      "sha256": "5e5d388d2a49bacce7adc165cf8323001fb83e921f3f7e6d0a9ee11d9181a34f"
+    },
+    {
+      "commit": "0b9b47f8d7c48847219441cd15152792adbd45de",
+      "source": "PR #30 (Lane 7, HR-009), merged to main",
+      "path": "research/experiments/HR009-l6-review/e1.csv",
+      "blob": "70ec689443c77696e01ac082a6b80dc1685f41ba",
+      "sha256": "577ea543ccc5f2a8fc0f5ac78414c914820a9ec0402e6a61955118f549060c5d"
+    },
+    {
+      "commit": "0b9b47f8d7c48847219441cd15152792adbd45de",
+      "source": "PR #30 (Lane 7, HR-009), merged to main",
+      "path": "research/experiments/HR009-l6-review/e2.csv",
+      "blob": "3d56ff6a2f968b55ac6acee588db90269d9d2ae4",
+      "sha256": "4e1321f5b2080d3cd83746c37f877481023759bd7485df632c2336138c2cdb97"
+    },
+    {
+      "commit": "0b9b47f8d7c48847219441cd15152792adbd45de",
+      "source": "PR #30 (Lane 7, HR-009), merged to main",
+      "path": "research/reports/hostile-review.md",
+      "blob": "cefcab93e6f9113156be63155bc2bfb0cd42dcbd",
+      "sha256": "8ec9533236531553b6670b162c8e49a7564ced56eb1d1e397ccab9e194b8cda2"
+    },
+    {
+      "commit": "20bdff9f3827290cff6646fae6bc8f283e5aa373",
+      "source": "PR #29 (Lane 3, L3-003), merged to main",
+      "path": "research/experiments/L3-003-circler-lifetime/README.md",
+      "blob": "0d8a2eb4c841e38f95476ecf689698ae6dcfc80b",
+      "sha256": "ecbca4e133131cb93d9925280c6f4a94549d58305b55cf55074e005b7301f6ed"
+    }
+  ],
+  "outputs": [
+    "research/figures/D-pair-and-circler/figure-D.png",
+    "research/figures/D-pair-and-circler/figure-D.svg",
+    "research/figures/D-pair-and-circler/figure-D.pdf",
+    "research/figures/D-pair-and-circler/figure-D-pair.csv",
+    "research/figures/D-pair-and-circler/figure-D-lifetimes.csv"
+  ],
+  "code_commit": "161a471",
+  "code_dirty": true,
+  "versions": {
+    "python": "3.13.16",
+    "numpy": "2.5.3",
+    "matplotlib": "3.11.2"
+  },
+  "notes": [
+    "PROVISIONAL: evidence read from merged PRs #27, #29 and #30 at their merge commits; see pinned_inputs.",
+    "Proposed claims L6-c, L6-d, L6-f are not in the ledger; no status is drawn for them.",
+    "Kaplan-Meier with Greenwood log-log 95% band; HR-009's rerun of the unperturbed seed is not counted as a separate start.",
+    "Panels c-d are R 13, T 10 only; PR #29 (L3-003) sees no end at R 26, R 39, T 20 or T 40, so the collapse is a discretisation effect. L3-003 is cited, not plotted.",
+    "Panel b's s 0.2-0.3 window is withdrawn: HR-009c (PR #30) and L6-009 (PR #27 L6-008 README) show the on-gap pulse frees two Orbia that collide only on 128\u00b2. Cited, not plotted."
+  ]
+}

@@ -17,6 +17,11 @@ Room files are HTML fragments with a JSON header comment and these directives:
     {{src:path|label}}       link to a repository file or folder on GitHub (must exist)
     {{asset:path}}           relative URL of a repository file for <img>/<video> (must exist)
     {{page:slug|label}}      link to another museum page (must exist)
+    {{pr:27|label}}          link to an open pull request; only in a room marked "provisional"
+                             that lists the number under "under_review"
+
+A provisional room shows work that has not reached main or the ledger yet. It gets a banner
+saying so, and its prose must attribute every such finding to the PR it comes from.
 
 Usage (from the repo root): .venv/bin/python museum/build.py [--out DIR]
 """
@@ -42,7 +47,7 @@ sys.path.insert(0, str(REPO / "research" / "figures"))
 from figlib import ledger  # noqa: E402  (Lane 9's parser: one reading of the ledger for everyone)
 
 _HEADER = re.compile(r"\A\s*<!--meta\s*(\{.*?\})\s*-->\s*", re.S)
-_DIRECTIVE = re.compile(r"\{\{(claim|status|src|asset|page):([^}|]+)(?:\|([^}]*))?\}\}")
+_DIRECTIVE = re.compile(r"\{\{(claim|status|src|asset|page|pr):([^}|]+)(?:\|([^}]*))?\}\}")
 
 
 class MuseumBuildError(RuntimeError):
@@ -76,6 +81,10 @@ def load_rooms():
         meta.setdefault("expect", {})
         meta.setdefault("kicker", "")
         meta.setdefault("summary", "")
+        meta.setdefault("provisional", False)
+        meta.setdefault("under_review", [])
+        if meta["under_review"] and not meta["provisional"]:
+            raise MuseumBuildError(f"{path.name}: only a provisional room may cite work under review")
         meta["file"] = path.name
         meta["body"] = text[m.end():]
         rooms.append(meta)
@@ -134,6 +143,10 @@ def render_body(room, claims, conv, slugs, cited, sources):
             if p.is_dir():
                 raise MuseumBuildError(f"{where}: asset must be a file: {rel}")
             return "../../" + rel  # site pages live at museum/site/*.html
+        if kind == "pr":
+            if not arg.isdigit() or int(arg) not in room["under_review"]:
+                raise MuseumBuildError(f"{where}: PR {arg} is not listed in this room's 'under_review'")
+            return f'<a class="pr" href="{GITHUB}/pull/{arg}">{html.escape(label or "PR #" + arg)}</a>'
         if kind == "page":
             if arg not in slugs:
                 raise MuseumBuildError(f"{where}: link to unknown page '{arg}'")
@@ -170,6 +183,14 @@ def page(rooms, room, body, stamp, prev_next):
                  if next_r else "<span></span>")
         walk = f'<nav class="walk" aria-label="Tour">{left}{right}</nav>'
     kicker = f'<p class="kicker">{html.escape(room["kicker"])}</p>' if room["kicker"] else ""
+    if room.get("provisional"):
+        prs = ", ".join(f'<a href="{GITHUB}/pull/{n}">#{n}</a>' for n in room["under_review"])
+        source = (f"work still under review ({prs})" if prs
+                  else "work merged on <code>main</code> but")
+        kicker += (f'<div class="provisional-banner"><strong>Provisional room.</strong> Parts of these '
+                   f'exhibits come from {source} not yet in the claims '
+                   f'ledger. Badges appear only for ledger claims; everything else is attributed to the '
+                   f'lane and report it comes from, and may change.</div>')
     return f"""<!doctype html>
 <html lang="en">
 <head>

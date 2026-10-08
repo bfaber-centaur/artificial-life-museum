@@ -20,6 +20,7 @@ made of, ten times per unit of time. Some of them travel; one of them never chan
 | [G003](#g003--contact-sheet-half-a-time-unit-at-a-time) | Contact sheet | S001, S101, S102, S103 | 2026-10-07 |
 | [G004](#g004--same-cut-two-fates) | Same cut, two fates (before and after) | S101, S001 | 2026-10-07 |
 | [G005](#g005--two-steps-apart) | Two steps apart: the circler becomes the ring | S102 → S103 | 2026-10-07 |
+| [G006](#g006--the-circler-that-eventually-disappears-provisional) | The circler that eventually disappears (*provisional*) | S102 × 12 starts | 2026-10-08 |
 
 ### G001 — Four ways to move
 
@@ -132,6 +133,66 @@ the two cuts. Both films are aligned on their own cut.
   circler, a death, and a still ring. It also shows how much the outcome depends on two steps
   of timing.
 
+### G006 — The circler that eventually disappears (*provisional*)
+
+> **Provisional.** The evidence it quotes from Lane 3's
+> [L3-003](../experiments/L3-003-circler-lifetime/README.md) (PR #29) and Lane 7's
+> [HR-009](../reports/hostile-review.md) (PR #30) and Lane 6's
+> [L6-007](../experiments/L6-007-attractor-geography/README.md) follow-up (PR #27, merge 7cbf5ae)
+> are all merged on main, and they draw the same line as this caption (divergence at every setting,
+> collapse seen only at R 13, T 10, step 39 799 one trajectory). The ledger holds no claim on
+> S102's lifetime yet. The
+> pictures are verified replays; the reading of them below is not settled.
+>
+> **Shown at R 13, T 10 only; not seen under refinement.** Lane 3's L3-003 (merged)
+> reproduces Lane 6's R 13, T 10 deaths in an independent engine, but sees none when the grid is
+> finer (0 of 29 runs at R 26, to 5000–8000 tu; 0 of 3 at R 39, 8000 tu) or the timestep smaller
+> (0 of 24 at T 20 and 0 of 24 at T 40, R 13, 8000 tu each). So the disappearance below is
+> specific to the R 13, T 10 discretization, the grid and the step together, not a property the
+> creature has been shown to keep in finer simulations. Whether S102 lasts forever there is not
+> established either: every refined run was simply still alive when it stopped.
+
+![Twelve circlers from starts 1e-12 apart: five fall apart at different times, seven are still circling at 5000 tu](exhibits/G006-eventually-gone/lifelines-sheet.png)
+
+![Film: the twelve runs side by side, one frame every 20 time units](exhibits/G006-eventually-gone/eventually-gone.gif)
+
+Video (one frame every 10 tu): [`eventually-gone.mp4`](exhibits/G006-eventually-gone/eventually-gone.mp4) ·
+provenance: [`provenance.json`](exhibits/G006-eventually-gone/provenance.json)
+
+Twelve runs of the circler S102 at its registered rule, each for 5000 time units (50 000 steps).
+One starts from the registered seed. The other eleven are twins: the same seed plus noise of size
+10⁻¹² on the cells it covers, which is Lane 7's HR-009 recipe drawn with our own random seeds
+1–11. None was chosen by outcome. A run counts as gone when its total mass falls below 0.01
+(in units of R²), the threshold Lane 6 and Lane 7 use.
+
+- **Observation.** Five of the twelve are gone before 5000 tu, at 264, 386, 2206, 3313 and
+  3980 tu. The other seven are still circling when the run stops, with mass 0.51–0.54. In the
+  sheet's last-moments columns, each of the five still looks like a whole circler 2 tu before it
+  is gone, so the collapse takes under 2 tu. We could not see any sign in the film of which runs
+  would go. The registered seed is gone at step 39 799 (3979.9 tu), the same step as in Lane 6's
+  L6-007 follow-up.
+- **Interpretation, provisional.** Two things are going on, and the refinement results separate
+  them. *Divergence:* twins that start 10⁻¹² apart separate about e-fold every 5 tu at R 13, T 10
+  (HR-009 E1), so the step at which one run dies belongs to that floating-point trajectory, not to
+  the rule. *Collapse:* at R 13, T 10 some of those trajectories fall apart; Lane 7 pools 37 runs
+  (20 deaths, earliest at 292 tu, censored mean about 5900 tu, more early deaths than an
+  exponential predicts). Under refinement the divergence persists but weakens (HR-009b: half the
+  rate at T 20, about 13 times slower at R 26), while the collapse was not observed at all within
+  L3-003's horizons. So the collapse needs something the R 13, T 10 discretization adds; HR-009b
+  names lattice-driven mass fluctuation as a candidate, untested. None of this shows the circler
+  lasts forever on a finer grid, only that no run there ended before it was stopped. Our twelve
+  are a picture of the spread, not a lifetime estimate; seven of them say only "still alive at
+  5000 tu". The matching step 39 799 is not an independent check: HR-009 attributes that
+  agreement to engines that perform the same FFT operations, while L3-003 reproduces Lane 6's
+  R 13 deaths in an independent engine. Lane 9's Figure D
+  (`research/figures/D-pair-and-circler/`, PR #33, provisional) pools 37 starts into a survival
+  curve. When the ledger records a claim, this caption will cite it and drop the provisional
+  label.
+- **Why it is here.** One canonical death time would be the wrong picture. Twelve near-identical
+  starts show what the evidence so far supports at this resolution: the circler can last
+  thousands of time units and then fall apart abruptly, and when it goes is not predictable from
+  how it looks. On a finer grid or with a smaller step, L3-003 has not seen it fall apart at all.
+
 ## Field note, 7 October 2026
 
 > *What I saw.* Four animals, four temperaments. The Orbium set off at once along a line it never
@@ -188,9 +249,10 @@ pointing down.
 | S001 + I004 0.25 at step 3000 (G004) | [`S001-f51c4e7c2e`](../traces/S001-f51c4e7c2e/) | 0–5000 | `fa43239b…` | main |
 | S102 + I004 0.25 at step 3000 (G005) | [`S102-3769097a3c`](../traces/S102-3769097a3c/) | 0–5002 | `fa43239b…` (empty world) | main |
 | S102 + I004 0.25 at step 3002 (G005) | [`S102-ab87e3d6e0`](../traces/S102-ab87e3d6e0/) | 0–5002 | `8f6edaba…` | main |
+| S102 registered seed, and twins 1–11 with 1e-12 noise (G006) | twelve runs, listed with seeds and death steps in G006's [`provenance.json`](exhibits/G006-eventually-gone/provenance.json) and keyed `G006:S102#k` in [`runs.json`](runs.json) | 0–50000 | in each trace's manifest | main |
 
 The G001–G003 runs were made with `alm.run` at commit `96cb86c`, the G004 runs at `066878d` and
-the G005 runs at `de6f69c`, all with a clean `src/`. The full rule,
+the G005 runs at `de6f69c` and the G006 runs at `63fb816`, all with a clean `src/`. The full rule,
 grid, environment and hashes are in each trace's `manifest.json`. Each exhibit's `provenance.json`
 lists its frame range, view, overlays and disclosures.
 
@@ -209,8 +271,8 @@ recorded in every gallery run.
   matplotlib's `inferno` colormap (black → purple → orange → pale yellow). There is no gamma, no
   contrast stretch and no per-frame normalisation, so the same colour means the same value in
   every frame and every exhibit.
-- **Overlays are listed.** These are the centroid trail (G001), the scale bar (G002) and the text
-  labels. The centroid is the periodic circular-mean centre of mass, computed on every step of the
+- **Overlays are listed.** These are the centroid trail (G001), the scale bar (G002), the lifelines and
+  mass readouts (G006) and the text labels. The centroid is the periodic circular-mean centre of mass, computed on every step of the
   replay.
 - **Lossy formats are disclosed.** GIFs use a 128-colour palette. The MP4 is H.264. The PNGs are
   lossless.
@@ -236,15 +298,17 @@ in `runs.json` from its manifest and stops with an error unless the replay's fin
     --intervene 3000:gallery_port_injury:s=0.25                                        # G004
 .venv/bin/python research/gallery/run_specimen.py --specimen S102 --steps 5002 --every 10 \
     --intervene 3002:gallery_port_injury_h:s=0.25,hx=-0.9988910184063488,hy=0.047082197772908396  # G005
+.venv/bin/python research/gallery/run_specimen.py --specimen S102 --steps 50000 --every 10 --seed 3 \
+    --intervene 0:gallery_tiny_noise:delta=1e-12                                       # G006 twin 3
 ```
 
 `tests/test_gallery.py` runs the whole pipeline end to end on short (60-step) real runs in a
-scratch folder. It collects, replays, verifies the hashes and renders G001–G005, then checks every
+scratch folder. It collects, replays, verifies the hashes and renders G001–G006, then checks every
 listed media file and provenance entry. It also checks that a run with a wrong final hash is
 refused. Re-running `render` on the committed runs reproduces the committed media byte for byte.
 
-`run_specimen.py` is `python -m alm.run` with the gallery's `gallery_port_injury` and
-`gallery_port_injury_h` interventions ([`galintervene.py`](galintervene.py)) registered. G005's
+`run_specimen.py` is `python -m alm.run` with the gallery's `gallery_port_injury`,
+`gallery_port_injury_h` and `gallery_tiny_noise` interventions ([`galintervene.py`](galintervene.py)) registered. G005's
 heading values come from `galintervene.chord_heading("S102", 3002)`. The G004 S001 run uses the same flag with
 `--specimen S001`.
 
@@ -269,6 +333,11 @@ heading values come from `galintervene.chord_heading("S102", 3002)`. The G004 S0
 
 ## Cycle log
 
+- **2026-10-08, G006 (Lane 8).** The circler from twelve starts 10⁻¹² apart, run to 5000 tu:
+  five fall apart at different times, seven are still circling. Provisional, pending PR #27
+  and a ledger claim; shown at R 13, T 10 only, since L3-003 (merged) sees no deaths at R 26,
+  R 39, T 20 or T 40. Closeout check: caption re-read against PR #27 as merged (7cbf5ae), which agrees;
+  pictures unchanged.
 - **2026-10-08, ledger follow-up.** Ledger PR #22 and Lane 6's rerun (PR #23) merged. The
   field note and specimens table now quote the ledger as it stands: C039 *refuted* as worded,
   C047 *independently checked* for the eight seeds tested (ledger PR #25). No pictures changed.
