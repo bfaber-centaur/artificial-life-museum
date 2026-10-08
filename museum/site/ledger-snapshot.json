@@ -1,7 +1,7 @@
 {
   "ledger": "research/claims.md",
-  "ledger_sha256": "0ebb34a100c5a7c5efac6d3276c74af587aedb3eb252e1dcffb953d22f8b67be",
-  "ledger_commit": "4b2db26",
+  "ledger_sha256": "0418569939b8dd91a1a1e80aa4485824f1768eccb171fcc0213374d8b283b001",
+  "ledger_commit": "a9ff918",
   "conventions_sha256": "227df043de8fff733da0840fd8297b01f064007a2320a944a5b743733f0ff1bb",
   "claims": {
     "C001": {
@@ -142,7 +142,7 @@
     },
     "C039": {
       "status": "REFUTED",
-      "status_text": "REFUTED as worded (superseded by C047). The narrower fact, that the *bilinearly resized* seed dies at R 26 and 39, is INDEPENDENTLY_CHECKED (`field.py` and `alm_check`). That is a resize-method dependence of the initial condition, not a resolution dependence: from block, nearest or cubic seeds S102 persists at R 26 and 39, with mean properties within 0.5% of R 13 (C046).",
+      "status_text": "REFUTED as worded (superseded by C047). The narrower fact, that the *bilinearly resized* seed dies at R 26 and 39, is INDEPENDENTLY_CHECKED (Lane 6 `field.py`, PR #11, at R 26; Lane 3 `alm_check`, PR #18, at R 26 and 39). That is a resize-method dependence of the initial condition, not a resolution dependence: from block, nearest or cubic seeds S102 persists at R 26 and 39 (C047), with mean properties within 0.5% of R 13 over 300 tu (C046).",
       "rooms": [
         "one-rule"
       ]
@@ -188,8 +188,8 @@
       ]
     },
     "C047": {
-      "status": "INDEPENDENTLY_CHECKED",
-      "status_text": "INDEPENDENTLY_CHECKED (`alm_check` and `field.py`; exploratory, not preregistered)",
+      "status": "OBSERVED",
+      "status_text": "OBSERVED (Lane 3, `alm_check`, merged). Block seeds through 300 tu are preregistered (C046); the four-method comparison through 1000 tu is exploratory. Lane 6 matched all eight outcomes in `field.py` (`413003d`), which is not yet on `main`; the archivist will mark this claim INDEPENDENTLY_CHECKED, for these eight seeds only, when that evidence lands.",
       "rooms": [
         "collection",
         "one-rule"
