@@ -147,8 +147,11 @@ for scattered static outcomes (see the figure).
 The coexistence itself is robust: it appears at every setting. Its location in σ is
 numerically fragile. At T = 40, Orbium's upper σ edge drops by about 0.0015 (Lane 3 saw
 L4 edges shift 11–13% at T = 40 too), and the circler's lower edge drops with it. At R = 26 the
-circler seed dies at the exact S102 rule (μ 0.155, σ 0.020) but lives at σ 0.0205. **S102 at its
-registered rule is therefore NUMERICALLY_FRAGILE under resolution.** S103 does not move at all:
+bilinear-resized circler seed dies at the exact S102 rule (μ 0.155, σ 0.020) but lives at σ 0.0205.
+~~S102 at its registered rule is therefore NUMERICALLY_FRAGILE under resolution.~~ **Corrected
+2026-10-08 (D2):** block, nearest and cubic seeds survive at R 26 and R 39, in both Lane 3's engine and
+this one (`../L6-007-attractor-geography/d2-resize.csv`). The death came from the bilinear seed, not
+from the resolution. S103 does not move at all:
 a clip fixed point does not depend on T (see its dossier), and at R = 26 its resized seed is
 static too.
 
@@ -180,7 +183,7 @@ pair → single Orbium.
 | --- | --- | --- | --- |
 | S101 pair (S001) | GLIDER m 0.8736 v 0.473 | GLIDER m 0.8642 v 0.508 | GLIDER m 0.8738 v 0.472 |
 | O4i cells (S001) | GLIDER m 0.8737 v 0.472 | GLIDER m 0.8643 v 0.508 | GLIDER m 0.8738 v 0.472 |
-| S102 circler (coex) | CIRCLER m 0.523, turn 95°/tu | CIRCLER m 0.497, turn 109°/tu | **DIED** |
+| S102 circler (coex) | CIRCLER m 0.523, turn 95°/tu | CIRCLER m 0.497, turn 109°/tu | **DIED** (bilinear seed; block/nearest/cubic seeds survive, D2) |
 | S103 ring (coex) | STATIC m 0.3787 | STATIC m 0.3787 | STATIC m 0.3787 |
 | Orbium (coex) | GLIDER m 0.487 v 0.548 | STATIC m 0.3873 | GLIDER m 0.487 v 0.549 |
 
@@ -223,7 +226,7 @@ Traces are under [`../../traces/`](../../traces/).
 | --- | --- | --- | --- |
 | 1. stable ID + serialized state | yes | yes | yes |
 | 2. clean-process rerun | yes (bitwise) | yes (bitwise) | yes (bitwise) |
-| 3. survives a T or R perturbation | yes (T40, R26) | T40 yes, R26 **no** at its rule | yes (T-independent; R26) |
+| 3. survives a T or R perturbation | yes (T40, R26) | T40 yes; R26 and R39 yes from non-bilinear seeds (D2) | yes (T-independent; R26) |
 | 4. behaviour shown by intervention | yes (I004 fission) | partly (fragility, switch to S103) | yes (exact return after I001 ≤ 0.2) |
 | 5. reference check fails to identify it | **no: it is O4i** | **no: it is OG2g** | **no: it is C0la** |
 | 6. second lane reproduces | not yet | not yet | not yet |
