@@ -17,11 +17,12 @@ pair runs [`figure-D-pair.csv`](figure-D-pair.csv) · lifetimes and survival est
 > finite-world artefact, and the s 0.3 deaths are world- and placement-dependent. The figure will
 > be redrawn when L6-009's data is in a PR.
 >
-> **Panels c and d are R 13, T 10 only, and refinement is disputed.** Lane 3's independent
-> replication (PR #29 @ `5288e08`, L3-003) reproduces these R 13 deaths exactly. But no copy died
-> at R 26 (0 of 29 runs, up to 8000 tu) or at R 39 (0 of 3), so the finite lifetime may be an
-> effect of the R 13 grid rather than of the rule. A timestep test that separates grid from step
-> is running. L3-003 is cited here, not plotted.
+> **Panels c and d are R 13, T 10 only.** Lane 3's independent replication (PR #29 @ `8c3c082`,
+> L3-003) reproduces these R 13, T 10 deaths exactly. But no copy ends when either discretisation
+> knob is refined: 0 of 29 runs at R 26 and 0 of 3 at R 39 (T 10), and 0 of 24 at T 20 and 0 of 24
+> at T 40 (R 13), all to 8000 tu. So the collapse is an effect of the R 13, T 10 discretisation, not
+> a lifetime of the rule. The refined runs are censored at their horizons, so S102 is not shown to
+> be an attractor at any setting. L3-003 is cited here, not plotted.
 >
 > Both are read with `git show`, and nothing is copied here. The findings shown are *proposed* claims
 > (L6-c, L6-d, L6-f) as Lane 6 revised them after HR-009. They are not in `research/claims.md`, so the
@@ -33,7 +34,7 @@ pair runs [`figure-D-pair.csv`](figure-D-pair.csv) · lifetimes and survival est
 | --- | --- | --- |
 | **L6-c**: under port injury, the pair survives because the uninjured partner does | proposed (PR #27); accepted as written by HR-009 | a |
 | **L6-d**: under frontal addition, the bound pair dies where each partner alone survives | proposed (PR #27), narrowed by Lane 6 after HR-009 to s 0.2–0.3; preregistered verdict INCONCLUSIVE. Lane 6's L6-009 note: s 0.2 is a 128² collision artefact, s 0.3 is placement-dependent | b |
-| **L6-f**: S102 is a long, chaotic transient, not an attractor | proposed (PR #27), revised by Lane 6 after HR-009: a chaotic transient whose lifetime distribution is the target. Lane 3's PR #29 replicates it at R 13, T 10 but sees no death at R 26 or R 39 | c, d |
+| **L6-f**: S102 is a long, chaotic transient, not an attractor | proposed (PR #27), revised by Lane 6 after HR-009: a chaotic transient whose lifetime distribution is the target. Lane 3's PR #29 replicates it at R 13, T 10 but sees no end at R 26, R 39, T 20 or T 40 | c, d |
 | **C041**: S101 survives port injury of 10–50% by shedding to a single Orbium | OBSERVED (ledger) | a |
 | **C038**: one rule supports a glider, a circler (S102) and a static ring | REPRODUCED (ledger) | c, d |
 
@@ -94,12 +95,13 @@ under half at 5000 tu. 10 of the 20 deaths come before 1000 tu, so the hazard is
   pulse lands. Only s 0.3 remains a candidate for coupling, pending L6-009.
 - **One rule, one grid, five phases.** Every pair run is at S001's rule, R 13, T 10. The phases are
   consecutive steps.
-- **R 13, T 10 only; refinement disputed.** Lane 3's L3-003 (PR #29 @ `5288e08`) reproduces
-  Lane 6's death step and all 12 noisy fates at R 13, and finds 10 of 24 δ = 1e−12 copies ending
-  within 5000 tu, which agrees with Lane 7. At R 26 none of 29 runs died (to 8000 tu), and at R 39
-  none of 3. So the transient replicates across implementations but not across resolution. Whether
-  the collapse comes from the grid or the timestep is not yet known (T 20 and T 40 are one run
-  each, both alive). The exhibit should not present a lifetime as a property of the rule.
+- **R 13, T 10 only; a discretisation effect.** Lane 3's L3-003 (PR #29 @ `8c3c082`) reproduces
+  Lane 6's death step and all 12 noisy fates at R 13, T 10, and finds 10 of 24 δ = 1e−12 copies
+  ending within 5000 tu, which agrees with Lane 7. Refining either knob removes the collapse within
+  8000 tu: none of 29 runs at R 26, 3 at R 39, 24 at T 20 or 24 at T 40 ended. So the transient
+  replicates across implementations but not across resolution or timestep. The exhibit should not
+  present a lifetime as a property of the rule. Whether S102 is an attractor at a refined setting is
+  not established, because every refined run is censored.
 - **Lifetimes are a sample, not a law.** 37 starts with three perturbation recipes are pooled, as
   HR-009 pools them. The band reflects only the sampling of these starts. It does not cover another
   engine, timestep or grid.
@@ -112,7 +114,7 @@ under half at 5000 tu. 10 of the 20 deaths come before 1000 tu, so the hazard is
 
 Four-part figure, marked provisional. Part b carries a red warning that it holds only in a 128²
 world, where the s 0.2 deaths are a collision artefact. Parts c and d carry a red warning that they hold only at
-R 13, T 10, because a replication saw no deaths at finer resolution.
+R 13, T 10, because a replication saw no deaths at a finer grid or a finer timestep.
 (a) A grid of small tiles, 12 strengths of port injury by five phases, for the bound pair above and
 the two partners run alone below. Almost every tile reads 1 in both blocks up to s 0.5 and 0 beyond,
 so the pair behaves like its partners alone.
@@ -133,7 +135,7 @@ a shaded uncertainty band.
 | L6-007 circler lifetimes (exploratory follow-up) | `research/experiments/L6-007-attractor-geography/circler-lifetimes.csv` | `efa8999` | c, d |
 | HR-009 E1 twin and δ-perturbed circlers | `research/experiments/HR009-l6-review/e1.csv` | `4e74822` | c, d |
 | L6-009 world-size note (cited, not plotted) | `research/experiments/L6-008-pair-coupling/README.md` | PR #27 head `efa8999` | b caveat |
-| L3-003 refinement result (cited, not plotted) | `research/experiments/L3-003-circler-lifetime/README.md` | PR #29 head `5288e08` | c, d caveat |
+| L3-003 refinement result (cited, not plotted) | `research/experiments/L3-003-circler-lifetime/README.md` | PR #29 head `8c3c082` | c, d caveat |
 | Claim statuses | `research/claims.md` | stamped on the figure | badges |
 
 Blob IDs and SHA-256s of every file read are in `figure-D.provenance.json` (`pinned_inputs`).
