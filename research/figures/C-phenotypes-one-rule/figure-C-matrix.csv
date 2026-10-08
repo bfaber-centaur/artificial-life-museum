@@ -1,0 +1,25 @@
+specimen,column,verdict,text
+gyrator,T10 R13,pass,circler m 0.523
+gyrator,T10 R26,fail,died
+gyrator,T40 R13,pass,circler m 0.497
+gyrator,catalog,none,OG2g
+gyrator,clean rerun,pass,bitwise S102- 5bfac8f95f
+gyrator,resize,pass,"circler, all 3, R 26 and 39 (Lane 3; Lane 6 match pending)"
+gyrator,return,fail,at 5%: kept in 1 of 2 phases
+gyrator,second,none,not yet
+orbium,T10 R13,pass,glider m 0.487
+orbium,T10 R26,pass,glider m 0.487
+orbium,T40 R13,changed,→ static m 0.387
+orbium,catalog,none,Orbium
+orbium,clean rerun,untested,no trace at this rule
+orbium,resize,untested,not run
+orbium,return,pass,≤ 10% (2 phases)
+orbium,second,none,not yet
+static,T10 R13,pass,static m 0.379
+static,T10 R26,pass,static m 0.379
+static,T40 R13,pass,static m 0.379
+static,catalog,none,C0la
+static,clean rerun,pass,bitwise S103- 1d8c158cdd
+static,resize,changed,"static, block seed m 0.381, ≠ seed (Lane 3, C048)"
+static,return,pass,"bitwise, ≤ 20% (1 phase, dossier)"
+static,second,none,not yet

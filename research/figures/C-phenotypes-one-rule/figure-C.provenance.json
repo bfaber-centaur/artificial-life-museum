@@ -1,0 +1,225 @@
+{
+  "figure": "C-phenotypes-one-rule",
+  "command": ".venv/bin/python research/figures/C-phenotypes-one-rule/make_figure.py",
+  "ledger": {
+    "ledger": "research/claims.md",
+    "ledger_commit": "a9ff918",
+    "ledger_full_commit": "a9ff91867b4dd6cad080fe7ae3f0cc4a6ef9f006",
+    "ledger_sha256": "0418569939b8dd91a1a1e80aa4485824f1768eccb171fcc0213374d8b283b001",
+    "pending": "PR #22 (archivist ledger update), unmerged",
+    "claims": {
+      "C038": {
+        "status": "REPRODUCED",
+        "status_text": "REPRODUCED (clean-process reruns); not yet reproduced by a second lane",
+        "title": "One rule (S001's, with \u03bc = 0.155, \u03c3 = 0.020) supports three phenotypes chosen by history: an Orbium glider, a circler (S102) and a static ring (S103)",
+        "base_status": "REPRODUCED"
+      },
+      "C039": {
+        "status": "REFUTED",
+        "status_text": "REFUTED as worded (superseded by C047). The narrower fact, that the *bilinearly resized* seed dies at R 26 and 39, is INDEPENDENTLY_CHECKED (Lane 6 `field.py`, PR #11, at R 26; Lane 3 `alm_check`, PR #18, at R 26 and 39). That is a resize-method dependence of the initial condition, not a resolution dependence: from block, nearest or cubic seeds S102 persists at R 26 and 39 (C047), with mean properties within 0.5% of R 13 over 300 tu (C046).",
+        "title": "The circler S102 at its registered rule (\u03bc 0.155, \u03c3 0.020) does not survive doubling the resolution",
+        "base_status": "NUMERICALLY_FRAGILE"
+      },
+      "C040": {
+        "status": "OBSERVED",
+        "status_text": "OBSERVED; not yet reproduced by a second lane",
+        "title": "At the coexistence rule, Lane 4's disturbances never switch a glider into a circler or back (0/316); a port injury switched the circler into the static ring S103 in 2 of 38 runs",
+        "base_status": "OBSERVED"
+      },
+      "C042": {
+        "status": "REPRODUCED",
+        "status_text": "REPRODUCED (clean-process reruns); not yet reproduced by a second lane",
+        "title": "S103 is an exact fixed point of the clipped Lenia map: it is T-independent and returns bitwise to itself after attenuation up to 20%",
+        "base_status": "REPRODUCED"
+      },
+      "C043": {
+        "status": "OBSERVED",
+        "status_text": "OBSERVED (any novelty claim for S101\u2013S103 is REFUTED)",
+        "title": "S101, S102 and S103 are catalogued species carried to nearby rules, not new forms",
+        "base_status": "OBSERVED"
+      },
+      "C044": {
+        "status": "OBSERVED",
+        "status_text": "OBSERVED; not yet reproduced by a second lane",
+        "title": "Around S001, Orbium's \u03bc \u00d7 \u03c3 neighbourhood is one continuum: no other phenotype arises from Orbium cells, soups or rescaled Orbia except a circler at two rules and the bound pair",
+        "base_status": "OBSERVED"
+      },
+      "C047": {
+        "status": "OBSERVED",
+        "status_text": "OBSERVED (Lane 3, `alm_check`, merged). Block seeds through 300 tu are preregistered (C046); the four-method comparison through 1000 tu is exploratory. Lane 6 matched all eight outcomes in `field.py` (`413003d`), which is not yet on `main`; the archivist will mark this claim INDEPENDENTLY_CHECKED, for these eight seeds only, when that evidence lands.",
+        "title": "S102 at its registered rule persists at R = 26 and R = 39 from block-replicated, nearest-neighbour or cubic seeds; only the bilinear seed dies",
+        "base_status": null
+      },
+      "C048": {
+        "status": "OBSERVED",
+        "status_text": "OBSERVED (R statement, single engine); INDEPENDENTLY_CHECKED (T statement, with C042: `field.py`/`alm` and `alm_check`)",
+        "title": "S103 is a bitwise fixed point at every timestep tested (T 10\u201380), but block-scaled to R = 26 or 39 it relaxes to a different static body",
+        "base_status": null
+      }
+    }
+  },
+  "inputs": [
+    {
+      "path": "research/figures/C-phenotypes-one-rule/make_figure.py",
+      "sha256": "c8d7bd309b6626f94bf75389b32f7d2fbe17d9713aed8292590a8e482f48a05e",
+      "last_commit": "2dbe84c"
+    },
+    {
+      "path": "research/figures/figlib/__init__.py",
+      "sha256": "23d1dd07a43a84f1f441481050b2daa508a69658e3b71bb3bd1d6da0fa9f7b70",
+      "last_commit": "08b074f"
+    },
+    {
+      "path": "research/figures/figlib/edges.py",
+      "sha256": "f66c531fc0d3f4471076e550384a8dc06797c1eb831574c9376ab63c8a84ef62",
+      "last_commit": "08b074f"
+    },
+    {
+      "path": "research/figures/figlib/gitsource.py",
+      "sha256": "cb9d65796293697f4cd173bc81f6a290d1097713c490534b50c88f37c197ad57",
+      "last_commit": "4c7dd20"
+    },
+    {
+      "path": "research/figures/figlib/ledger.py",
+      "sha256": "b711afa1e9bdc057d5dd2fdb2d55f9ff802f5f6c8f621619da164b94a5bcddf7",
+      "last_commit": "78406e9"
+    },
+    {
+      "path": "research/figures/figlib/provenance.py",
+      "sha256": "51b8064e6178735aa4dabaecde17d347291cb56821aa370adaae9e5f7dfd6623",
+      "last_commit": "4c7dd20"
+    },
+    {
+      "path": "research/figures/figlib/style.py",
+      "sha256": "37cf3aecfc105a526fd915a26e0c9ea300d7e1660b7bbc09fa942eb78db120ac",
+      "last_commit": "4c7dd20"
+    }
+  ],
+  "pinned_inputs": [
+    {
+      "commit": "f72db9ef9584fffc10af0fcbbc6491c8f22a6d9c",
+      "source": "PR #11 (Lane 6), merged to main",
+      "path": "research/experiments/L6-field/README.md",
+      "blob": "37099c919345f466d51985abaac8cfa36a4aa1b5",
+      "sha256": "078d4c62d2a1355746187993143b568ed8d2461d23053596200253fd2342edaa"
+    },
+    {
+      "commit": "f72db9ef9584fffc10af0fcbbc6491c8f22a6d9c",
+      "source": "PR #11 (Lane 6), merged to main",
+      "path": "research/experiments/L6-field/bistab-T10-R13.csv",
+      "blob": "3b47c1901174f57057c9c955a974e8f984783c00",
+      "sha256": "cf7680c1092dfd9af342485c6d45cd04401f29d3a75fcb6373e5fddda314fcfa"
+    },
+    {
+      "commit": "f72db9ef9584fffc10af0fcbbc6491c8f22a6d9c",
+      "source": "PR #11 (Lane 6), merged to main",
+      "path": "research/experiments/L6-field/bistab-T10-R26.csv",
+      "blob": "b8d3f55dd9b86e2470fd03afb2caf5e37c573795",
+      "sha256": "891fa9718cbf99e50d07ade63e7bf87e2b3898901b83aa260bd85635d2a68617"
+    },
+    {
+      "commit": "f72db9ef9584fffc10af0fcbbc6491c8f22a6d9c",
+      "source": "PR #11 (Lane 6), merged to main",
+      "path": "research/experiments/L6-field/bistab-T40-R13.csv",
+      "blob": "2b018516311dbd5e8dd2b186e9ca753846923304",
+      "sha256": "1c5071128b401b322b912c9481155fb9c10fc67c73868d763168a194558bec29"
+    },
+    {
+      "commit": "f72db9ef9584fffc10af0fcbbc6491c8f22a6d9c",
+      "source": "PR #11 (Lane 6), merged to main",
+      "path": "research/experiments/L6-field/musigma-T10.csv",
+      "blob": "a6383b96520bc72a5c6088aa3d1ff54b5732e9cd",
+      "sha256": "1f08c4a4abe8d7da70342267f9b6bc4550bba24796d03a9075cacb439dee2c9e"
+    },
+    {
+      "commit": "f72db9ef9584fffc10af0fcbbc6491c8f22a6d9c",
+      "source": "PR #11 (Lane 6), merged to main",
+      "path": "research/experiments/L6-field/persist-T10-R13.csv",
+      "blob": "223154141221c4db2546d9aefcd96a650e713156",
+      "sha256": "94d348b2f25074eccf151ef2141f86a8d72024227a0879c08c9a570d42c080f6"
+    },
+    {
+      "commit": "f72db9ef9584fffc10af0fcbbc6491c8f22a6d9c",
+      "source": "PR #11 (Lane 6), merged to main",
+      "path": "research/experiments/L6-field/persist-T10-R26.csv",
+      "blob": "df3cc5ba614450072b5de45207767ebce5703032",
+      "sha256": "4f70a2e53f1e4b296073d0b712ad00126d5e3557cd3c2747245321b9a251cd9d"
+    },
+    {
+      "commit": "f72db9ef9584fffc10af0fcbbc6491c8f22a6d9c",
+      "source": "PR #11 (Lane 6), merged to main",
+      "path": "research/experiments/L6-field/persist-T40-R13.csv",
+      "blob": "9e9275f6e6e84fa8949e78001a9f535e37cde1e5",
+      "sha256": "89b4bba8f18710fce7882992336d2f64a112aa7270cf6d186c39fb91aac439bf"
+    },
+    {
+      "commit": "f72db9ef9584fffc10af0fcbbc6491c8f22a6d9c",
+      "source": "PR #11 (Lane 6), merged to main",
+      "path": "research/experiments/L6-field/switch-T10-R13.csv",
+      "blob": "e4c3ad2e4761cc33e7f65a0ae0b7afa5847ea84c",
+      "sha256": "d285d0bd03fc7e7f434f8e4bb0d68397f6be069296476e6af7a7c340b12d98ae"
+    },
+    {
+      "commit": "f72db9ef9584fffc10af0fcbbc6491c8f22a6d9c",
+      "source": "PR #11 (Lane 6), merged to main",
+      "path": "research/specimens/S103-static-ring.md",
+      "blob": "05c3c95c9f5061069a485dc0a9a6c43192407d53",
+      "sha256": "71aa43a2057e6559dddd8673a6a866274dfe1e7704a24f6edea98c242d726d30"
+    },
+    {
+      "commit": "f72db9ef9584fffc10af0fcbbc6491c8f22a6d9c",
+      "source": "PR #11 (Lane 6), merged to main",
+      "path": "research/traces/S102-5bfac8f95f/summary.json",
+      "blob": "ab9eb9ba040cb742c7cce400f4e02e81993887f1",
+      "sha256": "06440a75371db91173154c17a1b931929d72cdef695c073168822a1eecdf6ab8"
+    },
+    {
+      "commit": "f72db9ef9584fffc10af0fcbbc6491c8f22a6d9c",
+      "source": "PR #11 (Lane 6), merged to main",
+      "path": "research/traces/S103-1d8c158cdd/summary.json",
+      "blob": "bbd31eb7a4aa624e3e8dfd3e8199109701231354",
+      "sha256": "0fd355a936cd33e21a818c470bc61dc9a528f437a2b0b09c87723d2f39799a20"
+    },
+    {
+      "commit": "413003da752922e61be8a220abff8d86600e6aee",
+      "source": "Lane 6 L6-007 D2 rerun, branch claude/night0-field-tmbx06 (no PR)",
+      "path": "research/experiments/L6-007-attractor-geography/d2-resize.csv",
+      "blob": "da49a5d2498e4a2bf117485f5bbafbed3f5c7c14",
+      "sha256": "bc3f9dac9a91d9f13e2948ec8bd45898139c138f2304309dfd3501cf5c184ce8"
+    },
+    {
+      "commit": "56ae4210a225a9dc0c7d38cee9c833b48096307f",
+      "source": "PR #18 (Lane 3 L3-002), merged to main",
+      "path": "research/experiments/L3-002-property-persistence/s102_resize_check.txt",
+      "blob": "1ae1acc83c3283a207fe70df8e7e324d8a340ae1",
+      "sha256": "93afe4808e377f1663bde0c196d0a9ec423079b9772eff919f7e674ab30f0598"
+    },
+    {
+      "commit": "56ae4210a225a9dc0c7d38cee9c833b48096307f",
+      "source": "PR #18 (Lane 3 L3-002), merged to main",
+      "path": "research/traces/lane3/L3-002/labels.csv",
+      "blob": "1f04209bdc595500d4467593384949ca7d88e46e",
+      "sha256": "5652a1b7db876f9c4c5f511e4d0eaa272b26652834bdb2c7c90eec1de4fb77ae"
+    }
+  ],
+  "outputs": [
+    "research/figures/C-phenotypes-one-rule/figure-C.png",
+    "research/figures/C-phenotypes-one-rule/figure-C.svg",
+    "research/figures/C-phenotypes-one-rule/figure-C.pdf",
+    "research/figures/C-phenotypes-one-rule/figure-C-data.csv",
+    "research/figures/C-phenotypes-one-rule/figure-C-matrix.csv"
+  ],
+  "code_commit": "2dbe84c",
+  "code_dirty": false,
+  "versions": {
+    "python": "3.13.16",
+    "numpy": "2.5.3",
+    "matplotlib": "3.11.2"
+  },
+  "notes": [
+    "Single-lane evidence: Lane 6 data read at the PR #11 merge commit; see pinned_inputs.",
+    "Resize evidence (C047, C048) read from Lane 6's D2 rerun commit and Lane 3's PR #18 merge commit.",
+    "Statuses checked against the PR #22 ledger update (pending); base_status is main's at build.",
+    "Phenotypes recomputed with Lane 6's tables.py classifier; switch CSV 'outcome' column unused."
+  ]
+}

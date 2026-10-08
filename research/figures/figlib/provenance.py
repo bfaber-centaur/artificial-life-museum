@@ -32,7 +32,7 @@ def last_commit(path):
     return git("log", "-n", "1", "--format=%h", "--", str(path))
 
 
-def manifest(figure_id, inputs, outputs, command, ledger, notes=()):
+def manifest(figure_id, inputs, outputs, command, ledger, notes=(), pinned_inputs=()):
     """Describe a figure build. Paths are recorded relative to the repo root."""
     rel = lambda p: str(pathlib.Path(p).resolve().relative_to(REPO))
     return {
@@ -41,6 +41,7 @@ def manifest(figure_id, inputs, outputs, command, ledger, notes=()):
         "ledger": ledger,  # figlib.ledger.snapshot(): claims.md revision + statuses checked
         "inputs": [{"path": rel(p), "sha256": sha256(p), "last_commit": last_commit(p)}
                    for p in sorted(set(map(str, inputs)))],
+        "pinned_inputs": list(pinned_inputs),  # files read from a git commit (figlib.gitsource)
         "outputs": [rel(p) for p in outputs],
         "code_commit": git("rev-parse", "--short", "HEAD"),
         "code_dirty": bool(git("status", "--porcelain", "--", "research/figures", ":!*.provenance.json")),
