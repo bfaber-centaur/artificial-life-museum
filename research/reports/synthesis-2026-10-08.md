@@ -2,8 +2,7 @@
 
 This is the closing synthesis for October 8, the periodic synthesis described in
 [`../roadmap.md`](../roadmap.md). It was written in closeout mode: no new questions, experiments,
-exhibits or lanes. It reflects `main` at `0b9b47f` (after PRs #29 and #30), with #27 pending
-merge. Claim statuses are the ledger's ([`../claims.md`](../claims.md)). Anything marked *proposed*
+exhibits or lanes. It reflects `main` at `7cbf5ae` (after PRs #29, #30 and #27). Claim statuses are the ledger's ([`../claims.md`](../claims.md)). Anything marked *proposed*
 has no ledger entry yet.
 
 ## New evidence
@@ -42,7 +41,7 @@ has no ledger entry yet.
     on 256².
   - E2's coupling reading is withdrawn. Its preregistered verdict stays INCONCLUSIVE.
 
-**Pending merge: L6-007 and L6-008 (PR #27, head `968d330`)**
+**Merged in closeout: L6-007 and L6-008 (PR #27, merged as `7cbf5ae`), proposed claims**
 
 - **Orbium** at the coexistence rule returns from noise up to ε 0.1 (18/18).
 - **S103** returns bitwise up to ε 0.3 (24/24) at the primary rule.
@@ -74,7 +73,7 @@ has no ledger entry yet.
 
 - **Why S102's collapse needs the T 10 step at R 13**, and whether weaker chaos explains its
   absence at refined settings.
-- **L6-009's off-gap leads.** At s 0.3, a pulse slightly off the gap kills the pair in 4 of 5
+- **L6-009's off-gap leads (parked in draft #35).** At s 0.3, a pulse slightly off the gap kills the pair in 4 of 5
   phases on both world sizes. A pulse on one partner lets the pair keep a partner that dies alone
   (8 of 15). Neither is preregistered or independently checked.
 - **HR-009's two-regime hypothesis** for S102 at R 13, T 10: a fragile and a longer-lived circling
@@ -87,17 +86,17 @@ has no ledger entry yet.
 | --- | --- | --- |
 | #29 L3-003 | merged | |
 | #30 HR-009 | merged | |
-| #27 L6-007/L6-008 | pending merge | head `968d330`, revised per Bobby's and Lane 7's reviews |
+| #27 L6-007/L6-008 | merged (`7cbf5ae`) | revised per Bobby's and Lane 7's reviews |
 | #33 Figure D (provisional) | open | retitled to "a withdrawn 'together is worse'" |
 | #32 museum Room 6 (provisional) | open | merges after #33 |
 | #34 gallery G006 (provisional) | open | shown at R 13, T 10 only |
-| L6-009 | no PR | its findings are summarized in #27's L6-008 README; the work itself must be kept on a durable branch or draft PR |
-| ledger | not updated | C038 and C041 wording, and claims for L6-f, L6-c and L6-d, wait until #27 lands |
+| #35 L6-009 / L6-010 | draft, parked | exploratory work preserved; not to be resolved in closeout |
+| ledger | not updated | C038 and C041 wording, and claims for L6-f, L6-c and L6-d, are for the archivist on resume |
 
 ## Decisions pending for Bobby
 
-1. **C038 and C041.** Should the archivist narrow them on resume, now that #29 and #30 have merged
-   and #27 is landing?
+1. **C038 and C041.** Should the archivist narrow them on resume, now that #27, #29 and #30 have
+   merged?
 2. **#32, #33 and #34.** Each merges as provisional once it is consistent with the merged evidence.
 3. **Resuming.** The four open questions above are candidates for the next bounded tests, but
    none should run until you say so.
