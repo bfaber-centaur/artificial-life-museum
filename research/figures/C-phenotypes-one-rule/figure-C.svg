@@ -2553,7 +2553,7 @@ z
    </g>
    <g id="text_23">
     <text style="font-weight: 700; font-size: 6.2px; font-family: 'DejaVu Sans'; fill: #d55e00" transform="translate(2.592 25.429885)">ONE LANE: evidence from Lane 6 (PR #11, merged @ f72db9e); no second-lane reproduction of the coexistence yet.</text>
-    <text style="font-weight: 700; font-size: 6.2px; font-family: 'DejaVu Sans'; fill: #d55e00" transform="translate(2.592 32.87158)">Claim statuses checked against research/claims.md as updated in PR #22 @ a9ff918 (unmerged; C039 refuted, D2).</text>
+    <text style="font-weight: 700; font-size: 6.2px; font-family: 'DejaVu Sans'; fill: #d55e00" transform="translate(2.592 32.87158)">Claim statuses checked against research/claims.md @ 1056e39 (C039 refuted, D2).</text>
    </g>
    <g id="text_24">
     <text style="font-size: 6.2px; font-family: 'DejaVu Sans'" transform="translate(258.214781 23.332575)"> </text>
@@ -4807,7 +4807,7 @@ L 512.325363 553.565969
      <text style="font-size: 5.8px; font-family: 'DejaVu Sans'; fill: #222222" transform="translate(215.75454 607.723231)">circler, all 3,</text>
      <text style="font-size: 5.8px; font-family: 'DejaVu Sans'; fill: #222222" transform="translate(215.96343 614.689121)">R 26 and 39</text>
      <text style="font-size: 5.8px; font-family: 'DejaVu Sans'; fill: #222222" transform="translate(210.985852 621.014746)">(Lane 3; Lane 6</text>
-     <text style="font-size: 5.8px; font-family: 'DejaVu Sans'; fill: #222222" transform="translate(210.566712 627.467246)">match pending)</text>
+     <text style="font-size: 5.8px; font-family: 'DejaVu Sans'; fill: #222222" transform="translate(211.27993 627.687918)">rerun matches)</text>
     </g>
     <g id="text_74">
      <text style="font-weight: 700; font-size: 5.8px; font-family: 'DejaVu Sans'; fill: #8a5a00" transform="translate(204.845102 640.368295)">static, block seed</text>

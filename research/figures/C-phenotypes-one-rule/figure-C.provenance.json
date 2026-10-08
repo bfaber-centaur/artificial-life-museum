@@ -3,65 +3,55 @@
   "command": ".venv/bin/python research/figures/C-phenotypes-one-rule/make_figure.py",
   "ledger": {
     "ledger": "research/claims.md",
-    "ledger_commit": "a9ff918",
-    "ledger_full_commit": "a9ff91867b4dd6cad080fe7ae3f0cc4a6ef9f006",
-    "ledger_sha256": "0418569939b8dd91a1a1e80aa4485824f1768eccb171fcc0213374d8b283b001",
-    "pending": "PR #22 (archivist ledger update), unmerged",
+    "ledger_commit": "1056e39",
+    "ledger_sha256": "f8c9c704acce6ff4972fa9533bd73959f27a9f691fc9d80572c3ab4aa97fb571",
     "claims": {
       "C038": {
         "status": "REPRODUCED",
         "status_text": "REPRODUCED (clean-process reruns); not yet reproduced by a second lane",
-        "title": "One rule (S001's, with \u03bc = 0.155, \u03c3 = 0.020) supports three phenotypes chosen by history: an Orbium glider, a circler (S102) and a static ring (S103)",
-        "base_status": "REPRODUCED"
+        "title": "One rule (S001's, with \u03bc = 0.155, \u03c3 = 0.020) supports three phenotypes chosen by history: an Orbium glider, a circler (S102) and a static ring (S103)"
       },
       "C039": {
         "status": "REFUTED",
         "status_text": "REFUTED as worded (superseded by C047). The narrower fact, that the *bilinearly resized* seed dies at R 26 and 39, is INDEPENDENTLY_CHECKED (Lane 6 `field.py`, PR #11, at R 26; Lane 3 `alm_check`, PR #18, at R 26 and 39). That is a resize-method dependence of the initial condition, not a resolution dependence: from block, nearest or cubic seeds S102 persists at R 26 and 39 (C047), with mean properties within 0.5% of R 13 over 300 tu (C046).",
-        "title": "The circler S102 at its registered rule (\u03bc 0.155, \u03c3 0.020) does not survive doubling the resolution",
-        "base_status": "NUMERICALLY_FRAGILE"
+        "title": "The circler S102 at its registered rule (\u03bc 0.155, \u03c3 0.020) does not survive doubling the resolution"
       },
       "C040": {
         "status": "OBSERVED",
         "status_text": "OBSERVED; not yet reproduced by a second lane",
-        "title": "At the coexistence rule, Lane 4's disturbances never switch a glider into a circler or back (0/316); a port injury switched the circler into the static ring S103 in 2 of 38 runs",
-        "base_status": "OBSERVED"
+        "title": "At the coexistence rule, Lane 4's disturbances never switch a glider into a circler or back (0/316); a port injury switched the circler into the static ring S103 in 2 of 38 runs"
       },
       "C042": {
         "status": "REPRODUCED",
         "status_text": "REPRODUCED (clean-process reruns); not yet reproduced by a second lane",
-        "title": "S103 is an exact fixed point of the clipped Lenia map: it is T-independent and returns bitwise to itself after attenuation up to 20%",
-        "base_status": "REPRODUCED"
+        "title": "S103 is an exact fixed point of the clipped Lenia map: it is T-independent and returns bitwise to itself after attenuation up to 20%"
       },
       "C043": {
         "status": "OBSERVED",
         "status_text": "OBSERVED (any novelty claim for S101\u2013S103 is REFUTED)",
-        "title": "S101, S102 and S103 are catalogued species carried to nearby rules, not new forms",
-        "base_status": "OBSERVED"
+        "title": "S101, S102 and S103 are catalogued species carried to nearby rules, not new forms"
       },
       "C044": {
         "status": "OBSERVED",
         "status_text": "OBSERVED; not yet reproduced by a second lane",
-        "title": "Around S001, Orbium's \u03bc \u00d7 \u03c3 neighbourhood is one continuum: no other phenotype arises from Orbium cells, soups or rescaled Orbia except a circler at two rules and the bound pair",
-        "base_status": "OBSERVED"
+        "title": "Around S001, Orbium's \u03bc \u00d7 \u03c3 neighbourhood is one continuum: no other phenotype arises from Orbium cells, soups or rescaled Orbia except a circler at two rules and the bound pair"
       },
       "C047": {
         "status": "OBSERVED",
         "status_text": "OBSERVED (Lane 3, `alm_check`, merged). Block seeds through 300 tu are preregistered (C046); the four-method comparison through 1000 tu is exploratory. Lane 6 matched all eight outcomes in `field.py` (`413003d`), which is not yet on `main`; the archivist will mark this claim INDEPENDENTLY_CHECKED, for these eight seeds only, when that evidence lands.",
-        "title": "S102 at its registered rule persists at R = 26 and R = 39 from block-replicated, nearest-neighbour or cubic seeds; only the bilinear seed dies",
-        "base_status": null
+        "title": "S102 at its registered rule persists at R = 26 and R = 39 from block-replicated, nearest-neighbour or cubic seeds; only the bilinear seed dies"
       },
       "C048": {
         "status": "OBSERVED",
         "status_text": "OBSERVED (R statement, single engine); INDEPENDENTLY_CHECKED (T statement, with C042: `field.py`/`alm` and `alm_check`)",
-        "title": "S103 is a bitwise fixed point at every timestep tested (T 10\u201380), but block-scaled to R = 26 or 39 it relaxes to a different static body",
-        "base_status": null
+        "title": "S103 is a bitwise fixed point at every timestep tested (T 10\u201380), but block-scaled to R = 26 or 39 it relaxes to a different static body"
       }
     }
   },
   "inputs": [
     {
       "path": "research/figures/C-phenotypes-one-rule/make_figure.py",
-      "sha256": "c8d7bd309b6626f94bf75389b32f7d2fbe17d9713aed8292590a8e482f48a05e",
+      "sha256": "6b08f9736ab340fd1d20d117dcaa5dc502e911cdb44a55cd63a3a6ceeccd9778",
       "last_commit": "2dbe84c"
     },
     {
@@ -181,8 +171,8 @@
       "sha256": "0fd355a936cd33e21a818c470bc61dc9a528f437a2b0b09c87723d2f39799a20"
     },
     {
-      "commit": "413003da752922e61be8a220abff8d86600e6aee",
-      "source": "Lane 6 L6-007 D2 rerun, branch claude/night0-field-tmbx06 (no PR)",
+      "commit": "7a4ea3b963fbfc3c952fadb2eb25193f4b1be207",
+      "source": "PR #23 (Lane 6 L6-007 D2 rerun), merged to main",
       "path": "research/experiments/L6-007-attractor-geography/d2-resize.csv",
       "blob": "da49a5d2498e4a2bf117485f5bbafbed3f5c7c14",
       "sha256": "bc3f9dac9a91d9f13e2948ec8bd45898139c138f2304309dfd3501cf5c184ce8"
@@ -209,8 +199,8 @@
     "research/figures/C-phenotypes-one-rule/figure-C-data.csv",
     "research/figures/C-phenotypes-one-rule/figure-C-matrix.csv"
   ],
-  "code_commit": "2dbe84c",
-  "code_dirty": false,
+  "code_commit": "5b1b9e3",
+  "code_dirty": true,
   "versions": {
     "python": "3.13.16",
     "numpy": "2.5.3",
@@ -218,8 +208,7 @@
   },
   "notes": [
     "Single-lane evidence: Lane 6 data read at the PR #11 merge commit; see pinned_inputs.",
-    "Resize evidence (C047, C048) read from Lane 6's D2 rerun commit and Lane 3's PR #18 merge commit.",
-    "Statuses checked against the PR #22 ledger update (pending); base_status is main's at build.",
+    "Resize evidence (C047, C048) read at the PR #23 (Lane 6) and PR #18 (Lane 3) merge commits.",
     "Phenotypes recomputed with Lane 6's tables.py classifier; switch CSV 'outcome' column unused."
   ]
 }
