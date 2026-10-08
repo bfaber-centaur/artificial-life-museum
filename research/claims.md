@@ -1317,20 +1317,26 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
   PR #11 has merged; the underlying claims are still single-lane (not yet reproduced by a second lane).
   - [Chan2019] Fig. 7(b), p. 17 *(full text)*. **RELATED.** Orbium's niche stays static over
     R = 9–55 at T = 10. That is Orbium, not the circler, so it is not a contradiction.
-  - [Davis2024] p. 18 (definition) and p. 20 *(full text)*. **CONSISTENT WITH.**
+  - [Davis2024] p. 18 (definition) and p. 20 *(full text)*. **RELATED** (downgraded from
+    CONSISTENT WITH on 2026-10-08 after dispute D2).
     - Davis defines a pattern–rule pair as non-Platonic if it fails at some discretization but
       persists at a coarser one. *Scutium gravidus*, *Triscutium solidus* and an *H. natans*
       wobbler meet that definition.
-    - By that definition, S102 at its registered rule (alive at R = 13, dead at R = 26) is
-      non-Platonic with respect to R on our data.
+    - The R = 26 death in this claim comes from the *bilinearly resized* seed. Block, nearest and
+      cubic seeds of S102 persist at R = 26 and 39 in two engines (C047, PR #22). So the death is
+      a resize-method dependence of the initial condition, not a resolution dependence of the
+      rule–pattern pair, and S102 does not meet Davis's definition with respect to R on our data.
     - Similar outcome only: other species and Gaussian-family rules. Davis's Orbium is Platonic.
-  - [Yevenko2024] *(excerpt)*. **CONSISTENT WITH** (excerpt-only, so provisional). Reports
-    Orbium variants that "rely on discretization to survive".
+  - [Yevenko2024] *(excerpt)*. **RELATED** (downgraded from CONSISTENT WITH on 2026-10-08, for
+    the same reason; excerpt-only, so provisional). Reports Orbium variants that "rely on
+    discretization to survive".
 - **History:**
   - 2026-10-07 — NUMERICALLY_FRAGILE — Lane 6.
   - 2026-10-07 — Prior literature added (status unchanged) — archivist, literature-provenance mandate.
   - 2026-10-07 — Prior literature verified against Chan 2019 full text and authors' code (status unchanged) — archivist.
   - 2026-10-07 — Prior literature re-verified against arXiv full texts after the network change (status unchanged) — archivist.
+  - 2026-10-08 — Prior literature: Davis2024 and Yevenko2024 downgraded to RELATED after D2 showed the R = 26
+    death depends on the seed resize method (C047, PR #22). The status change itself is carried by PR #22 — archivist.
 
 ### C040 — At the coexistence rule, Lane 4's disturbances never switch a glider into a circler or back (0/316); a port injury switched the circler into the static ring S103 in 2 of 38 runs
 

@@ -128,7 +128,7 @@ Still unread:
   The paper's Orbium (σ = 0.016, exponential cores in Fig. 6) is **not** S001's rule, which is
   poly/poly with σ = 0.015 (see C002).
 
-  Cited by C003, C009, C013, C014, C038, C039, C040, C041, C042.
+  Cited by C003, C009, C013, C014, C038, C039, C040, C041, C042; C046 and C051 in PR #22.
 
 - **[Chan2020]** Bert Wang-Chak Chan. *Lenia and Expanded Universe.* ALIFE 2020 Proceedings
   (vol. 32), p. 221 onward. doi:[10.1162/isal_a_00297](https://doi.org/10.1162/isal_a_00297);
@@ -240,7 +240,9 @@ Still unread:
   (arXiv:[2208.09444](https://arxiv.org/abs/2208.09444)). It agrees with Orbium being Platonic,
   because coarse runs failing is the Platonic case.
 
-  Cited by C003, C039.
+  Cited by C003, C039; C047 in PR #22. On 2026-10-08 the C039 entry was downgraded from CONSISTENT WITH to
+  RELATED: S102's R = 26 death occurs only from a bilinearly resized seed (dispute D2, C047), so it is
+  a resize-method dependence of the initial condition, not evidence that S102 is non-Platonic in R.
 
 - **[Kojima2023]** H. Kojima, T. Ikegami. *Implementation of Lenia as a Reaction-Diffusion
   System.* arXiv:[2305.13784](https://arxiv.org/abs/2305.13784) v1, 2023.
@@ -260,7 +262,8 @@ Still unread:
   well enough to reconcile them. That makes it a numerical-ecology question for us, not a ledger
   dispute.
 
-  Cited by C009, C042.
+  Cited by C009, C042; C051 in PR #22 (CONTRADICTORY, similar outcome only: S001 survives at
+  dt = 0.0016–0.00039 under its own poly/poly rule).
 
 - **[Yevenko2024]** I. Yevenko. *Classifying the fractal parameter space of the Lenia Orbium.*
   ALIFE 2024 Proceedings, paper 14 (3 pp.).
@@ -272,7 +275,7 @@ Still unread:
   Used for: escape-time maps of Orbium stability over pairs of parameters, and Orbium variants
   that "fundamentally rely on discretization to survive".
 
-  Cited by C038, C039.
+  Cited by C038, C039 (RELATED since 2026-10-08, as for Davis2024).
 
 - **[Hudcova2026]** B. Hudcová, F. Dušek, M. Tuccio, C. Hongler. *Visualizing the Structure of
   Lenia Parameter Space.* arXiv:[2601.01932](https://arxiv.org/abs/2601.01932) v1, 2026. This is
@@ -353,3 +356,19 @@ C014, so those claims gained entries. No new literature search was run.
 ### 2026-10-07: verification pass, round 2 (archivist)
 
 The network was opened, so every cited arXiv paper was read at v1. Yevenko (2024) is still excerpt-only. No new literature search was run.
+
+### 2026-10-08: L3-002 (PR #18) and dispute D2 (archivist)
+
+No new search was run. Lane 3's timestep and resolution results (C046–C051, ledgered in PR #22) were
+checked against the papers already read (Chan 2019 Fig. 7, Kojima 2023 §2.1.2, Davis 2024 p. 18).
+
+Two kinds of discretization effect are kept apart:
+
+- *Resolution or timestep dependence*: a property changes as R or T is refined from the same
+  continuum initial condition. L3-002 finds R = 13 converged to 0.5% and T = 10 biased by 10–18%
+  (C046).
+- *Resize-method dependence*: the outcome changes with how a seed is resampled to a new R. S102's
+  R = 26 death (C039) is of this kind (C047).
+
+Only the first kind bears on Davis's Platonic/non-Platonic definition, so the C039 entries for
+Davis 2024 and Yevenko 2024 were downgraded to RELATED.
