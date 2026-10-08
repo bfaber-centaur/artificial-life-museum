@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Still being argued · ALM museum</title>
-<meta name="description" content="Two exhibits in progress: a circler that eventually disappears, but perhaps only on a coarse grid, and a pair for which being together looked worse, until the world was made bigger.">
+<meta name="description" content="Two exhibits in progress: a circler that eventually disappears, but only at one numerical setting, and a pair for which being together looked worse, until the world was made bigger.">
 <link rel="stylesheet" href="museum.css">
 </head>
 <body class="room-under-review">
@@ -54,10 +54,12 @@ reports, side by side, with nothing promoted to fact until the ledger says so.</
       death time belongs to the creature (<a class="pr" href="https://github.com/bfaber-centaur/artificial-life-museum/pull/30">Lane 7, PR #30</a>).</p>
       <p class="open">The replication lane reproduced this exactly on the same grid, with the same
       death step and the same four early deaths, and 10 of 24 copies nudged by one part in a trillion
-      stopped circling within 5000 time units. But on finer grids, none died: 0 of 29 runs at
-      R 26 (watched for 5000 to 8000 time units) and 0 of 3 at R 39. So the disappearing may belong
-      to the coarse grid, not to the creature. That is disputed, and it does not show that the
-      finer-grid circler lives forever, only that it outlasted these runs
+      stopped circling within 5000 time units. But change the numerical setting and none died. On
+      finer grids: 0 of 29 runs at R 26 (watched for 5000 to 8000 time units) and 0 of 3 at R 39.
+      On the same grid with smaller time steps: 0 of 24 copies at T 20 and 0 of 24 at T 40, each
+      watched for 8000 time units. So on this evidence the disappearing belongs to the simulation
+      settings, R 13 with T 10, not to the creature's rule. It does not show that the circler lives
+      forever at any other setting, only that it outlasted these runs
       (<a class="pr" href="https://github.com/bfaber-centaur/artificial-life-museum/pull/29">Lane 3, PR #29</a>).</p>
     </div>
   </div>
@@ -73,8 +75,9 @@ reports, side by side, with nothing promoted to fact until the ledger says so.</
   runs honestly rather than guessing their ends. Panels a and b belong to the pair, below. The
   data are read from <a class="pr" href="https://github.com/bfaber-centaur/artificial-life-museum/pull/27">PR #27</a> and <a class="pr" href="https://github.com/bfaber-centaur/artificial-life-museum/pull/30">PR #30</a>; Lane 3's independent lifetimes
   (<a class="pr" href="https://github.com/bfaber-centaur/artificial-life-museum/pull/29">PR #29</a>) are not in it yet. Every run in panels c and d is on the
-  standard R 13 grid, and the red warning on them says so: Lane 3 saw no deaths at R 26 or R 39,
-  so the disappearance may be a grid effect, not a property of the creature. Only C038 and C041 carry ledger statuses. Read the
+  standard setting, R 13 with T 10, and the red warning on them says so. Lane 3 saw no deaths
+  on finer grids or with smaller time steps, so the disappearance looks like an effect of that
+  numerical setting, not a property of the rule. Only C038 and C041 carry ledger statuses. Read the
   <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/figures/D-pair-and-circler/README.md">full caption and its limits</a> ·
   <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/figures/D-pair-and-circler/figure-D-lifetimes.csv">lifetimes</a> ·
   <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/figures/D-pair-and-circler/figure-D-pair.csv">pair runs</a> ·
@@ -83,8 +86,8 @@ reports, side by side, with nothing promoted to fact until the ledger says so.</
 <div class="caveat"><strong>Why this matters</strong> A pattern can look perfectly stable for
 thousands of time units and still be on its way out. "Survived everything we tried" is a
 statement about how long we watched, not necessarily about the animal. And "disappears" can
-be a statement about the grid it was drawn on: the same circler, drawn finer, has not yet been
-seen to die.</div>
+be a statement about how the world was computed: the same circler, drawn on a finer grid or
+stepped in smaller time steps, has not yet been seen to die.</div>
 
 <h2>When together is worse</h2>
 <p>The bound pair S101 is two Orbium bodies sharing one shell. The obvious question is whether
