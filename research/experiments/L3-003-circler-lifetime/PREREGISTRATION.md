@@ -144,3 +144,28 @@ Changes (additions only; Q1 to Q5 and their rules stand and are still reported):
     descriptively (counts and ranges), no test.
 - Q6 runs are written to the same `lifetimes.csv` schema in `research/traces/lane3/L3-003/q6.csv`,
   by `.venv/bin/python -m alm_check.lifetime --q6`, added to the runner before Q6 is run.
+
+### Amendment 2 (2026-10-08, after the Q1–Q6 results, before any Q7 run)
+
+Reason: Q6 found that S102 collapses at R 13, T 10 but not at R 26 (0 of 12 copies, 8000 tu). The
+single runs at T 20 and T 40 (Q4) cannot say whether the step or the spatial grid causes the
+collapse. The coordinator, relaying Bobby's request for a discriminating experiment, asked for
+this one. Q1–Q6 and their results are unchanged.
+
+- **Q7 (new).** The Q6 recipe at R 13, native seed, 24 copies each, δ = 1e-12, horizon **8000 tu**:
+  - Q7-T20: T 20, ξ rng `default_rng(7000 + 100·2 + k)`, k = 0..23.
+  - Q7-T40: T 40, ξ rng `default_rng(7000 + 100·3 + k)`, k = 0..23.
+- **End of circling** = death (mass < 0.01) **or** world-fill (mass > 2). Both are reported
+  separately; the world-fill category is added because Q6-13 produced one.
+- Label per T: **TRANSIENT** if at least one copy ends circling within 8000 tu; **NO END OBSERVED**
+  otherwise (censored, not an attractor claim).
+- Interpretation, fixed now:
+  - both TRANSIENT → the collapse survives timestep refinement at R 13; it is tied to the spatial
+    grid (consistent with R 26 having none). The fraction ended by 5000 tu is compared
+    descriptively with Q6-13 (10 of 24).
+  - both NO END OBSERVED → the T 10 step is necessary for the collapse at R 13 (and R 26 shows
+    the grid also matters); the collapse is a joint discretisation effect.
+  - T 20 TRANSIENT, T 40 NO END OBSERVED → collapse weakens with smaller step; reported as such.
+  - anything else → reported per T as MIXED.
+- Output `research/traces/lane3/L3-003/q7.csv`, command `.venv/bin/python -m alm_check.lifetime --q7`,
+  added to the runner before Q7 is run. No run is extended past 8000 tu.

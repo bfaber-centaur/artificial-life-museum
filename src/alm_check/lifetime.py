@@ -5,6 +5,7 @@ Protocol: research/experiments/L3-003-circler-lifetime/PREREGISTRATION.md
 
     .venv/bin/python -m alm_check.lifetime        # Q1-Q5
     .venv/bin/python -m alm_check.lifetime --q6   # Q6 (amendment 1): lifetime distribution
+    .venv/bin/python -m alm_check.lifetime --q7   # Q7 (amendment 2): Q6 recipe at T 20, T 40
 """
 
 from __future__ import annotations
@@ -20,7 +21,7 @@ from .lenia import REPO, Rule, World, periodic_centroid, place
 
 OUT = REPO / "research" / "traces" / "lane3" / "L3-003"
 SEED = REPO / "research" / "specimens" / "S102-circler" / "initial-cells-u8.csv"
-MU, SIGMA, DEATH = 0.155, 0.020, 0.01
+MU, SIGMA, DEATH, FILL = 0.155, 0.020, 0.01, 2.0
 EPS, REPS = (0.01, 0.03), 6
 
 # id: (R, T, resize, noisy, horizon tu)
@@ -41,8 +42,12 @@ CONDITIONS = {
     # amendment 1: delta = 1e-12 copies, rng 7000 + 100 i_R + k
     "Q6-13": (13, 10, "native", True, 5000),
     "Q6-26": (26, 10, "block", True, 8000),
+    # amendment 2: same recipe at R13, T 20 and T 40
+    "Q7-T20": (13, 20, "native", True, 8000),
+    "Q7-T40": (13, 40, "native", True, 8000),
 }
 Q6 = {"Q6-13": (0, 24), "Q6-26": (1, 12)}  # cond: (i_R, replicates)
+Q7 = {"Q7-T20": (2, 24), "Q7-T40": (3, 24)}
 DELTA = 1e-12
 
 
@@ -61,8 +66,8 @@ def starts(cond: str) -> list[tuple[float, int, np.ndarray]]:
     if not noisy:
         return [(0.0, -1, base)]
     support = ndimage.binary_dilation(base > 0, iterations=3 * R // 13)
-    if cond in Q6:
-        i_r, reps = Q6[cond]
+    if cond in Q6 or cond in Q7:
+        i_r, reps = {**Q6, **Q7}[cond]
         return [(DELTA, k, np.clip(base + DELTA * np.random.default_rng(7000 + 100 * i_r + k)
                                    .uniform(-1, 1, base.shape) * support, 0, 1))
                 for k in range(reps)]
@@ -80,22 +85,25 @@ def run_one(job) -> dict:
     w = World(A0.copy(), Rule(R=R, T=T, mu=MU, sigma=SIGMA))
     steps = int(horizon * T)
     mass_tu, cen_tu = [], []
-    death = None
+    death = fill = None
     for s in range(1, steps + 1):
         w.step()
         m = w.A.sum() / R**2
         if death is None and m < DEATH:
             death = s
+        if fill is None and m > FILL:
+            fill = s
         if s % T == 0:
             mass_tu.append(m)
             cen_tu.append(periodic_centroid(w.A) if m > 0 else (np.nan, np.nan))
-        if death is not None and s >= death + 10 * T:  # 10 tu past death is enough
+        if (death or fill) and s >= (death or fill) + 10 * T:  # 10 tu past the end is enough
             break
     rid = f"{cond}" + ("" if e == 0 else f"-e{e}-r{k}")
     np.savez_compressed(OUT / f"{rid}.npz", mass=np.array(mass_tu), centroid=np.array(cen_tu))
     row = dict(run_id=f"L3-003-{rid}", condition=cond, R=R, T=T, eps=e, rep=k,
                death_step="" if death is None else death,
                death_tu="" if death is None else death / T,
+               fill_step="" if fill is None else fill,
                mass_last_100tu=float(np.mean(mass_tu[-100:])), steps_run=s)
     print(row, flush=True)
     return row
@@ -123,11 +131,16 @@ def main() -> None:
         jobs.sort(key=lambda j: -CONDITIONS[j[0]][0])
         write(run_all(jobs), "q6.csv")
         return
+    if "--q7" in sys.argv:
+        jobs = [(c, e, k, A) for c in Q7 for e, k, A in starts(c)]
+        jobs.sort(key=lambda j: -CONDITIONS[j[0]][1])
+        write(run_all(jobs), "q7.csv")
+        return
     same = np.array_equal(seed(26, "nearest"), seed(26, "block")), \
         np.array_equal(seed(39, "nearest"), seed(39, "block"))
     print("nearest == block bitwise at R26, R39:", same, flush=True)
     skip = {c for c, s in zip(("B26-nearest", "B39-nearest"), same) if s}
-    jobs = [(c, e, k, A) for c in CONDITIONS if c not in skip | set(Q6) for e, k, A in starts(c)]
+    jobs = [(c, e, k, A) for c in CONDITIONS if c not in skip | set(Q6) | set(Q7) for e, k, A in starts(c)]
     jobs.sort(key=lambda j: -CONDITIONS[j[0]][0] ** 2 * CONDITIONS[j[0]][1] * CONDITIONS[j[0]][4])
     write(run_all(jobs), "lifetimes.csv")
     with open(OUT / "nearest-equals-block.txt", "w") as f:
