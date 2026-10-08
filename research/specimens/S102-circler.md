@@ -72,3 +72,10 @@ t = 8.3 tu (R 26) and 6.0 tu (R 39). So the claim of fragility under resolution 
 What remains is sensitivity to the initial condition. At T 40 it persists, turning ~15% faster. The
 coexistence band with Orbium exists at all three settings but sits at different σ
 (L6-004 table).
+
+**Lifetime (2026-10-08, L6-007 follow-up, exploratory): S102 is a long transient, not a stable
+state.** At its registered rule on 128², the registered seed circles until step 39 799
+(t = 3979.9 tu) and then dies. Both `field.py` and `alm.lenia` give the same step. In the same
+follow-up, 4 of 12 starts with 1–3% noise die between 934 and 1291 tu, and 8 still circle at
+5000 tu. See [`L6-007`](../experiments/L6-007-attractor-geography/README.md). Night 0's runs
+(20 000 steps) were too short to see this.
