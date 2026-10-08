@@ -22,12 +22,15 @@ unchanged. What changes is the interpretation:
   circler ends of Part B) is a draw from that distribution. It is not evidence of a basin.
 - The claims at the end are rewritten to match (L6-f, L6-g and the replication target).
 
-**Resolution caveat (Lane 3, L3-003, PR #29, not yet merged).** An independent engine reproduces
-step 39 799 and the transient at R 13, T 10. At **R 26** no circler died: 0 of 24 perturbed copies
-over 5000–8000 tu, and 2 unperturbed seeds were alive at 8000 tu. At R 39, 0 of 3 died. So the
-finite lifetime may be an R 13 (discretisation) effect rather than a property of the continuum
-rule. L6-f below is stated for R 13, T 10 only. Whether the circler is an attractor at finer
-resolution is open (all censored). Lane 3 proposes the discriminating experiment.
+**Discretisation caveat (Lane 3, L3-003, PR #29, not yet merged).** An independent engine
+reproduces step 39 799 and the transient at R 13, T 10. Lane 3's discriminating runs at μ 0.155,
+σ 0.020 found **no deaths** in 0 of 48 copies at R 13 with T 20 or T 40 (to 8000 tu), and in 0 of 29
+at R 26 (R 39: 0 of 3). So the finite lifetime belongs to the **R 13, T 10 discretisation
+specifically**, not to the rule. Every S102 "transient" statement in this README (L6-f, the
+lifetime follow-up, the circler rows of Part A and Part B) is scoped to R 13, T 10. At other
+settings all runs are censored, so the circler is not shown to be an attractor there either. My
+own T 40 variant (σ 0.019, not 0.020) did see circler deaths at noise ε ≥ 0.01. That is a different
+σ and much larger noise, so it does not contradict Lane 3.
 
 ## Verdict
 
@@ -45,7 +48,8 @@ What this does to C038 ("one rule hosts three phenotypes"):
 - **The S103 ring is an exact, robust fixed point at the primary rule**: every perturbed start up
   to ε 0.3 (24/24) relaxes back to the same binary state, bitwise. At R 26 and T 40 it is not one
   state but a family. Every perturbed start settles on its own distinct static body.
-- **The S102 circler is a chaotic transient, not an attractor.** A 1% perturbation kills it in
+- **At R 13, T 10, the S102 circler is a chaotic transient, not an attractor.** (Lane 3 finds no
+  deaths at finer T or R; see the discretisation caveat above.) A 1% perturbation kills it in
   2 of 6 runs, and the unperturbed seed dies too in a longer exploratory run. HR-009 shows that
   even a 1e−14 perturbation changes when it dies, so lifetimes are spread widely (292 tu to more
   than 5000 tu over 37 starts pooled by Lane 7). C038 should be narrowed: under this rule the
@@ -158,12 +162,13 @@ G glider, C circler, S static, D died, F filled. ¹ circler at 1000 tu, died bef
 - **L6-e.** At the coexistence rule (R 13, T 10), Orbium returns from 18/18 noise perturbations
   up to ε 0.1, and S103 returns bitwise from 24/24 up to ε 0.3. Both are attractors in this
   test.
-- **L6-f** (revised after HR-009, wording adapted from Lane 7). At μ 0.155, σ 0.020, R 13, T 10,
-  128², S102 is a chaotic transient, not an attractor. 1% noise kills it in 2/6 runs within
+- **L6-f** (revised after HR-009 and L3-003; scoped to **R 13, T 10 only**). At μ 0.155,
+  σ 0.020, R 13, T 10, 128², S102 is a chaotic transient, not an attractor. 1% noise kills it in 2/6 runs within
   2000 tu. Twin runs separate at about 0.2 per tu (HR-009), and lifetimes range from 292 tu to
   beyond 5000 tu. The unperturbed seed's death at step 39 799 is one floating-point trajectory,
-  specific to this arithmetic, and not a lifetime of the rule. At R 26 and R 39, Lane 3 saw no
-  deaths in up to 8000 tu (PR #29), so the transient is established at R 13 only.
+  specific to this arithmetic, and not a lifetime of the rule. The finite lifetime is a property
+  of the R 13, T 10 discretisation. Lane 3 saw no deaths at R 13 with T 20 or T 40 (0/48), or at
+  R 26 or R 39 (PR #29).
 - **L6-g** (narrowed). Blends between the three seeds never switch directly between phenotypes
   within 2000 tu. On the Orbium → ring path the classes interleave (dead zones, a filled point
   and a static island at λ 0.20). Classes near the circler ends are horizon samples of a chaotic
