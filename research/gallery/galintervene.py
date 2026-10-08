@@ -87,3 +87,22 @@ if "gallery_port_injury_h" not in __import__("alm.interventions", fromlist=["REG
         def apply(self, A, sim, rng):
             cx, cy = disturb.periodic_centroid(A)
             return disturb.i004_port_injury(A, disturb.Frame(cx, cy, self.hx, self.hy), self.s, sim.rule.R)
+
+
+if "gallery_tiny_noise" not in __import__("alm.interventions", fromlist=["REGISTRY"]).REGISTRY:
+
+    @register
+    @dataclass(frozen=True)
+    class GalleryTinyNoise(Intervention):
+        """Add ``delta * U(-1, 1)`` noise on the creature's support (cells within 3 of a nonzero
+        cell), from the run's seeded RNG. Lane 7's HR-009 E1 recipe for twin starts; the draws
+        differ from HR-009's because the RNG seeds and engine differ."""
+
+        name: ClassVar[str] = "gallery_tiny_noise"
+        delta: float = 1e-12
+
+        def apply(self, A, sim, rng):
+            from scipy import ndimage
+
+            support = ndimage.binary_dilation(A > 0, iterations=3)
+            return A + self.delta * rng.uniform(-1, 1, A.shape) * support

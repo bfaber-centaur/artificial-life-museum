@@ -1,0 +1,551 @@
+{
+  "exhibit": "G006",
+  "title": "The circler that eventually disappears",
+  "status": "provisional: L6-007 (PR #27, merged 7cbf5ae), L3-003 and HR-009 are merged, but the ledger holds no claim on S102's lifetime yet (L3-003: PR #29, merged 20bdff9; HR-009: PR #30, merged 0b9b47f). The disappearance is shown at R 13, T 10 only; L3-003 sees no deaths at R 26, R 39 (finer grid) or T 20, T 40 (smaller step), so the collapse is specific to the R 13, T 10 discretization",
+  "media": [
+    "lifelines-sheet.png",
+    "eventually-gone.gif",
+    "eventually-gone.mp4"
+  ],
+  "runs": [
+    {
+      "label": "registered seed",
+      "run_id": "S102-c1d3b36679",
+      "seed": 0,
+      "noise_delta": 0.0,
+      "death_step": 39799,
+      "death_tu": 3979.9,
+      "censored_at_step": null
+    },
+    {
+      "label": "twin 1 (seed 1)",
+      "run_id": "S102-be02ee8880",
+      "seed": 1,
+      "noise_delta": 1e-12,
+      "death_step": null,
+      "death_tu": null,
+      "censored_at_step": 50000
+    },
+    {
+      "label": "twin 2 (seed 2)",
+      "run_id": "S102-fa6ac55f0b",
+      "seed": 2,
+      "noise_delta": 1e-12,
+      "death_step": null,
+      "death_tu": null,
+      "censored_at_step": 50000
+    },
+    {
+      "label": "twin 3 (seed 3)",
+      "run_id": "S102-c12cd8153f",
+      "seed": 3,
+      "noise_delta": 1e-12,
+      "death_step": 3860,
+      "death_tu": 386.0,
+      "censored_at_step": null
+    },
+    {
+      "label": "twin 4 (seed 4)",
+      "run_id": "S102-7382c56040",
+      "seed": 4,
+      "noise_delta": 1e-12,
+      "death_step": 33126,
+      "death_tu": 3312.6,
+      "censored_at_step": null
+    },
+    {
+      "label": "twin 5 (seed 5)",
+      "run_id": "S102-dc0e825ca0",
+      "seed": 5,
+      "noise_delta": 1e-12,
+      "death_step": null,
+      "death_tu": null,
+      "censored_at_step": 50000
+    },
+    {
+      "label": "twin 6 (seed 6)",
+      "run_id": "S102-1b8871c4fb",
+      "seed": 6,
+      "noise_delta": 1e-12,
+      "death_step": null,
+      "death_tu": null,
+      "censored_at_step": 50000
+    },
+    {
+      "label": "twin 7 (seed 7)",
+      "run_id": "S102-d02bac5f58",
+      "seed": 7,
+      "noise_delta": 1e-12,
+      "death_step": null,
+      "death_tu": null,
+      "censored_at_step": 50000
+    },
+    {
+      "label": "twin 8 (seed 8)",
+      "run_id": "S102-26579c425b",
+      "seed": 8,
+      "noise_delta": 1e-12,
+      "death_step": null,
+      "death_tu": null,
+      "censored_at_step": 50000
+    },
+    {
+      "label": "twin 9 (seed 9)",
+      "run_id": "S102-fab4826cea",
+      "seed": 9,
+      "noise_delta": 1e-12,
+      "death_step": 2639,
+      "death_tu": 263.9,
+      "censored_at_step": null
+    },
+    {
+      "label": "twin 10 (seed 10)",
+      "run_id": "S102-4533082007",
+      "seed": 10,
+      "noise_delta": 1e-12,
+      "death_step": null,
+      "death_tu": null,
+      "censored_at_step": 50000
+    },
+    {
+      "label": "twin 11 (seed 11)",
+      "run_id": "S102-11a80aee12",
+      "seed": 11,
+      "noise_delta": 1e-12,
+      "death_step": 22063,
+      "death_tu": 2206.3,
+      "censored_at_step": null
+    }
+  ],
+  "death_definition": "first step whose total mass / R^2 is below 0.01, from the replay's per-step mass (checked against the run's series.npz)",
+  "frames": {
+    "film_stride_steps": {
+      "mp4": 100,
+      "gif": 200
+    },
+    "film_steps": [
+      0,
+      50000
+    ],
+    "playback_fps": 25,
+    "film_hold_last_frame_s": 2,
+    "sheet_offsets_from_end_steps": [
+      -500,
+      -200,
+      -100,
+      -50,
+      -20,
+      0
+    ]
+  },
+  "view": "film: 64x64-cell windows shifted by whole cells to centre the centroid (camera follows; after death it holds its last position), 3x nearest-neighbour in the MP4, 2x in the GIF preview; sheet thumbnails: the central 32x32 cells of the same windows, 4x",
+  "overlays": [
+    "lifeline bars, Lane 9 'died' x marker (#D55E00) and a Lane 9 'muted' (#6b6b6b) arrow for runs still above the threshold at the horizon",
+    "per-tile mass readout",
+    "text labels"
+  ],
+  "disclosures": [
+    "the MP4 samples one frame every 10 tu and the GIF every 20 tu; the circler turns about 95 degrees per tu, so its pose from frame to frame is not continuous motion",
+    "the film holds its last frame for two seconds",
+    "twins are our own draws of HR-009's recipe (noise U(-1,1) x 1e-12 on cells within 3 of the seed's support) in alm.lenia; they are not HR-009's or Lane 6's runs, and their death times are not expected to match those runs'",
+    "12 runs show spread, not a lifetime distribution; HR-009 pools 37 runs",
+    "all runs are at R 13, T 10 on a 128x128 grid; L3-003 (PR #29, merged at 20bdff9) finds no deaths in 29 runs at R 26 (to 5000-8000 tu), 3 at R 39 (8000 tu), 24 at R 13 T 20 or 24 at R 13 T 40 (8000 tu each), so the finite lifetime is specific to the R 13, T 10 discretization",
+    "GIF palette reduced to 128 colours; the MP4 is H.264 (lossy)"
+  ],
+  "sources_of_interpretation": {
+    "L6-007 follow-up": "PR #27 merged @ 7cbf5ae (divergence at all settings, collapse at R 13, T 10 only), research/experiments/L6-007-attractor-geography/",
+    "L3-003": "PR #29, merged at 20bdff9, research/experiments/L3-003-circler-lifetime/",
+    "HR-009 E1 and HR-009b": "PR #30, merged at 0b9b47f, research/reports/hostile-review.md and research/experiments/HR009-l6-review/e1.csv"
+  },
+  "sources": [
+    {
+      "specimen": "S102",
+      "specimen_name": "Gyrorbium-like circler under the coexistence rule",
+      "specimen_source": "research/specimens/S102-circler.md (Lane 6 field exploration)",
+      "run_id": "S102-c1d3b36679",
+      "trace": "research/traces/S102-c1d3b36679/",
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.155,
+        "sigma": 0.02,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "grid": {
+        "shape": [
+          128,
+          128
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "simulator_commit": "63fb8166c07ca3305e492709b820fb615110ade8",
+      "final_state_sha256": "fa43239bcee7b97ca62f007cc68487560a39e19f74f3dde7486db3f98df8e471",
+      "replay_verified": true,
+      "reproduce_run": "git checkout 63fb8166c07c && .venv/bin/python -m alm.run --specimen S102 --steps 50000 --every 10 --size 128 --seed 0 --burn-in 1000"
+    },
+    {
+      "specimen": "S102",
+      "specimen_name": "Gyrorbium-like circler under the coexistence rule",
+      "specimen_source": "research/specimens/S102-circler.md (Lane 6 field exploration)",
+      "run_id": "S102-be02ee8880",
+      "trace": "research/traces/S102-be02ee8880/",
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.155,
+        "sigma": 0.02,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "grid": {
+        "shape": [
+          128,
+          128
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "simulator_commit": "63fb8166c07ca3305e492709b820fb615110ade8",
+      "final_state_sha256": "0dfc2fbb3461be6dc570d359e67554b1ee940d0635b117cb757f59fe3958ad88",
+      "replay_verified": true,
+      "reproduce_run": "git checkout 63fb8166c07c && .venv/bin/python research/gallery/run_specimen.py --specimen S102 --steps 50000 --every 10 --size 128 --seed 1 --burn-in 1000 --intervene 0:gallery_tiny_noise:delta=1e-12"
+    },
+    {
+      "specimen": "S102",
+      "specimen_name": "Gyrorbium-like circler under the coexistence rule",
+      "specimen_source": "research/specimens/S102-circler.md (Lane 6 field exploration)",
+      "run_id": "S102-fa6ac55f0b",
+      "trace": "research/traces/S102-fa6ac55f0b/",
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.155,
+        "sigma": 0.02,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "grid": {
+        "shape": [
+          128,
+          128
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "simulator_commit": "63fb8166c07ca3305e492709b820fb615110ade8",
+      "final_state_sha256": "fe785cda52d7371fe4e72c47d5291d78b193523c75d37fb0b15c89d84df5739a",
+      "replay_verified": true,
+      "reproduce_run": "git checkout 63fb8166c07c && .venv/bin/python research/gallery/run_specimen.py --specimen S102 --steps 50000 --every 10 --size 128 --seed 2 --burn-in 1000 --intervene 0:gallery_tiny_noise:delta=1e-12"
+    },
+    {
+      "specimen": "S102",
+      "specimen_name": "Gyrorbium-like circler under the coexistence rule",
+      "specimen_source": "research/specimens/S102-circler.md (Lane 6 field exploration)",
+      "run_id": "S102-c12cd8153f",
+      "trace": "research/traces/S102-c12cd8153f/",
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.155,
+        "sigma": 0.02,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "grid": {
+        "shape": [
+          128,
+          128
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "simulator_commit": "63fb8166c07ca3305e492709b820fb615110ade8",
+      "final_state_sha256": "fa43239bcee7b97ca62f007cc68487560a39e19f74f3dde7486db3f98df8e471",
+      "replay_verified": true,
+      "reproduce_run": "git checkout 63fb8166c07c && .venv/bin/python research/gallery/run_specimen.py --specimen S102 --steps 50000 --every 10 --size 128 --seed 3 --burn-in 1000 --intervene 0:gallery_tiny_noise:delta=1e-12"
+    },
+    {
+      "specimen": "S102",
+      "specimen_name": "Gyrorbium-like circler under the coexistence rule",
+      "specimen_source": "research/specimens/S102-circler.md (Lane 6 field exploration)",
+      "run_id": "S102-7382c56040",
+      "trace": "research/traces/S102-7382c56040/",
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.155,
+        "sigma": 0.02,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "grid": {
+        "shape": [
+          128,
+          128
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "simulator_commit": "63fb8166c07ca3305e492709b820fb615110ade8",
+      "final_state_sha256": "fa43239bcee7b97ca62f007cc68487560a39e19f74f3dde7486db3f98df8e471",
+      "replay_verified": true,
+      "reproduce_run": "git checkout 63fb8166c07c && .venv/bin/python research/gallery/run_specimen.py --specimen S102 --steps 50000 --every 10 --size 128 --seed 4 --burn-in 1000 --intervene 0:gallery_tiny_noise:delta=1e-12"
+    },
+    {
+      "specimen": "S102",
+      "specimen_name": "Gyrorbium-like circler under the coexistence rule",
+      "specimen_source": "research/specimens/S102-circler.md (Lane 6 field exploration)",
+      "run_id": "S102-dc0e825ca0",
+      "trace": "research/traces/S102-dc0e825ca0/",
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.155,
+        "sigma": 0.02,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "grid": {
+        "shape": [
+          128,
+          128
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "simulator_commit": "63fb8166c07ca3305e492709b820fb615110ade8",
+      "final_state_sha256": "b2ba9ab5adb8cc99d0bad0966aa4a256f5a46e1e15135d72ee9c2bb85b2cd872",
+      "replay_verified": true,
+      "reproduce_run": "git checkout 63fb8166c07c && .venv/bin/python research/gallery/run_specimen.py --specimen S102 --steps 50000 --every 10 --size 128 --seed 5 --burn-in 1000 --intervene 0:gallery_tiny_noise:delta=1e-12"
+    },
+    {
+      "specimen": "S102",
+      "specimen_name": "Gyrorbium-like circler under the coexistence rule",
+      "specimen_source": "research/specimens/S102-circler.md (Lane 6 field exploration)",
+      "run_id": "S102-1b8871c4fb",
+      "trace": "research/traces/S102-1b8871c4fb/",
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.155,
+        "sigma": 0.02,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "grid": {
+        "shape": [
+          128,
+          128
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "simulator_commit": "63fb8166c07ca3305e492709b820fb615110ade8",
+      "final_state_sha256": "f910e7f2d3dba718507589ff46fd604e7745dc4a073522e43f3796a286c28495",
+      "replay_verified": true,
+      "reproduce_run": "git checkout 63fb8166c07c && .venv/bin/python research/gallery/run_specimen.py --specimen S102 --steps 50000 --every 10 --size 128 --seed 6 --burn-in 1000 --intervene 0:gallery_tiny_noise:delta=1e-12"
+    },
+    {
+      "specimen": "S102",
+      "specimen_name": "Gyrorbium-like circler under the coexistence rule",
+      "specimen_source": "research/specimens/S102-circler.md (Lane 6 field exploration)",
+      "run_id": "S102-d02bac5f58",
+      "trace": "research/traces/S102-d02bac5f58/",
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.155,
+        "sigma": 0.02,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "grid": {
+        "shape": [
+          128,
+          128
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "simulator_commit": "63fb8166c07ca3305e492709b820fb615110ade8",
+      "final_state_sha256": "e4c3e378253e4255c1b4cfc991a982a06c7aa11deb7cb97c272e4c545bbf57b0",
+      "replay_verified": true,
+      "reproduce_run": "git checkout 63fb8166c07c && .venv/bin/python research/gallery/run_specimen.py --specimen S102 --steps 50000 --every 10 --size 128 --seed 7 --burn-in 1000 --intervene 0:gallery_tiny_noise:delta=1e-12"
+    },
+    {
+      "specimen": "S102",
+      "specimen_name": "Gyrorbium-like circler under the coexistence rule",
+      "specimen_source": "research/specimens/S102-circler.md (Lane 6 field exploration)",
+      "run_id": "S102-26579c425b",
+      "trace": "research/traces/S102-26579c425b/",
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.155,
+        "sigma": 0.02,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "grid": {
+        "shape": [
+          128,
+          128
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "simulator_commit": "63fb8166c07ca3305e492709b820fb615110ade8",
+      "final_state_sha256": "8120a046924ba20905b24cb5c883741665185b3fb0327cc050c82e1eed022c61",
+      "replay_verified": true,
+      "reproduce_run": "git checkout 63fb8166c07c && .venv/bin/python research/gallery/run_specimen.py --specimen S102 --steps 50000 --every 10 --size 128 --seed 8 --burn-in 1000 --intervene 0:gallery_tiny_noise:delta=1e-12"
+    },
+    {
+      "specimen": "S102",
+      "specimen_name": "Gyrorbium-like circler under the coexistence rule",
+      "specimen_source": "research/specimens/S102-circler.md (Lane 6 field exploration)",
+      "run_id": "S102-fab4826cea",
+      "trace": "research/traces/S102-fab4826cea/",
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.155,
+        "sigma": 0.02,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "grid": {
+        "shape": [
+          128,
+          128
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "simulator_commit": "63fb8166c07ca3305e492709b820fb615110ade8",
+      "final_state_sha256": "fa43239bcee7b97ca62f007cc68487560a39e19f74f3dde7486db3f98df8e471",
+      "replay_verified": true,
+      "reproduce_run": "git checkout 63fb8166c07c && .venv/bin/python research/gallery/run_specimen.py --specimen S102 --steps 50000 --every 10 --size 128 --seed 9 --burn-in 1000 --intervene 0:gallery_tiny_noise:delta=1e-12"
+    },
+    {
+      "specimen": "S102",
+      "specimen_name": "Gyrorbium-like circler under the coexistence rule",
+      "specimen_source": "research/specimens/S102-circler.md (Lane 6 field exploration)",
+      "run_id": "S102-4533082007",
+      "trace": "research/traces/S102-4533082007/",
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.155,
+        "sigma": 0.02,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "grid": {
+        "shape": [
+          128,
+          128
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "simulator_commit": "63fb8166c07ca3305e492709b820fb615110ade8",
+      "final_state_sha256": "d6e0a5b03b1d6e1140e61b00f36f895c36f3557194cdf6c3399b616d2cbd479e",
+      "replay_verified": true,
+      "reproduce_run": "git checkout 63fb8166c07c && .venv/bin/python research/gallery/run_specimen.py --specimen S102 --steps 50000 --every 10 --size 128 --seed 10 --burn-in 1000 --intervene 0:gallery_tiny_noise:delta=1e-12"
+    },
+    {
+      "specimen": "S102",
+      "specimen_name": "Gyrorbium-like circler under the coexistence rule",
+      "specimen_source": "research/specimens/S102-circler.md (Lane 6 field exploration)",
+      "run_id": "S102-11a80aee12",
+      "trace": "research/traces/S102-11a80aee12/",
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.155,
+        "sigma": 0.02,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "grid": {
+        "shape": [
+          128,
+          128
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "simulator_commit": "63fb8166c07ca3305e492709b820fb615110ade8",
+      "final_state_sha256": "fa43239bcee7b97ca62f007cc68487560a39e19f74f3dde7486db3f98df8e471",
+      "replay_verified": true,
+      "reproduce_run": "git checkout 63fb8166c07c && .venv/bin/python research/gallery/run_specimen.py --specimen S102 --steps 50000 --every 10 --size 128 --seed 11 --burn-in 1000 --intervene 0:gallery_tiny_noise:delta=1e-12"
+    }
+  ],
+  "render": {
+    "script": "research/gallery/render.py render",
+    "colormap": "matplotlib inferno, A in [0,1] mapped linearly",
+    "upscaling": "nearest neighbour (one block per cell)"
+  }
+}

@@ -68,6 +68,14 @@ G4_SUBJECTS = [("S101", "bound Orbium pair"), ("S001", "Orbium (O2u)")]
 # heading (10-step chord) and phases t0 = 3000 and 3002; Lane 6 saw circler -> S103 only at 3002.
 G5_STEPS, G5_T0S, G5_S = 5002, (3000, 3002), 0.25
 
+# G006: the circler from twin starts (Lane 7 HR-009 E1 recipe, our own seeds): the unperturbed
+# seed plus G6_RUNS - 1 copies with noise of size G6_DELTA on the creature's support, all run for
+# G6_STEPS (5000 tu, the horizon of L6-007's follow-up and HR-009 E1). Seeds 1..G6_RUNS-1 in order;
+# none is chosen by outcome.
+G6_STEPS, G6_RUNS, G6_DELTA = 50000, 12, 1e-12
+G6_FILM_STRIDE = 100  # film samples every 10 tu: a stroboscopic view, see the exhibit's disclosures
+G6_DEAD = 0.01  # "gone": total mass / R^2 below this (L6-007 follow-up and HR-009 E1 threshold)
+
 SUBJECTS = [
     Subject("S001", "glides", "Orbium (O2u)"),
     Subject("S101", "glides as a bound pair", "bound Orbium pair"),
@@ -91,6 +99,11 @@ def run_configs() -> dict[str, almrun.RunConfig]:
         cfgs[f"G005:S102@{t0}"] = almrun.RunConfig(
             specimen="S102", steps=G5_STEPS, every=EVERY,
             interventions=[(t0, galintervene.GalleryPortInjuryH(s=G5_S, hx=hx, hy=hy))],
+        )
+    for k in range(G6_RUNS):
+        cfgs[f"G006:S102#{k}"] = almrun.RunConfig(
+            specimen="S102", steps=G6_STEPS, every=EVERY, seed=k,
+            interventions=[(0, galintervene.GalleryTinyNoise(delta=G6_DELTA))] if k else [],
         )
     return cfgs
 
@@ -117,6 +130,7 @@ class Replay:
     frames: dict[int, np.ndarray]  # step -> state, for the requested steps
     edits: dict[int, tuple[np.ndarray, np.ndarray]]  # step -> (pre, post) of each intervention
     centroids: np.ndarray  # (steps + 1, 2) wrapped periodic centroid (cx, cy) per step
+    mass: np.ndarray  # (steps + 1,) total mass / R^2 per step
 
 
 def replay(run_id: str, keep: set[int]) -> Replay:
@@ -136,7 +150,7 @@ def replay(run_id: str, keep: set[int]) -> Replay:
         raise ValueError(f"{run_id}: initial state differs from the run's")
     sim = Lenia(rule, A0)
     n = man["timestep"]["steps"]
-    frames, edits, cents = {}, {}, np.empty((n + 1, 2))
+    frames, edits, cents, mass = {}, {}, np.empty((n + 1, 2)), np.empty(n + 1)
     for t in range(n + 1):
         if t > 0:
             sim.step()
@@ -145,12 +159,13 @@ def replay(run_id: str, keep: set[int]) -> Replay:
             sim.A = np.clip(np.asarray(iv.apply(pre.copy(), sim, rng), dtype=np.float64), 0.0, 1.0)
             edits[t] = (pre, sim.A.copy())
         cents[t] = measure.periodic_centroid(sim.A)
+        mass[t] = sim.A.sum() / rule.R**2
         if t in keep:
             frames[t] = sim.A.copy()
     final = provenance.state_sha256(sim.A)
     if final != man["final_state_sha256"]:
         raise ValueError(f"{run_id}: replay final sha256 {final} != manifest {man['final_state_sha256']}")
-    return Replay(run_id, man, rule, frames, edits, cents)
+    return Replay(run_id, man, rule, frames, edits, cents, mass)
 
 
 # --- drawing primitives -----------------------------------------------------------------------
@@ -597,6 +612,174 @@ def g005_circler_to_ring(reps: dict[str, Replay]) -> None:
     )
 
 
+G6_LAST = (-500, -200, -100, -50, -20, 0)  # sheet columns: steps before the end of the life or run
+G6_CROP, G6_SCALE = 64, 3
+
+
+def _death_step(mass: np.ndarray) -> int | None:
+    """First step whose total mass / R^2 is below G6_DEAD, or None if the run never gets there."""
+    below = np.flatnonzero(mass < G6_DEAD)
+    return int(below[0]) if len(below) else None
+
+
+def _g6_job(run_id: str) -> dict:
+    """Replay one G006 run (in a worker) and reduce it to 64x64 crops, so the 12 replays fit in memory.
+    The death step is planned from the run's own series.npz and then checked against the replay."""
+    n = json.loads((TRACES / run_id / "manifest.json").read_text())["timestep"]["steps"]
+    planned = _death_step(np.load(TRACES / run_id / "series.npz")["mass"])
+    end = planned if planned is not None else n
+    film = list(range(0, n + 1, G6_FILM_STRIDE))
+    last = [max(0, end + o) for o in G6_LAST]
+    r = replay(run_id, set(film) | set(last))
+    death = _death_step(r.mass)
+    if death != planned:
+        raise ValueError(f"{run_id}: replay death step {death} != recorded {planned}")
+    cents = _ffill(r.centroids)
+    crop = {t: centred(r.frames[t], cents[t], G6_CROP) for t in r.frames}
+    return {"run_id": run_id, "manifest": r.manifest, "rule": r.rule, "death": death, "steps": n,
+            "film": film, "last": last, "crops": crop, "mass": r.mass[film]}
+
+
+def g006_eventually_gone(jobs: list[dict]) -> None:
+    """G006: the circler from twin starts that differ by 1e-12, run to 5000 tu (HR-009 E1, L6-007)."""
+    from PIL import Image, ImageDraw
+
+    folder = EXHIBITS / "G006-eventually-gone"
+    folder.mkdir(parents=True, exist_ok=True)
+    n = jobs[0]["steps"]
+    T = jobs[0]["rule"].T
+    died = [j for j in jobs if j["death"] is not None]
+
+    def name(k: int) -> str:
+        return "registered seed" if k == 0 else f"twin {k} (seed {k})"
+
+    # The sheet: one row per run. A lifeline from 0 to the end of the life (x, Lane 9's "died") or
+    # to the horizon (arrow: still above the threshold when the run stopped), then the last moments.
+    th = G6_CROP * 2  # thumbnails: the central 32x32 cells at 4x
+    left, line_w, gap, top = 170, 360, 4, 40
+    W = left + line_w + 20 + len(G6_LAST) * (th + gap)
+    H = top + len(jobs) * (th + gap) + 64
+    sheet = Image.new("RGB", (W, H), BG)
+    d = ImageDraw.Draw(sheet)
+    x_line = left
+    d.text((x_line, 10), f"lifeline, 0 to {n / T:g} tu", fill=DIM, font=font(13))
+    x_th = left + line_w + 20
+    for c, o in enumerate(G6_LAST):
+        d.text((x_th + c * (th + gap) + 4, 10), "end" if o == 0 else f"{o / T:g} tu", fill=DIM, font=font(13))
+    for i, j in enumerate(jobs):
+        y = top + i * (th + gap)
+        mid = y + th // 2
+        d.text((10, mid - 18), name(i), fill=INK, font=font(14, True))
+        fate = (f"mass < {G6_DEAD:g} at {j['death'] / T:g} tu" if j["death"] is not None
+                else f"still above {G6_DEAD:g} at {n / T:g} tu")
+        d.text((10, mid + 2), fate, fill=DIM, font=font(11))
+        end = j["death"] if j["death"] is not None else n
+        xe = x_line + line_w * end / n
+        d.line([(x_line, mid), (xe, mid)], fill=INK, width=3)
+        if j["death"] is not None:
+            d.line([(xe - 6, mid - 6), (xe + 6, mid + 6)], fill=REMOVED, width=3)
+            d.line([(xe - 6, mid + 6), (xe + 6, mid - 6)], fill=REMOVED, width=3)
+        else:
+            d.polygon([(xe, mid - 6), (xe + 10, mid), (xe, mid + 6)], fill=(107, 107, 107))  # Lane 9 muted
+        for c, t in enumerate(j["last"]):
+            tile = Image.fromarray(colorize(j["crops"][t][G6_CROP // 4: 3 * G6_CROP // 4,
+                                                          G6_CROP // 4: 3 * G6_CROP // 4], 4))
+            sheet.paste(tile, (x_th + c * (th + gap), y))
+    for k in range(0, int(n / T) + 1, max(1, int(n / T) // 5)):
+        xk = x_line + line_w * k * T / n
+        d.line([(xk, H - 58), (xk, H - 52)], fill=DIM, width=1)
+        d.text((xk - 10, H - 50), f"{k:g}", fill=DIM, font=font(11))
+    d.text((10, H - 32), f"{len(died)} of {len(jobs)} runs fell below mass {G6_DEAD:g} before {n / T:g} tu "
+           f"(x); the rest were still above it when the run stopped (arrow). Thumbnails: 32x32 cells around "
+           "the centroid, 4x; 'end' is the death step or the last step.", fill=DIM, font=font(11))
+    d.text((10, H - 16), f"Twins start from the registered seed plus noise of size {G6_DELTA:g} on its support "
+           "(HR-009 E1 recipe, our seeds 1-11, none chosen by outcome) · μ 0.155 σ 0.020 R 13 T 10 · "
+           "128x128 torus", fill=DIM, font=font(11))
+    sheet.save(folder / "lifelines-sheet.png", optimize=True)
+
+    # The film: all runs side by side, sampled every G6_FILM_STRIDE steps, camera following. The MP4
+    # is drawn at G6_SCALE; the GIF preview at 2x with every other frame, to keep it small.
+    fps = 25
+
+    def film(scale: int, every: int) -> list:
+        cols, head = 4, 36
+        cell = G6_CROP * scale
+        rows = math.ceil(len(jobs) / cols)
+        FW = cols * cell + (cols + 1) * gap
+        FH = rows * (cell + head + gap) + gap + 24
+        out = []
+        for f, t in list(enumerate(jobs[0]["film"]))[::every]:
+            img = Image.new("RGB", (FW, FH), BG)
+            d = ImageDraw.Draw(img)
+            for i, j in enumerate(jobs):
+                x0 = gap + (i % cols) * (cell + gap)
+                y0 = gap + (i // cols) * (cell + head + gap)
+                d.text((x0, y0), name(i), fill=INK, font=font(13, True))
+                gone = j["death"] is not None and t >= j["death"]
+                d.text((x0, y0 + 17), f"mass < {G6_DEAD:g} since {j['death'] / T:g} tu" if gone
+                       else f"mass {j['mass'][f]:.3f}", fill=REMOVED if gone else DIM, font=font(11))
+                img.paste(Image.fromarray(colorize(j["crops"][t], scale)), (x0, y0 + head))
+            d.text((gap, FH - 20), f"t = {t / T:6.0f} tu · one frame every {every * G6_FILM_STRIDE / T:g} tu",
+                   fill=DIM, font=font(12))
+            out.append(img)
+        return out + [out[-1]] * fps * 2  # hold the last frame for two seconds
+
+    write_video(film(2, 2), folder / "eventually-gone.gif", None, fps)
+    mp4 = write_video(film(G6_SCALE, 1), folder / "eventually-gone-mp4.gif", folder / "eventually-gone.mp4", fps)
+    (folder / "eventually-gone-mp4.gif").unlink()
+    save_provenance(folder, {
+        "exhibit": "G006",
+        "title": "The circler that eventually disappears",
+        "status": "provisional: L6-007 (PR #27, merged 7cbf5ae), L3-003 and HR-009 are merged, but the ledger holds no claim on S102's "
+                  "lifetime yet (L3-003: PR #29, merged 20bdff9; HR-009: PR #30, merged 0b9b47f). The disappearance is shown at R 13, T 10 only; L3-003 sees no deaths at R 26, R 39 "
+                  "(finer grid) or T 20, T 40 (smaller step), so "
+                  "the collapse is specific to the R 13, T 10 discretization",
+        "media": ["lifelines-sheet.png", "eventually-gone.gif"] + (["eventually-gone.mp4"] if mp4 else []),
+        "runs": [{"label": name(i), "run_id": j["run_id"], "seed": j["manifest"]["seed"],
+                  "noise_delta": G6_DELTA if i else 0.0,
+                  "death_step": j["death"], "death_tu": None if j["death"] is None else j["death"] / T,
+                  "censored_at_step": None if j["death"] is not None else n} for i, j in enumerate(jobs)],
+        "death_definition": f"first step whose total mass / R^2 is below {G6_DEAD:g}, from the replay's "
+                            "per-step mass (checked against the run's series.npz)",
+        "frames": {"film_stride_steps": {"mp4": G6_FILM_STRIDE, "gif": 2 * G6_FILM_STRIDE},
+                   "film_steps": [0, n], "playback_fps": fps,
+                   "film_hold_last_frame_s": 2,
+                   "sheet_offsets_from_end_steps": list(G6_LAST)},
+        "view": f"film: {G6_CROP}x{G6_CROP}-cell windows shifted by whole cells to centre the centroid (camera "
+                f"follows; after death it holds its last position), {G6_SCALE}x nearest-neighbour in the MP4, "
+                "2x in the GIF preview; sheet "
+                f"thumbnails: the central 32x32 cells of the same windows, 4x",
+        "overlays": ["lifeline bars, Lane 9 'died' x marker (#D55E00) and a Lane 9 'muted' (#6b6b6b) arrow for "
+                     "runs still above the threshold at the horizon", "per-tile mass readout", "text labels"],
+        "disclosures": [
+            "the MP4 samples one frame every 10 tu and the GIF every 20 tu; the circler turns about 95 "
+            "degrees per tu, so its pose from frame to frame is not continuous motion",
+            "the film holds its last frame for two seconds",
+            "twins are our own draws of HR-009's recipe (noise U(-1,1) x 1e-12 on cells within 3 of the "
+            "seed's support) in alm.lenia; they are not HR-009's or Lane 6's runs, and their death times "
+            "are not expected to match those runs'",
+            "12 runs show spread, not a lifetime distribution; HR-009 pools 37 runs",
+            "all runs are at R 13, T 10 on a 128x128 grid; L3-003 (PR #29, merged at 20bdff9) finds no deaths in 29 "
+            "runs at R 26 (to 5000-8000 tu), 3 at R 39 (8000 tu), 24 at R 13 T 20 or 24 at R 13 T 40 "
+            "(8000 tu each), so the finite lifetime is specific to the R 13, T 10 discretization",
+            "GIF palette reduced to 128 colours; the MP4 is H.264 (lossy)",
+        ],
+        "sources_of_interpretation": {
+            "L6-007 follow-up": "PR #27 merged @ 7cbf5ae (divergence at all settings, collapse at R 13, T 10 only), research/experiments/L6-007-attractor-geography/",
+            "L3-003": "PR #29, merged at 20bdff9, research/experiments/L3-003-circler-lifetime/",
+            "HR-009 E1 and HR-009b": "PR #30, merged at 0b9b47f, research/reports/hostile-review.md and "
+                         "research/experiments/HR009-l6-review/e1.csv",
+        },
+    }, [_Src(j) for j in jobs])
+
+
+class _Src:
+    """The parts of a Replay that save_provenance reads, for runs reduced in a worker."""
+
+    def __init__(self, job: dict):
+        self.run_id, self.manifest = job["run_id"], job["manifest"]
+
+
 def render() -> None:
     runs = json.loads(RUNS_JSON.read_text())
     keep = set(range(WINDOW[0], WINDOW[1] + 1))
@@ -620,6 +803,14 @@ def render() -> None:
         g5[key] = replay(runs[key], set(_cut_steps(t0, n)) | {t0 + o for o in _film_offsets(t0, n)})
         print(f"{key}: replay of {runs[key]} matches its final_state_sha256")
     g005_circler_to_ring(g5)
+    from multiprocessing import Pool
+
+    keys = [f"G006:S102#{k}" for k in range(G6_RUNS)]
+    with Pool(min(4, len(keys))) as pool:
+        jobs = pool.map(_g6_job, [runs[k] for k in keys])
+    for k, j in zip(keys, jobs):
+        print(f"{k}: replay of {j['run_id']} matches its final_state_sha256")
+    g006_eventually_gone(jobs)
 
 
 def main(argv=None) -> int:
