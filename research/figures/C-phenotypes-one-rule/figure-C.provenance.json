@@ -3,10 +3,10 @@
   "command": ".venv/bin/python research/figures/C-phenotypes-one-rule/make_figure.py",
   "ledger": {
     "ledger": "research/claims.md",
-    "ledger_commit": "a9ff918",
-    "ledger_full_commit": "a9ff91867b4dd6cad080fe7ae3f0cc4a6ef9f006",
-    "ledger_sha256": "0418569939b8dd91a1a1e80aa4485824f1768eccb171fcc0213374d8b283b001",
-    "pending": "PR #22 (archivist ledger update), unmerged",
+    "ledger_commit": "5363da2",
+    "ledger_full_commit": "5363da22c0230bea8257589d5903e3a4f9ea8275",
+    "ledger_sha256": "3bb1eeb7e08639ccdcf24cd1b32055c7515e224297d2b732eae8e3b65b4e1b68",
+    "pending": "PR #25 (archivist: C047 upgrade), unmerged",
     "claims": {
       "C038": {
         "status": "REPRODUCED",
@@ -18,7 +18,7 @@
         "status": "REFUTED",
         "status_text": "REFUTED as worded (superseded by C047). The narrower fact, that the *bilinearly resized* seed dies at R 26 and 39, is INDEPENDENTLY_CHECKED (Lane 6 `field.py`, PR #11, at R 26; Lane 3 `alm_check`, PR #18, at R 26 and 39). That is a resize-method dependence of the initial condition, not a resolution dependence: from block, nearest or cubic seeds S102 persists at R 26 and 39 (C047), with mean properties within 0.5% of R 13 over 300 tu (C046).",
         "title": "The circler S102 at its registered rule (\u03bc 0.155, \u03c3 0.020) does not survive doubling the resolution",
-        "base_status": "NUMERICALLY_FRAGILE"
+        "base_status": "REFUTED"
       },
       "C040": {
         "status": "OBSERVED",
@@ -45,24 +45,24 @@
         "base_status": "OBSERVED"
       },
       "C047": {
-        "status": "OBSERVED",
-        "status_text": "OBSERVED (Lane 3, `alm_check`, merged). Block seeds through 300 tu are preregistered (C046); the four-method comparison through 1000 tu is exploratory. Lane 6 matched all eight outcomes in `field.py` (`413003d`), which is not yet on `main`; the archivist will mark this claim INDEPENDENTLY_CHECKED, for these eight seeds only, when that evidence lands.",
+        "status": "INDEPENDENTLY_CHECKED",
+        "status_text": "INDEPENDENTLY_CHECKED for the eight seeds tested (block, nearest, bilinear and cubic resizes \u00d7 R 26 and 39; \u03bc 0.155, \u03c3 0.020, T 10; one seed position; 1000 tu): Lane 3 `alm_check` (PR #18) and Lane 6 `field.py` (PR #23) give the same eight outcomes. Exploratory in both lanes; only the block seeds through 300 tu are preregistered (C046).",
         "title": "S102 at its registered rule persists at R = 26 and R = 39 from block-replicated, nearest-neighbour or cubic seeds; only the bilinear seed dies",
-        "base_status": null
+        "base_status": "OBSERVED"
       },
       "C048": {
         "status": "OBSERVED",
         "status_text": "OBSERVED (R statement, single engine); INDEPENDENTLY_CHECKED (T statement, with C042: `field.py`/`alm` and `alm_check`)",
         "title": "S103 is a bitwise fixed point at every timestep tested (T 10\u201380), but block-scaled to R = 26 or 39 it relaxes to a different static body",
-        "base_status": null
+        "base_status": "OBSERVED"
       }
     }
   },
   "inputs": [
     {
       "path": "research/figures/C-phenotypes-one-rule/make_figure.py",
-      "sha256": "c8d7bd309b6626f94bf75389b32f7d2fbe17d9713aed8292590a8e482f48a05e",
-      "last_commit": "2dbe84c"
+      "sha256": "c66b1c353c695ad9a14c632d221da782e17c404c076b5fc1c35fcc0c2f639243",
+      "last_commit": "b667c34"
     },
     {
       "path": "research/figures/figlib/__init__.py",
@@ -181,8 +181,8 @@
       "sha256": "0fd355a936cd33e21a818c470bc61dc9a528f437a2b0b09c87723d2f39799a20"
     },
     {
-      "commit": "413003da752922e61be8a220abff8d86600e6aee",
-      "source": "Lane 6 L6-007 D2 rerun, branch claude/night0-field-tmbx06 (no PR)",
+      "commit": "7a4ea3b963fbfc3c952fadb2eb25193f4b1be207",
+      "source": "PR #23 (Lane 6 L6-007 D2 rerun), merged to main",
       "path": "research/experiments/L6-007-attractor-geography/d2-resize.csv",
       "blob": "da49a5d2498e4a2bf117485f5bbafbed3f5c7c14",
       "sha256": "bc3f9dac9a91d9f13e2948ec8bd45898139c138f2304309dfd3501cf5c184ce8"
@@ -209,7 +209,7 @@
     "research/figures/C-phenotypes-one-rule/figure-C-data.csv",
     "research/figures/C-phenotypes-one-rule/figure-C-matrix.csv"
   ],
-  "code_commit": "2dbe84c",
+  "code_commit": "b667c34",
   "code_dirty": false,
   "versions": {
     "python": "3.13.16",
@@ -218,8 +218,7 @@
   },
   "notes": [
     "Single-lane evidence: Lane 6 data read at the PR #11 merge commit; see pinned_inputs.",
-    "Resize evidence (C047, C048) read from Lane 6's D2 rerun commit and Lane 3's PR #18 merge commit.",
-    "Statuses checked against the PR #22 ledger update (pending); base_status is main's at build.",
+    "Resize evidence (C047, C048) read at the PR #23 (Lane 6) and PR #18 (Lane 3) merge commits.",
     "Phenotypes recomputed with Lane 6's tables.py classifier; switch CSV 'outcome' column unused."
   ]
 }
