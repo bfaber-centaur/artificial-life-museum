@@ -33,8 +33,8 @@ from figlib.gitsource import Pinned  # noqa: E402
 from figlib.style import GRID, INK, MUTED, OKABE_ITO, figure_style, status_badge  # noqa: E402
 
 OUT = HERE / "figure-D"
-PR27 = "efa899901c8051d24e70b9836c23386ef693c43d"  # Lane 6, L6-007/L6-008 results (unmerged)
-PR30 = "4e7482277714c909501692626b1c998bdd23c073"  # Lane 7, HR-009 (unmerged)
+PR27 = "e1f8760c5055f671dc07ef9a4f9ff782da6bdfa6"  # Lane 6, L6-007/L6-008 results (unmerged)
+PR30 = "c063d7377dffed70fafe460c3a10fec4205e0169"  # Lane 7, HR-009 (unmerged)
 PR29 = "8c3c082c16181a942ec12b1d555c74d4b32beded"  # Lane 3, L3-003 (unmerged): cited for the refinement caveat only
 L3_003 = "research/experiments/L3-003-circler-lifetime/README.md"
 L8 = "research/experiments/L6-008-pair-coupling/pair-coupling.csv"
@@ -167,11 +167,12 @@ def panel_b(ax, runs, full):
     y = tile_panel(ax, runs, "I003", svals, [("bound pair", "pair"), ("partners alone,\ntheir share of pulse\n(L6-008)", "split"),
                                              ("partners alone,\nfull pulse\n(HR-009 E2)", "full")], full=full)
     j = {s: i for i, s in enumerate(svals)}
-    ax.add_patch(Rectangle((j[0.2], -y + 0.4), 2, y - 0.3, facecolor=DRAG, alpha=0.10, edgecolor="none", zorder=0))
+    ax.add_patch(Rectangle((j[0.2], -y + 0.4), 2, y - 0.3, facecolor="none", edgecolor=MUTED, hatch="\\\\",
+                           lw=0, alpha=0.35, zorder=0))
     ax.add_patch(Rectangle((j[0.5], -y + 0.4), len(svals) - j[0.5], y - 0.3, facecolor="white", alpha=0.62,
                            edgecolor="none", zorder=5))
     top = 0.35
-    ax.text(j[0.2] + 1, top, "both baselines hold,\n128² world only", ha="center", va="bottom", fontsize=6,
+    ax.text(j[0.2] + 1, top, "withdrawn: a 128²\nworld-size effect", ha="center", va="bottom", fontsize=6,
             color=DRAG, fontweight="bold")
     ax.text(j[0.4] + 0.5, top, "explained by\nexposure", ha="center", va="bottom", fontsize=6, color=MUTED)
     ax.text((j[0.5] + len(svals)) / 2, top, "not interpreted: no baseline brackets the pair\n"
@@ -248,6 +249,7 @@ def build():
     l3 = Pinned(PR29, "PR #29 (Lane 3, L3-003), unmerged")
     l3.text(L3_003)  # not plotted: logged so the caveat names exactly what it rests on
     l6.text("research/experiments/L6-008-pair-coupling/README.md")  # L6-009 world-size note, cited for panel b
+    l7.text("research/reports/hostile-review.md")  # HR-009c withdrawal, cited for panel b
     led = L.snapshot(EXPECTED)
     status = {cid: c["status"] for cid, c in led["claims"].items()}
     runs = pair_runs(l6)
@@ -269,12 +271,12 @@ def build():
         panel_a(axa, runs)
         panel_b(axb, runs, full)
         axa.set_title("a   S101 under port injury (I004): an ordinary response (cells: Orbia alive at the end)", loc="left", fontsize=7.3, fontweight="bold", pad=4)
-        axb.set_title("b   S101 under frontal addition (I003): worse together at s 0.2–0.3, in a 128² world",
+        axb.set_title("b   S101 under frontal addition (I003): the 'worse together' window is withdrawn",
                       loc="left", fontsize=7.3, fontweight="bold", pad=56)
-        axb.annotate(f"128² WORLD ONLY. Lane 6 (PR #27 @ {PR27[:7]}; L6-009, not yet proposed): the gap pulse splits "
-                     "the pair into two free Orbia.\nAt s 0.2 they die when they later collide on the 128² torus; in a "
-                     "256² world they end as two Orbia (5 of 5,\nexploratory). So s 0.2 is a finite-world artefact, and "
-                     "s 0.3 is world- and placement-dependent.", xy=(0, 1), xycoords="axes fraction",
+        axb.annotate(f"WITHDRAWN. Lane 7's HR-009c (PR #30 @ {PR30[:7]}) with Lane 6's L6-009: the on-gap pulse splits the pair "
+                     "into two\nintact Orbia. On the 128² torus they later collide; zero-padded to 256², all 10 s 0.2–0.3 "
+                     "states end as two Orbia.\nThe red-outlined runs are a world-size effect, not coupling. Only an "
+                     "off-gap s 0.3 result (L6-009, exploratory) remains open.", xy=(0, 1), xycoords="axes fraction",
                      xytext=(0, 25), textcoords="offset points", ha="left", va="bottom", fontsize=6.2,
                      color=OKABE_ITO["vermillion"], fontweight="bold")
         status_badge(axa, "C041", status["C041"], x=1.0, y=1.0, short=True, in_layout=False)
@@ -338,8 +340,8 @@ def build():
                       "counted as a separate start.",
                       "Panels c-d are R 13, T 10 only; PR #29 (L3-003) sees no end at R 26, R 39, T 20 or T 40, so the "
                       "collapse is a discretisation effect. L3-003 is cited, not plotted.",
-                      "Panel b is 128² world only; Lane 6's L6-009 note (L6-008 README @ PR #27) finds the s 0.2 "
-                      "drag-down is a collision artefact at 128² and s 0.3 placement-dependent. Cited, not plotted."],
+                      "Panel b's s 0.2-0.3 window is withdrawn: HR-009c (PR #30) and L6-009 (PR #27 L6-008 README) show the "
+                      "on-gap pulse frees two Orbia that collide only on 128². Cited, not plotted."],
                      pinned_inputs=l6.manifest() + l7.manifest() + l3.manifest())
     P.write_manifest(HERE / "figure-D.provenance.json", man)
 
