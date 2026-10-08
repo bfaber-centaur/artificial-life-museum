@@ -73,8 +73,8 @@ What remains is sensitivity to the initial condition. At T 40 it persists, turni
 coexistence band with Orbium exists at all three settings but sits at different σ
 (L6-004 table).
 
-**Lifetime (2026-10-08, L6-007 follow-up and HR-009): S102 is a chaotic transient, not a stable
-state.** At its registered rule on 128², the registered seed circles until step 39 799
+**Lifetime (2026-10-08, L6-007 follow-up and HR-009): at R 13, T 10, S102 is a chaotic transient,
+not a stable state.** At its registered rule on 128², the registered seed circles until step 39 799
 (t = 3979.9 tu) and then dies. Both `field.py` and `alm.lenia` give that step, but that is **one
 floating-point trajectory, not the lifetime of S102**. Lane 7 (HR-009, PR #30) showed that twins
 differing by 1e−12 separate at about 0.2 per tu, and that tiny-noise copies die anywhere from

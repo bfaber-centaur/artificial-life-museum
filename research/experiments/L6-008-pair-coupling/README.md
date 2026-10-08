@@ -22,7 +22,8 @@ historical outcome of the experiment. Interpretive passages that no longer hold 
   two intact Orbia** (0.868–0.873 mass at 40 tu, 10/10). Those two later collide on the 128²
   periodic world, and whether that kills them depends on world size: on 256², all 10 of Lane 7's
   states end as two Orbia. In Lane 6's own 256² rerun (frames per phase), 5/5 survive at s 0.2,
-  and 3/5 at s 0.3, where the 2 deaths come late. The halves-alone baseline cannot show this
+  and 3/5 at s 0.3, where the 2 deaths come late and are probably collisions (unverified). Lane 7's
+  phases 1–4 reused the phase-0 frame, which likely explains the difference. The halves-alone baseline cannot show this
   because each half has no partner to collide with. What L6-008 counted as drag-down is a
   world-size effect, not coupling.
 - **Off-gap candidates (exploratory, unverified):** L6-009 reports that at s 0.3 a pulse slightly

@@ -14,8 +14,9 @@ This section governs. The pre-registered P1–P4 scoring below is unchanged, fai
 included. Older interpretive passages are kept and marked where they are superseded.
 
 - **Divergence and collapse are different things.** Twin circlers that differ by 1e−12 diverge
-  exponentially: about 0.20 per tu at R 13, T 10 (HR-009), slower at T 20 and T 40 (0.08–0.10),
-  and much slower at R 26 (about 0.015, HR-009b). So the circler's trajectory is chaotic at every
+  exponentially at R 13: about 0.20 per tu at T 10 (HR-009), slower at T 20 and T 40
+  (0.08–0.10). At R 26 the divergence is slow (about 0.01 per tu) and decelerating, yet twins still
+  decorrelate within about 3000 tu (HR-009b). So the circler's trajectory is chaotic at every
   setting tested. **Collapse** (the circler dying or filling the world) was observed only at
   **R 13, T 10**. L3-003 saw no collapse at R 13 with T 20 or T 40 (0 of 48 copies, to 8000 tu),
   at R 26 (0 of 29) or at R 39 (0 of 3), within the horizons tested.
@@ -189,7 +190,9 @@ G glider, C circler, S static, D died, F filled. ¹ circler at 1000 tu, died bef
   ranges from 292 tu to beyond 5000 tu (HR-009, L3-003). The unperturbed seed's death at step
   39 799 is one floating-point trajectory, not a characteristic lifetime. Interpretation: at this
   setting S102 is a transient, not an attractor. Separately, its trajectory diverges
-  exponentially from a 1e−12 twin at every setting tested (HR-009b). That divergence is not
+  from a 1e−12 twin at every setting tested (HR-009b): exponentially at R 13 (0.08–0.20 per tu
+  across T), slowly and decelerating at R 26 (about 0.01 per tu), with twins still decorrelating
+  within about 3000 tu. That divergence is not
   collapse. No collapse was observed at R 13 with T 20 or T 40 (0/48), or at R 26 (0/29) or R 39
   (0/3), within 5000–8000 tu (L3-003). So neither "transient" nor "stable" is claimed at those
   settings.
