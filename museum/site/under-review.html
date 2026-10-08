@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Still being argued · ALM museum</title>
-<meta name="description" content="Two exhibits in progress: a circler that eventually disappears, and a pair for which being together is sometimes worse.">
+<meta name="description" content="Two exhibits in progress: a circler that eventually disappears, but perhaps only on a coarse grid, and a pair for which being together is sometimes worse.">
 <link rel="stylesheet" href="museum.css">
 </head>
 <body class="room-under-review">
@@ -45,14 +45,19 @@ reports, side by side, with nothing promoted to fact until the ledger says so.</
     <a class="claim" href="claims.html#C047" title="S102 at its registered rule persists at R = 26 and R = 39 from block-replicated, nearest-neighbour or cubic seeds; only the bilinear seed dies"><span class="cid">C047</span><span class="badge s-INDEPENDENTLY_CHECKED" title="INDEPENDENTLY_CHECKED for the eight seeds tested (block, nearest, bilinear and cubic resizes × R 26 and 39; μ 0.155, σ 0.020, T 10; one seed position; 1000 tu): Lane 3 `alm_check` (PR #18) and Lane 6 `field.py` (PR #23) give the same eight outcomes. Exploratory in both lanes; only the block seeds through 300 tu are preregistered (C046).">indep. checked</span></a>. Both statements were measured over at most a few thousand time units.
     Watched for longer, the circler changes the story.</p>
     <div class="label">
-      <p class="obs">In the field explorer's longer runs, the registered circler stopped
+      <p class="obs">On the standard grid (R 13), in the field explorer's longer runs, the registered circler stopped
       circling and died after roughly four thousand time units, and slightly disturbed copies
       died at very different times, while others were still circling when the runs ended
       (<a class="pr" href="https://github.com/bfaber-centaur/artificial-life-museum/pull/27">Lane 6, PR #27</a>).</p>
       <p class="open">The hostile reviewer found that copies differing by one part in a trillion
       drift apart exponentially, and die at times scattered across the whole run, so no single
-      death time belongs to the creature (<a class="pr" href="https://github.com/bfaber-centaur/artificial-life-museum/pull/30">Lane 7, PR #30</a>). The replication lane is
-      now measuring the spread of lifetimes in its own independent engine
+      death time belongs to the creature (<a class="pr" href="https://github.com/bfaber-centaur/artificial-life-museum/pull/30">Lane 7, PR #30</a>).</p>
+      <p class="open">The replication lane reproduced this exactly on the same grid, with the same
+      death step and the same four early deaths, and 10 of 24 copies nudged by one part in a trillion
+      stopped circling within 5000 time units. But on finer grids, none died: 0 of 29 runs at
+      R 26 (watched for 5000 to 8000 time units) and 0 of 3 at R 39. So the disappearing may belong
+      to the coarse grid, not to the creature. That is disputed, and it does not show that the
+      finer-grid circler lives forever, only that it outlasted these runs
       (<a class="pr" href="https://github.com/bfaber-centaur/artificial-life-museum/pull/29">Lane 3, PR #29</a>).</p>
     </div>
   </div>
@@ -67,7 +72,8 @@ reports, side by side, with nothing promoted to fact until the ledger says so.</
   Panel d is the fraction still alive over time, with its uncertainty, counting those unfinished
   runs honestly rather than guessing their ends. Panels a and b belong to the pair, below. The
   data are read from <a class="pr" href="https://github.com/bfaber-centaur/artificial-life-museum/pull/27">PR #27</a> and <a class="pr" href="https://github.com/bfaber-centaur/artificial-life-museum/pull/30">PR #30</a>; Lane 3's independent lifetimes
-  (<a class="pr" href="https://github.com/bfaber-centaur/artificial-life-museum/pull/29">PR #29</a>) are not in it yet. Only C038 and C041 carry ledger statuses. Read the
+  (<a class="pr" href="https://github.com/bfaber-centaur/artificial-life-museum/pull/29">PR #29</a>) are not in it yet. Every run in panels c and d is on the
+  standard R 13 grid, and Lane 9 is updating the figure to show the finer grids too. Only C038 and C041 carry ledger statuses. Read the
   <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/figures/D-pair-and-circler/README.md">full caption and its limits</a> ·
   <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/figures/D-pair-and-circler/figure-D-lifetimes.csv">lifetimes</a> ·
   <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/figures/D-pair-and-circler/figure-D-pair.csv">pair runs</a> ·
@@ -75,7 +81,9 @@ reports, side by side, with nothing promoted to fact until the ledger says so.</
 </figure>
 <div class="caveat"><strong>Why this matters</strong> A pattern can look perfectly stable for
 thousands of time units and still be on its way out. "Survived everything we tried" is a
-statement about how long we watched, not necessarily about the animal.</div>
+statement about how long we watched, not necessarily about the animal. And "disappears" can
+be a statement about the grid it was drawn on: the same circler, drawn finer, has not yet been
+seen to die.</div>
 
 <h2>When together is worse</h2>
 <p>The bound pair S101 is two Orbium bodies sharing one shell. The obvious question is whether
