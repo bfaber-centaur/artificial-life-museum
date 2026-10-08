@@ -1354,7 +1354,7 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
   - 2026-10-07 — Prior literature re-verified against arXiv full texts after the network change (status unchanged) — archivist.
   - 2026-10-07 — disputed (D2) — Lane 3 L3-002 (PR #18). Lane 3 reproduces the bilinear-seed death in
     `alm_check`; its block, nearest and cubic seeds survive. Status unchanged pending Lane 6.
-  - 2026-10-07 — REFUTED — Lane 6 reran the four resizes in `field.py` (`d2_resize.py`, `d2-resize.csv` in `research/experiments/L6-007-attractor-geography/` (branch `claude/night0-field-tmbx06` @ `413003d`, **not yet on `main`**)) and got Lane 3's result:
+  - 2026-10-07 — REFUTED — Lane 6 reran the four resizes in `field.py` (`d2_resize.py`, `d2-resize.csv` in `research/experiments/L6-007-attractor-geography/` (PR #23 @ `413003d`, merged to `main` as `7a4ea3b`)) and got Lane 3's result:
     only the bilinear seed dies. Lane 6 conceded and proposed REFUTED (relayed by the coordinator). The
     "circler lives at σ 0.0205 at R 26" result and the C038 band shift were measured from bilinear seeds
     and have not been rerun with other resizes.
@@ -1363,7 +1363,7 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
   - 2026-10-08 — REFUTED (basis restated) — PR #18 merged (`56ae421`). The refutation rests on Lane 3's merged
     evidence: preregistered block seeds persist at R 26 and 39 through 300 tu, and in the exploratory
     follow-up block, nearest and cubic seeds persist through 1000 tu. Lane 6's `field.py` rerun
-    (`413003d`) corroborates the eight outcomes but is not yet on `main`.
+    (`413003d`) corroborates the eight outcomes; it is on `main` via PR #23 (`7a4ea3b`).
   - 2026-10-08 — Lane 6's rerun merged in PR #23 (`7a4ea3b`); C047 is now INDEPENDENTLY_CHECKED for those eight seeds (status unchanged) — archivist.
 
 ### C040 — At the coexistence rule, Lane 4's disturbances never switch a glider into a circler or back (0/316); a port injury switched the circler into the static ring S103 in 2 of 38 runs
