@@ -61,7 +61,7 @@
   "inputs": [
     {
       "path": "research/figures/C-phenotypes-one-rule/make_figure.py",
-      "sha256": "d2c850053ef0e7d3027d92a58d2a3c93534a18f8175d796b6e8ac2c16088c9ae",
+      "sha256": "042868269d877e5c5360e511996f9f3be065917649bba6185c2c417903c42c2d",
       "last_commit": "78406e9"
     },
     {
@@ -188,15 +188,15 @@
       "sha256": "bc3f9dac9a91d9f13e2948ec8bd45898139c138f2304309dfd3501cf5c184ce8"
     },
     {
-      "commit": "4998d0328a2fbb9d889496c441df59a20a084945",
-      "source": "PR #18 (Lane 3 L3-002), unmerged",
+      "commit": "56ae4210a225a9dc0c7d38cee9c833b48096307f",
+      "source": "PR #18 (Lane 3 L3-002), merged to main",
       "path": "research/experiments/L3-002-property-persistence/s102_resize_check.txt",
       "blob": "1ae1acc83c3283a207fe70df8e7e324d8a340ae1",
       "sha256": "93afe4808e377f1663bde0c196d0a9ec423079b9772eff919f7e674ab30f0598"
     },
     {
-      "commit": "4998d0328a2fbb9d889496c441df59a20a084945",
-      "source": "PR #18 (Lane 3 L3-002), unmerged",
+      "commit": "56ae4210a225a9dc0c7d38cee9c833b48096307f",
+      "source": "PR #18 (Lane 3 L3-002), merged to main",
       "path": "research/traces/lane3/L3-002/labels.csv",
       "blob": "1f04209bdc595500d4467593384949ca7d88e46e",
       "sha256": "5652a1b7db876f9c4c5f511e4d0eaa272b26652834bdb2c7c90eec1de4fb77ae"
@@ -209,8 +209,8 @@
     "research/figures/C-phenotypes-one-rule/figure-C-data.csv",
     "research/figures/C-phenotypes-one-rule/figure-C-matrix.csv"
   ],
-  "code_commit": "e75f9ce",
-  "code_dirty": false,
+  "code_commit": "ef7b86a",
+  "code_dirty": true,
   "versions": {
     "python": "3.13.16",
     "numpy": "2.5.3",
@@ -218,7 +218,7 @@
   },
   "notes": [
     "Single-lane evidence: Lane 6 data read at the PR #11 merge commit; see pinned_inputs.",
-    "Resize evidence (C047, C048) read from Lane 6's D2 rerun commit and Lane 3's PR #18 head.",
+    "Resize evidence (C047, C048) read from Lane 6's D2 rerun commit and Lane 3's PR #18 merge commit.",
     "Statuses checked against the PR #22 ledger update (pending); base_status is main's at build.",
     "Phenotypes recomputed with Lane 6's tables.py classifier; switch CSV 'outcome' column unused."
   ]

@@ -9,7 +9,7 @@ directory shows evidence: edges, sweeps, sensitivity, and the limits of each res
 | --- | --- | --- | --- |
 | [A: survival boundary](A-survival-boundary/README.md) | four disturbance kill edges; uniform vs localized injury; independent replication; T/R sensitivity | C023, C026, C027 | independently checked; I003/I004 values numerically fragile |
 | B: the lattice masquerading as biology | resolution dependence of the mass wobble and heading locking | C003, C004, C011–C013 (planned) | planned |
-| [C: phenotypes under one rule](C-phenotypes-one-rule/README.md) (one lane) | μ × σ map, glider/circler coexistence across T and R, persistence vs attractor evidence | C038–C040, C042–C044, C047, C048 | Lane 6 data at the PR #11 merge commit; resize evidence from PR #18 and Lane 6's D2 rerun; statuses from the pending ledger update in PR #22 (C039 refuted) |
+| [C: phenotypes under one rule](C-phenotypes-one-rule/README.md) (one lane) | μ × σ map, glider/circler coexistence across T and R, persistence vs attractor evidence | C038–C040, C042–C044, C047, C048 | Lane 6 data at the PR #11 merge commit; resize evidence from merged PR #18 and Lane 6's D2 rerun; statuses from the pending ledger update in PR #22 (C039 refuted) |
 
 ## Rules every figure follows
 

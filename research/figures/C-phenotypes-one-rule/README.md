@@ -132,8 +132,8 @@ All Lane 6 L6-field data is read at the PR #11 merge commit `f72db9e`.
 | Clean reruns | `research/traces/S102-5bfac8f95f/`, `S103-1d8c158cdd/`, and the README's rerun table | c |
 | S103 perturbations | `research/specimens/S103-static-ring.md` (table only) | c |
 | D2 seed-resize rerun (Lane 6, `field.py`) | `research/experiments/L6-007-attractor-geography/d2-resize.csv` at `413003d` (branch `claude/night0-field-tmbx06`, no PR yet) | c |
-| Seed-resize check (Lane 3, `alm_check`), cross-checked against the row above | `research/experiments/L3-002-property-persistence/s102_resize_check.txt` at PR #18 head `4998d03` (unmerged) | c |
-| S103 block-scaled to R 26 (Lane 3) | `research/traces/lane3/L3-002/labels.csv` at `4998d03` | c |
+| Seed-resize check (Lane 3, `alm_check`), cross-checked against the row above | `research/experiments/L3-002-property-persistence/s102_resize_check.txt` at the PR #18 merge commit `56ae421` | c |
+| S103 block-scaled to R 26 (Lane 3) | `research/traces/lane3/L3-002/labels.csv` at `56ae421` | c |
 | Claim statuses | `research/claims.md` at PR #22 head `db4b894` (unmerged) | all |
 
 Blob IDs and SHA-256s of every file read are in `figure-C.provenance.json` (`pinned_inputs`).
@@ -141,7 +141,7 @@ Blob IDs and SHA-256s of every file read are in `figure-C.provenance.json` (`pin
 ## Reproduce
 
 ```bash
-git fetch origin claude/night0-field-tmbx06 claude/night0-replication-13cz1b claude/night1-claims-l3002-w1iy56
+git fetch origin claude/night0-field-tmbx06 claude/night1-claims-l3002-w1iy56
 .venv/bin/python research/figures/C-phenotypes-one-rule/make_figure.py
 ```
 

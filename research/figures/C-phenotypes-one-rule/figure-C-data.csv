@@ -7,7 +7,7 @@ c,L6-007 d2-resize.csv @ 413003d,gyrator (block),0.155,0.02,T10 R39,CIRCLER,0.52
 c,L6-007 d2-resize.csv @ 413003d,gyrator (nearest),0.155,0.02,T10 R39,CIRCLER,0.5234,0.0054,0.5
 c,L6-007 d2-resize.csv @ 413003d,gyrator (bilinear),0.155,0.02,T10 R39,died,0.0,0.0,0.0
 c,L6-007 d2-resize.csv @ 413003d,gyrator (cubic),0.155,0.02,T10 R39,CIRCLER,0.5235,0.0054,0.5
-c,L3-002 labels.csv @ 4998d03,static (block),0.155,0.02,T10 R26,STATIC,0.380599,,
+c,L3-002 labels.csv @ 56ae421,static (block),0.155,0.02,T10 R26,STATIC,0.380599,,
 c,L6-006 persist-T10-R13.csv,orbium,0.155,0.02,T10 R13,GLIDER,0.487285,0.548411,0.548433
 c,L6-006 persist-T10-R13.csv,gyrator,0.155,0.02,T10 R13,CIRCLER,0.522779,0.00497166,0.498855
 c,L6-006 persist-T10-R13.csv,static,0.155,0.02,T10 R13,STATIC,0.378698,0,0

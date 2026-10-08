@@ -48,7 +48,7 @@ D6 = "research/experiments/L6-field"
 LEDGER_REF = "db4b8946d9e1d964540b7b436496b836b156cde9"  # PR #22 head: C039 refuted, C047 added (unmerged)
 L6_D2 = ("413003da752922e61be8a220abff8d86600e6aee",  # Lane 6 field.py rerun of the four resizes (branch, no PR)
          "research/experiments/L6-007-attractor-geography/d2-resize.csv")
-L3_002 = "4998d0328a2fbb9d889496c441df59a20a084945"  # PR #18 head (Lane 3, unmerged)
+L3_002 = "56ae4210a225a9dc0c7d38cee9c833b48096307f"  # merge of PR #18 (Lane 3) into main; same blobs as its 4998d03 head
 L3_RESIZE = "research/experiments/L3-002-property-persistence/s102_resize_check.txt"
 L3_LABELS = "research/traces/lane3/L3-002/labels.csv"
 COEX = (0.155, 0.020)  # registered rule of S102 and S103
@@ -244,7 +244,7 @@ def evidence(src, ledger_claims, rows_out, l6d2, l3):
     assert lab["fixed_point"]["R26"] == "False"
     cells["static", "resize"] = (CHANGED, f"static, block seed\nm {float(lab['mass']['R26']):.3f}, ≠ seed\n"
                                           f"(Lane 3, C048)")
-    rows_out.append(["c", "L3-002 labels.csv @ 4998d03", "static (block)", COEX[0], COEX[1], "T10 R26", "STATIC",
+    rows_out.append(["c", "L3-002 labels.csv @ 56ae421", "static (block)", COEX[0], COEX[1], "T10 R26", "STATIC",
                      lab["mass"]["R26"], "", ""])
     for num in ("T10 R13", "T40 R13", "T10 R26"):
         fname = f"persist-{num.replace(' ', '-')}.csv"
@@ -341,7 +341,7 @@ def panel_matrix(ax, cells, status):
 def build():
     src = Pinned(PR11, "PR #11 (Lane 6), merged to main")
     l6d2 = Pinned(L6_D2[0], "Lane 6 L6-007 D2 rerun, branch claude/night0-field-tmbx06 (no PR)")
-    l3 = Pinned(L3_002, "PR #18 (Lane 3 L3-002), unmerged")
+    l3 = Pinned(L3_002, "PR #18 (Lane 3 L3-002), merged to main")
     led = L.snapshot_pending(EXPECTED, LEDGER_REF, "PR #22 (archivist ledger update), unmerged")
     status = {cid: c["status"] for cid, c in led["claims"].items()}
     rows_out = []
@@ -413,7 +413,7 @@ def build():
     man = P.manifest("C-phenotypes-one-rule", inputs, outs,
                      ".venv/bin/python research/figures/C-phenotypes-one-rule/make_figure.py", led,
                      ["Single-lane evidence: Lane 6 data read at the PR #11 merge commit; see pinned_inputs.",
-                      "Resize evidence (C047, C048) read from Lane 6's D2 rerun commit and Lane 3's PR #18 head.",
+                      "Resize evidence (C047, C048) read from Lane 6's D2 rerun commit and Lane 3's PR #18 merge commit.",
                       "Statuses checked against the PR #22 ledger update (pending); base_status is main's at build.",
                       "Phenotypes recomputed with Lane 6's tables.py classifier; switch CSV 'outcome' column unused."],
                      pinned_inputs=src.manifest() + l6d2.manifest() + l3.manifest())
