@@ -16,7 +16,8 @@ experience built around it, not in PR count, parameter combinations or agent-hou
 ## Where Night 0 left us
 
 These are the starting facts each expedition builds on. Statuses are the ledger's, as of `main`
-at `f72db9e`; [`claims.md`](claims.md) wins wherever this summary disagrees.
+at `c46b598` plus the archivist's open PR #22 (C039 refuted, C046–C051 added);
+[`claims.md`](claims.md) wins wherever this summary disagrees.
 
 - **S001** (Orbium, poly/poly, μ 0.15, σ 0.015, R 13, T 10) glides stably and is replicated
   bitwise by two independent implementations (C001). Several of its apparent traits are lattice
@@ -27,10 +28,16 @@ at `f72db9e`; [`claims.md`](claims.md) wins wherever this summary disagrees.
   independently checked (C023). Where mass is removed matters more than how much (C026).
 - **Field specimens** (Lane 6, PR #11, merged 2026-10-07): at μ 0.155, σ 0.020 one rule supports a
   glider, a circler S102 and a static ring S103, chosen by history (C038). The coexistence holds at
-  every numerical setting tried, but its σ band moves with T and R, and S102 dies at R 26 at its
-  registered rule (C039). Under S001's own rule a bound pair S101 survives port injury by shedding
+  every numerical setting tried, but its σ band moves with T and R (C038). Under S001's own rule a bound pair S101 survives port injury by shedding
   to one Orbium (C041). All three are catalogued species, not new forms (C043).
-- **Single-lane.** C038 and C040–C045 have not yet been reproduced by a second lane. They are the
+- **S102 at R 26: a resize effect, not a resolution effect.** C039 ("S102 does not survive doubling
+  the resolution") is REFUTED as worded. Its circler died because Lane 6 upscaled the seed
+  bilinearly. Seeds upscaled by block replication, nearest neighbour or cubic interpolation
+  circle at R 26 and 39 for 1000 tu, in two distinct engines (C047, INDEPENDENTLY_CHECKED, dispute
+  D2). Only the narrower fact, that the bilinear seed dies, stands. C038's R-dependent band shift
+  and the "circler lives at σ 0.0205 at R 26" result were measured from bilinear seeds and have
+  not been rerun with other resizes.
+- **Single-lane.** C038, C040–C046 and C048–C051 (C048's T statement aside) have not yet been reproduced by a second lane. They are the
   evidence the first two expeditions start from, so they are treated as provisional until that
   happens.
 
@@ -76,7 +83,8 @@ answer stay the same when the observation horizon is extended and when one numer
 (R or T) is refined? Lane 6 fixes the family, horizons, classifier and stopping rule in its
 preregistration before running.
 
-**Preregistration:** _pending (Lane 6)._ Link added here when it lands.
+**Preregistration:** [L6-007 protocol](https://github.com/bfaber-centaur/artificial-life-museum/blob/claude/night0-field-tmbx06/research/experiments/L6-007-attractor-geography/protocol.md)
+(Lane 6 branch, no PR yet).
 
 **What would count.** A basin statement that holds at a longer horizon and a refined numerical
 setting, reproduced by Lane 3 in a distinct implementation, survives Lane 7's review and is drawn
@@ -100,7 +108,10 @@ same edit? Lane 4 supplies the lone-organism arms with its standardized disturba
 supplies the pair arms. Lane 6 and Lane 4 fix the comparison, arms and outcome in their
 preregistrations before running.
 
-**Preregistrations:** _pending (Lane 6, Lane 4)._ Links added here when they land.
+**Preregistrations:** [L6-008 protocol](https://github.com/bfaber-centaur/artificial-life-museum/blob/claude/night0-field-tmbx06/research/experiments/L6-008-pair-coupling/protocol.md)
+(Lane 6 branch, no PR yet);
+[L4-002 protocol](https://github.com/bfaber-centaur/artificial-life-museum/blob/claude/night0-disturbance-np4adr/research/experiments/L4-002-lone-baselines/protocol.md)
+(Lane 4, PR #20, open).
 
 **What would count.** A difference between the bound and lone arms that exceeds the variation
 across phases, with the "unaffected partner" explanation explicitly tested. No difference is a
@@ -116,7 +127,19 @@ and which belong to a particular discretization?
 **Scope, as mandated:** finite-resolution behaviors are legitimate observations of the system
 actually simulated, and stay in the record as such. They are not to be mistaken for
 continuum-invariant properties. Night 0 already has several worked examples (C003, C009, C011,
-C013, C025, C027, C039).
+C013, C025, C027).
+
+Two kinds of numerical dependence are kept apart in the ledger and in this program:
+
+- **Resolution dependence:** a property changes when R (or T) changes, whatever way the
+  specimen was carried to the new setting.
+- **Resize-method dependence:** a property changes with how the seed was upscaled to the new R
+  (bilinear, block, nearest, cubic), at the same R. This is a fact about the starting state, not
+  about the resolution. C039 versus C047 is the worked example: what was reported as a
+  resolution death was a resize death.
+
+A refinement result names the resize method it used, and is read as resolution dependence only
+when it holds across resize methods.
 
 **First bounded test (question level).** For the properties already in the ledger for S001 and
 S101–S103, which hold under a preregistered refinement in R and in T, which shift but persist,
@@ -124,7 +147,22 @@ and which vanish? The answer is an inventory that classifies each property, rath
 sweep. Lane 3 fixes the properties, refinements and tolerances in its preregistration; Lane 1 and
 the archivist say where prior literature reports the same property.
 
-**Preregistration:** _pending (Lane 3)._ Link added here when it lands.
+**Preregistration:** [L3-002](experiments/L3-002-property-persistence/PREREGISTRATION.md)
+(Lane 3, PR #18, open).
+
+**First results** (L3-002, PR #18; ledgered as C046–C051 in PR #22; both open):
+
+- *Resolution:* at R 13 every mean property of S001, S101 and S102 is within 0.5% of its R 39
+  value (C046, OBSERVED).
+- *Timestep:* T = 10 is the main bias. Speeds and turning are 10–18% low (C046); S102's mass and
+  size are 6.7% and 4.6% high (C049); S101's mass fluctuation grows about 5× from T 10 to T 80
+  and has not converged (C050); S001 survives at T = 640–2560 and settles at C009's
+  extrapolated limit (C051). All OBSERVED, single engine.
+- *Resize method:* S102 persists at R 26 and 39 except from a bilinear seed (C047,
+  INDEPENDENTLY_CHECKED). S103 is a bitwise fixed point at every T tested, but block-scaled to
+  R 26 or 39 it relaxes to a different static ring (C048). The R 26 ring itself depends on the
+  resize (bilinear 0.378748, block 0.380599), so C048's R statement mixes both kinds of
+  dependence and stays OBSERVED.
 
 **What would count.** Each listed property carries an explicit verdict (invariant within
 tolerance, shifted, or discretization-specific) backed by runs at both settings, and the ledger
@@ -176,7 +214,8 @@ Default location: `research/reports/synthesis-YYYY-MM-DD.md`.
 - Bounded tasks, independent PRs, explicit dependencies. Each mandate says what it waits on.
 - Settled decisions stay settled unless new evidence reveals a defect. Settled so far: the S001
   rule definition; `INDEPENDENTLY_CHECKED` means two distinct implementations agree; dispute D1
-  (heading lock at R 26) resolved in favour of C013; S101–S103 are catalogued species (C043).
+  (heading lock at R 26) resolved in favour of C013; dispute D2 (S102 at R 26) resolved in favour of
+  C047; S101–S103 are catalogued species (C043).
 - Review and reconcile evidence before upgrading a claim. The archivist changes statuses only on
   recorded evidence and appends history rather than rewriting it.
 - Nothing merges automatically, neither scientific claims nor PRs. Bobby merges.
@@ -201,7 +240,7 @@ Default location: `research/reports/synthesis-YYYY-MM-DD.md`.
 
 | Expedition | Lane | Preregistration |
 | --- | --- | --- |
-| Attractor geography | 6 | pending |
-| Pair dynamics | 6 | pending |
-| Pair dynamics baselines | 4 | pending |
-| Numerical ecology | 3 | pending |
+| Attractor geography | 6 | L6-007 `protocol.md` (Lane 6 branch, no PR yet) |
+| Pair dynamics | 6 | L6-008 `protocol.md` (Lane 6 branch, no PR yet) |
+| Pair dynamics baselines | 4 | L4-002 `protocol.md` (PR #20, open) |
+| Numerical ecology | 3 | L3-002 `PREREGISTRATION.md` (PR #18, open) |
