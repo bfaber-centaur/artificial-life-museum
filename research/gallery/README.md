@@ -154,7 +154,7 @@ the two cuts. Both films are aligned on their own cut.
 > nearest-neighbour or cubic resizing, it keeps circling at both. Lane 3 measured this
 > ([L3-002](../experiments/L3-002-property-persistence/README.md), on main), and Lane 6 got the
 > same eight outcomes in its own engine (branch not yet merged). The ledger change (C039
-> *refuted* as worded, superseded by C047 *observed* (Lane 6's rerun not yet on main)) is proposed in ledger PR #22
+> *refuted* as worded, superseded by C047 *observed*) is proposed in ledger PR #22
 > and not yet merged; until it is, the ledger on main still lists C039 as *numerically fragile*.
 > The method used to resize a seed is a choice, and here it decided the outcome. That is a
 > different fragility from resolution itself.
