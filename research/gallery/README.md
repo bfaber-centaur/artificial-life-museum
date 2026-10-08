@@ -137,10 +137,11 @@ the two cuts. Both films are aligned on their own cut.
 
 > **Provisional.** The evidence it quotes from Lane 3's
 > [L3-003](../experiments/L3-003-circler-lifetime/README.md) (PR #29) and Lane 7's
-> [HR-009](../reports/hostile-review.md) (PR #30) is merged on main. Lane 6's L6-007 results
-> (PR #27, checked at 968d330) are still under review; their corrected text draws the same line
-> as this caption (divergence at every setting, collapse seen only at R 13, T 10, step 39 799 one
-> trajectory). The ledger holds no claim on S102's lifetime yet. The
+> [HR-009](../reports/hostile-review.md) (PR #30) and Lane 6's
+> [L6-007](../experiments/L6-007-attractor-geography/README.md) follow-up (PR #27, merge 7cbf5ae)
+> are all merged on main, and they draw the same line as this caption (divergence at every setting,
+> collapse seen only at R 13, T 10, step 39 799 one trajectory). The ledger holds no claim on
+> S102's lifetime yet. The
 > pictures are verified replays; the reading of them below is not settled.
 >
 > **Shown at R 13, T 10 only; not seen under refinement.** Lane 3's L3-003 (merged)
@@ -335,7 +336,7 @@ heading values come from `galintervene.chord_heading("S102", 3002)`. The G004 S0
 - **2026-10-08, G006 (Lane 8).** The circler from twelve starts 10⁻¹² apart, run to 5000 tu:
   five fall apart at different times, seven are still circling. Provisional, pending PR #27
   and a ledger claim; shown at R 13, T 10 only, since L3-003 (merged) sees no deaths at R 26,
-  R 39, T 20 or T 40. Closeout check: caption re-read against PR #27 at 968d330, which agrees;
+  R 39, T 20 or T 40. Closeout check: caption re-read against PR #27 as merged (7cbf5ae), which agrees;
   pictures unchanged.
 - **2026-10-08, ledger follow-up.** Ledger PR #22 and Lane 6's rerun (PR #23) merged. The
   field note and specimens table now quote the ledger as it stands: C039 *refuted* as worded,
