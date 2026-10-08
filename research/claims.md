@@ -144,6 +144,7 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
 | Lane 6 S103 dossier (fixed point), L6-field negative results | C042, C044 |
 | Lane 6 L6-005 control runs at t0 = 3000/3002 | C023 caveat |
 | Lane 7 hostile-review HR-007 (C023 world size, thresholds) | C023, C026 |
+| Lane 9 wording note (C026 title overstates the 10% uniform survival) | C026 |
 | Lane 6 | not started |
 
 ## Claims
@@ -902,7 +903,7 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
 - **History:**
   - 2026-10-07 — NUMERICALLY_FRAGILE — Lane 5 proposed; archivist ledgered.
 
-### C026 — Where mass is removed matters more than how much: S001 survives losing 10% uniformly but dies from about 5% removed at its centre
+### C026 — Where mass is removed matters more than how much: at R = 13 (t0 = 1000–1004) S001 survives losing 10% uniformly but dies from about 5% removed at its centre
 
 - **Status:** INDEPENDENTLY_CHECKED
 - **Owner lane:** Lane 4 (data), Lane 3 (replication), Lane 7 (statement, HR-007)
@@ -923,7 +924,11 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
 - **Known caveats:** one specimen; three geometries, not a fitted spatial law (Lane 4). Lane 4
   proposed REPRODUCED; the archivist keeps INDEPENDENTLY_CHECKED because Lane 3's separate code
   measured the same mass edges. I004 shifts with T (C027). At R = 26 the I002 edge is
-  −4.6 to −5.0% → −5.3 to −5.6% (Lane 3).
+  −4.6 to −5.0% → −5.3 to −5.6% (Lane 3). The "survives 10% uniformly" wording holds only at
+  R = 13, t0 = 1000–1004: at R = 26 the I001 edge is 9.88–10.0% (Lane 3
+  `disturb-T10-R26-brackets.csv`: s_ok 0.0984–0.0992, s_fail 0.0992–0.1000) and s = 0.100 dies
+  (Lane 4 `results/R26/bisect-brackets.csv`: s_ok 0.0969, s_fail 0.1000); Lane 6 has s = 0.10
+  dying at t0 = 3002 (C023).
 - **Prior literature** (search and full-text verification 2026-10-07; grades and versions in `references.md`):
   - [Cool2026] "Sensitivity to occlusion is spatially structured" and Fig. 4, pp. 4–5
     *(full text)*. **RELATED** (downgraded from CONSISTENT WITH after the full-text read).
@@ -943,6 +948,8 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
   - 2026-10-07 — Prior literature added (status unchanged) — archivist, literature-provenance mandate.
   - 2026-10-07 — Prior literature verified against Chan 2019 full text and authors' code (status unchanged) — archivist.
   - 2026-10-07 — Prior literature re-verified against arXiv full texts after the network change (status unchanged) — archivist.
+  - 2026-10-07 — title scoped to R = 13, t0 = 1000–1004 (status unchanged) — Lane 9 wording note:
+    the 10% uniform figure sits on the R = 26 edge and fails at t0 = 3002.
 
 ### C027 — The frontal-addition (I003) and port-side-injury (I004) kill edges move 11–13% when the timestep is quartered (T = 10 → 40)
 
