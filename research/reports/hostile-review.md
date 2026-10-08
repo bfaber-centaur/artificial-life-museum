@@ -494,3 +494,53 @@ each undisturbed half with the **full** pulse added.
   partner alone survives even the full pulse (HR-009). At s ≥ 0.4 the outcome is explained by
   pulse exposure or is unbracketed."
 - **L6-c** as written.
+
+### HR-009b: L3-003 (PR #29), chaos vs collapse under refinement (exploratory, not preregistered)
+
+Lane 3 reproduces the R 13 transient bit for bit. At R 13, T 10, 9 of 24 independent 1e−12 copies
+die and 1 fills the world. But 0 of 29 R 26 runs and 0 of 3 R 39 runs die within 5000–8000 tu.
+My HR-009 wording was scoped to R 13, T 10, 128², and I accept that it does not carry over to
+refined grids. L3-003 proposes my twin-separation rate as a cheap discriminator, so I ran it
+(`hr009b_sep.py`, `hr009b_sep.csv`, `hr009b_sep_R26_long.csv`; 1e−12 twins, μ and σ fixed at
+0.155 and 0.020, separation per R):
+
+| Setting | Growth rate (per tu) | Separation at 600 tu | Both alive |
+| --- | --- | --- | --- |
+| R 13, T 10 | 0.198–0.201 | 0.46–0.56 (saturated) | 3/3 at 600 tu |
+| R 13, T 20 | 0.096 | 0.48–0.61 (saturated) | 3/3 |
+| R 13, T 40 | 0.076–0.079 | 0.46–0.57 (saturated) | 3/3 |
+| R 26, T 10, block seed | 0.015 early; separation reaches 0.17–0.42 by 3000 tu | 2e−9 to 1e−8 | 4/4 at 3000 tu |
+
+- **Chaos survives refinement in both knobs, but weakens.** Halving the step halves the rate, and
+  further halving changes it by only 20%. Doubling R cuts it about 13-fold, yet R 26 twins still
+  decorrelate within about 3000 tu.
+- **So chaos and collapse are separable.** The R 26 circler is chaotic but shows no collapse in
+  Lane 3's 172 000 tu of exposure. The collapse needs something the R 13 grid adds. The likely
+  candidate is the larger lattice-driven mass fluctuation (L3-003 traces: 0.49–0.547 at R 13 vs
+  0.511–0.540 at R 26), which fits H001's lattice-amplitude scaling. This is untested.
+- **L3-003's post-hoc probability for "no R 26 death"** (≈ 1e−9) uses a constant hazard. With the
+  front-loaded R 13 hazard and only the early window, Q6-13's 4 of 24 ends before 1000 tu give
+  (20/24)^24 ≈ 0.01 for 24 R 26 copies with no early end. The contrast holds, but it is about
+  1%, not 1e−9.
+
+### HR-009c: correction to E2, the s 0.2 "drag-down" is a 128² collision artefact (L6-009)
+
+Lane 6's L6-009 tracks show that the gap pulse **unbinds** S101 into two free Orbia, which
+collide later on the 128² torus. E2's full-pulse baseline could not catch this because each half
+runs alone. I checked it independently from the same edited states (pulse 1 R ahead, heading from
+the phase-3000 frame), with zero-padding to 256²:
+- At 40 tu the pair world holds 0.868–0.873 mass, i.e. two intact Orbia (2 × 0.4358), at
+  s 0.2 and 0.3, in all 5 phases.
+- Of those 10 states, 7 are dead at 300 tu on 128². All 10 end as two Orbia on 256².
+
+My phase 1–4 frames reuse the phase-0 heading, so their 128² outcomes do not match L6-008
+one for one. Phase 0 matches exactly, and `tests/test_hr009_pair_pulse.py` now pins that case
+on both world sizes.
+
+**E2's "coupling stands at s 0.2–0.3" is withdrawn** for the on-gap pulse. Its preregistered verdict
+(INCONCLUSIVE) is unchanged. What it measured is a world-size effect: the two freed partners do not
+die of the pulse. The placement-dependent effects in L6-009 are separate claims (off-gap
+drag-down at s 0.3, f 0.25, in 4/5 phases on both world sizes, and rescue of a directly hit
+partner in 8/15). They are exploratory, and I have not checked them independently.
+Recommended L6-d replacement: "An on-gap pulse at s 0.2–0.3 splits S101 into two intact Orbia.
+Whether they survive then depends on the world (collisions on 128²), not on coupling."

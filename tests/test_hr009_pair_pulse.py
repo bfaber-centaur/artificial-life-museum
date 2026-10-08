@@ -1,8 +1,9 @@
-"""Lane 7 HR-009 E2 check: S101's frontal-addition drag-down is not just the pulse being split.
+"""Lane 7 HR-009 E2, as corrected by Lane 6's L6-009: the gap pulse unbinds S101; it does not kill it.
 
-L6-008 gives each partner alone only its own half of the I003 pulse. Here each partner alone gets
-the *whole* pulse and still survives as an Orbium at s = 0.2 (phase t0 = 3000), while the bound
-pair dies (research/experiments/HR009-l6-review/e2.csv; L6-008 pair-coupling.csv).
+At I003 s = 0.2 (phase t0 = 3000) the bound pair is dead at 300 tu on the 128² torus, while each
+partner alone survives even the *full* pulse (HR-009 E2, which first read this as coupling). L6-009
+showed why: the pulse splits the pair into two intact Orbia that later collide on the small torus.
+The same edited state, zero-padded to 256², ends as two Orbia (L6-009 bigworld.csv; HR-009c).
 """
 import numpy as np
 
@@ -13,14 +14,17 @@ from alm.lenia import Lenia
 M1 = 0.4358  # single-Orbium mass, sum(A)/R^2
 
 
-def _run(rule, A, steps):
+def _run(rule, A, steps, check=()):
     w = Lenia(rule, A)
-    for _ in range(steps):
+    seen = {}
+    for t in range(1, steps + 1):
         w.step()
-    return w.A.sum() / rule.R**2
+        if t in check:
+            seen[t] = w.A.sum() / rule.R**2
+    return w.A.sum() / rule.R**2, seen
 
 
-def test_full_pulse_halves_survive_where_the_pair_dies():
+def test_gap_pulse_unbinds_the_pair_and_deaths_need_the_small_torus():
     S = specimens.load("S101")
     rule = specimens.load("S001").rule  # L6-008 runs S101 under the S001 rule
     w = Lenia(rule, S.place(128))
@@ -38,10 +42,16 @@ def test_full_pulse_halves_survive_where_the_pair_dies():
     R = rule.R
     gx, gy = offsets(A.shape, c[0] + R * hx, c[1] + R * hy)
     G = 0.2 * np.exp(-(gx**2 + gy**2) / (2 * (0.25 * R) ** 2))
+    E = np.clip(A + G, 0, 1)
 
-    pair = _run(rule, np.clip(A + G, 0, 1), 3000)
-    port_alone = _run(rule, np.clip(np.where(port, A, 0) + G, 0, 1), 3000)
-    stb_alone = _run(rule, np.clip(np.where(port, 0, A) + G, 0, 1), 3000)
-    assert pair < 0.01
-    assert abs(port_alone / M1 - 1) < 0.05
-    assert abs(stb_alone / M1 - 1) < 0.05
+    # each partner alone survives the full pulse
+    assert abs(_run(rule, np.clip(np.where(port, A, 0) + G, 0, 1), 3000)[0] / M1 - 1) < 0.05
+    assert abs(_run(rule, np.clip(np.where(port, 0, A) + G, 0, 1), 3000)[0] / M1 - 1) < 0.05
+    # on 128² the pair carries two Orbia's mass at 40 tu, yet is dead by 300 tu (a later collision)
+    final, seen = _run(rule, E, 3000, check=(400,))
+    assert abs(seen[400] / (2 * M1) - 1) < 0.01
+    assert final < 0.01
+    # the same edited state on a 256² torus ends as two Orbia
+    big = np.zeros((256, 256))
+    big[64:192, 64:192] = np.roll(E, (64 - int(round(c[1])), 64 - int(round(c[0]))), (0, 1))
+    assert abs(_run(rule, big, 3000)[0] / (2 * M1) - 1) < 0.05
