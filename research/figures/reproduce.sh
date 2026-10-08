@@ -7,3 +7,8 @@ PY=${PY:-.venv/bin/python}
 "$PY" research/figures/A-survival-boundary/make_figure.py
 # Figure C reads merged PR data at pinned merge commits on main (git show; no checkout).
 "$PY" research/figures/C-phenotypes-one-rule/make_figure.py
+# Figure D reads unmerged PRs #27 and #30 at pinned commits; fetch them if missing.
+for c in ad9ac03a03d7599bc57535f11a8470349cd2156a 4e7482277714c909501692626b1c998bdd23c073; do
+  git cat-file -e "$c" 2>/dev/null || git fetch -q origin claude/night0-field-tmbx06 claude/night0-hostile-review-o3avnq
+done
+"$PY" research/figures/D-pair-and-circler/make_figure.py

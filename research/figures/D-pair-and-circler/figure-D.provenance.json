@@ -1,0 +1,107 @@
+{
+  "figure": "D-pair-and-circler",
+  "command": ".venv/bin/python research/figures/D-pair-and-circler/make_figure.py",
+  "ledger": {
+    "ledger": "research/claims.md",
+    "ledger_commit": "76ee3a6",
+    "ledger_sha256": "df1e7b0ae26f8fe574fe54301e63f5f7da0663b4f56ee33ab631a722521964f2",
+    "claims": {
+      "C038": {
+        "status": "REPRODUCED",
+        "status_text": "REPRODUCED (clean-process reruns); not yet reproduced by a second lane",
+        "title": "One rule (S001's, with \u03bc = 0.155, \u03c3 = 0.020) supports three phenotypes chosen by history: an Orbium glider, a circler (S102) and a static ring (S103)"
+      },
+      "C041": {
+        "status": "OBSERVED",
+        "status_text": "OBSERVED; not yet reproduced by a second lane",
+        "title": "Under S001's own rule, a bound Orbium pair (S101) survives port injury of 10\u201350% by shedding to a single Orbium, where a single Orbium dies at 10%"
+      }
+    }
+  },
+  "inputs": [
+    {
+      "path": "research/figures/D-pair-and-circler/make_figure.py",
+      "sha256": "06563eeee2938b36a221589415ef726a7f0b88539381341157ac7d2f4436619b",
+      "last_commit": "7598d3b"
+    },
+    {
+      "path": "research/figures/figlib/__init__.py",
+      "sha256": "23d1dd07a43a84f1f441481050b2daa508a69658e3b71bb3bd1d6da0fa9f7b70",
+      "last_commit": "08b074f"
+    },
+    {
+      "path": "research/figures/figlib/edges.py",
+      "sha256": "f66c531fc0d3f4471076e550384a8dc06797c1eb831574c9376ab63c8a84ef62",
+      "last_commit": "08b074f"
+    },
+    {
+      "path": "research/figures/figlib/gitsource.py",
+      "sha256": "cb9d65796293697f4cd173bc81f6a290d1097713c490534b50c88f37c197ad57",
+      "last_commit": "4c7dd20"
+    },
+    {
+      "path": "research/figures/figlib/ledger.py",
+      "sha256": "b711afa1e9bdc057d5dd2fdb2d55f9ff802f5f6c8f621619da164b94a5bcddf7",
+      "last_commit": "78406e9"
+    },
+    {
+      "path": "research/figures/figlib/provenance.py",
+      "sha256": "51b8064e6178735aa4dabaecde17d347291cb56821aa370adaae9e5f7dfd6623",
+      "last_commit": "4c7dd20"
+    },
+    {
+      "path": "research/figures/figlib/style.py",
+      "sha256": "37cf3aecfc105a526fd915a26e0c9ea300d7e1660b7bbc09fa942eb78db120ac",
+      "last_commit": "4c7dd20"
+    }
+  ],
+  "pinned_inputs": [
+    {
+      "commit": "ad9ac03a03d7599bc57535f11a8470349cd2156a",
+      "source": "PR #27 (Lane 6, L6-007/L6-008), unmerged",
+      "path": "research/experiments/L6-007-attractor-geography/circler-lifetimes.csv",
+      "blob": "a3b22df612babba5e1f45cd1fe138eb9f60abbc6",
+      "sha256": "9671495b005deb16f432d0b0b975fc8ad5cda767593fa6368e4f8ed7bbe1255f"
+    },
+    {
+      "commit": "ad9ac03a03d7599bc57535f11a8470349cd2156a",
+      "source": "PR #27 (Lane 6, L6-007/L6-008), unmerged",
+      "path": "research/experiments/L6-008-pair-coupling/pair-coupling.csv",
+      "blob": "9ecf69a72f2bc56d23746e51882d579ad3c79e8e",
+      "sha256": "5e5d388d2a49bacce7adc165cf8323001fb83e921f3f7e6d0a9ee11d9181a34f"
+    },
+    {
+      "commit": "4e7482277714c909501692626b1c998bdd23c073",
+      "source": "PR #30 (Lane 7, HR-009), unmerged",
+      "path": "research/experiments/HR009-l6-review/e1.csv",
+      "blob": "70ec689443c77696e01ac082a6b80dc1685f41ba",
+      "sha256": "577ea543ccc5f2a8fc0f5ac78414c914820a9ec0402e6a61955118f549060c5d"
+    },
+    {
+      "commit": "4e7482277714c909501692626b1c998bdd23c073",
+      "source": "PR #30 (Lane 7, HR-009), unmerged",
+      "path": "research/experiments/HR009-l6-review/e2.csv",
+      "blob": "3d56ff6a2f968b55ac6acee588db90269d9d2ae4",
+      "sha256": "4e1321f5b2080d3cd83746c37f877481023759bd7485df632c2336138c2cdb97"
+    }
+  ],
+  "outputs": [
+    "research/figures/D-pair-and-circler/figure-D.png",
+    "research/figures/D-pair-and-circler/figure-D.svg",
+    "research/figures/D-pair-and-circler/figure-D.pdf",
+    "research/figures/D-pair-and-circler/figure-D-pair.csv",
+    "research/figures/D-pair-and-circler/figure-D-lifetimes.csv"
+  ],
+  "code_commit": "7598d3b",
+  "code_dirty": false,
+  "versions": {
+    "python": "3.13.16",
+    "numpy": "2.5.3",
+    "matplotlib": "3.11.2"
+  },
+  "notes": [
+    "PROVISIONAL: evidence read from unmerged PRs #27 and #30 at pinned commits; see pinned_inputs.",
+    "Proposed claims L6-c, L6-d, L6-f are not in the ledger; no status is drawn for them.",
+    "Kaplan-Meier with Greenwood log-log 95% band; HR-009's rerun of the unperturbed seed is not counted as a separate start."
+  ]
+}
