@@ -1758,7 +1758,7 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
 
 ### C052 — At the coexistence rule, first contact between the settled glider and S103 fuses them and ignites a world-covering colony of small static bodies; isolated controls stay in class (bitwise ring at N256, R13)
 
-- **Status:** INDEPENDENTLY_CHECKED for contact, fusion and ignition (FISSION + PROLIFERATION in the t_c + 20 window, through 25 tu) on P2 and P3 via `alm_check` direct convolution; clean replay bitwise. World coverage by ~50 tu is OBSERVED (`alm` only, including N512). T20 keeps the class but not its timing (C053); R26 is a weaker check (non-fixed-point ring, D-024; 1-tu checkpoint scoring). The other ten encounters are OBSERVED.
+- **Status:** INDEPENDENTLY_CHECKED for contact, fusion and ignition (FISSION + PROLIFERATION in the t_c + 20 window, through 25 tu) on P2 and P3 via `alm_check` direct convolution; clean replay bitwise. World coverage by ~50 tu is OBSERVED (`alm` only, including N512). T20 keeps the class but not its timing (C053); R26 is a weaker check (non-fixed-point ring, D-024; scored from per-step rows, numerics 8f17849). The other ten encounters are OBSERVED.
 - **Owner lane:** REEF expedition (field runs, behavior scoring, numerics checks; coordinator ledger)
 - **Sources:** `research/reports/reef-expedition-2026-10-20.md`; `research/experiments/REEF/` (PROTOCOL v1 + §11, DECISIONS D-014–D-024); `REEF-field/README.md`; `REEF-behavior/audit/pilot-table.md`, `audit/discovery-table.md`; `REEF-numerics/checks/MATRIX.md`
 - **Specimen / version:** glider = S001 cells settled 500 tu under the coexistence rule (GA sha256 `982b7939…`, GB `63e381b8…`, elapsed-time snapshots 0.5 tu apart); ring = S103 (`1e9aa713…` at N256)

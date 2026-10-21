@@ -27,7 +27,7 @@ Under the classes frozen before any encounter, every run scores **FISSION**. A d
 | `alm_check` direct, 3→25 tu | same class, t_int/t_c/ignition identical, mass within 1e-12 rel | same | **different arithmetic agrees**; divergence grows ~0.7/tu after ignition (6e-9 at 25 tu) |
 | N512, R13, same separation | identical to N256 through 25 tu | identical | not a torus artifact inside the window |
 | T20, own controls | FISSION; ignition 3.1 tu earlier, mass +48–62% | FISSION; ignition 2.1 tu earlier, mass +27–35%, t_c −0.55 | outcome survives; **timing and mass outside the frozen tolerance** |
-| R26 (2×2 block, N512), own controls | FISSION + PROLIFERATION (111 bodies); ignition 4.3 tu earlier, mass +32–41% | FISSION + PROLIFERATION (63 bodies); ignition 0.9 tu earlier, mass +16–28% | outcome survives, but against a ring that is itself relaxing at R26 (D-010, D-024, C048), with classes scored from 1-tu float64 checkpoints: a weaker check |
+| R26 (2×2 block, N512), own controls | FISSION + PROLIFERATION (95 bodies); ignition 4.3 tu earlier, mass +32–41% | FISSION + PROLIFERATION (60 bodies); ignition 0.9 tu earlier, mass +16–28% | outcome survives, but against a ring that is itself relaxing at R26 (D-010, D-024, C048), scored from per-step rows (numerics 8f17849, behavior ae899e2): a weaker check |
 
 So contact → fusion → ignition holds through 25 tu across arithmetic (direct route, 3–25 tu), world size (N512), timestep (T20) and, as a weaker check, resolution (R26, D-024). The world-covering stage after that was watched with `alm` only. Both routes were scored by the same tracker (`REEF-behavior/score.py`). The *when* and *how much* do not: ignition time and colony mass are numerically fragile in T and R.
 
