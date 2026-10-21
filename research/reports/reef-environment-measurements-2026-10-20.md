@@ -1,6 +1,6 @@
 # Reef environment and runtime measurements (REEF-M0), integrated
 
-**Status:** calibration report, not scientific evidence. No encounters, parameter searches, claim changes or merges.
+**Status:** calibration evidence only; no encounter experiments, parameter searches or scientific claim changes were performed.
 Mandate: `research/expeditions/2026-10-20-environment-measurements.md`.
 
 This integrated version replaces the runtime-lane draft of this file (PR #38 @ `d8a495b`). Corrections to that draft
@@ -54,7 +54,8 @@ All runs use float64, poly/poly, Euler+clip, a periodic torus, mu = 0.155 and si
 | N256, Batch W1 + morph every 1 tu | 221.5 [219.3–241.2] | — | — |
 | N256, Batch W2 | 232.6 (no morph) / 207.3 (morph) | — | 286.4 |
 | N256, Batch W4 + morph every 1 tu | 213.6 [205.6–216.8] | 297.9 [279.1–341.7] | 311.0 (morph every 100 steps) |
-| N256, 4 sequential engines | 254.0 [252.0–262.5] | — | 306.6 (no measurements) |
+| N256, 4 sequential engines | 254.0 [252.0–262.5] | — | — |
+| N256, four-world batch update, no measurements | — | — | 306.6 |
 | N512 R13 T10 | engine 52.2 [51.4–53.5] (retry 52.2); instr 54.8 | — | 74.0 |
 | N512 R26 T10 (2×2 block-resized) | engine 42.3 [42.2–42.3], **retry 49.8**; instr 49.9 | — | 73.7 |
 | N256 R13 **T20** | engine 239.2, instr 227.5 (≈ 11.4 tu/s) | — | 334.1 (16.7 tu/s) |
@@ -80,7 +81,7 @@ What the measurements show:
 - **Cross-session.** The 200-step smoke state hash `59714babf013cdc5…` is identical on both sessions.
 - **Existing tests.** The S103 exact fixed point passes on both sessions; the audit session also found the S103 fixed point exact at step 501. The runtime session ran `tests/test_lenia.py` plus the fixed-point test: 9 passed, 2 skipped. The audit session ran `tests/test_lane6_specimens.py` and `tests/test_lenia.py`: 15 passed, 2 skipped. The skipped tests are the same 2 on both sessions; they need `.refs/Lenia`, which was not cloned in either session. **The upstream-comparison tests were therefore not exercised.**
 
-**The benchmark inputs are not isolated encounter controls.** The runtime-lane input puts raw S001 and S103 seed cells into one world at fixed positions. The S001 cells are seeds from the native rule, not settled at the coexistence rule. Nothing measured the S001 heading, nothing aimed the seeds at each other, and nothing censors interactions across the torus. The audit lane placed each seed alone in its own world, but only to time the engine. No run here tests whether either specimen survives alone at mu = 0.155, sigma = 0.020. Survival over a few hundred steps is not attractor evidence, and none of these states should be reused as control or encounter starting states.
+**The benchmark inputs are not isolated encounter controls.** The runtime-lane input puts raw S001 and S103 seed cells into one world at fixed positions. The S001 cells are seeds from the native rule, not settled at the coexistence rule. Nothing measured the S001 heading, nothing aimed the seeds at each other, and nothing censors interactions across the torus. The audit lane placed each seed alone in its own world, but only to time the engine. These timing and smoke runs do not establish matched isolated-control behavior over an encounter's chosen horizon. Survival over a few hundred steps is not attractor evidence, and none of these states should be reused as control or encounter starting states.
 
 ## 6. Cross-session reconciliation
 
@@ -115,7 +116,7 @@ Every number below is an extrapolation. It is not measured.
 
 **Horizons used for costing only.** The estimates use H = 200 tu per run and Hd = 20 tu per direct window. These are **costing examples only**. First-contact, follow-up and direct-check horizons are scientific design decisions that this calibration does not make. Costs scale linearly in H per run.
 
-**Excluded.** Setup takes under 0.35 s per run and is ignored. Untimed compression, checkpoint I/O and two-body tracking (§3) are excluded. Treat every figure as a lower bound until those are measured.
+**Excluded.** Setup takes under 0.35 s per run and is ignored. Untimed compression, checkpoint I/O and two-body tracking (§3) are excluded. These are partial workload estimates, not guaranteed lower bounds on wall time; omitted work adds cost, while host performance can vary.
 
 | workload | runs | steps/run | serial (s) | **P = 2 (conservative)** | P = 4 (conditional) |
 |---|---|---|---|---|---|
@@ -149,7 +150,7 @@ Do not assume that more threads, or more project threads, add throughput linearl
 - Pin thread variables to 1.
 - Record per-step mass and centroid, plus a snapshot every 1 tu.
 - Checkpoint the full float64 state every 10 tu (512 KiB at N256, 2 MiB at N512), with a sha256 for each checkpoint. Commit hashes and selected compressed states only.
-- Memory (≤ 85 MB per process against 13.36 GiB) and disk (~31 GB) are not binding.
+- Memory (38–85 MB per process against a 13.36 GiB process-cgroup limit) and free disk (~31 GB) were ample for these short benchmarks. Longer trajectories and retained checkpoints require separate accounting.
 
 ## 8. Failures, deviations and open items carried forward
 
@@ -170,7 +171,7 @@ Do not assume that more threads, or more project threads, add throughput linearl
 **Ready:**
 - The environment is characterised: 4 vCPU, 13.36 GiB, ~30 GB.
 - Engine throughput is known to within about 1.5× across hosts.
-- The engines agree bitwise. The direct-arithmetic check agrees to about 1e-14 over 20 steps.
+- The primary, batch and independent FFT paths agree bitwise in the 200-step smoke checks. The direct-arithmetic check differs by about 1.7e-14 over 20 steps.
 - The compute for the feasible minimum is small, about 8 min at P = 2 under the example horizons.
 
 **Not ready. These must be fixed before encounters can be scored:**
