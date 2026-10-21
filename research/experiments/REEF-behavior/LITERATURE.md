@@ -95,6 +95,8 @@ N256, R13, T10, every pilot geometry with contact (b/R ∈ {−1, 0, +1}, two sn
 - The observation that is new to this repository is that **glider contact reliably ignites S103
   into an expanding, freezing lattice** at the pilot geometries. It is OBSERVED, with numerical
   checks pending.
-- Nicknames are not earned. If the passive-blob test (X7/X8) ignites too, the precise statement is
-  "S103 plus a sufficient nearby mass ignites"; the glider would then be only a delivery
-  mechanism.
+- Nicknames are not earned. Addendum after D-020: a static blob of the glider's mass placed in
+  contact also ignites (X9, X10), and half that dose does not (X11). The precise statement is
+  therefore "S103 plus enough mass in contact ignites (threshold between 0.24 and 0.49 ΣA/R² at this
+  position); a glider is one way to deliver it". That is the dossier's I003 result restated with a
+  moving source.

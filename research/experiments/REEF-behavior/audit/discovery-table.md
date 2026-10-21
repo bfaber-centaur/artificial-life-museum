@@ -8,3 +8,6 @@
 | X6 | GB, +1.50 | FISSION (PROLIFERATION) | 4.5 | 6.8 | 7.7 | — | 27.7 | 0.898 → 40.04 | 104 | merged |
 | X7 | BLOB-X7, +0.02 | NO_CONTACT (PASSIVE_STAND_IN, INTERACTION_WITHOUT_CONTACT, RING_EXACT) | 0.0 | 0.1 | None | — | 50.0 | 0.866 → 0.38 | 1 | exact |
 | X8 | BLOB-X8, +0.99 | NO_CONTACT (PASSIVE_STAND_IN, RING_EXACT) | 0.0 | None | None | — | 50.0 | 0.866 → 0.38 | 1 | exact |
+| X9 | BLOB-X9 (1.0× dose) at P2 contact position | FISSION (PASSIVE_STAND_IN, PROLIFERATION) | 0.0 | 0.1 | 0.1 | 31.6 | 20.1 | 0.866 (t=0) → 35.03 | 79 | merged |
+| X10 | BLOB-X10 (1.0×) at P3 contact position | FISSION (PASSIVE_STAND_IN, PROLIFERATION) | 0.0 | 0.1 | 0.1 | — | 20.1 | 0.866 (t=0) → 35.07 | 87 | merged |
+| X11 | BLOB-X11 (0.5×) at P2 contact position | NO_CONTACT (PASSIVE_STAND_IN, INTERACTION_WITHOUT_CONTACT, RING_EXACT) | 0.0 | 0.1 | None | — | 50.0 | 0.622 (t=0) → 0.38 | 1 | exact |
