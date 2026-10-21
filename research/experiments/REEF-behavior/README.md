@@ -104,7 +104,7 @@ blob placed in contact ignites the same way (X9, X10), and so does 0.75× (X12).
 or the full dose 2.1 R away (X7, X8), does not. Kernel-range interaction
 comes 0.6–1.0 tu before contact, glider and ring fuse at contact, and an expanding colony follows
 that freezes behind its front. All statements are OBSERVED at N256, R13, T10, finite
-horizon t_c + 20 tu. Numerical checks belong to the numerics lane and are not reported here.
+horizon t_c + 20 tu. Numerical checks are the numerics lane's; panel F shows their matrix and this lane's D-010 rescore of R26.
 
 | rival (from [`RIVALS.md`](RIVALS.md)) | status | evidence | what would discriminate |
 |---|---|---|---|
@@ -114,7 +114,7 @@ horizon t_c + 20 tu. Numerical checks belong to the numerics lane and are not re
 | Lattice re-lock / deflection artifact (G1) | **moot** | no run separates, so no deflection is measured | — |
 | Snapshot (GA vs GB) or placement rounding matters | **excluded for the class** | GA and GB agree at every offset tested (P1–P6, X1–X6). Realized offsets are within 0.03 R of requested. | — |
 | Sensitivity, not mechanism (G2) | **open** | not yet tested | `alm_check` direct window and clean replay (numerics lane) |
-| R13 or T10 specific | **open** | T40 already changes the isolated glider at this rule | T20 and R26 with their own controls |
+| R13 or T10 specific | **class survives T20, R26 (D-010) and N512; timing and mass do not** | numerics `e7d4ef6`: T20 FISSION with ignition 2–3 tu earlier and E mass +35–62% at t20; R26 judged against its own ring-alone (one static body, D-010/D-024) is FISSION + PROLIFERATION; disclosed variant with a 0.378–0.383 mass band is CONTROL_FAILURE from a pre-contact seed-relaxation dip (panel F, `exhibit/README.md`) | R26 per-step rows (checkpoint cadence 1 tu so far) |
 | Any nearby mass ignites the ring (not glider-specific) | **supported: the glider is a delivery mechanism, not a requirement** | a static blob of the glider's mass, placed at the glider's position at t_c (X9 for P2's geometry, X10 for P3's), ignites the same colony: FISSION + PROLIFERATION, 79–87 bodies and mass ≈ 35 at t_c + 20. The same blob 2.1 R away evaporates without contact (X7, X8). Half the dose at the contact position (X11) evaporates in 0.3 tu, and the ring returns bitwise. | the ignition threshold at this position lies between 0.5× and 0.75× the glider's mass, 0.24–0.37 ΣA/R²: X12 at 0.75× ignites (113 bodies, mass 46 at t_c + 20). A finer dose ladder would narrow it. Prior: the S103 dossier's I003 additions (0.10 returns, ≥ 0.30 fills) |
 | The colony is self-replication (Chan 2020-style) | **not supported** | interior freezes behind the front (P2: mean ΔA within 4 R falls from 0.12 to 0.011 per tu, 16 → 26 tu), bodies laid down by the front | count body divisions in the interior over time; check whether front speed is set by the front itself (pushed front), not by the trigger |
 | Novel phenomenon | **no** | S103 dossier (fill under ≥ 0.30 addition), HR-009 (S102 fills the world at this rule), Chan 2019 §3.5.5 "Detonation" | — |

@@ -1,0 +1,67 @@
+{
+ "class": "CONTROL_FAILURE",
+ "partial_class": null,
+ "flags": [
+  "S_RULE_D010",
+  "S_CONTROL_OUT_OF_CLASS",
+  "PROLIFERATION"
+ ],
+ "t_int": 6.0,
+ "t_kr": 4.0,
+ "t_c": 7.0,
+ "t_cen": null,
+ "censor_reason": null,
+ "observables": {
+  "t_end": 27.0,
+  "planned_end": 27.0,
+  "window_after_contact_tu": 20.0,
+  "debris_max": 0.003665779344822055,
+  "t_int_minus_t_c": -1.0,
+  "control_S_path_speed_R_tu": 0.0002739198291160532,
+  "control_S_mass_range": [
+   0.37594318905256585,
+   0.38202012019111153
+  ],
+  "control_G_speed_R_tu": 0.5484902038139589,
+  "control_G_heading_deg": 72.72272757096843
+ },
+ "params": {
+  "R": 26.0,
+  "T": 10.0,
+  "N": 512,
+  "theta_s": 0.01,
+  "body_mass": 0.005,
+  "debris_high": 0.01,
+  "death_mass": 0.01,
+  "theta_int": 1e-10,
+  "approach_timeout": 30.0,
+  "post_contact": 20.0,
+  "horizon": 50.0,
+  "fit_window": 5.0,
+  "theta_defl": 1.0,
+  "delta_lat": 0.1,
+  "shift_flag": 0.1,
+  "glider_tol": 0.02,
+  "ring_tol": 0.01,
+  "ring_moved": 0.1,
+  "glider_speed": 0.2,
+  "static_speed": 0.02,
+  "bind_min": 2.0,
+  "capture_last": 5.0,
+  "censor_margin": 3.0,
+  "fill_frac": 0.25,
+  "fill_level": 0.1,
+  "g_kind": "glider",
+  "s_rule": "D-010",
+  "s_mass_range": [
+   0.378,
+   0.383
+  ]
+ },
+ "input": {
+  "source": "/mnt/project-files/reef-numerics/checks/REEF-P3-E-R26/checkpoints.npz (float64, every 1 tu)",
+  "numerics_commit": "e7d4ef6",
+  "cadence_tu": 1.0,
+  "note": "disclosed variant (D-024): S-alone mass also in 0.378-0.383; checkpoint cadence because the --save-rows traces were not published"
+ }
+}
