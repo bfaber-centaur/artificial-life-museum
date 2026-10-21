@@ -1,0 +1,39 @@
+{
+ "run_id": "REEF-NUM-TOY-S",
+ "kind": "test",
+ "lane": "numerics",
+ "commit": null,
+ "engine": "alm",
+ "rule": {
+  "kernel": "poly",
+  "growth": "poly",
+  "beta": [
+   1.0
+  ],
+  "mu": 0.155,
+  "sigma": 0.02,
+  "R": 13,
+  "T": 10,
+  "update": "euler+clip",
+  "dtype": "float64"
+ },
+ "world": {
+  "N": 256,
+  "boundary": "periodic"
+ },
+ "inputs": {
+  "initial_state_sha256": "d38934ca082003b39e8749e2837631566be11f813876db0d1d26c8ecd467d86d",
+  "path": "validation/inputs/REEF-NUM-TOY-S.npy",
+  "ring": {
+   "shift_cells": [
+    0,
+    80
+   ]
+  }
+ },
+ "horizon_tu": 20,
+ "command": "python research/experiments/REEF-numerics/validation/make_inputs.py",
+ "outputs": {},
+ "status": "ok",
+ "notes": "toy triple S (tool test only)"
+}

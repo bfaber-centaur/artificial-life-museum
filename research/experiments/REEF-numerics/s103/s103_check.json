@@ -1,0 +1,50 @@
+{
+ "N128": {
+  "initial_sha256": "a81efdacfda98e0fe41063dbcebda08fd746e99ee8c5cd59e4f78d700dd72745",
+  "alm_fft": {
+   "min_G_full": 0.02761582311568045,
+   "max_G_empty": -0.12531362297960935,
+   "steps": 20,
+   "final_sha256": "a81efdacfda98e0fe41063dbcebda08fd746e99ee8c5cd59e4f78d700dd72745",
+   "bitwise_fixed": true
+  },
+  "check_fft": {
+   "min_G_full": 0.02761582311568045,
+   "max_G_empty": -0.12531362297960935,
+   "steps": 20,
+   "final_sha256": "a81efdacfda98e0fe41063dbcebda08fd746e99ee8c5cd59e4f78d700dd72745",
+   "bitwise_fixed": true
+  },
+  "check_direct": {
+   "min_G_full": 0.027615823115678895,
+   "max_G_empty": -0.12531362297961124,
+   "steps": 20,
+   "final_sha256": "a81efdacfda98e0fe41063dbcebda08fd746e99ee8c5cd59e4f78d700dd72745",
+   "bitwise_fixed": true
+  }
+ },
+ "N256": {
+  "initial_sha256": "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+  "alm_fft": {
+   "min_G_full": 0.02761582311568045,
+   "max_G_empty": -0.12531362297960935,
+   "steps": 20,
+   "final_sha256": "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+   "bitwise_fixed": true
+  },
+  "check_fft": {
+   "min_G_full": 0.02761582311568045,
+   "max_G_empty": -0.12531362297960935,
+   "steps": 20,
+   "final_sha256": "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+   "bitwise_fixed": true
+  },
+  "check_direct": {
+   "min_G_full": 0.027615823115678895,
+   "max_G_empty": -0.12531362297961124,
+   "steps": 20,
+   "final_sha256": "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+   "bitwise_fixed": true
+  }
+ }
+}

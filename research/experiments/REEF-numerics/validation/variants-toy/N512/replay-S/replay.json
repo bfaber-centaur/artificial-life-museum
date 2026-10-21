@@ -1,0 +1,208 @@
+[
+ {
+  "run_id": "REEF-NUM-TOY-S-N512-replay",
+  "kind": "check",
+  "lane": "numerics",
+  "commit": "f49ab2f2a5ddbfa27060e8f8c16106dd566effbf",
+  "commit_dirty": false,
+  "engine": "alm",
+  "rule": {
+   "kernel": "poly",
+   "growth": "poly",
+   "beta": [
+    1.0
+   ],
+   "mu": 0.155,
+   "sigma": 0.02,
+   "R": 13,
+   "T": 10,
+   "update": "euler+clip",
+   "dtype": "float64"
+  },
+  "world": {
+   "N": 512,
+   "boundary": "periodic"
+  },
+  "inputs": {
+   "source_run_id": "REEF-NUM-TOY-S-N512",
+   "source_state_sha256": "d38934ca082003b39e8749e2837631566be11f813876db0d1d26c8ecd467d86d",
+   "transform": "np.roll(A, (0, -38), (0, 1)) then embed at offset (128, 128)",
+   "initial_state_sha256": "fb40c77432a1ffbc987f9a4dc4c647554ff846ba274388a0c7eda3ff294ef339",
+   "path": "research/experiments/REEF-numerics/validation/variants-toy/N512/S.npy",
+   "geometry": null,
+   "state_path": "research/experiments/REEF-numerics/validation/variants-toy/N512/S.npy",
+   "state_file_sha256": "f2b213b9b2131ed6dbae675e2543dc28b397306bcc576ada00100a8c8a8e516c",
+   "source_manifest": "research/experiments/REEF-numerics/validation/variants-toy/N512/S.json",
+   "source_manifest_sha256": "a84a5610f19076503517339ec7785000d9173a15a0f2510f04225cf26a7fae83"
+  },
+  "horizon_tu": 5,
+  "command": "python research/experiments/REEF-numerics/replay.py --manifest research/experiments/REEF-numerics/validation/variants-toy/N512/S.json --state research/experiments/REEF-numerics/validation/variants-toy/N512/S.npy --tu 5 --out research/experiments/REEF-numerics/validation/variants-toy/N512/replay-S --engines alm,check_fft,check_direct --run-id REEF-NUM-TOY-S-N512",
+  "env": {
+   "python": "3.13.16",
+   "numpy": "2.5.4",
+   "scipy": "1.18.1",
+   "OMP_NUM_THREADS": "1",
+   "OPENBLAS_NUM_THREADS": "1",
+   "MKL_NUM_THREADS": "1"
+  },
+  "outputs": {
+   "states_npz": "research/experiments/REEF-numerics/validation/variants-toy/N512/replay-S/alm.npz",
+   "states_npz_sha256": "90ac75b99e0125f0e9ed093c35b455c7030788fe593b77823deb2b2c2cbd72e9",
+   "sha256_per_tu": [
+    "fb40c77432a1ffbc987f9a4dc4c647554ff846ba274388a0c7eda3ff294ef339",
+    "fb40c77432a1ffbc987f9a4dc4c647554ff846ba274388a0c7eda3ff294ef339",
+    "fb40c77432a1ffbc987f9a4dc4c647554ff846ba274388a0c7eda3ff294ef339",
+    "fb40c77432a1ffbc987f9a4dc4c647554ff846ba274388a0c7eda3ff294ef339",
+    "fb40c77432a1ffbc987f9a4dc4c647554ff846ba274388a0c7eda3ff294ef339",
+    "fb40c77432a1ffbc987f9a4dc4c647554ff846ba274388a0c7eda3ff294ef339"
+   ]
+  },
+  "final_state_sha256": "fb40c77432a1ffbc987f9a4dc4c647554ff846ba274388a0c7eda3ff294ef339",
+  "wall_s": 0.5030728600000316,
+  "status": "ok",
+  "result": {
+   "final_mass_R2": 0.378698224852071
+  },
+  "notes": "fresh-process alm replay (reproducibility)"
+ },
+ {
+  "run_id": "REEF-NUM-TOY-S-N512-chkfft",
+  "kind": "check",
+  "lane": "numerics",
+  "commit": "f49ab2f2a5ddbfa27060e8f8c16106dd566effbf",
+  "commit_dirty": false,
+  "engine": "alm_check.fft",
+  "rule": {
+   "kernel": "poly",
+   "growth": "poly",
+   "beta": [
+    1.0
+   ],
+   "mu": 0.155,
+   "sigma": 0.02,
+   "R": 13,
+   "T": 10,
+   "update": "euler+clip",
+   "dtype": "float64"
+  },
+  "world": {
+   "N": 512,
+   "boundary": "periodic"
+  },
+  "inputs": {
+   "source_run_id": "REEF-NUM-TOY-S-N512",
+   "source_state_sha256": "d38934ca082003b39e8749e2837631566be11f813876db0d1d26c8ecd467d86d",
+   "transform": "np.roll(A, (0, -38), (0, 1)) then embed at offset (128, 128)",
+   "initial_state_sha256": "fb40c77432a1ffbc987f9a4dc4c647554ff846ba274388a0c7eda3ff294ef339",
+   "path": "research/experiments/REEF-numerics/validation/variants-toy/N512/S.npy",
+   "geometry": null,
+   "state_path": "research/experiments/REEF-numerics/validation/variants-toy/N512/S.npy",
+   "state_file_sha256": "f2b213b9b2131ed6dbae675e2543dc28b397306bcc576ada00100a8c8a8e516c",
+   "source_manifest": "research/experiments/REEF-numerics/validation/variants-toy/N512/S.json",
+   "source_manifest_sha256": "a84a5610f19076503517339ec7785000d9173a15a0f2510f04225cf26a7fae83"
+  },
+  "horizon_tu": 5,
+  "command": "python research/experiments/REEF-numerics/replay.py --manifest research/experiments/REEF-numerics/validation/variants-toy/N512/S.json --state research/experiments/REEF-numerics/validation/variants-toy/N512/S.npy --tu 5 --out research/experiments/REEF-numerics/validation/variants-toy/N512/replay-S --engines alm,check_fft,check_direct --run-id REEF-NUM-TOY-S-N512",
+  "env": {
+   "python": "3.13.16",
+   "numpy": "2.5.4",
+   "scipy": "1.18.1",
+   "OMP_NUM_THREADS": "1",
+   "OPENBLAS_NUM_THREADS": "1",
+   "MKL_NUM_THREADS": "1"
+  },
+  "outputs": {
+   "states_npz": "research/experiments/REEF-numerics/validation/variants-toy/N512/replay-S/check_fft.npz",
+   "states_npz_sha256": "44977f15821206085a64926f2b42fde4295079c5f4edff401ea320378bfa573e",
+   "sha256_per_tu": [
+    "fb40c77432a1ffbc987f9a4dc4c647554ff846ba274388a0c7eda3ff294ef339",
+    "fb40c77432a1ffbc987f9a4dc4c647554ff846ba274388a0c7eda3ff294ef339",
+    "fb40c77432a1ffbc987f9a4dc4c647554ff846ba274388a0c7eda3ff294ef339",
+    "fb40c77432a1ffbc987f9a4dc4c647554ff846ba274388a0c7eda3ff294ef339",
+    "fb40c77432a1ffbc987f9a4dc4c647554ff846ba274388a0c7eda3ff294ef339",
+    "fb40c77432a1ffbc987f9a4dc4c647554ff846ba274388a0c7eda3ff294ef339"
+   ]
+  },
+  "final_state_sha256": "fb40c77432a1ffbc987f9a4dc4c647554ff846ba274388a0c7eda3ff294ef339",
+  "wall_s": 0.6039296619999845,
+  "status": "ok",
+  "result": {
+   "final_mass_R2": 0.378698224852071,
+   "vs_alm_bitwise_final": true,
+   "vs_alm_max_abs_final": 0.0,
+   "vs_alm_max_abs_any_tu": 0.0,
+   "vs_alm_first_nonbitwise_tu": null
+  },
+  "notes": "independent implementation, SAME NumPy FFT arithmetic as alm: not independent arithmetic"
+ },
+ {
+  "run_id": "REEF-NUM-TOY-S-N512-direct",
+  "kind": "check",
+  "lane": "numerics",
+  "commit": "f49ab2f2a5ddbfa27060e8f8c16106dd566effbf",
+  "commit_dirty": false,
+  "engine": "alm_check.direct",
+  "rule": {
+   "kernel": "poly",
+   "growth": "poly",
+   "beta": [
+    1.0
+   ],
+   "mu": 0.155,
+   "sigma": 0.02,
+   "R": 13,
+   "T": 10,
+   "update": "euler+clip",
+   "dtype": "float64"
+  },
+  "world": {
+   "N": 512,
+   "boundary": "periodic"
+  },
+  "inputs": {
+   "source_run_id": "REEF-NUM-TOY-S-N512",
+   "source_state_sha256": "d38934ca082003b39e8749e2837631566be11f813876db0d1d26c8ecd467d86d",
+   "transform": "np.roll(A, (0, -38), (0, 1)) then embed at offset (128, 128)",
+   "initial_state_sha256": "fb40c77432a1ffbc987f9a4dc4c647554ff846ba274388a0c7eda3ff294ef339",
+   "path": "research/experiments/REEF-numerics/validation/variants-toy/N512/S.npy",
+   "geometry": null,
+   "state_path": "research/experiments/REEF-numerics/validation/variants-toy/N512/S.npy",
+   "state_file_sha256": "f2b213b9b2131ed6dbae675e2543dc28b397306bcc576ada00100a8c8a8e516c",
+   "source_manifest": "research/experiments/REEF-numerics/validation/variants-toy/N512/S.json",
+   "source_manifest_sha256": "a84a5610f19076503517339ec7785000d9173a15a0f2510f04225cf26a7fae83"
+  },
+  "horizon_tu": 5,
+  "command": "python research/experiments/REEF-numerics/replay.py --manifest research/experiments/REEF-numerics/validation/variants-toy/N512/S.json --state research/experiments/REEF-numerics/validation/variants-toy/N512/S.npy --tu 5 --out research/experiments/REEF-numerics/validation/variants-toy/N512/replay-S --engines alm,check_fft,check_direct --run-id REEF-NUM-TOY-S-N512",
+  "env": {
+   "python": "3.13.16",
+   "numpy": "2.5.4",
+   "scipy": "1.18.1",
+   "OMP_NUM_THREADS": "1",
+   "OPENBLAS_NUM_THREADS": "1",
+   "MKL_NUM_THREADS": "1"
+  },
+  "outputs": {
+   "states_npz": "research/experiments/REEF-numerics/validation/variants-toy/N512/replay-S/check_direct.npz",
+   "states_npz_sha256": "e87b896a09b715fc107fa9941809218ccaa5f70827f71f25bee36bdcd05ce54a",
+   "sha256_per_tu": [
+    "fb40c77432a1ffbc987f9a4dc4c647554ff846ba274388a0c7eda3ff294ef339",
+    "fb40c77432a1ffbc987f9a4dc4c647554ff846ba274388a0c7eda3ff294ef339",
+    "fb40c77432a1ffbc987f9a4dc4c647554ff846ba274388a0c7eda3ff294ef339",
+    "fb40c77432a1ffbc987f9a4dc4c647554ff846ba274388a0c7eda3ff294ef339",
+    "fb40c77432a1ffbc987f9a4dc4c647554ff846ba274388a0c7eda3ff294ef339",
+    "fb40c77432a1ffbc987f9a4dc4c647554ff846ba274388a0c7eda3ff294ef339"
+   ]
+  },
+  "final_state_sha256": "fb40c77432a1ffbc987f9a4dc4c647554ff846ba274388a0c7eda3ff294ef339",
+  "wall_s": 5.393275722999988,
+  "status": "ok",
+  "result": {
+   "final_mass_R2": 0.378698224852071,
+   "vs_alm_bitwise_final": true,
+   "vs_alm_max_abs_final": 0.0,
+   "vs_alm_max_abs_any_tu": 0.0,
+   "vs_alm_first_nonbitwise_tu": null
+  },
+  "notes": "real-space wrap correlation, no FFT: the only different arithmetic route"
+ }
+]

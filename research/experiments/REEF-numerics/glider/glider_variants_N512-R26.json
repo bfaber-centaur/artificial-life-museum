@@ -1,0 +1,264 @@
+{
+ "GA_sha256": "982b793956a8336d96969d1cd5ed71e83604e78c1aa360819c334eaa098c25f1",
+ "GA_source": "reef/field 5f21378 research/experiments/REEF-field/seeds/GA.npy",
+ "N512": {
+  "setting": "N512",
+  "R": 13,
+  "T": 10,
+  "N": 512,
+  "initial_sha256": "f03ed34621037c8b133e55fbefc15af61f68af8c76e9547214a7411a5e22dc66",
+  "final_sha256": "b66637c342f93b8bfbefb443db522ce26a383a0b9f10957682f3a2306603db3f",
+  "windows": [
+   {
+    "tu": [
+     0,
+     10
+    ],
+    "net_R_per_tu": 0.5480780837626393,
+    "path_R_per_tu": 0.5480787102682045,
+    "class": "GLIDER",
+    "heading_deg": 72.28681832237496,
+    "mass_R2_end": 0.48713653027286,
+    "components_max": 1
+   },
+   {
+    "tu": [
+     10,
+     20
+    ],
+    "net_R_per_tu": 0.5486837594865207,
+    "path_R_per_tu": 0.5486844996189906,
+    "class": "GLIDER",
+    "heading_deg": 72.28022337369276,
+    "mass_R2_end": 0.4872492785326009,
+    "components_max": 2
+   },
+   {
+    "tu": [
+     20,
+     30
+    ],
+    "net_R_per_tu": 0.5484753806484292,
+    "path_R_per_tu": 0.5484761150416575,
+    "class": "GLIDER",
+    "heading_deg": 72.29311929327845,
+    "mass_R2_end": 0.48816052672176835,
+    "components_max": 2
+   },
+   {
+    "tu": [
+     30,
+     40
+    ],
+    "net_R_per_tu": 0.5481872840877307,
+    "path_R_per_tu": 0.5481877490930477,
+    "class": "GLIDER",
+    "heading_deg": 72.3018531519119,
+    "mass_R2_end": 0.48624387628988147,
+    "components_max": 3
+   },
+   {
+    "tu": [
+     40,
+     50
+    ],
+    "net_R_per_tu": 0.548466924014477,
+    "path_R_per_tu": 0.5484673240507602,
+    "class": "GLIDER",
+    "heading_deg": 72.32067391397162,
+    "mass_R2_end": 0.48729451715756206,
+    "components_max": 2
+   },
+   {
+    "tu": [
+     50,
+     60
+    ],
+    "net_R_per_tu": 0.5485717028933275,
+    "path_R_per_tu": 0.5485724376393356,
+    "class": "GLIDER",
+    "heading_deg": 72.32777020773128,
+    "mass_R2_end": 0.4876850317432561,
+    "components_max": 2
+   },
+   {
+    "tu": [
+     60,
+     70
+    ],
+    "net_R_per_tu": 0.5482949218249555,
+    "path_R_per_tu": 0.5482954085523508,
+    "class": "GLIDER",
+    "heading_deg": 72.26474679046738,
+    "mass_R2_end": 0.4862953205363119,
+    "components_max": 2
+   },
+   {
+    "tu": [
+     70,
+     80
+    ],
+    "net_R_per_tu": 0.5483106892204195,
+    "path_R_per_tu": 0.5483112459537925,
+    "class": "GLIDER",
+    "heading_deg": 72.28787397700592,
+    "mass_R2_end": 0.48804629727260335,
+    "components_max": 3
+   },
+   {
+    "tu": [
+     80,
+     90
+    ],
+    "net_R_per_tu": 0.5486556912366984,
+    "path_R_per_tu": 0.5486561547441949,
+    "class": "GLIDER",
+    "heading_deg": 72.30526655344941,
+    "mass_R2_end": 0.4870670709400306,
+    "components_max": 3
+   },
+   {
+    "tu": [
+     90,
+     100
+    ],
+    "net_R_per_tu": 0.5482395969347998,
+    "path_R_per_tu": 0.5482400240131458,
+    "class": "GLIDER",
+    "heading_deg": 72.32139277420974,
+    "mass_R2_end": 0.48687594200186735,
+    "components_max": 2
+   }
+  ]
+ },
+ "R26": {
+  "setting": "R26",
+  "R": 26,
+  "T": 10,
+  "N": 512,
+  "initial_sha256": "9d13da3ff31034a6c6195837d46972ad65a2fd2af194eb7327f30b31341c02b1",
+  "final_sha256": "982dbc1b042fae325f318511760eef91d6c8257763824ad7d2bad75a901b0c07",
+  "windows": [
+   {
+    "tu": [
+     0,
+     10
+    ],
+    "net_R_per_tu": 0.5485133054543994,
+    "path_R_per_tu": 0.548514044470177,
+    "class": "GLIDER",
+    "heading_deg": 72.73577581237409,
+    "mass_R2_end": 0.48724515062385154,
+    "components_max": 4
+   },
+   {
+    "tu": [
+     10,
+     20
+    ],
+    "net_R_per_tu": 0.5485037445075451,
+    "path_R_per_tu": 0.5485037834241006,
+    "class": "GLIDER",
+    "heading_deg": 72.71202463093147,
+    "mass_R2_end": 0.4871937138001967,
+    "components_max": 1
+   },
+   {
+    "tu": [
+     20,
+     30
+    ],
+    "net_R_per_tu": 0.5485040188395718,
+    "path_R_per_tu": 0.5485040899163318,
+    "class": "GLIDER",
+    "heading_deg": 72.71930327104826,
+    "mass_R2_end": 0.4874242096211125,
+    "components_max": 1
+   },
+   {
+    "tu": [
+     30,
+     40
+    ],
+    "net_R_per_tu": 0.5485515719403502,
+    "path_R_per_tu": 0.5485516312746597,
+    "class": "GLIDER",
+    "heading_deg": 72.67226329665095,
+    "mass_R2_end": 0.4874518393712294,
+    "components_max": 1
+   },
+   {
+    "tu": [
+     40,
+     50
+    ],
+    "net_R_per_tu": 0.5484405310709047,
+    "path_R_per_tu": 0.5484405867220503,
+    "class": "GLIDER",
+    "heading_deg": 72.67541786127782,
+    "mass_R2_end": 0.48699024692230675,
+    "components_max": 1
+   },
+   {
+    "tu": [
+     50,
+     60
+    ],
+    "net_R_per_tu": 0.5485228349318485,
+    "path_R_per_tu": 0.5485229034970753,
+    "class": "GLIDER",
+    "heading_deg": 72.66252590910543,
+    "mass_R2_end": 0.4876756554821917,
+    "components_max": 1
+   },
+   {
+    "tu": [
+     60,
+     70
+    ],
+    "net_R_per_tu": 0.5485478792740265,
+    "path_R_per_tu": 0.5485479544073445,
+    "class": "GLIDER",
+    "heading_deg": 72.57429040289797,
+    "mass_R2_end": 0.48705837072921343,
+    "components_max": 1
+   },
+   {
+    "tu": [
+     70,
+     80
+    ],
+    "net_R_per_tu": 0.5484763537178563,
+    "path_R_per_tu": 0.548476396447531,
+    "class": "GLIDER",
+    "heading_deg": 72.5656190007655,
+    "mass_R2_end": 0.4873990085340519,
+    "components_max": 1
+   },
+   {
+    "tu": [
+     80,
+     90
+    ],
+    "net_R_per_tu": 0.5485275865506856,
+    "path_R_per_tu": 0.5485276627541331,
+    "class": "GLIDER",
+    "heading_deg": 72.56438742892658,
+    "mass_R2_end": 0.48722587230995984,
+    "components_max": 1
+   },
+   {
+    "tu": [
+     90,
+     100
+    ],
+    "net_R_per_tu": 0.5485090343677879,
+    "path_R_per_tu": 0.5485090563498388,
+    "class": "GLIDER",
+    "heading_deg": 72.51000403300594,
+    "mass_R2_end": 0.48747763826001456,
+    "components_max": 1
+   }
+  ]
+ }
+}

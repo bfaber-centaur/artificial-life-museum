@@ -1,0 +1,18 @@
+P2 chkfft==alm at every 1-tu checkpoint 0..50 (E,G,S): True
+  t3: E max|d|=0.00e+00 suppXOR=0 | G max|d|=0.0e+00
+  t5: E max|d|=1.08e-14 suppXOR=0 | G max|d|=6.3e-15
+  t6: E max|d|=2.67e-14 suppXOR=0 | G max|d|=1.5e-14
+  t7: E max|d|=6.18e-14 suppXOR=0 | G max|d|=2.0e-14
+  t10: E max|d|=2.93e-13 suppXOR=0 | G max|d|=7.1e-14
+  t15: E max|d|=4.02e-12 suppXOR=0 | G max|d|=2.8e-13
+  t20: E max|d|=1.44e-10 suppXOR=0 | G max|d|=6.4e-13
+  t25: E max|d|=6.09e-09 suppXOR=0 | G max|d|=8.5e-13
+P3 chkfft==alm at every 1-tu checkpoint 0..50 (E,G,S): True
+  t3: E max|d|=0.00e+00 suppXOR=0 | G max|d|=0.0e+00
+  t5: E max|d|=4.33e-15 suppXOR=0 | G max|d|=6.3e-15
+  t6: E max|d|=6.49e-15 suppXOR=0 | G max|d|=1.5e-14
+  t7: E max|d|=5.18e-15 suppXOR=0 | G max|d|=2.0e-14
+  t10: E max|d|=7.28e-14 suppXOR=0 | G max|d|=7.1e-14
+  t15: E max|d|=1.85e-12 suppXOR=0 | G max|d|=2.8e-13
+  t20: E max|d|=5.18e-11 suppXOR=0 | G max|d|=6.4e-13
+  t25: E max|d|=3.14e-09 suppXOR=0 | G max|d|=8.5e-13
