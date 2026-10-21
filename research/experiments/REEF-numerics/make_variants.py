@@ -138,7 +138,7 @@ def main(argv=None) -> None:
                 m["world"]["N"] = info["N"]
             m["inputs"] = {"source_run_id": ids[k], "source_state_sha256": sha256(states[k]),
                            "transform": info["transform"], "initial_state_sha256": sha256(A),
-                           "path": str((d / f"{k}.npy").relative_to(REPO)) if d.resolve().is_relative_to(REPO) else str(d / f"{k}.npy"),
+                           "path": str((d / f"{k}.npy").resolve().relative_to(REPO)) if d.resolve().is_relative_to(REPO) else str(d / f"{k}.npy"),
                            "geometry": mE.get("inputs", {}).get("geometry")}
             if k == "E":
                 m["controls"] = {"G": f"{ids['G']}-{kind}", "S": f"{ids['S']}-{kind}"}
