@@ -1,0 +1,83 @@
+{
+ "utc": "2026-10-21T04:57:54Z",
+ "session_prefix": "cse_01UdE7aZ",
+ "repo_head": "7ccf7f9b9fe8950eae134af0d38187a04741dd07",
+ "os": "Linux-6.18.44-fc-v139-x86_64-with-glibc2.39",
+ "arch": "x86_64",
+ "python": "3.13.16",
+ "numpy": "2.5.3",
+ "scipy": "1.18.1",
+ "fft_backend": "numpy.fft (pocketfft, single-threaded)",
+ "blas": {
+  "name": "scipy-openblas",
+  "found": true,
+  "version": "0.3.34.106.0",
+  "detection method": "pkgconfig",
+  "include directory": "/opt/_internal/cpython-3.13.14/lib/python3.13/site-packages/scipy_openblas64/include",
+  "lib directory": "/opt/_internal/cpython-3.13.14/lib/python3.13/site-packages/scipy_openblas64/lib",
+  "openblas configuration": "OpenBLAS 0.3.34.106.0  USE64BITINT DYNAMIC_ARCH NO_AFFINITY Haswell MAX_THREADS=64",
+  "pc file directory": "/project/.openblas"
+ },
+ "thread_env": {
+  "OMP_NUM_THREADS": "1",
+  "OPENBLAS_NUM_THREADS": "1",
+  "MKL_NUM_THREADS": "1"
+ },
+ "cpu_model": "Intel(R) Xeon(R) Processor @ 2.80GHz",
+ "os_cpu_count": 4,
+ "sched_affinity": [
+  0,
+  1,
+  2,
+  3
+ ],
+ "cgroup_raw": "9:name=systemd:/\n8:pids:/\n7:blkio:/\n6:freezer:/\n5:devices:/\n4:memory:/process_api/01a15ccf-1cb3-7122-921a-c675c7afb9df/claude-code-bash\n3:cpuset:/\n2:cpuacct:/\n1:cpu:/\n0::/",
+ "cgroup_version": "v1 (+ empty unified)",
+ "cpu_cfs_quota_us": "-1",
+ "cpu_cfs_period_us": "100000",
+ "cpu_stat": "nr_periods 0\nnr_throttled 0\nthrottled_time 0\nnr_bursts 0\nburst_time 0",
+ "cpuset": "0-3",
+ "mem_cgroup_path": "/process_api/01a15ccf-1cb3-7122-921a-c675c7afb9df/claude-code-bash",
+ "mem_limit_bytes": "14343688192",
+ "mem_parent_limit_bytes": "9223372036854771712",
+ "mem_root_limit_bytes": "9223372036854771712",
+ "mem_usage_bytes": "301723648",
+ "mem_max_usage_bytes": "463855616",
+ "mem_failcnt": "0",
+ "meminfo": {
+  "MemTotal": "16479424 kB",
+  "MemAvailable": "15948476 kB",
+  "SwapTotal": "0 kB"
+ },
+ "disk": {
+  "/": {
+   "total": 270553174016,
+   "used": 10238394368,
+   "free": 31288844288
+  },
+  "/home/user/artificial-life-museum": {
+   "total": 270553174016,
+   "used": 10238394368,
+   "free": 31288844288
+  },
+  "/tmp": {
+   "total": 270553174016,
+   "used": 10238394368,
+   "free": 31288844288
+  }
+ },
+ "ulimit_cpu_s": [
+  -1,
+  -1
+ ],
+ "ulimit_as": [
+  -1,
+  -1
+ ],
+ "ulimit_nproc": [
+  64297,
+  64297
+ ],
+ "pids_max": "unavailable: FileNotFoundError",
+ "timeouts": "Bash tool: foreground default 120 s, max 600 s; background default 1800 s, max 7200 s (tool documentation, not tested)"
+}
