@@ -125,3 +125,17 @@ stated.
   is disclosed.
 - **Panel captions** in the museum carry the finite horizon, rule and window. "Reef is a description, not a species"
   is correct.
+
+## Re-check of `57d56ea..0cb5c08` (2026-10-21 ~08:05Z): **approve**
+
+I read the full diff (report, claims.md, `65-reef.html` and the regenerated `museum/site/` pages).
+- **R1–R9 are all applied as specified.** C052 uses the scoped status wording verbatim, and the same-scorer caveat
+  and the 3–25 tu direct-window caveat are in its caveats. C055 copies the numerics r95 definition. The R26 variant is
+  attributed to D-024, and P3 R26 reads FISSION + PROLIFERATION. The FILL sentence now gives 0.09–0.17 at window end.
+  The t_kr and t_int ranges are corrected. The museum text is scoped to 25 tu, the units are fixed, and the
+  interpretation is labelled.
+- **Ledger:** the only removed claims.md lines are C052's title, status and caveats and C055's metric. Both claims are
+  new in this PR, so no dated history line was changed. C038/C041 are untouched since 57d56ea. No `museum/` or
+  `research/` file still links the old C052 anchor. The site pages' ledger sha256 was regenerated (`7bd9e567d5c0`).
+- **No residual changes.** The numerical checks are not re-run here. Every number I can check against this lane's
+  tables and `matrix.json` matches.
