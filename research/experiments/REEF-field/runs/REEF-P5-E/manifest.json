@@ -1,0 +1,113 @@
+{
+  "lane": "field",
+  "commit": "fe4ba1cd6df234c05668db3ae7ca11f1d9feebbb",
+  "engine": "alm",
+  "rule": {
+    "kernel": "poly",
+    "growth": "poly",
+    "beta": [
+      1.0
+    ],
+    "mu": 0.155,
+    "sigma": 0.02,
+    "R": 13,
+    "T": 10,
+    "update": "euler+clip",
+    "dtype": "float64"
+  },
+  "world": {
+    "N": 256,
+    "boundary": "periodic"
+  },
+  "horizon_tu": 50,
+  "command": "python research/experiments/REEF-field/runner.py --run-id REEF-P5-E --kind encounter --snapshot GB --ring-shift 65 20 --geometry '{\"b_R_requested\": 0.0, \"b_R_realized\": 0.042345209501056955, \"d_R_requested\": 5.145985857481212, \"d_R_realized\": 5.160868754689759, \"heading_deg\": 72.29421551158049, \"gap_R_realized\": 4.0148828972085475}' --schedule-position 0 --protocol-addendum 3c3fdc4b12cb064061d899b2a6e42290ceb452c9 --notes 'controls: G=REEF-CTRL-GB (shared), S=REEF-P5-S (lockstep in REEF-P5-E)'",
+  "env": {
+    "python": "3.13.16",
+    "numpy": "2.5.3",
+    "scipy": "1.18.1",
+    "platform": "Linux-6.18.44-fc-v139-x86_64-with-glibc2.39",
+    "machine": "x86_64",
+    "threads": "OMP/OPENBLAS/MKL=1",
+    "git_dirty": false,
+    "embedded_from_N256": false
+  },
+  "outputs": {
+    "checkpoints.npz": {
+      "path": "research/experiments/REEF-field/runs/REEF-P5-E/checkpoints.npz",
+      "sha256": "26236512ee392ffab3f1d23d8ad719d1aa68758252e9bbd8e524c529db2e818c"
+    },
+    "frames.npz": {
+      "path": "research/experiments/REEF-field/runs/REEF-P5-E/frames.npz",
+      "sha256": "39fdc4d2e2f78410016cf3f6d63be698bf1d54c75087da9a74f415185a3c39ca"
+    },
+    "trace.npz": {
+      "path": "research/experiments/REEF-field/runs/REEF-P5-E/trace.npz",
+      "sha256": "f6bbc263c213fe7e56bbd0ab5675604102b8a85ab3364e003abbbf200d75f835"
+    }
+  },
+  "wall_s": 12.50705361366272,
+  "status": "ok",
+  "run_id": "REEF-P5-E",
+  "kind": "encounter",
+  "inputs": {
+    "glider": {
+      "snapshot": "GB",
+      "state_sha256": "63e381b8002c10b008d8dffb4e955660cbb12b64057de0217d5edd7a1fc05d30",
+      "path": "research/experiments/REEF-field/seeds/GB.npy",
+      "shift_cells": [
+        0,
+        0
+      ]
+    },
+    "ring": {
+      "state_sha256": "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+      "path": "research/experiments/REEF-field/seeds/S103.npy",
+      "shift_cells": [
+        65,
+        20
+      ]
+    },
+    "initial_state_sha256": "b1bbd17480fb2fc3cdfd6f7d29e143d4ef7c26ce04431274aa53ee79d2a96090",
+    "geometry": {
+      "b_R_requested": 0.0,
+      "b_R_realized": 0.042345209501056955,
+      "d_R_requested": 5.145985857481212,
+      "d_R_realized": 5.160868754689759,
+      "heading_deg": 72.29421551158049,
+      "gap_R_realized": 4.0148828972085475
+    },
+    "component_initial_sha256": {
+      "G": "63e381b8002c10b008d8dffb4e955660cbb12b64057de0217d5edd7a1fc05d30",
+      "S": "b15f6941b0e6f6e576b6799d200be1a7eb40b6e53184cd178ab704aab97ea86d"
+    }
+  },
+  "controls": {
+    "G": "REEF-CTRL-GB",
+    "S": "REEF-P5-S",
+    "mapping": "G-alone shared per snapshot (D-004), reproduced bitwise by the lockstep G; S-alone = lockstep S at this realised ring position"
+  },
+  "final_state_sha256": "37fa66ba0c6bc5a85227f74fcebda7002b6242242cd0abc39b40d1716f7a3794",
+  "lockstep_final_state_sha256": {
+    "E": "37fa66ba0c6bc5a85227f74fcebda7002b6242242cd0abc39b40d1716f7a3794",
+    "G": "8ff9ab499752cd876621bf677eeccdce1730d912eacea49be9f3f9508852a004",
+    "S": "b15f6941b0e6f6e576b6799d200be1a7eb40b6e53184cd178ab704aab97ea86d"
+  },
+  "schedule": {
+    "seed": 20261020,
+    "position": 0
+  },
+  "result": {
+    "provisional_contact_tu": 6.2,
+    "residual_max_before_contact": 0.16667288210224418,
+    "residual_max_overall": 2.0,
+    "ncomp_E_final": 295,
+    "mass_final": {
+      "E": 81.08095773409633,
+      "G": 0.4878517445813404,
+      "S": 0.378698224852071
+    },
+    "wall_sim_s": 9.088943481445312,
+    "wall_total_s": 12.50705361366272
+  },
+  "notes": "controls: G=REEF-CTRL-GB (shared), S=REEF-P5-S (lockstep in REEF-P5-E) protocol addendum 3c3fdc4b12cb064061d899b2a6e42290ceb452c9"
+}

@@ -1,0 +1,113 @@
+{
+  "lane": "field",
+  "commit": "fe4ba1cd6df234c05668db3ae7ca11f1d9feebbb",
+  "engine": "alm",
+  "rule": {
+    "kernel": "poly",
+    "growth": "poly",
+    "beta": [
+      1.0
+    ],
+    "mu": 0.155,
+    "sigma": 0.02,
+    "R": 13,
+    "T": 10,
+    "update": "euler+clip",
+    "dtype": "float64"
+  },
+  "world": {
+    "N": 256,
+    "boundary": "periodic"
+  },
+  "horizon_tu": 50,
+  "command": "python research/experiments/REEF-field/runner.py --run-id REEF-P3-E --kind encounter --snapshot GA --ring-shift 68 8 --geometry '{\"b_R_requested\": 1.0, \"b_R_realized\": 0.9945533068049305, \"d_R_requested\": 5.15383666383055, \"d_R_realized\": 5.131214397620976, \"heading_deg\": 72.29403933885672, \"gap_R_realized\": 3.977377733790427}' --schedule-position 4 --protocol-addendum 3c3fdc4b12cb064061d899b2a6e42290ceb452c9 --notes 'controls: G=REEF-CTRL-GA (shared), S=REEF-P3-S (lockstep in REEF-P3-E)'",
+  "env": {
+    "python": "3.13.16",
+    "numpy": "2.5.3",
+    "scipy": "1.18.1",
+    "platform": "Linux-6.18.44-fc-v139-x86_64-with-glibc2.39",
+    "machine": "x86_64",
+    "threads": "OMP/OPENBLAS/MKL=1",
+    "git_dirty": false,
+    "embedded_from_N256": false
+  },
+  "outputs": {
+    "checkpoints.npz": {
+      "path": "research/experiments/REEF-field/runs/REEF-P3-E/checkpoints.npz",
+      "sha256": "288e6bea085f46b6d8adf8a6ebaab3749a1a006a75deb4009367e5a728e45a77"
+    },
+    "frames.npz": {
+      "path": "research/experiments/REEF-field/runs/REEF-P3-E/frames.npz",
+      "sha256": "dd05e19e4b177da7be4808f837a7b8b1b5a22dc07f382f62bf1d344255caf9fd"
+    },
+    "trace.npz": {
+      "path": "research/experiments/REEF-field/runs/REEF-P3-E/trace.npz",
+      "sha256": "85787024669d1c5b5b9d96bdef05d99c92e81b0fd5aedfa25ea2701603876dd8"
+    }
+  },
+  "wall_s": 11.795017719268799,
+  "status": "ok",
+  "run_id": "REEF-P3-E",
+  "kind": "encounter",
+  "inputs": {
+    "glider": {
+      "snapshot": "GA",
+      "state_sha256": "982b793956a8336d96969d1cd5ed71e83604e78c1aa360819c334eaa098c25f1",
+      "path": "research/experiments/REEF-field/seeds/GA.npy",
+      "shift_cells": [
+        0,
+        0
+      ]
+    },
+    "ring": {
+      "state_sha256": "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+      "path": "research/experiments/REEF-field/seeds/S103.npy",
+      "shift_cells": [
+        68,
+        8
+      ]
+    },
+    "initial_state_sha256": "4d24ae9fadfd09de1911bd1b95287c37fe61b138181e4b565833c72fe88c3b17",
+    "geometry": {
+      "b_R_requested": 1.0,
+      "b_R_realized": 0.9945533068049305,
+      "d_R_requested": 5.15383666383055,
+      "d_R_realized": 5.131214397620976,
+      "heading_deg": 72.29403933885672,
+      "gap_R_realized": 3.977377733790427
+    },
+    "component_initial_sha256": {
+      "G": "982b793956a8336d96969d1cd5ed71e83604e78c1aa360819c334eaa098c25f1",
+      "S": "a8e53a3126781449b53584ccad76ee4fa8d497708a39bcef5013fa1ab37eb525"
+    }
+  },
+  "controls": {
+    "G": "REEF-CTRL-GA",
+    "S": "REEF-P3-S",
+    "mapping": "G-alone shared per snapshot (D-004), reproduced bitwise by the lockstep G; S-alone = lockstep S at this realised ring position"
+  },
+  "final_state_sha256": "40b6a0eed32bdbfbb1caba4a1003511f4edd27da8f699797b81239cde2cf1a22",
+  "lockstep_final_state_sha256": {
+    "E": "40b6a0eed32bdbfbb1caba4a1003511f4edd27da8f699797b81239cde2cf1a22",
+    "G": "7fac2d9132cba04e9cfb7ef6e9835ab003e6e6cd444907644e11c2839aa69617",
+    "S": "a8e53a3126781449b53584ccad76ee4fa8d497708a39bcef5013fa1ab37eb525"
+  },
+  "schedule": {
+    "seed": 20261020,
+    "position": 4
+  },
+  "result": {
+    "provisional_contact_tu": 6.7,
+    "residual_max_before_contact": 0.15196816970217297,
+    "residual_max_overall": 1.8934298927317523,
+    "ncomp_E_final": 294,
+    "mass_final": {
+      "E": 81.04849854491125,
+      "G": 0.48729451715756283,
+      "S": 0.378698224852071
+    },
+    "wall_sim_s": 8.425055503845215,
+    "wall_total_s": 11.795017719268799
+  },
+  "notes": "controls: G=REEF-CTRL-GA (shared), S=REEF-P3-S (lockstep in REEF-P3-E) protocol addendum 3c3fdc4b12cb064061d899b2a6e42290ceb452c9"
+}

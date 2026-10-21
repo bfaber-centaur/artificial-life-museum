@@ -1,0 +1,249 @@
+{
+ "decision": "D-018 (reef/coordinator a0698db)",
+ "schedule_seed": 20261020,
+ "shuffle": "random.Random(20261020).shuffle(list(range(8))) over [X1..X8]",
+ "order": [
+  "X5",
+  "X1",
+  "X4",
+  "X2",
+  "X3",
+  "X7",
+  "X6",
+  "X8"
+ ],
+ "N": 256,
+ "H_tu": 50,
+ "blob": {
+  "form": "a*exp(-r^2/(2 s^2)) for r <= 4 s (minimum-image r from centre), else 0",
+  "a": 0.680108174486775,
+  "s_cells": 4.39072617302981,
+  "cut_cells": 17.56290469211924,
+  "centre_yx": [
+   165.26094775389473,
+   139.56525259057284
+  ],
+  "target_mass_R2": 0.4873,
+  "target_gyradius_R": 0.477,
+  "mass_R2": 0.4873,
+  "gyradius_R": 0.47700000000000004,
+  "centroid_yx": [
+   165.26084703534877,
+   139.56540966226586
+  ],
+  "support_cells_gt_0.01": 514,
+  "centre_source": "REEF-CTRL-GA pos at step 55 (controls-series.npz GA_pos, wrapped)"
+ },
+ "jobs": [
+  {
+   "id": "X5",
+   "run_id": "REEF-X5-E",
+   "snapshot": "GB",
+   "ring_shift": [
+    59,
+    39
+   ],
+   "geometry": {
+    "b_R_requested": -1.5,
+    "b_R_realized": -1.4903286584810695,
+    "d_R_requested": 5.145985857481212,
+    "d_R_realized": 5.165689588664303,
+    "gap_R_realized": 4.019703731183091,
+    "heading_deg": 72.29421551158049
+   },
+   "controls": {
+    "G": "REEF-CTRL-GB",
+    "G_final_sha256": "8ff9ab499752cd876621bf677eeccdce1730d912eacea49be9f3f9508852a004",
+    "S": "REEF-X5-S (lockstep)"
+   },
+   "schedule": {
+    "seed": 20261020,
+    "position": 0
+   }
+  },
+  {
+   "id": "X1",
+   "run_id": "REEF-X1-E",
+   "snapshot": "GA",
+   "ring_shift": [
+    58,
+    39
+   ],
+   "geometry": {
+    "b_R_requested": -1.5,
+    "b_R_realized": -1.511050302469751,
+    "d_R_requested": 5.153836663830551,
+    "d_R_realized": 5.123660453920598,
+    "gap_R_realized": 3.9698237900900484,
+    "heading_deg": 72.29403933885672
+   },
+   "controls": {
+    "G": "REEF-CTRL-GA",
+    "G_final_sha256": "7fac2d9132cba04e9cfb7ef6e9835ab003e6e6cd444907644e11c2839aa69617",
+    "S": "REEF-X1-S (lockstep)"
+   },
+   "schedule": {
+    "seed": 20261020,
+    "position": 1
+   }
+  },
+  {
+   "id": "X4",
+   "run_id": "REEF-X4-E",
+   "snapshot": "GA",
+   "ring_shift": [
+    70,
+    2
+   ],
+   "geometry": {
+    "b_R_requested": 1.5,
+    "b_R_realized": 1.4810181848663666,
+    "d_R_requested": 5.153836663830551,
+    "d_R_realized": 5.137404142786694,
+    "gap_R_realized": 3.983567478956144,
+    "heading_deg": 72.29403933885672
+   },
+   "controls": {
+    "G": "REEF-CTRL-GA",
+    "G_final_sha256": "7fac2d9132cba04e9cfb7ef6e9835ab003e6e6cd444907644e11c2839aa69617",
+    "S": "REEF-X4-S (lockstep)"
+   },
+   "schedule": {
+    "seed": 20261020,
+    "position": 2
+   }
+  },
+  {
+   "id": "X2",
+   "run_id": "REEF-X2-E",
+   "snapshot": "GA",
+   "ring_shift": [
+    59,
+    36
+   ],
+   "geometry": {
+    "b_R_requested": -1.25,
+    "b_R_realized": -1.267817863439033,
+    "d_R_requested": 5.153836663830551,
+    "d_R_realized": 5.126755326503457,
+    "gap_R_realized": 3.9729186626729076,
+    "heading_deg": 72.29403933885672
+   },
+   "controls": {
+    "G": "REEF-CTRL-GA",
+    "G_final_sha256": "7fac2d9132cba04e9cfb7ef6e9835ab003e6e6cd444907644e11c2839aa69617",
+    "S": "REEF-X2-S (lockstep)"
+   },
+   "schedule": {
+    "seed": 20261020,
+    "position": 3
+   }
+  },
+  {
+   "id": "X3",
+   "run_id": "REEF-X3-E",
+   "snapshot": "GA",
+   "ring_shift": [
+    69,
+    5
+   ],
+   "geometry": {
+    "b_R_requested": 1.25,
+    "b_R_realized": 1.2377857458356485,
+    "d_R_requested": 5.153836663830551,
+    "d_R_realized": 5.134309270203835,
+    "gap_R_realized": 3.9804726063732856,
+    "heading_deg": 72.29403933885672
+   },
+   "controls": {
+    "G": "REEF-CTRL-GA",
+    "G_final_sha256": "7fac2d9132cba04e9cfb7ef6e9835ab003e6e6cd444907644e11c2839aa69617",
+    "S": "REEF-X3-S (lockstep)"
+   },
+   "schedule": {
+    "seed": 20261020,
+    "position": 4
+   }
+  },
+  {
+   "id": "X7",
+   "run_id": "REEF-X7-E",
+   "snapshot": "BLOB-X7",
+   "ring_shift": [
+    64,
+    20
+   ],
+   "geometry": {
+    "stand_in": "static Gaussian blob",
+    "geometry_of": "P2",
+    "b_R_requested": 0.0,
+    "ring_shift_from": "P2",
+    "blob_to_ring_along_heading_R": 2.1029528316487176,
+    "blob_to_ring_lateral_R": 0.02183109881138727,
+    "heading_deg": 72.29403933885672
+   },
+   "blob_state_sha256": "321c176a1b5750b54f038f99fbe2c7c101a5b019d4581589bca8e5531d77e57f",
+   "controls": {
+    "G": "REEF-X7-G (lockstep blob-alone)",
+    "S": "REEF-X7-S (lockstep)"
+   },
+   "schedule": {
+    "seed": 20261020,
+    "position": 5
+   }
+  },
+  {
+   "id": "X6",
+   "run_id": "REEF-X6-E",
+   "snapshot": "GB",
+   "ring_shift": [
+    71,
+    2
+   ],
+   "geometry": {
+    "b_R_requested": 1.5,
+    "b_R_realized": 1.501739786581891,
+    "d_R_requested": 5.145985857481212,
+    "d_R_realized": 5.179442477524811,
+    "gap_R_realized": 4.033456620043599,
+    "heading_deg": 72.29421551158049
+   },
+   "controls": {
+    "G": "REEF-CTRL-GB",
+    "G_final_sha256": "8ff9ab499752cd876621bf677eeccdce1730d912eacea49be9f3f9508852a004",
+    "S": "REEF-X6-S (lockstep)"
+   },
+   "schedule": {
+    "seed": 20261020,
+    "position": 6
+   }
+  },
+  {
+   "id": "X8",
+   "run_id": "REEF-X8-E",
+   "snapshot": "BLOB-X8",
+   "ring_shift": [
+    68,
+    8
+   ],
+   "geometry": {
+    "stand_in": "static Gaussian blob",
+    "geometry_of": "P3",
+    "b_R_requested": 1.0,
+    "ring_shift_from": "P3",
+    "blob_to_ring_along_heading_R": 2.115332321980155,
+    "blob_to_ring_lateral_R": 0.9947608549342593,
+    "heading_deg": 72.29403933885672
+   },
+   "blob_state_sha256": "321c176a1b5750b54f038f99fbe2c7c101a5b019d4581589bca8e5531d77e57f",
+   "controls": {
+    "G": "REEF-X8-G (lockstep blob-alone)",
+    "S": "REEF-X8-S (lockstep)"
+   },
+   "schedule": {
+    "seed": 20261020,
+    "position": 7
+   }
+  }
+ ]
+}

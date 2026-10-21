@@ -1,0 +1,45 @@
+{
+  "N": 256,
+  "construction": {
+    "a": 0.680108174486775,
+    "a_used": 0.5100811308650812,
+    "amplitude_scale": 0.75,
+    "centre_source": "REEF-CTRL-GA pos at step 61 (controls-series.npz GA_pos, wrapped)",
+    "centre_yx": [
+      169.3510148974147,
+      140.87640202215817
+    ],
+    "centroid_yx": [
+      169.3508196101674,
+      140.87647986574038
+    ],
+    "cut_cells": 17.56290469211924,
+    "decision": "D-022",
+    "form": "a*exp(-r^2/(2 s^2)) for r <= 4 s (minimum-image r from centre), else 0",
+    "geometry_of": "P2",
+    "gyradius_R": 0.477010730258723,
+    "masked_cells_under_ring": 1,
+    "masked_mass_cells": 0.0001948849771462898,
+    "mass_R2": 0.36547738504636673,
+    "s_cells": 4.39072617302981,
+    "support_cells_gt_0_01": 474,
+    "target_gyradius_R": 0.477,
+    "target_mass_R2": 0.4873
+  },
+  "file": "BLOB-X12.npy",
+  "file_sha256": "e9c1d54cd233ef295849de3391b3617142f19a6dc1b56d113634d64d910e26ab",
+  "name": "BLOB-X12",
+  "rule": {
+    "R": 13,
+    "T": 10,
+    "beta": [
+      1.0
+    ],
+    "dt": 0.1,
+    "growth": "poly",
+    "kernel": "poly",
+    "mu": 0.155,
+    "sigma": 0.02
+  },
+  "state_sha256": "40f944344abfdce86a515868fe685d1b240c9cb7be991952feccec11edf44c27"
+}
