@@ -1,5 +1,9 @@
 # L6-010: the Orbium/ring blend boundary (results)
 
+## Integration note — 2026-10-20
+
+Bobby authorized merging PR #35 to preserve these executed experiments on the working baseline. This work remains scientifically unreviewed and independently unchecked. The 0/252 class changes support insensitivity to the particular 1e-12 initial-state perturbations tested in this implementation, at this horizon. They do not establish machine independence or robustness to different numerical arithmetic. The historical phrases "not machine-specific" and "not a rounding artefact" below must be read with that narrower scope. The island verdict remains indeterminate, circler classes remain finite-horizon observations, and proposed claims are not promoted by merging. Original protocols, data and verdicts remain intact.
+
 Protocol: [`protocol.md`](protocol.md), pre-registered before any run, with a twin-rounding check
 added at Lane 7's request. Runner: [`run.py`](run.py). Data: [`scan.csv`](scan.csv) (556 worlds),
 [`finals.npz`](finals.npz). Rule: μ 0.155, σ 0.020, R 13, T 10, 128², 1000 tu.
