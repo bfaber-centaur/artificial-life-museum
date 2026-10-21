@@ -9,6 +9,78 @@ Rule throughout (unless a later dated entry says otherwise): poly kernel, poly g
 `alm.lenia.Lenia` unchanged. `OMP_NUM_THREADS=OPENBLAS_NUM_THREADS=MKL_NUM_THREADS=1`, at most two
 simulation processes.
 
+## Lane summary (2026-10-21 07:15Z, for integration)
+
+**What this lane produced.** Settled seeds, isolated controls, pilot and discovery geometry, a
+lockstep encounter runner and the raw evidence of 25 registered runs (`runs.jsonl`); no outcome
+scoring (that is the behavior lane's tracker and the lead's review, `REEF/DECISIONS.md` D-015 on).
+No run failed or was retried. In every glider encounter (P1–P6, X1–X6) the lockstep glider reproduced its shared isolated
+control bitwise.
+
+**Seeds** (`seeds/`, float64 `.npy` + `.json` with hashes): GA (state sha256 `982b7939…`) and GB
+(`63e381b8…`), the S001 cells settled 500 tu under μ 0.155, σ 0.020, R 13, T 10, N 256, taken 0.5 tu
+apart (elapsed-time snapshots: the only mass period is grid crossing); S103 placed centred
+(`1e9aa713…`); blob stand-ins BLOB-X7…X11 (F-007, F-008).
+
+**Nulls, failures and repairs kept on record.**
+- The 200-tu settle failed its heading-drift test; the single allowed extension (500 tu) passed (R-001).
+- The preregistered "exactly one component" glider acceptance **failed**: the isolated glider sheds
+  single-cell specks (≤ 0.001 ΣA/R²) in 13% of steps at every threshold. Replaced protocol-wide by the
+  lead's debris rule (§11), not by retuning.
+- `REEF-SHAM-try` is a 1-tu smoke test of the runner (frames deleted).
+- The mass-matched static Gaussian blob **dies alone** within 10 tu in every stand-in run (X7–X11).
+- X9–X11 placement repair: one blob tail cell under a full ring cell was zeroed so E(0) = G(0) + S(0) (F-008).
+- Timestamps on F-001/F-004/F-005 were written ahead of time; commit times are authoritative.
+
+**Shortest reproduction** (repo root, `pip install -e '.[dev]'`, threads = 1, ≤ 2 processes; each
+step was run from the commit listed in the registry):
+
+    cd research/experiments/REEF-field
+    python settle.py                      # R-001: seeds/GA, GB, S103 (16 s)
+    python controls.py                    # R-002: controls.json, geometry (14 s)
+    python torus_margin.py 256 && python torus_margin.py 512
+    python register_prior.py              # manifests for settle/controls (only on a fresh runs.jsonl)
+    python runner.py --run-id REEF-SHAM --kind sham --snapshot GA --ring-shift -82 -78
+    python runner.py --run-id REEF-SHAM-N512 --kind sham --snapshot GA --ring-shift -82 -78 --N 512
+    python jobs.py plan && python jobs.py run --protocol-addendum 3c3fdc4b12cb064061d899b2a6e42290ceb452c9
+    python discovery.py plan && python discovery.py run --protocol-addendum a0698db9b26547ed8692c49fcca073f81832e666
+    python discovery.py plan-reserve && python discovery.py run --jobs jobs-reserve.json \
+        --protocol-addendum 2a1c60ae5b32ea93090d94da36a91657a8577f6d
+
+Per-step float32 frames are not in git (`.gitignore`); copies are in the project folder
+`reef-field/runs/<run_id>/frames.npz`, sha256 in each manifest. A rerun from the registered commit is expected to regenerate them
+bitwise (the lockstep G checks show determinism), but no full rerun of the frames was done.
+
+**Run registry** (full manifests in `runs.jsonl` and `runs/<id>/manifest.json`):
+
+| run_id | kind | N | H tu | code | final E sha256 (12) | status | note |
+|---|---|---|---|---|---|---|---|
+| REEF-SETTLE-G | settle | 256 | 501.0 | `586b134` | `6fcff8f4bb58` | ok | one extension to 500 tu (heading); one-component acceptance FAILED (specks) |
+| REEF-CTRL-GA | control_G | 256 | 50.0 | `87d90e1` | `7fac2d9132cb` | ok |  |
+| REEF-CTRL-GB | control_G | 256 | 50.0 | `87d90e1` | `8ff9ab499752` | ok |  |
+| REEF-CTRL-GA-100tu | control_G | 256 | 100.0 | `87d90e1` | `2646caf5154a` | ok |  |
+| REEF-CTRL-S103 | control_S | 256 | 50.0 | `87d90e1` | `1e9aa71324e5` | ok | bitwise fixed through H |
+| REEF-SHAM-try | test | 256 | 1.0 | `5c2ec1b` | `e0c9c6429b31` | ok | 1-tu runner smoke test; frames deleted |
+| REEF-SHAM | sham | 256 | 50 | `5c2ec1b` | `aec56bf70c15` | ok | residual floor 1.3e-13 at 50 tu |
+| REEF-SHAM-N512 | sham | 512 | 50 | `5c2ec1b` | `e1379fd68a9a` | ok | residual 1.1e-13; timing |
+| REEF-P5-E | encounter | 256 | 50 | `fe4ba1c` | `37fa66ba0c6b` | ok | schedule pos 0; lockstep G = shared control bitwise |
+| REEF-P1-E | encounter | 256 | 50 | `fe4ba1c` | `ff7f263e32ac` | ok | schedule pos 1; lockstep G = shared control bitwise |
+| REEF-P6-E | encounter | 256 | 50 | `fe4ba1c` | `38daf9c1adc2` | ok | schedule pos 2; lockstep G = shared control bitwise |
+| REEF-P2-E | encounter | 256 | 50 | `fe4ba1c` | `3549322b1c7f` | ok | schedule pos 3; lockstep G = shared control bitwise |
+| REEF-P3-E | encounter | 256 | 50 | `fe4ba1c` | `40b6a0eed32b` | ok | schedule pos 4; lockstep G = shared control bitwise |
+| REEF-P4-E | encounter | 256 | 50 | `fe4ba1c` | `f2320817f3d1` | ok | schedule pos 5; lockstep G = shared control bitwise |
+| REEF-X5-E | encounter | 256 | 50 | `18cb4c0` | `5d360cd2dd60` | ok | schedule pos 0; lockstep G = shared control bitwise |
+| REEF-X1-E | encounter | 256 | 50 | `18cb4c0` | `055c3b85e041` | ok | schedule pos 1; lockstep G = shared control bitwise |
+| REEF-X4-E | encounter | 256 | 50 | `18cb4c0` | `951734c043c6` | ok | schedule pos 2; lockstep G = shared control bitwise |
+| REEF-X2-E | encounter | 256 | 50 | `18cb4c0` | `97bfa2df0cc4` | ok | schedule pos 3; lockstep G = shared control bitwise |
+| REEF-X7-E | encounter | 256 | 50 | `18cb4c0` | `371632556f2d` | ok | blob stand-in; blob-alone control DIES by 10 tu |
+| REEF-X3-E | encounter | 256 | 50 | `18cb4c0` | `90fb518aaad2` | ok | schedule pos 4; lockstep G = shared control bitwise |
+| REEF-X8-E | encounter | 256 | 50 | `18cb4c0` | `a8e53a312678` | ok | blob stand-in; blob-alone control DIES by 10 tu |
+| REEF-X6-E | encounter | 256 | 50 | `18cb4c0` | `d1389942d3b6` | ok | schedule pos 6; lockstep G = shared control bitwise |
+| REEF-X11-E | encounter | 256 | 50 | `9e34a08` | `371632556f2d` | ok | blob stand-in; blob-alone control DIES by 10 tu |
+| REEF-X9-E | encounter | 256 | 50 | `9e34a08` | `6c5c505df144` | ok | blob stand-in; blob-alone control DIES by 10 tu |
+| REEF-X10-E | encounter | 256 | 50 | `9e34a08` | `c0f3d778f814` | ok | blob stand-in; blob-alone control DIES by 10 tu |
+
 ## Decision log (each entry committed before the runs it governs)
 
 ### F-001 (2026-10-21 ~06:05Z): glider settling procedure and transient test
