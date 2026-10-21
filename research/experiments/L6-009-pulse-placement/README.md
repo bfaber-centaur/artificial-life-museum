@@ -1,5 +1,9 @@
 # L6-009: why is the bound pair fragile to a frontal pulse? (results)
 
+## Integration note — 2026-10-20
+
+Bobby authorized merging PR #35 to establish the next expedition's baseline. Integration preserves these executed runs; it does not independently validate the off-gap findings or promote their claims. The current interpretation in [L6-008](../L6-008-pair-coupling/README.md) and [HR-009c](../../reports/hostile-review.md) governs: on-gap pulse coupling was withdrawn after the torus re-encounter check. The off-gap drag-down and rescue below remain exploratory, unverified leads. The historical "What this does to L6-d" recommendation and its phrase "robust coupling effects" are superseded by this qualification. Protocols, raw results and historical verdicts remain unchanged.
+
 Protocol: [`protocol.md`](protocol.md), pre-registered before any run. Runner: [`run.py`](run.py).
 Data: [`placement.csv`](placement.csv) (50 pair worlds, each with two full-pulse half worlds),
 [`tracks.csv`](tracks.csv) (pair tracks, first 100 tu). Exploratory follow-up:
