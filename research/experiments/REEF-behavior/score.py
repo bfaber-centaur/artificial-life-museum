@@ -391,7 +391,7 @@ def score_trace(rows, p: ScoreParams = ScoreParams()) -> dict:
 # --- REEF-field run directories ---------------------------------------------------------------
 
 
-def record_run_dir(run_dir, params: ScoreParams | None = None) -> EncounterRecorder:
+def record_run_dir(run_dir, params: ScoreParams | None = None, frames=None) -> EncounterRecorder:
     """Track a REEF-field runner directory. E and G come from frames.npz (float32, every step); S
     is the float64 t=0 checkpoint, verified bitwise against every S checkpoint; the residual is the
     runner's float64 per-step value from trace.npz."""
@@ -399,7 +399,7 @@ def record_run_dir(run_dir, params: ScoreParams | None = None) -> EncounterRecor
     man = json.loads((d / "manifest.json").read_text())
     N, R, T = man["world"]["N"], man["rule"]["R"], man["rule"]["T"]
     p = params or ScoreParams(N=N, R=float(R), T=float(T), horizon=float(man["horizon_tu"]))
-    fr = np.load(d / "frames.npz")
+    fr = np.load(frames or d / "frames.npz")
     ck = np.load(d / "checkpoints.npz")
     tr = np.load(d / "trace.npz")
     S0 = ck["S_00000"]
@@ -424,9 +424,9 @@ def ring_exact_f64(run_dir, rec, t_end):
     return bool(np.array_equal(E[np.ix_(by, bx)], S[np.ix_(by, bx)])), k / T
 
 
-def score_run_dir(run_dir, params: ScoreParams | None = None):
-    """Returns (result, recorder) for a REEF-field run directory."""
-    rec = record_run_dir(run_dir, params)
+def score_run_dir(run_dir, params: ScoreParams | None = None, frames=None):
+    """Returns (result, recorder) for a REEF-field run directory (frames.npz may live elsewhere)."""
+    rec = record_run_dir(run_dir, params, frames)
     res = score_trace(rec.rows, rec.p)
     exact, t_ck = ring_exact_f64(run_dir, rec, res["observables"]["t_end"])
     fl = [f for f in res["flags"] if f not in ("RING_EXACT", "RING_PERTURBED")]
@@ -449,8 +449,13 @@ def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("run_dir")
     ap.add_argument("--out", help="write the result JSON here (and trace.jsonl next to it)")
+    ap.add_argument("--frames", help="frames.npz path if not in the run directory")
     a = ap.parse_args(argv)
-    res, rec = score_run_dir(a.run_dir)
+    res, rec = score_run_dir(a.run_dir, frames=a.frames)
+    if a.frames:
+        import hashlib
+
+        res["frames_sha256"] = hashlib.sha256(Path(a.frames).read_bytes()).hexdigest()
     if a.out:
         out = Path(a.out)
         rec.write(out.parent)
