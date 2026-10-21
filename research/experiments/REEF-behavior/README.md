@@ -93,3 +93,27 @@ must be control-relative at matched times, never against a nominal heading.
 - t_cen checks G bodies against ring images only, not fragments against each other.
 - After a merge, which fragment is "G" is decided by cell ownership; any class that depends on that
   attribution should be reviewed on frames.
+
+## Results so far and rival status (updated against the evidence, 2026-10-21)
+
+Scores: P1–P6 (pilots) and X1–X8 (discovery), tables in [`audit/pilot-table.md`](audit/pilot-table.md)
+and [`audit/discovery-table.md`](audit/discovery-table.md), audit in [`audit/PILOT-AUDIT.md`](audit/PILOT-AUDIT.md),
+literature in [`LITERATURE.md`](LITERATURE.md), exhibit in [`exhibit/`](exhibit/). Every glider encounter
+with b/R in [−1.5, +1.5], under both snapshots, is FISSION + PROLIFERATION. Kernel-range interaction
+comes 0.6–1.0 tu before contact, glider and ring fuse at contact, and an expanding colony follows
+that freezes behind its front. The two blob stand-ins (X7, X8) evaporate within 1.4 tu without
+contact, and the ring stays bitwise S103. All statements are OBSERVED at N256, R13, T10, finite
+horizon t_c + 20 tu. Numerical checks belong to the numerics lane and are not reported here.
+
+| rival (from [`RIVALS.md`](RIVALS.md)) | status | evidence | what would discriminate |
+|---|---|---|---|
+| Torus re-encounter produces the outcome | **excluded for the class**, remains for anything after ~27 tu | FISSION is reached at 10–16 tu. The colony's support reaches N/2 at 27–30 tu, after every scoring window (26.1–27.7). No G body comes near a ring image inside a window. | N512 or larger-world rerun (checks table) to follow the front past 27 tu |
+| A control failure is read as an effect | **excluded** | glider-alone stays a single GLIDER through H in every run; ring-alone stays bitwise; no CONTROL_FAILURE | — |
+| Labelling artifact (merge/identity) | **excluded for the class**, identity after ignition is meaningless | FISSION + PROLIFERATION use only body counts and total mass, not identity | — |
+| Lattice re-lock / deflection artifact (G1) | **moot** | no run separates, so no deflection is measured | — |
+| Snapshot (GA vs GB) or placement rounding matters | **excluded for the class** | GA and GB agree at every offset tested (P1–P6, X1–X6). Realized offsets are within 0.03 R of requested. | — |
+| Sensitivity, not mechanism (G2) | **open** | not yet tested | `alm_check` direct window and clean replay (numerics lane) |
+| R13 or T10 specific | **open** | T40 already changes the isolated glider at this rule | T20 and R26 with their own controls |
+| Any nearby mass ignites the ring (not glider-specific) | **narrowed**: decaying mass placed 2.1 R from the ring, without contact, does not ignite (X7, X8) | the blob evaporates in 1.4 tu, its gap grows from 9 to 15 cells, the ring stays bitwise | mass placed already in contact: X9/X10 (blob at the control centroid at t_c) and X11 (half dose). Prior: the S103 dossier's I003 ≥ 0.30 addition fills the world |
+| The colony is self-replication (Chan 2020-style) | **not supported** | interior freezes behind the front (P2: mean ΔA within 4 R falls from 0.12 to 0.011 per tu, 16 → 26 tu), bodies laid down by the front | count body divisions in the interior over time; check whether front speed is set by the front itself (pushed front), not by the trigger |
+| Novel phenomenon | **no** | S103 dossier (fill under ≥ 0.30 addition), HR-009 (S102 fills the world at this rule), Chan 2019 §3.5.5 "Detonation" | — |
