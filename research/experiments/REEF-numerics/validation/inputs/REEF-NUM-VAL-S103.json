@@ -1,0 +1,33 @@
+{
+ "run_id": "REEF-NUM-VAL-S103",
+ "kind": "test",
+ "lane": "numerics",
+ "commit": null,
+ "engine": "alm",
+ "rule": {
+  "kernel": "poly",
+  "growth": "poly",
+  "beta": [
+   1.0
+  ],
+  "mu": 0.155,
+  "sigma": 0.02,
+  "R": 13,
+  "T": 10,
+  "update": "euler+clip",
+  "dtype": "float64"
+ },
+ "world": {
+  "N": 256,
+  "boundary": "periodic"
+ },
+ "inputs": {
+  "initial_state_sha256": "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+  "path": "validation/inputs/REEF-NUM-VAL-S103.npy"
+ },
+ "horizon_tu": 20,
+ "command": "python research/experiments/REEF-numerics/validation/make_inputs.py",
+ "outputs": {},
+ "status": "ok",
+ "notes": "S103 exact seed centred; known exact fixed point"
+}
