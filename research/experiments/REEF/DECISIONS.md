@@ -1,0 +1,12 @@
+# REEF decision log
+
+Append-only. Each entry: date/time UTC, decision, reason, who. Decisions are committed before the runs they govern.
+
+- **D-001 2026-10-21 05:50Z.** Expedition launched by Bobby (thread root message 05:50:01Z). Launch commit `51af137761512d66f7f73d4512e7bbc3b76f5b1f` verified as HEAD of `origin/expedition/reef-launch-2026-10-20`. Window: start 05:50Z (22:50 PDT Oct 20); no new exploratory geometries after 09:50Z (02:50 PDT); end 11:50Z (04:50 PDT). Checking starts as soon as two contrasts are chosen, and no later than 10:20Z. — lead
+- **D-002 05:51Z.** Three specialist threads started (field, numerics, behavior/hostile review), each owning only its `research/experiments/REEF-<lane>/` directory and branch `reef/<lane>`. — coordinator, per mandate
+- **D-003 05:55Z.** Lead works on its session branch `claude/project-thread-2ns90a` and mirrors the same commits to `reef/coordinator`, the integration PR source. — lead
+- **D-004 05:55Z.** Only the ring is moved between offsets; the glider is placed at one reference position per snapshot. Reason: the glider-alone control is then identical across offsets and can be shared with a recorded mapping, and integer-cell ring placement avoids interpolating the glider. — lead
+- **D-005 05:55Z.** Scheduled horizon H = 50 tu for every encounter and control, so controls never end before the encounter's window. Subject to change in the Gate A addendum only. — lead
+- **D-006 05:55Z.** Interaction onset measured as the residual between the encounter and the sum of its two controls, thresholded at ≥ 100× a sham run's floor. Reason: kernel-range interaction precedes support contact, and the residual is engine-agnostic. — lead
+- **D-007 05:55Z.** Job interleaving schedule seed 20261020. — lead
+- **D-008 05:55Z.** The pinned upstream reference (`Chakazul/Lenia` @ `adfc542…`) is cloned into `.refs/Lenia` if the network allows, so the two upstream-comparison tests can run; otherwise they are reported as skipped, not passed. Assigned to the numerics lane. — lead

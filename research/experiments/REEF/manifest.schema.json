@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "REEF run manifest (one per run; registry = runs.jsonl, one manifest per line)",
+  "type": "object",
+  "required": ["run_id", "kind", "lane", "commit", "rule", "world", "inputs", "horizon_tu", "command", "outputs", "status"],
+  "properties": {
+    "run_id": {"type": "string", "description": "e.g. REEF-P2-E, REEF-P2-G, REEF-P2-S, REEF-SHAM, REEF-CTRL-GA; checks append -replay, -chkfft, -direct, -T20, -R26, -N512"},
+    "kind": {"enum": ["settle", "control_G", "control_S", "encounter", "sham", "check", "test"]},
+    "lane": {"enum": ["field", "numerics", "behavior", "coordinator"]},
+    "commit": {"type": "string", "description": "git SHA of the code that ran; dirty flag must be false"},
+    "engine": {"enum": ["alm", "field.Batch", "alm_check.fft", "alm_check.direct"]},
+    "rule": {
+      "type": "object",
+      "required": ["kernel", "growth", "beta", "mu", "sigma", "R", "T", "update", "dtype"],
+      "properties": {
+        "kernel": {"const": "poly"}, "growth": {"const": "poly"},
+        "beta": {"type": "array"}, "mu": {"type": "number"}, "sigma": {"type": "number"},
+        "R": {"type": "integer"}, "T": {"type": "integer"},
+        "update": {"const": "euler+clip"}, "dtype": {"const": "float64"}
+      }
+    },
+    "world": {"type": "object", "required": ["N", "boundary"], "properties": {"N": {"type": "integer"}, "boundary": {"const": "periodic"}}},
+    "inputs": {
+      "type": "object",
+      "description": "seed states and transforms",
+      "properties": {
+        "glider": {"type": ["object", "null"], "properties": {"snapshot": {"enum": ["GA", "GB"]}, "state_sha256": {"type": "string"}, "path": {"type": "string"}, "shift_cells": {"type": "array"}}},
+        "ring": {"type": ["object", "null"], "properties": {"state_sha256": {"type": "string"}, "path": {"type": "string"}, "shift_cells": {"type": "array"}}},
+        "initial_state_sha256": {"type": "string"},
+        "geometry": {"type": "object", "properties": {"b_R_requested": {"type": "number"}, "b_R_realized": {"type": "number"}, "d_R_requested": {"type": "number"}, "d_R_realized": {"type": "number"}, "gap_R_realized": {"type": "number"}, "heading_deg": {"type": "number"}}}
+      }
+    },
+    "controls": {"type": "object", "description": "for encounters: run_ids of matched G-alone and S-alone; shared controls named explicitly", "properties": {"G": {"type": "string"}, "S": {"type": "string"}}},
+    "horizon_tu": {"type": "number"},
+    "schedule": {"type": "object", "properties": {"seed": {"type": "integer"}, "position": {"type": "integer"}}},
+    "command": {"type": "string"},
+    "env": {"type": "object", "description": "python, numpy, scipy versions; thread variables; host note"},
+    "outputs": {"type": "object", "description": "paths and sha256 of trace, checkpoints, stored arrays, final state"},
+    "final_state_sha256": {"type": "string"},
+    "wall_s": {"type": "number"},
+    "status": {"enum": ["ok", "failed", "retried", "stopped", "superseded"]},
+    "result": {"type": "object", "description": "filled by scoring: class, flags, t_int, t_c, t_cen, censor_reason, observables"},
+    "notes": {"type": "string"}
+  }
+}
