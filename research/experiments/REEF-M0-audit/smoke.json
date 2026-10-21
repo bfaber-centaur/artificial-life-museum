@@ -1,0 +1,25 @@
+{
+ "S001": {
+  "steps": 200,
+  "alm_sha": "28a3b09c11bafc524d31f5b07853d138440600fae7c7c38bcd4664bdf8fe4edd",
+  "field_sha": "28a3b09c11bafc524d31f5b07853d138440600fae7c7c38bcd4664bdf8fe4edd",
+  "alm_eq_field_bitwise": true,
+  "alm_vs_check_fft_maxabs": 0.0,
+  "check_fft_vs_direct_maxabs": 5.18030063290098e-13,
+  "mass_alm": 82.38277739817529
+ },
+ "S103": {
+  "steps": 200,
+  "alm_sha": "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+  "field_sha": "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+  "alm_eq_field_bitwise": true,
+  "alm_vs_check_fft_maxabs": 0.0,
+  "check_fft_vs_direct_maxabs": 0.0,
+  "mass_alm": 64.0
+ },
+ "S103_fixed_point": {
+  "steps": 501,
+  "max_abs_dA_last_step": 0.0,
+  "max_abs_vs_initial": 0.0
+ }
+}

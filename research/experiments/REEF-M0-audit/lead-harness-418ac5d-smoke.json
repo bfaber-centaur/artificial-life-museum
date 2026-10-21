@@ -1,0 +1,9 @@
+{
+ "steps": 200,
+ "lenia_vs_batch_maxabs": 0.0,
+ "lenia_vs_batch_bitwise": true,
+ "lenia_vs_check_fft_maxabs": 0.0,
+ "direct_vs_fft_20steps_maxabs": 1.6764367671839864e-14,
+ "lenia_200_sha256": "59714babf013cdc51877540825c807d8a043bba2ebee0f0bd757b5af372906c4",
+ "mass_200": 0.8661702804625755
+}
