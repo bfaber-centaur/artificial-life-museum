@@ -88,6 +88,7 @@ def main(argv=None):
     ap.add_argument("--horizon", type=float, default=50.0, help="scorer horizon in tu (absolute time)")
     ap.add_argument("--track-until", type=float, default=None,
                     help="stop the (slow) recorder after this tu; later rows carry masses/r95 only, n_bodies_E = -1")
+    ap.add_argument("--save-rows", action="store_true", help="also write the recorder rows (trace.jsonl) for re-scoring")
     ap.add_argument("--behavior-dir", required=True)
     ap.add_argument("--source", default="", help="free text: where the inputs came from")
     ap.add_argument("--out", required=True)
@@ -165,6 +166,8 @@ def main(argv=None):
     out = Path(a.out)
     out.mkdir(parents=True, exist_ok=True)
     np.savez_compressed(out / "checkpoints.npz", **ckpt)
+    if a.save_rows:
+        rec.write(out / "recorder")
     with open(out / "series.csv", "w", newline="") as f:
         wr = csv.DictWriter(f, fieldnames=list(series[0]))
         wr.writeheader()
