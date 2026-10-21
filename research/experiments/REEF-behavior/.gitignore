@@ -2,3 +2,4 @@ baseline/*.npy
 __pycache__/
 scores/*/trace.jsonl
 scores/REEF-P*/trace.jsonl.gz
+scores/REEF-X*/trace.jsonl.gz

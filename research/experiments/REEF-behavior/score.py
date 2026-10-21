@@ -62,6 +62,7 @@ class ScoreParams:
     censor_margin: float = 3.0  # R added to r_G + r_S for t_cen
     fill_frac: float = 0.25
     fill_level: float = 0.1
+    g_kind: str = "glider"  # "passive": G is a static stand-in (D-018 X7/X8); no glider checks
 
 
 def _lab(rec, lab):
@@ -246,6 +247,10 @@ def score_trace(rows, p: ScoreParams = ScoreParams()) -> dict:
     obs["t_int_minus_t_c"] = None if (t_int is None or t_c is None) else t_int - t_c
 
     def out(cls):
+        # D-016: post-hoc descriptive flag, never replaces the class
+        ctrl = end["Gc"]["total_mass"] + end["Sc"]["total_mass"]
+        if end["E"]["n_bodies"] > 10 and end["E"]["total_mass"] > 10 * ctrl and "PROLIFERATION" not in flags:
+            flags.append("PROLIFERATION")
         return {
             "class": "CENSORED" if censored and cls != "CONTROL_FAILURE" else cls,
             "partial_class": cls if censored else None,
@@ -265,6 +270,10 @@ def score_trace(rows, p: ScoreParams = ScoreParams()) -> dict:
     g_ctrl_ok = all(r["Gc"]["status"] == "single" and r["Gc"]["n_bodies"] == 1 for r in win)
     if fitG is None or np.hypot(*fitG[1]) / R <= p.glider_speed:
         g_ctrl_ok = False
+    if p.g_kind == "passive":  # blob-alone is validated to die; record when, never a GLIDER check
+        g_ctrl_ok = True
+        obs["control_G_lost_at"] = _first(rows, lambda r: r["Gc"]["status"] == "lost")
+        flags.append("PASSIVE_STAND_IN")
     s_ctrl_ok = all(r["Sc"]["status"] == "single" and r["Sc"]["n_bodies"] == 1 and r["Sc"]["mass"] == s0["mass"] for r in win)
     if fitG is not None:
         obs["control_G_speed_R_tu"] = float(np.hypot(*fitG[1]) / R)
@@ -312,7 +321,7 @@ def score_trace(rows, p: ScoreParams = ScoreParams()) -> dict:
             flags.append("RING_MOVED")
 
     # glider kinematics vs control (straight-line fits over the last fit_window)
-    fitE = _fit(win, end["t"], W, _g_point)
+    fitE = _fit(win, end["t"], W, _g_point) if p.g_kind == "glider" else None
     big_turn = False
     if fitE is not None:
         h = fitG[1] / np.hypot(*fitG[1])
@@ -398,7 +407,9 @@ def record_run_dir(run_dir, params: ScoreParams | None = None, frames=None) -> E
     d = Path(run_dir)
     man = json.loads((d / "manifest.json").read_text())
     N, R, T = man["world"]["N"], man["rule"]["R"], man["rule"]["T"]
-    p = params or ScoreParams(N=N, R=float(R), T=float(T), horizon=float(man["horizon_tu"]))
+    snap = ((man.get("inputs") or {}).get("glider") or {}).get("snapshot") or ""
+    p = params or ScoreParams(N=N, R=float(R), T=float(T), horizon=float(man["horizon_tu"]),
+                              g_kind="passive" if str(snap).startswith("BLOB") else "glider")
     fr = np.load(frames or d / "frames.npz")
     ck = np.load(d / "checkpoints.npz")
     tr = np.load(d / "trace.npz")

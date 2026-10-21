@@ -23,5 +23,6 @@
  "capture_last": 5.0,
  "censor_margin": 3.0,
  "fill_frac": 0.25,
- "fill_level": 0.1
+ "fill_level": 0.1,
+ "g_kind": "glider"
 }

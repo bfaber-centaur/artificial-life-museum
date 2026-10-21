@@ -1,7 +1,9 @@
 {
  "class": "FISSION",
  "partial_class": null,
- "flags": [],
+ "flags": [
+  "PROLIFERATION"
+ ],
  "t_int": 5.5,
  "t_kr": 3.6,
  "t_c": 6.1,

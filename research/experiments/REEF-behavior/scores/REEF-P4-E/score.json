@@ -1,7 +1,9 @@
 {
  "class": "FISSION",
  "partial_class": null,
- "flags": [],
+ "flags": [
+  "PROLIFERATION"
+ ],
  "t_int": 6.0,
  "t_kr": 4.0,
  "t_c": 6.8,
@@ -1667,7 +1669,8 @@
   "capture_last": 5.0,
   "censor_margin": 3.0,
   "fill_frac": 0.25,
-  "fill_level": 0.1
+  "fill_level": 0.1,
+  "g_kind": "glider"
  },
  "run_id": "REEF-P4-E",
  "frames": "float32 E/G frames; float64 S and residual",
