@@ -66,7 +66,7 @@ N256, R13, T10, every pilot geometry with contact (b/R ∈ {−1, 0, +1}, two sn
 
 ## Pattern-formation analogues (by abstract; a mechanism to test, not a claim)
 
-- **Pearson 1993**, *Complex Patterns in a Simple System*, Science 261:189–192 (arXiv
+- **Pearson 1993**, *Complex Patterns in a Simple System*, Science 261:189–192 (1993), doi 10.1126/science.261.5118.189 (arXiv
   patt-sol/9304003). In the Gray–Scott model, patterns form in response to finite-amplitude
   perturbations; some spots grow and divide, filling the domain. **Shared:** a finite perturbation
   is needed (our empty background is stable, since the controls stay clean) and the spots end up
@@ -81,7 +81,7 @@ N256, R13, T10, every pilot geometry with contact (b/R ∈ {−1, 0, +1}, two sn
   invades. Prediction: a passive mass-matched blob (X7/X8) above a threshold mass should ignite
   the same front. Below it, the ring should relax back to S103, as the 0.10 addition does in the
   dossier.
-- **van Saarloos 2003**, *Front propagation into unstable states*, Phys. Rep. 386:29–222 (arXiv
+- **van Saarloos 2003**, *Front propagation into unstable states*, Phys. Rep. 386, 29 (2003), doi 10.1016/j.physrep.2003.08.001 (arXiv
   cond-mat/0308540). Fronts invading a linearly stable state are of the *pushed* type, with a speed
   set by the nonlinear front. Our invaded state (empty) is stable, so the 0.31–0.37 R/tu front
   should be pushed. Its speed should then not depend on the triggering geometry once the front has
@@ -97,6 +97,18 @@ N256, R13, T10, every pilot geometry with contact (b/R ∈ {−1, 0, +1}, two sn
   checks pending.
 - Nicknames are not earned. Addendum after D-020: a static blob of the glider's mass placed in
   contact also ignites (X9, X10), and half that dose does not (X11). The precise statement is
-  therefore "S103 plus enough mass in contact ignites (threshold between 0.24 and 0.49 ΣA/R² at this
-  position); a glider is one way to deliver it". That is the dossier's I003 result restated with a
+  therefore "S103 plus enough mass in contact ignites (threshold between 0.24 and 0.37 ΣA/R² at this
+  position; X12 at 0.75× ignites); a glider is one way to deliver it". That is the dossier's I003 result restated with a
   moving source.
+
+## Provenance check (2026-10-21 ~07:20Z, at the lead's request)
+
+Each citation was checked for existence against a primary index. Nothing was removed.
+
+| citation | checked against | recorded |
+|---|---|---|
+| Gupta 2026 | https://arxiv.org/abs/2609.01348 and the arXiv API | "Collision-based logic in Lenia and its composition boundary", Chakshu Gupta, submitted 1 Sep 2026, arXiv:2609.01348v1 [cs.ET]. Cited from the abstract only. |
+| Pearson 1993 | Crossref (doi 10.1126/science.261.5118.189) and https://arxiv.org/abs/patt-sol/9304003 | "Complex Patterns in a Simple System", John E. Pearson, Science 261:189–192, 9 Jul 1993; arXiv submitted 17 Apr 1993. Cited from the abstract. |
+| Knobloch 2015 | Crossref (doi 10.1146/annurev-conmatphys-031214-014514); annualreviews.org returned 403 | "Spatial Localization in Dissipative Systems", E. Knobloch, Annu. Rev. Condens. Matter Phys. 6:325–359, 2015. Cited from the abstract. |
+| van Saarloos 2003 | arXiv API, cond-mat/0308540 | "Front propagation into unstable states", Wim van Saarloos, journal-ref Phys. Rep. 386, 29 (2003), doi 10.1016/j.physrep.2003.08.001. Cited from the abstract. |
+| Chan 2019, Chan 2020 | full-text PDFs from arxiv.org (sha256 above), quoted passages located by pdf page | already in `research/references.md` as [Chan2019] and [Chan2020] |

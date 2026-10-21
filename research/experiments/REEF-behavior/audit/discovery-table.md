@@ -11,3 +11,4 @@
 | X9 | BLOB-X9 (1.0× dose) at P2 contact position | FISSION (PASSIVE_STAND_IN, PROLIFERATION) | 0.0 | 0.1 | 0.1 | 31.6 | 20.1 | 0.866 (t=0) → 35.03 | 79 | merged |
 | X10 | BLOB-X10 (1.0×) at P3 contact position | FISSION (PASSIVE_STAND_IN, PROLIFERATION) | 0.0 | 0.1 | 0.1 | — | 20.1 | 0.866 (t=0) → 35.07 | 87 | merged |
 | X11 | BLOB-X11 (0.5×) at P2 contact position | NO_CONTACT (PASSIVE_STAND_IN, INTERACTION_WITHOUT_CONTACT, RING_EXACT) | 0.0 | 0.1 | None | — | 50.0 | 0.622 (t=0) → 0.38 | 1 | exact |
+| X12 | BLOB-X12 (0.75× amplitude, mass 0.365) at P2 contact position | FISSION (PASSIVE_STAND_IN, PROLIFERATION) | 0.0 | 0.1 | 0.4 | 30.3 | 20.4 | 0.744 (t=0) → 46.30 | 113 | merged |
