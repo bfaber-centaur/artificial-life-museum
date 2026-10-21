@@ -182,7 +182,10 @@ def run(args):
                     inputs={"glider": glider, "ring": ring, "initial_state_sha256": state_sha256(E0),
                             "geometry": geom,
                             "component_initial_sha256": {"G": state_sha256(G0), "S": state_sha256(S0)}},
-                    controls={"G": f"{args.run_id}:G (lockstep)", "S": f"{args.run_id}:S (lockstep)"},
+                    controls={"G": f"REEF-CTRL-{args.snapshot}" if N == 256 else f"{args.run_id}:G (lockstep)",
+                              "S": (args.run_id[:-2] + "-S") if args.run_id.endswith("-E") else f"{args.run_id}:S (lockstep)",
+                              "mapping": "G-alone shared per snapshot (D-004), reproduced bitwise by the lockstep G; "
+                                         "S-alone = lockstep S at this realised ring position"},
                     final_state_sha256=finals["E"],
                     lockstep_final_state_sha256=finals,
                     schedule={"seed": args.schedule_seed, "position": args.schedule_position},

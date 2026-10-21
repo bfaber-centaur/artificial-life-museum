@@ -159,3 +159,15 @@ fixed. `REEF-SHAM-N512`: residual 1.1e-13 at 50 tu. Wall time for one lockstep j
 1 tu): N 256 8.3 s (6.8 s stepping), 411 MB peak RSS; N 512 33 s (27.5 s stepping). Outputs per
 run: trace 13 KB, checkpoints 0.35–0.58 MB, frames 1.4–2.2 MB (frames kept out of git, copied
 to the project folder `reef-field/runs/<id>/frames.npz`; sha256 in each manifest).
+
+### F-006 (2026-10-21 06:12Z): pilot job list (Gate A addendum `6b142be` adopted)
+
+`jobs.py plan` → `jobs-pilots.json`: P1–P6 at N 256, H 50, rolls from R-002, schedule
+`random.Random(20261020).shuffle` → order **P5, P1, P6, P2, P3, P4**. Controls: G-alone =
+REEF-CTRL-GA / REEF-CTRL-GB shared across offsets (D-004); `jobs.py run` checks that each
+lockstep G reproduces the shared control's final sha256 bitwise. S-alone = REEF-P<k>-S, the
+lockstep S at that realised ring position. Float64 arrays stored per run: t = 0, every 1 tu,
+provisional contact step, contact + 10 tu, final (`checkpoints.npz`); float32 E and G every step
+(`frames.npz`) for the tracker. Runner contact = one E support component overlapping both
+control supports, which is the §6.4 adjacency/merge condition; the scored t_c is the tracker's.
+Launch only after the Gate A pass: `python jobs.py run --protocol-addendum <SHA> --procs 2`.
