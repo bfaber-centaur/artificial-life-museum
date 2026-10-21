@@ -6,24 +6,24 @@
   "S_CONTROL_OUT_OF_CLASS",
   "PROLIFERATION"
  ],
- "t_int": 6.0,
- "t_kr": 4.0,
- "t_c": 7.0,
+ "t_int": 5.4,
+ "t_kr": 3.6,
+ "t_c": 6.1,
  "t_cen": null,
  "censor_reason": null,
  "observables": {
-  "t_end": 27.0,
-  "planned_end": 27.0,
+  "t_end": 26.1,
+  "planned_end": 26.1,
   "window_after_contact_tu": 20.0,
-  "debris_max": 0.0015757911673969175,
-  "t_int_minus_t_c": -1.0,
-  "control_S_path_speed_R_tu": 0.0002739198291161677,
+  "debris_max": 0.0050646110232143255,
+  "t_int_minus_t_c": -0.6999999999999993,
+  "control_S_path_speed_R_tu": 0.00029788372866174393,
   "control_S_mass_range": [
-   0.37594318905256585,
-   0.3820201201911115
+   0.3759281796070943,
+   0.3820350904942215
   ],
-  "control_G_speed_R_tu": 0.5484902038139589,
-  "control_G_heading_deg": 72.72272757096843
+  "control_G_speed_R_tu": 0.548532545164375,
+  "control_G_heading_deg": 72.73023078465052
  },
  "params": {
   "R": 26.0,
@@ -36,7 +36,7 @@
   "theta_int": 1e-10,
   "approach_timeout": 30.0,
   "post_contact": 20.0,
-  "horizon": 50.0,
+  "horizon": 50,
   "fit_window": 5.0,
   "theta_defl": 1.0,
   "delta_lat": 0.1,
@@ -59,9 +59,9 @@
   ]
  },
  "input": {
-  "source": "/mnt/project-files/reef-numerics/checks/REEF-P2-E-R26/checkpoints.npz (float64, every 1 tu)",
-  "numerics_commit": "e7d4ef6",
-  "cadence_tu": 1.0,
-  "note": "disclosed variant (D-024): S-alone mass also in 0.378-0.383; checkpoint cadence because the --save-rows traces were not published"
+  "source": "/mnt/project-files/reef-numerics/checks/REEF-P2-E-R26-rows/recorder/trace.jsonl",
+  "numerics_commit": "8f1784944c188a33dff9d038ca0f989d49739f34",
+  "cadence": "every step",
+  "note": "disclosed variant (D-024): S-alone mass also in 0.378-0.383"
  }
 }

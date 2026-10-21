@@ -18,9 +18,10 @@ colony meeting its own periodic images on the torus. Field is A in [0, 1], white
 **R 26 rescore (applying D-010, ruling D-024; not a new rule).** At R 26 the ring is judged against its own R 26
 ring-alone control, never bitwise: the control is valid if it stays one STATIC body (< 0.02 R/tu) through the window,
 and ring tolerance is relative to that control at the same time. It does (0.0003 R/tu), so the **primary label for P2
-and P3 at R 26 is FISSION + PROLIFERATION** (P2 111 bodies, P3 63 at window end; `../scores/REEF-P?-E-R26-D010/score.json`).
+and P3 at R 26 is FISSION + PROLIFERATION** (P2 95 bodies, P3 60 at window end; `../scores/REEF-P?-E-R26-D010/score.json`).
 Disclosed variant (D-024): additionally requiring ring-alone mass in 0.378–0.383 (the numerics 200–300 tu range) gives
 CONTROL_FAILURE, because the ring-alone dips to 0.3759 at 4–11 tu as the 2×2-block seed relaxes, before contact
-(`score-mass-band-variant.json`). Both are scored from the float64 checkpoints at 1-tu cadence (t_c 7.0 at that
-cadence; numerics' per-step t_c 6.1 / 6.7), because the `--save-rows` traces were not published; rescore with
-`score.py`'s `score_rows_file` if they appear.
+(`score-mass-band-variant.json`). Both are scored with `score.py`'s `score_rows_file` from the numerics lane's per-step recorder rows
+(reef/numerics `8f17849`, `checks/REEF-P?-E-R26-rows/recorder/trace.jsonl` in project files, sha256 P2 `77eb6d8c…`,
+P3 `01cfc2aa…`; t_c 6.1 / 6.7, t_int 5.4 / 5.9). An earlier 1-tu checkpoint-cadence rescore gave the same labels
+(t_c 7.0 at that cadence, 111 / 63 bodies at its window end).
