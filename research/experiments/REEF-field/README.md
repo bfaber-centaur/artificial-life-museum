@@ -171,3 +171,16 @@ provisional contact step, contact + 10 tu, final (`checkpoints.npz`); float32 E 
 (`frames.npz`) for the tracker. Runner contact = one E support component overlapping both
 control supports, which is the §6.4 adjacency/merge condition; the scored t_c is the tracker's.
 Launch only after the Gate A pass: `python jobs.py run --protocol-addendum <SHA> --procs 2`.
+
+### F-007 (2026-10-21 06:33Z): D-018 discovery grid X1–X8 (generator committed before runs)
+
+`discovery.py plan` → `jobs-discovery.json`, `seeds/BLOB-X7.npy`, `seeds/BLOB-X8.npy` (the same
+state, two files so each run names its own input). X1–X6 use the pilot placement code path
+(checked: it reproduces the P1–P6 rolls exactly). Rolls: X1 GA −1.5 (58, 39), X2 GA −1.25
+(59, 36), X3 GA +1.25 (69, 5), X4 GA +1.5 (70, 2), X5 GB −1.5 (59, 39), X6 GB +1.5 (71, 2).
+Blob: a·exp(−r²/2s²) truncated at r ≤ 4 s, a = 0.68011, s = 4.3907 cells, mass 0.4873,
+gyradius 0.4770 R, centred at the GA-alone centroid at step 55 (165.261, 139.565); X7 with the P2
+roll (64, 20), X8 with the P3 roll (68, 8). Schedule `random.Random(20261020).shuffle` over
+[X1..X8] → **X5, X1, X4, X2, X3, X7, X6, X8**. The runner gained stand-in seeds (`--snapshot
+BLOB-X7`); the blob construction is copied into each manifest. Blob-alone controls are the lockstep
+G (no shared control).

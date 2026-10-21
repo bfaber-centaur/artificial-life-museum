@@ -172,7 +172,8 @@ def run(args):
     }
     glider = None if gm is None else {"snapshot": args.snapshot, "state_sha256": gm["state_sha256"],
                                       "path": f"research/experiments/REEF-field/seeds/{args.snapshot}.npy",
-                                      "shift_cells": [(N - 256) // 2] * 2}
+                                      "shift_cells": [(N - 256) // 2] * 2,
+                                      "construction": gm.get("construction")}
     ring = None if sm is None else {"state_sha256": sm["state_sha256"],
                                     "path": "research/experiments/REEF-field/seeds/S103.npy",
                                     "shift_cells": [int(args.ring_shift[0]) + (N - 256) // 2,
@@ -182,7 +183,8 @@ def run(args):
                     inputs={"glider": glider, "ring": ring, "initial_state_sha256": state_sha256(E0),
                             "geometry": geom,
                             "component_initial_sha256": {"G": state_sha256(G0), "S": state_sha256(S0)}},
-                    controls={"G": f"REEF-CTRL-{args.snapshot}" if N == 256 else f"{args.run_id}:G (lockstep)",
+                    controls={"G": f"REEF-CTRL-{args.snapshot}" if N == 256 and args.snapshot in ("GA", "GB")
+                              else (args.run_id[:-2] + "-G (lockstep " + ("glider" if args.snapshot in ("GA", "GB") else "stand-in") + "-alone)"),
                               "S": (args.run_id[:-2] + "-S") if args.run_id.endswith("-E") else f"{args.run_id}:S (lockstep)",
                               "mapping": "G-alone shared per snapshot (D-004), reproduced bitwise by the lockstep G; "
                                          "S-alone = lockstep S at this realised ring position"},
@@ -207,7 +209,7 @@ def main(argv=None):
     p = argparse.ArgumentParser()
     p.add_argument("--run-id", required=True)
     p.add_argument("--kind", default="encounter", choices=["encounter", "sham", "test"])
-    p.add_argument("--snapshot", choices=["GA", "GB"], required=True)
+    p.add_argument("--snapshot", required=True, help="seed name in seeds/: GA, GB, or a generated stand-in such as BLOB-X7")
     p.add_argument("--ring-shift", nargs=2, type=int, required=True, metavar=("DY", "DX"))
     p.add_argument("--N", type=int, default=256)
     p.add_argument("--H", type=float, default=50)
