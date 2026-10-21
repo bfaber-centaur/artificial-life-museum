@@ -1,0 +1,87 @@
+{
+ "class": "NO_CONTACT",
+ "partial_class": null,
+ "flags": [
+  "PASSIVE_STAND_IN",
+  "INTERACTION_WITHOUT_CONTACT",
+  "RING_EXACT"
+ ],
+ "t_int": 0.1,
+ "t_kr": 0.0,
+ "t_c": null,
+ "t_cen": null,
+ "censor_reason": null,
+ "observables": {
+  "t_end": 50.0,
+  "planned_end": 50.0,
+  "window_after_contact_tu": null,
+  "debris_max": 0.0017556117671216733,
+  "t_int_minus_t_c": null,
+  "control_G_lost_at": 0.3,
+  "n_bodies": 1,
+  "topology": "S",
+  "contact_lineage": [
+   "S"
+  ],
+  "total_mass": 0.378698224852071,
+  "unassigned_mass": 0.0,
+  "bodies": [
+   {
+    "owners": "S",
+    "mass": 0.378698224852071,
+    "owned_mass": {
+     "G": 0.0,
+     "S": 0.37869822485207105
+    },
+    "gyradius": 5.034985026665918,
+    "radius": 5.854393715941045,
+    "unwrapped": [
+     191.390625,
+     147.609375
+    ]
+   }
+  ],
+  "together_intervals": [],
+  "together_longest_tu": 0.0,
+  "ring_box_bitwise_equal_at_end": true,
+  "fill": 0.0009765625,
+  "G_mass": 0.0,
+  "S_mass": 0.37869822485207105,
+  "ring_mass_rel": -1.1102230246251565e-16,
+  "ring_gyr_rel": 0.0,
+  "ring_shift_R": 0.0,
+  "ring_exact_f64": true,
+  "ring_exact_checkpoint_t": 50.0
+ },
+ "params": {
+  "R": 13.0,
+  "T": 10.0,
+  "N": 256,
+  "theta_s": 0.01,
+  "body_mass": 0.005,
+  "debris_high": 0.01,
+  "death_mass": 0.01,
+  "theta_int": 1e-10,
+  "approach_timeout": 30.0,
+  "post_contact": 20.0,
+  "horizon": 50.0,
+  "fit_window": 5.0,
+  "theta_defl": 1.0,
+  "delta_lat": 0.1,
+  "shift_flag": 0.1,
+  "glider_tol": 0.02,
+  "ring_tol": 0.01,
+  "ring_moved": 0.1,
+  "glider_speed": 0.2,
+  "static_speed": 0.02,
+  "bind_min": 2.0,
+  "capture_last": 5.0,
+  "censor_margin": 3.0,
+  "fill_frac": 0.25,
+  "fill_level": 0.1,
+  "g_kind": "passive"
+ },
+ "run_id": "REEF-X11-E",
+ "frames": "float32 E/G frames; float64 S and residual",
+ "frames_sha256": "19140d66e66add4cc9d2fad87e2b633fd9d61faf7bb4daaa8f85a8cab0ad4a65"
+}
