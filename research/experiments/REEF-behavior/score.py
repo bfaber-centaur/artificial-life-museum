@@ -63,6 +63,8 @@ class ScoreParams:
     fill_frac: float = 0.25
     fill_level: float = 0.1
     g_kind: str = "glider"  # "passive": G is a static stand-in (D-018 X7/X8); no glider checks
+    s_rule: str = "bitwise"  # "D-010": S-alone judged as one STATIC body with mass in s_mass_range (R26)
+    s_mass_range: tuple = (0.378, 0.383)
 
 
 def _lab(rec, lab):
@@ -274,7 +276,18 @@ def score_trace(rows, p: ScoreParams = ScoreParams()) -> dict:
         g_ctrl_ok = True
         obs["control_G_lost_at"] = _first(rows, lambda r: r["Gc"]["status"] == "lost")
         flags.append("PASSIVE_STAND_IN")
-    s_ctrl_ok = all(r["Sc"]["status"] == "single" and r["Sc"]["n_bodies"] == 1 and r["Sc"]["mass"] == s0["mass"] for r in win)
+    if p.s_rule == "D-010":  # applying D-010: the R26 ring is judged against its own control, never bitwise
+        lo, hi = p.s_mass_range
+        sp = _path_speed(win, end["t"], end["t"] - win[0]["t"], lambda r: r["Sc"].get("unwrapped"))
+        s_ctrl_ok = all(r["Sc"]["status"] == "single" and r["Sc"]["n_bodies"] == 1 and lo <= r["Sc"]["mass"] <= hi for r in win) \
+            and sp is not None and sp / R < p.static_speed
+        obs["control_S_path_speed_R_tu"] = None if sp is None else sp / R
+        obs["control_S_mass_range"] = [min(r["Sc"]["mass"] for r in win), max(r["Sc"]["mass"] for r in win)]
+        flags.append("S_RULE_D010")
+        s_ref = end["Sc"]  # ring tolerance relative to the control at the same time
+    else:
+        s_ctrl_ok = all(r["Sc"]["status"] == "single" and r["Sc"]["n_bodies"] == 1 and r["Sc"]["mass"] == s0["mass"] for r in win)
+        s_ref = s0
     if fitG is not None:
         obs["control_G_speed_R_tu"] = float(np.hypot(*fitG[1]) / R)
         obs["control_G_heading_deg"] = _ang(fitG[1])
@@ -309,9 +322,9 @@ def score_trace(rows, p: ScoreParams = ScoreParams()) -> dict:
     ring_ok = None
     if ls["status"] == "single" and sb:
         b = sb[0]
-        obs["ring_mass_rel"] = b["mass"] / s0["mass"] - 1
-        obs["ring_gyr_rel"] = b["gyradius"] / s0["gyradius"] - 1
-        obs["ring_shift_R"] = float(np.hypot(*np.subtract(b["unwrapped"], s0["unwrapped"]))) / R
+        obs["ring_mass_rel"] = b["mass"] / s_ref["mass"] - 1
+        obs["ring_gyr_rel"] = b["gyradius"] / s_ref["gyradius"] - 1
+        obs["ring_shift_R"] = float(np.hypot(*np.subtract(b["unwrapped"], s_ref["unwrapped"]))) / R
         ring_ok = abs(obs["ring_mass_rel"]) <= p.ring_tol and abs(obs["ring_gyr_rel"]) <= p.ring_tol
         if end["ring_box_equal"]:
             flags.append("RING_EXACT")
@@ -454,6 +467,16 @@ def score_run_dir(run_dir, params: ScoreParams | None = None, frames=None):
     res["run_id"] = rec.manifest.get("run_id")
     res["frames"] = "float32 E/G frames; float64 S and residual"
     return res, rec
+
+
+def score_rows_file(path, params: ScoreParams) -> dict:
+    """Score a saved recorder trace (trace.jsonl or .gz) without frames, e.g. numerics --save-rows output."""
+    import gzip
+
+    op = gzip.open if str(path).endswith(".gz") else open
+    with op(path, "rt") as f:
+        rows = [json.loads(line) for line in f]
+    return score_trace(rows, params)
 
 
 def main(argv=None):
