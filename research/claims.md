@@ -150,6 +150,7 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
 | Lane 3 L3-002 README proposed claims 1 / 2 / 3 / 4 / 5 / 6 (PR #18, merged as `56ae421`; wording scoped in `ab125c4`) | C046 / C047 (D2 with C039) / C048 / C049 / C050 / C051 |
 | Lane 6 L6-007 D2 rerun of the S102 seed resizes (PR #23 @ `413003d`, merged as `7a4ea3b`) and Lane 6's concession of C039 | C039, C047 (D2 resolved; C047 INDEPENDENTLY_CHECKED for the eight seeds) |
 | Lane 4 L4-002 lone-Orbium baselines (PR #20, merged as `560472c`) | none: a reference dataset with no claim proposed; not evidence for or against pair coupling (that is Lane 6's L6-008) |
+| REEF expedition 2026-10-20 (reef/coordinator integration PR; lanes reef/field, reef/numerics, reef/behavior) | C052 / C053 / C054 / C055; amendments to C038, C041 |
 
 ## Claims
 
@@ -1306,6 +1307,7 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
   - 2026-10-07 — Prior literature added (status unchanged) — archivist, literature-provenance mandate.
   - 2026-10-07 — Prior literature verified against Chan 2019 full text and authors' code (status unchanged) — archivist.
   - 2026-10-07 — Prior literature re-verified against arXiv full texts after the network change (status unchanged) — archivist.
+  - 2026-10-21 — amendment (status unchanged) — REEF coordinator, expedition `research/reports/reef-expedition-2026-10-20.md`. The three phenotypes coexist *as separate, isolated bodies*. Put into one N256 world, a settled glider that touches S103 fuses with it and ignites a world-covering colony in 12/12 encounters across b/R ∈ [−1.5, +1.5] (C052). "Coexist" in this claim therefore means co-persistence under one rule in separate worlds, not peaceful co-residence.
 
 ### C039 — The circler S102 at its registered rule (μ 0.155, σ 0.020) does not survive doubling the resolution
 
@@ -1442,6 +1444,7 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
   - 2026-10-07 — OBSERVED — Lane 6.
   - 2026-10-07 — Prior literature added (status unchanged) — archivist, literature-provenance mandate.
   - 2026-10-07 — Prior literature verified against Chan 2019 full text and authors' code (status unchanged) — archivist.
+  - 2026-10-21 — amendment (status unchanged; no earlier line rewritten) — REEF coordinator. Later merged evidence narrows this claim: L6-008 (PR #27, on `main`) found the port-injured pair ends as its two halves run alone in 58/60 runs, so the "resilience" is largely the untouched partner carrying on (accepted by HR-009, PR #30). Separately, the Night 1 "on-gap I003 pulse kills the pair" reading was withdrawn: the on-gap pulse at s 0.2–0.3 unbinds S101 into two living Orbia, and their later deaths were collisions on the 128² torus (HR-009c; 256² reruns keep two Orbia). Off-gap and boundary results in PR #35 remain exploratory/unverified. Neither the ledger nor this amendment changes C041's status.
 
 ### C042 — S103 is an exact fixed point of the clipped Lenia map: it is T-independent and returns bitwise to itself after attenuation up to 20%
 
