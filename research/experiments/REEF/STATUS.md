@@ -7,6 +7,7 @@ Updated by the coordinator lane at gates and meaningful failures. Times UTC (Pac
 | 05:50Z (22:50 PDT) | Launched. Launch commit 51af137 verified. |
 | 05:51Z | Field, numerics and behavior/hostile-review threads started. |
 | 05:58Z | PROTOCOL.md v1 frozen (thresholds marked [A] pending). No encounter run has happened. |
+| 06:00Z | Numerics Gate A items delivered (8ebf557): S103 fixed point, upstream tests ran (105/0/0), replay tool. R26 ring not a fixed point (D-010). |
 
 ## Gates
 
@@ -24,5 +25,5 @@ Updated by the coordinator lane at gates and meaningful failures. Times UTC (Pac
 |---|---|---|---|
 | coordinator | reef/coordinator | (this commit) | protocol v1 |
 | field | reef/field | — | settling the glider |
-| numerics | reef/numerics | — | S103 check, tests, alm_check replay |
+| numerics | reef/numerics | 8ebf557 | Gate A items done; waits on field states |
 | behavior | reef/behavior | — | tracker + tests |
