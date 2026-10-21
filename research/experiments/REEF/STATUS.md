@@ -15,6 +15,8 @@ Updated by the coordinator lane at gates and meaningful failures. Times UTC (Pac
 | 06:31Z | X1–X8 ran (field c10b3f9). |
 | 07:02Z | X1–X8 scored: ignition at every offset to ±1.5 R; passive blob 4–6 cells away evaporates without contact (D-019). Literature: Chan 2019 'Detonation' is prior art. |
 | 07:06Z | Reserve X9–X11 committed (D-020): blob at the contact position, and a half-dose. |
+| 07:13Z | X9–X11 scored: full-dose passive blob in contact ignites; half dose does not (D-021). |
+| 07:15Z | X12 (0.75× dose) committed and run (D-022, field 0141e90). Discovery allowance spent (12/12). Numerics: replay, chkfft, direct agree for P2/P3; T20/R26/N512 running. |
 | 06:00Z | Numerics Gate A items delivered (8ebf557): S103 fixed point, upstream tests ran (105/0/0), replay tool. R26 ring not a fixed point (D-010). |
 
 ## Gates
@@ -23,8 +25,8 @@ Updated by the coordinator lane at gates and meaningful failures. Times UTC (Pac
 |---|---|
 | A: isolated controls, serialization, tracker, contact/censor contract | PASSED 06:13Z (D-014) |
 | B: six pilots | DONE 06:26Z: 6/6 FISSION + PROLIFERATION (D-015, D-016) |
-| Contrast checks | P2, P3 selected 06:35Z |
-| Discovery (≤ 12) | X1–X8 done (D-019); X9–X11 committed (D-020); 1 unused |
+| Contrast checks | P2, P3: replay, chkfft, direct done (numerics status 06:40Z); T20/R26/N512 running |
+| Discovery (≤ 12) | 12/12 used: X1–X12 run; X12 being scored |
 | Report / exhibit / integration PR | not started |
 
 ## Lane heads
@@ -32,6 +34,6 @@ Updated by the coordinator lane at gates and meaningful failures. Times UTC (Pac
 | lane | branch | latest reviewed commit | note |
 |---|---|---|---|
 | coordinator | reef/coordinator | (this commit) | protocol v1 |
-| field | reef/field | c10b3f9 | pilots + X1–X8 run |
+| field | reef/field | 0141e90 | done: 26-run registry |
 | numerics | reef/numerics | 8ebf557 | Gate A items done; waits on field states |
-| behavior | reef/behavior | 4f5d328 | scores, LITERATURE.md, exhibit panels |
+| behavior | reef/behavior | 8bd355d | scores, LITERATURE.md, exhibit A–E |
