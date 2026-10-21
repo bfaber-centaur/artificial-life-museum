@@ -17,6 +17,11 @@ Updated by the coordinator lane at gates and meaningful failures. Times UTC (Pac
 | 07:06Z | Reserve X9–X11 committed (D-020): blob at the contact position, and a half-dose. |
 | 07:13Z | X9–X11 scored: full-dose passive blob in contact ignites; half dose does not (D-021). |
 | 07:15Z | X12 (0.75× dose) committed and run (D-022, field 0141e90). Discovery allowance spent (12/12). Numerics: replay, chkfft, direct agree for P2/P3; T20/R26/N512 running. |
+| 07:28Z | Numerics §9 matrix (e7d4ef6): replay, chkfft, direct, N512 pass; T20/R26 keep outcome, timing fragile (C053). |
+| 07:45Z | R26 control ruling (D-024). |
+| 07:55Z | Report, C052–C055, C038/C041 amendments, museum Room 7. |
+| 08:00Z | Hostile integration review: changes R1–R9 applied; **approved** (reef/behavior a4cf403). |
+| 08:05Z | Integration PR #41 opened (reef/coordinator → main). Bobby merges. |
 | 06:00Z | Numerics Gate A items delivered (8ebf557): S103 fixed point, upstream tests ran (105/0/0), replay tool. R26 ring not a fixed point (D-010). |
 
 ## Gates
@@ -25,15 +30,15 @@ Updated by the coordinator lane at gates and meaningful failures. Times UTC (Pac
 |---|---|
 | A: isolated controls, serialization, tracker, contact/censor contract | PASSED 06:13Z (D-014) |
 | B: six pilots | DONE 06:26Z: 6/6 FISSION + PROLIFERATION (D-015, D-016) |
-| Contrast checks | P2, P3: replay, chkfft, direct done (numerics status 06:40Z); T20/R26/N512 running |
-| Discovery (≤ 12) | 12/12 used: X1–X12 run; X12 being scored |
-| Report / exhibit / integration PR | not started |
+| Contrast checks | DONE: see MATRIX.md, C052/C053 |
+| Discovery (≤ 12) | DONE 12/12 (D-019–D-023) |
+| Report / exhibit / integration PR | PR #41 open, review approved |
 
 ## Lane heads
 
 | lane | branch | latest reviewed commit | note |
 |---|---|---|---|
-| coordinator | reef/coordinator | (this commit) | protocol v1 |
+| coordinator | reef/coordinator | (this commit) | integration |
 | field | reef/field | 0141e90 | done: 26-run registry |
-| numerics | reef/numerics | 8ebf557 | Gate A items done; waits on field states |
-| behavior | reef/behavior | 8bd355d | scores, LITERATURE.md, exhibit A–E |
+| numerics | reef/numerics | e7d4ef6 | §9 matrix; final README pending |
+| behavior | reef/behavior | a4cf403 | scores, exhibit A–F, integration review |

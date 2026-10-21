@@ -1,7 +1,7 @@
 {
   "ledger": "research/claims.md",
   "ledger_sha256": "7bd9e567d5c006fe7642cde7f758a19df6292a16b6091c1464f3d47b35381059",
-  "ledger_commit": "ef8a6ad",
+  "ledger_commit": "0cb5c08",
   "conventions_sha256": "0e237384e0425b3c325229cf650ab6f9807fb08c1bedc991433b54b13c2eb02f",
   "claims": {
     "C001": {
