@@ -100,3 +100,62 @@ Protocol v1 governs these runs where it differs from F-001–F-003:
   `REEF-SHAM`, N 256, H 50. It doubles as the timed runner segment (tracking + checkpoints +
   frames). A second sham at N 512 (`REEF-SHAM-N512`, same relative placement) times the
   alternative world size.
+
+Timestamp note: the "~06:05Z / ~06:10Z / ~06:25Z" labels on F-001, F-004 and F-005 were
+estimates written ahead of time; the commit times are authoritative (F-001–F-003 `89696f3`
+05:53:49Z, F-004 `586b134` 05:55:06Z, F-005 `5c2ec1b` 06:00:30Z). Each was still committed
+before the runs it governs.
+
+### R-002 (2026-10-21 06:03Z): isolated controls, geometry, torus margin, sham, timing
+
+Commands (repo root, threads = 1): `python research/experiments/REEF-field/controls.py`
+(commit `87d90e1`), `torus_margin.py 256` and `512`, `runner.py` for the shams (commit
+`5c2ec1b`, clean tree), `register_prior.py` for the manifests. Registry: `runs.jsonl` (8 rows,
+including a 1-tu runner smoke test `REEF-SHAM-try` whose frames file was deleted).
+
+**Isolated controls, N 256, H 50 tu** (θ_s = 0.01; sd = across 50 one-tu windows):
+
+| run | speed R/tu | heading ° | mass ΣA/R² | gyradius R | support radius R (max) |
+|---|---|---|---|---|---|
+| REEF-CTRL-GA | 0.54838 ± 0.00127 | 72.2966 ± 0.0863 | 0.48729 ± 0.00012 | 0.47743 ± 0.00012 | 1.021 |
+| REEF-CTRL-GB | 0.54837 ± 0.00116 | 72.2957 ± 0.0901 | 0.48729 ± 0.00010 | 0.47743 ± 0.00012 | 1.021 |
+| REEF-CTRL-GA-100tu | 0.54840 ± 0.00119 | 72.2990 ± 0.0848 | 0.48729 ± 0.00012 | 0.47743 ± 0.00012 | 1.021 |
+| REEF-CTRL-S103 | 0 | – | 0.378698 (exact) | 0.38731 (exact) | 0.450 |
+
+Whole-H least-squares fits: GA 0.548411 R/tu at 72.2940°, GB 0.548411 at 72.2942°,
+straightness 0.999999. Per-step mass rsd 0.12%, per-step gyradius sd 0.00087 R (grid wobble).
+Component count (A > θ_s) is 1 in 87%, 2 in 9.5%, 3 in 3.4% of steps: the single-cell specks of
+R-001. S103 is bitwise unchanged through H.
+
+**Pilot geometry (§4), N 256.** Glider fixed at its reference position; only the ring moves.
+ĥ from each control's whole-H fit. Requested gap 4 R along ĥ (glider front 0.72 R, ring back
+0.43 R ahead/behind its centre, so d = 5.15 R).
+
+| pilot | snap | b req | ring roll (dy, dx) | d real R | b real R | gap real R | geometric t_c tu |
+|---|---|---|---|---|---|---|---|
+| P1 | GA | −1 | (60, 33) | 5.130 | −1.025 | 3.976 | 8.1 |
+| P2 | GA | 0 | (64, 20) | 5.119 | +0.022 | 3.965 | 7.1 |
+| P3 | GA | +1 | (68, 8) | 5.131 | +0.995 | 3.977 | 8.1 |
+| P4 | GB | −1 | (61, 33) | 5.172 | −1.004 | 4.026 | 8.2 |
+| P5 | GB | 0 | (65, 20) | 5.161 | +0.042 | 4.015 | 7.2 |
+| P6 | GB | +1 | (69, 8) | 5.173 | +1.015 | 4.027 | 8.2 |
+
+Ring roll is applied to the centred `seeds/S103.npy`; geometric t_c is when the undisturbed
+G-alone support first becomes 8-adjacent to the placed ring support (no interaction modelled).
+
+**Torus (§6.6).** D_int = r_G + r_S + R + 2 R = 4.47 R. On the undisturbed track no ring image
+other than the primary comes within D_int before H (closest 4.97–7.00 R), so t_cen > 50 tu for
+all six. Turning the track once at t_c by any angle (speed kept): the earliest image hit is
+32.8–34.3 tu, after t_c + 20 (27.1–28.2 tu), so the scored window is safe for any single turn,
+with ~4.6 tu to spare. Small left turns (+1.5° to +7.5°) hit an image at 42–44 tu, inside H.
+At N 512 nothing hits before H for any turn. Not modelled: speed change, several turns,
+fragments, return to the primary ring; the scorer must recompute t_cen on measured tracks.
+
+**Sham and timing.** `REEF-SHAM` (N 256; ring roll (−82, −78), ≥ 8.74 R from the GA track):
+residual max|E − (G + S)| 6.7e-16 at 1 tu, 2.6e-14 at 10 tu, 1.3e-13 at 50 tu (it grows with
+t); no provisional contact; lockstep G final hash equals REEF-CTRL-GA's; lockstep S bitwise
+fixed. `REEF-SHAM-N512`: residual 1.1e-13 at 50 tu. Wall time for one lockstep job (E + G + S,
+500 steps, per-step labels and residual, per-step float32 frames, float64 checkpoints every
+1 tu): N 256 8.3 s (6.8 s stepping), 411 MB peak RSS; N 512 33 s (27.5 s stepping). Outputs per
+run: trace 13 KB, checkpoints 0.35–0.58 MB, frames 1.4–2.2 MB (frames kept out of git, copied
+to the project folder `reef-field/runs/<id>/frames.npz`; sha256 in each manifest).
