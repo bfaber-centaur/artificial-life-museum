@@ -1,7 +1,7 @@
 {
   "ledger": "research/claims.md",
-  "ledger_sha256": "7bd9e567d5c006fe7642cde7f758a19df6292a16b6091c1464f3d47b35381059",
-  "ledger_commit": "0cb5c08",
+  "ledger_sha256": "dbf8ec9397c277e85911bdae76e72aa4138f14ac4246149a8fc335a1bfea83f8",
+  "ledger_commit": "c8c8740",
   "conventions_sha256": "0e237384e0425b3c325229cf650ab6f9807fb08c1bedc991433b54b13c2eb02f",
   "claims": {
     "C001": {
@@ -201,7 +201,7 @@
     },
     "C052": {
       "status": "INDEPENDENTLY_CHECKED",
-      "status_text": "INDEPENDENTLY_CHECKED for contact, fusion and ignition (FISSION + PROLIFERATION in the t_c + 20 window, through 25 tu) on P2 and P3 via `alm_check` direct convolution; clean replay bitwise. World coverage by ~50 tu is OBSERVED (`alm` only, including N512). T20 keeps the class but not its timing (C053); R26 is a weaker check (non-fixed-point ring, D-024; 1-tu checkpoint scoring). The other ten encounters are OBSERVED.",
+      "status_text": "INDEPENDENTLY_CHECKED for contact, fusion and ignition (FISSION + PROLIFERATION in the t_c + 20 window, through 25 tu) on P2 and P3 via `alm_check` direct convolution; clean replay bitwise. World coverage by ~50 tu is OBSERVED (`alm` only, including N512). T20 keeps the class but not its timing (C053); R26 is a weaker check (non-fixed-point ring, D-024; scored from per-step rows, numerics 8f17849). The other ten encounters are OBSERVED.",
       "rooms": [
         "reef"
       ]
