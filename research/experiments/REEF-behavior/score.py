@@ -63,8 +63,8 @@ class ScoreParams:
     fill_frac: float = 0.25
     fill_level: float = 0.1
     g_kind: str = "glider"  # "passive": G is a static stand-in (D-018 X7/X8); no glider checks
-    s_rule: str = "bitwise"  # "D-010": S-alone judged as one STATIC body with mass in s_mass_range (R26)
-    s_mass_range: tuple = (0.378, 0.383)
+    s_rule: str = "bitwise"  # "D-010": S-alone judged as one STATIC body through the window (R26; D-024)
+    s_mass_range: tuple | None = None  # disclosed variant only (D-024): also require S-alone mass in this band
 
 
 def _lab(rec, lab):
@@ -277,7 +277,7 @@ def score_trace(rows, p: ScoreParams = ScoreParams()) -> dict:
         obs["control_G_lost_at"] = _first(rows, lambda r: r["Gc"]["status"] == "lost")
         flags.append("PASSIVE_STAND_IN")
     if p.s_rule == "D-010":  # applying D-010: the R26 ring is judged against its own control, never bitwise
-        lo, hi = p.s_mass_range
+        lo, hi = p.s_mass_range or (-np.inf, np.inf)
         sp = _path_speed(win, end["t"], end["t"] - win[0]["t"], lambda r: r["Sc"].get("unwrapped"))
         s_ctrl_ok = all(r["Sc"]["status"] == "single" and r["Sc"]["n_bodies"] == 1 and lo <= r["Sc"]["mass"] <= hi for r in win) \
             and sp is not None and sp / R < p.static_speed

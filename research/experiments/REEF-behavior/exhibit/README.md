@@ -12,14 +12,15 @@ colony meeting its own periodic images on the torus. Field is A in [0, 1], white
 | [C-X7-null.png](C-X7-null.png) | REEF-X7-E | **Null.** A static blob of the glider's mass at the glider's pre-contact position (2.1 R) evaporates in 1.4 tu without contact; the ring stays bitwise S103. |
 | [D-X9-blob-in-contact.png](D-X9-blob-in-contact.png) | REEF-X9-E | The same blob placed at the glider's contact position ignites the same colony: the glider is a delivery mechanism. |
 | [E-X11-half-dose.png](E-X11-half-dose.png) | REEF-X11-E | Half the dose at the contact position evaporates in 0.3 tu; the ring returns bitwise. |
-| [F-check-matrix.png](F-check-matrix.png) | numerics routes for P2, P3 | **Numerics matrix.** Route × {class, t_c, ignition (D-017), front speed, E mass t20} from reef/numerics `e7d4ef6` `checks/matrix.json` (copied as `F-numerics-matrix.json`). Every route keeps FISSION except R 26, whose class depends on the D-010 mass bound (see the R 26 note below). T 20 and R 26 timing and mass fall outside the frozen §9 tolerance. |
+| [F-check-matrix.png](F-check-matrix.png) | numerics routes for P2, P3 | **Numerics matrix.** Route × {class, t_c, ignition (D-017), front speed, E mass t20} from reef/numerics `e7d4ef6` `checks/matrix.json` (copied as `F-numerics-matrix.json`). Every route keeps FISSION; at R 26 that is the primary label under D-010 (see the R 26 note below). T 20 and R 26 timing and mass fall outside the frozen §9 tolerance. |
 | [P3-panel.png](P3-panel.png) | REEF-P3-E (GA, b/R +0.99) | The selected contrast: flank contact, slowest ignition, same fate. |
 
-**R 26 rescore (applying D-010, not a new rule).** At R 26 the ring is judged against its own R 26 ring-alone
-control, never bitwise: single body, static (path speed < 0.02 R/tu), mass in 0.378–0.383 (the numerics lane's
-200–300 tu range), ring tolerance relative to the control at the same time. Scores in
-`../scores/REEF-P?-E-R26-D010/`. The ring-alone stays one body and static (0.0003 R/tu), but its mass dips to 0.3759
-at 4–11 tu while the 2×2-block seed relaxes, before contact; so D-010 as given scores CONTROL_FAILURE for both P2 and
-P3. Without the mass bound both are FISSION + PROLIFERATION (P2 111 bodies, P3 63 at window end). These are from the
-float64 checkpoints at 1-tu cadence (t_c 7.0 at that cadence; numerics' per-step t_c 6.1 / 6.7), because the
-`--save-rows` traces were not yet published; they should be rescored with `score.py`'s `score_rows_file` when they are.
+**R 26 rescore (applying D-010, ruling D-024; not a new rule).** At R 26 the ring is judged against its own R 26
+ring-alone control, never bitwise: the control is valid if it stays one STATIC body (< 0.02 R/tu) through the window,
+and ring tolerance is relative to that control at the same time. It does (0.0003 R/tu), so the **primary label for P2
+and P3 at R 26 is FISSION + PROLIFERATION** (P2 111 bodies, P3 63 at window end; `../scores/REEF-P?-E-R26-D010/score.json`).
+Disclosed variant (D-024): additionally requiring ring-alone mass in 0.378–0.383 (the numerics 200–300 tu range) gives
+CONTROL_FAILURE, because the ring-alone dips to 0.3759 at 4–11 tu as the 2×2-block seed relaxes, before contact
+(`score-mass-band-variant.json`). Both are scored from the float64 checkpoints at 1-tu cadence (t_c 7.0 at that
+cadence; numerics' per-step t_c 6.1 / 6.7), because the `--save-rows` traces were not published; rescore with
+`score.py`'s `score_rows_file` if they appear.
