@@ -86,6 +86,8 @@ def main(argv=None):
     ap.add_argument("--R", type=int, default=13)
     ap.add_argument("--T", type=int, default=10)
     ap.add_argument("--horizon", type=float, default=50.0, help="scorer horizon in tu (absolute time)")
+    ap.add_argument("--track-until", type=float, default=None,
+                    help="stop the (slow) recorder after this tu; later rows carry masses/r95 only, n_bodies_E = -1")
     ap.add_argument("--behavior-dir", required=True)
     ap.add_argument("--source", default="", help="free text: where the inputs came from")
     ap.add_argument("--out", required=True)
@@ -135,7 +137,10 @@ def main(argv=None):
         for w in worlds:
             w.step()
         E, G, S = (w.A for w in worlds)
-        row = rec.update(E, G, S, k / T, float(np.abs(E - (G + S)).max()))
+        if a.track_until is None or k / T <= a.track_until + 1e-9:
+            row = rec.update(E, G, S, k / T, float(np.abs(E - (G + S)).max()))
+        else:
+            row = {"E": {"n_bodies": -1, "n_components": -1}, "fill": float(np.mean(E > p.fill_level))}
         observe(k, row)
     wall = time.time() - t0_wall
 
