@@ -362,8 +362,9 @@ def score_trace(rows, p: ScoreParams = ScoreParams()) -> dict:
         return out("CAPTURE")
     if _together(end):
         flags.append("TOGETHER_AT_END_NOT_CONTINUOUS")
-    if lg["status"] == "merged":  # merged at the end but not for the whole capture tail
-        return out("TEMP_BIND" if longest >= p.bind_min else "CAPTURE")
+    if _together(end):  # together at the end but not for the whole capture tail (D-013)
+        released = any(b - a + 1 / p.T >= p.bind_min for a, b in together_runs[:-1])
+        return out("TEMP_BIND" if released else "UNRESOLVED_BIND")
     if longest >= p.bind_min:
         if big_turn:
             flags.append("DEFLECT")
@@ -412,10 +413,30 @@ def record_run_dir(run_dir, params: ScoreParams | None = None) -> EncounterRecor
     return rec
 
 
+def ring_exact_f64(run_dir, rec, t_end):
+    """D-013: RING_EXACT judged on the latest float64 E checkpoint at or before the window end."""
+    ck = np.load(Path(run_dir) / "checkpoints.npz")
+    T = rec.p.T
+    steps = sorted(int(k[2:]) for k in ck.files if k.startswith("E_") and int(k[2:]) <= round(t_end * T))
+    k = steps[-1]
+    by, bx = rec._box
+    E, S = ck[f"E_{k:05d}"], ck["S_00000"]
+    return bool(np.array_equal(E[np.ix_(by, bx)], S[np.ix_(by, bx)])), k / T
+
+
 def score_run_dir(run_dir, params: ScoreParams | None = None):
     """Returns (result, recorder) for a REEF-field run directory."""
     rec = record_run_dir(run_dir, params)
     res = score_trace(rec.rows, rec.p)
+    exact, t_ck = ring_exact_f64(run_dir, rec, res["observables"]["t_end"])
+    fl = [f for f in res["flags"] if f not in ("RING_EXACT", "RING_PERTURBED")]
+    o = res["observables"]
+    o["ring_exact_f64"], o["ring_exact_checkpoint_t"] = exact, t_ck
+    if exact:
+        fl.append("RING_EXACT")
+    elif "ring_mass_rel" in o and abs(o["ring_mass_rel"]) <= rec.p.ring_tol and abs(o["ring_gyr_rel"]) <= rec.p.ring_tol:
+        fl.append("RING_PERTURBED")
+    res["flags"] = fl
     if not rec.s_checkpoints_constant:
         res["flags"].append("S_CHECKPOINTS_NOT_CONSTANT")
         res["class"] = "CONTROL_FAILURE"

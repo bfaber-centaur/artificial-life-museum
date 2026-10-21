@@ -70,7 +70,9 @@
   "lateral_R": 0.0,
   "longitudinal_R": 0.0,
   "speed_ratio": 1.0,
-  "glider_mass_ratio": 1.0
+  "glider_mass_ratio": 1.0,
+  "ring_exact_f64": true,
+  "ring_exact_checkpoint_t": 50.0
  },
  "params": {
   "R": 13.0,
