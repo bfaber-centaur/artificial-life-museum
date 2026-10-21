@@ -1,0 +1,59 @@
+{
+ "utc": "2026-10-21T04:57:54Z",
+ "repo_head": "46561aa5f3b8e1c061292374aceef5a0b45a7e5a",
+ "os": "Linux-6.18.44-fc-v139-x86_64-with-glibc2.39",
+ "arch": "x86_64",
+ "python": "3.13.16",
+ "numpy": "2.5.3",
+ "scipy": "1.18.1",
+ "fft_backend": "numpy.fft (pocketfft, single-threaded); scipy.ndimage.correlate for direct",
+ "blas": "scipy-openblas 0.3.34 (numpy); not on the stepping path",
+ "thread_env": {
+  "OMP_NUM_THREADS": null,
+  "OPENBLAS_NUM_THREADS": null,
+  "MKL_NUM_THREADS": null
+ },
+ "cpu_model": "Intel(R) Xeon(R) Processor @ 2.80GHz",
+ "os_cpu_count": 4,
+ "sched_affinity": 4,
+ "cgroup_version": "v1 (hybrid; unified mounted but empty 0::/)",
+ "proc_self_cgroup": [
+  "9:name=systemd:/",
+  "8:pids:/",
+  "7:blkio:/",
+  "6:freezer:/",
+  "5:devices:/",
+  "4:memory:/process_api/01a15ccf-2ca6-718c-bb84-dff9816384a3/claude-code-bash",
+  "3:cpuset:/",
+  "2:cpuacct:/",
+  "1:cpu:/",
+  "0::/"
+ ],
+ "cpu_cfs_quota_us": "-1",
+ "cpu_cfs_period_us": "100000",
+ "cpu_stat": "nr_periods 0\nnr_throttled 0\nthrottled_time 0\nnr_bursts 0\nburst_time 0",
+ "cpuset_cpus": "0-3",
+ "mem_root_limit_bytes": "9223372036854771712",
+ "mem_process_cgroup": "/process_api/01a15ccf-2ca6-718c-bb84-dff9816384a3/claude-code-bash",
+ "mem_process_limit_bytes": "14343688192",
+ "mem_process_usage_bytes": "353378304",
+ "mem_process_max_usage_bytes": "464113664",
+ "mem_process_failcnt": "0",
+ "mem_parent_limit_bytes": "9223372036854771712",
+ "meminfo_total_kb": "16479424",
+ "swap_total_kb": "0",
+ "pids_max": "unavailable (FileNotFoundError)",
+ "disk_/": {
+  "total_gb": 270.6,
+  "free_gb": 31.3
+ },
+ "disk_/home/user": {
+  "total_gb": 270.6,
+  "free_gb": 31.3
+ },
+ "disk_/tmp": {
+  "total_gb": 270.6,
+  "free_gb": 31.3
+ },
+ "disk_note": "df shows 252G device but Avail ~30G: per-session writable allowance, not device size"
+}
