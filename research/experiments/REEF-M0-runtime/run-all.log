@@ -1,0 +1,20 @@
+{"id": "n256-w1-engine", "tag": "", "med_world_steps_per_s": 223.1613459225905, "min_world_steps_per_s": 214.3331890199331, "max_world_steps_per_s": 240.24710029635233, "setup_s": 0.024002755000026355, "peak_rss_mb": 38.14453125, "truncation": []}
+{"id": "n256-w1-batch", "tag": "", "med_world_steps_per_s": 233.40608939464582, "min_world_steps_per_s": 209.41587256173617, "max_world_steps_per_s": 242.880088097338, "setup_s": 0.32375955999998496, "peak_rss_mb": 67.37890625, "truncation": []}
+{"id": "n256-w1-instr", "tag": "", "med_world_steps_per_s": 221.5356074586361, "min_world_steps_per_s": 219.33769141305584, "max_world_steps_per_s": 241.16535207618136, "setup_s": 0.28496017899999515, "peak_rss_mb": 67.3359375, "truncation": []}
+{"id": "n256-w2-batch", "tag": "", "med_world_steps_per_s": 232.58398171907734, "min_world_steps_per_s": 206.1854801934214, "max_world_steps_per_s": 245.47732583796298, "setup_s": 0.3041816450000283, "peak_rss_mb": 70.12890625, "truncation": []}
+{"id": "n256-w2-instr", "tag": "", "med_world_steps_per_s": 207.27654108151032, "min_world_steps_per_s": 195.67139560265082, "max_world_steps_per_s": 233.30632673484266, "setup_s": 0.29901463699997066, "peak_rss_mb": 70.35546875, "truncation": []}
+{"id": "n256-w4-batch", "tag": "", "med_world_steps_per_s": 226.00215771548326, "min_world_steps_per_s": 211.88524693470748, "max_world_steps_per_s": 233.07863335823538, "setup_s": 0.2851102179999998, "peak_rss_mb": 80.171875, "truncation": []}
+{"id": "n256-w4-instr", "tag": "", "med_world_steps_per_s": 213.60460921668266, "min_world_steps_per_s": 205.5701487915121, "max_world_steps_per_s": 216.80008393844764, "setup_s": 0.28622793200003116, "peak_rss_mb": 78.25390625, "truncation": []}
+{"id": "n256-w4-engine", "tag": "", "med_world_steps_per_s": 253.98899137859422, "min_world_steps_per_s": 252.03436981456161, "max_world_steps_per_s": 262.4781591923697, "setup_s": 0.04793648999998368, "peak_rss_mb": 43.59765625, "truncation": []}
+{"id": "n512-r13-engine", "tag": "", "med_world_steps_per_s": 52.16397490339247, "min_world_steps_per_s": 51.392188628380126, "max_world_steps_per_s": 53.49146857872704, "setup_s": 0.05674498799999128, "peak_rss_mb": 51.6796875, "truncation": []}
+{"id": "n512-r13-instr", "tag": "", "med_world_steps_per_s": 54.84029838268199, "min_world_steps_per_s": 52.27697951408856, "max_world_steps_per_s": 58.99910904912913, "setup_s": 0.28212161900000865, "peak_rss_mb": 82.3984375, "truncation": []}
+{"id": "n512-r26-engine", "tag": "", "med_world_steps_per_s": 42.294270117883926, "min_world_steps_per_s": 42.22326552970422, "max_world_steps_per_s": 42.305438508527054, "setup_s": 0.05906591200005096, "peak_rss_mb": 53.62109375, "truncation": []}
+{"id": "n512-r26-instr", "tag": "", "med_world_steps_per_s": 49.94036146778778, "min_world_steps_per_s": 49.16660846809318, "max_world_steps_per_s": 50.67982642842484, "setup_s": 0.31647608899999113, "peak_rss_mb": 84.50390625, "truncation": []}
+{"id": "n256-t20-engine", "tag": "", "med_world_steps_per_s": 239.21666170203204, "min_world_steps_per_s": 209.53208600939553, "max_world_steps_per_s": 241.85367703431405, "setup_s": 0.02511441200005038, "peak_rss_mb": 38.20703125, "truncation": []}
+{"id": "n256-t20-instr", "tag": "", "med_world_steps_per_s": 227.48610411496915, "min_world_steps_per_s": 206.1000452832523, "max_world_steps_per_s": 229.7204407927699, "setup_s": 0.3002989720000073, "peak_rss_mb": 67.328125, "truncation": []}
+{"id": "check-fft", "tag": "", "med_world_steps_per_s": 279.16389668505747, "min_world_steps_per_s": 261.59595340583314, "max_world_steps_per_s": 311.0559836959719, "setup_s": 0.30081746600001225, "peak_rss_mb": 66.625, "truncation": []}
+{"id": "check-direct", "tag": "", "med_world_steps_per_s": 19.075026684926364, "min_world_steps_per_s": 18.97223226277634, "max_world_steps_per_s": 19.428599053168064, "setup_s": 0.2725184760000161, "peak_rss_mb": 65.87890625, "truncation": []}
+
+real	2m32.442s
+user	2m17.375s
+sys	0m13.558s
