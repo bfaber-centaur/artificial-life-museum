@@ -12,7 +12,7 @@ simulation processes.
 ## Lane summary (2026-10-21 07:15Z, for integration)
 
 **What this lane produced.** Settled seeds, isolated controls, pilot and discovery geometry, a
-lockstep encounter runner and the raw evidence of 25 registered runs (`runs.jsonl`); no outcome
+lockstep encounter runner and the raw evidence of 26 registered runs (`runs.jsonl`); no outcome
 scoring (that is the behavior lane's tracker and the lead's review, `REEF/DECISIONS.md` D-015 on).
 No run failed or was retried. In every glider encounter (P1–P6, X1–X6) the lockstep glider reproduced its shared isolated
 control bitwise.
@@ -28,7 +28,7 @@ apart (elapsed-time snapshots: the only mass period is grid crossing); S103 plac
   single-cell specks (≤ 0.001 ΣA/R²) in 13% of steps at every threshold. Replaced protocol-wide by the
   lead's debris rule (§11), not by retuning.
 - `REEF-SHAM-try` is a 1-tu smoke test of the runner (frames deleted).
-- The mass-matched static Gaussian blob **dies alone** within 10 tu in every stand-in run (X7–X11).
+- The mass-matched static Gaussian blob **dies alone** within 10 tu in every stand-in run (X7–X12, including 0.5× and 0.75× doses).
 - X9–X11 placement repair: one blob tail cell under a full ring cell was zeroed so E(0) = G(0) + S(0) (F-008).
 - Timestamps on F-001/F-004/F-005 were written ahead of time; commit times are authoritative.
 
@@ -46,6 +46,8 @@ step was run from the commit listed in the registry):
     python discovery.py plan && python discovery.py run --protocol-addendum a0698db9b26547ed8692c49fcca073f81832e666
     python discovery.py plan-reserve && python discovery.py run --jobs jobs-reserve.json \
         --protocol-addendum 2a1c60ae5b32ea93090d94da36a91657a8577f6d
+    python discovery.py plan-x12 && python discovery.py run --jobs jobs-x12.json \
+        --protocol-addendum e8bc4b0a1eb57b5bb3b68cb1a09ee95fe26214c9
 
 Per-step float32 frames are not in git (`.gitignore`); copies are in the project folder
 `reef-field/runs/<run_id>/frames.npz`, sha256 in each manifest. A rerun from the registered commit is expected to regenerate them
@@ -80,6 +82,7 @@ bitwise (the lockstep G checks show determinism), but no full rerun of the frame
 | REEF-X11-E | encounter | 256 | 50 | `9e34a08` | `371632556f2d` | ok | blob stand-in; blob-alone control DIES by 10 tu |
 | REEF-X9-E | encounter | 256 | 50 | `9e34a08` | `6c5c505df144` | ok | blob stand-in; blob-alone control DIES by 10 tu |
 | REEF-X10-E | encounter | 256 | 50 | `9e34a08` | `c0f3d778f814` | ok | blob stand-in; blob-alone control DIES by 10 tu |
+| REEF-X12-E | encounter | 256 | 50 | `12e56d7` | `755502e83a66` | ok | blob stand-in, 0.75× dose (D-022); blob-alone control DIES by 10 tu |
 
 ## Decision log (each entry committed before the runs it governs)
 
