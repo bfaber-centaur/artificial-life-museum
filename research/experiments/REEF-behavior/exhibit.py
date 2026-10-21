@@ -167,8 +167,8 @@ def check_matrix(matrix_json, out, r26=None, source=""):
              "* R 26 primary label (applying D-010, ruling D-024): the R 26 ring is judged against its own R 26 ring-alone control, never bitwise; "
              "the control is valid if it stays one STATIC body (< 0.02 R/tu) through the window; it does (0.0003 R/tu), and E is FISSION + PROLIFERATION.\n"
              "† Disclosed variant: also requiring ring-alone mass in 0.378–0.383 (the 200–300 tu range) gives CONTROL_FAILURE, because the ring-alone "
-             "dips to 0.376 at 4–11 tu as the 2×2-block seed relaxes, before contact. R 26 class cells are scored from float64 checkpoints at 1-tu cadence\n"
-             "(t_c 7.0 at that cadence; the per-step t_c in the t_c column is the numerics lane's). Solid orange box: outside the frozen §9 tolerance "
+             "dips to 0.376 at 4–11 tu as the 2×2-block seed relaxes, before contact. R 26 class cells are scored from the numerics lane's per-step recorder rows\n"
+             "(reef/numerics 8f17849; t_c 6.1 / 6.7, 95 / 60 bodies at window end). Solid orange box: outside the frozen §9 tolerance "
              "(t_c within 0.5 tu, masses within 1%). Dashed: ignition shifted; ignition and front speed have no frozen tolerance.\n"
              "Ignition (D-017): first time E mass ≥ 2 × (glider alone + ring alone) and ≥ 5 bodies. Front: colony edge speed. Reference: N 256 (19.7 R), "
              "R 13, T 10, μ 0.155, σ 0.020, poly/poly, Euler + clip, float64; finite horizon, scored on the t_c + 20 tu window. " + source,
