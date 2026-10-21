@@ -83,9 +83,9 @@ def check_rule(m: dict) -> dict:
 
 def git_state() -> dict:
     def g(*a):
-        return subprocess.run(["git", *a], cwd=REPO, capture_output=True, text=True).stdout.strip()
-    dirty = [ln[3:] for ln in g("status", "--porcelain", "--untracked-files=no").splitlines()]
-    return {"commit": g("rev-parse", "HEAD"), "dirty": bool(dirty), "dirty_paths": dirty}
+        return subprocess.run(["git", *a], cwd=REPO, capture_output=True, text=True).stdout
+    dirty = [ln[3:] for ln in g("status", "--porcelain", "--untracked-files=no").splitlines() if ln.strip()]
+    return {"commit": g("rev-parse", "HEAD").strip(), "dirty": bool(dirty), "dirty_paths": dirty}
 
 
 def env() -> dict:
