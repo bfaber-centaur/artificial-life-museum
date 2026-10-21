@@ -2,6 +2,8 @@
 
   python research/experiments/REEF-field/discovery.py plan     # seeds/BLOB-X7/X8.npy + jobs-discovery.json
   python research/experiments/REEF-field/discovery.py run --protocol-addendum SHA [--procs 2]
+  python research/experiments/REEF-field/discovery.py plan-reserve  # D-020: X9-X11 -> jobs-reserve.json
+  python research/experiments/REEF-field/discovery.py run --jobs jobs-reserve.json --protocol-addendum SHA
 
 X1-X6: same placement as the pilots (controls.json geometry: heading from each snapshot's
 whole-H G-alone fit, glider front / ring back extents along it, requested gap 4 R), at new b.
@@ -48,16 +50,20 @@ def ring_geometry(c, snap, b):
                    "heading_deg": p0["heading_deg"]}
 
 
-def blob(center):
+def blob(center, fixed=None):
     yy, xx = np.mgrid[0:N, 0:N]
     r2 = min_image(yy - center[0], N) ** 2 + min_image(xx - center[1], N) ** 2
 
     def shape(s):
         return np.where(r2 <= (BLOB_CUT * s) ** 2, np.exp(-r2 / (2 * s * s)), 0.0)
 
-    s = brentq(lambda s: gyradius(shape(s), center, R) - BLOB_GYR, 1.0, 20.0, xtol=1e-14)
-    B = shape(s)
-    a = BLOB_MASS * R**2 / B.sum()
+    if fixed is None:  # solve a, s on the grid at this centre
+        s = brentq(lambda s: gyradius(shape(s), center, R) - BLOB_GYR, 1.0, 20.0, xtol=1e-14)
+        B = shape(s)
+        a = BLOB_MASS * R**2 / B.sum()
+    else:  # reuse a given (a, s) exactly
+        a, s = fixed
+        B = shape(s)
     A = a * B
     assert A.max() < 1
     return A, {"form": "a*exp(-r^2/(2 s^2)) for r <= 4 s (minimum-image r from centre), else 0",
@@ -66,6 +72,57 @@ def blob(center):
                "mass_R2": float(A.sum() / R**2), "gyradius_R": gyradius(A, center, R),
                "centroid_yx": list(centroid(A)), "support_cells_gt_0.01": int((A > 0.01).sum()),
                "centre_source": f"REEF-CTRL-GA pos at step {BLOB_STEP} (controls-series.npz GA_pos, wrapped)"}
+
+
+def plan_reserve():
+    """D-020. X9: X7 blob at the GA-alone centroid at step 61, P2 roll. X10: step 67, P3 roll.
+    X11: X9 at amplitude a/2, same s. a and s are X7's, not re-solved. The blob's truncated tail (r <= 4 s) reaches one cell that the
+    ring fills (value 1.0), where blob + ring would exceed the clip; that cell is zeroed in the blob
+    (removed mass <= 2.7e-4 cell units, ~1.6e-6 ΣA/R^2) so that E(0) = G(0) + S(0) holds exactly and
+    the A > 0 supports stay disjoint. The same masked blob is the blob-alone control."""
+    c = json.loads((HERE / "controls.json").read_text())
+    pos = np.load(HERE / "controls-series.npz")["GA_pos"]
+    S = np.load(HERE / "seeds" / "S103.npy")
+    x7 = json.loads((HERE / "jobs-discovery.json").read_text())["blob"]  # X7's a and s, reused exactly
+    jobs = []
+    for x, step, pilot, scale in (("X9", 61, "P2", 1.0), ("X10", 67, "P3", 1.0), ("X11", 61, "P2", 0.5)):
+        p = next(q for q in c["geometry"]["pilots"] if q["pilot"] == pilot)
+        centre = np.mod(pos[step], N)
+        A, info = blob(centre, fixed=(x7["a"], x7["s_cells"]))
+        A = A * scale
+        Sr = np.roll(S, tuple(p["ring_shift_cells_yx"]), axis=(0, 1))
+        clash = (A > 0) & (Sr > 0)
+        removed = float(A[clash].sum())
+        A = np.where(clash, 0.0, A)
+        info = dict(info, centre_source=f"REEF-CTRL-GA pos at step {step} (controls-series.npz GA_pos, wrapped)",
+                    amplitude_scale=scale, a_used=info["a"] * scale, mass_R2=float(A.sum() / R**2),
+                    gyradius_R=gyradius(A, centre, R), centroid_yx=list(centroid(A)),
+                    support_cells_gt_0_01=int((A > 0.01).sum()), masked_cells_under_ring=int(clash.sum()),
+                    masked_mass_cells=removed, geometry_of=pilot, decision="D-020")
+        info.pop("support_cells_gt_0.01", None)
+        name = f"BLOB-{x}"
+        meta = save_state(HERE / "seeds" / f"{name}.npy", A, {"name": name, "construction": info,
+                                                               "rule": RULE.to_dict(), "N": N})
+        rel = np.array(p["ring_centroid_yx"]) - centre
+        hd = np.radians(p["heading_deg"])
+        h = np.array([np.sin(hd), np.cos(hd)])
+        geom = {"stand_in": "static Gaussian blob", "geometry_of": pilot, "blob_centre_step": step,
+                "amplitude_scale": scale, "b_R_requested": p["b_R_requested"], "ring_shift_from": pilot,
+                "blob_to_ring_along_heading_R": float(rel @ h / R),
+                "blob_to_ring_lateral_R": float(rel @ np.array([h[1], -h[0]]) / R), "heading_deg": p["heading_deg"]}
+        jobs.append({"id": x, "run_id": f"REEF-{x}-E", "snapshot": name, "ring_shift": p["ring_shift_cells_yx"],
+                     "geometry": geom, "blob": info, "blob_state_sha256": meta["state_sha256"],
+                     "controls": {"G": f"REEF-{x}-G (lockstep blob-alone)", "S": f"REEF-{x}-S (lockstep)"}})
+    order = list(range(len(jobs)))
+    random.Random(SEED).shuffle(order)
+    sched = [dict(jobs[i], schedule={"seed": SEED, "position": k}) for k, i in enumerate(order)]
+    out = {"decision": "D-020 (reef/coordinator 2a1c60a)", "schedule_seed": SEED,
+           "shuffle": "random.Random(20261020).shuffle(list(range(3))) over [X9, X10, X11]",
+           "order": [j["id"] for j in sched], "N": N, "H_tu": 50, "jobs": sched}
+    (HERE / "jobs-reserve.json").write_text(json.dumps(out, indent=1) + "\n")
+    print(out["order"])
+    for j in sched:
+        print(j["id"], j["snapshot"], j["ring_shift"], json.dumps(j["geometry"]), json.dumps({k: j["blob"][k] for k in ("a_used", "mass_R2", "gyradius_R", "masked_cells_under_ring", "masked_mass_cells")}))
 
 
 def plan():
@@ -107,8 +164,8 @@ def plan():
     print(json.dumps(info))
 
 
-def run(addendum, procs):
-    plan_ = json.loads((HERE / "jobs-discovery.json").read_text())
+def run(addendum, procs, jobs_file="jobs-discovery.json"):
+    plan_ = json.loads((HERE / jobs_file).read_text())
     queue, running = list(plan_["jobs"]), []
     while queue or running:
         while queue and len(running) < procs:
@@ -116,7 +173,7 @@ def run(addendum, procs):
             cmd = [sys.executable, str(HERE / "runner.py"), "--run-id", j["run_id"], "--kind", "encounter",
                    "--snapshot", j["snapshot"], "--ring-shift", *map(str, j["ring_shift"]),
                    "--geometry", json.dumps(j["geometry"]), "--schedule-position", str(j["schedule"]["position"]),
-                   "--protocol-addendum", addendum, "--notes", f"D-018 {j['id']}; controls: G={j['controls']['G']}, S={j['controls']['S']}"]
+                   "--protocol-addendum", addendum, "--notes", f"{plan_['decision'].split()[0]} {j['id']}; controls: G={j['controls']['G']}, S={j['controls']['S']}"]
             running.append((j, subprocess.Popen(cmd, cwd=HERE)))
         j, p = running.pop(0)
         rc = p.wait()
@@ -133,13 +190,16 @@ def run(addendum, procs):
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
-    ap.add_argument("cmd", choices=["plan", "run"])
+    ap.add_argument("cmd", choices=["plan", "plan-reserve", "run"])
+    ap.add_argument("--jobs", default="jobs-discovery.json")
     ap.add_argument("--protocol-addendum", default="")
     ap.add_argument("--procs", type=int, default=2)
     a = ap.parse_args()
     if a.cmd == "plan":
         plan()
+    elif a.cmd == "plan-reserve":
+        plan_reserve()
     else:
         if not a.protocol_addendum:
             ap.error("--protocol-addendum required")
-        run(a.protocol_addendum, min(a.procs, 2))
+        run(a.protocol_addendum, min(a.procs, 2), a.jobs)

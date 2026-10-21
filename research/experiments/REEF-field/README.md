@@ -184,3 +184,15 @@ roll (64, 20), X8 with the P3 roll (68, 8). Schedule `random.Random(20261020).sh
 [X1..X8] → **X5, X1, X4, X2, X3, X7, X6, X8**. The runner gained stand-in seeds (`--snapshot
 BLOB-X7`); the blob construction is copied into each manifest. Blob-alone controls are the lockstep
 G (no shared control).
+
+### F-008 (2026-10-21 07:10Z): D-020 reserve X9–X11 (generator committed before runs)
+
+`discovery.py plan-reserve` → `jobs-reserve.json`, `seeds/BLOB-X9/X10/X11.npy`. The blob uses
+X7's a = 0.680108 and s = 4.39073 cells exactly (not re-solved), truncated at r ≤ 4 s, centred at
+the GA-alone centroid at step 61 (X9, X11; P2 roll (64, 20)) or step 67 (X10; P3 roll (68, 8)).
+X11 = X9 with amplitude a/2. **Placement repair:** at these closer centres the blob's truncated
+tail (2.6e-4 at that cell) reaches one cell the ring fills with 1.0, so blob + ring would exceed
+the clip and E(0) ≠ G(0) + S(0). That one cell is zeroed in the blob (removed 2.6e-4 cell units,
+≈ 1.5e-6 ΣA/R²), and the same masked blob is the blob-alone control. Resulting masses 0.48730 /
+0.48730 / 0.24365 ΣA/R², gyradius 0.47701 R. The θ_s supports were already disjoint and
+non-adjacent. Schedule over [X9, X10, X11] → **X9, X11, X10**.

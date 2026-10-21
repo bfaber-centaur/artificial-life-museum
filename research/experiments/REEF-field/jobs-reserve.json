@@ -1,0 +1,179 @@
+{
+ "decision": "D-020 (reef/coordinator 2a1c60a)",
+ "schedule_seed": 20261020,
+ "shuffle": "random.Random(20261020).shuffle(list(range(3))) over [X9, X10, X11]",
+ "order": [
+  "X9",
+  "X11",
+  "X10"
+ ],
+ "N": 256,
+ "H_tu": 50,
+ "jobs": [
+  {
+   "id": "X9",
+   "run_id": "REEF-X9-E",
+   "snapshot": "BLOB-X9",
+   "ring_shift": [
+    64,
+    20
+   ],
+   "geometry": {
+    "stand_in": "static Gaussian blob",
+    "geometry_of": "P2",
+    "blob_centre_step": 61,
+    "amplitude_scale": 1.0,
+    "b_R_requested": 0.0,
+    "ring_shift_from": "P2",
+    "blob_to_ring_along_heading_R": 1.7725618505574645,
+    "blob_to_ring_lateral_R": 0.0222248753952274,
+    "heading_deg": 72.29403933885672
+   },
+   "blob": {
+    "form": "a*exp(-r^2/(2 s^2)) for r <= 4 s (minimum-image r from centre), else 0",
+    "a": 0.680108174486775,
+    "s_cells": 4.39072617302981,
+    "cut_cells": 17.56290469211924,
+    "centre_yx": [
+     169.3510148974147,
+     140.87640202215817
+    ],
+    "target_mass_R2": 0.4873,
+    "target_gyradius_R": 0.477,
+    "mass_R2": 0.4873031800618224,
+    "gyradius_R": 0.477010730258723,
+    "centroid_yx": [
+     169.3508196101674,
+     140.87647986574038
+    ],
+    "centre_source": "REEF-CTRL-GA pos at step 61 (controls-series.npz GA_pos, wrapped)",
+    "amplitude_scale": 1.0,
+    "a_used": 0.680108174486775,
+    "support_cells_gt_0_01": 513,
+    "masked_cells_under_ring": 1,
+    "masked_mass_cells": 0.00025984663619505307,
+    "geometry_of": "P2",
+    "decision": "D-020"
+   },
+   "blob_state_sha256": "c7c47e852b75f07c14e15f3b9ab4c435a64d1e0b7d4f0b34ea757ad49f1939b3",
+   "controls": {
+    "G": "REEF-X9-G (lockstep blob-alone)",
+    "S": "REEF-X9-S (lockstep)"
+   },
+   "schedule": {
+    "seed": 20261020,
+    "position": 0
+   }
+  },
+  {
+   "id": "X11",
+   "run_id": "REEF-X11-E",
+   "snapshot": "BLOB-X11",
+   "ring_shift": [
+    64,
+    20
+   ],
+   "geometry": {
+    "stand_in": "static Gaussian blob",
+    "geometry_of": "P2",
+    "blob_centre_step": 61,
+    "amplitude_scale": 0.5,
+    "b_R_requested": 0.0,
+    "ring_shift_from": "P2",
+    "blob_to_ring_along_heading_R": 1.7725618505574645,
+    "blob_to_ring_lateral_R": 0.0222248753952274,
+    "heading_deg": 72.29403933885672
+   },
+   "blob": {
+    "form": "a*exp(-r^2/(2 s^2)) for r <= 4 s (minimum-image r from centre), else 0",
+    "a": 0.680108174486775,
+    "s_cells": 4.39072617302981,
+    "cut_cells": 17.56290469211924,
+    "centre_yx": [
+     169.3510148974147,
+     140.87640202215817
+    ],
+    "target_mass_R2": 0.4873,
+    "target_gyradius_R": 0.477,
+    "mass_R2": 0.2436515900309112,
+    "gyradius_R": 0.477010730258723,
+    "centroid_yx": [
+     169.3508196101674,
+     140.87647986574038
+    ],
+    "centre_source": "REEF-CTRL-GA pos at step 61 (controls-series.npz GA_pos, wrapped)",
+    "amplitude_scale": 0.5,
+    "a_used": 0.3400540872433875,
+    "support_cells_gt_0_01": 425,
+    "masked_cells_under_ring": 1,
+    "masked_mass_cells": 0.00012992331809752653,
+    "geometry_of": "P2",
+    "decision": "D-020"
+   },
+   "blob_state_sha256": "0af286a7b06f2b95b6c1d8609f2bcbfee24ab9413d1b6916d1468b0d6c8a90cb",
+   "controls": {
+    "G": "REEF-X11-G (lockstep blob-alone)",
+    "S": "REEF-X11-S (lockstep)"
+   },
+   "schedule": {
+    "seed": 20261020,
+    "position": 1
+   }
+  },
+  {
+   "id": "X10",
+   "run_id": "REEF-X10-E",
+   "snapshot": "BLOB-X10",
+   "ring_shift": [
+    68,
+    8
+   ],
+   "geometry": {
+    "stand_in": "static Gaussian blob",
+    "geometry_of": "P3",
+    "blob_centre_step": 67,
+    "amplitude_scale": 1.0,
+    "b_R_requested": 1.0,
+    "ring_shift_from": "P3",
+    "blob_to_ring_along_heading_R": 1.4597287756367214,
+    "blob_to_ring_lateral_R": 0.995423322275398,
+    "heading_deg": 72.29403933885672
+   },
+   "blob": {
+    "form": "a*exp(-r^2/(2 s^2)) for r <= 4 s (minimum-image r from centre), else 0",
+    "a": 0.680108174486775,
+    "s_cells": 4.39072617302981,
+    "cut_cells": 17.56290469211924,
+    "centre_yx": [
+     173.3774461197193,
+     142.16552837050597
+    ],
+    "target_mass_R2": 0.4873,
+    "target_gyradius_R": 0.477,
+    "mass_R2": 0.48730295771208515,
+    "gyradius_R": 0.47701006909491056,
+    "centroid_yx": [
+     173.37719269714623,
+     142.1654120432271
+    ],
+    "centre_source": "REEF-CTRL-GA pos at step 67 (controls-series.npz GA_pos, wrapped)",
+    "amplitude_scale": 1.0,
+    "a_used": 0.680108174486775,
+    "support_cells_gt_0_01": 513,
+    "masked_cells_under_ring": 1,
+    "masked_mass_cells": 0.00026288331425295715,
+    "geometry_of": "P3",
+    "decision": "D-020"
+   },
+   "blob_state_sha256": "677afe7b96b15d91b568fa93a362fecbbd1bd74281f5622388b0aa4f390e8b9b",
+   "controls": {
+    "G": "REEF-X10-G (lockstep blob-alone)",
+    "S": "REEF-X10-S (lockstep)"
+   },
+   "schedule": {
+    "seed": 20261020,
+    "position": 2
+   }
+  }
+ ]
+}
