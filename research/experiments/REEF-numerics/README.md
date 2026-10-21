@@ -104,3 +104,54 @@ outcome); its glider is ~8% faster, consistent with Lane 3's timestep-fragile sp
 geometry should be compared in its own controls' units. Single engine (alm). The `components` column
 uses a quick seam-merge counter that is not the behavior lane's tracker; its counts > 1 are not evidence
 of fragmentation.
+
+## 7. §9 checks of the selected contrasts P2 and P3 (D-017)
+
+Inputs: reef/field `91da893` runs `REEF-P2-E` (GA, b = +0.02 R) and `REEF-P3-E` (GA, b = +0.995 R),
+their float64 checkpoints. Scorer: reef/behavior `4de401e` `score.py` (`EncounterRecorder` fed live,
+every step, by `check_runner.py`). Ignition (D-017): E mass ≥ 2 × (G + S) and ≥ 5 bodies. Front:
+r95 = 95th-percentile distance of E support (A > 0.01) from the ring centre; speed = least-squares
+slope from ignition until r95 reaches 0.7 × (N/2)/R, plus sliding 5-tu slopes. Commands are in each
+`checks/<run>/summary.json`; per-step series in `series.csv`; float64 checkpoints (every tu) are in
+the project folder `reef-numerics/checks/<run>/checkpoints.npz`, not in git.
+Matrix: [`checks/MATRIX.md`](checks/MATRIX.md) (`checks/make_matrix.py`).
+
+**Arithmetic:** `alm_check` FFT is the same NumPy FFT arithmetic as alm. Only the direct window is a
+different arithmetic route.
+
+| check | P2 | P3 |
+|---|---|---|
+| clean-process exact-input replay (field `runner.py` at `fe4ba1c`, fresh process) | E/G/S final sha256 identical; all 159 checkpoints bitwise | same |
+| alm_check FFT, 0–50 tu | bitwise at every 1-tu checkpoint (E, G, S) | same |
+| alm_check direct, 3→25 tu from the saved t = 3 state (covers ignition) | FISSION; t_int 5.5, t_c 6.1, ignition 14.7 identical; E mass t20/t25 within 1e-12 rel; bodies 29/70 identical | FISSION; t_int 6.0, t_c 6.7, ignition 18.0 identical; same |
+| T20 (own controls) | FISSION, t_c 5.6 (−0.5), **ignition 11.6 (−3.1)**, E mass t20 +62%, t25 +48%; front 0.378 vs 0.362 | FISSION, t_c 6.15 (−0.55), **ignition 15.9 (−2.1)**, mass +35%/+27%; front 0.321 vs 0.332 |
+| R26 2×2 block, N512 (own controls) | scorer: CONTROL_FAILURE (S mass not constant, see §5); E ignites at **10.4 (−4.3)**, 95 bodies at t_c + 20, mass +41%/+32% | CONTROL_FAILURE (same reason); ignition **17.1 (−0.9)**, 60 bodies, mass +28%/+16% |
+| N512, R13, same separation (own controls) | identical to N256 through 25 tu (class, times, masses, bodies) | same |
+
+Direct-vs-alm divergence (`checks/direct_vs_alm.txt`): 0 at t = 3, ~1e-14 at contact, then grows
+about ×30 per 5 tu after ignition (≈ 0.7 per tu): 4e-12 at t15, 1e-10 at t20, 6e-9 at t25 (P2), with
+no support-cell change. Isolated glider differences stay < 1e-12. So the colony is sensitive to
+round-off, as expected of a growing many-body system; extrapolated, cell-level details lose arithmetic
+agreement around 50–60 tu, but aggregate observables agree to ~1e-10 through 25 tu.
+
+Verdicts under the frozen §9 rules:
+- Replay: PASS (bitwise). FFT: PASS (bitwise, not independent arithmetic). Direct: **PASS** for both.
+- T20: **same class, quantitative FAIL** (t_c moves 0.5–0.55 tu, at or just past the 0.5 tu limit;
+  masses differ ≫ 1% because ignition comes 2–3 tu earlier). The isolated controls stay in class
+  (glider GLIDER, ring fixed). Ignition timing is NUMERICALLY_FRAGILE in T; the qualitative outcome
+  (contact → fusion → expanding colony) is not.
+- R26: the scorer's frozen S-control rule demands constant ring mass, which the R26 block ring never
+  has (§5; S-alone mass spans 0.3759–0.3820, 1.6%, while staying one body). Per D-010 the R26 ring is
+  judged against its own control: it stays one static body, and the encounter ignites into the same
+  kind of colony (95 / 60 bodies at t_c + 20, mass ×30–40). So R26 gives the **same qualitative
+  outcome but earlier ignition** (quantitative FAIL). Rows are being re-recorded with `--save-rows`
+  (`checks/REEF-P{2,3}-E-R26-rows/`) so the behavior lane can re-score with an R26 ring rule.
+- N512: **PASS**; N256 was not torus-affected through t_c + 20.
+
+**Front speed in the big world (lead question).** N512 sliding 5-tu slopes of r95: P2 0.36 (15–20),
+then 0.38–0.41 R/tu from 20 to 55 tu (r95 7 → 19 R); P3 0.34 (18–23), then 0.37–0.40 from 23 to
+53 tu. The front settles to a roughly constant **≈ 0.39 R/tu** (±0.02) once past the first ~5 tu after
+ignition, and only slows (0.3, then ~0) once r95 nears (N/2)/R = 19.7 R, i.e. when the colony meets
+its own images. On N256 the same slow-down starts at r95 ≈ 10 R (= 9.8 R half-width) near 30 tu.
+The from-ignition fit (0.33–0.36) includes the acceleration phase. The front speed is about 70% of the
+glider speed (0.548). Single engine (alm) beyond 25 tu.
