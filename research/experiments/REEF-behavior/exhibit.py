@@ -112,5 +112,67 @@ def strip(items, out, title):
     fig.savefig(out, dpi=150, bbox_inches="tight")
 
 
+ROUTES = (("alm", "reference (alm)"), ("chkfft", "checkpointed FFT"), ("direct", "direct convolution"),
+          ("N512", "N 512, R 13"), ("T20", "T 20 (dt halved)"), ("R26", "R 26 (2×2, N 512)"))
+TC_TOL, MASS_TOL = 0.5, 0.01  # PROTOCOL §9 frozen tolerances (numerics MATRIX.md); ignition and front have none
+
+
+def check_matrix(matrix_json, out, r26=None, source=""):
+    """Panel F: numerics route x {class, t_c, ignition (D-017), front speed, E mass t20} for P2 and P3.
+
+    matrix_json: REEF-numerics checks/matrix.json. r26: {"P2": score.json, ...} from the D-010
+    rescore; it replaces the R26 class cell (the frozen bitwise S rule is not used at R26).
+    Solid orange box: outside the frozen §9 tolerance. Dashed: shifted, no frozen tolerance."""
+    m = json.load(open(matrix_json))
+    plt.rcParams.update({"font.size": 8, "text.color": INK})
+    encs = list(m)
+    cols = ["class", "t_c (tu)", "ignition (tu)", "front (R/tu)", "E mass t20"]
+    x0, w = 1.9, 1.2
+    fig, axs = plt.subplots(1, len(encs), figsize=(6.6 * len(encs), 3.0), facecolor="white")
+    for ax, e in zip(np.atleast_1d(axs), encs):
+        ref = m[e]["alm"]
+        ax.set_xlim(0, x0 + w * len(cols))
+        ax.set_ylim(len(ROUTES) + 0.1, -1)
+        ax.axis("off")
+        ax.text(0.03, -0.72, e, fontsize=10, fontweight="bold", va="center")
+        for j, c in enumerate(cols):
+            ax.text(x0 + w * (j + 0.5), -0.2, c, ha="center", va="center", fontsize=7.5, color=MUTED)
+        for i, (key, name) in enumerate(ROUTES):
+            row = m[e][key]
+            y = i + 0.5
+            cls = row["class"]
+            if key == "R26":
+                cls = "pending D-010"
+                if r26 and e in r26:  # (D-010 as given, D-010 without its mass bound)
+                    cls = "\n".join(json.load(open(f))["class"].replace("CONTROL_FAILURE", "CONTROL FAIL") + mark
+                                     for f, mark in zip(r26[e], ("*", "†")))
+            dt, di = row["t_c"] - ref["t_c"], row["ignition_t"] - ref["ignition_t"]
+            dm = row["mass_E_t20"] / ref["mass_E_t20"] - 1
+            vals = [cls, f"{row['t_c']:g}" + (f" ({dt:+.2g})" if abs(dt) > 1e-9 else ""),
+                    f"{row['ignition_t']:.1f}" + (f" ({di:+.1f})" if abs(di) > 1e-9 else ""),
+                    f"{row['front_R_per_tu']:.3f}", f"{row['mass_E_t20']:.2f}" + (f" ({dm:+.0%})" if abs(dm) > 1e-6 else "")]
+            box = [None, "solid" if abs(dt) > TC_TOL + 1e-9 else None, "dashed" if abs(di) > 1e-9 else None,
+                   None, "solid" if abs(dm) > MASS_TOL else None]
+            if i % 2 == 0:
+                ax.add_patch(plt.Rectangle((0, i), x0 + w * len(cols), 1, color="#f4f3ef", lw=0))
+            ax.text(0.05, y, name, va="center", fontsize=8)
+            for j, v in enumerate(vals):
+                if box[j]:
+                    ax.add_patch(plt.Rectangle((x0 + w * j + 0.04, i + 0.12), w - 0.08, 0.76, fill=False,
+                                               ec=SERIES[1], lw=1.2, ls="-" if box[j] == "solid" else (0, (3, 2))))
+                ax.text(x0 + w * (j + 0.5), y, v, ha="center", va="center", fontsize=6.5 if "\n" in v else 8, color=SERIES[1] if box[j] else INK)
+    fig.suptitle("Panel F. Numerical checks of P2 and P3: FISSION survives every route except R 26, where it turns on the D-010 mass bound; "
+                 "timing and mass do not survive T 20 or R 26", fontsize=9.5, x=0.01, ha="left")
+    fig.text(0.01, -0.12,
+             "Solid orange box: outside the frozen §9 tolerance (t_c within 0.5 tu, masses within 1%). Dashed: ignition shifted; ignition and front "
+             "speed have no frozen tolerance and are reported as differences.\nIgnition (D-017): first time E mass ≥ 2 × (glider alone + ring alone) "
+             "and ≥ 5 bodies. Front: colony edge speed. * R 26 class applies D-010: the R 26 ring is judged against its own R 26 ring-alone "
+             "control (single body, static, mass 0.378–0.383), never bitwise; the R 26 ring-alone dips to 0.376 at 4–11 tu (seed relaxation, before "
+             "contact), so the mass bound fails.\n† Same D-010 check without the mass bound: the ring stays one static body (0.0003 R/tu). "
+             "R 26 class cells come from float64 checkpoints at 1-tu cadence. Reference: N 256 (19.7 R), R 13, T 10, μ 0.155, σ 0.020, "
+             "poly/poly, Euler + clip, float64; finite horizon, scored on the t_c + 20 tu window. " + source,
+             fontsize=6.5, color=MUTED, va="top")
+    fig.savefig(out, dpi=150, bbox_inches="tight")
+
 if __name__ == "__main__":
     main(*sys.argv[1:5])
