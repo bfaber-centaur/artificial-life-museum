@@ -88,3 +88,15 @@ Protocol v1 governs these runs where it differs from F-001–F-003:
   elapsed-time snapshots, each integer-rolled to the grid centre. Hashes in
   `seeds/*.npy.json` and `settle.json`.
 - S103 placed centred on N 256: bitwise fixed after 1 and 1000 steps (local check).
+
+### F-005 (2026-10-21 ~06:25Z): runner, sham and timed segment (before running them)
+
+- `runner.py` steps E, G-alone and S-alone in lockstep in one process (so the residual
+  max|E − (G + S)| is exact per step and the lockstep G can be checked bitwise against the shared
+  control `REEF-CTRL-<snap>`). It stores raw arrays for the tracker and does not classify.
+  Encounters are refused without `--protocol-addendum <SHA>`.
+- Sham (§5): GA at its reference position, ring shift (−82, −78) cells, chosen on a 2-cell grid
+  to maximise the minimum torus distance from the GA-alone centroid track over H (8.74 R).
+  `REEF-SHAM`, N 256, H 50. It doubles as the timed runner segment (tracking + checkpoints +
+  frames). A second sham at N 512 (`REEF-SHAM-N512`, same relative placement) times the
+  alternative world size.
