@@ -64,3 +64,27 @@ Protocol v1 governs these runs where it differs from F-001–F-003:
   windows) for mass, speed, heading and gyradius. The 100-tu run of F-003 is kept as a
   longer validation of GA only.
 - One manifest per run in `runs.jsonl` (schema `REEF/manifest.schema.json`).
+
+## Results log
+
+### R-001 (2026-10-21 06:12Z): settle (commit `586b134`, `python settle.py`, 16 s)
+
+- 200-tu assessment tripped the **heading** transient test only: fitted heading 70.6° over
+  steps 1000–2000 with a 1.55° change between halves (mass and speed changes 4e-5 and 9e-5).
+  Extended once, as F-001 allows: assessment steps 4000–5000 (400–500 tu) gives heading
+  **72.30°**, speed **0.5484 R/tu** (0.7129 cells/step), mass **0.48728** (rsd 0.12%),
+  straightness 0.999999, half-to-half drift 0.02° / 5e-6 / 7e-6. Matches the L6-006 prior
+  (0.487, 0.548, ~72°). The heading creeps toward ~72° over hundreds of tu; this is consistent
+  with the known lattice heading lock at R 13, not tested further here.
+- **Preregistered acceptance criterion failed as written:** "exactly one component (A > 0.1)" is
+  false at 13% of samples (counts 1–3). Diagnosis: transient **single-cell specks** shed at
+  the tail (mass ≤ 0.001 ΣA/R², ≤ 2.24 cells from the main body); the count flickers the same
+  way at every threshold from 0.1 down to 1e-6 because the clip leaves exact zeros. All other
+  acceptance criteria pass. Consequence for the protocol: a raw component count would score
+  this isolated glider as FISSION; the tracker needs a minimum component mass/size or a merge
+  distance (proposal sent to the lead). Not retuned; reported.
+- Period test: dominant mass period 4.61 steps = grid-crossing 1/|vx| 4.61 steps, so no
+  intrinsic period. **GA** = state at step 5000, **GB** = step 5005 (0.5 tu later), named
+  elapsed-time snapshots, each integer-rolled to the grid centre. Hashes in
+  `seeds/*.npy.json` and `settle.json`.
+- S103 placed centred on N 256: bitwise fixed after 1 and 1000 steps (local check).

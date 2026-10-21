@@ -1,0 +1,28 @@
+{
+  "N": 256,
+  "cells_sha256_int16le": "8cd9073600c6868bfc8cd18e645f997af04a5e7a62c5a6e9a2425ae2fca8cdd6",
+  "centroid_yx": [
+    127.390625,
+    127.60937500000001
+  ],
+  "file": "S103.npy",
+  "file_sha256": "8569707d12219849e6a9411a10c366c7959a8e09ce13179688642620fcd446b2",
+  "fixed_point_after_1000_steps": true,
+  "fixed_point_after_1_step": true,
+  "kind": "catalogued clip fixed point, placed centred",
+  "mass_R2": 0.378698224852071,
+  "name": "S103",
+  "rule": {
+    "R": 13,
+    "T": 10,
+    "beta": [
+      1.0
+    ],
+    "dt": 0.1,
+    "growth": "poly",
+    "kernel": "poly",
+    "mu": 0.155,
+    "sigma": 0.02
+  },
+  "state_sha256": "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0"
+}
