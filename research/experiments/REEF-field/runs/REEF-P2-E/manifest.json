@@ -1,0 +1,113 @@
+{
+  "lane": "field",
+  "commit": "fe4ba1cd6df234c05668db3ae7ca11f1d9feebbb",
+  "engine": "alm",
+  "rule": {
+    "kernel": "poly",
+    "growth": "poly",
+    "beta": [
+      1.0
+    ],
+    "mu": 0.155,
+    "sigma": 0.02,
+    "R": 13,
+    "T": 10,
+    "update": "euler+clip",
+    "dtype": "float64"
+  },
+  "world": {
+    "N": 256,
+    "boundary": "periodic"
+  },
+  "horizon_tu": 50,
+  "command": "python research/experiments/REEF-field/runner.py --run-id REEF-P2-E --kind encounter --snapshot GA --ring-shift 64 20 --geometry '{\"b_R_requested\": 0.0, \"b_R_realized\": 0.021623550682058384, \"d_R_requested\": 5.15383666383055, \"d_R_realized\": 5.118834907289539, \"heading_deg\": 72.29403933885672, \"gap_R_realized\": 3.96499824345899}' --schedule-position 3 --protocol-addendum 3c3fdc4b12cb064061d899b2a6e42290ceb452c9 --notes 'controls: G=REEF-CTRL-GA (shared), S=REEF-P2-S (lockstep in REEF-P2-E)'",
+  "env": {
+    "python": "3.13.16",
+    "numpy": "2.5.3",
+    "scipy": "1.18.1",
+    "platform": "Linux-6.18.44-fc-v139-x86_64-with-glibc2.39",
+    "machine": "x86_64",
+    "threads": "OMP/OPENBLAS/MKL=1",
+    "git_dirty": false,
+    "embedded_from_N256": false
+  },
+  "outputs": {
+    "checkpoints.npz": {
+      "path": "research/experiments/REEF-field/runs/REEF-P2-E/checkpoints.npz",
+      "sha256": "0e69a3b03cddce24fd2326eb7f333828e2103e050bf4a08b83503bac41646bfc"
+    },
+    "frames.npz": {
+      "path": "research/experiments/REEF-field/runs/REEF-P2-E/frames.npz",
+      "sha256": "3e03bb8f2dfa86ccaea7c7909fffc5468468e716abdf3c5fb74d154da3727186"
+    },
+    "trace.npz": {
+      "path": "research/experiments/REEF-field/runs/REEF-P2-E/trace.npz",
+      "sha256": "1cca5a3a8b147fcb48793343bde06ec569367abc96ea1712bdb5fbdbb91fdeac"
+    }
+  },
+  "wall_s": 11.333970546722412,
+  "status": "ok",
+  "run_id": "REEF-P2-E",
+  "kind": "encounter",
+  "inputs": {
+    "glider": {
+      "snapshot": "GA",
+      "state_sha256": "982b793956a8336d96969d1cd5ed71e83604e78c1aa360819c334eaa098c25f1",
+      "path": "research/experiments/REEF-field/seeds/GA.npy",
+      "shift_cells": [
+        0,
+        0
+      ]
+    },
+    "ring": {
+      "state_sha256": "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+      "path": "research/experiments/REEF-field/seeds/S103.npy",
+      "shift_cells": [
+        64,
+        20
+      ]
+    },
+    "initial_state_sha256": "996f56c5dc2497dad25332a222ece353d5ef27cb9866fea18d2258affdea8032",
+    "geometry": {
+      "b_R_requested": 0.0,
+      "b_R_realized": 0.021623550682058384,
+      "d_R_requested": 5.15383666383055,
+      "d_R_realized": 5.118834907289539,
+      "heading_deg": 72.29403933885672,
+      "gap_R_realized": 3.96499824345899
+    },
+    "component_initial_sha256": {
+      "G": "982b793956a8336d96969d1cd5ed71e83604e78c1aa360819c334eaa098c25f1",
+      "S": "371632556f2d1c90cdeb5f9b5ee1392fab15bb8ff57d2a599278e07ab0742554"
+    }
+  },
+  "controls": {
+    "G": "REEF-CTRL-GA",
+    "S": "REEF-P2-S",
+    "mapping": "G-alone shared per snapshot (D-004), reproduced bitwise by the lockstep G; S-alone = lockstep S at this realised ring position"
+  },
+  "final_state_sha256": "3549322b1c7fb07ae9ad47e9eec8dab1fd27f416c71714909df88191edf206e4",
+  "lockstep_final_state_sha256": {
+    "E": "3549322b1c7fb07ae9ad47e9eec8dab1fd27f416c71714909df88191edf206e4",
+    "G": "7fac2d9132cba04e9cfb7ef6e9835ab003e6e6cd444907644e11c2839aa69617",
+    "S": "371632556f2d1c90cdeb5f9b5ee1392fab15bb8ff57d2a599278e07ab0742554"
+  },
+  "schedule": {
+    "seed": 20261020,
+    "position": 3
+  },
+  "result": {
+    "provisional_contact_tu": 6.1,
+    "residual_max_before_contact": 0.1466385760003275,
+    "residual_max_overall": 2.0,
+    "ncomp_E_final": 314,
+    "mass_final": {
+      "E": 80.51929196406842,
+      "G": 0.48729451715756283,
+      "S": 0.378698224852071
+    },
+    "wall_sim_s": 7.832450866699219,
+    "wall_total_s": 11.333970546722412
+  },
+  "notes": "controls: G=REEF-CTRL-GA (shared), S=REEF-P2-S (lockstep in REEF-P2-E) protocol addendum 3c3fdc4b12cb064061d899b2a6e42290ceb452c9"
+}

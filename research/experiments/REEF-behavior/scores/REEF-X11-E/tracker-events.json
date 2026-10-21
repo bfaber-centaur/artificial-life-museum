@@ -1,0 +1,19 @@
+{
+ "E": [
+  {
+   "t": 0.3,
+   "from": "G|S",
+   "to": "S",
+   "kind": "loss_or_merge"
+  }
+ ],
+ "G": [
+  {
+   "t": 0.3,
+   "from": "G",
+   "to": "",
+   "kind": "loss_or_merge"
+  }
+ ],
+ "S": []
+}

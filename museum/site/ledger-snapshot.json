@@ -1,7 +1,7 @@
 {
   "ledger": "research/claims.md",
-  "ledger_sha256": "df1e7b0ae26f8fe574fe54301e63f5f7da0663b4f56ee33ab631a722521964f2",
-  "ledger_commit": "76ee3a6",
+  "ledger_sha256": "19e63f59d6a78d8f26a3a6b9b4adc3ef2ac78b97d290598e11c41b38e6770c65",
+  "ledger_commit": "c8c8740",
   "conventions_sha256": "0e237384e0425b3c325229cf650ab6f9807fb08c1bedc991433b54b13c2eb02f",
   "claims": {
     "C001": {
@@ -138,6 +138,7 @@
         "collection",
         "index",
         "one-rule",
+        "reef",
         "under-review"
       ]
     },
@@ -196,6 +197,34 @@
         "collection",
         "one-rule",
         "under-review"
+      ]
+    },
+    "C052": {
+      "status": "INDEPENDENTLY_CHECKED",
+      "status_text": "INDEPENDENTLY_CHECKED for contact, fusion and ignition (FISSION + PROLIFERATION in the t_c + 20 window, through 25 tu) on P2 and P3 via `alm_check` direct convolution; clean replay bitwise. World coverage by ~50 tu is OBSERVED (`alm` only, including N512). T20 keeps the class but not its timing (C053); R26 is a weaker check (non-fixed-point ring, D-024; scored from per-step rows, numerics 8f17849). The other ten encounters are OBSERVED.",
+      "rooms": [
+        "reef"
+      ]
+    },
+    "C053": {
+      "status": "NUMERICALLY_FRAGILE",
+      "status_text": "NUMERICALLY_FRAGILE",
+      "rooms": [
+        "reef"
+      ]
+    },
+    "C054": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED (single engine `alm`; N256, with X11/X12 also at N512; preregistered as discovery geometries X7–X12, D-018/D-020/D-022)",
+      "rooms": [
+        "reef"
+      ]
+    },
+    "C055": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED (single engine beyond 25 tu; two runs)",
+      "rooms": [
+        "reef"
       ]
     }
   },
@@ -282,6 +311,16 @@
       "research/specimens/S101-orbium-pair.md",
       "research/specimens/S102-circler.md",
       "tests/test_hr009_pair_pulse.py"
+    ],
+    "reef": [
+      "research/experiments/REEF-behavior/LITERATURE.md",
+      "research/experiments/REEF-behavior/README.md",
+      "research/experiments/REEF-behavior/exhibit/README.md",
+      "research/experiments/REEF-field/README.md",
+      "research/experiments/REEF-numerics/checks/MATRIX.md",
+      "research/experiments/REEF/DECISIONS.md",
+      "research/experiments/REEF/PROTOCOL.md",
+      "research/reports/reef-expedition-2026-10-20.md"
     ],
     "collection": [
       "research/experiments/L6-field/make_seeds.py",

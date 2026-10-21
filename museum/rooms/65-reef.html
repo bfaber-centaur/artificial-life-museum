@@ -1,0 +1,110 @@
+<!--meta {
+  "slug": "reef", "order": 65, "title": "When the glider meets the ring", "nav_label": "7 · When the glider meets the ring (provisional)",
+  "kicker": "Room 7 · Provisional · Coexistence-Reef expedition, 2026-10-21",
+  "summary": "Two animals that live happily apart under one rule. Let them touch, and the world turns into a reef.",
+  "provisional": true,
+  "under_review": [41],
+  "expect": {"C038": "REPRODUCED", "C052": "INDEPENDENTLY_CHECKED", "C053": "NUMERICALLY_FRAGILE",
+             "C054": "OBSERVED", "C055": "OBSERVED"}
+} -->
+<h1>When the glider meets the ring</h1>
+<p class="lede">Room 4 showed three animals sharing one rule {{claim:C038}}. Each was watched
+alone, in its own world. This expedition put the gliding Orbium and the motionless ring S103 into
+one world, aimed the glider at the ring, and asked what first contact does to each of them,
+compared with their exact futures alone. We expected a bounce, a death or a capture. What we got
+was none of those.</p>
+
+<h2>Contact sets off a front</h2>
+<figure class="evidence">
+  <span class="label-tag">Panel A · encounter REEF-P2-E with its two matched controls</span>
+  <a href="{{asset:research/experiments/REEF-behavior/exhibit/A-P2-main.png}}" title="Open full size"><img src="{{asset:research/experiments/REEF-behavior/exhibit/A-P2-main.png}}" width="1262" height="1249" loading="lazy"
+       alt="Three rows of five frames. Top row: the encounter. A glider approaches a small ring, touches it at 6.1 time units, the two fuse into a lumpy body, and by 26 time units a round colony of many small rings and dumbbells has spread across a third of the world. Middle row: the same glider alone glides on unchanged. Bottom row: the ring alone stays exactly where it was. Below, a log-scale mass trace: the encounter climbs from under 1 to about 80 while the summed controls stay flat."></a>
+  <figcaption><strong>Glider meets ring, head-on (b = 0).</strong> Top: the encounter. Middle
+  and bottom: the same glider and the same ring, each alone, from identical starting states. The
+  mass trace marks the kernel-range overlap, the measured interaction onset and the contact time.
+  Scored on the window up to 20 time units after contact (dashed line); after about 27 time units
+  the colony meets its own copies across the 256-cell torus. Rule μ 0.155, σ 0.020, R 13, T 10,
+  float64. Behavior lane, {{src:research/experiments/REEF-behavior/exhibit/README.md|exhibit notes}}.</figcaption>
+</figure>
+<div class="label">
+  <p class="obs"><strong>What you see.</strong> The glider and the ring start to affect each other
+  half a time unit to one time unit <em>before</em> they visibly touch, through the reach of the kernel. Once
+  they touch they fuse and never separate. The fused body swells, breaks up from inside into small
+  static rings and dumbbells, and a front sweeps outward, laying down a frozen lattice behind it.
+  Alone, the glider glides on and the ring does not change by a single bit.</p>
+  <p class="open"><strong>What the ledger says.</strong> {{claim:C052}}. Twelve encounters at
+  offsets from −1.5 to +1.5 kernel radii all did this. Two of them were rerun from scratch, with a
+  second implementation using a different arithmetic route, and in a world twice as wide; all
+  agreed through the first 25 time units, when the colony is already growing. The world-covering
+  stage was watched with one engine. A finer timestep and a finer grid keep the outcome but move the timing
+  {{claim:C053}}.</p>
+</div>
+
+<h2>No glancing blow escapes</h2>
+<figure class="evidence">
+  <span class="label-tag">Panel B · seven offsets, one glider snapshot</span>
+  <a href="{{asset:research/experiments/REEF-behavior/exhibit/B-offset-strip.png}}" title="Open full size"><img src="{{asset:research/experiments/REEF-behavior/exhibit/B-offset-strip.png}}" width="1495" height="391" loading="lazy"
+       alt="Seven frames side by side, labelled b/R −1.51 to +1.48. Every frame shows a large round colony of small rings at the end of its scoring window, with 47 to 114 bodies."></a>
+  <figcaption>Each frame is the encounter 20 time units after first contact. The glider was aimed
+  to pass the ring at a transverse offset b, from 1.5 radii on one side to 1.5 on the other. Every
+  one ignited. Offsets wider than 1.5 radii were outside the expedition's bounds and were not run.</figcaption>
+</figure>
+
+<h2>The glider is only the messenger</h2>
+<div class="pair">
+  <figure class="evidence" style="margin:0">
+    <span class="label-tag">Panel C · a still blob, too far away</span>
+    <a href="{{asset:research/experiments/REEF-behavior/exhibit/C-X7-null.png}}" title="Open full size"><img src="{{asset:research/experiments/REEF-behavior/exhibit/C-X7-null.png}}" width="1291" height="1249" loading="lazy"
+         alt="A still blob of the glider's mass, placed a little short of the ring, fades away within about one and a half time units; the ring is unchanged."></a>
+    <figcaption>A blob with the glider's mass and size, placed where the glider is half a time
+    unit before contact. It fades away before reaching the ring; the ring returns bit for bit.</figcaption>
+  </figure>
+  <figure class="evidence" style="margin:0">
+    <span class="label-tag">Panel D · the same blob, touching</span>
+    <a href="{{asset:research/experiments/REEF-behavior/exhibit/D-X9-blob-in-contact.png}}" title="Open full size"><img src="{{asset:research/experiments/REEF-behavior/exhibit/D-X9-blob-in-contact.png}}" width="1305" height="1249" loading="lazy"
+         alt="The same blob, placed where the glider is at contact, touches the ring and the same spreading colony appears."></a>
+    <figcaption>Placed where the glider is at the moment of contact, the same lifeless blob sets
+    off the same reef. Half as much mass does not (panel E).</figcaption>
+  </figure>
+</div>
+<div class="label">
+  <p class="obs">We read this as the ring being the excitable partner. Masses from 0.37 upward
+  pressed against it ignite it; 0.24 does not, and the ring heals exactly. The glider carries 0.49
+  (same units), so it is one way to deliver the push.</p>
+  <p class="open">{{claim:C054}} rests on one engine and one world size. Night 0 had already seen
+  S103 "fill the world" when a bump was added in front of it, and Chan's 2019 paper lists
+  "detonation" among Lenia collision outcomes. So the phenomenon is not new; what this room shows is
+  where this particular rule keeps its trigger.</p>
+</div>
+<figure class="evidence">
+  <span class="label-tag">Panel E · half the mass</span>
+  <a href="{{asset:research/experiments/REEF-behavior/exhibit/E-X11-half-dose.png}}" title="Open full size"><img src="{{asset:research/experiments/REEF-behavior/exhibit/E-X11-half-dose.png}}" width="1321" height="1249" loading="lazy"
+       alt="A blob of half the glider's mass placed in contact with the ring fades within a fraction of a time unit; the ring is unchanged."></a>
+</figure>
+
+<h2>How we checked it</h2>
+<figure class="evidence">
+  <span class="label-tag">Panel F · every check route for encounters P2 and P3</span>
+  <a href="{{asset:research/experiments/REEF-behavior/exhibit/F-check-matrix.png}}" title="Open full size"><img src="{{asset:research/experiments/REEF-behavior/exhibit/F-check-matrix.png}}" width="2180" height="590" loading="lazy"
+       alt="A table rendered as an image: rows are check routes (replay, second implementation, direct convolution, half timestep, double resolution, double world) for two encounters; columns are outcome class, contact time, ignition time and front speed. Every row reads FISSION; the half-timestep and double-resolution rows have boxed timing and mass values marking them as outside the frozen tolerance."></a>
+  <figcaption>The outcome survives every route. The timing does not: at a finer timestep or grid
+  the reef ignites earlier and grows faster {{claim:C053}}. At double resolution the ring is not a
+  perfectly still body even alone, so that row is the weakest check. In a world four times larger
+  the front settles to about 0.39 radii per time unit {{claim:C055}}.</figcaption>
+</figure>
+
+<div class="caveat">
+  <strong>Finite horizons, one rule.</strong> Every result here is at μ 0.155, σ 0.020 with the
+  hard clip, watched for 20 time units after contact (longer only in the larger world). "Reef" is
+  a description, not a species: no new creature is named. The front lays the lattice down; nothing
+  here shows bodies dividing.
+</div>
+
+<h2>Sources</h2>
+<ul>
+  <li>{{src:research/reports/reef-expedition-2026-10-20.md|Expedition report}} · integration {{pr:41|PR #41}}</li>
+  <li>{{src:research/experiments/REEF/PROTOCOL.md|Preregistered protocol}} and {{src:research/experiments/REEF/DECISIONS.md|decision log}}</li>
+  <li>{{src:research/experiments/REEF-field/README.md|Field lane runs and registry}}</li>
+  <li>{{src:research/experiments/REEF-behavior/README.md|Tracker, scores and rival explanations}} · {{src:research/experiments/REEF-behavior/LITERATURE.md|literature check}}</li>
+  <li>{{src:research/experiments/REEF-numerics/checks/MATRIX.md|Independent-check matrix}}</li>
+</ul>

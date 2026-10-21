@@ -1,0 +1,216 @@
+{
+ "run_id": "REEF-P2-E-alm",
+ "kind": "check",
+ "lane": "numerics",
+ "commit": "0d875e6554b2055e460db4527094c9084076ef24",
+ "engine": "alm",
+ "arithmetic_note": "check_direct is the only different arithmetic route; alm_check FFT shares NumPy FFT arithmetic with alm",
+ "rule": {
+  "kernel": "poly",
+  "growth": "poly",
+  "beta": [
+   1.0
+  ],
+  "mu": 0.155,
+  "sigma": 0.02,
+  "R": 13,
+  "T": 10,
+  "update": "euler+clip",
+  "dtype": "float64"
+ },
+ "world": {
+  "N": 256,
+  "boundary": "periodic"
+ },
+ "t0_tu": 0.0,
+ "t_end_tu": 50.0,
+ "inputs": {
+  "source": "reef/field@91da893:runs/REEF-P2-E/checkpoints.npz",
+  "files": {
+   "npz": {
+    "path": "/tmp/claude-0/-home-user-artificial-life-museum/20f9f418-77e1-5c1b-a2f1-57ba8e9492cf/scratchpad/field/research/experiments/REEF-field/runs/REEF-P2-E/checkpoints.npz",
+    "sha256": "0e69a3b03cddce24fd2326eb7f333828e2103e050bf4a08b83503bac41646bfc",
+    "keys": [
+     "E_00000",
+     "G_00000",
+     "S_00000"
+    ]
+   }
+  },
+  "initial_state_sha256": {
+   "E": "996f56c5dc2497dad25332a222ece353d5ef27cb9866fea18d2258affdea8032",
+   "G": "982b793956a8336d96969d1cd5ed71e83604e78c1aa360819c334eaa098c25f1",
+   "S": "371632556f2d1c90cdeb5f9b5ee1392fab15bb8ff57d2a599278e07ab0742554"
+  }
+ },
+ "behavior_scorer": {
+  "dir": "/tmp/claude-0/-home-user-artificial-life-museum/20f9f418-77e1-5c1b-a2f1-57ba8e9492cf/scratchpad/behavior/research/experiments/REEF-behavior",
+  "params": {
+   "R": 13.0,
+   "T": 10.0,
+   "N": 256,
+   "theta_s": 0.01,
+   "body_mass": 0.005,
+   "debris_high": 0.01,
+   "death_mass": 0.01,
+   "theta_int": 1e-10,
+   "approach_timeout": 30.0,
+   "post_contact": 20.0,
+   "horizon": 50.0,
+   "fit_window": 5.0,
+   "theta_defl": 1.0,
+   "delta_lat": 0.1,
+   "shift_flag": 0.1,
+   "glider_tol": 0.02,
+   "ring_tol": 0.01,
+   "ring_moved": 0.1,
+   "glider_speed": 0.2,
+   "static_speed": 0.02,
+   "bind_min": 2.0,
+   "capture_last": 5.0,
+   "censor_margin": 3.0,
+   "fill_frac": 0.25,
+   "fill_level": 0.1
+  }
+ },
+ "command": "python research/experiments/REEF-numerics/check_runner.py --run-id REEF-P2-E-alm --states /tmp/claude-0/-home-user-artificial-life-museum/20f9f418-77e1-5c1b-a2f1-57ba8e9492cf/scratchpad/field/research/experiments/REEF-field/runs/REEF-P2-E/checkpoints.npz --keys E_00000 G_00000 S_00000 --t0 0 --tu-end 50 --engine alm --source reef/field@91da893:runs/REEF-P2-E/checkpoints.npz --behavior-dir /tmp/claude-0/-home-user-artificial-life-museum/20f9f418-77e1-5c1b-a2f1-57ba8e9492cf/scratchpad/behavior/research/experiments/REEF-behavior --out research/experiments/REEF-numerics/checks/REEF-P2-E-alm",
+ "env": {
+  "python": "3.13.16",
+  "numpy": "2.5.4",
+  "OMP_NUM_THREADS": "1",
+  "OPENBLAS_NUM_THREADS": "1",
+  "MKL_NUM_THREADS": "1"
+ },
+ "final_state_sha256": {
+  "E": "3549322b1c7fb07ae9ad47e9eec8dab1fd27f416c71714909df88191edf206e4",
+  "G": "7fac2d9132cba04e9cfb7ef6e9835ab003e6e6cd444907644e11c2839aa69617",
+  "S": "371632556f2d1c90cdeb5f9b5ee1392fab15bb8ff57d2a599278e07ab0742554"
+ },
+ "S_bitwise_constant": true,
+ "score": {
+  "class": "FISSION",
+  "partial_class": null,
+  "flags": [],
+  "t_int": 5.5,
+  "t_kr": 3.6,
+  "t_c": 6.1,
+  "t_cen": null,
+  "observables": {
+   "t_end": 26.1,
+   "planned_end": 26.1,
+   "window_after_contact_tu": 20.0,
+   "debris_max": 0.004962880589542577,
+   "t_int_minus_t_c": -0.5999999999999996,
+   "control_G_speed_R_tu": 0.5484211025784772,
+   "control_G_heading_deg": 72.32381315464085,
+   "n_bodies": 87,
+   "topology": "G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|GS|GS|GS|GS|GS|GS|GS|GS|S|S|S|S|S|S|S|S|S|S|S|S|S|S|S|S|S|S|S|S|S|S|S|S|S",
+   "total_mass": 32.88646732879854,
+   "unassigned_mass": 0.003985822298375284,
+   "together_longest_tu": 20.1,
+   "ring_box_bitwise_equal_at_end": false,
+   "fill": 0.1267547607421875,
+   "G_mass": 22.55994425494655,
+   "S_mass": 10.322537251553607
+  }
+ },
+ "ignition": {
+  "t": 14.7,
+  "mass_E": 5.534730821569423,
+  "n_bodies_E": 5
+ },
+ "front": {
+  "from_ignition_to_r95_0.7_half": {
+   "speed_R_per_tu": 0.36196973756232786,
+   "fit_tu": [
+    14.7,
+    24.6
+   ],
+   "rms_resid_R": 0.04111509468617433
+  },
+  "sliding_5tu": [
+   {
+    "tu": [
+     15.0,
+     20.0
+    ],
+    "speed_R_per_tu": 0.36151079122444874,
+    "r95_end_R": 5.1859312942565925
+   },
+   {
+    "tu": [
+     20.0,
+     25.0
+    ],
+    "speed_R_per_tu": 0.3792433131193684,
+    "r95_end_R": 7.07601449744523
+   },
+   {
+    "tu": [
+     25.0,
+     30.0
+    ],
+    "speed_R_per_tu": 0.3834242175350872,
+    "r95_end_R": 9.0054837115077
+   },
+   {
+    "tu": [
+     30.0,
+     35.0
+    ],
+    "speed_R_per_tu": 0.3016647267574346,
+    "r95_end_R": 10.556394531702312
+   },
+   {
+    "tu": [
+     35.0,
+     40.0
+    ],
+    "speed_R_per_tu": 0.30146469102525714,
+    "r95_end_R": 12.078007658592302
+   },
+   {
+    "tu": [
+     40.0,
+     45.0
+    ],
+    "speed_R_per_tu": -0.09336297694354193,
+    "r95_end_R": 11.87212725872398
+   },
+   {
+    "tu": [
+     45.0,
+     50.0
+    ],
+    "speed_R_per_tu": -0.005132037830669138,
+    "r95_end_R": 11.841305516704987
+   }
+  ]
+ },
+ "at_t20": {
+  "mass_E": 14.94699158109929,
+  "n_bodies_E": 29,
+  "r95_R": 5.1859312942565925
+ },
+ "at_t25": {
+  "mass_E": 28.91935036063563,
+  "n_bodies_E": 70,
+  "r95_R": 7.07601449744523
+ },
+ "at_t50": {
+  "mass_E": 80.51929196406842,
+  "n_bodies_E": 314,
+  "r95_R": 11.841305516704987
+ },
+ "at_end": {
+  "mass_E": 80.51929196406842,
+  "n_bodies_E": 314,
+  "r95_R": 11.841305516704987
+ },
+ "outputs": {
+  "series.csv": "19aa0f54fa3e9c27d51bc22a9e217e8fa5595904f57af15ddf088b931e66d3a2",
+  "checkpoints.npz": "71dd410d4c342ff82a71c0358e4da0952157a22ccd24f208ba7089358e4d3026"
+ },
+ "wall_s": 303.39020800590515,
+ "status": "ok"
+}

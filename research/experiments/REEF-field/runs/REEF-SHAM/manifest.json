@@ -1,0 +1,108 @@
+{
+  "lane": "field",
+  "commit": "5c2ec1bfd51a51f267948484161cefb9382ed577",
+  "engine": "alm",
+  "rule": {
+    "kernel": "poly",
+    "growth": "poly",
+    "beta": [
+      1.0
+    ],
+    "mu": 0.155,
+    "sigma": 0.02,
+    "R": 13,
+    "T": 10,
+    "update": "euler+clip",
+    "dtype": "float64"
+  },
+  "world": {
+    "N": 256,
+    "boundary": "periodic"
+  },
+  "horizon_tu": 50,
+  "command": "python research/experiments/REEF-field/runner.py --run-id REEF-SHAM --kind sham --snapshot GA --ring-shift -82 -78 --geometry '{\"note\":\"sham: max distance from GA track\",\"min_dist_R\":8.736}'",
+  "env": {
+    "python": "3.13.16",
+    "numpy": "2.5.3",
+    "scipy": "1.18.1",
+    "platform": "Linux-6.18.44-fc-v139-x86_64-with-glibc2.39",
+    "machine": "x86_64",
+    "threads": "OMP/OPENBLAS/MKL=1",
+    "git_dirty": false,
+    "embedded_from_N256": false
+  },
+  "outputs": {
+    "checkpoints.npz": {
+      "path": "research/experiments/REEF-field/runs/REEF-SHAM/checkpoints.npz",
+      "sha256": "c64155a991634b0f95a186f8758ef8d1a8caf7ad9262060308f9bd29cf3acde5"
+    },
+    "frames.npz": {
+      "path": "research/experiments/REEF-field/runs/REEF-SHAM/frames.npz",
+      "sha256": "f31fc270415f03cc202f1d19627e2c51ffd4453e9b67c29b2ec64f9eeb76444a"
+    },
+    "trace.npz": {
+      "path": "research/experiments/REEF-field/runs/REEF-SHAM/trace.npz",
+      "sha256": "61f4576468b8d654c74340a5c8b56a6f52887e5da4b8d7d2f3ee0a00f331d1eb"
+    }
+  },
+  "wall_s": 8.312323331832886,
+  "status": "ok",
+  "run_id": "REEF-SHAM",
+  "kind": "sham",
+  "inputs": {
+    "glider": {
+      "snapshot": "GA",
+      "state_sha256": "982b793956a8336d96969d1cd5ed71e83604e78c1aa360819c334eaa098c25f1",
+      "path": "research/experiments/REEF-field/seeds/GA.npy",
+      "shift_cells": [
+        0,
+        0
+      ]
+    },
+    "ring": {
+      "state_sha256": "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+      "path": "research/experiments/REEF-field/seeds/S103.npy",
+      "shift_cells": [
+        -82,
+        -78
+      ]
+    },
+    "initial_state_sha256": "187fafe44a24e30db113fd9852af959daffb968eddbb356d8ca65ca2270b8085",
+    "geometry": {
+      "note": "sham: max distance from GA track",
+      "min_dist_R": 8.736
+    },
+    "component_initial_sha256": {
+      "G": "982b793956a8336d96969d1cd5ed71e83604e78c1aa360819c334eaa098c25f1",
+      "S": "2f29eb849ff8a4e3c78ed4390fe457cb35e409dbeaaf62f5f30c3d317242ab06"
+    }
+  },
+  "controls": {
+    "G": "REEF-SHAM:G (lockstep)",
+    "S": "REEF-SHAM:S (lockstep)"
+  },
+  "final_state_sha256": "aec56bf70c151b74c1c89854fef20657ad5cd77aaa17dcf71a02d813817cf498",
+  "lockstep_final_state_sha256": {
+    "E": "aec56bf70c151b74c1c89854fef20657ad5cd77aaa17dcf71a02d813817cf498",
+    "G": "7fac2d9132cba04e9cfb7ef6e9835ab003e6e6cd444907644e11c2839aa69617",
+    "S": "2f29eb849ff8a4e3c78ed4390fe457cb35e409dbeaaf62f5f30c3d317242ab06"
+  },
+  "schedule": {
+    "seed": 20261020,
+    "position": -1
+  },
+  "result": {
+    "provisional_contact_tu": null,
+    "residual_max_before_contact": 1.2762013668066174e-13,
+    "residual_max_overall": 1.2762013668066174e-13,
+    "ncomp_E_final": 2,
+    "mass_final": {
+      "E": 0.8659927420096337,
+      "G": 0.48729451715756283,
+      "S": 0.378698224852071
+    },
+    "wall_sim_s": 6.847216844558716,
+    "wall_total_s": 8.312323331832886
+  },
+  "notes": ""
+}
