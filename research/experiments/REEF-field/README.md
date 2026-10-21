@@ -268,3 +268,10 @@ the clip and E(0) ≠ G(0) + S(0). That one cell is zeroed in the blob (removed 
 ≈ 1.5e-6 ΣA/R²), and the same masked blob is the blob-alone control. Resulting masses 0.48730 /
 0.48730 / 0.24365 ΣA/R², gyradius 0.47701 R. The θ_s supports were already disjoint and
 non-adjacent. Schedule over [X9, X10, X11] → **X9, X11, X10**.
+
+### F-009 (2026-10-21 07:16Z): D-022 X12 (generator committed before the run)
+
+`discovery.py plan-x12` → `jobs-x12.json`, `seeds/BLOB-X12.npy`: X9's placement (step-61 centre,
+P2 roll (64, 20), same masked cell) at 0.75 × X7's amplitude, same s; mass 0.36548 ΣA/R². This
+spends the discovery allowance (12 of 12). Regenerating the X9–X11 seeds with the refactored code
+gives identical files (checked: `git status` clean for `seeds/`).

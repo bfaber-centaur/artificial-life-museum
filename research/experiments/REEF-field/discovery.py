@@ -4,6 +4,7 @@
   python research/experiments/REEF-field/discovery.py run --protocol-addendum SHA [--procs 2]
   python research/experiments/REEF-field/discovery.py plan-reserve  # D-020: X9-X11 -> jobs-reserve.json
   python research/experiments/REEF-field/discovery.py run --jobs jobs-reserve.json --protocol-addendum SHA
+  python research/experiments/REEF-field/discovery.py plan-x12      # D-022: X12 -> jobs-x12.json
 
 X1-X6: same placement as the pilots (controls.json geometry: heading from each snapshot's
 whole-H G-alone fit, glider front / ring back extents along it, requested gap 4 R), at new b.
@@ -74,7 +75,8 @@ def blob(center, fixed=None):
                "centre_source": f"REEF-CTRL-GA pos at step {BLOB_STEP} (controls-series.npz GA_pos, wrapped)"}
 
 
-def plan_reserve():
+def plan_reserve(entries=(("X9", 61, "P2", 1.0), ("X10", 67, "P3", 1.0), ("X11", 61, "P2", 0.5)),
+                 outfile="jobs-reserve.json", decision="D-020 (reef/coordinator 2a1c60a)"):
     """D-020. X9: X7 blob at the GA-alone centroid at step 61, P2 roll. X10: step 67, P3 roll.
     X11: X9 at amplitude a/2, same s. a and s are X7's, not re-solved. The blob's truncated tail (r <= 4 s) reaches one cell that the
     ring fills (value 1.0), where blob + ring would exceed the clip; that cell is zeroed in the blob
@@ -85,7 +87,7 @@ def plan_reserve():
     S = np.load(HERE / "seeds" / "S103.npy")
     x7 = json.loads((HERE / "jobs-discovery.json").read_text())["blob"]  # X7's a and s, reused exactly
     jobs = []
-    for x, step, pilot, scale in (("X9", 61, "P2", 1.0), ("X10", 67, "P3", 1.0), ("X11", 61, "P2", 0.5)):
+    for x, step, pilot, scale in entries:
         p = next(q for q in c["geometry"]["pilots"] if q["pilot"] == pilot)
         centre = np.mod(pos[step], N)
         A, info = blob(centre, fixed=(x7["a"], x7["s_cells"]))
@@ -98,7 +100,7 @@ def plan_reserve():
                     amplitude_scale=scale, a_used=info["a"] * scale, mass_R2=float(A.sum() / R**2),
                     gyradius_R=gyradius(A, centre, R), centroid_yx=list(centroid(A)),
                     support_cells_gt_0_01=int((A > 0.01).sum()), masked_cells_under_ring=int(clash.sum()),
-                    masked_mass_cells=removed, geometry_of=pilot, decision="D-020")
+                    masked_mass_cells=removed, geometry_of=pilot, decision=decision.split()[0])
         info.pop("support_cells_gt_0.01", None)
         name = f"BLOB-{x}"
         meta = save_state(HERE / "seeds" / f"{name}.npy", A, {"name": name, "construction": info,
@@ -116,10 +118,10 @@ def plan_reserve():
     order = list(range(len(jobs)))
     random.Random(SEED).shuffle(order)
     sched = [dict(jobs[i], schedule={"seed": SEED, "position": k}) for k, i in enumerate(order)]
-    out = {"decision": "D-020 (reef/coordinator 2a1c60a)", "schedule_seed": SEED,
-           "shuffle": "random.Random(20261020).shuffle(list(range(3))) over [X9, X10, X11]",
+    out = {"decision": decision, "schedule_seed": SEED,
+           "shuffle": f"random.Random(20261020).shuffle(list(range({len(jobs)}))) over {[j['id'] for j in jobs]}",
            "order": [j["id"] for j in sched], "N": N, "H_tu": 50, "jobs": sched}
-    (HERE / "jobs-reserve.json").write_text(json.dumps(out, indent=1) + "\n")
+    (HERE / outfile).write_text(json.dumps(out, indent=1) + "\n")
     print(out["order"])
     for j in sched:
         print(j["id"], j["snapshot"], j["ring_shift"], json.dumps(j["geometry"]), json.dumps({k: j["blob"][k] for k in ("a_used", "mass_R2", "gyradius_R", "masked_cells_under_ring", "masked_mass_cells")}))
@@ -190,7 +192,7 @@ def run(addendum, procs, jobs_file="jobs-discovery.json"):
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
-    ap.add_argument("cmd", choices=["plan", "plan-reserve", "run"])
+    ap.add_argument("cmd", choices=["plan", "plan-reserve", "plan-x12", "run"])
     ap.add_argument("--jobs", default="jobs-discovery.json")
     ap.add_argument("--protocol-addendum", default="")
     ap.add_argument("--procs", type=int, default=2)
@@ -199,6 +201,8 @@ if __name__ == "__main__":
         plan()
     elif a.cmd == "plan-reserve":
         plan_reserve()
+    elif a.cmd == "plan-x12":  # D-022: X9 placement at 0.75 x amplitude
+        plan_reserve((("X12", 61, "P2", 0.75),), "jobs-x12.json", "D-022 (reef/coordinator e8bc4b0)")
     else:
         if not a.protocol_addendum:
             ap.error("--protocol-addendum required")
