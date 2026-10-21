@@ -155,3 +155,41 @@ ignition, and only slows (0.3, then ~0) once r95 nears (N/2)/R = 19.7 R, i.e. wh
 its own images. On N256 the same slow-down starts at r95 ≈ 10 R (= 9.8 R half-width) near 30 tu.
 The from-ignition fit (0.33–0.36) includes the acceleration phase. The front speed is about 70% of the
 glider speed (0.548). Single engine (alm) beyond 25 tu.
+
+## 8. Extra check (not a geometry): dose bracket X11/X12 at N512
+
+Lead request, 07:28Z. alm only. Inputs: reef/field `0141e90` `REEF-X11-E` (half-dose blob, 0.24 ΣA/R²)
+and `REEF-X12-E` (0.75× blob, 0.37) t = 0 states, moved to N512 by `make_variants.py` (common roll
++ centred embed; E = G + S preserved), each with its own blob-alone and ring-alone controls, 50 tu,
+scored every step (`checks/REEF-X1{1,2}-E-N512/`).
+
+- **X11 at N512: no ignition**, as at N256. E returns to the ring: E final sha256 = S-alone final
+  sha256 (`e77d5e26…`), and E mass = 0.378698 at every sample, identical to N256 through 50 tu.
+- **X12 at N512: ignites at 4.2 tu**, as at N256. E mass is identical to N256 (rel. diff < 1e-9)
+  until 22.7 tu. After that the N256 colony meets its own images: at 25 tu N256 has 67.9 and N512
+  69.2; at 50 tu 81.5 and 271 (103 → 851 bodies, still growing at N512).
+- The scorer labels both CONTROL_FAILURE (G_CONTROL_OUT_OF_CLASS), because its G rule expects a
+  glider, and the blob stand-in is not one. That is expected for stand-in runs, not a failure of the
+  check. Verdict: the dose bracket (0.24 no, 0.37 yes) is **not a world-size effect**.
+
+## 9. Final verdicts and the status each check supports
+
+Arithmetic: alm and alm_check FFT share NumPy FFT arithmetic. Only alm_check direct is
+independent arithmetic. Every direct check here is a window (3 → 25 tu), not the full 50 tu.
+
+| claim (scope) | evidence | status supported |
+|---|---|---|
+| S103 is an exact fixed point at R13, T10/T40, N128/N256 (C042) | bitwise on alm, chkfft, direct; margins +0.028 / −0.125 | INDEPENDENTLY_CHECKED (reproduced, plus different arithmetic) |
+| 2×2 block S103 at R26 is not an exact fixed point; it is a fluctuating static body (300 tu) | alm only | OBSERVED |
+| GA stays GLIDER through 100 tu at T20, N512 and R26 | alm only; T20 speed +7.7% | OBSERVED |
+| P2 and P3 (GA, b = 0 and +1 R): contact at 6.1 / 6.7 tu → fusion → expanding colony (FISSION by the frozen classes), ignition at 14.7 / 18.0 tu | clean replay bitwise; chkfft bitwise; direct window identical in class, t_int, t_c, ignition, bodies, masses (≤ 1e-12 rel) | **REPRODUCED; independent arithmetic agrees through 25 tu** |
+| Same, under refinement: qualitative outcome | T20 and R26 (own controls) give the same contact → colony fate; N512 is identical through t_c + 20 | qualitative outcome robust to T, R and world size |
+| Same, quantitative: ignition time, E mass at t20/t25 | T20 ignites 2.1–3.1 tu earlier, R26 0.9–4.3 tu earlier; masses differ 16–62%; t_c shifts 0.5–0.55 tu at T20 | **NUMERICALLY_FRAGILE** (fails the frozen 1% mass and 0.5 tu t_c tolerances) |
+| Colony front speed ≈ 0.39 ± 0.02 R/tu, constant until the colony meets its own images | N512, alm only, P2 and P3 | OBSERVED (world-size-checked, single arithmetic route) |
+| Dose bracket for a passive blob at the P2 contact position: no ignition at 0.24, ignition at 0.37 | X11/X12 at N512 behave as at N256 | not a world-size effect (OBSERVED, alm only) |
+
+Omitted or incomplete checks, disclosed: no direct run beyond 25 tu, and none on any refinement
+variant. The R26 S-alone control fails the scorer's frozen exact-mass ring rule (D-010 replaces it;
+rows handed to the behavior lane for rescoring). Direct-vs-alm differences grow by about ×2 per tu
+after ignition (6e-9 at 25 tu), so individual colony bodies after about 50 tu are not
+arithmetic-robust, even though aggregates are.
