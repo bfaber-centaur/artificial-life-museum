@@ -1,0 +1,40 @@
+{
+  "N": 256,
+  "T": 10,
+  "base": "190b2b9dbb056105db714f9eef88c3de1a8935cd",
+  "engine": "alm",
+  "environment": {
+    "machine": "x86_64",
+    "numpy": "2.3.5",
+    "platform": "Linux-6.18.55-x86_64-with-glibc2.39",
+    "python": "3.12.14",
+    "scipy": "1.17.0"
+  },
+  "git_sha": "60bf05271c869e51853e20bb071a1d8d6f7bb0b5",
+  "git_status": "?? research/experiments/REEF-nucleation/results/\n",
+  "horizon": 25,
+  "inputs": {
+    "A1.45": "f480166d569d951426ebbee46d6cb09038e8c15f8c2faa509f5c84c96de08fc7",
+    "B16": "41a06dfa43adaf9a1416b319ea89dda60bfac427d09a8572e6d51b3d33ba6b06",
+    "blank": "07854d2fef297a06ba81685e660c332de36d5d18d546927d30daad6d7fda1541",
+    "contact0.5": "f5841a1f1e33d2e40263b9bc351ac32de0fa873ce42ae16e0a87c302232ed7f7",
+    "contact0.75": "b72ba8a5d4dad67795adb2bd3820866c87d333ae92a0197c2fbe491a38291c9f",
+    "ring": "04d9cc0389df281c6894606215b109bd7e0d843da4ef7454445358625fa1f870"
+  },
+  "order": [
+    "blank",
+    "contact0.5",
+    "B16",
+    "A1.45",
+    "contact0.75",
+    "ring"
+  ],
+  "seed": 20261021,
+  "sources": {
+    "research/experiments/REEF-behavior/track.py": "0cd74300880f7ff38c4f5b01d8b02ff26225e52eaf06505622000e2c581ea20a",
+    "research/experiments/REEF-nucleation/PROTOCOL.md": "2501767907889a5c6db6fae8951f141da7c6006f27320a34f8fe8f080a37e5fe",
+    "research/experiments/REEF-nucleation/run.py": "58a7afcb00a171f3e995a4ee51f113ce7612b36250ec31f91b873b34f935bb33",
+    "src/alm/lenia.py": "1ebd3eef470060d2b23410d465e0e475419541f81df9d82ab8a0e7bbd6288616",
+    "src/alm_check/lenia.py": "b9af4d9474f6ee9752108a9167cb82a03ea3d8eb50440168bfa09706264241f4"
+  }
+}

@@ -1,0 +1,302 @@
+[
+  {
+    "N": 512,
+    "censored_at": null,
+    "center_yx": [
+      256.3510148974147,
+      255.87640202215817
+    ],
+    "condition": "blank",
+    "engine": "alm",
+    "files": {
+      "final.npy": "aafc9548ec25eebe3fa32cb2e88e9962d53e4d544377513866acb9960d12f75d",
+      "initial.npy": "aafc9548ec25eebe3fa32cb2e88e9962d53e4d544377513866acb9960d12f75d",
+      "series.csv": "f8cffdda0750e9202953fb9c118c2121a7f9f08f956fe2ac4c5897a20a95a734",
+      "snapshots.npz": "484188ee48d09aa27bad55f810cf440b78f60611242886e2de2fa0eeffc90257",
+      "steps.csv": "9eb044583ff2dc3746127abe025502ff08346b45818c069b6dfcb8c59ad63326"
+    },
+    "final": {
+      "bodies": 0,
+      "mass": 0.0,
+      "max_change": 0.0,
+      "radius": 0.0,
+      "time": 25.0
+    },
+    "final_sha256": "5647f05ec18958947d32874eeb788fa396a05d0bab7c1b71f112ceb7e9b31eee",
+    "final_time": 25.0,
+    "horizon": 25,
+    "initial": {
+      "bodies": 0,
+      "mass": 0.0,
+      "max_change": 0.0,
+      "radius": 0.0,
+      "time": 0.0
+    },
+    "initial_sha256": "5647f05ec18958947d32874eeb788fa396a05d0bab7c1b71f112ceb7e9b31eee",
+    "outcome": "EVAPORATION",
+    "peak": 0.0,
+    "rule": {
+      "R": 13,
+      "T": 10,
+      "beta": [
+        1.0
+      ],
+      "dt": 0.1,
+      "growth": "poly",
+      "kernel": "poly",
+      "mu": 0.155,
+      "sigma": 0.02
+    },
+    "scored_through": 25.0
+  },
+  {
+    "N": 512,
+    "censored_at": null,
+    "center_yx": [
+      256.3510148974147,
+      255.87640202215817
+    ],
+    "condition": "contact0.5",
+    "engine": "alm",
+    "files": {
+      "final.npy": "598e558327f956d65aa45841fa97885f0b853b7bd380cc4c2e67b5b66c7b81ff",
+      "initial.npy": "29fcf8ab65b870f0344886e28367aff24e406681bb97f02bd0abf3edd128da6a",
+      "series.csv": "ff6f1d7fce176708a227dc3bc7d60b476df994defca97fe00eef17c7ca8cf340",
+      "snapshots.npz": "e59e5e6a10b1306a81083b29dec84504f69a44c3fc5107104f1343b29eb121f3",
+      "steps.csv": "a2c71c4ec08618ca6f583bb7a25014c1bb7f8ec0953d8b94a19dd4017d8c772d"
+    },
+    "final": {
+      "bodies": 1,
+      "mass": 0.378698224852071,
+      "max_change": 0.0,
+      "radius": 2.2167453370651033,
+      "time": 25.0
+    },
+    "final_sha256": "7627f4919f2cd9e23ab10522a4f3bb032df6373fec6596af89b44ff4fbed3d86",
+    "final_time": 25.0,
+    "horizon": 25,
+    "initial": {
+      "bodies": 2,
+      "mass": 0.6223498148829821,
+      "max_change": 0.0,
+      "radius": 2.2167453370651033,
+      "time": 0.0
+    },
+    "initial_sha256": "ced2a3a3117f61ae675f8a9aac1b9e7d6c88d39f0eaba5ba0b0b355c6c3cbe89",
+    "outcome": "STABLE_LOCALIZED",
+    "peak": 1.0,
+    "rule": {
+      "R": 13,
+      "T": 10,
+      "beta": [
+        1.0
+      ],
+      "dt": 0.1,
+      "growth": "poly",
+      "kernel": "poly",
+      "mu": 0.155,
+      "sigma": 0.02
+    },
+    "scored_through": 25.0
+  },
+  {
+    "N": 512,
+    "censored_at": null,
+    "center_yx": [
+      256.3510148974147,
+      255.87640202215817
+    ],
+    "condition": "B16",
+    "engine": "alm",
+    "files": {
+      "final.npy": "aafc9548ec25eebe3fa32cb2e88e9962d53e4d544377513866acb9960d12f75d",
+      "initial.npy": "8563e0171c264e534f58bc0e7e35b35685086a32fd829707c45b4caafd3e07e7",
+      "series.csv": "241aed8d72f4e1254eb326dba78611a85d9d6f46330046686dbb6dc8d9565686",
+      "snapshots.npz": "7aee0f02982750824ffab97d88dd4b5ef1adc1df7f0696b4e05d23a76605f0b4",
+      "steps.csv": "081780901c7d72c3479a3531b949e6289a8cc1751197d865d2886cbfec0f31c8"
+    },
+    "final": {
+      "bodies": 0,
+      "mass": 0.0,
+      "max_change": 0.0,
+      "radius": 0.0,
+      "time": 25.0
+    },
+    "final_sha256": "5647f05ec18958947d32874eeb788fa396a05d0bab7c1b71f112ceb7e9b31eee",
+    "final_time": 25.0,
+    "horizon": 25,
+    "initial": {
+      "bodies": 1,
+      "mass": 7.796830301406818,
+      "max_change": 0.0,
+      "radius": 3.9244735278532312,
+      "time": 0.0
+    },
+    "initial_sha256": "2d09125d7555812d201ae300eafa9a93ac2bc62c1b9369b2c0aeb74464da1dd4",
+    "outcome": "EVAPORATION",
+    "peak": 0.6799555168792724,
+    "rule": {
+      "R": 13,
+      "T": 10,
+      "beta": [
+        1.0
+      ],
+      "dt": 0.1,
+      "growth": "poly",
+      "kernel": "poly",
+      "mu": 0.155,
+      "sigma": 0.02
+    },
+    "scored_through": 25.0
+  },
+  {
+    "N": 512,
+    "censored_at": null,
+    "center_yx": [
+      256.3510148974147,
+      255.87640202215817
+    ],
+    "condition": "A1.45",
+    "engine": "alm",
+    "files": {
+      "final.npy": "aafc9548ec25eebe3fa32cb2e88e9962d53e4d544377513866acb9960d12f75d",
+      "initial.npy": "2601d8823571c9378dcebdbea00d047347b194418a43c68c4a4724cc5260e705",
+      "series.csv": "326753459c0f476493db27bafd75eef028f94524583b32f28903fb971e08b2ea",
+      "snapshots.npz": "0ea11c4f1c56345c4a92e8ba7851e8081d2f84f24fcdc068b376859ce3333a9e",
+      "steps.csv": "763d271e6a8b786e83aec1ef7a7f1366980a37f684066c128f21a3c91350b658"
+    },
+    "final": {
+      "bodies": 0,
+      "mass": 0.0,
+      "max_change": 0.0,
+      "radius": 0.0,
+      "time": 25.0
+    },
+    "final_sha256": "5647f05ec18958947d32874eeb788fa396a05d0bab7c1b71f112ceb7e9b31eee",
+    "final_time": 25.0,
+    "horizon": 25,
+    "initial": {
+      "bodies": 1,
+      "mass": 0.7065896110896424,
+      "max_change": 0.0,
+      "radius": 1.0233975333621013,
+      "time": 0.0
+    },
+    "initial_sha256": "e28012c3b20e4f9905de0961070f932f6a2f929c69a2ab051a8f24983257fb98",
+    "outcome": "EVAPORATION",
+    "peak": 0.98262115249318,
+    "rule": {
+      "R": 13,
+      "T": 10,
+      "beta": [
+        1.0
+      ],
+      "dt": 0.1,
+      "growth": "poly",
+      "kernel": "poly",
+      "mu": 0.155,
+      "sigma": 0.02
+    },
+    "scored_through": 25.0
+  },
+  {
+    "N": 512,
+    "censored_at": null,
+    "center_yx": [
+      256.3510148974147,
+      255.87640202215817
+    ],
+    "condition": "contact0.75",
+    "engine": "alm",
+    "files": {
+      "final.npy": "5deb50b30ec3eb0a936ffd031005289d03f0244308b75dd228279b10e3bc45e2",
+      "initial.npy": "13dcebfc4be6a8b370c0c727e7134847a1fc373a68b5371239aeb67a6e2e500a",
+      "series.csv": "523bc2676d60d7e17e33fae55ec295361f2c3e0cb86adc7176d3cad8bb0899c3",
+      "snapshots.npz": "30d5411976b589484324a69222fd9fded6f597f496dc09a66febb4fa263569cc",
+      "steps.csv": "bffb9b71c72fc9984cd8cfbd5e421c47ffaca5ddaea42a732e69392d5057d7bf"
+    },
+    "final": {
+      "bodies": 177,
+      "mass": 69.21912194881683,
+      "max_change": 0.9796966114430523,
+      "radius": 11.422030828627259,
+      "time": 25.0
+    },
+    "final_sha256": "04ad7a7ab2ca01139355a6b60af3be09aa66f0753483218b184dd5a793f645c2",
+    "final_time": 25.0,
+    "horizon": 25,
+    "initial": {
+      "bodies": 2,
+      "mass": 0.7441756098984378,
+      "max_change": 0.0,
+      "radius": 2.2167453370651033,
+      "time": 0.0
+    },
+    "initial_sha256": "d34fc56ff372414a6476c676295108cdcf785b308700222b818651c6e7abd72c",
+    "outcome": "EXPANDING_COLONY",
+    "peak": 1.0,
+    "rule": {
+      "R": 13,
+      "T": 10,
+      "beta": [
+        1.0
+      ],
+      "dt": 0.1,
+      "growth": "poly",
+      "kernel": "poly",
+      "mu": 0.155,
+      "sigma": 0.02
+    },
+    "scored_through": 25.0
+  },
+  {
+    "N": 512,
+    "censored_at": null,
+    "center_yx": [
+      256.3510148974147,
+      255.87640202215817
+    ],
+    "condition": "ring",
+    "engine": "alm",
+    "files": {
+      "final.npy": "598e558327f956d65aa45841fa97885f0b853b7bd380cc4c2e67b5b66c7b81ff",
+      "initial.npy": "598e558327f956d65aa45841fa97885f0b853b7bd380cc4c2e67b5b66c7b81ff",
+      "series.csv": "cc8c2f0bc58066e87b3135ac5b7128273ef034a0aec020c6294dfd72522ee8b1",
+      "snapshots.npz": "fddaaa703535e81d64f99f0b5ad70e9c46f56286bb135dc782f2654deb508bc1",
+      "steps.csv": "4617eedbdbbea1b352cb7827f9d52629fd8c84690f7898c7725deab053c2d99b"
+    },
+    "final": {
+      "bodies": 1,
+      "mass": 0.378698224852071,
+      "max_change": 0.0,
+      "radius": 2.2167453370651033,
+      "time": 25.0
+    },
+    "final_sha256": "7627f4919f2cd9e23ab10522a4f3bb032df6373fec6596af89b44ff4fbed3d86",
+    "final_time": 25.0,
+    "horizon": 25,
+    "initial": {
+      "bodies": 1,
+      "mass": 0.378698224852071,
+      "max_change": 0.0,
+      "radius": 2.2167453370651033,
+      "time": 0.0
+    },
+    "initial_sha256": "7627f4919f2cd9e23ab10522a4f3bb032df6373fec6596af89b44ff4fbed3d86",
+    "outcome": "STABLE_LOCALIZED",
+    "peak": 1.0,
+    "rule": {
+      "R": 13,
+      "T": 10,
+      "beta": [
+        1.0
+      ],
+      "dt": 0.1,
+      "growth": "poly",
+      "kernel": "poly",
+      "mu": 0.155,
+      "sigma": 0.02
+    },
+    "scored_through": 25.0
+  }
+]
