@@ -35,7 +35,7 @@ So contact → fusion → ignition holds through 25 tu across arithmetic (direct
 
 - **Placed where the glider is at t = 5.5 tu (X7, X8), 9–12 cells from the ring:** the blob evaporates in 1.4 tu without touching it. The ring returns bitwise, and the final world equals ring-alone bitwise. The same mass 9–12 cells away decays without effect (one distance, one dose tested).
 - **Placed in contact, where the glider is at t_c (X9, X10):** the same ignition and colony (79–87 bodies at the window end).
-- **Dose at the contact position:** 0.5× (0.24 ΣA/R², X11) does not ignite, and the ring returns bitwise. 0.75× (0.37, X12) and 1.0× (0.49) ignite. The glider carries 0.49.
+- **Dose at the contact position:** 0.5× (0.24 ΣA/R², X11) does not ignite, and the ring returns bitwise. 0.75× (0.37, X12) and 1.0× (0.49) ignite. The glider carries 0.49. An N512 rerun of X11 and X12 gives the same outcomes, so the bracket is not a world-size effect (numerics README §8; `alm` only).
 
 We interpret this as the ring being the excitable partner: **the glider is a delivery vehicle for enough mass in contact, not a necessary ingredient.** The empty-world nucleation test that would separate this from a metastable empty state (next experiment 2) has not been run. This agrees with the Night 0 S103 dossier: a frontal Gaussian addition (I003) of 0.10 returns S103, while ≥ 0.30 "fills the world". That was a different shape and placement, so it is consistent with our bracket, not directly comparable.
 

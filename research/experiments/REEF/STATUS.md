@@ -22,6 +22,8 @@ Updated by the coordinator lane at gates and meaningful failures. Times UTC (Pac
 | 07:55Z | Report, C052–C055, C038/C041 amendments, museum Room 7. |
 | 08:00Z | Hostile integration review: changes R1–R9 applied; **approved** (reef/behavior a4cf403). |
 | 08:05Z | Integration PR #41 opened (reef/coordinator → main). Bobby merges. |
+| 08:13Z | R26 rescored from per-step rows; labels unchanged (D-025). |
+| 08:30Z | Numerics final imported (1a01fce): N512 dose check confirms bracket (D-026). All lanes final. PR #41 CI green; awaiting Bobby. |
 | 06:00Z | Numerics Gate A items delivered (8ebf557): S103 fixed point, upstream tests ran (105/0/0), replay tool. R26 ring not a fixed point (D-010). |
 
 ## Gates
@@ -40,5 +42,5 @@ Updated by the coordinator lane at gates and meaningful failures. Times UTC (Pac
 |---|---|---|---|
 | coordinator | reef/coordinator | (this commit) | integration |
 | field | reef/field | 0141e90 | done: 26-run registry |
-| numerics | reef/numerics | e7d4ef6 | §9 matrix; final README pending |
-| behavior | reef/behavior | a4cf403 | scores, exhibit A–F, integration review |
+| numerics | reef/numerics | 1a01fce | final |
+| behavior | reef/behavior | ae899e2 | final; review approved |

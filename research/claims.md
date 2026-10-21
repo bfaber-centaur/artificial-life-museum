@@ -1795,7 +1795,7 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
 
 ### C054 — A passive, mass-matched Gaussian placed in contact with S103 ignites the same colony; at half the mass it does not, and the same mass 9–12 cells away evaporates without effect
 
-- **Status:** OBSERVED (single engine `alm`, N256; preregistered as discovery geometries X7–X12, D-018/D-020/D-022)
+- **Status:** OBSERVED (single engine `alm`; N256, with X11/X12 also at N512; preregistered as discovery geometries X7–X12, D-018/D-020/D-022)
 - **Owner lane:** REEF field (runs), behavior (scores)
 - **Sources:** `REEF-field/README.md` F-007–F-009; `REEF-behavior/audit/discovery-table.md`
 - **Specimen / version:** S103 at the P2/P3 positions; isotropic Gaussian a·exp(−r²/2s²), s = 4.3907 cells, truncated at 4s, a = 0.68011 (mass 0.4873, gyradius 0.477 R), scaled for doses
@@ -1807,7 +1807,7 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
 - **Run IDs:** REEF-X7-E … REEF-X12-E with blob-alone and ring-alone controls
 - **Search / parameter bounds:** one shape, one width, three doses at one position; two positions at full dose
 - **Reproduction command:** see the report
-- **Known caveats:** single engine and world size (an N512 check of X11/X12 was requested from numerics; see the report). The I003 result in the S103 dossier is a different shape and placement and is consistent but not directly comparable. X9–X12 zero one blob-tail cell overlapping a full ring cell (−1.5e-6 ΣA/R², D-021).
+- **Known caveats:** single engine (`alm`). World size checked: X11 and X12 rerun at N512 (numerics extra check, reef/numerics `1a01fce`, README §8) give the same outcomes (X11 E final = S-alone final bitwise; X12 ignites at 4.2 tu, mass identical to N256 to < 1e-9 rel until the N256 colony meets its images at 22.7 tu). The I003 result in the S103 dossier is a different shape and placement and is consistent but not directly comparable. X9–X12 zero one blob-tail cell overlapping a full ring cell (−1.5e-6 ΣA/R², D-021).
 - **History:**
   - 2026-10-21 — OBSERVED — REEF expedition.
 

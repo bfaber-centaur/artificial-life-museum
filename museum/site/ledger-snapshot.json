@@ -1,6 +1,6 @@
 {
   "ledger": "research/claims.md",
-  "ledger_sha256": "dbf8ec9397c277e85911bdae76e72aa4138f14ac4246149a8fc335a1bfea83f8",
+  "ledger_sha256": "19e63f59d6a78d8f26a3a6b9b4adc3ef2ac78b97d290598e11c41b38e6770c65",
   "ledger_commit": "c8c8740",
   "conventions_sha256": "0e237384e0425b3c325229cf650ab6f9807fb08c1bedc991433b54b13c2eb02f",
   "claims": {
@@ -215,7 +215,7 @@
     },
     "C054": {
       "status": "OBSERVED",
-      "status_text": "OBSERVED (single engine `alm`, N256; preregistered as discovery geometries X7–X12, D-018/D-020/D-022)",
+      "status_text": "OBSERVED (single engine `alm`; N256, with X11/X12 also at N512; preregistered as discovery geometries X7–X12, D-018/D-020/D-022)",
       "rooms": [
         "reef"
       ]
