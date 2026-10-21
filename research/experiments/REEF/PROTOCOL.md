@@ -113,6 +113,32 @@ These are recorded so they can fail.
 - **Pr4.** Snapshot (GA vs GB) changes the class in at most one of the three offsets.
 - **Pr5.** No pilot gives FILL.
 
-## 11. Gate A addendum (to be filled before pilots)
+## 11. Gate A addendum (frozen 2026-10-21 06:10Z, before any encounter run)
 
-_Pending field and behavior handoffs: θ_s, θ_int (with sham floor), ring tolerance, θ_defl, δ_lat, glider acceptance tolerances, N, H, t_cen for each pilot geometry._
+Inputs: field reef/field @ `bc95885` (settle, controls, geometry, sham, timing); numerics reef/numerics @ `8ebf557`, `2da5996`. Values below come from isolated runs and the sham only.
+
+**Seeds and world.** GA = settled step 5000 (sha256 `982b7939…`), GB = step 5005 (`63e381b8…`); the settle needed the one allowed extension to 500 tu (heading drift 1.55° between halves of the first 200-tu assessment). No intrinsic glider period was found (mass period 4.61 steps = grid crossing, 1/|v_x|), so GA/GB are **elapsed-time snapshots 0.5 tu apart, not phases**. S103 N256 sha256 `1e9aa713…`, bitwise fixed. N = 256 is kept: undisturbed t_cen > H for all six pilots, and under any single post-contact turn the earliest image hit is 32.8 tu, after t_c + 20 tu (≤ 28.2 tu). H = 50 tu is kept.
+
+**Isolated baselines** (H = 50, 1-tu windows, mean ± sd): speed 0.5484 ± 0.0012 R/tu, heading 72.297 ± 0.09°, mass 0.48729 ± 0.00012, gyradius 0.47743 ± 0.00012 R. GA and GB fits agree to 0.0002°.
+
+**Frozen values.**
+
+| symbol | value | basis |
+|---|---|---|
+| θ_s | 0.01 | field proposal; the speck problem below does not depend on θ_s (seen down to 1e-6) |
+| body vs debris | a component is a **body** if its mass ≥ 0.005 ΣA/R²; smaller components are **debris**, excluded from component counts and reported as debris mass. Flag DEBRIS_HIGH if total debris > 0.01 at any sample | the isolated glider sheds single-cell specks (≤ 0.001, ≤ 2.3 cells from the body) in 13% of steps; unfiltered, every control would score FISSION |
+| θ_int | 1e-10 | sham residual floor 1.3e-13 at 50 tu (N256), so ≈ 770× floor |
+| heading, lateral, longitudinal | straight-line fit to the unwrapped G-body centroid over the last 5 tu of the window, compared to the G-alone fit over the same times | |
+| θ_defl | 1.0° | ≈ 11× the 1-tu heading sd |
+| δ_lat | 0.1 R lateral offset vs control at the window end | |
+| SHIFT flag | longitudinal lead/lag vs control ≥ 0.1 R (signed); does not by itself change a PASS | a slowdown during contact without deflection |
+| glider unchanged | body mass and speed within ±2% of the control over the last 5 tu | |
+| ring | RING_EXACT flag if the S-body region is bitwise equal to S-alone; otherwise mass and gyradius within ±1% → RING_PERTURBED flag (still in tolerance); outside ±1% → RING_CHANGED. RING_MOVED flag if the ring centroid moves ≥ 0.1 R | |
+| TEMP_BIND | G and S in one body component, or supports 8-adjacent, for ≥ 2 tu, then two bodies again inside the window | |
+| CAPTURE | one body component, or supports 8-adjacent, continuously for the last 5 tu of the window | |
+| t_cen | recomputed by the tracker on the measured tracks: the first time any body centroid comes within (r_G + r_S + 3 R) of a periodic image of another body it has not already met, or of the ring again after separating (r = max support distance from the body centroid) | |
+| window | ends at min(t_c + 20 tu, t_cen, 50 tu); NO_CONTACT if no t_c by 30 tu | |
+
+**Failed preregistered acceptance (kept):** the field lane's own one-component glider acceptance failed because of the specks; the debris rule above replaces it for every run, including controls.
+
+**Gate A remains open** until the behavior lane's tracker passes its translation, wrap, merge and split tests and implements this contract. No encounter run before the Gate A pass is logged in DECISIONS.md.
