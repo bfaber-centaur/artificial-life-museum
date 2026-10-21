@@ -51,3 +51,16 @@ approach timeout + 20-tu follow-up with margin). Measured: unwrapped track, fitt
 heading per 10-tu window, mass, component count, and minimum-image distance of the track from
 every periodic image of a candidate ring site (for the torus re-encounter window). Exact float64
 states saved at 0 and every 10 tu; hashes recorded.
+
+### F-004 (2026-10-21 ~06:10Z): adopt protocol v1 (reef/coordinator `5a6cce6`)
+
+Protocol v1 governs these runs where it differs from F-001–F-003:
+- Snapshots (replaces the GB choice rule in F-002): if the assessed glider has a measurable
+  period P that is **not** explained by grid crossing (dominant mass period within 10% of
+  1/|vx| or 1/|vy| counts as grid crossing), GA = phase 0 and GB = P/2. Otherwise GA = the
+  settled seed and GB = GA + 5 steps (0.5 tu), labelled elapsed-time snapshots. The sub-cell
+  fractional centroid of each is still recorded.
+- Isolated controls run H = 50 tu (D-005), plus gyradius, and window noise (sd over 1-tu
+  windows) for mass, speed, heading and gyradius. The 100-tu run of F-003 is kept as a
+  longer validation of GA only.
+- One manifest per run in `runs.jsonl` (schema `REEF/manifest.schema.json`).
