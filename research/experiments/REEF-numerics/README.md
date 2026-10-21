@@ -86,3 +86,21 @@ engine (alm), single seed method (block).
 Consequence for the §9 R26 check: the R26 S-alone control is a fluctuating body, not a frozen one, so
 ring tolerance and the interaction residual floor at R26 must come from its own controls/sham, and
 "ring unchanged" cannot mean bitwise at R26.
+
+## 6. Does GA stay GLIDER under the refinement settings? (lead request, 06:01Z)
+
+`glider/glider_variants.py` on the field lane's `GA` (reef/field `5f21378`, state sha256 `982b7939…25f1`),
+100 tu each, classes per 10-tu window (protocol §7 motion classes):
+
+| setting | class (all 10 windows) | net speed R/tu | heading | mass R² |
+|---|---|---|---|---|
+| base T10 N256 | GLIDER | 0.548–0.549 | 72.3° | 0.486–0.488 |
+| T20 N256 | GLIDER | 0.590–0.591 (+7.7%) | 72.1–72.3° | 0.482–0.485 (−0.8%) |
+| N512 T10 (centred embed) | GLIDER | identical to base | 72.3° | identical to base |
+| R26 kron N512 | GLIDER | 0.548–0.549 | 72.5–72.7° | 0.487–0.488 |
+
+So the T20 check can compare phenotypes through at least 100 tu (unlike the earlier T40 STATIC
+outcome); its glider is ~8% faster, consistent with Lane 3's timestep-fragile speed, so T20 encounter
+geometry should be compared in its own controls' units. Single engine (alm). The `components` column
+uses a quick seam-merge counter that is not the behavior lane's tracker; its counts > 1 are not evidence
+of fragmentation.
