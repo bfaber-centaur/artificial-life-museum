@@ -1,0 +1,104 @@
+{
+ "commit": "e7d4ef6b8f5a5189c3ad324fe50b48ca1afaba98",
+ "commit_dirty": false,
+ "E_equals_G_plus_S_input": true,
+ "inputs": {
+  "E": {
+   "path": "/tmp/claude-0/-home-user-artificial-life-museum/20f9f418-77e1-5c1b-a2f1-57ba8e9492cf/scratchpad/in-X12/E.npy",
+   "sha256": "fcc86e3d22e7334bf1b4e526c528c23598fb1472f0820239959bb437ccd0be37"
+  },
+  "G": {
+   "path": "/tmp/claude-0/-home-user-artificial-life-museum/20f9f418-77e1-5c1b-a2f1-57ba8e9492cf/scratchpad/in-X12/G.npy",
+   "sha256": "40f944344abfdce86a515868fe685d1b240c9cb7be991952feccec11edf44c27"
+  },
+  "S": {
+   "path": "/tmp/claude-0/-home-user-artificial-life-museum/20f9f418-77e1-5c1b-a2f1-57ba8e9492cf/scratchpad/in-X12/S.npy",
+   "sha256": "371632556f2d1c90cdeb5f9b5ee1392fab15bb8ff57d2a599278e07ab0742554"
+  }
+ },
+ "variants": {
+  "T20": {
+   "transform": "identity",
+   "T": 20,
+   "E_equals_G_plus_S": true,
+   "mass_ratio": {
+    "E": 1.0,
+    "G": 1.0,
+    "S": 1.0
+   },
+   "files": {
+    "E": {
+     "state_sha256": "fcc86e3d22e7334bf1b4e526c528c23598fb1472f0820239959bb437ccd0be37",
+     "npy_file_sha256": "4e77d3661b820ef155468714e6e6f976d9851697647b553d518063461993d7bb"
+    },
+    "G": {
+     "state_sha256": "40f944344abfdce86a515868fe685d1b240c9cb7be991952feccec11edf44c27",
+     "npy_file_sha256": "e9c1d54cd233ef295849de3391b3617142f19a6dc1b56d113634d64d910e26ab"
+    },
+    "S": {
+     "state_sha256": "371632556f2d1c90cdeb5f9b5ee1392fab15bb8ff57d2a599278e07ab0742554",
+     "npy_file_sha256": "cd3ee8f67351332b1eaf24a4b3966d008b8b2f8197629ccacd84d2b1704ea4dc"
+    }
+   }
+  },
+  "R26": {
+   "transform": "np.kron(A, ones((2, 2)))",
+   "R": 26,
+   "N": 512,
+   "E_equals_G_plus_S": true,
+   "mass_ratio": {
+    "E": 4.0,
+    "G": 4.0,
+    "S": 4.0
+   },
+   "files": {
+    "E": {
+     "state_sha256": "67855cb13fd8bcff785336c9d70f7708de645bc7aa07b4eb5e70bdeeeae207ed",
+     "npy_file_sha256": "83730623428449a45761783df0e8b47902d2ebd0a5d33b67d28fc1d38fd15361"
+    },
+    "G": {
+     "state_sha256": "a4178e2ba2ab779e2643d9aec8a9d2f1174fc9db5c31f4267284d70e226762d7",
+     "npy_file_sha256": "892bea9c75005af5f4c2537f817c6953bde3411b293bebc2f4f5797e58716ec8"
+    },
+    "S": {
+     "state_sha256": "49a66423b239688bd5f7facaedb83f36efd80722a1ebbb77a175f1b4f6d43b8d",
+     "npy_file_sha256": "1c134e88594555ea90def222958b5cbf24e0cd726a093ab0bb6639c965b26c80"
+    }
+   }
+  },
+  "N512": {
+   "transform": "np.roll(A, (-47, -13), (0, 1)) then embed at offset (128, 128)",
+   "N": 512,
+   "roll": [
+    -47,
+    -13
+   ],
+   "offset": [
+    128,
+    128
+   ],
+   "empty_rows": 210,
+   "empty_cols": 221,
+   "E_equals_G_plus_S": true,
+   "mass_ratio": {
+    "E": 1.0,
+    "G": 1.0,
+    "S": 1.0
+   },
+   "files": {
+    "E": {
+     "state_sha256": "c80ba679cc90525e80457c67d5eef9487199c6b827097f20a45d0076c0f47c46",
+     "npy_file_sha256": "2d296d48926fee72043cc4f1a8085fd135d55761350b61aef39cba191572c884"
+    },
+    "G": {
+     "state_sha256": "f33becfbdf54068c427ed85172d542817adde86040c5baeceacc493a2017a738",
+     "npy_file_sha256": "92a4f92b2a565e2bfbce034505d3ddbe7a1801d174d157220c0b4d3e440006e4"
+    },
+    "S": {
+     "state_sha256": "e77d5e262ffebbd892fd4b7226ca348421026830bda47a51c3c1ff2de51c54d3",
+     "npy_file_sha256": "d94fea4f6a50c0aaa5f8bbdb754ecd45c4888cf6bcdb15c896aff95ff3ee70fb"
+    }
+   }
+  }
+ }
+}
