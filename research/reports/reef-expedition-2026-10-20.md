@@ -11,12 +11,12 @@
 
 The sequence is the same each time ([panel A](../experiments/REEF-behavior/exhibit/A-P2-main.png)):
 
-1. **Kernel-range overlap** at t_kr ≈ 3.6–4.2 tu.
-2. **Interaction onset**, measured as the encounter minus the sum of its two controls exceeding 1e-10 (≈ 770× the sham floor), at t_int 5.5–6.1 tu. That is 0.6–1.0 tu *before* visible support contact, as preregistered (Pr1, 12/12).
+1. **Kernel-range overlap** at t_kr ≈ 3.6–4.5 tu.
+2. **Interaction onset**, measured as the encounter minus the sum of its two controls exceeding 1e-10 (≈ 770× the sham floor), at t_int 5.5–6.8 tu. That is 0.6–1.0 tu *before* visible support contact, as preregistered (Pr1, 12/12).
 3. **Contact and fusion** at t_c 6.1–7.7 tu. The two bodies never separate again.
 4. **Ignition.** The fused body grows and breaks up from inside into small static ring and dumbbell bodies (median ≈ 0.2 ΣA/R², about half an S103). An advancing front lays the bodies down, and behind it the interior freezes (P2: mean |ΔA| per tu within 4 R falls from 0.12 to 0.011). At the end of the scored window (t_c + 20 tu) there are 47–114 bodies and mass is 26–50× the controls. By 50 tu about 300 bodies cover the N256 torus (mass ≈ 81).
 
-Under the classes frozen before any encounter, every run scores **FISSION**. A descriptive flag added afterwards (D-016), **PROLIFERATION**, says what that class understates. The fill fraction saturates at 0.22–0.24, just under the frozen FILL threshold of 0.25, because the colony is a sparse lattice.
+Under the classes frozen before any encounter, every run scores **FISSION**. A descriptive flag added afterwards (D-016), **PROLIFERATION**, says what that class understates. The frozen FILL test (> 25% of cells above 0.1) is not met: the fill fraction is 0.09–0.17 at the window end, and it saturates at 0.22–0.24 by about 50 tu (field lane), because the colony is a sparse lattice.
 
 **Independent checking (P2 head-on and P3 flank, chosen by the rule frozen in §8; matrix in [`REEF-numerics/checks/MATRIX.md`](../experiments/REEF-numerics/checks/MATRIX.md), [panel F](../experiments/REEF-behavior/exhibit/F-check-matrix.png)):**
 
@@ -27,17 +27,17 @@ Under the classes frozen before any encounter, every run scores **FISSION**. A d
 | `alm_check` direct, 3→25 tu | same class, t_int/t_c/ignition identical, mass within 1e-12 rel | same | **different arithmetic agrees**; divergence grows ~0.7/tu after ignition (6e-9 at 25 tu) |
 | N512, R13, same separation | identical to N256 through 25 tu | identical | not a torus artifact inside the window |
 | T20, own controls | FISSION; ignition 3.1 tu earlier, mass +48–62% | FISSION; ignition 2.1 tu earlier, mass +27–35%, t_c −0.55 | outcome survives; **timing and mass outside the frozen tolerance** |
-| R26 (2×2 block, N512), own controls | FISSION + PROLIFERATION (111 bodies); ignition 4.3 tu earlier, mass +32–41% | FISSION (63 bodies); ignition 0.9 tu earlier, mass +16–28% | outcome survives, but against a ring that is itself relaxing at R26 (D-010, D-024, C048): a weaker check |
+| R26 (2×2 block, N512), own controls | FISSION + PROLIFERATION (111 bodies); ignition 4.3 tu earlier, mass +32–41% | FISSION + PROLIFERATION (63 bodies); ignition 0.9 tu earlier, mass +16–28% | outcome survives, but against a ring that is itself relaxing at R26 (D-010, D-024, C048), with classes scored from 1-tu float64 checkpoints: a weaker check |
 
-So the qualitative outcome, contact → fusion → world-covering colony, holds across arithmetic, world size, timestep and resolution. The *when* and *how much* do not: ignition time and colony mass are numerically fragile in T and R.
+So contact → fusion → ignition holds through 25 tu across arithmetic (direct route, 3–25 tu), world size (N512), timestep (T20) and, as a weaker check, resolution (R26, D-024). The world-covering stage after that was watched with `alm` only. Both routes were scored by the same tracker (`REEF-behavior/score.py`). The *when* and *how much* do not: ignition time and colony mass are numerically fragile in T and R.
 
 **Mechanism test (the most informative discovery runs).** Replacing the glider with a static, mass-matched Gaussian blob (0.487 ΣA/R², same gyradius) showed three things:
 
-- **Placed where the glider is at t = 5.5 tu (X7, X8), 9–12 cells from the ring:** the blob evaporates in 1.4 tu without touching it. The ring returns bitwise, and the final world equals ring-alone bitwise. Nearby mass that decays does nothing.
+- **Placed where the glider is at t = 5.5 tu (X7, X8), 9–12 cells from the ring:** the blob evaporates in 1.4 tu without touching it. The ring returns bitwise, and the final world equals ring-alone bitwise. The same mass 9–12 cells away decays without effect (one distance, one dose tested).
 - **Placed in contact, where the glider is at t_c (X9, X10):** the same ignition and colony (79–87 bodies at the window end).
 - **Dose at the contact position:** 0.5× (0.24 ΣA/R², X11) does not ignite, and the ring returns bitwise. 0.75× (0.37, X12) and 1.0× (0.49) ignite. The glider carries 0.49.
 
-The ring is the excitable partner. **The glider is a delivery vehicle for enough mass in contact, not a necessary ingredient.** This agrees with the Night 0 S103 dossier: a frontal Gaussian addition (I003) of 0.10 returns S103, while ≥ 0.30 "fills the world". That was a different shape and placement, so it is consistent with our bracket, not directly comparable.
+We interpret this as the ring being the excitable partner: **the glider is a delivery vehicle for enough mass in contact, not a necessary ingredient.** The empty-world nucleation test that would separate this from a metastable empty state (next experiment 2) has not been run. This agrees with the Night 0 S103 dossier: a frontal Gaussian addition (I003) of 0.10 returns S103, while ≥ 0.30 "fills the world". That was a different shape and placement, so it is consistent with our bracket, not directly comparable.
 
 **Novelty: not novel as a phenomenon.** Chan 2019 §3.5.5 (pdf p. 29) lists "Detonation, the resultant mass explodes into infinite growth" among Orbium collision outcomes. §3.3.1 (pdf p. 21) describes Class 2 "regional, periodic immobile patterns (e.g. Circium)". In-repo, S103's I003 fill and HR-009's world-filling S102 copy at this same rule were already known. What is new is narrow and OBSERVED/checked at this rule: the specific trigger (first contact of the settled coexistence glider with S103), the dose bracket for passive mass in contact, and the front-laid frozen lattice. See [`REEF-behavior/LITERATURE.md`](../experiments/REEF-behavior/LITERATURE.md), with a citation-existence check for every source.
 
@@ -54,7 +54,7 @@ Other recorded failures and repairs:
 
 ## 3. Remaining disagreement and open ends
 
-- **How strong is R26?** The behavior lane's mass-band variant scores R26 as CONTROL_FAILURE. The primary rule (one static body) scores FISSION. The disagreement is about whether a ring that is not a fixed point at R26 is a fair control. We report both labels and count R26 as a weaker check, not a clean pass.
+- **How strong is R26?** A disclosed variant (D-024): requiring ring-alone mass in 0.378–0.383 (the lead's unfrozen paraphrase of the numerics measurement) scores CONTROL_FAILURE, because the R26 ring-alone relaxes below the band at 4–11 tu, before contact. The primary rule (one static body) scores FISSION + PROLIFERATION. The open question is how strong a control a non-fixed-point ring is. We report both labels and count R26 as a weaker check, not a clean pass.
 - **Timing.** Ignition time is fragile in T and R (T20 −2.1 to −3.1 tu, R26 −0.9 to −4.3 tu). Any statement about *when* the reef ignites is NUMERICALLY_FRAGILE.
 - **The transition in offset lies outside the mandate's range.** No glancing pass was found up to |b| = 1.5 R. Wider offsets were not run.
 - **Mechanism.** The front-laid frozen lattice resembles depinning of a localized pattern in a bistable system (Knobloch 2015) and pushed fronts (van Saarloos 2003). These are testable analogues only, cited from abstracts. Self-replication is *not* supported: the interior freezes, and no division was seen.

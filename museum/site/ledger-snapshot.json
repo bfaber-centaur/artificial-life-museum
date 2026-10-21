@@ -1,6 +1,6 @@
 {
   "ledger": "research/claims.md",
-  "ledger_sha256": "7a377a6cbfef68de36a2c45da6ee823199fd5a5d17b2a2c9f948e9c3353001ba",
+  "ledger_sha256": "7bd9e567d5c006fe7642cde7f758a19df6292a16b6091c1464f3d47b35381059",
   "ledger_commit": "ef8a6ad",
   "conventions_sha256": "0e237384e0425b3c325229cf650ab6f9807fb08c1bedc991433b54b13c2eb02f",
   "claims": {
@@ -201,7 +201,7 @@
     },
     "C052": {
       "status": "INDEPENDENTLY_CHECKED",
-      "status_text": "INDEPENDENTLY_CHECKED for the qualitative outcome on two encounters (P2, P3): clean replay, `alm_check` direct-convolution window and N512 agree; T20 and R26 keep the outcome but not its timing (see C053). The other ten encounters are OBSERVED.",
+      "status_text": "INDEPENDENTLY_CHECKED for contact, fusion and ignition (FISSION + PROLIFERATION in the t_c + 20 window, through 25 tu) on P2 and P3 via `alm_check` direct convolution; clean replay bitwise. World coverage by ~50 tu is OBSERVED (`alm` only, including N512). T20 keeps the class but not its timing (C053); R26 is a weaker check (non-fixed-point ring, D-024; 1-tu checkpoint scoring). The other ten encounters are OBSERVED.",
       "rooms": [
         "reef"
       ]

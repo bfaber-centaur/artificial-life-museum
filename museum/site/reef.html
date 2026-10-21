@@ -46,14 +46,15 @@ was none of those.</p>
 </figure>
 <div class="label">
   <p class="obs"><strong>What you see.</strong> The glider and the ring start to affect each other
-  about half a time unit <em>before</em> they visibly touch, through the reach of the kernel. Once
+  half a time unit to one time unit <em>before</em> they visibly touch, through the reach of the kernel. Once
   they touch they fuse and never separate. The fused body swells, breaks up from inside into small
   static rings and dumbbells, and a front sweeps outward, laying down a frozen lattice behind it.
   Alone, the glider glides on and the ring does not change by a single bit.</p>
-  <p class="open"><strong>What the ledger says.</strong> <a class="claim" href="claims.html#C052" title="At the coexistence rule, first contact between the settled glider and S103 fuses them and ignites a world-covering colony of small static bodies; isolated controls stay in class"><span class="cid">C052</span><span class="badge s-INDEPENDENTLY_CHECKED" title="INDEPENDENTLY_CHECKED for the qualitative outcome on two encounters (P2, P3): clean replay, `alm_check` direct-convolution window and N512 agree; T20 and R26 keep the outcome but not its timing (see C053). The other ten encounters are OBSERVED.">indep. checked</span></a>. Twelve encounters at
+  <p class="open"><strong>What the ledger says.</strong> <a class="claim" href="claims.html#C052" title="At the coexistence rule, first contact between the settled glider and S103 fuses them and ignites a world-covering colony of small static bodies; isolated controls stay in class (bitwise ring at N256, R13)"><span class="cid">C052</span><span class="badge s-INDEPENDENTLY_CHECKED" title="INDEPENDENTLY_CHECKED for contact, fusion and ignition (FISSION + PROLIFERATION in the t_c + 20 window, through 25 tu) on P2 and P3 via `alm_check` direct convolution; clean replay bitwise. World coverage by ~50 tu is OBSERVED (`alm` only, including N512). T20 keeps the class but not its timing (C053); R26 is a weaker check (non-fixed-point ring, D-024; 1-tu checkpoint scoring). The other ten encounters are OBSERVED.">indep. checked</span></a>. Twelve encounters at
   offsets from −1.5 to +1.5 kernel radii all did this. Two of them were rerun from scratch, with a
   second implementation using a different arithmetic route, and in a world twice as wide; all
-  agreed. A finer timestep and a finer grid keep the outcome but move the timing
+  agreed through the first 25 time units, when the colony is already growing. The world-covering
+  stage was watched with one engine. A finer timestep and a finer grid keep the outcome but move the timing
   <a class="claim" href="claims.html#C053" title="The ignition time and colony mass of C052 depend on timestep and resolution"><span class="cid">C053</span><span class="badge s-NUMERICALLY_FRAGILE" title="NUMERICALLY_FRAGILE">num. fragile</span></a>.</p>
 </div>
 
@@ -85,9 +86,9 @@ was none of those.</p>
   </figure>
 </div>
 <div class="label">
-  <p class="obs">So the ring is the excitable partner. Enough mass pressed against it, from 0.37 of
-  the glider-mass unit upward, ignites it; 0.24 does not, and the ring heals exactly. A glider
-  carries 0.49, so it is simply a way to deliver the push.</p>
+  <p class="obs">We read this as the ring being the excitable partner. Masses from 0.37 upward
+  pressed against it ignite it; 0.24 does not, and the ring heals exactly. The glider carries 0.49
+  (same units), so it is one way to deliver the push.</p>
   <p class="open"><a class="claim" href="claims.html#C054" title="A passive, mass-matched Gaussian placed in contact with S103 ignites the same colony; at half the mass it does not, and the same mass 9–12 cells away evaporates without effect"><span class="cid">C054</span><span class="badge s-OBSERVED" title="OBSERVED (single engine `alm`, N256; preregistered as discovery geometries X7–X12, D-018/D-020/D-022)">observed</span></a> rests on one engine and one world size. Night 0 had already seen
   S103 "fill the world" when a bump was added in front of it, and Chan's 2019 paper lists
   "detonation" among Lenia collision outcomes. So the phenomenon is not new; what this room shows is
@@ -129,7 +130,7 @@ was none of those.</p>
 <nav class="walk" aria-label="Tour"><a class="prev" href="under-review.html"><small>Back</small>Still being argued</a><span></span></nav>
 </main>
 <footer class="site">
-  <p>Claim statuses read from <code>research/claims.md</code> (sha256 <code>7a377a6cbfef</code>) when this page was built.</p>
+  <p>Claim statuses read from <code>research/claims.md</code> (sha256 <code>7bd9e567d5c0</code>) when this page was built.</p>
   <p>Every picture here is a recorded simulation or a figure drawn from committed data. Statuses
   are the claims ledger's, not the museum's: a badge never says more than
   <a href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/claims.md">research/claims.md</a> does.</p>
