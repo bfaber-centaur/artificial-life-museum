@@ -11,12 +11,15 @@ reproduce its final sha256 bitwise (checked in `run`). The S-alone is per realis
 import argparse
 import json
 import random
+import shutil
 import subprocess
 import sys
+from pathlib import Path
 
 from reefcore import HERE
 
 SEED = 20261020
+SHARED = Path("/mnt/project-files/reef-field/runs")
 
 
 def plan():
@@ -55,6 +58,10 @@ def run(addendum, procs):
         rc = p.wait()
         m = json.loads((HERE / "runs" / j["run_id"] / "manifest.json").read_text()) if rc == 0 else None
         ok = m is not None and m["lockstep_final_state_sha256"]["G"] == j["controls"]["G_final_sha256"]
+        if rc == 0:  # frames stay out of git (.gitignore); mirror to the project folder
+            dst = SHARED / j["run_id"]
+            dst.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(HERE / "runs" / j["run_id"] / "frames.npz", dst / "frames.npz")
         print(j["run_id"], "rc", rc, "lockstep G == shared control:", ok, flush=True)
 
 
