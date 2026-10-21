@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>When the glider meets the ring · ALM museum</title>
+<meta name="description" content="Two animals that live happily apart under one rule. Let them touch, and the world turns into a reef.">
+<link rel="stylesheet" href="museum.css">
+</head>
+<body class="room-reef">
+<header class="site">
+  <a class="brand" href="index.html">ALM <span>an artificial-life natural history museum</span></a>
+  <details class="map"><summary>Rooms</summary><ol>
+<li><a href="index.html">Entrance</a></li>
+<li><a href="orbium.html">1 · The ruler: Orbium</a></li>
+<li><a href="wobbles.html">2 · The wobble that wasn&#x27;t</a></li>
+<li><a href="edges.html">3 · How much can it take?</a></li>
+<li><a href="one-rule.html">4 · Three animals, one rule</a></li>
+<li><a href="how-we-know.html">5 · How we know</a></li>
+<li><a href="under-review.html">6 · Still being argued (provisional)</a></li>
+<li><a class="here" href="reef.html">7 · When the glider meets the ring (provisional)</a></li>
+<li><a href="collection.html">Reference · The collection</a></li>
+<li><a href="claims.html">Reference · Claims on display</a></li>
+  </ol></details>
+</header>
+<main>
+<p class="kicker">Room 7 · Provisional · Coexistence-Reef expedition, 2026-10-21</p><div class="provisional-banner"><strong>Provisional room.</strong> Parts of these exhibits come from work merged on <code>main</code> but not yet in the claims ledger. Badges appear only for ledger claims; everything else is attributed to the lane and report it comes from, and may change.</div>
+<h1>When the glider meets the ring</h1>
+<p class="lede">Room 4 showed three animals sharing one rule <a class="claim" href="claims.html#C038" title="One rule (S001&#x27;s, with μ = 0.155, σ = 0.020) supports three phenotypes chosen by history: an Orbium glider, a circler (S102) and a static ring (S103)"><span class="cid">C038</span><span class="badge s-REPRODUCED" title="REPRODUCED (clean-process reruns); not yet reproduced by a second lane">reproduced</span></a>. Each was watched
+alone, in its own world. This expedition put the gliding Orbium and the motionless ring S103 into
+one world, aimed the glider at the ring, and asked what first contact does to each of them,
+compared with their exact futures alone. We expected a bounce, a death or a capture. What we got
+was none of those.</p>
+
+<h2>Contact sets off a front</h2>
+<figure class="evidence">
+  <span class="label-tag">Panel A · encounter REEF-P2-E with its two matched controls</span>
+  <a href="../../research/experiments/REEF-behavior/exhibit/A-P2-main.png" title="Open full size"><img src="../../research/experiments/REEF-behavior/exhibit/A-P2-main.png" width="1262" height="1249" loading="lazy"
+       alt="Three rows of five frames. Top row: the encounter. A glider approaches a small ring, touches it at 6.1 time units, the two fuse into a lumpy body, and by 26 time units a round colony of many small rings and dumbbells has spread across a third of the world. Middle row: the same glider alone glides on unchanged. Bottom row: the ring alone stays exactly where it was. Below, a log-scale mass trace: the encounter climbs from under 1 to about 80 while the summed controls stay flat."></a>
+  <figcaption><strong>Glider meets ring, head-on (b = 0).</strong> Top: the encounter. Middle
+  and bottom: the same glider and the same ring, each alone, from identical starting states. The
+  mass trace marks the kernel-range overlap, the measured interaction onset and the contact time.
+  Scored on the window up to 20 time units after contact (dashed line); after about 27 time units
+  the colony meets its own copies across the 256-cell torus. Rule μ 0.155, σ 0.020, R 13, T 10,
+  float64. Behavior lane, <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/REEF-behavior/exhibit/README.md">exhibit notes</a>.</figcaption>
+</figure>
+<div class="label">
+  <p class="obs"><strong>What you see.</strong> The glider and the ring start to affect each other
+  about half a time unit <em>before</em> they visibly touch, through the reach of the kernel. Once
+  they touch they fuse and never separate. The fused body swells, breaks up from inside into small
+  static rings and dumbbells, and a front sweeps outward, laying down a frozen lattice behind it.
+  Alone, the glider glides on and the ring does not change by a single bit.</p>
+  <p class="open"><strong>What the ledger says.</strong> <a class="claim" href="claims.html#C052" title="At the coexistence rule, first contact between the settled glider and S103 fuses them and ignites a world-covering colony of small static bodies; isolated controls stay in class"><span class="cid">C052</span><span class="badge s-INDEPENDENTLY_CHECKED" title="INDEPENDENTLY_CHECKED for the qualitative outcome on two encounters (P2, P3): clean replay, `alm_check` direct-convolution window and N512 agree; T20 and R26 keep the outcome but not its timing (see C053). The other ten encounters are OBSERVED.">indep. checked</span></a>. Twelve encounters at
+  offsets from −1.5 to +1.5 kernel radii all did this. Two of them were rerun from scratch, with a
+  second implementation using a different arithmetic route, and in a world twice as wide; all
+  agreed. A finer timestep and a finer grid keep the outcome but move the timing
+  <a class="claim" href="claims.html#C053" title="The ignition time and colony mass of C052 depend on timestep and resolution"><span class="cid">C053</span><span class="badge s-NUMERICALLY_FRAGILE" title="NUMERICALLY_FRAGILE">num. fragile</span></a>.</p>
+</div>
+
+<h2>No glancing blow escapes</h2>
+<figure class="evidence">
+  <span class="label-tag">Panel B · seven offsets, one glider snapshot</span>
+  <a href="../../research/experiments/REEF-behavior/exhibit/B-offset-strip.png" title="Open full size"><img src="../../research/experiments/REEF-behavior/exhibit/B-offset-strip.png" width="1495" height="391" loading="lazy"
+       alt="Seven frames side by side, labelled b/R −1.51 to +1.48. Every frame shows a large round colony of small rings at the end of its scoring window, with 47 to 114 bodies."></a>
+  <figcaption>Each frame is the encounter 20 time units after first contact. The glider was aimed
+  to pass the ring at a transverse offset b, from 1.5 radii on one side to 1.5 on the other. Every
+  one ignited. Offsets wider than 1.5 radii were outside the expedition's bounds and were not run.</figcaption>
+</figure>
+
+<h2>The glider is only the messenger</h2>
+<div class="pair">
+  <figure class="evidence" style="margin:0">
+    <span class="label-tag">Panel C · a still blob, too far away</span>
+    <a href="../../research/experiments/REEF-behavior/exhibit/C-X7-null.png" title="Open full size"><img src="../../research/experiments/REEF-behavior/exhibit/C-X7-null.png" width="1291" height="1249" loading="lazy"
+         alt="A still blob of the glider's mass, placed a little short of the ring, fades away within about one and a half time units; the ring is unchanged."></a>
+    <figcaption>A blob with the glider's mass and size, placed where the glider is half a time
+    unit before contact. It fades away before reaching the ring; the ring returns bit for bit.</figcaption>
+  </figure>
+  <figure class="evidence" style="margin:0">
+    <span class="label-tag">Panel D · the same blob, touching</span>
+    <a href="../../research/experiments/REEF-behavior/exhibit/D-X9-blob-in-contact.png" title="Open full size"><img src="../../research/experiments/REEF-behavior/exhibit/D-X9-blob-in-contact.png" width="1305" height="1249" loading="lazy"
+         alt="The same blob, placed where the glider is at contact, touches the ring and the same spreading colony appears."></a>
+    <figcaption>Placed where the glider is at the moment of contact, the same lifeless blob sets
+    off the same reef. Half as much mass does not (panel E).</figcaption>
+  </figure>
+</div>
+<div class="label">
+  <p class="obs">So the ring is the excitable partner. Enough mass pressed against it, from 0.37 of
+  the glider-mass unit upward, ignites it; 0.24 does not, and the ring heals exactly. A glider
+  carries 0.49, so it is simply a way to deliver the push.</p>
+  <p class="open"><a class="claim" href="claims.html#C054" title="A passive, mass-matched Gaussian placed in contact with S103 ignites the same colony; at half the mass it does not, and the same mass 9–12 cells away evaporates without effect"><span class="cid">C054</span><span class="badge s-OBSERVED" title="OBSERVED (single engine `alm`, N256; preregistered as discovery geometries X7–X12, D-018/D-020/D-022)">observed</span></a> rests on one engine and one world size. Night 0 had already seen
+  S103 "fill the world" when a bump was added in front of it, and Chan's 2019 paper lists
+  "detonation" among Lenia collision outcomes. So the phenomenon is not new; what this room shows is
+  where this particular rule keeps its trigger.</p>
+</div>
+<figure class="evidence">
+  <span class="label-tag">Panel E · half the mass</span>
+  <a href="../../research/experiments/REEF-behavior/exhibit/E-X11-half-dose.png" title="Open full size"><img src="../../research/experiments/REEF-behavior/exhibit/E-X11-half-dose.png" width="1321" height="1249" loading="lazy"
+       alt="A blob of half the glider's mass placed in contact with the ring fades within a fraction of a time unit; the ring is unchanged."></a>
+</figure>
+
+<h2>How we checked it</h2>
+<figure class="evidence">
+  <span class="label-tag">Panel F · every check route for encounters P2 and P3</span>
+  <a href="../../research/experiments/REEF-behavior/exhibit/F-check-matrix.png" title="Open full size"><img src="../../research/experiments/REEF-behavior/exhibit/F-check-matrix.png" width="2180" height="590" loading="lazy"
+       alt="A table rendered as an image: rows are check routes (replay, second implementation, direct convolution, half timestep, double resolution, double world) for two encounters; columns are outcome class, contact time, ignition time and front speed. Every row reads FISSION; the half-timestep and double-resolution rows have boxed timing and mass values marking them as outside the frozen tolerance."></a>
+  <figcaption>The outcome survives every route. The timing does not: at a finer timestep or grid
+  the reef ignites earlier and grows faster <a class="claim" href="claims.html#C053" title="The ignition time and colony mass of C052 depend on timestep and resolution"><span class="cid">C053</span><span class="badge s-NUMERICALLY_FRAGILE" title="NUMERICALLY_FRAGILE">num. fragile</span></a>. At double resolution the ring is not a
+  perfectly still body even alone, so that row is the weakest check. In a world four times larger
+  the front settles to about 0.39 radii per time unit <a class="claim" href="claims.html#C055" title="Away from its own periodic images, the colony&#x27;s front advances at about 0.39 R/tu"><span class="cid">C055</span><span class="badge s-OBSERVED" title="OBSERVED (single engine beyond 25 tu; two runs)">observed</span></a>.</figcaption>
+</figure>
+
+<div class="caveat">
+  <strong>Finite horizons, one rule.</strong> Every result here is at μ 0.155, σ 0.020 with the
+  hard clip, watched for 20 time units after contact (longer only in the larger world). "Reef" is
+  a description, not a species: no new creature is named. The front lays the lattice down; nothing
+  here shows bodies dividing.
+</div>
+
+<h2>Sources</h2>
+<ul>
+  <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/reports/reef-expedition-2026-10-20.md">Expedition report</a></li>
+  <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/REEF/PROTOCOL.md">Preregistered protocol</a> and <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/REEF/DECISIONS.md">decision log</a></li>
+  <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/REEF-field/README.md">Field lane runs and registry</a></li>
+  <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/REEF-behavior/README.md">Tracker, scores and rival explanations</a> · <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/REEF-behavior/LITERATURE.md">literature check</a></li>
+  <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/REEF-numerics/checks/MATRIX.md">Independent-check matrix</a></li>
+</ul>
+
+<nav class="walk" aria-label="Tour"><a class="prev" href="under-review.html"><small>Back</small>Still being argued</a><span></span></nav>
+</main>
+<footer class="site">
+  <p>Claim statuses read from <code>research/claims.md</code> (sha256 <code>7a377a6cbfef</code>) when this page was built.</p>
+  <p>Every picture here is a recorded simulation or a figure drawn from committed data. Statuses
+  are the claims ledger's, not the museum's: a badge never says more than
+  <a href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/claims.md">research/claims.md</a> does.</p>
+</footer>
+</body>
+</html>
