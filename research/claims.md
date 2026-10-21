@@ -1755,3 +1755,76 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
     not check which rule Kojima ran.
 - **History:**
   - 2026-10-07 — OBSERVED — Lane 3 (L3-002 exploratory follow-up).
+
+### C052 — At the coexistence rule, first contact between the settled glider and S103 fuses them and ignites a world-covering colony of small static bodies; isolated controls stay in class
+
+- **Status:** INDEPENDENTLY_CHECKED for the qualitative outcome on two encounters (P2, P3): clean replay, `alm_check` direct-convolution window and N512 agree; T20 and R26 keep the outcome but not its timing (see C053). The other ten encounters are OBSERVED.
+- **Owner lane:** REEF expedition (field runs, behavior scoring, numerics checks; coordinator ledger)
+- **Sources:** `research/reports/reef-expedition-2026-10-20.md`; `research/experiments/REEF/` (PROTOCOL v1 + §11, DECISIONS D-014–D-024); `REEF-field/README.md`; `REEF-behavior/audit/pilot-table.md`, `audit/discovery-table.md`; `REEF-numerics/checks/MATRIX.md`
+- **Specimen / version:** glider = S001 cells settled 500 tu under the coexistence rule (GA sha256 `982b7939…`, GB `63e381b8…`, elapsed-time snapshots 0.5 tu apart); ring = S103 (`1e9aa713…` at N256)
+- **Simulator / version:** `alm` via `REEF-field/runner.py` @ `fe4ba1c`; checks `alm_check` (FFT, direct) via `REEF-numerics/replay.py` and `check_runner`
+- **Parameters:** μ 0.155, σ 0.020, poly/poly, β [1], R 13, T 10, Euler + clip, float64, periodic N 256; checks also T 20, R 26 (2×2 block, N 512), N 512 at R 13
+- **Intervention:** none; the ring is placed 4 R ahead (clear gap 3.97–4.03 R) at transverse offset b/R ∈ {−1.5, −1.25, −1, 0, +1, +1.25, +1.5}
+- **Metric:** PROTOCOL §7 classes and §11 thresholds, frozen before encounters; scored on [0, t_c + 20 tu]; PROLIFERATION flag added post hoc (D-016)
+- **Result:** 12/12 encounters (P1–P6, X1–X6) score FISSION + PROLIFERATION: interaction onset (residual > 1e-10) 0.6–1.0 tu before support contact; contact at 6.1–7.7 tu; the bodies never separate; 47–114 bodies and mass ×26–50 at the window end; the N256 torus is covered by ≈ 50 tu. Matched G-alone stays GLIDER (0.548 R/tu) and S-alone stays bitwise fixed. No run censored inside its window. Not observed: pass, deflection, capture, glider death.
+- **Run IDs:** REEF-P1-E…REEF-P6-E, REEF-X1-E…REEF-X6-E, controls REEF-CTRL-GA/GB and REEF-P*/X*-S; checks REEF-P2/P3-E-{replay,chkfft,direct,T20,R26,N512}
+- **Search / parameter bounds:** b/R ∈ [−1.5, +1.5] (mandate bound), two snapshots, one approach distance, N256
+- **Reproduction command:** see the report's "Shortest reproduction"
+- **Known caveats:** finite horizon (t_c + 20 tu at N256; colony meets its own images ≈ 27–30 tu); ignition timing and colony mass are NUMERICALLY_FRAGILE (C053); R26's ring is not a fixed point at R26 (C048), so that check is weaker (D-024); one rule, one ring size; no offset beyond 1.5 R; cell identity is meaningless after ignition.
+- **Prior literature:** [Chan2019] §3.5.5, pdf p. 29, "Detonation, the resultant mass explodes into infinite growth" — **PREVIOUSLY REPORTED** (the phenomenon, Orbium–Orbium, rule unstated). [Chan2019] §3.3.1, pdf p. 21, Class 2 "regional, periodic immobile patterns (e.g. Circium)" — **CONSISTENT WITH** the frozen lattice. In-repo: S103 dossier I003 ≥ 0.30 fills the world; HR-009 world-filling S102 copy at this rule. Novelty: not claimed. Details `REEF-behavior/LITERATURE.md`.
+- **History:**
+  - 2026-10-21 — INDEPENDENTLY_CHECKED (qualitative, P2/P3) — REEF coordinator, from the integration PR evidence.
+
+### C053 — The ignition time and colony mass of C052 depend on timestep and resolution
+
+- **Status:** NUMERICALLY_FRAGILE
+- **Owner lane:** REEF numerics
+- **Sources:** `REEF-numerics/checks/MATRIX.md`, README §7; panel `REEF-behavior/exhibit/F-check-matrix.png`
+- **Specimen / version:** as C052, encounters P2 and P3
+- **Simulator / version:** `alm` (T20, R26 runs), each with its own matched controls
+- **Parameters:** T 20 (R 13, N 256); R 26 by 2×2 block replication at N 512 (same physical world)
+- **Intervention:** none
+- **Metric:** ignition = first time E mass ≥ 2× (G-alone + S-alone) and ≥ 5 bodies (D-017, frozen before checks); §9 tolerances t_c ± 0.5 tu, masses ± 1%
+- **Result:** T20: ignition 3.1 tu (P2) and 2.1 tu (P3) earlier; E mass at 20/25 tu +62%/+48% (P2), +35%/+27% (P3); P3 t_c −0.55 tu. R26: ignition 4.3 tu (P2) and 0.9 tu (P3) earlier; mass +41%/+32% (P2), +28%/+16% (P3). Both outside the frozen tolerance; class unchanged.
+- **Run IDs:** REEF-P2/P3-E-T20, REEF-P2/P3-E-R26 and their controls
+- **Search / parameter bounds:** one refinement step each in T and R
+- **Reproduction command:** `REEF-numerics/README.md` §7
+- **Known caveats:** T20's isolated glider is 7.7% faster than T10's; T40 previously made it STATIC at this rule, so further T refinement may change the comparison itself.
+- **History:**
+  - 2026-10-21 — NUMERICALLY_FRAGILE — REEF numerics checks, ledgered by the coordinator.
+
+### C054 — A passive, mass-matched Gaussian placed in contact with S103 ignites the same colony; at half the mass it does not, and the same mass 9–12 cells away evaporates without effect
+
+- **Status:** OBSERVED (single engine `alm`, N256; preregistered as discovery geometries X7–X12, D-018/D-020/D-022)
+- **Owner lane:** REEF field (runs), behavior (scores)
+- **Sources:** `REEF-field/README.md` F-007–F-009; `REEF-behavior/audit/discovery-table.md`
+- **Specimen / version:** S103 at the P2/P3 positions; isotropic Gaussian a·exp(−r²/2s²), s = 4.3907 cells, truncated at 4s, a = 0.68011 (mass 0.4873, gyradius 0.477 R), scaled for doses
+- **Simulator / version:** `alm` via `REEF-field/discovery.py` @ `18cb4c0`, `9e34a08`, `12e56d7`
+- **Parameters:** as C052
+- **Intervention:** blob replaces the glider, centred at the G-alone centroid at t = 5.5 tu (X7, X8) or at t_c (X9–X12)
+- **Metric:** as C052
+- **Result:** X7/X8 (at 5.5 tu position): blob evaporates in 1.4 tu, never touches; final world = ring-alone bitwise. X9/X10 (full dose at contact position): FISSION + PROLIFERATION (79/87 bodies). X12 (0.75×, 0.37 ΣA/R²): FISSION + PROLIFERATION (113 bodies). X11 (0.5×, 0.24): NO_CONTACT, ring returns bitwise. Blob alone dies in every control.
+- **Run IDs:** REEF-X7-E … REEF-X12-E with blob-alone and ring-alone controls
+- **Search / parameter bounds:** one shape, one width, three doses at one position; two positions at full dose
+- **Reproduction command:** see the report
+- **Known caveats:** single engine and world size (an N512 check of X11/X12 was requested from numerics; see the report). The I003 result in the S103 dossier is a different shape and placement and is consistent but not directly comparable. X9–X12 zero one blob-tail cell overlapping a full ring cell (−1.5e-6 ΣA/R², D-021).
+- **History:**
+  - 2026-10-21 — OBSERVED — REEF expedition.
+
+### C055 — Away from its own periodic images, the colony's front advances at about 0.39 R/tu
+
+- **Status:** OBSERVED (single engine beyond 25 tu; two runs)
+- **Owner lane:** REEF numerics
+- **Sources:** `REEF-numerics/README.md` §7
+- **Specimen / version:** encounters P2, P3 replayed at N 512, R 13
+- **Simulator / version:** `alm`
+- **Parameters:** as C052 at N 512
+- **Intervention:** none
+- **Metric:** slope of the radius enclosing 95% of colony mass (r95) versus time
+- **Result:** after ≈ 5 tu of acceleration, 0.39 ± 0.02 R/tu (P2 20–55 tu, P3 23–53 tu; r95 7 → 19 R), about 70% of the glider's speed; it slows only near the torus half-width (19.7 R at N512). From-ignition fits at N256 (0.31–0.37) include the acceleration.
+- **Run IDs:** REEF-P2-E-N512, REEF-P3-E-N512 (long)
+- **Search / parameter bounds:** two runs, one world size
+- **Reproduction command:** `REEF-numerics/README.md` §7
+- **Known caveats:** not checked with another arithmetic route over the long window; fragile timing (C053) may carry over to front speed under refinement (T20 front 0.38/0.32 vs 0.36/0.33 at N256 fits).
+- **History:**
+  - 2026-10-21 — OBSERVED — REEF numerics, ledgered by the coordinator.
