@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Field trip: what Lenia can look like · ALM museum</title>
+<meta name="description" content="Seven moving pictures from one afternoon of looking: the reef at four times the size, a catalogue bestiary, collisions, a soup, growers and a spiral.">
+<link rel="stylesheet" href="museum.css">
+</head>
+<body class="room-field-trip">
+<header class="site">
+  <a class="brand" href="index.html">ALM <span>an artificial-life natural history museum</span></a>
+  <details class="map"><summary>Rooms</summary><ol>
+<li><a href="index.html">Entrance</a></li>
+<li><a href="orbium.html">1 · The ruler: Orbium</a></li>
+<li><a href="wobbles.html">2 · The wobble that wasn&#x27;t</a></li>
+<li><a href="edges.html">3 · How much can it take?</a></li>
+<li><a href="one-rule.html">4 · Three animals, one rule</a></li>
+<li><a href="how-we-know.html">5 · How we know</a></li>
+<li><a href="under-review.html">6 · Still being argued (provisional)</a></li>
+<li><a href="reef.html">7 · When the glider meets the ring (provisional)</a></li>
+<li><a class="here" href="field-trip.html">8 · Field trip</a></li>
+<li><a href="collection.html">Reference · The collection</a></li>
+<li><a href="claims.html">Reference · Claims on display</a></li>
+  </ol></details>
+</header>
+<main>
+<p class="kicker">Room 8 · A visual field trip, 2026-11-07</p>
+<h1>Field trip: what Lenia can look like</h1>
+<p class="lede">The other rooms each follow one question about four animals. This room is a
+field trip: an afternoon of filming whatever looked most striking, for a lightning talk. Every
+frame is still a recorded simulation with a stated rule, seed and final-state hash. Most of what
+you see here was already known to Lenia's inventor, Bert Chan; the labels say so.</p>
+
+<h2>The reef, at four times the size</h2>
+<figure class="vitrine">
+  <img src="../../research/gallery/exhibits/G008-the-reef/reef-world.gif" width="400" height="423" loading="lazy"
+       alt="A 1024 by 1024 world. A small glider meets a small ring near the centre; a round colony of tiny rings and dumbbells spreads outward until it covers the whole world.">
+  <figcaption><strong>One glider meets one ring.</strong> Room 7's head-on encounter, rebuilt with
+  the expedition's own code in a world sixteen times the area of its main runs, for 130 time
+  units. GIF preview; use the
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G008-the-reef/reef-world.mp4">full video</a> on a projector. Also:
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G008-the-reef/reef-contact.mp4">close-up of first contact</a> ·
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G008-the-reef/provenance.json">provenance</a>.</figcaption>
+</figure>
+<figure class="vitrine">
+  <img src="../../research/gallery/exhibits/G008-the-reef/reef-lattice-detail.png" width="800" height="800" loading="lazy"
+       alt="Close-up of the frozen colony: small rings and dumbbell shapes, lined up in patches whose alignment changes from patch to patch.">
+  <figcaption>160 × 160 cells of the frozen colony at 130 time units, five pixels per cell.</figcaption>
+</figure>
+<div class="label">
+  <p class="obs"><strong>What you see.</strong> Contact, fusion and a spreading front, as in Room 7.
+  Behind the front everything freezes into small rings and dumbbells, lined up in patches with
+  boundaries between them.</p>
+  <p class="open"><strong>What the ledger says.</strong> <a class="claim" href="claims.html#C052" title="At the coexistence rule, first contact between the settled glider and S103 fuses them and ignites a world-covering colony of small static bodies; isolated controls stay in class (bitwise ring at N256, R13)"><span class="cid">C052</span><span class="badge s-INDEPENDENTLY_CHECKED" title="INDEPENDENTLY_CHECKED for contact, fusion and ignition (FISSION + PROLIFERATION in the t_c + 20 window, through 25 tu) on P2 and P3 via `alm_check` direct convolution; clean replay bitwise. World coverage by ~50 tu is OBSERVED (`alm` only, including N512). T20 keeps the class but not its timing (C053); R26 is a weaker check (non-fixed-point ring, D-024; scored from per-step rows, numerics 8f17849). The other ten encounters are OBSERVED.">indep. checked</span></a> covers only the first 25 time
+  units, at the expedition's world sizes. Everything later, and this world size, is a single run
+  with one engine. Timing and colony mass move with the timestep and grid <a class="claim" href="claims.html#C053" title="The ignition time and colony mass of C052 depend on timestep and resolution"><span class="cid">C053</span><span class="badge s-NUMERICALLY_FRAGILE" title="NUMERICALLY_FRAGILE">num. fragile</span></a>. The
+  patches are an observation in one run, not a measurement.</p>
+</div>
+
+<h2>Sixteen catalogued species</h2>
+<figure class="vitrine">
+  <img src="../../research/gallery/exhibits/G007-bestiary/bestiary.gif" width="640" height="740" loading="lazy"
+       alt="Sixteen tiles, each following one creature: gliders, a chain of four Orbia, spiky and toothed rings, rotating spirals and gears, pulsing concentric rings, a long centipede-like chain and star shapes.">
+  <figcaption><strong>A bestiary.</strong> Sixteen species from Chan's catalogue, each under its own
+  rule, 60 to 90 time units after its catalogued seed.
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G007-bestiary/bestiary.mp4">Full video</a> ·
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G007-bestiary/provenance.json">provenance</a>.</figcaption>
+</figure>
+<div class="label">
+  <p class="obs"><strong>What you see.</strong> Gliders, rotors, a pulsing ring and long crawling
+  chains, all still alive. Every name and seed is Chan's.</p>
+  <p class="open"><strong>What the ledger says.</strong> We ran every eligible catalogue entry
+  through our own simulator <a class="claim" href="claims.html#C057" title="509 of 526 catalogue entries (poly/exp families, T ≤ 40) persist as bounded patterns for 100 tu in ALM&#x27;s simulator; 4 die and 13 fill their world"><span class="cid">C057</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>: 509 of 526 were still bounded patterns after 100
+  time units. That checks persistence only, not that each one keeps its catalogued shape.</p>
+</div>
+
+<h2>Two Orbia, nine ways to meet</h2>
+<figure class="vitrine">
+  <img src="../../research/gallery/exhibits/G009-orbium-collisions/collisions.gif" width="720" height="811" loading="lazy"
+       alt="Nine worlds in a grid. In each, two Orbia approach each other head-on or at a right angle; some bounce apart, two vanish together, some fuse into one double body, and in others only one survives.">
+  <figcaption><strong>Collisions.</strong> The same Orbium and an exact rotated copy, aimed at each
+  other with different offsets. <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G009-orbium-collisions/collisions-outcomes.png">Outcomes</a> ·
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G009-orbium-collisions/provenance.json">provenance</a>.</figcaption>
+</figure>
+<div class="label">
+  <p class="obs"><strong>What you see.</strong> Scattering, mutual destruction, one survivor, and
+  fusion into a single double body, depending only on how the two are lined up.</p>
+  <p class="open"><strong>What the ledger says.</strong> <a class="claim" href="claims.html#C058" title="Two S001 Orbia meeting head-on or at a right angle show four of Chan&#x27;s collision outcomes (scatter, annihilation, absorption, fusion into one bound body), depending on offset"><span class="cid">C058</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>: one sample per geometry.
+  Chan catalogued these outcomes in 2019; this is our simulator reproducing them.</p>
+</div>
+
+<h2>Same recipe, three fates</h2>
+<figure class="vitrine">
+  <img src="../../research/gallery/exhibits/G010-soup/soup.gif" width="720" height="291" loading="lazy"
+       alt="Three worlds seeded with the same kind of random noise. The first fades to nothing, the second leaves a single small glider, the third fills the whole world with a pattern of small bodies.">
+  <figcaption><strong>Noise under the Orbium rule.</strong> A square of random values, 40 random
+  seeds; the film shows the first seed of each outcome.
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G010-soup/soup-scan.json">All 40 seeds</a> ·
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G010-soup/provenance.json">provenance</a>.</figcaption>
+</figure>
+<div class="label">
+  <p class="obs"><strong>What you see.</strong> From identical recipes: nothing, one glider, or a world
+  taken over.</p>
+  <p class="open"><strong>What the ledger says.</strong> <a class="claim" href="claims.html#C056" title="Under the S001 rule, 40 random 80 × 80 noise patches: 27 die, 4 leave a single Orbium-mass survivor, and 9 fill the world with a frozen lattice"><span class="cid">C056</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>: 27 of 40 died, 4 left one
+  Orbium's worth of mass, 9 filled the world. Finding Orbium in a "primordial soup" is how Chan
+  first found it.</p>
+</div>
+
+<h2>How a step works</h2>
+<figure class="vitrine">
+  <img src="../../research/gallery/exhibits/G011-anatomy-of-a-step/anatomy.gif" width="800" height="347" loading="lazy"
+       alt="Three panels following an Orbium: the creature itself; a blurred ring-weighted sum of its surroundings; and a red and blue map of where cells will grow or shrink.">
+  <figcaption><strong>Anatomy of one step.</strong> The state A, what each cell senses through the
+  ring-shaped kernel (U), and the growth G(U) that is added, a tenth at a time. Teaching exhibit,
+  no claim. <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G011-anatomy-of-a-step/provenance.json">provenance</a>.</figcaption>
+</figure>
+
+<h2>Growers</h2>
+<div class="pair">
+  <figure class="vitrine" style="margin:0">
+    <img src="../../research/gallery/exhibits/G013-spiral/spiral.gif" width="480" height="515" loading="lazy"
+         alt="A chain of small cells winding outward into a widening spiral.">
+    <figcaption><strong>A spiral that draws itself.</strong> Catenohelicium monospirae in a world of
+    1024 × 1024 cells, 150 time units.
+    <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G013-spiral/provenance.json">provenance</a>.</figcaption>
+  </figure>
+  <figure class="vitrine" style="margin:0">
+    <img src="../../research/gallery/exhibits/G012-growers/growers.gif" width="540" height="419" loading="lazy"
+         alt="Six worlds in which a single seed grows into a spiral, two labyrinths, a lattice of rings, a straight chain and a fine wavy texture.">
+    <figcaption><strong>Six catalogued growers</strong>, 100 time units each; downsampled, not one
+    pixel per cell. <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G012-growers/provenance.json">provenance</a>.</figcaption>
+  </figure>
+</div>
+<div class="caveat"><strong>Not discoveries</strong> Growth is these species' catalogued
+behaviour: Chan 2019 describes chains that lengthen and spirals that wind outward. The labyrinths
+look like reaction–diffusion patterns, which is a resemblance, not a tested mechanism.</div>
+
+<h2>Sources</h2>
+<ul>
+  <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/README.md">Gallery notes for G007–G013</a></li>
+  <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/VIS-talk/film.py">Film script</a> and
+      <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/VIS-talk/SURVEY.md">catalogue survey</a></li>
+  <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/reports/visual-specimens-2026-11-07.md">Field-trip report</a></li>
+  <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/reports/reef-expedition-2026-10-20.md">Reef expedition report</a></li>
+</ul>
+
+<nav class="walk" aria-label="Tour"><a class="prev" href="reef.html"><small>Back</small>When the glider meets the ring</a><span></span></nav>
+</main>
+<footer class="site">
+  <p>Claim statuses read from <code>research/claims.md</code> (sha256 <code>db4428f0311c</code>) when this page was built.</p>
+  <p>Every picture here is a recorded simulation or a figure drawn from committed data. Statuses
+  are the claims ledger's, not the museum's: a badge never says more than
+  <a href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/claims.md">research/claims.md</a> does.</p>
+</footer>
+</body>
+</html>

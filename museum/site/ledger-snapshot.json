@@ -1,7 +1,7 @@
 {
   "ledger": "research/claims.md",
-  "ledger_sha256": "19e63f59d6a78d8f26a3a6b9b4adc3ef2ac78b97d290598e11c41b38e6770c65",
-  "ledger_commit": "c8c8740",
+  "ledger_sha256": "db4428f0311c311da7548282ba3511164335cca0685c88bcb38acb1724b96f26",
+  "ledger_commit": "190b2b9",
   "conventions_sha256": "0e237384e0425b3c325229cf650ab6f9807fb08c1bedc991433b54b13c2eb02f",
   "claims": {
     "C001": {
@@ -203,6 +203,7 @@
       "status": "INDEPENDENTLY_CHECKED",
       "status_text": "INDEPENDENTLY_CHECKED for contact, fusion and ignition (FISSION + PROLIFERATION in the t_c + 20 window, through 25 tu) on P2 and P3 via `alm_check` direct convolution; clean replay bitwise. World coverage by ~50 tu is OBSERVED (`alm` only, including N512). T20 keeps the class but not its timing (C053); R26 is a weaker check (non-fixed-point ring, D-024; scored from per-step rows, numerics 8f17849). The other ten encounters are OBSERVED.",
       "rooms": [
+        "field-trip",
         "reef"
       ]
     },
@@ -210,6 +211,7 @@
       "status": "NUMERICALLY_FRAGILE",
       "status_text": "NUMERICALLY_FRAGILE",
       "rooms": [
+        "field-trip",
         "reef"
       ]
     },
@@ -225,6 +227,27 @@
       "status_text": "OBSERVED (single engine beyond 25 tu; two runs)",
       "rooms": [
         "reef"
+      ]
+    },
+    "C056": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "field-trip"
+      ]
+    },
+    "C057": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "field-trip"
+      ]
+    },
+    "C058": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "field-trip"
       ]
     }
   },
@@ -321,6 +344,25 @@
       "research/experiments/REEF/DECISIONS.md",
       "research/experiments/REEF/PROTOCOL.md",
       "research/reports/reef-expedition-2026-10-20.md"
+    ],
+    "field-trip": [
+      "research/experiments/VIS-talk/SURVEY.md",
+      "research/experiments/VIS-talk/film.py",
+      "research/gallery/README.md",
+      "research/gallery/exhibits/G007-bestiary/bestiary.mp4",
+      "research/gallery/exhibits/G007-bestiary/provenance.json",
+      "research/gallery/exhibits/G008-the-reef/provenance.json",
+      "research/gallery/exhibits/G008-the-reef/reef-contact.mp4",
+      "research/gallery/exhibits/G008-the-reef/reef-world.mp4",
+      "research/gallery/exhibits/G009-orbium-collisions/collisions-outcomes.png",
+      "research/gallery/exhibits/G009-orbium-collisions/provenance.json",
+      "research/gallery/exhibits/G010-soup/provenance.json",
+      "research/gallery/exhibits/G010-soup/soup-scan.json",
+      "research/gallery/exhibits/G011-anatomy-of-a-step/provenance.json",
+      "research/gallery/exhibits/G012-growers/provenance.json",
+      "research/gallery/exhibits/G013-spiral/provenance.json",
+      "research/reports/reef-expedition-2026-10-20.md",
+      "research/reports/visual-specimens-2026-11-07.md"
     ],
     "collection": [
       "research/experiments/L6-field/make_seeds.py",

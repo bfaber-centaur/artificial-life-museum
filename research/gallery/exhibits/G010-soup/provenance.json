@@ -1,0 +1,131 @@
+{
+  "exhibit": "G010",
+  "title": "Same recipe, three fates",
+  "media": [
+    "soup.mp4",
+    "soup.gif",
+    "soup-final.png",
+    "soup-scan.json"
+  ],
+  "frames": {
+    "keep_every_steps": 2,
+    "mp4_fps": 25,
+    "time_compression": "5 tu per second"
+  },
+  "view": "three whole 256^2 periodic worlds, 2 px per cell",
+  "scan": {
+    "seeds": "0..39",
+    "counts": {
+      "died": 27,
+      "filled": 9,
+      "orbium": 4
+    },
+    "classes": "died: mass < 0.05 x one Orbium; filled: fill (A > 0.1) > 0.15; otherwise 'k orbium-mass' with k = round(mass / one Orbium's mass) (a mass count, not an identification)"
+  },
+  "picked": "the first seed of each class in seed order (not the prettiest)",
+  "caveats": [
+    "One noise recipe (80x80, uniform [0, 0.3)), one rule (S001), one world size; the counts are for this recipe only. Most other amplitudes we tried in a 6-seed pilot died out entirely.",
+    "'Orbium-sized survivor' is a mass count; the film shows what it is for the picked seed only.",
+    "The world-filling outcome resembles the reef lattice (G008) but happens here under the S001 rule, not the coexistence rule; we have not compared the two lattices.",
+    "Random initial states as a way to find Lenia creatures are standard practice (Chan 2019); not novel."
+  ],
+  "runs": [
+    {
+      "key": "G010:seed0",
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.15,
+        "sigma": 0.015,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "grid": {
+        "shape": [
+          256,
+          256
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 1000,
+      "time_units": 100.0,
+      "initial_state": "80x80 square of uniform [0, 0.3) noise, numpy default_rng(0).random, centred on zero 256^2",
+      "initial_state_sha256": "bf60cb72789cf6dda918e765a26afd8d59414b2d75a320664373a06fac9e2329",
+      "final_state_sha256": "07854d2fef297a06ba81685e660c332de36d5d18d546927d30daad6d7fda1541"
+    },
+    {
+      "key": "G010:seed5",
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.15,
+        "sigma": 0.015,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "grid": {
+        "shape": [
+          256,
+          256
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 1000,
+      "time_units": 100.0,
+      "initial_state": "80x80 square of uniform [0, 0.3) noise, numpy default_rng(5).random, centred on zero 256^2",
+      "initial_state_sha256": "99babb478c3cb3451efb0b127ddecc081a64fb7e048e5959bbd5dede33022331",
+      "final_state_sha256": "319a894efa5cadc2a43f62dc653994f9179c87f7d903059abe102cd9dc4f037a"
+    },
+    {
+      "key": "G010:seed1",
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.15,
+        "sigma": 0.015,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "grid": {
+        "shape": [
+          256,
+          256
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 1000,
+      "time_units": 100.0,
+      "initial_state": "80x80 square of uniform [0, 0.3) noise, numpy default_rng(1).random, centred on zero 256^2",
+      "initial_state_sha256": "26733bdb9b4f00df8b5c6488fe1073eee7bdc965a9c4ae3c27e8d53f77d3cba3",
+      "final_state_sha256": "bc57a78ea9fde6fd2e65b02f4c637ef06d5d2b4c184ad55843ff2047fbb51e3d"
+    }
+  ],
+  "simulator": {
+    "package": "alm.lenia.Lenia (unchanged)",
+    "git_commit": "990b3f1a9300d3db17e96d50092659fa19628638",
+    "git_dirty": false
+  },
+  "render": {
+    "colormap": "matplotlib inferno, A in [0,1] mapped linearly, nearest-neighbour",
+    "script": "research/experiments/VIS-talk/film.py"
+  },
+  "reproduce": "git checkout <this commit> && .venv/bin/python research/experiments/VIS-talk/film.py G010   # verify only: film.py verify G010"
+}

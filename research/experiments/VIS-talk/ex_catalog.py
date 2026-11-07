@@ -219,7 +219,8 @@ def g013(render: bool = True):
             "elongation (in Helicidae)' with quadratic mass growth. Nothing here is new; the exhibit shows ALM "
             "reproducing it at a large world size.",
             "Single run, alm only. In a 512^2 world (G012) the arm meets its own periodic image by about 70 tu and a "
-            "labyrinth texture takes over where it collides; check the film's last frames for the same here.",
+            "labyrinth texture takes over where it collides. This film uses a 1024^2 world, stops at 150 tu and "
+            "shows only the central 768^2 cells.",
         ],
     }, [run])
     return [run]
