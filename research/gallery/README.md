@@ -28,6 +28,11 @@ made of, ten times per unit of time. Some of them travel; one of them never chan
 | [G011](#g011--anatomy-of-one-step) | Anatomy of one step (animated) | S001 | 2026-11-07 |
 | [G012](#g012--catalogued-growers) | Catalogued growers (animated) | 6 upstream catalog species | 2026-11-07 |
 | [G013](#g013--a-spiral-that-draws-itself) | A spiral that draws itself (animated) | Catenohelicium monospirae | 2026-11-07 |
+| [G014](#g014--a-perfectly-symmetric-world-broken-by-rounding-error) | A perfectly symmetric world, broken by rounding error (animated) | symmetric noise, S001 rule | 2026-11-07 |
+| [G015](#g015--a-different-rule-at-every-point) | A different rule at every point (animated; *modified rule*) | noise, μ and σ varying in space | 2026-11-07 |
+| [G016](#g016--changing-the-laws-of-physics-under-a-living-creature) | Changing the laws of physics under a living creature (animated; *modified rule*) | S001 Orbium, μ or σ ramped in time | 2026-11-07 |
+| [G017](#g017--rush-hour) | Rush hour (animated) | 30 × S001 Orbium | 2026-11-07 |
+| [G018](#g018--the-invisible-wall) | The invisible wall (animated; *modified rule*) | S001 Orbium, μ step in space | 2026-11-07 |
 
 ### G001 — Four ways to move
 
@@ -337,6 +342,89 @@ Catenohelicium monospirae (catalogue `HN+m`) from its seed to 150 tu in a 1024²
 the central 768² cells at one pixel per cell. Catalogued behaviour (Chan 2019 §3.5.4), shown at a
 world size where the arm can wind several times before it meets its own periodic image.
 
+## Round two: stranger worlds (G014–G018)
+
+Three of these five (G015, G016, G018) are **not classic Lenia**: μ or σ varies in space or in
+time. They run on `FieldLenia` in `research/experiments/VIS-talk/ex_bizarre.py`. It repeats
+`alm.lenia.Lenia`'s step operation for operation, and with uniform S001 parameters it equals
+`Lenia` bit for bit over 200 steps. Each provenance file records that this check passed at render
+time. G014 and G017 are plain `Lenia` runs.
+
+### G014 — A perfectly symmetric world, broken by rounding error
+
+![Left: a symmetric noise patch grows four-fold symmetric colonies, then a world-filling lattice. Right: a log-scale map of how far the world is from its own mirror image, rising from 1e-16 to 1](exhibits/G014-kaleidoscope/kaleidoscope.gif)
+
+Video: [`kaleidoscope.mp4`](exhibits/G014-kaleidoscope/kaleidoscope.mp4) · stills at 10, 30 and 50 tu ·
+[`asymmetry.csv`](exhibits/G014-kaleidoscope/asymmetry.csv) ·
+[`provenance.json`](exhibits/G014-kaleidoscope/provenance.json)
+
+An 80 × 80 noise patch with all eight symmetries of the square, run under the S001 rule. In exact
+arithmetic the world would stay symmetric forever.
+
+- **Observation (claim C059).** The largest difference between the world and its mirror image
+  is 0 at the start, 2 × 10⁻¹³ at 5 tu, 3 × 10⁻¹⁰ at 15 tu, 2 × 10⁻⁵ at 25 tu and 1 by 40 tu,
+  while the colony is growing. Before that point the four-fold symmetric "mandala" stage is
+  exactly visible.
+- **Interpretation.** FFT rounding seeds the asymmetry, and the growing front amplifies it. A
+  different FFT library would break the symmetry differently.
+
+### G015 — A different rule at every point
+
+![Noise in a world whose growth centre mu rises left to right and whose relative width rises top to bottom: spots, labyrinths and an empty region form a visible map](exhibits/G015-map-of-worlds/map-of-worlds.gif)
+
+Video: [`map-of-worlds.mp4`](exhibits/G015-map-of-worlds/map-of-worlds.mp4) · final:
+[`map-of-worlds-final.png`](exhibits/G015-map-of-worlds/map-of-worlds-final.png) ·
+[`provenance.json`](exhibits/G015-map-of-worlds/provenance.json)
+
+A 1024² world of random noise. μ runs from 0.10 to 0.40 across it and σ/μ from 0.08 to 0.22 down
+it. Both vary along a cosine, so the torus has no seam. The film shows the 512² quadrant where both
+rise. After 200 tu the world sorts itself into spots, then labyrinths, then stripes, with an empty
+region at high μ and narrow σ.
+
+This is a picture, not a phase diagram. A pattern feels parameters up to R = 13 cells away, and
+the regime boundaries are shaped by the gradient itself. It shows one seed at one horizon.
+
+### G016 — Changing the laws of physics under a living creature
+
+![Two Orbia. On the left the growth centre slowly falls, on the right the growth width slowly rises; both eventually burst into a lattice of rings](exhibits/G016-live-mutation/live-mutation.gif)
+
+Video: [`live-mutation.mp4`](exhibits/G016-live-mutation/live-mutation.mp4) · mass series ·
+[`provenance.json`](exhibits/G016-live-mutation/provenance.json)
+
+The S001 Orbium, with μ lowered from 0.15 to 0.11 (left) or σ raised from 0.015 to 0.035 (right),
+linearly over 150 tu. The Orbium follows each change for a long time. In both runs it eventually
+bursts into a world-filling lattice, and on the left it first passes through a two-lobed body.
+Changing parameters gradually is Chan's own way of morphing species (2019 §2.3.2). The creature is
+never at equilibrium with the rule.
+
+### G017 — Rush hour
+
+![Thirty Orbia gliding in random directions in a 512 by 512 world; one collision detonates and the colony swallows the rest](exhibits/G017-rush-hour/rush-hour.gif)
+
+Video: [`rush-hour.mp4`](exhibits/G017-rush-hour/rush-hour.mp4) ·
+[`rush-hour-t30.png`](exhibits/G017-rush-hour/rush-hour-t30.png) ·
+[`mass.csv`](exhibits/G017-rush-hour/mass.csv) ·
+[`provenance.json`](exhibits/G017-rush-hour/provenance.json)
+
+Thirty copies of the S001 Orbium, rotated and mirrored at random, in one 512² world under the
+plain S001 rule. Within a few time units one collision detonates (Chan 2019 §3.5.5). The colony
+grows from 13 to 54 R² by 30 tu and fills the world (327 R²) by about 90 tu, swallowing every
+glider it meets. This is one random arrangement.
+
+### G018 — The invisible wall
+
+![Six worlds; an Orbium glides from the top half into a lower half with a slightly different growth centre; in four worlds it dies at the boundary, in two it crosses](exhibits/G018-invisible-wall/invisible-wall.gif)
+
+Video: [`invisible-wall.mp4`](exhibits/G018-invisible-wall/invisible-wall.mp4) ·
+[`provenance.json`](exhibits/G018-invisible-wall/provenance.json)
+
+- **Observation (claim C060).** The S001 Orbium glides from rows with μ 0.15 into rows with
+  μ = 0.12, 0.13, 0.14, 0.16, 0.17 or 0.18. It crosses and keeps going for 0.14 and 0.16, and it
+  dies at the wall for the other four.
+- **Caveats.** The step in μ is sharp, so the Orbium feels the wall up to 13 cells before it
+  arrives. Each lane uses one phase and one approach angle. A "cross" means a body with Orbium's
+  mass persisted, not that its shape is unchanged.
+
 ## Field note, 7 October 2026
 
 > *What I saw.* Four animals, four temperaments. The Orbium set off at once along a line it never
@@ -476,6 +564,10 @@ heading values come from `galintervene.chord_heading("S102", 3002)`. The G004 S0
   heading, the mass wobble).
 
 ## Cycle log
+
+- **2026-11-07, G014–G018 (lightning-talk thread, round two).** Five "stranger worlds". G015,
+  G016 and G018 use a spatially or temporally varying rule (`FieldLenia`, checked bitwise against
+  `Lenia` at uniform parameters) and are labelled *modified rule*.
 
 - **2026-11-07, G007–G013 (lightning-talk thread).** Seven animated exhibits for a lightning
   talk, made by `research/experiments/VIS-talk/film.py` rather than `render.py`: they simulate

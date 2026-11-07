@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Field trip: what Lenia can look like · ALM museum</title>
-<meta name="description" content="Seven moving pictures from one afternoon of looking: the reef at four times the size, a catalogue bestiary, collisions, a soup, growers and a spiral.">
+<meta name="description" content="Twelve moving pictures from one afternoon of looking: the reef at four times the size, a catalogue bestiary, collisions, a soup, growers, a spiral, and five stranger worlds.">
 <link rel="stylesheet" href="museum.css">
 </head>
 <body class="room-field-trip">
@@ -136,9 +136,51 @@ you see here was already known to Lenia's inventor, Bert Chan; the labels say so
 behaviour: Chan 2019 describes chains that lengthen and spirals that wind outward. The labyrinths
 look like reaction–diffusion patterns, which is a resemblance, not a tested mechanism.</div>
 
+<h2>Stranger worlds</h2>
+<p>Three of these five change the rule itself, which classic Lenia never does. In those worlds
+the growth centre or width varies from place to place or over time. They are labelled
+<em>modified rule</em>, and their code is checked to match the ordinary simulator bit for bit
+when the rule is held uniform.</p>
+<figure class="vitrine">
+  <img src="../../research/gallery/exhibits/G014-kaleidoscope/kaleidoscope.gif" width="520" height="311" loading="lazy"
+       alt="Left: a perfectly symmetric noise patch grows into four mirrored colonies and then a lattice that is no longer symmetric. Right: a map of how far the world is from its mirror image, brightening from dark to yellow.">
+  <figcaption><strong>A perfectly symmetric world, broken by rounding error.</strong> The rule and the start
+  are exactly symmetric. The asymmetry starts in the sixteenth decimal place and reaches full size within 40 time units
+  <a class="claim" href="claims.html#C059" title="An exactly symmetric soup under the S001 rule loses its symmetry through float64 FFT rounding: the mirror difference grows from 2 × 10⁻¹³ at 5 tu to 1 by 40 tu"><span class="cid">C059</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>. <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G014-kaleidoscope/provenance.json">provenance</a>.</figcaption>
+</figure>
+<figure class="vitrine">
+  <img src="../../research/gallery/exhibits/G015-map-of-worlds/map-of-worlds.gif" width="400" height="423" loading="lazy"
+       alt="A square world of noise that sorts itself into spots on the left, labyrinths in the middle, stripes on the right and an empty region at the top right.">
+  <figcaption><strong>A different rule at every point</strong> (<em>modified rule</em>). The growth centre rises from left to
+  right and the growth width from top to bottom. One world turns into a map of what noise becomes. This is a picture, not a
+  phase diagram. <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G015-map-of-worlds/provenance.json">provenance</a>.</figcaption>
+</figure>
+<div class="pair">
+  <figure class="vitrine" style="margin:0">
+    <img src="../../research/gallery/exhibits/G017-rush-hour/rush-hour.gif" width="400" height="444" loading="lazy"
+         alt="Thirty small gliders in one world; a collision explodes into a growing colony that swallows the rest.">
+    <figcaption><strong>Rush hour.</strong> Thirty Orbia under the plain rule. One collision detonates and the colony
+    eats the rest. <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G017-rush-hour/provenance.json">provenance</a>.</figcaption>
+  </figure>
+  <figure class="vitrine" style="margin:0">
+    <img src="../../research/gallery/exhibits/G018-invisible-wall/invisible-wall.gif" width="640" height="501" loading="lazy"
+         alt="Six worlds; a glider moves from the top half into a faintly tinted lower half; in four it vanishes at the boundary, in two it carries on.">
+    <figcaption><strong>The invisible wall</strong> (<em>modified rule</em>). Raise or lower the growth centre by 0.01 in the lower
+    half and the Orbium crosses. Change it by 0.02 or more and it dies at the boundary <a class="claim" href="claims.html#C060" title="An S001 Orbium gliding into a half-world whose μ differs by ±0.01 crosses; by ±0.02 or more (0.12, 0.13, 0.17, 0.18) it dies at the boundary"><span class="cid">C060</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>.
+    <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G018-invisible-wall/provenance.json">provenance</a>.</figcaption>
+  </figure>
+</div>
+<figure class="vitrine">
+  <img src="../../research/gallery/exhibits/G016-live-mutation/live-mutation.gif" width="600" height="348" loading="lazy"
+       alt="Two Orbia while their rule slowly changes; both keep their shape for a long time, then burst into a lattice of rings.">
+  <figcaption><strong>Changing the laws of physics under a living creature</strong> (<em>modified rule</em>). The growth
+  centre falls (left) or the growth width rises (right) over 150 time units. The Orbium follows the change until it bursts.
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G016-live-mutation/provenance.json">provenance</a>.</figcaption>
+</figure>
+
 <h2>Sources</h2>
 <ul>
-  <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/README.md">Gallery notes for G007–G013</a></li>
+  <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/README.md">Gallery notes for G007–G018</a></li>
   <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/VIS-talk/film.py">Film script</a> and
       <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/VIS-talk/SURVEY.md">catalogue survey</a></li>
   <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/reports/visual-specimens-2026-11-07.md">Field-trip report</a></li>
@@ -148,7 +190,7 @@ look like reaction–diffusion patterns, which is a resemblance, not a tested me
 <nav class="walk" aria-label="Tour"><a class="prev" href="reef.html"><small>Back</small>When the glider meets the ring</a><span></span></nav>
 </main>
 <footer class="site">
-  <p>Claim statuses read from <code>research/claims.md</code> (sha256 <code>db4428f0311c</code>) when this page was built.</p>
+  <p>Claim statuses read from <code>research/claims.md</code> (sha256 <code>0bd5b17b1fb9</code>) when this page was built.</p>
   <p>Every picture here is a recorded simulation or a figure drawn from committed data. Statuses
   are the claims ledger's, not the museum's: a badge never says more than
   <a href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/claims.md">research/claims.md</a> does.</p>

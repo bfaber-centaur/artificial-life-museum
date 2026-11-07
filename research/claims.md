@@ -152,6 +152,7 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
 | Lane 4 L4-002 lone-Orbium baselines (PR #20, merged as `560472c`) | none: a reference dataset with no claim proposed; not evidence for or against pair coupling (that is Lane 6's L6-008) |
 | REEF expedition 2026-10-20 (reef/coordinator integration PR; lanes reef/field, reef/numerics, reef/behavior) | C052 / C053 / C054 / C055; amendments to C038, C041 |
 | VIS-talk lightning-talk thread 2026-11-07 (`research/experiments/VIS-talk/`, gallery G007–G013) | C056 / C057 / C058 |
+| VIS-talk round two 2026-11-07 (gallery G014–G018) | C059 / C060 |
 
 ## Claims
 
@@ -1883,5 +1884,41 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
 - **Reproduction command:** `.venv/bin/python research/experiments/VIS-talk/film.py G009`
 - **Known caveats:** collision outcomes depend on phase and exact offset, so each geometry is one sample; whether the fused bodies are S101 (C041) was not checked; on a 256² torus debris can meet again
 - **Prior literature:** Chan 2019 §3.5.5 (pdf pp. 28–29) lists deflection, reflection, absorption, annihilation, detonation, fusion and parallelism. Not novel
+- **History:**
+  - 2026-11-07 — OBSERVED — VIS-talk thread.
+
+### C059 — An exactly symmetric soup under the S001 rule loses its symmetry through float64 FFT rounding: the mirror difference grows from 2 × 10⁻¹³ at 5 tu to 1 by 40 tu
+
+- **Status:** OBSERVED
+- **Owner lane:** VIS-talk thread
+- **Sources:** gallery G014, `research/gallery/exhibits/G014-kaleidoscope/asymmetry.csv`
+- **Specimen / version:** none. `d4_soup(seed=4)` in `ex_bizarre.py`: an 80 × 80 patch of uniform [0, 0.3) noise with all 8 square symmetries, centred on 256², asserted exactly invariant under `rot90` and transpose at t = 0
+- **Simulator / version:** `alm.lenia.Lenia` (numpy pocketfft, float64)
+- **Parameters:** S001 rule, 256² periodic, Euler + clip
+- **Intervention:** none
+- **Metric:** max over cells of max(|A − rot90 A|, |A − Aᵀ|), every 2 steps
+- **Result:** 0 at t = 0; 1.8e-13 at 5 tu; 2.7e-10 at 15 tu; 2.3e-5 at 25 tu; 1 at 40 tu. The colony is growing over the same window (mass 3.0 → 54 R²)
+- **Run IDs:** `G014:d4-soup-seed4`
+- **Search / parameter bounds:** one seed filmed. Pilot of 24 D4 soups (seeds 0–11 at amplitudes 0.3, 0.35): 8 filled the world and all 8 were fully asymmetric (difference 1) by 100 tu; 16 died
+- **Reproduction command:** `.venv/bin/python research/experiments/VIS-talk/film.py G014`
+- **Known caveats:** the size and timing of the break depend on the FFT implementation and summation order; the exact growth rate was not fitted
+- **History:**
+  - 2026-11-07 — OBSERVED — VIS-talk thread.
+
+### C060 — An S001 Orbium gliding into a half-world whose μ differs by ±0.01 crosses; by ±0.02 or more (0.12, 0.13, 0.17, 0.18) it dies at the boundary
+
+- **Status:** OBSERVED
+- **Owner lane:** VIS-talk thread
+- **Sources:** gallery G018
+- **Specimen / version:** S001 settled 1000 steps, 48² crop, pasted at row 40, column 128 of 256²
+- **Simulator / version:** `FieldLenia` (`ex_bizarre.py`), bitwise equal to `alm.lenia.Lenia` at uniform parameters (checked at render)
+- **Parameters:** S001 rule except μ = X in rows 128–255 (σ unchanged); X ∈ {0.12, 0.13, 0.14, 0.16, 0.17, 0.18}; periodic, so walls at rows 128 and 0
+- **Intervention:** spatial step in μ (a modified rule, not classic Lenia)
+- **Metric:** at 120 tu, final mass > 0.5 × one Orbium → crosses; else dies
+- **Result:** crosses for 0.14 and 0.16; dies for 0.12, 0.13, 0.17, 0.18
+- **Run IDs:** `G018:mu<X>`
+- **Search / parameter bounds:** one phase, one approach angle, six values of X; a σ-wall prototype (σ 0.018, 0.021, 0.025) gave mixed results and is not filmed
+- **Reproduction command:** `.venv/bin/python research/experiments/VIS-talk/film.py G018`
+- **Known caveats:** a "cross" is a mass test, not a shape test; uniform-rule survival bounds for Orbium are a different question (the Orbium is not at μ = X before the wall)
 - **History:**
   - 2026-11-07 — OBSERVED — VIS-talk thread.

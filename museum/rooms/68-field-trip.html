@@ -2,9 +2,9 @@
   "slug": "field-trip", "order": 68, "title": "Field trip: what Lenia can look like",
   "nav_label": "8 · Field trip",
   "kicker": "Room 8 · A visual field trip, 2026-11-07",
-  "summary": "Seven moving pictures from one afternoon of looking: the reef at four times the size, a catalogue bestiary, collisions, a soup, growers and a spiral.",
+  "summary": "Twelve moving pictures from one afternoon of looking: the reef at four times the size, a catalogue bestiary, collisions, a soup, growers, a spiral, and five stranger worlds.",
   "expect": {"C052": "INDEPENDENTLY_CHECKED", "C053": "NUMERICALLY_FRAGILE", "C056": "OBSERVED",
-             "C057": "OBSERVED", "C058": "OBSERVED"}
+             "C057": "OBSERVED", "C058": "OBSERVED", "C059": "OBSERVED", "C060": "OBSERVED"}
 } -->
 <h1>Field trip: what Lenia can look like</h1>
 <p class="lede">The other rooms each follow one question about four animals. This room is a
@@ -116,9 +116,51 @@ you see here was already known to Lenia's inventor, Bert Chan; the labels say so
 behaviour: Chan 2019 describes chains that lengthen and spirals that wind outward. The labyrinths
 look like reaction–diffusion patterns, which is a resemblance, not a tested mechanism.</div>
 
+<h2>Stranger worlds</h2>
+<p>Three of these five change the rule itself, which classic Lenia never does. In those worlds
+the growth centre or width varies from place to place or over time. They are labelled
+<em>modified rule</em>, and their code is checked to match the ordinary simulator bit for bit
+when the rule is held uniform.</p>
+<figure class="vitrine">
+  <img src="{{asset:research/gallery/exhibits/G014-kaleidoscope/kaleidoscope.gif}}" width="520" height="311" loading="lazy"
+       alt="Left: a perfectly symmetric noise patch grows into four mirrored colonies and then a lattice that is no longer symmetric. Right: a map of how far the world is from its mirror image, brightening from dark to yellow.">
+  <figcaption><strong>A perfectly symmetric world, broken by rounding error.</strong> The rule and the start
+  are exactly symmetric. The asymmetry starts in the sixteenth decimal place and reaches full size within 40 time units
+  {{claim:C059}}. {{src:research/gallery/exhibits/G014-kaleidoscope/provenance.json|provenance}}.</figcaption>
+</figure>
+<figure class="vitrine">
+  <img src="{{asset:research/gallery/exhibits/G015-map-of-worlds/map-of-worlds.gif}}" width="400" height="423" loading="lazy"
+       alt="A square world of noise that sorts itself into spots on the left, labyrinths in the middle, stripes on the right and an empty region at the top right.">
+  <figcaption><strong>A different rule at every point</strong> (<em>modified rule</em>). The growth centre rises from left to
+  right and the growth width from top to bottom. One world turns into a map of what noise becomes. This is a picture, not a
+  phase diagram. {{src:research/gallery/exhibits/G015-map-of-worlds/provenance.json|provenance}}.</figcaption>
+</figure>
+<div class="pair">
+  <figure class="vitrine" style="margin:0">
+    <img src="{{asset:research/gallery/exhibits/G017-rush-hour/rush-hour.gif}}" width="400" height="444" loading="lazy"
+         alt="Thirty small gliders in one world; a collision explodes into a growing colony that swallows the rest.">
+    <figcaption><strong>Rush hour.</strong> Thirty Orbia under the plain rule. One collision detonates and the colony
+    eats the rest. {{src:research/gallery/exhibits/G017-rush-hour/provenance.json|provenance}}.</figcaption>
+  </figure>
+  <figure class="vitrine" style="margin:0">
+    <img src="{{asset:research/gallery/exhibits/G018-invisible-wall/invisible-wall.gif}}" width="640" height="501" loading="lazy"
+         alt="Six worlds; a glider moves from the top half into a faintly tinted lower half; in four it vanishes at the boundary, in two it carries on.">
+    <figcaption><strong>The invisible wall</strong> (<em>modified rule</em>). Raise or lower the growth centre by 0.01 in the lower
+    half and the Orbium crosses. Change it by 0.02 or more and it dies at the boundary {{claim:C060}}.
+    {{src:research/gallery/exhibits/G018-invisible-wall/provenance.json|provenance}}.</figcaption>
+  </figure>
+</div>
+<figure class="vitrine">
+  <img src="{{asset:research/gallery/exhibits/G016-live-mutation/live-mutation.gif}}" width="600" height="348" loading="lazy"
+       alt="Two Orbia while their rule slowly changes; both keep their shape for a long time, then burst into a lattice of rings.">
+  <figcaption><strong>Changing the laws of physics under a living creature</strong> (<em>modified rule</em>). The growth
+  centre falls (left) or the growth width rises (right) over 150 time units. The Orbium follows the change until it bursts.
+  {{src:research/gallery/exhibits/G016-live-mutation/provenance.json|provenance}}.</figcaption>
+</figure>
+
 <h2>Sources</h2>
 <ul>
-  <li>{{src:research/gallery/README.md|Gallery notes for G007–G013}}</li>
+  <li>{{src:research/gallery/README.md|Gallery notes for G007–G018}}</li>
   <li>{{src:research/experiments/VIS-talk/film.py|Film script}} and
       {{src:research/experiments/VIS-talk/SURVEY.md|catalogue survey}}</li>
   <li>{{src:research/reports/visual-specimens-2026-11-07.md|Field-trip report}}</li>

@@ -1,7 +1,7 @@
 {
   "ledger": "research/claims.md",
-  "ledger_sha256": "db4428f0311c311da7548282ba3511164335cca0685c88bcb38acb1724b96f26",
-  "ledger_commit": "190b2b9",
+  "ledger_sha256": "0bd5b17b1fb9c661c271f282477267445d6ebcaf8cbad6bed0c2222b572f1f33",
+  "ledger_commit": "941c169",
   "conventions_sha256": "0e237384e0425b3c325229cf650ab6f9807fb08c1bedc991433b54b13c2eb02f",
   "claims": {
     "C001": {
@@ -249,6 +249,20 @@
       "rooms": [
         "field-trip"
       ]
+    },
+    "C059": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "field-trip"
+      ]
+    },
+    "C060": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "field-trip"
+      ]
     }
   },
   "sources": {
@@ -361,6 +375,11 @@
       "research/gallery/exhibits/G011-anatomy-of-a-step/provenance.json",
       "research/gallery/exhibits/G012-growers/provenance.json",
       "research/gallery/exhibits/G013-spiral/provenance.json",
+      "research/gallery/exhibits/G014-kaleidoscope/provenance.json",
+      "research/gallery/exhibits/G015-map-of-worlds/provenance.json",
+      "research/gallery/exhibits/G016-live-mutation/provenance.json",
+      "research/gallery/exhibits/G017-rush-hour/provenance.json",
+      "research/gallery/exhibits/G018-invisible-wall/provenance.json",
       "research/reports/reef-expedition-2026-10-20.md",
       "research/reports/visual-specimens-2026-11-07.md"
     ],

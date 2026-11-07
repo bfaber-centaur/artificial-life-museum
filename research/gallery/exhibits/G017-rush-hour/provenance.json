@@ -1,0 +1,244 @@
+{
+  "exhibit": "G017",
+  "title": "Rush hour",
+  "media": [
+    "rush-hour.mp4",
+    "rush-hour.gif",
+    "rush-hour-t30.png",
+    "mass.csv"
+  ],
+  "frames": {
+    "keep_every_steps": 2,
+    "mp4_fps": 25,
+    "time_compression": "5 tu per second"
+  },
+  "view": "whole 512^2 world, 1 px per cell",
+  "placements_y_x_rot_transpose": [
+    [
+      326,
+      157,
+      3,
+      true
+    ],
+    [
+      89,
+      416,
+      0,
+      true
+    ],
+    [
+      467,
+      497,
+      2,
+      false
+    ],
+    [
+      286,
+      478,
+      2,
+      false
+    ],
+    [
+      417,
+      201,
+      1,
+      true
+    ],
+    [
+      391,
+      373,
+      3,
+      true
+    ],
+    [
+      89,
+      11,
+      3,
+      false
+    ],
+    [
+      246,
+      216,
+      2,
+      true
+    ],
+    [
+      14,
+      4,
+      1,
+      true
+    ],
+    [
+      131,
+      315,
+      2,
+      false
+    ],
+    [
+      196,
+      412,
+      3,
+      false
+    ],
+    [
+      486,
+      333,
+      3,
+      false
+    ],
+    [
+      352,
+      448,
+      3,
+      true
+    ],
+    [
+      432,
+      268,
+      0,
+      false
+    ],
+    [
+      158,
+      368,
+      1,
+      true
+    ],
+    [
+      272,
+      183,
+      3,
+      false
+    ],
+    [
+      292,
+      368,
+      2,
+      true
+    ],
+    [
+      389,
+      200,
+      2,
+      true
+    ],
+    [
+      455,
+      365,
+      1,
+      true
+    ],
+    [
+      402,
+      405,
+      1,
+      true
+    ],
+    [
+      343,
+      172,
+      3,
+      true
+    ],
+    [
+      76,
+      458,
+      2,
+      true
+    ],
+    [
+      392,
+      26,
+      3,
+      true
+    ],
+    [
+      207,
+      484,
+      2,
+      true
+    ],
+    [
+      460,
+      152,
+      0,
+      false
+    ],
+    [
+      344,
+      388,
+      3,
+      true
+    ],
+    [
+      325,
+      54,
+      3,
+      true
+    ],
+    [
+      322,
+      209,
+      2,
+      false
+    ],
+    [
+      100,
+      255,
+      1,
+      false
+    ],
+    [
+      217,
+      179,
+      0,
+      false
+    ]
+  ],
+  "caveats": [
+    "One random arrangement. Which collision detonates first, and when, depends on it.",
+    "Transposing the Orbium mirrors it; mirror images are exact symmetries of the square-grid kernel.",
+    "Detonation is one of Chan's collision outcomes (2019 sec. 3.5.5); the colony is the same kind of frozen lattice as G010's filled soups."
+  ],
+  "runs": [
+    {
+      "key": "G017:rush-hour",
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.15,
+        "sigma": 0.015,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "grid": {
+        "shape": [
+          512,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 1200,
+      "time_units": 120.0,
+      "initial_state": "30 copies of the settled S001 Orbium (48^2 crop), each rotated by a multiple of 90 deg and optionally transposed, at random positions (numpy default_rng(0); overlapping supports rejected and redrawn) on zero 512^2",
+      "initial_state_sha256": "e5c63512d881dac779c6758f782d9b4fa4cb55489114f4671766e9f385a19418",
+      "final_state_sha256": "4f05a75ef71a4cb69bcdee8152a64f14e1ad6039f535efc4ebc3b6dea43d364f"
+    }
+  ],
+  "simulator": {
+    "package": "alm.lenia.Lenia (unchanged)",
+    "git_commit": "31908e536edd279e919fe7d9fdadbaa005ba8c22",
+    "git_dirty": false
+  },
+  "render": {
+    "colormap": "matplotlib inferno, A in [0,1] mapped linearly, nearest-neighbour",
+    "script": "research/experiments/VIS-talk/film.py"
+  },
+  "reproduce": "git checkout <this commit> && .venv/bin/python research/experiments/VIS-talk/film.py G017   # verify only: film.py verify G017"
+}

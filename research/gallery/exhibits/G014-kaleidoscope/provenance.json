@@ -1,0 +1,65 @@
+{
+  "exhibit": "G014",
+  "title": "A perfectly symmetric world, broken by rounding error",
+  "media": [
+    "kaleidoscope.mp4",
+    "kaleidoscope.gif",
+    "kaleidoscope-t10.png",
+    "kaleidoscope-t30.png",
+    "kaleidoscope-t50.png",
+    "asymmetry.csv"
+  ],
+  "frames": {
+    "keep_every_steps": 2,
+    "mp4_fps": 20,
+    "time_compression": "4 tu per second"
+  },
+  "view": "whole 256^2 world, 2 px per cell; right panel max(|A - rot90 A|, |A - A^T|) per cell, log10, viridis from -16 to 0 (values below 1e-16, including exact zeros, shown as -16)",
+  "measured": "max asymmetry 0 at t = 0, about 2e-13 at 5 tu, 3e-10 at 15 tu, 2e-5 at 25 tu, 1 by 40 tu (asymmetry.csv; growth roughly 30x per 5 tu while the colony grows)",
+  "caveats": [
+    "The rule and the initial state are exactly symmetric, so in exact arithmetic the world stays symmetric. The symmetry is broken by floating-point rounding in the FFT convolution (float64, numpy pocketfft) and then amplified. Another FFT library or summation order would break it differently.",
+    "One seed; in a 24-run pilot of D4 soups (seeds 0-11 at amplitudes 0.3 and 0.35), 8 filled the world and 16 died out, and every survivor was fully asymmetric (max difference 1) by 100 tu.",
+    "The world-filling lattice is the same kind of state as G010's filled soups (C056)."
+  ],
+  "runs": [
+    {
+      "key": "G014:d4-soup-seed4",
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.15,
+        "sigma": 0.015,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "grid": {
+        "shape": [
+          256,
+          256
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 800,
+      "time_units": 80.0,
+      "initial_state": "d4_soup(seed=4): 40x40 uniform [0, 0.3) block (numpy default_rng(4)), symmetrised across the diagonal and mirrored into an 80x80 patch with all 8 square symmetries, centred on zero 256^2",
+      "initial_state_sha256": "e953e041acc5bb3dc5c0c20611e3c68cca79a038ebb7b173f2758a25cb86dc35",
+      "final_state_sha256": "6689c43cb6557835411f76fe9f60a1713e07fa21ac7fa5a81c8079585b010e67"
+    }
+  ],
+  "simulator": {
+    "package": "alm.lenia.Lenia (unchanged)",
+    "git_commit": "31908e536edd279e919fe7d9fdadbaa005ba8c22",
+    "git_dirty": false
+  },
+  "render": {
+    "colormap": "matplotlib inferno, A in [0,1] mapped linearly, nearest-neighbour",
+    "script": "research/experiments/VIS-talk/film.py"
+  },
+  "reproduce": "git checkout <this commit> && .venv/bin/python research/experiments/VIS-talk/film.py G014   # verify only: film.py verify G014"
+}

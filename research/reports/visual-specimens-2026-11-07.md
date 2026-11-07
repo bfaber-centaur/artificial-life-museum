@@ -83,3 +83,20 @@ and printed page numbers are from that copy.
 .venv/bin/python research/experiments/VIS-talk/film.py verify                               # replay, compare hashes
 cd research/experiments/VIS-talk && ../../../.venv/bin/python survey.py run --jobs 2 && ../../../.venv/bin/python survey.py table   # ~1 h
 ```
+
+## Round two: stranger worlds (G014–G018)
+
+Bobby asked for "truly bizarre things to swipe through after the basics". Five more films:
+
+| Visual | File | One-liner | Caveat |
+|---|---|---|---|
+| Symmetry broken by rounding | `G014-kaleidoscope/kaleidoscope.mp4` | "A perfectly symmetric world. The symmetry breaks at the 16th decimal place and reaches full size in 40 time units." | Depends on the FFT library (C059) |
+| A different rule at every point | `G015-map-of-worlds/map-of-worlds.mp4` | "One world, every rule: spots, labyrinths, stripes, nothing." | Modified rule; a picture, not a phase diagram |
+| Rush hour | `G017-rush-hour/rush-hour.mp4` | "Thirty gliders, one bad collision, and the colony eats everyone." | One random arrangement; plain rule |
+| The invisible wall | `G018-invisible-wall/invisible-wall.mp4` | "Shift the growth centre by 0.01 and the creature crosses; by 0.02 it dies." | Modified rule; one phase per lane (C060) |
+| Live mutation | `G016-live-mutation/live-mutation.mp4` | "Change the laws under a living creature and watch it hold on, then burst." | Modified rule; Chan's own morphing method |
+
+G015, G016 and G018 run on `FieldLenia` (`ex_bizarre.py`). It is checked bitwise against
+`alm.lenia.Lenia` at uniform parameters, and each provenance file records that check. A σ-wall
+variant of G018 (σ 0.018, 0.021 and 0.025 in the lower half) gave mixed results and was not filmed.
+`film.py verify G014 G015 G016 G017 G018` replays all five.
