@@ -170,3 +170,56 @@ def g012(render: bool = True):
         ],
     }, runs)
     return runs
+
+
+SPIRAL = 197  # Catenohelicium monospirae (HN+m)
+N13, H13 = 1024, 150
+
+
+@exhibit("G013")
+def g013(render: bool = True):
+    e, rule, cells = catalog_entry(SPIRAL)
+    A0 = survey.place(np.rint(cells * 255), N13)
+    steps = int(round(H13 * rule.T))
+    run = Run(f"G013:{SPIRAL}:{e.get('code')}", rule, A0, steps,
+              built=f"catalog entry #{SPIRAL} ({e.get('code')} {e.get('name')}) cells placed centred on zero "
+                    f"{N13}^2 (VIS-talk survey.place)",
+              keep_every=5)
+    run.go(record=render, on_step=lambda sim, s: np.rint(sim.A * 255).astype(np.uint8))
+    if not render:
+        return [run]
+    folder = EXHIBITS / "G013-spiral"
+    frames = []
+    # Fixed camera on the central 768^2 cells, shown at 1 px per cell, so nothing is resampled.
+    o, w = (N13 - 768) // 2, 768
+    for s in sorted(run.frames):
+        A = run.frames[s][o:o + w, o:o + w] / 255.0
+        img = Image.new("RGB", (w, w + 56), BG)
+        img.paste(Image.fromarray(colorize(A)), (0, 56))
+        text(img, (14, 12), "A spiral that draws itself", 24, bold=True)
+        text(img, (w - 14, 16), f"t = {s / rule.T:5.1f}", 20, anchor="ra")
+        bar(img, 10 * rule.R, 1, (w - 14 - 10 * rule.R, 40), "10 R", 11)
+        frames.append(img)
+    media = write_media(frames, folder, "spiral", fps=30, gif_width=480, gif_every=3, gif_colors=64, crf=24)
+    frames[-1].save(folder / "spiral-final.png", optimize=True)
+    last = run.frames[max(run.frames)] / 255.0
+    fill = float((last > 0.1).mean())
+    np.savetxt(folder / "mass.csv", np.c_[np.arange(steps + 1) / rule.T, run.mass], delimiter=",",
+               header="t_tu,mass_sumA_over_R2", comments="", fmt="%.6g")
+    save_provenance(folder, {
+        "exhibit": "G013", "title": "A spiral that draws itself",
+        "media": media + ["spiral-final.png", "mass.csv"],
+        "frames": {"keep_every_steps": 5, "mp4_fps": 30, "time_compression": "15 tu per second"},
+        "view": f"central 768^2 cells of a {N13}^2 periodic world, 1 px per cell, fixed camera",
+        "species": {"index": SPIRAL, "code": e.get("code"), "name": e.get("name"), "R": rule.R, "T": rule.T,
+                    "mu": rule.mu, "sigma": rule.sigma, "beta": list(rule.beta)},
+        "final_fill_fraction_A_gt_0.1": fill,
+        "caveats": [
+            "Catalogued species and catalogued behaviour: Chan 2019 sec. 3.5.4 (pdf p. 28) describes 'spiral "
+            "elongation (in Helicidae)' with quadratic mass growth. Nothing here is new; the exhibit shows ALM "
+            "reproducing it at a large world size.",
+            "Single run, alm only. In a 512^2 world (G012) the arm meets its own periodic image by about 70 tu and a "
+            "labyrinth texture takes over where it collides; check the film's last frames for the same here.",
+        ],
+    }, [run])
+    return [run]

@@ -335,7 +335,7 @@ def g010(render: bool = True):
              f"Of {len(table)} noise seeds: {counts.get('died', 0)} fade away, {counts.get('orbium', 0)} leave "
              f"Orbium-sized survivors, {counts.get('filled', 0)} take over the world (t = {H10}).", 16, fill=DIM)
         frames.append(img)
-    media = write_media(frames, folder, "soup", fps=25, gif_width=900, gif_every=2, gif_colors=96)
+    media = write_media(frames, folder, "soup", fps=25, gif_width=720, gif_every=3, gif_colors=64, crf=23)
     frames[-1].save(folder / "soup-final.png", optimize=True)
     save_provenance(folder, {
         "exhibit": "G010", "title": "Same recipe, three fates",
