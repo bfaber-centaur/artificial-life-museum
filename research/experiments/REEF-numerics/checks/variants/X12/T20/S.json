@@ -1,0 +1,70 @@
+{
+ "lane": "numerics",
+ "commit": "e7d4ef6b8f5a5189c3ad324fe50b48ca1afaba98",
+ "engine": "alm",
+ "rule": {
+  "kernel": "poly",
+  "growth": "poly",
+  "beta": [
+   1.0
+  ],
+  "mu": 0.155,
+  "sigma": 0.02,
+  "R": 13,
+  "T": 20,
+  "update": "euler+clip",
+  "dtype": "float64"
+ },
+ "world": {
+  "N": 256,
+  "boundary": "periodic"
+ },
+ "horizon_tu": 50,
+ "command": null,
+ "env": {
+  "python": "3.13.16",
+  "numpy": "2.5.3",
+  "scipy": "1.18.1",
+  "platform": "Linux-6.18.44-fc-v139-x86_64-with-glibc2.39",
+  "machine": "x86_64",
+  "threads": "OMP/OPENBLAS/MKL=1",
+  "git_dirty": false,
+  "embedded_from_N256": false
+ },
+ "status": "prepared",
+ "run_id": "REEF-X12-S-T20",
+ "kind": "control_S",
+ "inputs": {
+  "source_run_id": "REEF-X12-S",
+  "source_state_sha256": "371632556f2d1c90cdeb5f9b5ee1392fab15bb8ff57d2a599278e07ab0742554",
+  "transform": "identity",
+  "initial_state_sha256": "371632556f2d1c90cdeb5f9b5ee1392fab15bb8ff57d2a599278e07ab0742554",
+  "path": "research/experiments/REEF-numerics/checks/variants/X12/T20/S.npy",
+  "geometry": {
+   "stand_in": "static Gaussian blob",
+   "geometry_of": "P2",
+   "blob_centre_step": 61,
+   "amplitude_scale": 0.75,
+   "b_R_requested": 0.0,
+   "ring_shift_from": "P2",
+   "blob_to_ring_along_heading_R": 1.7725618505574645,
+   "blob_to_ring_lateral_R": 0.0222248753952274,
+   "heading_deg": 72.29403933885672
+  }
+ },
+ "controls": {
+  "G": "REEF-X12-G (lockstep stand-in-alone)",
+  "S": "REEF-X12-S",
+  "mapping": "G-alone shared per snapshot (D-004), reproduced bitwise by the lockstep G; S-alone = lockstep S at this realised ring position"
+ },
+ "lockstep_final_state_sha256": {
+  "E": "755502e83a668fc436a29e6b3491667775dce5b3b6624bf3e0c478d3cc2c56d2",
+  "G": "07854d2fef297a06ba81685e660c332de36d5d18d546927d30daad6d7fda1541",
+  "S": "371632556f2d1c90cdeb5f9b5ee1392fab15bb8ff57d2a599278e07ab0742554"
+ },
+ "schedule": {
+  "seed": 20261020,
+  "position": 0
+ },
+ "notes": "D-022 X12; controls: G=REEF-X12-G (lockstep blob-alone), S=REEF-X12-S (lockstep) protocol addendum e8bc4b0a1eb57b5bb3b68cb1a09ee95fe26214c9"
+}

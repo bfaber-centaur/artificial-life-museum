@@ -1,0 +1,67 @@
+{
+ "lane": "numerics",
+ "commit": "0d875e6554b2055e460db4527094c9084076ef24",
+ "engine": "alm",
+ "rule": {
+  "kernel": "poly",
+  "growth": "poly",
+  "beta": [
+   1.0
+  ],
+  "mu": 0.155,
+  "sigma": 0.02,
+  "R": 13,
+  "T": 10,
+  "update": "euler+clip",
+  "dtype": "float64"
+ },
+ "world": {
+  "N": 512,
+  "boundary": "periodic"
+ },
+ "horizon_tu": 50,
+ "command": null,
+ "env": {
+  "python": "3.13.16",
+  "numpy": "2.5.3",
+  "scipy": "1.18.1",
+  "platform": "Linux-6.18.44-fc-v139-x86_64-with-glibc2.39",
+  "machine": "x86_64",
+  "threads": "OMP/OPENBLAS/MKL=1",
+  "git_dirty": false,
+  "embedded_from_N256": false
+ },
+ "status": "prepared",
+ "run_id": "REEF-P2-S-N512",
+ "kind": "control_S",
+ "inputs": {
+  "source_run_id": "REEF-P2-S",
+  "source_state_sha256": "371632556f2d1c90cdeb5f9b5ee1392fab15bb8ff57d2a599278e07ab0742554",
+  "transform": "np.roll(A, (-29, -7), (0, 1)) then embed at offset (128, 128)",
+  "initial_state_sha256": "2cc035a54941a82edceebee218854cd0ff86f6f26fee00b97a489ea16d3173b5",
+  "path": "research/experiments/REEF-numerics/checks/variants/P2/N512/S.npy",
+  "geometry": {
+   "b_R_requested": 0.0,
+   "b_R_realized": 0.021623550682058384,
+   "d_R_requested": 5.15383666383055,
+   "d_R_realized": 5.118834907289539,
+   "heading_deg": 72.29403933885672,
+   "gap_R_realized": 3.96499824345899
+  }
+ },
+ "controls": {
+  "G": "REEF-CTRL-GA",
+  "S": "REEF-P2-S",
+  "mapping": "G-alone shared per snapshot (D-004), reproduced bitwise by the lockstep G; S-alone = lockstep S at this realised ring position"
+ },
+ "lockstep_final_state_sha256": {
+  "E": "3549322b1c7fb07ae9ad47e9eec8dab1fd27f416c71714909df88191edf206e4",
+  "G": "7fac2d9132cba04e9cfb7ef6e9835ab003e6e6cd444907644e11c2839aa69617",
+  "S": "371632556f2d1c90cdeb5f9b5ee1392fab15bb8ff57d2a599278e07ab0742554"
+ },
+ "schedule": {
+  "seed": 20261020,
+  "position": 3
+ },
+ "notes": "controls: G=REEF-CTRL-GA (shared), S=REEF-P2-S (lockstep in REEF-P2-E) protocol addendum 3c3fdc4b12cb064061d899b2a6e42290ceb452c9"
+}

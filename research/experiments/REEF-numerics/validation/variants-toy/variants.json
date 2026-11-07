@@ -1,0 +1,104 @@
+{
+ "commit": "3a12ffa0925b440d04f1b2ebdfa3b9c060770223",
+ "commit_dirty": true,
+ "E_equals_G_plus_S_input": true,
+ "inputs": {
+  "E": {
+   "path": "research/experiments/REEF-numerics/validation/inputs/REEF-NUM-TOY-E.npy",
+   "sha256": "76e0082778901ce55cc703d52566acf9a1189968c3bcc370d3ac1ebb8cabba6b"
+  },
+  "G": {
+   "path": "research/experiments/REEF-numerics/validation/inputs/REEF-NUM-TOY-G.npy",
+   "sha256": "5cfb2443b91151f2d163a6883f23af083b7549222bf10381cb8b1677dfb4302f"
+  },
+  "S": {
+   "path": "research/experiments/REEF-numerics/validation/inputs/REEF-NUM-TOY-S.npy",
+   "sha256": "d38934ca082003b39e8749e2837631566be11f813876db0d1d26c8ecd467d86d"
+  }
+ },
+ "variants": {
+  "T20": {
+   "transform": "identity",
+   "T": 20,
+   "E_equals_G_plus_S": true,
+   "mass_ratio": {
+    "E": 1.0,
+    "G": 1.0,
+    "S": 1.0
+   },
+   "files": {
+    "E": {
+     "state_sha256": "76e0082778901ce55cc703d52566acf9a1189968c3bcc370d3ac1ebb8cabba6b",
+     "npy_file_sha256": "708722cf5e9afb086feda6679e70ed550801d813a45bbc996ce64e28fd02d3af"
+    },
+    "G": {
+     "state_sha256": "5cfb2443b91151f2d163a6883f23af083b7549222bf10381cb8b1677dfb4302f",
+     "npy_file_sha256": "b3caa5bda6b6ea77be7aa2d68c5a2117107d4556fbce51ef91032e145383d567"
+    },
+    "S": {
+     "state_sha256": "d38934ca082003b39e8749e2837631566be11f813876db0d1d26c8ecd467d86d",
+     "npy_file_sha256": "c1b0733b18c74531ab28545489401edfa331331e9d684b99d5fae83d4661fbf6"
+    }
+   }
+  },
+  "R26": {
+   "transform": "np.kron(A, ones((2, 2)))",
+   "R": 26,
+   "N": 512,
+   "E_equals_G_plus_S": true,
+   "mass_ratio": {
+    "E": 4.0,
+    "G": 4.000000000000001,
+    "S": 4.0
+   },
+   "files": {
+    "E": {
+     "state_sha256": "9ffc62cc2712ac1232e4295355cea28b740d7af9b5fc60b0d5b858c75064bf39",
+     "npy_file_sha256": "b7e3416e94a760ede8b9798a9666b54e1dd789e4e424c75e3faada9e304bd623"
+    },
+    "G": {
+     "state_sha256": "c48856b75aba3f13615316decc6ec0d8c842ed92148c3754b680962a6e05c395",
+     "npy_file_sha256": "f229af3fb65752a52d9764361baef8b65cb07a386a6cb1644c541f9c14bf8a79"
+    },
+    "S": {
+     "state_sha256": "f27a799355a27553d10234aef370a9bcee41f5e6e47c70748f838d0d53668360",
+     "npy_file_sha256": "3adaf3120332555c5f8b45fbfa894ddc0b78ac0de346b1a23adce8dec2f2c368"
+    }
+   }
+  },
+  "N512": {
+   "transform": "np.roll(A, (0, -38), (0, 1)) then embed at offset (128, 128)",
+   "N": 512,
+   "roll": [
+    0,
+    -38
+   ],
+   "offset": [
+    128,
+    128
+   ],
+   "empty_rows": 236,
+   "empty_cols": 160,
+   "E_equals_G_plus_S": true,
+   "mass_ratio": {
+    "E": 1.0,
+    "G": 1.0,
+    "S": 1.0
+   },
+   "files": {
+    "E": {
+     "state_sha256": "cec655fa3c8c962de5d7b87cd56dea58b12c0cc611e1fe322ff44e94138b06eb",
+     "npy_file_sha256": "039f1c99103f52b9e28363f23e53ba6cc0f7f97198a7cbfb59a0cfc71f3196c5"
+    },
+    "G": {
+     "state_sha256": "eed49a329b81d79b562ad5c0ad9e726a04e4cff914188dcf3bc0d2fa31fa8b79",
+     "npy_file_sha256": "34669886ee57596af1679ebb8d8ab346de79460fa7f158818a31137a5fd3b22a"
+    },
+    "S": {
+     "state_sha256": "fb40c77432a1ffbc987f9a4dc4c647554ff846ba274388a0c7eda3ff294ef339",
+     "npy_file_sha256": "f2b213b9b2131ed6dbae675e2543dc28b397306bcc576ada00100a8c8a8e516c"
+    }
+   }
+  }
+ }
+}

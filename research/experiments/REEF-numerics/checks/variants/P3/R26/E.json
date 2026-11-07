@@ -1,0 +1,66 @@
+{
+ "lane": "numerics",
+ "commit": "0d875e6554b2055e460db4527094c9084076ef24",
+ "engine": "alm",
+ "rule": {
+  "kernel": "poly",
+  "growth": "poly",
+  "beta": [
+   1.0
+  ],
+  "mu": 0.155,
+  "sigma": 0.02,
+  "R": 26,
+  "T": 10,
+  "update": "euler+clip",
+  "dtype": "float64"
+ },
+ "world": {
+  "N": 512,
+  "boundary": "periodic"
+ },
+ "horizon_tu": 50,
+ "command": null,
+ "env": {
+  "python": "3.13.16",
+  "numpy": "2.5.3",
+  "scipy": "1.18.1",
+  "platform": "Linux-6.18.44-fc-v139-x86_64-with-glibc2.39",
+  "machine": "x86_64",
+  "threads": "OMP/OPENBLAS/MKL=1",
+  "git_dirty": false,
+  "embedded_from_N256": false
+ },
+ "status": "prepared",
+ "run_id": "REEF-P3-E-R26",
+ "kind": "check",
+ "inputs": {
+  "source_run_id": "REEF-P3-E",
+  "source_state_sha256": "4d24ae9fadfd09de1911bd1b95287c37fe61b138181e4b565833c72fe88c3b17",
+  "transform": "np.kron(A, ones((2, 2)))",
+  "initial_state_sha256": "23303c623ec369f86bf6a3300a8cb1e26fd6bc95bf1ee156a6bef68a0e846c6a",
+  "path": "research/experiments/REEF-numerics/checks/variants/P3/R26/E.npy",
+  "geometry": {
+   "b_R_requested": 1.0,
+   "b_R_realized": 0.9945533068049305,
+   "d_R_requested": 5.15383666383055,
+   "d_R_realized": 5.131214397620976,
+   "heading_deg": 72.29403933885672,
+   "gap_R_realized": 3.977377733790427
+  }
+ },
+ "controls": {
+  "G": "REEF-CTRL-GA-R26",
+  "S": "REEF-P3-S-R26"
+ },
+ "lockstep_final_state_sha256": {
+  "E": "40b6a0eed32bdbfbb1caba4a1003511f4edd27da8f699797b81239cde2cf1a22",
+  "G": "7fac2d9132cba04e9cfb7ef6e9835ab003e6e6cd444907644e11c2839aa69617",
+  "S": "a8e53a3126781449b53584ccad76ee4fa8d497708a39bcef5013fa1ab37eb525"
+ },
+ "schedule": {
+  "seed": 20261020,
+  "position": 4
+ },
+ "notes": "controls: G=REEF-CTRL-GA (shared), S=REEF-P3-S (lockstep in REEF-P3-E) protocol addendum 3c3fdc4b12cb064061d899b2a6e42290ceb452c9"
+}

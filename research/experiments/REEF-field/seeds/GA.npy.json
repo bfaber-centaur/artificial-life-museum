@@ -1,0 +1,38 @@
+{
+  "N": 256,
+  "centroid_yx_after_roll": [
+    127.91251771353001,
+    127.63873448532254
+  ],
+  "file": "GA.npy",
+  "file_sha256": "7d7e0479c3459da078580088d0f1f73d14eeaef3f472da9189c846e371e986f4",
+  "fractional_centroid_yx": [
+    0.9125177135300078,
+    0.6387344853225443
+  ],
+  "heading_deg": 72.29860140450495,
+  "integer_roll_yx": [
+    -45,
+    -127
+  ],
+  "kind": "named elapsed-time snapshot (not an intrinsic phase)",
+  "mass_R2": 0.4869764587685827,
+  "name": "GA",
+  "rule": {
+    "R": 13,
+    "T": 10,
+    "beta": [
+      1.0
+    ],
+    "dt": 0.1,
+    "growth": "poly",
+    "kernel": "poly",
+    "mu": 0.155,
+    "sigma": 0.02
+  },
+  "source_state_sha256": "6fcff8f4bb588245add965a224aee7d15b4058ca35e7ff452c7b22f6bda22ae9",
+  "source_step": 5000,
+  "source_tu": 500.0,
+  "speed_R_per_tu": 0.5484066678351772,
+  "state_sha256": "982b793956a8336d96969d1cd5ed71e83604e78c1aa360819c334eaa098c25f1"
+}

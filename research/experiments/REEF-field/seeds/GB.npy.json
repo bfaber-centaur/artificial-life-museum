@@ -1,0 +1,38 @@
+{
+  "N": 256,
+  "centroid_yx_after_roll": [
+    128.30997391829746,
+    127.72936245200809
+  ],
+  "file": "GB.npy",
+  "file_sha256": "40a8112638e146789098463c58f628f81d8708b934172bebef62588cb16f2f99",
+  "fractional_centroid_yx": [
+    0.3099739182974588,
+    0.7293624520080897
+  ],
+  "heading_deg": 72.29860140450495,
+  "integer_roll_yx": [
+    -48,
+    -128
+  ],
+  "kind": "named elapsed-time snapshot (not an intrinsic phase)",
+  "mass_R2": 0.48799473301144186,
+  "name": "GB",
+  "rule": {
+    "R": 13,
+    "T": 10,
+    "beta": [
+      1.0
+    ],
+    "dt": 0.1,
+    "growth": "poly",
+    "kernel": "poly",
+    "mu": 0.155,
+    "sigma": 0.02
+  },
+  "source_state_sha256": "400aaa32e5a8b20acea05ebc67355c57d5a62f0fa34fd74b7a35a192fb17bfb4",
+  "source_step": 5005,
+  "source_tu": 500.5,
+  "speed_R_per_tu": 0.5484066678351772,
+  "state_sha256": "63e381b8002c10b008d8dffb4e955660cbb12b64057de0217d5edd7a1fc05d30"
+}

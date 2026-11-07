@@ -1,0 +1,244 @@
+[
+ {
+  "run_id": "REEF-NUM-VAL-S103-replay",
+  "kind": "check",
+  "lane": "numerics",
+  "commit": "3a12ffa0925b440d04f1b2ebdfa3b9c060770223",
+  "commit_dirty": false,
+  "engine": "alm",
+  "rule": {
+   "kernel": "poly",
+   "growth": "poly",
+   "beta": [
+    1.0
+   ],
+   "mu": 0.155,
+   "sigma": 0.02,
+   "R": 13,
+   "T": 10,
+   "update": "euler+clip",
+   "dtype": "float64"
+  },
+  "world": {
+   "N": 256,
+   "boundary": "periodic"
+  },
+  "inputs": {
+   "initial_state_sha256": "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+   "path": "validation/inputs/REEF-NUM-VAL-S103.npy",
+   "state_path": "research/experiments/REEF-numerics/validation/inputs/REEF-NUM-VAL-S103.npy",
+   "state_file_sha256": "8569707d12219849e6a9411a10c366c7959a8e09ce13179688642620fcd446b2",
+   "source_manifest": "research/experiments/REEF-numerics/validation/inputs/REEF-NUM-VAL-S103.json",
+   "source_manifest_sha256": "9f4a3ec581e0f953bdc5da86468250df9fc4e85bed4bc2df285a71b27053d21e",
+   "source_run_id": "REEF-NUM-VAL-S103"
+  },
+  "horizon_tu": 20,
+  "command": "python research/experiments/REEF-numerics/replay.py --manifest research/experiments/REEF-numerics/validation/inputs/REEF-NUM-VAL-S103.json --state research/experiments/REEF-numerics/validation/inputs/REEF-NUM-VAL-S103.npy --tu 20 --out research/experiments/REEF-numerics/validation/replay-S103 --engines alm,check_fft,check_direct --run-id REEF-NUM-VAL-S103",
+  "env": {
+   "python": "3.13.16",
+   "numpy": "2.5.4",
+   "scipy": "1.18.1",
+   "OMP_NUM_THREADS": "1",
+   "OPENBLAS_NUM_THREADS": "1",
+   "MKL_NUM_THREADS": "1"
+  },
+  "outputs": {
+   "states_npz": "research/experiments/REEF-numerics/validation/replay-S103/alm.npz",
+   "states_npz_sha256": "60d5f3efdaa1e624f64e5328be0fc5e14fc73c0c27e29372afd6cc4a4b979db2",
+   "sha256_per_tu": [
+    "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+    "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+    "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+    "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+    "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+    "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+    "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+    "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+    "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+    "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+    "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+    "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+    "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+    "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+    "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+    "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+    "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+    "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+    "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+    "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+    "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0"
+   ]
+  },
+  "final_state_sha256": "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+  "wall_s": 0.4824391809999611,
+  "status": "ok",
+  "result": {
+   "final_mass_R2": 0.378698224852071
+  },
+  "notes": "fresh-process alm replay (reproducibility)"
+ },
+ {
+  "run_id": "REEF-NUM-VAL-S103-chkfft",
+  "kind": "check",
+  "lane": "numerics",
+  "commit": "3a12ffa0925b440d04f1b2ebdfa3b9c060770223",
+  "commit_dirty": false,
+  "engine": "alm_check.fft",
+  "rule": {
+   "kernel": "poly",
+   "growth": "poly",
+   "beta": [
+    1.0
+   ],
+   "mu": 0.155,
+   "sigma": 0.02,
+   "R": 13,
+   "T": 10,
+   "update": "euler+clip",
+   "dtype": "float64"
+  },
+  "world": {
+   "N": 256,
+   "boundary": "periodic"
+  },
+  "inputs": {
+   "initial_state_sha256": "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+   "path": "validation/inputs/REEF-NUM-VAL-S103.npy",
+   "state_path": "research/experiments/REEF-numerics/validation/inputs/REEF-NUM-VAL-S103.npy",
+   "state_file_sha256": "8569707d12219849e6a9411a10c366c7959a8e09ce13179688642620fcd446b2",
+   "source_manifest": "research/experiments/REEF-numerics/validation/inputs/REEF-NUM-VAL-S103.json",
+   "source_manifest_sha256": "9f4a3ec581e0f953bdc5da86468250df9fc4e85bed4bc2df285a71b27053d21e",
+   "source_run_id": "REEF-NUM-VAL-S103"
+  },
+  "horizon_tu": 20,
+  "command": "python research/experiments/REEF-numerics/replay.py --manifest research/experiments/REEF-numerics/validation/inputs/REEF-NUM-VAL-S103.json --state research/experiments/REEF-numerics/validation/inputs/REEF-NUM-VAL-S103.npy --tu 20 --out research/experiments/REEF-numerics/validation/replay-S103 --engines alm,check_fft,check_direct --run-id REEF-NUM-VAL-S103",
+  "env": {
+   "python": "3.13.16",
+   "numpy": "2.5.4",
+   "scipy": "1.18.1",
+   "OMP_NUM_THREADS": "1",
+   "OPENBLAS_NUM_THREADS": "1",
+   "MKL_NUM_THREADS": "1"
+  },
+  "outputs": {
+   "states_npz": "research/experiments/REEF-numerics/validation/replay-S103/check_fft.npz",
+   "states_npz_sha256": "7cf705ed4607861686f5be6c8f5890b096c9825a973e59c6bc33f7f49b222c51",
+   "sha256_per_tu": [
+    "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+    "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+    "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+    "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+    "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+    "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+    "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+    "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+    "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+    "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+    "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+    "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+    "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+    "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+    "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+    "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+    "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+    "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+    "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+    "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+    "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0"
+   ]
+  },
+  "final_state_sha256": "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+  "wall_s": 0.4305989899999645,
+  "status": "ok",
+  "result": {
+   "final_mass_R2": 0.378698224852071,
+   "vs_alm_bitwise_final": true,
+   "vs_alm_max_abs_final": 0.0,
+   "vs_alm_max_abs_any_tu": 0.0,
+   "vs_alm_first_nonbitwise_tu": null
+  },
+  "notes": "independent implementation, SAME NumPy FFT arithmetic as alm: not independent arithmetic"
+ },
+ {
+  "run_id": "REEF-NUM-VAL-S103-direct",
+  "kind": "check",
+  "lane": "numerics",
+  "commit": "3a12ffa0925b440d04f1b2ebdfa3b9c060770223",
+  "commit_dirty": false,
+  "engine": "alm_check.direct",
+  "rule": {
+   "kernel": "poly",
+   "growth": "poly",
+   "beta": [
+    1.0
+   ],
+   "mu": 0.155,
+   "sigma": 0.02,
+   "R": 13,
+   "T": 10,
+   "update": "euler+clip",
+   "dtype": "float64"
+  },
+  "world": {
+   "N": 256,
+   "boundary": "periodic"
+  },
+  "inputs": {
+   "initial_state_sha256": "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+   "path": "validation/inputs/REEF-NUM-VAL-S103.npy",
+   "state_path": "research/experiments/REEF-numerics/validation/inputs/REEF-NUM-VAL-S103.npy",
+   "state_file_sha256": "8569707d12219849e6a9411a10c366c7959a8e09ce13179688642620fcd446b2",
+   "source_manifest": "research/experiments/REEF-numerics/validation/inputs/REEF-NUM-VAL-S103.json",
+   "source_manifest_sha256": "9f4a3ec581e0f953bdc5da86468250df9fc4e85bed4bc2df285a71b27053d21e",
+   "source_run_id": "REEF-NUM-VAL-S103"
+  },
+  "horizon_tu": 20,
+  "command": "python research/experiments/REEF-numerics/replay.py --manifest research/experiments/REEF-numerics/validation/inputs/REEF-NUM-VAL-S103.json --state research/experiments/REEF-numerics/validation/inputs/REEF-NUM-VAL-S103.npy --tu 20 --out research/experiments/REEF-numerics/validation/replay-S103 --engines alm,check_fft,check_direct --run-id REEF-NUM-VAL-S103",
+  "env": {
+   "python": "3.13.16",
+   "numpy": "2.5.4",
+   "scipy": "1.18.1",
+   "OMP_NUM_THREADS": "1",
+   "OPENBLAS_NUM_THREADS": "1",
+   "MKL_NUM_THREADS": "1"
+  },
+  "outputs": {
+   "states_npz": "research/experiments/REEF-numerics/validation/replay-S103/check_direct.npz",
+   "states_npz_sha256": "a040644231121dc5f308a3880c9b6d6f7b47a0022f7a2d29ea6f97c28501502d",
+   "sha256_per_tu": [
+    "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+    "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+    "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+    "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+    "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+    "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+    "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+    "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+    "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+    "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+    "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+    "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+    "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+    "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+    "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+    "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+    "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+    "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+    "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+    "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+    "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0"
+   ]
+  },
+  "final_state_sha256": "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+  "wall_s": 5.837317874000007,
+  "status": "ok",
+  "result": {
+   "final_mass_R2": 0.378698224852071,
+   "vs_alm_bitwise_final": true,
+   "vs_alm_max_abs_final": 0.0,
+   "vs_alm_max_abs_any_tu": 0.0,
+   "vs_alm_first_nonbitwise_tu": null
+  },
+  "notes": "real-space wrap correlation, no FFT: the only different arithmetic route"
+ }
+]

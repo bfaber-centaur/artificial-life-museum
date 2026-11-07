@@ -1,0 +1,13 @@
+route,tu,bitwise_equal,max_abs,mean_abs,mass_diff_R2,support_xor_cells
+check_fft,0,True,0.0,0.0,0.0,0
+check_fft,1,True,0.0,0.0,0.0,0
+check_fft,2,True,0.0,0.0,0.0,0
+check_fft,3,True,0.0,0.0,0.0,0
+check_fft,4,True,0.0,0.0,0.0,0
+check_fft,5,True,0.0,0.0,0.0,0
+check_direct,0,True,0.0,0.0,0.0,0
+check_direct,1,True,0.0,0.0,0.0,0
+check_direct,2,True,0.0,0.0,0.0,0
+check_direct,3,True,0.0,0.0,0.0,0
+check_direct,4,True,0.0,0.0,0.0,0
+check_direct,5,True,0.0,0.0,0.0,0

@@ -1,0 +1,67 @@
+{
+ "class": "CONTROL_FAILURE",
+ "partial_class": null,
+ "flags": [
+  "S_RULE_D010",
+  "S_CONTROL_OUT_OF_CLASS",
+  "PROLIFERATION"
+ ],
+ "t_int": 5.4,
+ "t_kr": 3.6,
+ "t_c": 6.1,
+ "t_cen": null,
+ "censor_reason": null,
+ "observables": {
+  "t_end": 26.1,
+  "planned_end": 26.1,
+  "window_after_contact_tu": 20.0,
+  "debris_max": 0.0050646110232143255,
+  "t_int_minus_t_c": -0.6999999999999993,
+  "control_S_path_speed_R_tu": 0.00029788372866174393,
+  "control_S_mass_range": [
+   0.3759281796070943,
+   0.3820350904942215
+  ],
+  "control_G_speed_R_tu": 0.548532545164375,
+  "control_G_heading_deg": 72.73023078465052
+ },
+ "params": {
+  "R": 26.0,
+  "T": 10.0,
+  "N": 512,
+  "theta_s": 0.01,
+  "body_mass": 0.005,
+  "debris_high": 0.01,
+  "death_mass": 0.01,
+  "theta_int": 1e-10,
+  "approach_timeout": 30.0,
+  "post_contact": 20.0,
+  "horizon": 50,
+  "fit_window": 5.0,
+  "theta_defl": 1.0,
+  "delta_lat": 0.1,
+  "shift_flag": 0.1,
+  "glider_tol": 0.02,
+  "ring_tol": 0.01,
+  "ring_moved": 0.1,
+  "glider_speed": 0.2,
+  "static_speed": 0.02,
+  "bind_min": 2.0,
+  "capture_last": 5.0,
+  "censor_margin": 3.0,
+  "fill_frac": 0.25,
+  "fill_level": 0.1,
+  "g_kind": "glider",
+  "s_rule": "D-010",
+  "s_mass_range": [
+   0.378,
+   0.383
+  ]
+ },
+ "input": {
+  "source": "/mnt/project-files/reef-numerics/checks/REEF-P2-E-R26-rows/recorder/trace.jsonl",
+  "numerics_commit": "8f1784944c188a33dff9d038ca0f989d49739f34",
+  "cadence": "every step",
+  "note": "disclosed variant (D-024): S-alone mass also in 0.378-0.383"
+ }
+}

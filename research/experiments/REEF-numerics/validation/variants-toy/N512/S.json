@@ -1,0 +1,36 @@
+{
+ "run_id": "REEF-NUM-TOY-S-N512",
+ "kind": "control_S",
+ "lane": "numerics",
+ "commit": "3a12ffa0925b440d04f1b2ebdfa3b9c060770223",
+ "engine": "alm",
+ "rule": {
+  "kernel": "poly",
+  "growth": "poly",
+  "beta": [
+   1.0
+  ],
+  "mu": 0.155,
+  "sigma": 0.02,
+  "R": 13,
+  "T": 10,
+  "update": "euler+clip",
+  "dtype": "float64"
+ },
+ "world": {
+  "N": 512,
+  "boundary": "periodic"
+ },
+ "inputs": {
+  "source_run_id": "REEF-NUM-TOY-S",
+  "source_state_sha256": "d38934ca082003b39e8749e2837631566be11f813876db0d1d26c8ecd467d86d",
+  "transform": "np.roll(A, (0, -38), (0, 1)) then embed at offset (128, 128)",
+  "initial_state_sha256": "fb40c77432a1ffbc987f9a4dc4c647554ff846ba274388a0c7eda3ff294ef339",
+  "path": "research/experiments/REEF-numerics/validation/variants-toy/N512/S.npy",
+  "geometry": null
+ },
+ "horizon_tu": 20,
+ "command": null,
+ "status": "prepared",
+ "notes": "toy triple S (tool test only)"
+}

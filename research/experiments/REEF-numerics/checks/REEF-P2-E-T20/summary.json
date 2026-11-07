@@ -1,0 +1,219 @@
+{
+ "run_id": "REEF-P2-E-T20",
+ "kind": "check",
+ "lane": "numerics",
+ "commit": "276bfe86776447ef1ffd2548d028c7f0433ed4c5",
+ "engine": "alm",
+ "arithmetic_note": "check_direct is the only different arithmetic route; alm_check FFT shares NumPy FFT arithmetic with alm",
+ "rule": {
+  "kernel": "poly",
+  "growth": "poly",
+  "beta": [
+   1.0
+  ],
+  "mu": 0.155,
+  "sigma": 0.02,
+  "R": 13,
+  "T": 20,
+  "update": "euler+clip",
+  "dtype": "float64"
+ },
+ "world": {
+  "N": 256,
+  "boundary": "periodic"
+ },
+ "t0_tu": 0.0,
+ "t_end_tu": 50.0,
+ "inputs": {
+  "source": "make_variants:T20:reef/field@91da893:REEF-P2-E:t0",
+  "files": {
+   "E": {
+    "path": "research/experiments/REEF-numerics/checks/variants/P2/T20/E.npy",
+    "sha256": "c96a0971af89ba045c08e3227657673280fb6edb1c7c237e0ad2cf27f68481ac"
+   },
+   "G": {
+    "path": "research/experiments/REEF-numerics/checks/variants/P2/T20/G.npy",
+    "sha256": "7d7e0479c3459da078580088d0f1f73d14eeaef3f472da9189c846e371e986f4"
+   },
+   "S": {
+    "path": "research/experiments/REEF-numerics/checks/variants/P2/T20/S.npy",
+    "sha256": "cd3ee8f67351332b1eaf24a4b3966d008b8b2f8197629ccacd84d2b1704ea4dc"
+   }
+  },
+  "initial_state_sha256": {
+   "E": "996f56c5dc2497dad25332a222ece353d5ef27cb9866fea18d2258affdea8032",
+   "G": "982b793956a8336d96969d1cd5ed71e83604e78c1aa360819c334eaa098c25f1",
+   "S": "371632556f2d1c90cdeb5f9b5ee1392fab15bb8ff57d2a599278e07ab0742554"
+  }
+ },
+ "behavior_scorer": {
+  "dir": "/tmp/claude-0/-home-user-artificial-life-museum/20f9f418-77e1-5c1b-a2f1-57ba8e9492cf/scratchpad/behavior/research/experiments/REEF-behavior",
+  "params": {
+   "R": 13.0,
+   "T": 20.0,
+   "N": 256,
+   "theta_s": 0.01,
+   "body_mass": 0.005,
+   "debris_high": 0.01,
+   "death_mass": 0.01,
+   "theta_int": 1e-10,
+   "approach_timeout": 30.0,
+   "post_contact": 20.0,
+   "horizon": 50.0,
+   "fit_window": 5.0,
+   "theta_defl": 1.0,
+   "delta_lat": 0.1,
+   "shift_flag": 0.1,
+   "glider_tol": 0.02,
+   "ring_tol": 0.01,
+   "ring_moved": 0.1,
+   "glider_speed": 0.2,
+   "static_speed": 0.02,
+   "bind_min": 2.0,
+   "capture_last": 5.0,
+   "censor_margin": 3.0,
+   "fill_frac": 0.25,
+   "fill_level": 0.1
+  }
+ },
+ "command": "python research/experiments/REEF-numerics/check_runner.py --run-id REEF-P2-E-T20 --npy research/experiments/REEF-numerics/checks/variants/P2/T20/E.npy research/experiments/REEF-numerics/checks/variants/P2/T20/G.npy research/experiments/REEF-numerics/checks/variants/P2/T20/S.npy --t0 0 --tu-end 50 --engine alm --T 20 --source make_variants:T20:reef/field@91da893:REEF-P2-E:t0 --behavior-dir /tmp/claude-0/-home-user-artificial-life-museum/20f9f418-77e1-5c1b-a2f1-57ba8e9492cf/scratchpad/behavior/research/experiments/REEF-behavior --out research/experiments/REEF-numerics/checks/REEF-P2-E-T20",
+ "env": {
+  "python": "3.13.16",
+  "numpy": "2.5.4",
+  "OMP_NUM_THREADS": "1",
+  "OPENBLAS_NUM_THREADS": "1",
+  "MKL_NUM_THREADS": "1"
+ },
+ "final_state_sha256": {
+  "E": "3f147e3dc9cec7a7882044ebffe635958b305140ea0b47e1f4f3a3c801586db6",
+  "G": "0ffe24b7aec6ad8439a731a6319243ebcd78fb0098a14f171c3a542ac5d6dc46",
+  "S": "371632556f2d1c90cdeb5f9b5ee1392fab15bb8ff57d2a599278e07ab0742554"
+ },
+ "S_bitwise_constant": true,
+ "score": {
+  "class": "FISSION",
+  "partial_class": null,
+  "flags": [],
+  "t_int": 5.0,
+  "t_kr": 3.3,
+  "t_c": 5.6,
+  "t_cen": 31.25,
+  "observables": {
+   "t_end": 25.6,
+   "planned_end": 25.6,
+   "window_after_contact_tu": 20.0,
+   "debris_max": 0.006248389300079108,
+   "t_int_minus_t_c": -0.5999999999999996,
+   "control_G_speed_R_tu": 0.5905406616089744,
+   "control_G_heading_deg": 72.31945841649338,
+   "n_bodies": 121,
+   "topology": "G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|G|GS|GS|GS|GS|GS|GS|GS|GS|GS|S|S|S|S|S|S|S|S|S|S|S|S|S|S|S|S|S|S|S|S|S|S|S|S",
+   "total_mass": 45.380635257072555,
+   "unassigned_mass": 0.007074497987971995,
+   "together_longest_tu": 20.05,
+   "ring_box_bitwise_equal_at_end": false,
+   "fill": 0.1667022705078125,
+   "G_mass": 36.3372100848834,
+   "S_mass": 9.036350674201179
+  }
+ },
+ "ignition": {
+  "t": 11.6,
+  "mass_E": 5.238438428537138,
+  "n_bodies_E": 5
+ },
+ "front": {
+  "from_ignition_to_r95_0.7_half": {
+   "speed_R_per_tu": 0.37825513089947305,
+   "fit_tu": [
+    11.6,
+    21.75
+   ],
+   "rms_resid_R": 0.03248330574924211
+  },
+  "sliding_5tu": [
+   {
+    "tu": [
+     12.0,
+     17.0
+    ],
+    "speed_R_per_tu": 0.36893051672319505,
+    "r95_end_R": 5.12528153980037
+   },
+   {
+    "tu": [
+     17.0,
+     22.0
+    ],
+    "speed_R_per_tu": 0.37127635168734174,
+    "r95_end_R": 7.009893782595721
+   },
+   {
+    "tu": [
+     22.0,
+     27.0
+    ],
+    "speed_R_per_tu": 0.3857528839804017,
+    "r95_end_R": 8.983567195856178
+   },
+   {
+    "tu": [
+     27.0,
+     32.0
+    ],
+    "speed_R_per_tu": 0.35391378250231526,
+    "r95_end_R": 10.782235275173168
+   },
+   {
+    "tu": [
+     32.0,
+     37.0
+    ],
+    "speed_R_per_tu": 0.29351850678652247,
+    "r95_end_R": 12.243867574132075
+   },
+   {
+    "tu": [
+     37.0,
+     42.0
+    ],
+    "speed_R_per_tu": -0.12215954027782511,
+    "r95_end_R": 11.863412267567734
+   },
+   {
+    "tu": [
+     42.0,
+     47.0
+    ],
+    "speed_R_per_tu": -0.007918232735283711,
+    "r95_end_R": 11.825917056716833
+   }
+  ]
+ },
+ "at_t20": {
+  "mass_E": 24.171655125755805,
+  "n_bodies_E": 56,
+  "r95_R": 6.242713989751734
+ },
+ "at_t25": {
+  "mass_E": 42.67005320767694,
+  "n_bodies_E": 114,
+  "r95_R": 8.181617163885646
+ },
+ "at_t50": {
+  "mass_E": 80.88483861942902,
+  "n_bodies_E": 305,
+  "r95_R": 11.816410632232905
+ },
+ "at_end": {
+  "mass_E": 80.88483861942902,
+  "n_bodies_E": 305,
+  "r95_R": 11.816410632232905
+ },
+ "outputs": {
+  "series.csv": "a10b9db71e32e09c84eaa8bb12e618bf20be7459f6e6c9773cdb83d36e5c4ad2",
+  "checkpoints.npz": "3381ad14ddcbc4a9407c20d9385855188c2ef6175cc3d73319d876aae77b7c73"
+ },
+ "wall_s": 514.1309893131256,
+ "status": "ok"
+}

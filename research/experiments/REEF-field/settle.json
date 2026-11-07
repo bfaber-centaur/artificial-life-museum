@@ -1,0 +1,316 @@
+{
+  "procedure": "README F-001/F-002",
+  "provenance": {
+    "code": {
+      "package": "alm",
+      "version": "0.1.0",
+      "git_commit": "586b134e9a88e1efa189016a4e06a61537bd91d0",
+      "git_dirty": false,
+      "git_dirty_paths": []
+    },
+    "env": {
+      "python": "3.13.16",
+      "numpy": "2.5.3",
+      "scipy": "1.18.1",
+      "platform": "Linux-6.18.44-fc-v139-x86_64-with-glibc2.39",
+      "machine": "x86_64"
+    },
+    "rule": {
+      "R": 13,
+      "T": 10,
+      "mu": 0.155,
+      "sigma": 0.02,
+      "beta": [
+        1.0
+      ],
+      "kernel": "poly",
+      "growth": "poly",
+      "dt": 0.1
+    },
+    "N": 256
+  },
+  "seed": {
+    "specimen": {
+      "id": "S001",
+      "name": "Orbium unicaudatus (O2u)",
+      "source": "research/specimens/S001-orbium.md; Chakazul/Lenia@adfc542 Python/animals.json code O2u",
+      "cells_shape": [
+        20,
+        20
+      ],
+      "cells_level_sum": 19600,
+      "cells_sha256_int16le": "3dc9eb0011ae91068a5bb7d09ed8f18b8fe73cfdd1326f3293277822299673bc",
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.15,
+        "sigma": 0.015,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      }
+    },
+    "placed_sha256": "5cfb2443b91151f2d163a6883f23af083b7549222bf10381cb8b1677dfb4302f",
+    "offset": [
+      118,
+      118
+    ]
+  },
+  "assessment": [
+    {
+      "window_steps": [
+        1000,
+        2000
+      ],
+      "motion": {
+        "speed_R_per_tu": 0.5483817840674525,
+        "speed_cells_per_step": 0.7128963192876883,
+        "heading_deg": 70.59562730257052,
+        "vy_cells_per_step": 0.6724018873377708,
+        "vx_cells_per_step": 0.23684776536530242,
+        "straightness": 0.9998904532179235
+      },
+      "halves": [
+        {
+          "speed_R_per_tu": 0.5483721570003652,
+          "speed_cells_per_step": 0.7128838041004748,
+          "heading_deg": 69.77259419518336,
+          "vy_cells_per_step": 0.6689186572276093,
+          "vx_cells_per_step": 0.24647748002926403,
+          "straightness": 0.999966164892352
+        },
+        {
+          "speed_R_per_tu": 0.5484207112508684,
+          "speed_cells_per_step": 0.712946924626129,
+          "heading_deg": 71.32347810248987,
+          "vy_cells_per_step": 0.6754042630832823,
+          "vx_cells_per_step": 0.22830330427478177,
+          "straightness": 0.999986918510413
+        }
+      ],
+      "mass_mean": 0.48733563398882934,
+      "mass_rsd": 0.00124997917500538,
+      "mass_min": 0.4855434750439031,
+      "mass_max": 0.4890038105115222,
+      "mass_halves": [
+        0.4873434345795096,
+        0.48732575791675986
+      ],
+      "ncomp_values": [
+        1,
+        2,
+        3
+      ],
+      "dominant_mass_period_steps": 4.162649339879231,
+      "grid_crossing_period_steps": {
+        "1/|vx|": 4.222121321084237,
+        "1/|vy|": 1.4872058196613378
+      },
+      "drift": {
+        "mass_rel_change": 3.6271469964539045e-05,
+        "speed_rel_change": 8.854251603291263e-05,
+        "heading_change_deg": 1.5508839073065133
+      },
+      "transient_trips": {
+        "mass": false,
+        "speed": false,
+        "heading": true
+      },
+      "transient_remains": true,
+      "acceptance": {
+        "alive": true,
+        "one_component": false,
+        "mass_rsd_lt_1pct": true,
+        "speed_gt_0.1": true,
+        "straightness_gt_0.99": true
+      },
+      "accepted": false
+    },
+    {
+      "window_steps": [
+        4000,
+        5000
+      ],
+      "motion": {
+        "speed_R_per_tu": 0.5484066678351772,
+        "speed_cells_per_step": 0.7129286681857303,
+        "heading_deg": 72.29860140450495,
+        "vy_cells_per_step": 0.6791743898764097,
+        "vx_cells_per_step": 0.21677046398687685,
+        "straightness": 0.9999986713106106
+      },
+      "halves": [
+        {
+          "speed_R_per_tu": 0.5484110100120894,
+          "speed_cells_per_step": 0.7129343130157162,
+          "heading_deg": 72.30560180380442,
+          "vy_cells_per_step": 0.6792062476057816,
+          "vx_cells_per_step": 0.21668919651995772,
+          "straightness": 0.9999986255591886
+        },
+        {
+          "speed_R_per_tu": 0.5484081016219917,
+          "speed_cells_per_step": 0.7129305321085891,
+          "heading_deg": 72.2845565528527,
+          "vy_cells_per_step": 0.6791230083001478,
+          "vx_cells_per_step": 0.21693750991931618,
+          "straightness": 0.9999987508919991
+        }
+      ],
+      "mass_mean": 0.4872822595275652,
+      "mass_rsd": 0.001195423847555755,
+      "mass_min": 0.48561840388298744,
+      "mass_max": 0.4884772543938086,
+      "mass_halves": [
+        0.48728395633912663,
+        0.487280304621966
+      ],
+      "ncomp_values": [
+        1,
+        2,
+        3
+      ],
+      "dominant_mass_period_steps": 4.614539360504507,
+      "grid_crossing_period_steps": {
+        "1/|vx|": 4.6131746069452495,
+        "1/|vy|": 1.4723758947712553
+      },
+      "drift": {
+        "mass_rel_change": 7.494022967824071e-06,
+        "speed_rel_change": 5.30330362546957e-06,
+        "heading_change_deg": -0.02104525095171539
+      },
+      "transient_trips": {
+        "mass": false,
+        "speed": false,
+        "heading": false
+      },
+      "transient_remains": false,
+      "acceptance": {
+        "alive": true,
+        "one_component": false,
+        "mass_rsd_lt_1pct": true,
+        "speed_gt_0.1": true,
+        "straightness_gt_0.99": true
+      },
+      "accepted": false
+    }
+  ],
+  "extension": "transient test tripped at 200 tu: heading",
+  "snapshots": {
+    "GB_minus_GA_steps": 5,
+    "period_test": {
+      "period_steps": 4.614539360504507,
+      "explained_by_grid_crossing": true,
+      "intrinsic_period": false
+    },
+    "GA": {
+      "name": "GA",
+      "kind": "named elapsed-time snapshot (not an intrinsic phase)",
+      "source_step": 5000,
+      "source_tu": 500.0,
+      "source_state_sha256": "6fcff8f4bb588245add965a224aee7d15b4058ca35e7ff452c7b22f6bda22ae9",
+      "integer_roll_yx": [
+        -45,
+        -127
+      ],
+      "centroid_yx_after_roll": [
+        127.91251771353001,
+        127.63873448532254
+      ],
+      "fractional_centroid_yx": [
+        0.9125177135300078,
+        0.6387344853225443
+      ],
+      "mass_R2": 0.4869764587685827,
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.155,
+        "sigma": 0.02,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "N": 256,
+      "heading_deg": 72.29860140450495,
+      "speed_R_per_tu": 0.5484066678351772,
+      "state_sha256": "982b793956a8336d96969d1cd5ed71e83604e78c1aa360819c334eaa098c25f1",
+      "file": "GA.npy",
+      "file_sha256": "7d7e0479c3459da078580088d0f1f73d14eeaef3f472da9189c846e371e986f4"
+    },
+    "GB": {
+      "name": "GB",
+      "kind": "named elapsed-time snapshot (not an intrinsic phase)",
+      "source_step": 5005,
+      "source_tu": 500.5,
+      "source_state_sha256": "400aaa32e5a8b20acea05ebc67355c57d5a62f0fa34fd74b7a35a192fb17bfb4",
+      "integer_roll_yx": [
+        -48,
+        -128
+      ],
+      "centroid_yx_after_roll": [
+        128.30997391829746,
+        127.72936245200809
+      ],
+      "fractional_centroid_yx": [
+        0.3099739182974588,
+        0.7293624520080897
+      ],
+      "mass_R2": 0.48799473301144186,
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.155,
+        "sigma": 0.02,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "N": 256,
+      "heading_deg": 72.29860140450495,
+      "speed_R_per_tu": 0.5484066678351772,
+      "state_sha256": "63e381b8002c10b008d8dffb4e955660cbb12b64057de0217d5edd7a1fc05d30",
+      "file": "GB.npy",
+      "file_sha256": "40a8112638e146789098463c58f628f81d8708b934172bebef62588cb16f2f99"
+    }
+  },
+  "S103": {
+    "name": "S103",
+    "kind": "catalogued clip fixed point, placed centred",
+    "cells_sha256_int16le": "8cd9073600c6868bfc8cd18e645f997af04a5e7a62c5a6e9a2425ae2fca8cdd6",
+    "rule": {
+      "R": 13,
+      "T": 10,
+      "mu": 0.155,
+      "sigma": 0.02,
+      "beta": [
+        1.0
+      ],
+      "kernel": "poly",
+      "growth": "poly",
+      "dt": 0.1
+    },
+    "N": 256,
+    "centroid_yx": [
+      127.390625,
+      127.60937500000001
+    ],
+    "mass_R2": 0.378698224852071,
+    "fixed_point_after_1_step": true,
+    "fixed_point_after_1000_steps": true,
+    "state_sha256": "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+    "file": "S103.npy",
+    "file_sha256": "8569707d12219849e6a9411a10c366c7959a8e09ce13179688642620fcd446b2"
+  },
+  "wall_s": 16.234718322753906
+}

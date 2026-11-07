@@ -1,0 +1,36 @@
+{
+ "run_id": "REEF-NUM-TOY-G-R26",
+ "kind": "control_G",
+ "lane": "numerics",
+ "commit": "3a12ffa0925b440d04f1b2ebdfa3b9c060770223",
+ "engine": "alm",
+ "rule": {
+  "kernel": "poly",
+  "growth": "poly",
+  "beta": [
+   1.0
+  ],
+  "mu": 0.155,
+  "sigma": 0.02,
+  "R": 26,
+  "T": 10,
+  "update": "euler+clip",
+  "dtype": "float64"
+ },
+ "world": {
+  "N": 512,
+  "boundary": "periodic"
+ },
+ "inputs": {
+  "source_run_id": "REEF-NUM-TOY-G",
+  "source_state_sha256": "5cfb2443b91151f2d163a6883f23af083b7549222bf10381cb8b1677dfb4302f",
+  "transform": "np.kron(A, ones((2, 2)))",
+  "initial_state_sha256": "c48856b75aba3f13615316decc6ec0d8c842ed92148c3754b680962a6e05c395",
+  "path": "research/experiments/REEF-numerics/validation/variants-toy/R26/G.npy",
+  "geometry": null
+ },
+ "horizon_tu": 20,
+ "command": null,
+ "status": "prepared",
+ "notes": "toy triple G (tool test only)"
+}

@@ -1,0 +1,40 @@
+{
+ "run_id": "REEF-NUM-TOY-E-R26",
+ "kind": "check",
+ "lane": "numerics",
+ "commit": "3a12ffa0925b440d04f1b2ebdfa3b9c060770223",
+ "engine": "alm",
+ "rule": {
+  "kernel": "poly",
+  "growth": "poly",
+  "beta": [
+   1.0
+  ],
+  "mu": 0.155,
+  "sigma": 0.02,
+  "R": 26,
+  "T": 10,
+  "update": "euler+clip",
+  "dtype": "float64"
+ },
+ "world": {
+  "N": 512,
+  "boundary": "periodic"
+ },
+ "inputs": {
+  "source_run_id": "REEF-NUM-TOY-E",
+  "source_state_sha256": "76e0082778901ce55cc703d52566acf9a1189968c3bcc370d3ac1ebb8cabba6b",
+  "transform": "np.kron(A, ones((2, 2)))",
+  "initial_state_sha256": "9ffc62cc2712ac1232e4295355cea28b740d7af9b5fc60b0d5b858c75064bf39",
+  "path": "research/experiments/REEF-numerics/validation/variants-toy/R26/E.npy",
+  "geometry": null
+ },
+ "horizon_tu": 20,
+ "command": null,
+ "status": "prepared",
+ "notes": "toy triple E = G + S (tool test only, not an expedition geometry)",
+ "controls": {
+  "G": "REEF-NUM-TOY-G-R26",
+  "S": "REEF-NUM-TOY-S-R26"
+ }
+}

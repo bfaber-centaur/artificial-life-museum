@@ -1,0 +1,18 @@
+{
+ "initial_sha256": "db14953db4fbe010ac793dbd446e120ac960b64019c382a0a355c711533c440f",
+ "min_G_full": -0.4084181122445544,
+ "max_G_empty": 0.3994515573712609,
+ "full_cells_G_lt_0": 28,
+ "empty_cells_G_gt_0": 25,
+ "final_sha256": "7c21df3c1f979d457de61dd9c150cba9ec1dcc57d8cccedff7ca34fca110dfff",
+ "bitwise_fixed_by_300tu": false,
+ "mass_R2_tu200_300": [
+  0.37836979123811965,
+  0.38255036872789944
+ ],
+ "max_abs_dA_per_tu_tu200_300": [
+  0.024086861170526053,
+  0.06301834804770134
+ ],
+ "max_centroid_shift_cells": 0.12108068633224352
+}

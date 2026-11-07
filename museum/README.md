@@ -25,6 +25,7 @@ Opening `museum/site/index.html` straight from disk works too. Pages load images
 | `one-rule.html` | 4 · Three animals, one rule | S101–S103 dossiers, G002, G003, C038–C044 |
 | `how-we-know.html` | 5 · How we know | charter, ledger, hostile review, gallery and figure rules |
 | `under-review.html` | 6 · Still being argued (provisional) | S102 lifetimes and S101 coupling: L6-007, L6-008, L3-003 and HR-009 on main, not yet ledgered; G002, G004, C038, C041, C047 |
+| `reef.html` | 7 · When the glider meets the ring (provisional) | REEF expedition 2026-10-21: report, REEF-behavior exhibit panels A–F, C038, C052–C055 |
 | `collection.html` | Reference: the four specimens | dossiers, gallery runs |
 | `claims.html` | Reference: every claim on display | generated from the ledger |
 

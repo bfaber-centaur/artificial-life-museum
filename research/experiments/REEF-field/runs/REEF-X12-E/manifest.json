@@ -1,0 +1,142 @@
+{
+  "lane": "field",
+  "commit": "12e56d78040f56235d50309fb2b2f05f4c7c1cfc",
+  "engine": "alm",
+  "rule": {
+    "kernel": "poly",
+    "growth": "poly",
+    "beta": [
+      1.0
+    ],
+    "mu": 0.155,
+    "sigma": 0.02,
+    "R": 13,
+    "T": 10,
+    "update": "euler+clip",
+    "dtype": "float64"
+  },
+  "world": {
+    "N": 256,
+    "boundary": "periodic"
+  },
+  "horizon_tu": 50,
+  "command": "python research/experiments/REEF-field/runner.py --run-id REEF-X12-E --kind encounter --snapshot BLOB-X12 --ring-shift 64 20 --geometry '{\"stand_in\": \"static Gaussian blob\", \"geometry_of\": \"P2\", \"blob_centre_step\": 61, \"amplitude_scale\": 0.75, \"b_R_requested\": 0.0, \"ring_shift_from\": \"P2\", \"blob_to_ring_along_heading_R\": 1.7725618505574645, \"blob_to_ring_lateral_R\": 0.0222248753952274, \"heading_deg\": 72.29403933885672}' --schedule-position 0 --protocol-addendum e8bc4b0a1eb57b5bb3b68cb1a09ee95fe26214c9 --notes 'D-022 X12; controls: G=REEF-X12-G (lockstep blob-alone), S=REEF-X12-S (lockstep)'",
+  "env": {
+    "python": "3.13.16",
+    "numpy": "2.5.3",
+    "scipy": "1.18.1",
+    "platform": "Linux-6.18.44-fc-v139-x86_64-with-glibc2.39",
+    "machine": "x86_64",
+    "threads": "OMP/OPENBLAS/MKL=1",
+    "git_dirty": false,
+    "embedded_from_N256": false
+  },
+  "outputs": {
+    "checkpoints.npz": {
+      "path": "research/experiments/REEF-field/runs/REEF-X12-E/checkpoints.npz",
+      "sha256": "a1fecd184f6e6592e280db6114cd38a577c80181274da55ec8f8cf000f07a568"
+    },
+    "frames.npz": {
+      "path": "research/experiments/REEF-field/runs/REEF-X12-E/frames.npz",
+      "sha256": "83c96e2808c074ae879842cfa0c0119023c8b88f1717fd8aab3fbe163c8f26d5"
+    },
+    "trace.npz": {
+      "path": "research/experiments/REEF-field/runs/REEF-X12-E/trace.npz",
+      "sha256": "c11f1ae8766d3fd73b847a637ec3be0c0a98dc49c26d2f4b3d109181d92a5fb4"
+    }
+  },
+  "wall_s": 10.709906101226807,
+  "status": "ok",
+  "run_id": "REEF-X12-E",
+  "kind": "encounter",
+  "inputs": {
+    "glider": {
+      "snapshot": "BLOB-X12",
+      "state_sha256": "40f944344abfdce86a515868fe685d1b240c9cb7be991952feccec11edf44c27",
+      "path": "research/experiments/REEF-field/seeds/BLOB-X12.npy",
+      "shift_cells": [
+        0,
+        0
+      ],
+      "construction": {
+        "a": 0.680108174486775,
+        "a_used": 0.5100811308650812,
+        "amplitude_scale": 0.75,
+        "centre_source": "REEF-CTRL-GA pos at step 61 (controls-series.npz GA_pos, wrapped)",
+        "centre_yx": [
+          169.3510148974147,
+          140.87640202215817
+        ],
+        "centroid_yx": [
+          169.3508196101674,
+          140.87647986574038
+        ],
+        "cut_cells": 17.56290469211924,
+        "decision": "D-022",
+        "form": "a*exp(-r^2/(2 s^2)) for r <= 4 s (minimum-image r from centre), else 0",
+        "geometry_of": "P2",
+        "gyradius_R": 0.477010730258723,
+        "masked_cells_under_ring": 1,
+        "masked_mass_cells": 0.0001948849771462898,
+        "mass_R2": 0.36547738504636673,
+        "s_cells": 4.39072617302981,
+        "support_cells_gt_0_01": 474,
+        "target_gyradius_R": 0.477,
+        "target_mass_R2": 0.4873
+      }
+    },
+    "ring": {
+      "state_sha256": "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+      "path": "research/experiments/REEF-field/seeds/S103.npy",
+      "shift_cells": [
+        64,
+        20
+      ]
+    },
+    "initial_state_sha256": "fcc86e3d22e7334bf1b4e526c528c23598fb1472f0820239959bb437ccd0be37",
+    "geometry": {
+      "stand_in": "static Gaussian blob",
+      "geometry_of": "P2",
+      "blob_centre_step": 61,
+      "amplitude_scale": 0.75,
+      "b_R_requested": 0.0,
+      "ring_shift_from": "P2",
+      "blob_to_ring_along_heading_R": 1.7725618505574645,
+      "blob_to_ring_lateral_R": 0.0222248753952274,
+      "heading_deg": 72.29403933885672
+    },
+    "component_initial_sha256": {
+      "G": "40f944344abfdce86a515868fe685d1b240c9cb7be991952feccec11edf44c27",
+      "S": "371632556f2d1c90cdeb5f9b5ee1392fab15bb8ff57d2a599278e07ab0742554"
+    }
+  },
+  "controls": {
+    "G": "REEF-X12-G (lockstep stand-in-alone)",
+    "S": "REEF-X12-S",
+    "mapping": "G-alone shared per snapshot (D-004), reproduced bitwise by the lockstep G; S-alone = lockstep S at this realised ring position"
+  },
+  "final_state_sha256": "755502e83a668fc436a29e6b3491667775dce5b3b6624bf3e0c478d3cc2c56d2",
+  "lockstep_final_state_sha256": {
+    "E": "755502e83a668fc436a29e6b3491667775dce5b3b6624bf3e0c478d3cc2c56d2",
+    "G": "07854d2fef297a06ba81685e660c332de36d5d18d546927d30daad6d7fda1541",
+    "S": "371632556f2d1c90cdeb5f9b5ee1392fab15bb8ff57d2a599278e07ab0742554"
+  },
+  "schedule": {
+    "seed": 20261020,
+    "position": 0
+  },
+  "result": {
+    "provisional_contact_tu": 0.4,
+    "residual_max_before_contact": 0.22846897442664157,
+    "residual_max_overall": 1.0,
+    "ncomp_E_final": 293,
+    "mass_final": {
+      "E": 81.53834777197702,
+      "G": 0.0,
+      "S": 0.378698224852071
+    },
+    "wall_sim_s": 7.230748653411865,
+    "wall_total_s": 10.709906101226807
+  },
+  "notes": "D-022 X12; controls: G=REEF-X12-G (lockstep blob-alone), S=REEF-X12-S (lockstep) protocol addendum e8bc4b0a1eb57b5bb3b68cb1a09ee95fe26214c9"
+}

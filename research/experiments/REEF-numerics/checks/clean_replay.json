@@ -1,0 +1,54 @@
+{
+ "REEF-P2-E-replay": {
+  "source_run": "REEF-P2-E @ reef/field 91da893 (ran at fe4ba1cd6df234c05668db3ae7ca11f1d9feebbb)",
+  "replay_commit": "fe4ba1cd6df234c05668db3ae7ca11f1d9feebbb",
+  "replay_git_dirty": false,
+  "command": "python research/experiments/REEF-field/runner.py --run-id REEF-P2-E-replay --kind test --snapshot GA --ring-shift 64 20",
+  "note": "same runner, same inputs, fresh process; --kind test instead of encounter (no protocol-addendum gate), arithmetic identical",
+  "initial_state_sha256": {
+   "original": "996f56c5dc2497dad25332a222ece353d5ef27cb9866fea18d2258affdea8032",
+   "replay": "996f56c5dc2497dad25332a222ece353d5ef27cb9866fea18d2258affdea8032"
+  },
+  "final_state_sha256": {
+   "original": {
+    "E": "3549322b1c7fb07ae9ad47e9eec8dab1fd27f416c71714909df88191edf206e4",
+    "G": "7fac2d9132cba04e9cfb7ef6e9835ab003e6e6cd444907644e11c2839aa69617",
+    "S": "371632556f2d1c90cdeb5f9b5ee1392fab15bb8ff57d2a599278e07ab0742554"
+   },
+   "replay": {
+    "E": "3549322b1c7fb07ae9ad47e9eec8dab1fd27f416c71714909df88191edf206e4",
+    "G": "7fac2d9132cba04e9cfb7ef6e9835ab003e6e6cd444907644e11c2839aa69617",
+    "S": "371632556f2d1c90cdeb5f9b5ee1392fab15bb8ff57d2a599278e07ab0742554"
+   }
+  },
+  "final_bitwise_equal": true,
+  "checkpoints_compared": 159,
+  "all_checkpoints_bitwise_equal": true
+ },
+ "REEF-P3-E-replay": {
+  "source_run": "REEF-P3-E @ reef/field 91da893 (ran at fe4ba1cd6df234c05668db3ae7ca11f1d9feebbb)",
+  "replay_commit": "fe4ba1cd6df234c05668db3ae7ca11f1d9feebbb",
+  "replay_git_dirty": false,
+  "command": "python research/experiments/REEF-field/runner.py --run-id REEF-P3-E-replay --kind test --snapshot GA --ring-shift 68 8",
+  "note": "same runner, same inputs, fresh process; --kind test instead of encounter (no protocol-addendum gate), arithmetic identical",
+  "initial_state_sha256": {
+   "original": "4d24ae9fadfd09de1911bd1b95287c37fe61b138181e4b565833c72fe88c3b17",
+   "replay": "4d24ae9fadfd09de1911bd1b95287c37fe61b138181e4b565833c72fe88c3b17"
+  },
+  "final_state_sha256": {
+   "original": {
+    "E": "40b6a0eed32bdbfbb1caba4a1003511f4edd27da8f699797b81239cde2cf1a22",
+    "G": "7fac2d9132cba04e9cfb7ef6e9835ab003e6e6cd444907644e11c2839aa69617",
+    "S": "a8e53a3126781449b53584ccad76ee4fa8d497708a39bcef5013fa1ab37eb525"
+   },
+   "replay": {
+    "E": "40b6a0eed32bdbfbb1caba4a1003511f4edd27da8f699797b81239cde2cf1a22",
+    "G": "7fac2d9132cba04e9cfb7ef6e9835ab003e6e6cd444907644e11c2839aa69617",
+    "S": "a8e53a3126781449b53584ccad76ee4fa8d497708a39bcef5013fa1ab37eb525"
+   }
+  },
+  "final_bitwise_equal": true,
+  "checkpoints_compared": 159,
+  "all_checkpoints_bitwise_equal": true
+ }
+}

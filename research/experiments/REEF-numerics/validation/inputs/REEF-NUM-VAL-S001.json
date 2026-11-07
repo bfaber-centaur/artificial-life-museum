@@ -1,0 +1,33 @@
+{
+ "run_id": "REEF-NUM-VAL-S001",
+ "kind": "test",
+ "lane": "numerics",
+ "commit": null,
+ "engine": "alm",
+ "rule": {
+  "kernel": "poly",
+  "growth": "poly",
+  "beta": [
+   1.0
+  ],
+  "mu": 0.155,
+  "sigma": 0.02,
+  "R": 13,
+  "T": 10,
+  "update": "euler+clip",
+  "dtype": "float64"
+ },
+ "world": {
+  "N": 256,
+  "boundary": "periodic"
+ },
+ "inputs": {
+  "initial_state_sha256": "5cfb2443b91151f2d163a6883f23af083b7549222bf10381cb8b1677dfb4302f",
+  "path": "validation/inputs/REEF-NUM-VAL-S001.npy"
+ },
+ "horizon_tu": 20,
+ "command": "python research/experiments/REEF-numerics/validation/make_inputs.py",
+ "outputs": {},
+ "status": "ok",
+ "notes": "raw S001 catalog cells centred, coexistence rule; arithmetic test input only"
+}

@@ -1,0 +1,4 @@
+# regenerable arrays stay out of git; hashes are in the committed JSON
+*.npy
+*.npz
+*.jsonl

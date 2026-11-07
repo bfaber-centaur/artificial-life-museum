@@ -3,7 +3,7 @@
 **Status:** Expedition directive / proposed protocol, not executed evidence.
 **Repo:** `bfaber-centaur/artificial-life-museum`. This stays in the **existing** repo.
 **Resource allocation:** No fixed cross-project inference share. Inference is abundant; elapsed time, per-session compute, attention and integration capacity govern the plan. Reserve roughly 15–20% of ALM effort for checking, reconciliation, an earned exhibit and a reproducible handoff.
-**Current execution gate:** Measurements only, under [the coordinator measurement mandate](2026-10-20-environment-measurements.md). Merging this proposal does not launch encounter experiments.
+**Current execution authorization:** Bobby authorized the expedition on October 20, 2026 (Pacific), after calibration PRs #37–39 merged. Follow [the concrete launch mandate](2026-10-20-reef-launch.md), which supersedes the measurements-only gate and supplies lane ownership, controls, bounded exploration and stopping rules. Authorization does not establish that workers have started; record actual execution separately.
 
 ## Prior art inside ALM — read before starting
 
@@ -42,6 +42,6 @@ Observable possibilities are deflection, survival, a changed ring, temporary bin
 - `field.py` shares `alm` kernel/growth and measures a whole-world centroid. It is not an independent engine or a two-body tracking solution. `alm_check` is independently implemented, but its FFT route shares NumPy arithmetic; its direct-convolution path supplies different arithmetic.
 - S103 has no internal phase at the primary fixed point. Use actual glider phases and measured headings, with explicit resizing, world size, horizons and re-encounter censoring.
 
-## Coordinator launch prompt (for a separately authorized expedition)
+## Original coordinator brief (use the concrete launch mandate above)
 
 You lead **ALM Coexistence-Reef Night 2**. Read the existing Night 1 synthesis and PR #35 first. Your safari is glider–ring *contact* at μ=.155, σ=.020, not repeated one-body blend scans. Freeze the pilot and matched-control contract before exploration. Preserve raw runs and failed predictions, independently check surprising outcomes, rule out torus repeat-collision artifacts, and create only earned exhibits. Use an expedition-specific branch, keep earlier work intact, and reserve final inference for a durable scientific field report.

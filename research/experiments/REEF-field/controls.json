@@ -1,0 +1,461 @@
+{
+  "provenance": {
+    "code": {
+      "package": "alm",
+      "version": "0.1.0",
+      "git_commit": "87d90e1826785d3091db18fcee5d7d191a0d7a17",
+      "git_dirty": false,
+      "git_dirty_paths": []
+    },
+    "env": {
+      "python": "3.13.16",
+      "numpy": "2.5.3",
+      "scipy": "1.18.1",
+      "platform": "Linux-6.18.44-fc-v139-x86_64-with-glibc2.39",
+      "machine": "x86_64"
+    },
+    "rule": {
+      "R": 13,
+      "T": 10,
+      "mu": 0.155,
+      "sigma": 0.02,
+      "beta": [
+        1.0
+      ],
+      "kernel": "poly",
+      "growth": "poly",
+      "dt": 0.1
+    },
+    "N": 256
+  },
+  "theta_s": 0.01,
+  "H_tu": 50,
+  "GA": {
+    "name": "REEF-CTRL-GA",
+    "steps": 500,
+    "initial_state_sha256": "982b793956a8336d96969d1cd5ed71e83604e78c1aa360819c334eaa098c25f1",
+    "final_state_sha256": "7fac2d9132cba04e9cfb7ef6e9835ab003e6e6cd444907644e11c2839aa69617",
+    "motion_fit": {
+      "speed_R_per_tu": 0.5484109345577022,
+      "speed_cells_per_step": 0.7129342149250129,
+      "heading_deg": 72.29403933885672,
+      "vy_cells_per_step": 0.6791624117838777,
+      "vx_cells_per_step": 0.21682622818895983,
+      "straightness": 0.9999988876147952
+    },
+    "noise_1tu": {
+      "speed_R_per_tu": {
+        "mean": 0.5483789154026033,
+        "sd": 0.0012739736990645103,
+        "min": 0.5456960840912829,
+        "max": 0.5507543680297248
+      },
+      "heading_deg": {
+        "mean": 72.2965487740586,
+        "sd": 0.0863166831384737,
+        "min": 72.09627839625091,
+        "max": 72.46522140183767
+      },
+      "mass_R2": {
+        "mean": 0.4872892447073134,
+        "sd": 0.00011686538395219408,
+        "min": 0.48696491325101315,
+        "max": 0.48757320483331573
+      },
+      "gyradius_R": {
+        "mean": 0.4774280719438617,
+        "sd": 0.00012154164359430794,
+        "min": 0.4771783573824421,
+        "max": 0.4776485850609508
+      },
+      "per_step_mass_rsd": 0.0011857373036713462,
+      "per_step_gyradius": {
+        "mean": 0.47742730532421196,
+        "sd": 0.0008729201141262637,
+        "min": 0.4756479562803686,
+        "max": 0.479207147073784
+      }
+    },
+    "support_radius_R_max": 1.0214166194152503,
+    "support_radius_R_mean": 0.9634225346862434,
+    "ncomp_fraction": {
+      "1": 0.8702594810379242,
+      "2": 0.09580838323353294,
+      "3": 0.033932135728542916
+    },
+    "displacement_R": [
+      26.12044104468244,
+      8.337833903256108
+    ],
+    "wall_s": 2.2166738510131836
+  },
+  "GB": {
+    "name": "REEF-CTRL-GB",
+    "steps": 500,
+    "initial_state_sha256": "63e381b8002c10b008d8dffb4e955660cbb12b64057de0217d5edd7a1fc05d30",
+    "final_state_sha256": "8ff9ab499752cd876621bf677eeccdce1730d912eacea49be9f3f9508852a004",
+    "motion_fit": {
+      "speed_R_per_tu": 0.5484106212595575,
+      "speed_cells_per_step": 0.7129338076374248,
+      "heading_deg": 72.29421551158049,
+      "vy_cells_per_step": 0.679162690481977,
+      "vx_cells_per_step": 0.21682401603530657,
+      "straightness": 0.9999987869083281
+    },
+    "noise_1tu": {
+      "speed_R_per_tu": {
+        "mean": 0.54837338286655,
+        "sd": 0.0011626940451677677,
+        "min": 0.5457654347831171,
+        "max": 0.5506393523431491
+      },
+      "heading_deg": {
+        "mean": 72.29569414275622,
+        "sd": 0.09011286896379397,
+        "min": 72.12976786641097,
+        "max": 72.51773196062356
+      },
+      "mass_R2": {
+        "mean": 0.4872875351633135,
+        "sd": 0.00010454221746462524,
+        "min": 0.4870779378068931,
+        "max": 0.48752583284758577
+      },
+      "gyradius_R": {
+        "mean": 0.4774253175135798,
+        "sd": 0.00012008620642520657,
+        "min": 0.47708002293393575,
+        "max": 0.47767079301456167
+      },
+      "per_step_mass_rsd": 0.001189254969305974,
+      "per_step_gyradius": {
+        "mean": 0.4774264159981246,
+        "sd": 0.0008704107845379972,
+        "min": 0.47564795628036916,
+        "max": 0.479207147073784
+      }
+    },
+    "support_radius_R_max": 1.0214166194152503,
+    "support_radius_R_mean": 0.9635122761692907,
+    "ncomp_fraction": {
+      "1": 0.872255489021956,
+      "2": 0.09381237524950099,
+      "3": 0.033932135728542916
+    },
+    "displacement_R": [
+      26.120050962787936,
+      8.338137161819848
+    ],
+    "wall_s": 2.285780906677246
+  },
+  "GA_100tu": {
+    "name": "REEF-CTRL-GA-100tu",
+    "steps": 1000,
+    "initial_state_sha256": "982b793956a8336d96969d1cd5ed71e83604e78c1aa360819c334eaa098c25f1",
+    "final_state_sha256": "2646caf5154afc1e0daf1e981ac0d60d772a2220bbe58782a8cbe791624317e5",
+    "motion_fit": {
+      "speed_R_per_tu": 0.548411133438382,
+      "speed_cells_per_step": 0.7129344734698966,
+      "heading_deg": 72.29892900019784,
+      "vy_cells_per_step": 0.6791811597148174,
+      "vx_cells_per_step": 0.21676834582160354,
+      "straightness": 0.9999989159140735
+    },
+    "noise_1tu": {
+      "speed_R_per_tu": {
+        "mean": 0.548396959926029,
+        "sd": 0.0011881970283158436,
+        "min": 0.5456960840912829,
+        "max": 0.5507543680297248
+      },
+      "heading_deg": {
+        "mean": 72.2989755917731,
+        "sd": 0.0847757834774344,
+        "min": 72.09627839625091,
+        "max": 72.46522140183767
+      },
+      "mass_R2": {
+        "mean": 0.48728575991965245,
+        "sd": 0.00012067163263182659,
+        "min": 0.48696491325101315,
+        "max": 0.48760897782948087
+      },
+      "gyradius_R": {
+        "mean": 0.47742895160926585,
+        "sd": 0.00011908188075812715,
+        "min": 0.47717567202660816,
+        "max": 0.47765975568471186
+      },
+      "per_step_mass_rsd": 0.0011875279516907857,
+      "per_step_gyradius": {
+        "mean": 0.47742937319876844,
+        "sd": 0.0008757693791527101,
+        "min": 0.4756179927803165,
+        "max": 0.479207147073784
+      }
+    },
+    "support_radius_R_max": 1.0214166194152503,
+    "support_radius_R_mean": 0.963680818230574,
+    "ncomp_fraction": {
+      "1": 0.8801198801198801,
+      "2": 0.0919080919080919,
+      "3": 0.027972027972027972
+    },
+    "displacement_R": [
+      52.24331157762738,
+      16.67399566463737
+    ],
+    "wall_s": 4.230209112167358
+  },
+  "S103": {
+    "name": "REEF-CTRL-S103",
+    "steps": 500,
+    "initial_state_sha256": "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+    "final_state_sha256": "1e9aa71324e5bc12a1fed999dfe9596e2eedf72a04161646409b6d787e823be0",
+    "motion_fit": {
+      "speed_R_per_tu": 1.2973160145571563e-17,
+      "speed_cells_per_step": 1.6865108189243032e-17,
+      "heading_deg": -103.23214716834953,
+      "vy_cells_per_step": -1.641735015668768e-17,
+      "vx_cells_per_step": -3.860374083891281e-18,
+      "straightness": NaN
+    },
+    "noise_1tu": {
+      "speed_R_per_tu": {
+        "mean": 0.0,
+        "sd": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "heading_deg": {
+        "mean": 0.0,
+        "sd": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "mass_R2": {
+        "mean": 0.378698224852071,
+        "sd": 5.607473066727768e-17,
+        "min": 0.37869822485207105,
+        "max": 0.37869822485207105
+      },
+      "gyradius_R": {
+        "mean": 0.38730654051276325,
+        "sd": 0.0,
+        "min": 0.38730654051276325,
+        "max": 0.38730654051276325
+      },
+      "per_step_mass_rsd": 2.931682674400803e-16,
+      "per_step_gyradius": {
+        "mean": 0.38730654051276325,
+        "sd": 5.55666346546344e-17,
+        "min": 0.3873065405127633,
+        "max": 0.3873065405127633
+      }
+    },
+    "support_radius_R_max": 0.45033797814931203,
+    "support_radius_R_mean": 0.4503379781493121,
+    "ncomp_fraction": {
+      "1": 1.0
+    },
+    "displacement_R": [
+      0.0,
+      0.0
+    ],
+    "wall_s": 2.1554079055786133,
+    "bitwise_fixed_through_H": true
+  },
+  "geometry": {
+    "theta_s": 0.01,
+    "gap_R_target": 4.0,
+    "guard_R": 2.0,
+    "pilots": [
+      {
+        "pilot": "P1",
+        "snapshot": "GA",
+        "b_R_requested": -1.0,
+        "d_R_requested": 5.15383666383055,
+        "ring_shift_cells_yx": [
+          60,
+          33
+        ],
+        "ring_centroid_yx": [
+          187.390625,
+          160.609375
+        ],
+        "glider_centroid_yx": [
+          127.91251771353001,
+          127.63873448532254
+        ],
+        "heading_deg": 72.29403933885672,
+        "d_R_realized": 5.129850199086316,
+        "b_R_realized": -1.024585424408315,
+        "gap_R_realized": 3.9760135352557664,
+        "glider_front_R": 0.7211648965962685,
+        "ring_back_R": -0.4326717672342816,
+        "D_int_R": 4.471754597564562,
+        "t_closest_primary_tu": 9.4,
+        "min_dist_primary_R": 1.0234611283649795,
+        "t_cen_tu": null,
+        "min_dist_other_images_R_over_H": 4.965886634001564,
+        "t_c_geometric_tu": 8.1,
+        "t_c_plus_20_le_t_cen": true
+      },
+      {
+        "pilot": "P2",
+        "snapshot": "GA",
+        "b_R_requested": 0.0,
+        "d_R_requested": 5.15383666383055,
+        "ring_shift_cells_yx": [
+          64,
+          20
+        ],
+        "ring_centroid_yx": [
+          191.390625,
+          147.609375
+        ],
+        "glider_centroid_yx": [
+          127.91251771353001,
+          127.63873448532254
+        ],
+        "heading_deg": 72.29403933885672,
+        "d_R_realized": 5.118834907289539,
+        "b_R_realized": 0.021623550682058384,
+        "gap_R_realized": 3.96499824345899,
+        "glider_front_R": 0.7211648965962685,
+        "ring_back_R": -0.4326717672342816,
+        "D_int_R": 4.471754597564562,
+        "t_closest_primary_tu": 9.3,
+        "min_dist_primary_R": 0.02910152416607207,
+        "t_cen_tu": null,
+        "min_dist_other_images_R_over_H": 6.012022221882195,
+        "t_c_geometric_tu": 7.1,
+        "t_c_plus_20_le_t_cen": true
+      },
+      {
+        "pilot": "P3",
+        "snapshot": "GA",
+        "b_R_requested": 1.0,
+        "d_R_requested": 5.15383666383055,
+        "ring_shift_cells_yx": [
+          68,
+          8
+        ],
+        "ring_centroid_yx": [
+          195.390625,
+          135.609375
+        ],
+        "glider_centroid_yx": [
+          127.91251771353001,
+          127.63873448532254
+        ],
+        "heading_deg": 72.29403933885672,
+        "d_R_realized": 5.131214397620976,
+        "b_R_realized": 0.9945533068049305,
+        "gap_R_realized": 3.977377733790427,
+        "glider_front_R": 0.7211648965962685,
+        "ring_back_R": -0.4326717672342816,
+        "D_int_R": 4.471754597564562,
+        "t_closest_primary_tu": 9.4,
+        "min_dist_primary_R": 0.9962308684262747,
+        "t_cen_tu": null,
+        "min_dist_other_images_R_over_H": 6.984997943023224,
+        "t_c_geometric_tu": 8.1,
+        "t_c_plus_20_le_t_cen": true
+      },
+      {
+        "pilot": "P4",
+        "snapshot": "GB",
+        "b_R_requested": -1.0,
+        "d_R_requested": 5.145985857481212,
+        "ring_shift_cells_yx": [
+          61,
+          33
+        ],
+        "ring_centroid_yx": [
+          188.390625,
+          160.609375
+        ],
+        "glider_centroid_yx": [
+          128.30997391829746,
+          127.72936245200809
+        ],
+        "heading_deg": 72.29421551158049,
+        "d_R_realized": 5.17188082960932,
+        "b_R_realized": -1.0038637994541248,
+        "gap_R_realized": 4.025894972128108,
+        "glider_front_R": 0.71331406510099,
+        "ring_back_R": -0.4326717923802219,
+        "D_int_R": 4.471754597564562,
+        "t_closest_primary_tu": 9.4,
+        "min_dist_primary_R": 1.004028394304457,
+        "t_cen_tu": null,
+        "min_dist_other_images_R_over_H": 4.985762821295206,
+        "t_c_geometric_tu": 8.2,
+        "t_c_plus_20_le_t_cen": true
+      },
+      {
+        "pilot": "P5",
+        "snapshot": "GB",
+        "b_R_requested": 0.0,
+        "d_R_requested": 5.145985857481212,
+        "ring_shift_cells_yx": [
+          65,
+          20
+        ],
+        "ring_centroid_yx": [
+          192.390625,
+          147.609375
+        ],
+        "glider_centroid_yx": [
+          128.30997391829746,
+          127.72936245200809
+        ],
+        "heading_deg": 72.29421551158049,
+        "d_R_realized": 5.160868754689759,
+        "b_R_realized": 0.042345209501056955,
+        "gap_R_realized": 4.0148828972085475,
+        "glider_front_R": 0.71331406510099,
+        "ring_back_R": -0.4326717923802219,
+        "D_int_R": 4.471754597564562,
+        "t_closest_primary_tu": 9.4,
+        "min_dist_primary_R": 0.04315847166698493,
+        "t_cen_tu": null,
+        "min_dist_other_images_R_over_H": 6.032022974913345,
+        "t_c_geometric_tu": 7.2,
+        "t_c_plus_20_le_t_cen": true
+      },
+      {
+        "pilot": "P6",
+        "snapshot": "GB",
+        "b_R_requested": 1.0,
+        "d_R_requested": 5.145985857481212,
+        "ring_shift_cells_yx": [
+          69,
+          8
+        ],
+        "ring_centroid_yx": [
+          196.390625,
+          135.609375
+        ],
+        "glider_centroid_yx": [
+          128.30997391829746,
+          127.72936245200809
+        ],
+        "heading_deg": 72.29421551158049,
+        "d_R_realized": 5.173251236579794,
+        "b_R_realized": 1.0152749275549462,
+        "gap_R_realized": 4.027265379098582,
+        "glider_front_R": 0.71331406510099,
+        "ring_back_R": -0.4326717923802219,
+        "D_int_R": 4.471754597564562,
+        "t_closest_primary_tu": 9.4,
+        "min_dist_primary_R": 1.0155042260404745,
+        "t_cen_tu": null,
+        "min_dist_other_images_R_over_H": 7.004785521966811,
+        "t_c_geometric_tu": 8.2,
+        "t_c_plus_20_le_t_cen": true
+      }
+    ]
+  }
+}
