@@ -137,10 +137,12 @@ class Run:
     mass: list = field(default_factory=list)
     final_sha: str = ""
     init_sha: str = ""
+    make_sim: object = None  # optional factory A0 -> simulator with .A and .step() (G014+ field rules)
+    rule_note: str = ""  # how the rule departs from `rule`, if it does
 
     def go(self, record=True, on_step=None) -> "Run":
         self.init_sha = state_sha256(self.A0)
-        sim = Lenia(self.rule, self.A0)
+        sim = self.make_sim(self.A0) if self.make_sim else Lenia(self.rule, self.A0)
         R2 = self.rule.R ** 2
         for s in range(self.steps + 1):
             if record:
@@ -157,7 +159,8 @@ class Run:
         return {"key": self.key, "rule": self.rule.to_dict(), "grid": {"shape": list(self.A0.shape),
                 "boundary": "periodic", "dtype": "float64"}, "integrator": "euler+clip[0,1]",
                 "steps": self.steps, "time_units": self.steps / self.rule.T, "initial_state": self.built,
-                "initial_state_sha256": self.init_sha, "final_state_sha256": self.final_sha}
+                "initial_state_sha256": self.init_sha, "final_state_sha256": self.final_sha,
+                **({"rule_note": self.rule_note} if self.rule_note else {})}
 
 
 def save_provenance(folder: Path, exhibit: dict, runs: list[Run]) -> None:
