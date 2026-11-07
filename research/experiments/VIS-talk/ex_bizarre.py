@@ -116,11 +116,11 @@ def g014(render: bool = True):
         img.paste(Image.fromarray(colorize(L, sc, "viridis", -16, 0)), (2 * pad + tile, 56))
         text(img, (pad, 56 + tile + 10), "the world", 15, fill=DIM)
         m = float(10 ** L.max())
-        text(img, (2 * pad + tile, 56 + tile + 10),
-             f"how far it is from its own mirror image, log scale 1e-16 (dark) to 1 (yellow); max {m:.0e}", 15,
-             fill=DIM)
+        text(img, (2 * pad + tile, 56 + tile + 10), "distance from its own mirror image (log: 1e-16 dark, 1 yellow)",
+             15, fill=DIM)
+        text(img, (2 * pad + tile, 56 + tile + 32), f"largest difference: {m:.0e}", 18, bold=True)
         frames.append(img)
-    media = write_media(frames, folder, "kaleidoscope", fps=20, gif_width=640, gif_every=3, gif_colors=96)
+    media = write_media(frames, folder, "kaleidoscope", fps=20, gif_width=520, gif_every=4, gif_colors=64, crf=26)
     for t_still in (10, 30, 50):
         k = min(run.frames, key=lambda s: abs(s - t_still * T))
         frames[sorted(run.frames).index(k)].save(folder / f"kaleidoscope-t{t_still}.png", optimize=True)
@@ -179,7 +179,7 @@ def g015(render: bool = True):
     for s in sorted(run.frames):
         img = Image.new("RGB", (left + h + 16, top + h + bottom), BG)
         img.paste(Image.fromarray(colorize(run.frames[s] / 255.0)), (left, top))
-        text(img, (16, 12), "One world, a different rule at every point", 22, bold=True)
+        text(img, (16, 12), "A different rule at every point", 22, bold=True)
         text(img, (left + h, 16), f"t = {s / T:5.1f}", 18, anchor="ra")
         # tick labels at the true mu of those columns (cosine spacing)
         for col in (0, h // 4, h // 2, 3 * h // 4, h - 1):
@@ -191,7 +191,7 @@ def g015(render: bool = True):
             text(img, (left - 6, top + row - 6), f"{k:.2f}", 12, fill=DIM, anchor="ra")
         text(img, (6, top + h + 28), "sigma/mu", 12, fill=DIM)
         frames.append(img)
-    media = write_media(frames, folder, "map-of-worlds", fps=20, gif_width=480, gif_every=2, gif_colors=64, crf=24)
+    media = write_media(frames, folder, "map-of-worlds", fps=20, gif_width=400, gif_every=3, gif_colors=64, crf=24)
     frames[-1].save(folder / "map-of-worlds-final.png", optimize=True)
     save_provenance(folder, {
         "exhibit": "G015", "title": "One world, a different rule at every point",
@@ -263,7 +263,7 @@ def g016(render: bool = True):
             lab = f"growth centre mu = {m:.4f} (falling)" if kind == "mu" else f"growth width sigma = {sg:.4f} (rising)"
             text(img, (x, 56 + tile + 10), lab, 16)
         frames.append(img)
-    media = write_media(frames, folder, "live-mutation", fps=25, gif_width=720, gif_every=3, gif_colors=96)
+    media = write_media(frames, folder, "live-mutation", fps=25, gif_width=600, gif_every=4, gif_colors=64, crf=24)
     frames[-1].save(folder / "live-mutation-final.png", optimize=True)
     for run, kind in zip(runs, ("mu", "sigma")):
         np.savetxt(folder / f"mass-{kind}.csv", np.c_[np.arange(len(run.mass)) / T, run.mass], delimiter=",",
@@ -320,16 +320,15 @@ def g017(render: bool = True):
     if not render:
         return [run]
     folder = EXHIBITS / "G017-rush-hour"
-    sc = 1.5
-    w = int(N17 * sc)
+    w = N17
     frames = []
     for s in sorted(run.frames):
         img = Image.new("RGB", (w, w + 56), BG)
-        img.paste(Image.fromarray(colorize(run.frames[s] / 255.0, 3)).resize((w, w), Image.Resampling.NEAREST), (0, 56))
-        text(img, (14, 12), f"Rush hour: {COUNT17} Orbia, one rule, no traffic lights", 22, bold=True)
+        img.paste(Image.fromarray(colorize(run.frames[s] / 255.0)), (0, 56))
+        text(img, (14, 12), f"Rush hour: {COUNT17} Orbia", 22, bold=True)
         text(img, (w - 14, 16), f"t = {s / T:5.1f}", 20, anchor="ra")
         frames.append(img)
-    media = write_media(frames, folder, "rush-hour", fps=25, gif_width=480, gif_every=3, gif_colors=64, crf=24)
+    media = write_media(frames, folder, "rush-hour", fps=25, gif_width=400, gif_every=4, gif_colors=48, crf=26)
     k = min(run.frames, key=lambda s: abs(s - 30 * T))
     frames[sorted(run.frames).index(k)].save(folder / "rush-hour-t30.png", optimize=True)
     np.savetxt(folder / "mass.csv", np.c_[np.arange(len(run.mass)) / T, run.mass], delimiter=",",
@@ -338,7 +337,7 @@ def g017(render: bool = True):
         "exhibit": "G017", "title": "Rush hour",
         "media": media + ["rush-hour-t30.png", "mass.csv"],
         "frames": {"keep_every_steps": 2, "mp4_fps": 25, "time_compression": "5 tu per second"},
-        "view": f"whole {N17}^2 world, 1.5 px per cell (nearest neighbour)",
+        "view": f"whole {N17}^2 world, 1 px per cell",
         "placements_y_x_rot_transpose": placed,
         "caveats": [
             "One random arrangement. Which collision detonates first, and when, depends on it.",
