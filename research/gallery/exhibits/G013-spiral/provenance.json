@@ -1,0 +1,74 @@
+{
+  "exhibit": "G013",
+  "title": "A spiral that draws itself",
+  "media": [
+    "spiral.mp4",
+    "spiral.gif",
+    "spiral-final.png",
+    "mass.csv"
+  ],
+  "frames": {
+    "keep_every_steps": 5,
+    "mp4_fps": 30,
+    "time_compression": "15 tu per second"
+  },
+  "view": "central 768^2 cells of a 1024^2 periodic world, 1 px per cell, fixed camera",
+  "species": {
+    "index": 197,
+    "code": "HN+m",
+    "name": "Catenohelicium monospirae",
+    "R": 13,
+    "T": 10,
+    "mu": 0.35,
+    "sigma": 0.044,
+    "beta": [
+      1.0
+    ]
+  },
+  "final_fill_fraction_A_gt_0.1": 0.08550453186035156,
+  "caveats": [
+    "Catalogued species and catalogued behaviour: Chan 2019 sec. 3.5.4 (pdf p. 28) describes 'spiral elongation (in Helicidae)' with quadratic mass growth. Nothing here is new; the exhibit shows ALM reproducing it at a large world size.",
+    "Single run, alm only. In a 512^2 world (G012) the arm meets its own periodic image by about 70 tu and a labyrinth texture takes over where it collides. This film uses a 1024^2 world, stops at 150 tu and shows only the central 768^2 cells."
+  ],
+  "runs": [
+    {
+      "key": "G013:197:HN+m",
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.35,
+        "sigma": 0.044,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "grid": {
+        "shape": [
+          1024,
+          1024
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 1500,
+      "time_units": 150.0,
+      "initial_state": "catalog entry #197 (HN+m Catenohelicium monospirae) cells placed centred on zero 1024^2 (VIS-talk survey.place)",
+      "initial_state_sha256": "ae7297d15e0911fea7928c03693371a583b06a3aa53905c338df45ae5a84b55a",
+      "final_state_sha256": "722cf98a32091e094216194b7748d696285d27cf3518ea5e8419d85f66455020"
+    }
+  ],
+  "simulator": {
+    "package": "alm.lenia.Lenia (unchanged)",
+    "git_commit": "990b3f1a9300d3db17e96d50092659fa19628638",
+    "git_dirty": false
+  },
+  "render": {
+    "colormap": "matplotlib inferno, A in [0,1] mapped linearly, nearest-neighbour",
+    "script": "research/experiments/VIS-talk/film.py"
+  },
+  "reproduce": "git checkout <this commit> && .venv/bin/python research/experiments/VIS-talk/film.py G013   # verify only: film.py verify G013"
+}

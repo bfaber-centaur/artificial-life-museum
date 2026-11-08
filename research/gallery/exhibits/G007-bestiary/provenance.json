@@ -1,0 +1,673 @@
+{
+  "exhibit": "G007",
+  "title": "Sixteen catalogued species, alive in our simulator",
+  "media": [
+    "bestiary.mp4",
+    "bestiary.gif",
+    "bestiary-still.png"
+  ],
+  "frames": {
+    "window_tu": [
+      60,
+      90
+    ],
+    "frames_per_tu": 5,
+    "mp4_fps": 20,
+    "time_compression": "4 tu per second"
+  },
+  "view": "each tile follows its creature's periodic centroid (integer shift), window 6 R (7-10 R for the three long species, see WIN_R; or the whole world if smaller), nearest-neighbour; tiles have different cell scales, so each carries its own R bar",
+  "species": [
+    {
+      "index": 4,
+      "code": "O2u",
+      "name": "Orbium unicaudatus",
+      "R": 13,
+      "T": 10,
+      "window_cells": 78,
+      "survey_class": "MOVER"
+    },
+    {
+      "index": 19,
+      "code": "O8?",
+      "name": "Tetrasynorbium?",
+      "R": 26,
+      "T": 10,
+      "window_cells": 182,
+      "survey_class": "MOVER"
+    },
+    {
+      "index": 35,
+      "code": "2S1f",
+      "name": "Scutium serratus fluens",
+      "R": 18,
+      "T": 10,
+      "window_cells": 108,
+      "survey_class": "MOVER"
+    },
+    {
+      "index": 72,
+      "code": "2PG1v",
+      "name": "Gyropteron serratus velox",
+      "R": 18,
+      "T": 10,
+      "window_cells": 108,
+      "survey_class": "STAY"
+    },
+    {
+      "index": 86,
+      "code": "3P3sp",
+      "name": "Synptera serratus sinus pedes",
+      "R": 10,
+      "T": 10,
+      "window_cells": 60,
+      "survey_class": "MOVER"
+    },
+    {
+      "index": 172,
+      "code": "3H3t",
+      "name": "Helicium serratus turbulentus",
+      "R": 18,
+      "T": 10,
+      "window_cells": 108,
+      "survey_class": "STAY"
+    },
+    {
+      "index": 207,
+      "code": "3C0s",
+      "name": "Cumulocircium scintillans",
+      "R": 18,
+      "T": 10,
+      "window_cells": 108,
+      "survey_class": "STAY"
+    },
+    {
+      "index": 222,
+      "code": "3ECi",
+      "name": "Circoechinium inconditus",
+      "R": 18,
+      "T": 10,
+      "window_cells": 108,
+      "survey_class": "STAY"
+    },
+    {
+      "index": 242,
+      "code": "3GT2t",
+      "name": "Terrageminium tardus",
+      "R": 27,
+      "T": 10,
+      "window_cells": 162,
+      "survey_class": "STAY"
+    },
+    {
+      "index": 259,
+      "code": "3Ct20",
+      "name": "Eicosactenium",
+      "R": 18,
+      "T": 10,
+      "window_cells": 162,
+      "survey_class": "MOVER"
+    },
+    {
+      "index": 277,
+      "code": "3U7p",
+      "name": "Heptaurium perlongus",
+      "R": 13,
+      "T": 10,
+      "window_cells": 130,
+      "survey_class": "MOVER"
+    },
+    {
+      "index": 322,
+      "code": "K16a",
+      "name": "Heptakronium arcus",
+      "R": 18,
+      "T": 10,
+      "window_cells": 108,
+      "survey_class": "MOVER"
+    },
+    {
+      "index": 375,
+      "code": "3D16s",
+      "name": "Hexadecadentium rotans",
+      "R": 27,
+      "T": 10,
+      "window_cells": 162,
+      "survey_class": "STAY"
+    },
+    {
+      "index": 395,
+      "code": "3R5t",
+      "name": "Asterium torquens",
+      "R": 27,
+      "T": 10,
+      "window_cells": 162,
+      "survey_class": "STAY"
+    },
+    {
+      "index": 417,
+      "code": "3R6s",
+      "name": "Nivium solidus",
+      "R": 27,
+      "T": 10,
+      "window_cells": 162,
+      "survey_class": "STAY"
+    },
+    {
+      "index": 568,
+      "code": "3F9g",
+      "name": "Nonafolium nausia",
+      "R": 18,
+      "T": 10,
+      "window_cells": 108,
+      "survey_class": "STAY"
+    }
+  ],
+  "caveats": [
+    "Every species, name and seed is Bert Chan's, from the pinned upstream catalog (Chakazul/Lenia@adfc542 Python/animals.json). Nothing here is a new species; the exhibit shows that ALM's own simulator runs them.",
+    "Picked by eye for variety from the VIS-S1 survey (survey.py, SURVEY.md); 'persisted for 100 tu in our world' is all the survey checks, not that the shape is the catalogued one.",
+    "Each species runs under its own catalogued rule (R, T, mu, sigma, kernel shells b) - sixteen different rules."
+  ],
+  "runs": [
+    {
+      "key": "G007:4:O2u",
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.15,
+        "sigma": 0.015,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "grid": {
+        "shape": [
+          128,
+          128
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 900,
+      "time_units": 90.0,
+      "initial_state": "catalog entry #4 (O2u Orbium unicaudatus) cells placed centred on zero 128^2 (VIS-talk survey.place)",
+      "initial_state_sha256": "81e9e30780fc4ea435a8d4ee870d832ee860f180f65fbffc066359cbaf129003",
+      "final_state_sha256": "c7ab033dcf6a4679cf883ea1ed5cf85adfdabef8f0051fb5d8260d7a0dec54cc"
+    },
+    {
+      "key": "G007:19:O8?",
+      "rule": {
+        "R": 26,
+        "T": 10,
+        "mu": 0.15,
+        "sigma": 0.0149,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "grid": {
+        "shape": [
+          512,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 900,
+      "time_units": 90.0,
+      "initial_state": "catalog entry #19 (O8? Tetrasynorbium?) cells placed centred on zero 512^2 (VIS-talk survey.place)",
+      "initial_state_sha256": "55ac9a72629eacdda8de36bd2bfb23eaa4d985ca2ef8a0ca0210d8f0ac473a38",
+      "final_state_sha256": "9a3c3c34a2d4ca80100964973587d5be880c0d0c2a273007490c26b70c3136ba"
+    },
+    {
+      "key": "G007:35:2S1f",
+      "rule": {
+        "R": 18,
+        "T": 10,
+        "mu": 0.3,
+        "sigma": 0.0505,
+        "beta": [
+          0.16666666666666666,
+          0.5,
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "grid": {
+        "shape": [
+          256,
+          256
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 900,
+      "time_units": 90.0,
+      "initial_state": "catalog entry #35 (2S1f Scutium serratus fluens) cells placed centred on zero 256^2 (VIS-talk survey.place)",
+      "initial_state_sha256": "53d80c7b36085cfa86287645164a01418119449e8c10455c603c997b3e68cf37",
+      "final_state_sha256": "0278a532d62af1e33f789d7eda40567778e78707c25ecef8ec2b685ed3152614"
+    },
+    {
+      "key": "G007:72:2PG1v",
+      "rule": {
+        "R": 18,
+        "T": 10,
+        "mu": 0.21,
+        "sigma": 0.032,
+        "beta": [
+          0.16666666666666666,
+          0.5,
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "grid": {
+        "shape": [
+          256,
+          256
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 900,
+      "time_units": 90.0,
+      "initial_state": "catalog entry #72 (2PG1v Gyropteron serratus velox) cells placed centred on zero 256^2 (VIS-talk survey.place)",
+      "initial_state_sha256": "67d92402d10f49eced4ae792fd01ea0a4221d7f411df80b88b4461a3baa75e12",
+      "final_state_sha256": "6c9d3bf8bfd5dba8d4e34e095cd97b46530df19bffe88e615450f33917f6b9aa"
+    },
+    {
+      "key": "G007:86:3P3sp",
+      "rule": {
+        "R": 10,
+        "T": 10,
+        "mu": 0.24,
+        "sigma": 0.038,
+        "beta": [
+          0.08333333333333333,
+          0.5,
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "grid": {
+        "shape": [
+          128,
+          128
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 900,
+      "time_units": 90.0,
+      "initial_state": "catalog entry #86 (3P3sp Synptera serratus sinus pedes) cells placed centred on zero 128^2 (VIS-talk survey.place)",
+      "initial_state_sha256": "0f10657bbf649ad941e6daa87761e80987844877a5cf5dec08565cc287231e9e",
+      "final_state_sha256": "d4fb8bc322515874e0c8c4a2e4a92b941f26dbf33c52335fe0546c027a870333"
+    },
+    {
+      "key": "G007:172:3H3t",
+      "rule": {
+        "R": 18,
+        "T": 10,
+        "mu": 0.24,
+        "sigma": 0.03,
+        "beta": [
+          0.5,
+          0.75,
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "grid": {
+        "shape": [
+          256,
+          256
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 900,
+      "time_units": 90.0,
+      "initial_state": "catalog entry #172 (3H3t Helicium serratus turbulentus) cells placed centred on zero 256^2 (VIS-talk survey.place)",
+      "initial_state_sha256": "c039d23c454470f32bd46905c8bafca89b9025c729ccc68586418f3e1e53bbb8",
+      "final_state_sha256": "00d3a5182cf1adf0b170d30099dcf14a8b7a7143132e9915530c6cf14c4bbc9b"
+    },
+    {
+      "key": "G007:207:3C0s",
+      "rule": {
+        "R": 18,
+        "T": 10,
+        "mu": 0.296,
+        "sigma": 0.0374,
+        "beta": [
+          0.8333333333333334,
+          1.0,
+          0.8333333333333334
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "grid": {
+        "shape": [
+          256,
+          256
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 900,
+      "time_units": 90.0,
+      "initial_state": "catalog entry #207 (3C0s Cumulocircium scintillans) cells placed centred on zero 256^2 (VIS-talk survey.place)",
+      "initial_state_sha256": "cf0b0e02a9f528f2d68058308899ad1ee9cda085e398ea1d82df43342e69176a",
+      "final_state_sha256": "37f2d3fe2d9c4f60fcd5e6dc488767ab3df13bbbf711e4fbcce37a72618e5057"
+    },
+    {
+      "key": "G007:222:3ECi",
+      "rule": {
+        "R": 18,
+        "T": 10,
+        "mu": 0.26,
+        "sigma": 0.028,
+        "beta": [
+          1.0,
+          0.5,
+          0.75
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "grid": {
+        "shape": [
+          256,
+          256
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 900,
+      "time_units": 90.0,
+      "initial_state": "catalog entry #222 (3ECi Circoechinium inconditus) cells placed centred on zero 256^2 (VIS-talk survey.place)",
+      "initial_state_sha256": "6052263f77d6b76f5e91c787df946566b81386f0ab01d81324506d2059358292",
+      "final_state_sha256": "9e8e9128a3e672de934fb3b90a988d44f63a7508ce0a8faeb23b09b7f7082a9f"
+    },
+    {
+      "key": "G007:242:3GT2t",
+      "rule": {
+        "R": 27,
+        "T": 10,
+        "mu": 0.32,
+        "sigma": 0.049,
+        "beta": [
+          1.0,
+          0.0,
+          0.6666666666666666
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "grid": {
+        "shape": [
+          512,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 900,
+      "time_units": 90.0,
+      "initial_state": "catalog entry #242 (3GT2t Terrageminium tardus) cells placed centred on zero 512^2 (VIS-talk survey.place)",
+      "initial_state_sha256": "f300cf6b93bcdb9f38dfafa1920de42282e7440f5d052371cec963b739d9d397",
+      "final_state_sha256": "80f71b265545bf597e23a61989556b7a97c31390ce25d35e672920d111e67467"
+    },
+    {
+      "key": "G007:259:3Ct20",
+      "rule": {
+        "R": 18,
+        "T": 10,
+        "mu": 0.271,
+        "sigma": 0.038,
+        "beta": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "grid": {
+        "shape": [
+          512,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 900,
+      "time_units": 90.0,
+      "initial_state": "catalog entry #259 (3Ct20 Eicosactenium) cells placed centred on zero 512^2 (VIS-talk survey.place)",
+      "initial_state_sha256": "b13ccfa446d4d6da08fa83ca96dfb867707f07affe9bf75e077f538ed0eace67",
+      "final_state_sha256": "e55158a48b0732a40f73c6c8d23bf7df604dc2e3fc15eb5f4382055423f02eec"
+    },
+    {
+      "key": "G007:277:3U7p",
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.333,
+        "sigma": 0.042,
+        "beta": [
+          0.75,
+          1.0,
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "grid": {
+        "shape": [
+          512,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 900,
+      "time_units": 90.0,
+      "initial_state": "catalog entry #277 (3U7p Heptaurium perlongus) cells placed centred on zero 512^2 (VIS-talk survey.place)",
+      "initial_state_sha256": "614746d20e9d075cb660fa3a7396334e52eefa09313ca5f737aac39ca8083e78",
+      "final_state_sha256": "8f53bab9e77b4097851d9a9e7197103f2c164c84148e8057ebe993776da3f77b"
+    },
+    {
+      "key": "G007:322:K16a",
+      "rule": {
+        "R": 18,
+        "T": 10,
+        "mu": 0.29,
+        "sigma": 0.034,
+        "beta": [
+          1.0,
+          0.3333333333333333
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "grid": {
+        "shape": [
+          256,
+          256
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 900,
+      "time_units": 90.0,
+      "initial_state": "catalog entry #322 (K16a Heptakronium arcus) cells placed centred on zero 256^2 (VIS-talk survey.place)",
+      "initial_state_sha256": "0d69fa7b7f7b1b91ab84990c4dffbbbe21fa1b324bdd14c361a04bec01a8c71b",
+      "final_state_sha256": "03d08a0d51d9491c4634ea96a4437ee6b0dd10b55594ec2249159630e2db4634"
+    },
+    {
+      "key": "G007:375:3D16s",
+      "rule": {
+        "R": 27,
+        "T": 10,
+        "mu": 0.24,
+        "sigma": 0.024,
+        "beta": [
+          1.0,
+          0.9166666666666666,
+          0.5
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "grid": {
+        "shape": [
+          256,
+          256
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 900,
+      "time_units": 90.0,
+      "initial_state": "catalog entry #375 (3D16s Hexadecadentium rotans) cells placed centred on zero 256^2 (VIS-talk survey.place)",
+      "initial_state_sha256": "a0dcfe1c30a28241dc76402bc9f90ef1382b2012bbac5a4474bce2c76d2afbcf",
+      "final_state_sha256": "87cb2fe632e4b3b3a5e6519832b129b14a276717db0390c64ed8df25341d7d1c"
+    },
+    {
+      "key": "G007:395:3R5t",
+      "rule": {
+        "R": 27,
+        "T": 10,
+        "mu": 0.31,
+        "sigma": 0.035,
+        "beta": [
+          0.6666666666666666,
+          0.0,
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "grid": {
+        "shape": [
+          256,
+          256
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 900,
+      "time_units": 90.0,
+      "initial_state": "catalog entry #395 (3R5t Asterium torquens) cells placed centred on zero 256^2 (VIS-talk survey.place)",
+      "initial_state_sha256": "3b6446f5b38934eb6d1f2ed3013ad0b6e0633e68aac90c7cd90b4007179d67f9",
+      "final_state_sha256": "e12abdea912de492bec31bc4c41bc2ea885280f2e46ce82159e033037988c8f0"
+    },
+    {
+      "key": "G007:417:3R6s",
+      "rule": {
+        "R": 27,
+        "T": 10,
+        "mu": 0.28,
+        "sigma": 0.041,
+        "beta": [
+          0.5833333333333334,
+          0.0,
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "grid": {
+        "shape": [
+          256,
+          256
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 900,
+      "time_units": 90.0,
+      "initial_state": "catalog entry #417 (3R6s Nivium solidus) cells placed centred on zero 256^2 (VIS-talk survey.place)",
+      "initial_state_sha256": "3cfaec805ac1996ae245c1234b56fd35fc22a59645162bc6d6367f8130dcaec3",
+      "final_state_sha256": "ad8b12547f044119bf65e1e4446accac0d30cfe29288f75606649691f27cdb1a"
+    },
+    {
+      "key": "G007:568:3F9g",
+      "rule": {
+        "R": 18,
+        "T": 10,
+        "mu": 0.25,
+        "sigma": 0.026,
+        "beta": [
+          0.6666666666666666,
+          0.3333333333333333,
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "grid": {
+        "shape": [
+          256,
+          256
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 900,
+      "time_units": 90.0,
+      "initial_state": "catalog entry #568 (3F9g Nonafolium nausia) cells placed centred on zero 256^2 (VIS-talk survey.place)",
+      "initial_state_sha256": "d30ff6064495584762f75e71be901a24f3bb1e34159f064ffbdf1fcbf3c3ef39",
+      "final_state_sha256": "2e04b8db4fb3aa6b810453ef70a6796436768da53c01201a3dd8f4ef0ad62e13"
+    }
+  ],
+  "simulator": {
+    "package": "alm.lenia.Lenia (unchanged)",
+    "git_commit": "ddc45ca56fc08b3cbd754483bf1bd22c9e30590a",
+    "git_dirty": false
+  },
+  "render": {
+    "colormap": "matplotlib inferno, A in [0,1] mapped linearly, nearest-neighbour",
+    "script": "research/experiments/VIS-talk/film.py"
+  },
+  "reproduce": "git checkout <this commit> && .venv/bin/python research/experiments/VIS-talk/film.py G007   # verify only: film.py verify G007"
+}

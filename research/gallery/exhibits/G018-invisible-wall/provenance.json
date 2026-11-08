@@ -1,0 +1,221 @@
+{
+  "exhibit": "G018",
+  "title": "The invisible wall",
+  "media": [
+    "invisible-wall.mp4",
+    "invisible-wall.gif",
+    "invisible-wall-final.png"
+  ],
+  "frames": {
+    "keep_every_steps": 3,
+    "mp4_fps": 25,
+    "time_compression": "7.5 tu per second"
+  },
+  "view": "six whole 256^2 worlds, 2.8 px per cell; the lower half is tinted blue (overlay only)",
+  "equivalence": "FieldLenia (ex_bizarre.py) repeats alm.lenia.Lenia's step with mu, sigma as arrays or functions of the step; with uniform S001 parameters it equals Lenia bitwise over 200 steps (checked at render: True)",
+  "fates_at_120_tu": {
+    "0.12": "dies at the wall",
+    "0.13": "dies at the wall",
+    "0.14": "crosses and keeps going",
+    "0.16": "crosses and keeps going",
+    "0.17": "dies at the wall",
+    "0.18": "dies at the wall"
+  },
+  "fate_rule": "final mass > 0.5 x one Orbium's mass -> 'crosses and keeps going', else 'dies at the wall'",
+  "caveats": [
+    "A sharp step in mu between neighbouring cells; the Orbium feels the other rule up to R = 13 cells before reaching the wall. One phase, one approach angle per lane.",
+    "A survivor only shows that a body with Orbium's mass persisted; it may have changed shape in the other half."
+  ],
+  "runs": [
+    {
+      "key": "G018:mu0.12",
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.15,
+        "sigma": 0.015,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "grid": {
+        "shape": [
+          256,
+          256
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 1200,
+      "time_units": 120.0,
+      "initial_state": "settled S001 Orbium (48^2 crop) pasted at row 40, column 128 of zero 256^2, heading mostly down",
+      "initial_state_sha256": "a097edd0c51253b62bfe87137223b28be1ad35e22cc281275098611385cdd696",
+      "final_state_sha256": "07854d2fef297a06ba81685e660c332de36d5d18d546927d30daad6d7fda1541",
+      "rule_note": "S001 rule in rows 0-127; mu = 0.12 (sigma unchanged) in rows 128-255. The torus wraps, so there are two walls, at rows 128 and 0"
+    },
+    {
+      "key": "G018:mu0.13",
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.15,
+        "sigma": 0.015,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "grid": {
+        "shape": [
+          256,
+          256
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 1200,
+      "time_units": 120.0,
+      "initial_state": "settled S001 Orbium (48^2 crop) pasted at row 40, column 128 of zero 256^2, heading mostly down",
+      "initial_state_sha256": "a097edd0c51253b62bfe87137223b28be1ad35e22cc281275098611385cdd696",
+      "final_state_sha256": "07854d2fef297a06ba81685e660c332de36d5d18d546927d30daad6d7fda1541",
+      "rule_note": "S001 rule in rows 0-127; mu = 0.13 (sigma unchanged) in rows 128-255. The torus wraps, so there are two walls, at rows 128 and 0"
+    },
+    {
+      "key": "G018:mu0.14",
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.15,
+        "sigma": 0.015,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "grid": {
+        "shape": [
+          256,
+          256
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 1200,
+      "time_units": 120.0,
+      "initial_state": "settled S001 Orbium (48^2 crop) pasted at row 40, column 128 of zero 256^2, heading mostly down",
+      "initial_state_sha256": "a097edd0c51253b62bfe87137223b28be1ad35e22cc281275098611385cdd696",
+      "final_state_sha256": "81ab5acf1655745ff708ce046ab3cb8ce57f1ab5948e2cdde027e54857a97074",
+      "rule_note": "S001 rule in rows 0-127; mu = 0.14 (sigma unchanged) in rows 128-255. The torus wraps, so there are two walls, at rows 128 and 0"
+    },
+    {
+      "key": "G018:mu0.16",
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.15,
+        "sigma": 0.015,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "grid": {
+        "shape": [
+          256,
+          256
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 1200,
+      "time_units": 120.0,
+      "initial_state": "settled S001 Orbium (48^2 crop) pasted at row 40, column 128 of zero 256^2, heading mostly down",
+      "initial_state_sha256": "a097edd0c51253b62bfe87137223b28be1ad35e22cc281275098611385cdd696",
+      "final_state_sha256": "59b6eb2d0da76ade15b72599f079805cf82466622087527460d3abc12df684fd",
+      "rule_note": "S001 rule in rows 0-127; mu = 0.16 (sigma unchanged) in rows 128-255. The torus wraps, so there are two walls, at rows 128 and 0"
+    },
+    {
+      "key": "G018:mu0.17",
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.15,
+        "sigma": 0.015,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "grid": {
+        "shape": [
+          256,
+          256
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 1200,
+      "time_units": 120.0,
+      "initial_state": "settled S001 Orbium (48^2 crop) pasted at row 40, column 128 of zero 256^2, heading mostly down",
+      "initial_state_sha256": "a097edd0c51253b62bfe87137223b28be1ad35e22cc281275098611385cdd696",
+      "final_state_sha256": "07854d2fef297a06ba81685e660c332de36d5d18d546927d30daad6d7fda1541",
+      "rule_note": "S001 rule in rows 0-127; mu = 0.17 (sigma unchanged) in rows 128-255. The torus wraps, so there are two walls, at rows 128 and 0"
+    },
+    {
+      "key": "G018:mu0.18",
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.15,
+        "sigma": 0.015,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "grid": {
+        "shape": [
+          256,
+          256
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 1200,
+      "time_units": 120.0,
+      "initial_state": "settled S001 Orbium (48^2 crop) pasted at row 40, column 128 of zero 256^2, heading mostly down",
+      "initial_state_sha256": "a097edd0c51253b62bfe87137223b28be1ad35e22cc281275098611385cdd696",
+      "final_state_sha256": "07854d2fef297a06ba81685e660c332de36d5d18d546927d30daad6d7fda1541",
+      "rule_note": "S001 rule in rows 0-127; mu = 0.18 (sigma unchanged) in rows 128-255. The torus wraps, so there are two walls, at rows 128 and 0"
+    }
+  ],
+  "simulator": {
+    "package": "alm.lenia.Lenia (unchanged)",
+    "git_commit": "31908e536edd279e919fe7d9fdadbaa005ba8c22",
+    "git_dirty": false
+  },
+  "render": {
+    "colormap": "matplotlib inferno, A in [0,1] mapped linearly, nearest-neighbour",
+    "script": "research/experiments/VIS-talk/film.py"
+  },
+  "reproduce": "git checkout <this commit> && .venv/bin/python research/experiments/VIS-talk/film.py G018   # verify only: film.py verify G018"
+}

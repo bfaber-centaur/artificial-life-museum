@@ -1,0 +1,56 @@
+[
+  {
+    "label": "head-on, b = 0",
+    "kind": "head",
+    "b_R": 0.0,
+    "outcome": "both survive, scattered"
+  },
+  {
+    "label": "head-on, b = 0.25 R",
+    "kind": "head",
+    "b_R": 0.25,
+    "outcome": "both die"
+  },
+  {
+    "label": "head-on, b = 0.5 R",
+    "kind": "head",
+    "b_R": 0.5,
+    "outcome": "fused into one bound pair"
+  },
+  {
+    "label": "head-on, b = 0.75 R",
+    "kind": "head",
+    "b_R": 0.75,
+    "outcome": "both survive, scattered"
+  },
+  {
+    "label": "head-on, b = 1 R",
+    "kind": "head",
+    "b_R": 1.0,
+    "outcome": "both survive, scattered"
+  },
+  {
+    "label": "right angle, b = 0",
+    "kind": "perp",
+    "b_R": 0.0,
+    "outcome": "fused into one bound pair"
+  },
+  {
+    "label": "right angle, b = 0.5 R",
+    "kind": "perp",
+    "b_R": 0.5,
+    "outcome": "one dies, one survives"
+  },
+  {
+    "label": "right angle, b = 1 R",
+    "kind": "perp",
+    "b_R": 1.0,
+    "outcome": "one dies, one survives"
+  },
+  {
+    "label": "right angle, b = -0.5 R",
+    "kind": "perp",
+    "b_R": -0.5,
+    "outcome": "one dies, one survives"
+  }
+]

@@ -1,0 +1,63 @@
+{
+  "exhibit": "G015",
+  "title": "One world, a different rule at every point",
+  "media": [
+    "map-of-worlds.mp4",
+    "map-of-worlds.gif",
+    "map-of-worlds-final.png"
+  ],
+  "frames": {
+    "keep_every_steps": 10,
+    "mp4_fps": 20,
+    "time_compression": "20 tu per second"
+  },
+  "view": "top-left 512^2 quadrant of the 1024^2 world (rows and columns 0-511), where mu and sigma/mu both rise monotonically; 1 px per cell. The other three quadrants mirror the parameter ramp.",
+  "equivalence": "FieldLenia (ex_bizarre.py) repeats alm.lenia.Lenia's step with mu, sigma as arrays or functions of the step; with uniform S001 parameters it equals Lenia bitwise over 200 steps (checked at render: True)",
+  "caveats": [
+    "Not classic Lenia: the rule changes from cell to cell. Patterns near one point feel parameters up to R = 13 cells away, so a region is not an isolated world with that point's rule; boundaries between regimes are shaped by the gradient itself.",
+    "Tick labels give the exact mu and sigma/mu of the labelled column and row; spacing is cosine, not linear.",
+    "Chan 2019 maps where Orbium survives in (mu, sigma); this picture is a different thing (what random noise turns into), from one seed and one horizon (200 tu). We did not search the literature for spatially varying Lenia parameters beyond the project's reference list."
+  ],
+  "runs": [
+    {
+      "key": "G015:map-of-worlds",
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.15,
+        "sigma": 0.015,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "grid": {
+        "shape": [
+          1024,
+          1024
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 2000,
+      "time_units": 200.0,
+      "initial_state": "uniform [0, 0.5) noise over the whole 1024^2 world, numpy default_rng(0)",
+      "initial_state_sha256": "6988e6dc2ae7b0723d88f0b20d572e841095c98ea2a01dd2da4ef08fe37211e6",
+      "final_state_sha256": "d82bf75938e4b1868ad87f1abb9f543a7f3404a7a525a88b8ba12fe6cd313f21",
+      "rule_note": "S001 kernel (R 13, poly, beta [1]) and poly growth, but mu and sigma vary in space: mu = 0.10 + 0.30 w(x), sigma = mu (0.08 + 0.14 w(y)), w(z) = (1 - cos(2 pi z / 1024)) / 2"
+    }
+  ],
+  "simulator": {
+    "package": "alm.lenia.Lenia (unchanged)",
+    "git_commit": "31908e536edd279e919fe7d9fdadbaa005ba8c22",
+    "git_dirty": false
+  },
+  "render": {
+    "colormap": "matplotlib inferno, A in [0,1] mapped linearly, nearest-neighbour",
+    "script": "research/experiments/VIS-talk/film.py"
+  },
+  "reproduce": "git checkout <this commit> && .venv/bin/python research/experiments/VIS-talk/film.py G015   # verify only: film.py verify G015"
+}

@@ -1,0 +1,258 @@
+{
+  "exhibit": "G012",
+  "title": "Catalogued growers",
+  "media": [
+    "growers.mp4",
+    "growers.gif",
+    "growers-final.png"
+  ],
+  "frames": {
+    "frames_per_tu": 2.5,
+    "mp4_fps": 25,
+    "time_compression": "10 tu per second"
+  },
+  "view": "whole periodic worlds (256^2 or 512^2, see runs), downsampled to 320 px with Lanczos filtering (this exhibit is NOT one pixel per cell)",
+  "species": [
+    {
+      "index": 197,
+      "code": "HN+m",
+      "name": "Catenohelicium monospirae",
+      "R": 13,
+      "N": 256,
+      "survey_class": "FILLED"
+    },
+    {
+      "index": 157,
+      "code": "PN+cy",
+      "name": "Catenopteryx cyclon",
+      "R": 13,
+      "N": 128,
+      "survey_class": "FILLED"
+    },
+    {
+      "index": 198,
+      "code": "HN+bv",
+      "name": "Catenohelicium bispirae vacuoides",
+      "R": 13,
+      "N": 256,
+      "survey_class": "FILLED"
+    },
+    {
+      "index": 12,
+      "code": "OG2r",
+      "name": "Gyrorbium revolvens",
+      "R": 13,
+      "N": 128,
+      "survey_class": "FILLED"
+    },
+    {
+      "index": 62,
+      "code": "SN+",
+      "name": "Catenoscutium bidirectus",
+      "R": 13,
+      "N": 128,
+      "survey_class": "FILLED"
+    },
+    {
+      "index": 262,
+      "code": "3CtN+m",
+      "name": "Catenoctenium monospirae",
+      "R": 18,
+      "N": 256,
+      "survey_class": "FILLED"
+    }
+  ],
+  "caveats": [
+    "These are the catalogue's own 'Cateno-' (chain-forming) and related growing species: growth is their catalogued behaviour, not our discovery. Gyrorbium revolvens (OG2r) is included because it filled its world in our survey.",
+    "Whether a grower fills the world depends on world size and time; these are single runs to 100 tu.",
+    "The labyrinths resemble reaction-diffusion (Turing) patterns; that is a resemblance, not a tested mechanism."
+  ],
+  "runs": [
+    {
+      "key": "G012:197:HN+m",
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.35,
+        "sigma": 0.044,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "grid": {
+        "shape": [
+          256,
+          256
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 1000,
+      "time_units": 100.0,
+      "initial_state": "catalog entry #197 (HN+m Catenohelicium monospirae) cells placed centred on zero 256^2 (VIS-talk survey.place)",
+      "initial_state_sha256": "703acfcb7f455727483f03e720fae8006fcf579b252996308404726210b18a3f",
+      "final_state_sha256": "adf96f9bf7b41b4bc19a21a8b28b4bbd66ab76c286a129677da571851bab8eba"
+    },
+    {
+      "key": "G012:157:PN+cy",
+      "rule": {
+        "R": 13,
+        "T": 5,
+        "mu": 0.34,
+        "sigma": 0.045,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.2
+      },
+      "grid": {
+        "shape": [
+          128,
+          128
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 500,
+      "time_units": 100.0,
+      "initial_state": "catalog entry #157 (PN+cy Catenopteryx cyclon) cells placed centred on zero 128^2 (VIS-talk survey.place)",
+      "initial_state_sha256": "69dac35eee0628b883c4a4d81ef89049f916cfea80dbbe8964e34ba52a2f7a2f",
+      "final_state_sha256": "a7696e5fdecf875461dabc86360b6fb40aa52a5bab0aae35a46558e6719b9b9e"
+    },
+    {
+      "key": "G012:198:HN+bv",
+      "rule": {
+        "R": 13,
+        "T": 5,
+        "mu": 0.33,
+        "sigma": 0.044,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.2
+      },
+      "grid": {
+        "shape": [
+          256,
+          256
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 500,
+      "time_units": 100.0,
+      "initial_state": "catalog entry #198 (HN+bv Catenohelicium bispirae vacuoides) cells placed centred on zero 256^2 (VIS-talk survey.place)",
+      "initial_state_sha256": "49d6346e519ce9fb6647c3342f59afaeaa4909442bcae39904e8583ad428a22e",
+      "final_state_sha256": "29b82d9dd27b882acd1c0e4e89ae3ed981dff37bb7796f1753f1eea9016634ab"
+    },
+    {
+      "key": "G012:12:OG2r",
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.133,
+        "sigma": 0.0177,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "grid": {
+        "shape": [
+          128,
+          128
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 1000,
+      "time_units": 100.0,
+      "initial_state": "catalog entry #12 (OG2r Gyrorbium revolvens) cells placed centred on zero 128^2 (VIS-talk survey.place)",
+      "initial_state_sha256": "ab6b633ada968174f2a9a89361366e6140eb4f7e655580eb104be12862d9f179",
+      "final_state_sha256": "242b1d6c00a4d9f49de3a798ea1d404cfc60f677bfa2d105d17f2e08ba70815f"
+    },
+    {
+      "key": "G012:62:SN+",
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.29,
+        "sigma": 0.0432,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "grid": {
+        "shape": [
+          128,
+          128
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 1000,
+      "time_units": 100.0,
+      "initial_state": "catalog entry #62 (SN+ Catenoscutium bidirectus) cells placed centred on zero 128^2 (VIS-talk survey.place)",
+      "initial_state_sha256": "20855af50eb902b6ed66f031f9ec75dbef61dff7bb58a6d54643cf6cd4cd9e21",
+      "final_state_sha256": "7eeded8df2dea28ba3348646ce5bd8cd10c0c4460018b91ddc80ad6abdc49cac"
+    },
+    {
+      "key": "G012:262:3CtN+m",
+      "rule": {
+        "R": 18,
+        "T": 10,
+        "mu": 0.277,
+        "sigma": 0.0386,
+        "beta": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "grid": {
+        "shape": [
+          256,
+          256
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 1000,
+      "time_units": 100.0,
+      "initial_state": "catalog entry #262 (3CtN+m Catenoctenium monospirae) cells placed centred on zero 256^2 (VIS-talk survey.place)",
+      "initial_state_sha256": "cd4463fd8d2bddb24e1cf98c80114d2cc19186c8a1ba77ac9005bab217b0a8ff",
+      "final_state_sha256": "4d484aa5b3789669df7061a44ce67ce6293419cfc8821bf744bf79ade9064657"
+    }
+  ],
+  "simulator": {
+    "package": "alm.lenia.Lenia (unchanged)",
+    "git_commit": "ddc45ca56fc08b3cbd754483bf1bd22c9e30590a",
+    "git_dirty": false
+  },
+  "render": {
+    "colormap": "matplotlib inferno, A in [0,1] mapped linearly, nearest-neighbour",
+    "script": "research/experiments/VIS-talk/film.py"
+  },
+  "reproduce": "git checkout <this commit> && .venv/bin/python research/experiments/VIS-talk/film.py G012   # verify only: film.py verify G012"
+}

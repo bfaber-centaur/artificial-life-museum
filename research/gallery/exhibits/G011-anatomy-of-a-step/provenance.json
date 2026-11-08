@@ -1,0 +1,67 @@
+{
+  "exhibit": "G011",
+  "title": "Anatomy of one step",
+  "media": [
+    "anatomy.mp4",
+    "anatomy.gif",
+    "anatomy-still.png",
+    "kernel.png"
+  ],
+  "frames": {
+    "keep_every_steps": 1,
+    "mp4_fps": 20,
+    "time_compression": "2 tu per second"
+  },
+  "view": "64x64-cell window, integer-shifted to follow the centroid, 6 px per cell",
+  "colormaps": {
+    "A": "inferno 0..1",
+    "U": "viridis 0..0.3",
+    "G": "RdBu_r -1..1",
+    "kernel.png": "viridis, K / max K, 32x32 cells"
+  },
+  "caveats": [
+    "U is clipped to 0..0.3 for display only; G is computed from the unclipped U.",
+    "Teaching exhibit, no claim. Rule = S001 (C001 family)."
+  ],
+  "runs": [
+    {
+      "key": "G011:S001-anatomy",
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.15,
+        "sigma": 0.015,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "grid": {
+        "shape": [
+          128,
+          128
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 400,
+      "time_units": 40.0,
+      "initial_state": "settled S001 Orbium (S001 on 128^2 after 1000 steps, 48^2 crop) pasted centred on a zero 128^2 world",
+      "initial_state_sha256": "d0d9959ff4b9faaaba0dfe33bfa7345204571d57e74da87c98e2895e38c9878f",
+      "final_state_sha256": "2af374c4b10ebc810491d86449013965bb2f62e3a5e540e90df2c50b03490ab9"
+    }
+  ],
+  "simulator": {
+    "package": "alm.lenia.Lenia (unchanged)",
+    "git_commit": "ddc45ca56fc08b3cbd754483bf1bd22c9e30590a",
+    "git_dirty": false
+  },
+  "render": {
+    "colormap": "matplotlib inferno, A in [0,1] mapped linearly, nearest-neighbour",
+    "script": "research/experiments/VIS-talk/film.py"
+  },
+  "reproduce": "git checkout <this commit> && .venv/bin/python research/experiments/VIS-talk/film.py G011   # verify only: film.py verify G011"
+}

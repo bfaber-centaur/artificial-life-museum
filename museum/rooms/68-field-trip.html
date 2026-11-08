@@ -1,0 +1,168 @@
+<!--meta {
+  "slug": "field-trip", "order": 68, "title": "Field trip: what Lenia can look like",
+  "nav_label": "8 · Field trip",
+  "kicker": "Room 8 · A visual field trip, 2026-11-07",
+  "summary": "Twelve moving pictures from one afternoon of looking: the reef at four times the size, a catalogue bestiary, collisions, a soup, growers, a spiral, and five stranger worlds.",
+  "expect": {"C052": "INDEPENDENTLY_CHECKED", "C053": "NUMERICALLY_FRAGILE", "C056": "OBSERVED",
+             "C057": "OBSERVED", "C058": "OBSERVED", "C059": "OBSERVED", "C060": "OBSERVED"}
+} -->
+<h1>Field trip: what Lenia can look like</h1>
+<p class="lede">The other rooms each follow one question about four animals. This room is a
+field trip: an afternoon of filming whatever looked most striking, for a lightning talk. Every
+frame is still a recorded simulation with a stated rule, seed and final-state hash. Most of what
+you see here was already known to Lenia's inventor, Bert Chan; the labels say so.</p>
+
+<h2>The reef, at four times the size</h2>
+<figure class="vitrine">
+  <img src="{{asset:research/gallery/exhibits/G008-the-reef/reef-world.gif}}" width="400" height="423" loading="lazy"
+       alt="A 1024 by 1024 world. A small glider meets a small ring near the centre; a round colony of tiny rings and dumbbells spreads outward until it covers the whole world.">
+  <figcaption><strong>One glider meets one ring.</strong> Room 7's head-on encounter, rebuilt with
+  the expedition's own code in a world sixteen times the area of its main runs, for 130 time
+  units. GIF preview; use the
+  {{src:research/gallery/exhibits/G008-the-reef/reef-world.mp4|full video}} on a projector. Also:
+  {{src:research/gallery/exhibits/G008-the-reef/reef-contact.mp4|close-up of first contact}} ·
+  {{src:research/gallery/exhibits/G008-the-reef/provenance.json|provenance}}.</figcaption>
+</figure>
+<figure class="vitrine">
+  <img src="{{asset:research/gallery/exhibits/G008-the-reef/reef-lattice-detail.png}}" width="800" height="800" loading="lazy"
+       alt="Close-up of the frozen colony: small rings and dumbbell shapes, lined up in patches whose alignment changes from patch to patch.">
+  <figcaption>160 × 160 cells of the frozen colony at 130 time units, five pixels per cell.</figcaption>
+</figure>
+<div class="label">
+  <p class="obs"><strong>What you see.</strong> Contact, fusion and a spreading front, as in Room 7.
+  Behind the front everything freezes into small rings and dumbbells, lined up in patches with
+  boundaries between them.</p>
+  <p class="open"><strong>What the ledger says.</strong> {{claim:C052}} covers only the first 25 time
+  units, at the expedition's world sizes. Everything later, and this world size, is a single run
+  with one engine. Timing and colony mass move with the timestep and grid {{claim:C053}}. The
+  patches are an observation in one run, not a measurement.</p>
+</div>
+
+<h2>Sixteen catalogued species</h2>
+<figure class="vitrine">
+  <img src="{{asset:research/gallery/exhibits/G007-bestiary/bestiary.gif}}" width="640" height="740" loading="lazy"
+       alt="Sixteen tiles, each following one creature: gliders, a chain of four Orbia, spiky and toothed rings, rotating spirals and gears, pulsing concentric rings, a long centipede-like chain and star shapes.">
+  <figcaption><strong>A bestiary.</strong> Sixteen species from Chan's catalogue, each under its own
+  rule, 60 to 90 time units after its catalogued seed.
+  {{src:research/gallery/exhibits/G007-bestiary/bestiary.mp4|Full video}} ·
+  {{src:research/gallery/exhibits/G007-bestiary/provenance.json|provenance}}.</figcaption>
+</figure>
+<div class="label">
+  <p class="obs"><strong>What you see.</strong> Gliders, rotors, a pulsing ring and long crawling
+  chains, all still alive. Every name and seed is Chan's.</p>
+  <p class="open"><strong>What the ledger says.</strong> We ran every eligible catalogue entry
+  through our own simulator {{claim:C057}}: 509 of 526 were still bounded patterns after 100
+  time units. That checks persistence only, not that each one keeps its catalogued shape.</p>
+</div>
+
+<h2>Two Orbia, nine ways to meet</h2>
+<figure class="vitrine">
+  <img src="{{asset:research/gallery/exhibits/G009-orbium-collisions/collisions.gif}}" width="720" height="811" loading="lazy"
+       alt="Nine worlds in a grid. In each, two Orbia approach each other head-on or at a right angle; some bounce apart, two vanish together, some fuse into one double body, and in others only one survives.">
+  <figcaption><strong>Collisions.</strong> The same Orbium and an exact rotated copy, aimed at each
+  other with different offsets. {{src:research/gallery/exhibits/G009-orbium-collisions/collisions-outcomes.png|Outcomes}} ·
+  {{src:research/gallery/exhibits/G009-orbium-collisions/provenance.json|provenance}}.</figcaption>
+</figure>
+<div class="label">
+  <p class="obs"><strong>What you see.</strong> Scattering, mutual destruction, one survivor, and
+  fusion into a single double body, depending only on how the two are lined up.</p>
+  <p class="open"><strong>What the ledger says.</strong> {{claim:C058}}: one sample per geometry.
+  Chan catalogued these outcomes in 2019; this is our simulator reproducing them.</p>
+</div>
+
+<h2>Same recipe, three fates</h2>
+<figure class="vitrine">
+  <img src="{{asset:research/gallery/exhibits/G010-soup/soup.gif}}" width="720" height="291" loading="lazy"
+       alt="Three worlds seeded with the same kind of random noise. The first fades to nothing, the second leaves a single small glider, the third fills the whole world with a pattern of small bodies.">
+  <figcaption><strong>Noise under the Orbium rule.</strong> A square of random values, 40 random
+  seeds; the film shows the first seed of each outcome.
+  {{src:research/gallery/exhibits/G010-soup/soup-scan.json|All 40 seeds}} ·
+  {{src:research/gallery/exhibits/G010-soup/provenance.json|provenance}}.</figcaption>
+</figure>
+<div class="label">
+  <p class="obs"><strong>What you see.</strong> From identical recipes: nothing, one glider, or a world
+  taken over.</p>
+  <p class="open"><strong>What the ledger says.</strong> {{claim:C056}}: 27 of 40 died, 4 left one
+  Orbium's worth of mass, 9 filled the world. Finding Orbium in a "primordial soup" is how Chan
+  first found it.</p>
+</div>
+
+<h2>How a step works</h2>
+<figure class="vitrine">
+  <img src="{{asset:research/gallery/exhibits/G011-anatomy-of-a-step/anatomy.gif}}" width="800" height="347" loading="lazy"
+       alt="Three panels following an Orbium: the creature itself; a blurred ring-weighted sum of its surroundings; and a red and blue map of where cells will grow or shrink.">
+  <figcaption><strong>Anatomy of one step.</strong> The state A, what each cell senses through the
+  ring-shaped kernel (U), and the growth G(U) that is added, a tenth at a time. Teaching exhibit,
+  no claim. {{src:research/gallery/exhibits/G011-anatomy-of-a-step/provenance.json|provenance}}.</figcaption>
+</figure>
+
+<h2>Growers</h2>
+<div class="pair">
+  <figure class="vitrine" style="margin:0">
+    <img src="{{asset:research/gallery/exhibits/G013-spiral/spiral.gif}}" width="480" height="515" loading="lazy"
+         alt="A chain of small cells winding outward into a widening spiral.">
+    <figcaption><strong>A spiral that draws itself.</strong> Catenohelicium monospirae in a world of
+    1024 × 1024 cells, 150 time units.
+    {{src:research/gallery/exhibits/G013-spiral/provenance.json|provenance}}.</figcaption>
+  </figure>
+  <figure class="vitrine" style="margin:0">
+    <img src="{{asset:research/gallery/exhibits/G012-growers/growers.gif}}" width="540" height="419" loading="lazy"
+         alt="Six worlds in which a single seed grows into a spiral, two labyrinths, a lattice of rings, a straight chain and a fine wavy texture.">
+    <figcaption><strong>Six catalogued growers</strong>, 100 time units each; downsampled, not one
+    pixel per cell. {{src:research/gallery/exhibits/G012-growers/provenance.json|provenance}}.</figcaption>
+  </figure>
+</div>
+<div class="caveat"><strong>Not discoveries</strong> Growth is these species' catalogued
+behaviour: Chan 2019 describes chains that lengthen and spirals that wind outward. The labyrinths
+look like reaction–diffusion patterns, which is a resemblance, not a tested mechanism.</div>
+
+<h2>Stranger worlds</h2>
+<p>Three of these five change the rule itself, which classic Lenia never does. In those worlds
+the growth centre or width varies from place to place or over time. They are labelled
+<em>modified rule</em>, and their code is checked to match the ordinary simulator bit for bit
+when the rule is held uniform.</p>
+<figure class="vitrine">
+  <img src="{{asset:research/gallery/exhibits/G014-kaleidoscope/kaleidoscope.gif}}" width="520" height="311" loading="lazy"
+       alt="Left: a perfectly symmetric noise patch grows into four mirrored colonies and then a lattice that is no longer symmetric. Right: a map of how far the world is from its mirror image, brightening from dark to yellow.">
+  <figcaption><strong>A perfectly symmetric world, broken by rounding error.</strong> The rule and the start
+  are exactly symmetric. The asymmetry starts in the sixteenth decimal place and reaches full size within 40 time units
+  {{claim:C059}}. {{src:research/gallery/exhibits/G014-kaleidoscope/provenance.json|provenance}}.</figcaption>
+</figure>
+<figure class="vitrine">
+  <img src="{{asset:research/gallery/exhibits/G015-map-of-worlds/map-of-worlds.gif}}" width="400" height="423" loading="lazy"
+       alt="A square world of noise that sorts itself into spots on the left, labyrinths in the middle, stripes on the right and an empty region at the top right.">
+  <figcaption><strong>A different rule at every point</strong> (<em>modified rule</em>). The growth centre rises from left to
+  right and the growth width from top to bottom. One world turns into a map of what noise becomes. This is a picture, not a
+  phase diagram. {{src:research/gallery/exhibits/G015-map-of-worlds/provenance.json|provenance}}.</figcaption>
+</figure>
+<div class="pair">
+  <figure class="vitrine" style="margin:0">
+    <img src="{{asset:research/gallery/exhibits/G017-rush-hour/rush-hour.gif}}" width="400" height="444" loading="lazy"
+         alt="Thirty small gliders in one world; a collision explodes into a growing colony that swallows the rest.">
+    <figcaption><strong>Rush hour.</strong> Thirty Orbia under the plain rule. One collision detonates and the colony
+    eats the rest. {{src:research/gallery/exhibits/G017-rush-hour/provenance.json|provenance}}.</figcaption>
+  </figure>
+  <figure class="vitrine" style="margin:0">
+    <img src="{{asset:research/gallery/exhibits/G018-invisible-wall/invisible-wall.gif}}" width="640" height="501" loading="lazy"
+         alt="Six worlds; a glider moves from the top half into a faintly tinted lower half; in four it vanishes at the boundary, in two it carries on.">
+    <figcaption><strong>The invisible wall</strong> (<em>modified rule</em>). Raise or lower the growth centre by 0.01 in the lower
+    half and the Orbium crosses. Change it by 0.02 or more and it dies at the boundary {{claim:C060}}.
+    {{src:research/gallery/exhibits/G018-invisible-wall/provenance.json|provenance}}.</figcaption>
+  </figure>
+</div>
+<figure class="vitrine">
+  <img src="{{asset:research/gallery/exhibits/G016-live-mutation/live-mutation.gif}}" width="600" height="348" loading="lazy"
+       alt="Two Orbia while their rule slowly changes; both keep their shape for a long time, then burst into a lattice of rings.">
+  <figcaption><strong>Changing the laws of physics under a living creature</strong> (<em>modified rule</em>). The growth
+  centre falls (left) or the growth width rises (right) over 150 time units. The Orbium follows the change until it bursts.
+  {{src:research/gallery/exhibits/G016-live-mutation/provenance.json|provenance}}.</figcaption>
+</figure>
+
+<h2>Sources</h2>
+<ul>
+  <li>{{src:research/gallery/README.md|Gallery notes for G007–G018}}</li>
+  <li>{{src:research/experiments/VIS-talk/film.py|Film script}} and
+      {{src:research/experiments/VIS-talk/SURVEY.md|catalogue survey}}</li>
+  <li>{{src:research/reports/visual-specimens-2026-11-07.md|Field-trip report}}</li>
+  <li>{{src:research/reports/reef-expedition-2026-10-20.md|Reef expedition report}}</li>
+</ul>

@@ -1,0 +1,81 @@
+{
+  "exhibit": "G008",
+  "title": "The reef: one glider meets one ring",
+  "media": [
+    "reef-world.mp4",
+    "reef-world.gif",
+    "reef-contact.mp4",
+    "reef-contact.gif",
+    "reef-world-final.png",
+    "reef-world-t60.png",
+    "reef-lattice-detail.png",
+    "mass.csv"
+  ],
+  "frames": {
+    "keep_every_steps": 3,
+    "mp4_fps": {
+      "reef-world": 30,
+      "reef-contact": 15
+    },
+    "time_compression": "reef-world 9 tu per second; reef-contact 4.5 tu per second",
+    "gif": "reef-world GIF is downsized to 400 px (Lanczos), every 3rd kept frame, 64 colours; use the MP4 on a projector"
+  },
+  "view": {
+    "reef-world": "whole 1024^2 periodic world, 1 px per cell",
+    "reef-contact": "200x200-cell window at rows 452-652, cols 428-628, 4 px per cell, 0-24 tu",
+    "reef-lattice-detail": "160x160 cells at rows 432-592, cols 232-392 at t = 130 tu, 5 px per cell"
+  },
+  "claims": [
+    "C052",
+    "C053",
+    "C054",
+    "C055"
+  ],
+  "caveats": [
+    "Same P2 encounter geometry as the expedition, but in a 1024^2 world that the expedition never ran. The checked result (C052) covers contact, fusion and ignition within 3-25 tu at N256/N512; everything after 25 tu here is alm-only and unchecked by a second arithmetic route.",
+    "Ignition timing and colony mass are NUMERICALLY_FRAGILE in T and R (C053); the film shows R13, T10 only.",
+    "Not novel as a phenomenon: Chan 2019 sec. 3.5.5 lists 'detonation' among collision outcomes.",
+    "The interior lattice is frozen, not self-replicating: no division was seen (expedition report sec. 3)."
+  ],
+  "runs": [
+    {
+      "key": "REEF-P2-N1024",
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.155,
+        "sigma": 0.02,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "grid": {
+        "shape": [
+          1024,
+          1024
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 1300,
+      "time_units": 130.0,
+      "initial_state": "REEF-field runner.build('GA', ring_shift=[64, 20], N=1024): pilot P2 geometry (head-on, b/R 0.02) from jobs-pilots.json, glider snapshot GA and S103 seeds embedded centred in a zero 1024^2 world",
+      "initial_state_sha256": "bb2946d7fce6c14705502d1a004ddea40b995a092f3a9c602b556c8c933e645b",
+      "final_state_sha256": "8c112e86b1cf0ab59179fa5ebc11df954b078c128315a7719a85c5578fdc9b6a"
+    }
+  ],
+  "simulator": {
+    "package": "alm.lenia.Lenia (unchanged)",
+    "git_commit": "ddc45ca56fc08b3cbd754483bf1bd22c9e30590a",
+    "git_dirty": false
+  },
+  "render": {
+    "colormap": "matplotlib inferno, A in [0,1] mapped linearly, nearest-neighbour",
+    "script": "research/experiments/VIS-talk/film.py"
+  },
+  "reproduce": "git checkout <this commit> && .venv/bin/python research/experiments/VIS-talk/film.py G008   # verify only: film.py verify G008"
+}

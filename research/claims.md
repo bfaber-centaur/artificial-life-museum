@@ -151,6 +151,8 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
 | Lane 6 L6-007 D2 rerun of the S102 seed resizes (PR #23 @ `413003d`, merged as `7a4ea3b`) and Lane 6's concession of C039 | C039, C047 (D2 resolved; C047 INDEPENDENTLY_CHECKED for the eight seeds) |
 | Lane 4 L4-002 lone-Orbium baselines (PR #20, merged as `560472c`) | none: a reference dataset with no claim proposed; not evidence for or against pair coupling (that is Lane 6's L6-008) |
 | REEF expedition 2026-10-20 (reef/coordinator integration PR; lanes reef/field, reef/numerics, reef/behavior) | C052 / C053 / C054 / C055; amendments to C038, C041 |
+| VIS-talk lightning-talk thread 2026-11-07 (`research/experiments/VIS-talk/`, gallery G007–G013) | C056 / C057 / C058 |
+| VIS-talk round two 2026-11-07 (gallery G014–G018) | C059 / C060 |
 
 ## Claims
 
@@ -1828,3 +1830,95 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
 - **Known caveats:** not checked with another arithmetic route over the long window; fragile timing (C053) may carry over to front speed under refinement (T20 front 0.38/0.32 vs 0.36/0.33 at N256 fits).
 - **History:**
   - 2026-10-21 — OBSERVED — REEF numerics, ledgered by the coordinator.
+
+### C056 — Under the S001 rule, 40 random 80 × 80 noise patches: 27 die, 4 leave a single Orbium-mass survivor, and 9 fill the world with a frozen lattice
+
+- **Status:** OBSERVED
+- **Owner lane:** VIS-talk thread (lightning-talk exhibits)
+- **Sources:** `research/gallery/exhibits/G010-soup/soup-scan.json`, gallery G010
+- **Specimen / version:** none (random initial states)
+- **Simulator / version:** `alm` (`alm.lenia.Lenia`), scan rendered at the commit in G010's `provenance.json`
+- **Parameters:** S001 rule (R 13, T 10, μ 0.15, σ 0.015, poly/poly, β [1]), 256² periodic, float64, Euler + clip
+- **Intervention:** none. Initial state: 80 × 80 square of i.i.d. uniform [0, 0.3) values (`numpy.random.default_rng(seed).random`), centred, seeds 0–39
+- **Metric:** at 100 tu: died if mass < 0.05 × one settled Orbium's mass; filled if fill (A > 0.1) > 0.15; otherwise k = round(mass / one Orbium's mass). Classes fixed before the 40-seed scan, after a 6-seed amplitude pilot
+- **Result:** 27 died, 4 with k = 1, 9 filled. Seed 5's survivor is visibly an Orbium-like glider (film); the other three k = 1 survivors were not inspected
+- **Run IDs:** `G010:scan:0` … `G010:scan:39` (final hashes in `soup-scan.json`); films `G010:seed0`, `G010:seed5`, `G010:seed1`
+- **Search / parameter bounds:** one recipe (side 80, amplitude 0.3), one world size, one horizon. Pilot (6 seeds each, `research/experiments/VIS-talk/pilot_soup.py`): side 26 at amplitudes 0.5 and 1.0, side 40 at 0.25, 0.3, 0.35, 0.5 and 1.0, and side 80 at 0.25 all died; side 80 at 0.35 filled 1/6. The scan's recipe (side 80, 0.3) was chosen after the pilot, whose seeds 0–5 it re-runs
+- **Reproduction command:** `.venv/bin/python research/experiments/VIS-talk/film.py G010`
+- **Known caveats:** counts are for this recipe only; "Orbium-mass" is a mass count, not an identification; the filled state resembles the reef lattice (C052) but under a different rule, and the two were not compared; not checked by a second route
+- **Prior literature:** Orbium emerging from random initial patches: Chan 2019 §2.3.1 (pdf p. 12). Not novel as a phenomenon
+- **History:**
+  - 2026-11-07 — OBSERVED — VIS-talk thread.
+
+### C057 — 509 of 526 catalogue entries (poly/exp families, T ≤ 40) persist as bounded patterns for 100 tu in ALM's simulator; 4 die and 13 fill their world
+
+- **Status:** OBSERVED
+- **Owner lane:** VIS-talk thread (catalogue survey VIS-S1)
+- **Sources:** `research/experiments/VIS-talk/survey.py`, `survey.jsonl`, `SURVEY.md`
+- **Specimen / version:** every entry of `Chakazul/Lenia@adfc542` `Python/animals.json` (sha256 pinned in `alm.specimens`) with params, `kn`/`gn` in {1, 2} and T ≤ 40
+- **Simulator / version:** `alm` (`alm.lenia.Lenia`)
+- **Parameters:** each entry's own catalogued rule; seed placed centred on a zero periodic world of side the smallest power of two ≥ max(8 R, 3 × seed size) and ≥ 128 (65 at 128², 355 at 256², 100 at 512², 6 at 1024²)
+- **Intervention:** none
+- **Metric:** at 100 tu, fixed before the first run: DIED final mass < 0.05 × initial; FILLED fill (A > 0.1) > 0.25 or mass > 4 × initial; otherwise PERSISTED, split by net periodic-centroid travel over the last 50 tu (≥ 1 R MOVER, else STAY)
+- **Result:** MOVER 261, STAY 248, FILLED 13, DIED 4. Died: `O2bi` Orbium bicaudatus ignis, `H4?` Tetrahelicium(?), `2PN+c`, `KN+c`. Filled: mostly the catalogue's own "Cateno-" growers, plus `OG2r`, `3GH2l`, `1P8o`, `3F4l?`, `~4T2v`
+- **Run IDs:** one row per catalogue index in `survey.jsonl` (with final sha256)
+- **Search / parameter bounds:** one horizon, one world size per entry, one placement
+- **Reproduction command:** `cd research/experiments/VIS-talk && ../../../.venv/bin/python survey.py run --jobs 2 && ../../../.venv/bin/python survey.py table`
+- **Known caveats:** PERSISTED means a bounded non-empty pattern at 100 tu, not the catalogued shape or behaviour; STAY includes rotators and oscillators; a death may reflect our placement or world size rather than the species (the four deaths were not investigated); kn/gn 3–4 entries and T > 40 entries were excluded
+- **History:**
+  - 2026-11-07 — OBSERVED — VIS-talk thread.
+
+### C058 — Two S001 Orbia meeting head-on or at a right angle show four of Chan's collision outcomes (scatter, annihilation, absorption, fusion into one bound body), depending on offset
+
+- **Status:** OBSERVED
+- **Owner lane:** VIS-talk thread (lightning-talk exhibits)
+- **Sources:** `research/gallery/exhibits/G009-orbium-collisions/outcomes.json`, gallery G009
+- **Specimen / version:** S001 settled 1000 steps on 128², integer-rolled to centre, 48² crop; partner = `np.rot90` of it by 180° (head-on) or 90° (right angle)
+- **Simulator / version:** `alm`
+- **Parameters:** S001 rule, 256² periodic, float64, Euler + clip; each body starts 5 R from the meeting point; head-on transverse offsets b = 0, 0.25, 0.5, 0.75, 1 R; right angle with the partner crossing A's line b = 0, 0.5, 1, −0.5 R beyond the meeting point
+- **Intervention:** none
+- **Metric:** at 120 tu, k = round(mass / one Orbium's mass); k = 2 with one connected component of A > 0.01 → "fused into one bound pair"; k = 2 otherwise → "scattered"; k = 1 → "one survives"; k = 0 → "both die". Fixed before the final runs; an earlier version of the rule, counting components at A > 0.1, split single Orbia into two and was replaced
+- **Result:** head-on b 0, 0.75, 1 R: scattered; b 0.25 R: both die; b 0.5 R: fused. Right angle b 0: fused; b 0.5, 1, −0.5 R: one survives
+- **Run IDs:** `G009:<label>` in `provenance.json` (final hashes)
+- **Search / parameter bounds:** one Orbium phase, one starting distance, nine geometries, single runs
+- **Reproduction command:** `.venv/bin/python research/experiments/VIS-talk/film.py G009`
+- **Known caveats:** collision outcomes depend on phase and exact offset, so each geometry is one sample; whether the fused bodies are S101 (C041) was not checked; on a 256² torus debris can meet again
+- **Prior literature:** Chan 2019 §3.5.5 (pdf pp. 28–29) lists deflection, reflection, absorption, annihilation, detonation, fusion and parallelism. Not novel
+- **History:**
+  - 2026-11-07 — OBSERVED — VIS-talk thread.
+
+### C059 — An exactly symmetric soup under the S001 rule loses its symmetry through float64 FFT rounding: the mirror difference grows from 2 × 10⁻¹³ at 5 tu to 1 by 40 tu
+
+- **Status:** OBSERVED
+- **Owner lane:** VIS-talk thread
+- **Sources:** gallery G014, `research/gallery/exhibits/G014-kaleidoscope/asymmetry.csv`
+- **Specimen / version:** none. `d4_soup(seed=4)` in `ex_bizarre.py`: an 80 × 80 patch of uniform [0, 0.3) noise with all 8 square symmetries, centred on 256², asserted exactly invariant under `rot90` and transpose at t = 0
+- **Simulator / version:** `alm.lenia.Lenia` (numpy pocketfft, float64)
+- **Parameters:** S001 rule, 256² periodic, Euler + clip
+- **Intervention:** none
+- **Metric:** max over cells of max(|A − rot90 A|, |A − Aᵀ|), every 2 steps
+- **Result:** 0 at t = 0; 1.8e-13 at 5 tu; 2.7e-10 at 15 tu; 2.3e-5 at 25 tu; 1 at 40 tu. The colony is growing over the same window (mass 3.0 → 54 R²)
+- **Run IDs:** `G014:d4-soup-seed4`
+- **Search / parameter bounds:** one seed filmed. Pilot of 24 D4 soups (seeds 0–11 at amplitudes 0.3, 0.35): 8 filled the world and all 8 were fully asymmetric (difference 1) by 100 tu; 16 died
+- **Reproduction command:** `.venv/bin/python research/experiments/VIS-talk/film.py G014`
+- **Known caveats:** the size and timing of the break depend on the FFT implementation and summation order; the exact growth rate was not fitted
+- **History:**
+  - 2026-11-07 — OBSERVED — VIS-talk thread.
+
+### C060 — An S001 Orbium gliding into a half-world whose μ differs by ±0.01 crosses; by ±0.02 or more (0.12, 0.13, 0.17, 0.18) it dies at the boundary
+
+- **Status:** OBSERVED
+- **Owner lane:** VIS-talk thread
+- **Sources:** gallery G018
+- **Specimen / version:** S001 settled 1000 steps, 48² crop, pasted at row 40, column 128 of 256²
+- **Simulator / version:** `FieldLenia` (`ex_bizarre.py`), bitwise equal to `alm.lenia.Lenia` at uniform parameters (checked at render)
+- **Parameters:** S001 rule except μ = X in rows 128–255 (σ unchanged); X ∈ {0.12, 0.13, 0.14, 0.16, 0.17, 0.18}; periodic, so walls at rows 128 and 0
+- **Intervention:** spatial step in μ (a modified rule, not classic Lenia)
+- **Metric:** at 120 tu, final mass > 0.5 × one Orbium → crosses; else dies
+- **Result:** crosses for 0.14 and 0.16; dies for 0.12, 0.13, 0.17, 0.18
+- **Run IDs:** `G018:mu<X>`
+- **Search / parameter bounds:** one phase, one approach angle, six values of X; a σ-wall prototype (σ 0.018, 0.021, 0.025) gave mixed results and is not filmed
+- **Reproduction command:** `.venv/bin/python research/experiments/VIS-talk/film.py G018`
+- **Known caveats:** a "cross" is a mass test, not a shape test; uniform-rule survival bounds for Orbium are a different question (the Orbium is not at μ = X before the wall)
+- **History:**
+  - 2026-11-07 — OBSERVED — VIS-talk thread.

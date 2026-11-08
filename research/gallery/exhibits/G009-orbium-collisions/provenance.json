@@ -1,0 +1,356 @@
+{
+  "exhibit": "G009",
+  "title": "Two Orbia, nine ways to meet",
+  "media": [
+    "collisions.mp4",
+    "collisions.gif",
+    "collisions-final.png",
+    "collisions-outcomes.png"
+  ],
+  "frames": {
+    "keep_every_steps": 4,
+    "mp4_fps": 25,
+    "time_compression": "10 tu per second"
+  },
+  "view": "nine whole 256^2 periodic worlds, fixed camera",
+  "orbium_heading_dy_dx": [
+    0.9282622767006858,
+    0.3719262637330943
+  ],
+  "single_orbium_mass_R2": 0.4369498391934646,
+  "outcomes_at_t_120": [
+    {
+      "label": "head-on, b = 0",
+      "kind": "head",
+      "b_R": 0.0,
+      "outcome": "both survive, scattered"
+    },
+    {
+      "label": "head-on, b = 0.25 R",
+      "kind": "head",
+      "b_R": 0.25,
+      "outcome": "both die"
+    },
+    {
+      "label": "head-on, b = 0.5 R",
+      "kind": "head",
+      "b_R": 0.5,
+      "outcome": "fused into one bound pair"
+    },
+    {
+      "label": "head-on, b = 0.75 R",
+      "kind": "head",
+      "b_R": 0.75,
+      "outcome": "both survive, scattered"
+    },
+    {
+      "label": "head-on, b = 1 R",
+      "kind": "head",
+      "b_R": 1.0,
+      "outcome": "both survive, scattered"
+    },
+    {
+      "label": "right angle, b = 0",
+      "kind": "perp",
+      "b_R": 0.0,
+      "outcome": "fused into one bound pair"
+    },
+    {
+      "label": "right angle, b = 0.5 R",
+      "kind": "perp",
+      "b_R": 0.5,
+      "outcome": "one dies, one survives"
+    },
+    {
+      "label": "right angle, b = 1 R",
+      "kind": "perp",
+      "b_R": 1.0,
+      "outcome": "one dies, one survives"
+    },
+    {
+      "label": "right angle, b = -0.5 R",
+      "kind": "perp",
+      "b_R": -0.5,
+      "outcome": "one dies, one survives"
+    }
+  ],
+  "outcome_rule": "at t = 120 tu: k = round(mass / one Orbium's mass); k 0 'both die', 1 'one dies', 2 and one connected component of A > 0.01 on the torus 'fused into one bound pair', 2 otherwise 'both survive, scattered'; 'detonation' if fill (A > 0.1) > 0.25 or mass > 6 x",
+  "caveats": [
+    "One phase of the Orbium and one starting gap (5 R) per geometry; outcomes of Lenia collisions depend on phase and exact offset, so each panel is one sample, not the outcome for that angle.",
+    "Single runs, alm only, R13 T10, 256^2 torus: after a collision, debris can wrap around and meet again.",
+    "Not novel: Chan 2019 sec. 3.5.5 catalogues Orbium collision outcomes (merging, bouncing, death, detonation). This is our simulator reproducing that kind of zoo."
+  ],
+  "runs": [
+    {
+      "key": "G009:head-on, b = 0",
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.15,
+        "sigma": 0.015,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "grid": {
+        "shape": [
+          256,
+          256
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 1200,
+      "time_units": 120.0,
+      "initial_state": "two copies of the settled S001 Orbium (S001 on 128^2 after 1000 steps, 48^2 crop), A at [67.7, 103.8] heading [0.928, 0.372], B = np.rot90(A, 2) at [188.3, 152.2], on a zero 256^2 world",
+      "initial_state_sha256": "e9cd839ab28b8708685c79d7cdb7c0908a31572abefe5de668774a537ab046df",
+      "final_state_sha256": "6be6e4305e9d83fb091a685e4692fe2b899129074168266df4738d23958560ae"
+    },
+    {
+      "key": "G009:head-on, b = 0.25 R",
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.15,
+        "sigma": 0.015,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "grid": {
+        "shape": [
+          256,
+          256
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 1200,
+      "time_units": 120.0,
+      "initial_state": "two copies of the settled S001 Orbium (S001 on 128^2 after 1000 steps, 48^2 crop), A at [67.1, 105.3] heading [0.928, 0.372], B = np.rot90(A, 2) at [188.9, 150.7], on a zero 256^2 world",
+      "initial_state_sha256": "87b41a4fd88ede3684e77537a7932ce6575732cfa43fb76735f2f89305aecead",
+      "final_state_sha256": "07854d2fef297a06ba81685e660c332de36d5d18d546927d30daad6d7fda1541"
+    },
+    {
+      "key": "G009:head-on, b = 0.5 R",
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.15,
+        "sigma": 0.015,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "grid": {
+        "shape": [
+          256,
+          256
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 1200,
+      "time_units": 120.0,
+      "initial_state": "two copies of the settled S001 Orbium (S001 on 128^2 after 1000 steps, 48^2 crop), A at [66.5, 106.8] heading [0.928, 0.372], B = np.rot90(A, 2) at [189.5, 149.2], on a zero 256^2 world",
+      "initial_state_sha256": "e1dba6039b725a42e77e32e1a7bbc1e8bb528230d0a10fba5551f1d240db976d",
+      "final_state_sha256": "d36398ec520fcfc331f5744332f164db2c46d10536838ec1f73bb706425038e3"
+    },
+    {
+      "key": "G009:head-on, b = 0.75 R",
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.15,
+        "sigma": 0.015,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "grid": {
+        "shape": [
+          256,
+          256
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 1200,
+      "time_units": 120.0,
+      "initial_state": "two copies of the settled S001 Orbium (S001 on 128^2 after 1000 steps, 48^2 crop), A at [65.8, 108.4] heading [0.928, 0.372], B = np.rot90(A, 2) at [190.2, 147.6], on a zero 256^2 world",
+      "initial_state_sha256": "d0527326fa81e69176c7e24ef94fbdad9f7fda8e4ca4bc819a3bdce846ff01d3",
+      "final_state_sha256": "a90ce2d354219ae96fb000e57b1ac3da85012a3d60fa6ce7a6edb1c65dd63e78"
+    },
+    {
+      "key": "G009:head-on, b = 1 R",
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.15,
+        "sigma": 0.015,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "grid": {
+        "shape": [
+          256,
+          256
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 1200,
+      "time_units": 120.0,
+      "initial_state": "two copies of the settled S001 Orbium (S001 on 128^2 after 1000 steps, 48^2 crop), A at [65.2, 109.9] heading [0.928, 0.372], B = np.rot90(A, 2) at [190.8, 146.1], on a zero 256^2 world",
+      "initial_state_sha256": "348be1c7beb78d835c4ce40a8e2d6f3aef75f2ed36f71f21181d835454ff887c",
+      "final_state_sha256": "ea2be6f78487dd2259520a0d0f656adaeb21a295be88a5ffb5e8520e955f83e1"
+    },
+    {
+      "key": "G009:right angle, b = 0",
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.15,
+        "sigma": 0.015,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "grid": {
+        "shape": [
+          256,
+          256
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 1200,
+      "time_units": 120.0,
+      "initial_state": "two copies of the settled S001 Orbium (S001 on 128^2 after 1000 steps, 48^2 crop), A at [67.7, 103.8] heading [0.928, 0.372], B = np.rot90(A, 1) at [152.2, 67.7], on a zero 256^2 world",
+      "initial_state_sha256": "cbf8f3bc3ce3175dfac9344fbf9ae3c9054aa5346a768dbf73838c076e4075d3",
+      "final_state_sha256": "0208b590cd6a1177f04a44dbb39ca617ee52275fc4efbeae5bc8d39225e64e50"
+    },
+    {
+      "key": "G009:right angle, b = 0.5 R",
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.15,
+        "sigma": 0.015,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "grid": {
+        "shape": [
+          256,
+          256
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 1200,
+      "time_units": 120.0,
+      "initial_state": "two copies of the settled S001 Orbium (S001 on 128^2 after 1000 steps, 48^2 crop), A at [67.7, 103.8] heading [0.928, 0.372], B = np.rot90(A, 1) at [158.2, 70.1], on a zero 256^2 world",
+      "initial_state_sha256": "c837838a1851b85e53569de9ca7773e52152cb75627d55a951752ef83af4f384",
+      "final_state_sha256": "e2bf1ddfad7b755da26ea5ba18b94217173a18530c6b72b74b34bfbe91e86930"
+    },
+    {
+      "key": "G009:right angle, b = 1 R",
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.15,
+        "sigma": 0.015,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "grid": {
+        "shape": [
+          256,
+          256
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 1200,
+      "time_units": 120.0,
+      "initial_state": "two copies of the settled S001 Orbium (S001 on 128^2 after 1000 steps, 48^2 crop), A at [67.7, 103.8] heading [0.928, 0.372], B = np.rot90(A, 1) at [164.2, 72.5], on a zero 256^2 world",
+      "initial_state_sha256": "7954cd50091ce0cd06619bcaf435f335c176c7b774e88fb482156946081d8fa5",
+      "final_state_sha256": "5006f6adceed0544cca8e3ca89e67664186d4efece4e56cf1c86a71375ea497f"
+    },
+    {
+      "key": "G009:right angle, b = -0.5 R",
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.15,
+        "sigma": 0.015,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "grid": {
+        "shape": [
+          256,
+          256
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 1200,
+      "time_units": 120.0,
+      "initial_state": "two copies of the settled S001 Orbium (S001 on 128^2 after 1000 steps, 48^2 crop), A at [67.7, 103.8] heading [0.928, 0.372], B = np.rot90(A, 1) at [146.1, 65.2], on a zero 256^2 world",
+      "initial_state_sha256": "42837105ab00be4f1e9af9019d91e2cc85e27acaa23b243791b15c287a1c54f1",
+      "final_state_sha256": "4c273c05de7f658b4cfb04467b8d7358a3fe76ca71e6471192106bf40df9ac5b"
+    }
+  ],
+  "simulator": {
+    "package": "alm.lenia.Lenia (unchanged)",
+    "git_commit": "ddc45ca56fc08b3cbd754483bf1bd22c9e30590a",
+    "git_dirty": false
+  },
+  "render": {
+    "colormap": "matplotlib inferno, A in [0,1] mapped linearly, nearest-neighbour",
+    "script": "research/experiments/VIS-talk/film.py"
+  },
+  "reproduce": "git checkout <this commit> && .venv/bin/python research/experiments/VIS-talk/film.py G009   # verify only: film.py verify G009"
+}

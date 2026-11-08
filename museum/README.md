@@ -26,6 +26,7 @@ Opening `museum/site/index.html` straight from disk works too. Pages load images
 | `how-we-know.html` | 5 · How we know | charter, ledger, hostile review, gallery and figure rules |
 | `under-review.html` | 6 · Still being argued (provisional) | S102 lifetimes and S101 coupling: L6-007, L6-008, L3-003 and HR-009 on main, not yet ledgered; G002, G004, C038, C041, C047 |
 | `reef.html` | 7 · When the glider meets the ring (provisional) | REEF expedition 2026-10-21: report, REEF-behavior exhibit panels A–F, C038, C052–C055 |
+| `field-trip.html` | 8 · Field trip: what Lenia can look like | gallery G007–G018 (VIS-talk, 2026-11-07), C052, C053, C056–C060 |
 | `collection.html` | Reference: the four specimens | dossiers, gallery runs |
 | `claims.html` | Reference: every claim on display | generated from the ledger |
 

@@ -1,0 +1,95 @@
+{
+  "exhibit": "G016",
+  "title": "Changing the laws of physics under a living creature",
+  "media": [
+    "live-mutation.mp4",
+    "live-mutation.gif",
+    "live-mutation-final.png",
+    "mass-mu.csv",
+    "mass-sigma.csv"
+  ],
+  "frames": {
+    "keep_every_steps": 3,
+    "mp4_fps": 25,
+    "time_compression": "7.5 tu per second"
+  },
+  "view": "whole 256^2 worlds, 2 px per cell",
+  "equivalence": "FieldLenia (ex_bizarre.py) repeats alm.lenia.Lenia's step with mu, sigma as arrays or functions of the step; with uniform S001 parameters it equals Lenia bitwise over 200 steps (checked at render: True)",
+  "caveats": [
+    "The rule changes during the run; the creature is never at equilibrium with it, so its shape at a given mu or sigma is not the shape a creature would settle to at that fixed rule.",
+    "One ramp rate each. In a prototype, the mu ramp kept a single Orbium until mu ~ 0.114, then gave a two-lobed body and a world-filling lattice; the sigma ramp kept it until sigma ~ 0.022, then filled.",
+    "Gradual parameter change as a way to morph Lenia creatures is Chan's own method (2019 sec. 2.3.2)."
+  ],
+  "runs": [
+    {
+      "key": "G016:mu-ramp",
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.15,
+        "sigma": 0.015,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "grid": {
+        "shape": [
+          256,
+          256
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 1500,
+      "time_units": 150.0,
+      "initial_state": "settled S001 Orbium (48^2 crop) pasted centred on zero 256^2",
+      "initial_state_sha256": "f2ba24c726192fb836aa1aa05fa0956e9af394246d79de1d4d9284e6c8506884",
+      "final_state_sha256": "157c3280616b4db620750bc98949f7c03612550d95580707cc5d609d56dd3a88",
+      "rule_note": "S001 rule with mu ramped linearly from 0.15 at step 0 to 0.11 at step 1500; the step uses the value at its own step index"
+    },
+    {
+      "key": "G016:sigma-ramp",
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.15,
+        "sigma": 0.015,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "grid": {
+        "shape": [
+          256,
+          256
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 1500,
+      "time_units": 150.0,
+      "initial_state": "settled S001 Orbium (48^2 crop) pasted centred on zero 256^2",
+      "initial_state_sha256": "f2ba24c726192fb836aa1aa05fa0956e9af394246d79de1d4d9284e6c8506884",
+      "final_state_sha256": "304e9a194a6515d65b8f093fdf69a66c5d171e534b00ea683b7b76be0b57c094",
+      "rule_note": "S001 rule with sigma ramped linearly from 0.015 at step 0 to 0.035 at step 1500; the step uses the value at its own step index"
+    }
+  ],
+  "simulator": {
+    "package": "alm.lenia.Lenia (unchanged)",
+    "git_commit": "31908e536edd279e919fe7d9fdadbaa005ba8c22",
+    "git_dirty": false
+  },
+  "render": {
+    "colormap": "matplotlib inferno, A in [0,1] mapped linearly, nearest-neighbour",
+    "script": "research/experiments/VIS-talk/film.py"
+  },
+  "reproduce": "git checkout <this commit> && .venv/bin/python research/experiments/VIS-talk/film.py G016   # verify only: film.py verify G016"
+}
