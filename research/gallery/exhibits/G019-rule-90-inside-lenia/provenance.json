@@ -1,0 +1,2856 @@
+{
+  "exhibit": "G019",
+  "title": "Rule 90 inside Lenia",
+  "media": [
+    "rule90-grows.mp4",
+    "rule90-grows.gif",
+    "melt-sweep.mp4",
+    "melt-sweep.gif",
+    "rule90-lenia.png",
+    "melt-grid.png"
+  ],
+  "rule90_check": {
+    "reference": "integer XOR of left and right neighbours on the same ring",
+    "max_abs_difference": 7.454695605702e-06,
+    "identical_after_threshold_0.5": true,
+    "steps": 511
+  },
+  "why_it_works": "R = 2 poly kernel core is zero at r = 0 and r = 1, so on a 1-D ring it puts weight 1/2 on each nearest neighbour and none on the cell. U is 0, 1/2 or 1. With T = 1, A <- clip(A + G(U)) gives 1 when G(U) ~ +1 (U = 1/2, one neighbour on) and 0 when G(U) ~ -1 -- exactly Rule 90. exp growth leaves residues of order 2e^(-12.5) ~ 7e-6.",
+  "view": "space-time diagrams: x = cell, y = step (downward); inferno, nearest-neighbour",
+  "caveats": [
+    "Classic Lenia's radially symmetric kernel cannot express left-right asymmetric rules such as Rule 30 or Rule 110 exactly; see claim C061 for the set that the discrete limit reaches.",
+    "T = 1 (dt = 1) is far outside the usual Lenia regime (T = 10 for Orbium); this is the discrete limit Chan 2019 sec. 2.1.6 uses to embed Game of Life."
+  ],
+  "runs": [
+    {
+      "key": "G019:rule90",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.1,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          1024
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 511,
+      "time_units": 511.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 1024 ring",
+      "initial_state_sha256": "aca015aa9f8f8fef9b55bb17a2f533c84756189190afa867ba17d43b9f31184a",
+      "final_state_sha256": "4c388c5656b7e290a4d6e0049e6f9602ccfd87cdea27ab474638c7b96d640bf5",
+      "rule_note": "one-row world: R = 2 poly kernel = weight 1/2 at offsets +-1, 0 at the cell itself"
+    },
+    {
+      "key": "G019:melt:T1:s0.1",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.1,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "497d71a17fe679ef1b7240cabc7729d357733219cd9ca912d90472433e9ff453",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:melt:T1:s0.17",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.17,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "2b6579cd06a913ae62a272cc0fbb7947a850d0d1c895f83ecd83fea7dae28b32",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:melt:T1:s0.2",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.2,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "c066c96c65728ced97b1573d826b2d0bc2fc36fe4c1bc5388ff1b0060f0964c0",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:melt:T1:s0.3",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.3,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "c7ad245166385bdb99c106da2021c9c755bbb647d3f40074791508b53b387680",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:melt:T2:s0.1",
+      "rule": {
+        "R": 2,
+        "T": 2,
+        "mu": 0.5,
+        "sigma": 0.1,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 0.5
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 127.5,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:melt:T2:s0.17",
+      "rule": {
+        "R": 2,
+        "T": 2,
+        "mu": 0.5,
+        "sigma": 0.17,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 0.5
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 127.5,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "91cff482d05632a6bb027080a0973601a6dacd6c6b809f8cadd7e1ac9dd8e309",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:melt:T2:s0.2",
+      "rule": {
+        "R": 2,
+        "T": 2,
+        "mu": 0.5,
+        "sigma": 0.2,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 0.5
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 127.5,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "2e8aa3a7059f764b6347b786160583b43c84e088fab90d8a8353e206901d7a2e",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:melt:T2:s0.3",
+      "rule": {
+        "R": 2,
+        "T": 2,
+        "mu": 0.5,
+        "sigma": 0.3,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 0.5
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 127.5,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "9d55d22e32013aefc95c55a601e7cca0b2947ecafea6d18290266a978bd8ad50",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:melt:T4:s0.1",
+      "rule": {
+        "R": 2,
+        "T": 4,
+        "mu": 0.5,
+        "sigma": 0.1,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 0.25
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 63.75,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:melt:T4:s0.17",
+      "rule": {
+        "R": 2,
+        "T": 4,
+        "mu": 0.5,
+        "sigma": 0.17,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 0.25
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 63.75,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "5de9db509534ba1f227904b73cdf2a1bd48e8b5a49a8cd8ad478220ef489c70b",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:melt:T4:s0.2",
+      "rule": {
+        "R": 2,
+        "T": 4,
+        "mu": 0.5,
+        "sigma": 0.2,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 0.25
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 63.75,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "86e49bfe9a806920077f47f54b6a56fa4f415aef64e6b9600bdd6cf465ef1947",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:melt:T4:s0.3",
+      "rule": {
+        "R": 2,
+        "T": 4,
+        "mu": 0.5,
+        "sigma": 0.3,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 0.25
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 63.75,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "ea9bff378feaac5e886c1335430c92c8f01def17cd852ba1d8cde2c2d4e9dd9a",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.1",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.1,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "497d71a17fe679ef1b7240cabc7729d357733219cd9ca912d90472433e9ff453",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.1025",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.1025,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "64cb32d8e5b6e7c9fd92ba2e428af4f3180e8f77794216f1ae2af569c281e443",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.105",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.105,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "cb2be438c42ca77e9ae07ad59dc00af88139d71578b98ef07991da466ab49404",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.1075",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.1075,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "6362bd0a824cc31ffee31d4cdb3a14e5c6e423701a96408e748f67b21f0491e4",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.11",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.11,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "e6e1afe32386a8a17154c61954feb2c1b431530fc42fd44ee77c7f24dc9418a5",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.1125",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.1125,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "7c9989b5b98b24090c76609ab5be4c3a8acc4548d2bd8567c8e82fb8d51476eb",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.115",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.115,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "4bba6fac7f10e4ba1fc1c37370151e4ac8b8e19e9f5513e7763a68cd3a06c83f",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.1175",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.1175,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "d4644b6f4422b0c779f15b23840743cd2df9e83fd8709a3689d4acaebfd833b8",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.12",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.12,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "b987401ff8e598805cb7fd4a0edca619dde65cfd1217372e49ad1203c79a67cc",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.1225",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.1225,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "b86871b381496ead2c7a1e188070956727df6a4ce0e3c74778d7ded156c67ca0",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.125",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.125,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "567b7cc80c0f055f507302214df2662bcf5a1dccebce65d69c86cb79059b7d19",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.1275",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.1275,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "792e8c2cbdeff6da33678c6551c9f90f33fbe339b80d3a9c8fdd29de2ad73688",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.13",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.13,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "ca8eafb5f9f61bc473a88fd95427b04733c6320907e0673418cb4ba0c9bd5d4f",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.1325",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.1325,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "b2530b09bbafb1aba1684ac5a92aa6c9a96e9abf9be920a97f1497104c6ee1dc",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.135",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.135,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "ad4eb02078f11a37316049a4a98ef3f4ef8df32f4e7730f2a731152be49dc3a9",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.1375",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.1375,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "edc4c7c77b50996edcf40ab6b3f841853109af9d6bf2a7b6687bd257a9fed8f0",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.14",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.14,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "86ce9bdd47ee9ccfce4a0b36445ffbdd89d91e0f9f88b23563a9a83005a9f286",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.1425",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.1425,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "d5d2e0372c184a5c009ff12cf2debfb08614699e33667c5d27a25cbc0a6e6cc8",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.145",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.145,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "adbc74fcaaaf5c3c876b01c660419512ba65767bf3365d382e95311ed8442730",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.1475",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.1475,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "de6faae1764d1ddd39294c11b42d0e7660ba2f29f283d0d1dc6b5f2d4a11db08",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.15",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.15,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "cbf89bf02eea2fef064f126c20ca735616783693e34e1570cdbb9f6f54dcab10",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.1525",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.1525,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "f5c2166bcf3982a32e1b3c7ce97a4c8fad3870fe00f8f268bf96496325dafb52",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.155",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.155,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "7bf52aa3adc44254194e0091c6f0414fc86d4129e77ed44bb83f9be7c07e168d",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.1575",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.1575,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "7d47536e2b9dff1f28c3ddc906e7d3efbcb6c8c644b48da21b53a3175c9fb66f",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.16",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.16,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "d7c631f7038234a646b39c9768257b92f24e5ae3878def53bc547e18fd65e622",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.1625",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.1625,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "0a4ef0700b64e12a84a1672cbce3e42d556df2f1c19bcccd1ddec1c7c3063e5b",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.165",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.165,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "92a6ccd06df95468a87d39df1294fef476daa8f53a273ed700f9bbacafc8dacc",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.1675",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.1675,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "6b037cf750b15506096328b39cca8b49b228776b24ab0f2f27e4a3e6168f3596",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.17",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.17,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "2b6579cd06a913ae62a272cc0fbb7947a850d0d1c895f83ecd83fea7dae28b32",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.1725",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.1725,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "b703ea2bc75c86622d6b68dcee1bc1e37cd00ca81f3f9606eabdd29db4aa2684",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.175",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.175,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "25fb5bba726cd72c90874331774433bdb95f04cd7775a3c6218cf4700a15278e",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.1775",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.1775,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "4aa0f190a3ab816fffe2e5d1aa98ec53bea0adeb2dea4735758a5f9d8b37411b",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.18",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.18,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "a320165e1179a11f8f5fb7b9b48feb96f0382e1bb4d096382b95d80cd5063118",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.1825",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.1825,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "6ec436e42bbeb75d5e309c26e270432c2f781610d38692b36e7d2997c0dd486d",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.185",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.185,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "e1fbe93a9a8f76b376589febe6c5f700fc765acae18a967bec0aa5735c83e327",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.1875",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.1875,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "54ff1ae574d3575918ea5bcb867b8dc15db5ea800e2c1e5e54b8fa298d5ffe85",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.19",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.19,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "36e6618aad4fc7a30b74c89c621702fb6c931945c5fbe850288b3195efec1ca5",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.1925",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.1925,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "e9cf91392f8b6af0d857fba2f795688c56cffd1bc9431f0d176865ff95d2fe4e",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.195",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.195,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "a32f7a06b4bf280f24be907a07b34268a366780c29e5aeed75bc68e8bc4bfd95",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.1975",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.1975,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "335ccdd9de5f836647d08e0bcdec2e97cb714d6af47b4ce47a9e3239ffd3e718",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.2",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.2,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "c066c96c65728ced97b1573d826b2d0bc2fc36fe4c1bc5388ff1b0060f0964c0",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.2025",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.2025,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "b58fa429436d41d1188878dd117d0128a90e6a3bc215aaf3436b59a8fe8b0dc9",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.205",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.205,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "a460a7bb80d679b540b15d2a8eed5e32a4194aad5013ce6adc6e5d679b3c30b0",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.2075",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.2075,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "3d667ee5d31926ce5cb83ee0ea135e05f0280e6a4805a8c34224f7d6e8957eed",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.21",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.21,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "fadad1b022eab9d8f33da3cc51b5a9c3256916c6233af2a00a5c22f78d41d239",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.2125",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.2125,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "ddb69e3e7e910c5b1492ae92858ce6aedbdf4ecaf9d0ff3168a071368289ff67",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.215",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.215,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "db3c1b661167aab8694990e0dea0568708be14cdffad81b1b74d44a0a4266cfb",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.2175",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.2175,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "91133a5a0f414e4be143659486b48a5cfb5da5a8190d801e66b8be28f17843e3",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.22",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.22,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "1f01bf22c37fa4f46bdaee63e3de8ab52727ed6c3ea04fcdd169a5db7a04de40",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.2225",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.2225,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "f596efddb9c113e6ecbf12199be131415fde4a4cc31504c55de4de88448e0055",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.225",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.225,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "78c8224b5ad79945ecae940e5aeb8d1a34ca0538cc128fe3c776b74bffecc4d1",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.2275",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.2275,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "b9208187b50bd75928f45ee271872e8a1c8d2e1d4bb9b80ef76ca5bed36343e8",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.23",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.23,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "c3e1b46432d57999240f18e4c498b9d4cfcea41670c9fbe790e81c515790a11d",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.2325",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.2325,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "d3dfd374b2f1852c7573657ba4e8ce41ac4f3e842e6e2e3de9863704b58e3319",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.235",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.235,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "ce45ae19d01e040c52879c40e4dee0edba2ce8ba2690b06883ff97e61ea2590d",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.2375",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.2375,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "48e3b7bed08093698abdcea8a62ab25d79412e9f77b5cac91281d348a1c29f33",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.24",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.24,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "fb677f728c5f3bc74d85d1aaab9e2c31aab6a4e68b7b1bef85d6736eeb6c5c46",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.2425",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.2425,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "0c062c74678ea31f4b65fcbac1b7556f78e9358a2e1be24cc181f2a915036518",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.245",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.245,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "32d81b11ec53e22104de7ff8e820eab7b0b327175b2693647571a915c21975cc",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.2475",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.2475,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "6b6ff6e02c242ac556dfa8e68648f9e7a63da9207b52e1cac7ed0d4ec94974b2",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.25",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.25,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "7ced440bbd7f8c28c4672f7d979e1678ba1e5021f51d5ad903047745750cbb8e",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.2525",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.2525,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "f674a9ab022a201611cf6e65b305c490368709daed94f6f6cf7044370c0abd31",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.255",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.255,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "34bef2733dd9ee396a27258c1b3aac47cfcd72aab8331c3a29403958feb7d77e",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.2575",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.2575,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "dc1bf7ca4c874cc2e857648e31e09a0b17230a07430614443561d0097de69525",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.26",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.26,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "3196239819c91a40765e091b3b244b40b35e8b93ae9b291d23c83294aec8c046",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.2625",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.2625,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "caf3bb37ba1f37d9f3dab3c5c5671af944e75e357219f75655b05d44612c20da",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.265",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.265,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "358eab89113fc164c5d2a37697c7ba86a52df64c5a2ff3c26e1a4d893f9eb129",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.2675",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.2675,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "0927aeb67527ed58606069dbc354d5d82334cebf3c806e4e9eb231066a90fb09",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.27",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.27,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "898d4e13548768087dee85a358b59078320e67080f63a1e5482dd436b3aad538",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.2725",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.2725,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "2a91878fff9c2f53108677fa359dc4f4ae7430b03a1835a0d70f85b819e24b36",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.275",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.275,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "956af3e8334bf13ce4d7fef00fec6224bab1b5c1484733da6834d942061ec4f2",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.2775",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.2775,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "4fe2e3cd7cd92e8e368721fefa46a33a543faa60dd382e655ec2a5b1b23d99f7",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.28",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.28,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "e2f4ec1174b7c8815952a692696221d1c12a44a6a2e915d210a98ab14ef372d4",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.2825",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.2825,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "88238908c6aeecdc9a240b6167cd01f3c941738fb0f77f5da9fecc9265e9f3b0",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.285",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.285,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "bf904136810004b31d0ef47948bcdb8fcaf771014dad7ee74d4c4bd65d65d2a4",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.2875",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.2875,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "fc913560597d4856f10b4bae462e1b6c36741e1718b1d01cb959c3a4d0764434",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.29",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.29,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "87c2c74703c947328bb27eeaf9a8367f8afdcf2c325ea523fe657ede744f795e",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.2925",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.2925,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "0e8f35f74d5ac5d433ddd18d5e71f1379e106592103ab3d69e2f6512e594584c",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.295",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.295,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "b1e95b3e2a5d657bd1f582225ce979f98d8375cb112d17cfffe16180e2a09146",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.2975",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.2975,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "e30061fa53d39723ffa57daa561766525092180515e9ce7975c7ce967600a86d",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    },
+    {
+      "key": "G019:sweep:T1:s0.3",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.5,
+        "sigma": 0.3,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          1,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 1 x 512 ring",
+      "initial_state_sha256": "62aae717d16d4bee0f60e47781791170d853b11a9ada4370c8e74179c974dbb2",
+      "final_state_sha256": "c7ad245166385bdb99c106da2021c9c755bbb647d3f40074791508b53b387680",
+      "rule_note": "one-row world: the 2-D kernel on a 1 x N torus reduces to a 1-D kernel (R = 2 poly core: weight 1/2 at offsets +-1, 0 elsewhere, including the cell itself)"
+    }
+  ],
+  "simulator": {
+    "package": "alm.lenia.Lenia (unchanged)",
+    "git_commit": "9f13a5660b501176a966cf902b37041998febbe0",
+    "git_dirty": false
+  },
+  "render": {
+    "colormap": "matplotlib inferno, A in [0,1] mapped linearly, nearest-neighbour",
+    "script": "research/experiments/VIS-talk/film.py"
+  },
+  "reproduce": "git checkout <this commit> && .venv/bin/python research/experiments/VIS-talk/film.py G019   # verify only: film.py verify G019"
+}
