@@ -69,3 +69,19 @@ mu 0.15, sigma 0.016 (the paper's exp/exp Orbium sigma). Strips: `strip-*.png`. 
 
 Reading: changing only the growth curve gives nearly the same species as the parent family. The kernel shape matters more.
 Next: R5 = exp/exp **multi-ring** kernels, which the catalogue covers with a single entry.
+
+## Phase 3 (2026-11-10): R5, exp/exp multi-ring kernels
+
+60 rules × 8 seeds (R18, sigma = mu × 0.07–0.13): 13 BODY worlds (2.7 %) in 8 rules. Sheet: `sheet-R5.png`. 600 tu continuation
+of six of them: `film-R5.png` (`filmstrip.py`). All six persist through 600 tu.
+
+- **Shapeshifting stars** (k27: mu 0.1803, sigma 0.0204, b=[1, 1/6, 11/12]; k55: mu 0.1722, sigma 0.0158, b=[1, 1/6, 2/3]): five- and
+  six-pointed bodies that morph and wander (corr 0.5–0.7 per 20 tu, about 1 R per 20 tu of drift). These are the most striking forms of the hunt.
+  They are clearly **Asterium-like**. The nearest catalogue rules are 3R5m *Asterium metamorpha* and 3R5l *Asterium limus* (`star-vs-asterium.png`).
+  Moved into poly/poly at the same mu and b, the state survives only at sigma 0.019 and fills the world at 0.0204–0.023.
+- Others: a ring glider (k4, b=[1, 2/3, 2/3]), a gear oscillator (k11), and a saturated three-dot oscillator (k20). Each is close to a catalogue
+  body plan (Pterifera/Circium, Folium, Lapillium).
+
+Reading so far: every distinct body found in phases 1–3 maps to a catalogue genus (Orbium, Pterifera, Asterium, Circium/Folium).
+The same body plans reappear when the kernel family changes. Within classic single-channel Lenia, Chan's catalogue is dense
+at the genus level.
