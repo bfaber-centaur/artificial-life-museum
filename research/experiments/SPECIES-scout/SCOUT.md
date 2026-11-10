@@ -50,3 +50,22 @@ Contact sheets: `sheet-R1.png`, `sheet-R2.png`, `sheet-R4.png`.
    came almost entirely from Orbium seeds. Drift mu/sigma (and the kernel/growth mix) in small steps from a live body and
    record each change of form. This is how Chan's catalogue was built.
 3. Narrow sigma to about mu × 0.07–0.13 for multi-ring kernels, to avoid saturated blobs.
+
+## Phase 2 (2026-11-10): parameter walks in the mixed families
+
+`walk.py run`: 4 starting bodies × 8 directions in (log mu, log sigma), 2 % per stage, 60 tu of settling per stage, N256.
+Starts: the crescent (poly/exp at sigma 0.0406, exp/poly at 0.0395) and S001 Orbium moved to poly/exp and exp/poly at
+mu 0.15, sigma 0.016 (the paper's exp/exp Orbium sigma). Strips: `strip-*.png`. Close-ups: `zoom.png`.
+
+- **Novelty check on the crescent** (`crescent-vs-catalogue.png`): the same state also glides under exp/poly (sigma 0.0383–0.0406),
+  under exp/exp (0.0406), and under plain poly/poly at sigma 0.043. So it is **not specific to the mixed family**. Its nearest
+  catalogue rules are hollow Pterifera chains (P5cf, P4cf, P4sus), which are larger, multi-segment bodies. Whether the crescent is a known
+  one-segment member is not settled.
+- **The crescent's niche is tiny**: in 6 of 8 directions it dies within 1–3 steps of 2 %. Raising mu and sigma together turns it into a clip-saturated
+  static disc, which persists over a 40 % range.
+- **Orbium is nearly unchanged by the growth curve**. In both mixed families it keeps the Orbium shape across a niche of about ±15–25 % in mu
+  and sigma. At low sigma it deforms into twin-bar and tilted-bar variants, and at the low-mu edge it breaks up into a field of
+  saturated rings. No new form was found.
+
+Reading: changing only the growth curve gives nearly the same species as the parent family. The kernel shape matters more.
+Next: R5 = exp/exp **multi-ring** kernels, which the catalogue covers with a single entry.

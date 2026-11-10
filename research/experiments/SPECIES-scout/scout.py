@@ -17,6 +17,7 @@ Regions:
   R1  poly/poly single ring, R13 T10, mu-sigma band around the Orbium niche;
       seeds = random soups and mutated S001 Orbia
   R2  poly/poly multi-ring kernels (2 or 3 shells), R18 T10, random shell heights
+  R5  exp/exp multi-ring kernels (2-3 shells), R18 T10, sigma = mu x 0.07-0.13 (added after R2)
   R4  exp kernel families (exp/exp and mixed exp/poly), single and double ring, R13 T10;
       the pinned catalogue has only 5 exp-kernel entries
 (R3, reef / fractal debris, is not simulated here: see SCOUT.md.)
@@ -67,6 +68,13 @@ def sample_rule(region: str, rng: np.random.Generator) -> Rule:
         mu = rng.uniform(0.10, 0.40)
         sigma = mu * rng.uniform(0.07, 0.20)
         return Rule(R=13, T=10, mu=round(mu, 4), sigma=round(sigma, 4), beta=beta, kernel=kn, growth=gn)
+    if region == "R5":  # exp/exp multi-ring, tighter sigma band (lesson from R2)
+        nb = int(rng.integers(2, 4))
+        beta = [1.0] + [float(rng.choice(SHELLS[1:-1])) for _ in range(nb - 1)]
+        rng.shuffle(beta)
+        mu = rng.uniform(0.10, 0.40)
+        sigma = mu * rng.uniform(0.07, 0.13)
+        return Rule(R=18, T=10, mu=round(mu, 4), sigma=round(sigma, 4), beta=tuple(beta), kernel="exp", growth="exp")
     raise ValueError(region)
 
 
