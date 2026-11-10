@@ -33,6 +33,7 @@ made of, ten times per unit of time. Some of them travel; one of them never chan
 | [G016](#g016--changing-the-laws-of-physics-under-a-living-creature) | Changing the laws of physics under a living creature (animated; *modified rule*) | S001 Orbium, μ or σ ramped in time | 2026-11-07 |
 | [G017](#g017--rush-hour) | Rush hour (animated) | 30 × S001 Orbium | 2026-11-07 |
 | [G018](#g018--the-invisible-wall) | The invisible wall (animated; *modified rule*) | S001 Orbium, μ step in space | 2026-11-07 |
+| [G021](#g021--same-body-plan-different-physics) | Same body plan, different physics (animated) | Orbium, crescent, star + 3 catalogue cousins | 2026-11-10 |
 
 ### G001 — Four ways to move
 
@@ -425,7 +426,24 @@ Video: [`invisible-wall.mp4`](exhibits/G018-invisible-wall/invisible-wall.mp4) �
   arrives. Each lane uses one phase and one approach angle. A "cross" means a body with Orbium's
   mass persisted, not that its shape is unchanged.
 
-## Field note, 7 October 2026
+## Species hunt (G021)
+
+### G021 — Same body plan, different physics
+
+![Six tiles. Top row: an Orbium, a crescent glider and a shapeshifting star found under the exponential kernel or growth curve. Bottom row: their catalogued cousins under the polynomial rule: Orbium, a hollow two-segment glider, and Asterium metamorpha](exhibits/G021-convergence/convergence.gif)
+
+Video: [`convergence.mp4`](exhibits/G021-convergence/convergence.mp4) ·
+[`convergence-still.png`](exhibits/G021-convergence/convergence-still.png) ·
+[`provenance.json`](exhibits/G021-convergence/provenance.json)
+
+- **Observation (claim C063).** The species hunt (`research/experiments/SPECIES-scout/SCOUT.md`) looked in
+  kernel/growth families that the catalogue barely uses. Everything it found already had a catalogued body plan.
+  Moved into all four poly/exp kernel × growth combinations, the four test bodies keep their motion class.
+  Top: ours. Bottom: the nearest catalogue entry under its own poly/poly rule.
+- **Caveats.** Nothing here is a new species. The crescent is a single hollow segment, and its cousin P4cf has two.
+  The star runs at R 18 and Asterium at R 27, so their fine texture differs. Each top-row body is one seeded soup.
+
+
 
 > *What I saw.* Four animals, four temperaments. The Orbium set off at once along a line it never
 > left, steady as a commuter. The pair travelled the same way, shoulder to shoulder, slightly
@@ -565,6 +583,7 @@ heading values come from `galintervene.chord_heading("S102", 3002)`. The G004 S0
 
 ## Cycle log
 
+- **2026-11-10, G021 (species-hunt thread).** Convergence exhibit from the SPECIES-scout hunt, claim C063.
 - **2026-11-07, G014–G018 (lightning-talk thread, round two).** Five "stranger worlds". G015,
   G016 and G018 use a spatially or temporally varying rule (`FieldLenia`, checked bitwise against
   `Lenia` at uniform parameters) and are labelled *modified rule*.
