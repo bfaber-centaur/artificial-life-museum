@@ -1,0 +1,87 @@
+{
+  "exhibit": "G024",
+  "title": "A pinwheel made of particles",
+  "media": [
+    "pinwheel.mp4",
+    "pinwheel.gif",
+    "pinwheel-final.png"
+  ],
+  "frames": {
+    "every_steps": 50,
+    "dt": 0.1,
+    "mp4_fps": 25
+  },
+  "view": "particles as discs, each tile centred on its own particle centroid, half-width 13 units",
+  "claim": "C067",
+  "caveats": [
+    "Rotating bodies at these parameters are shown in Mordvintsev et al. 2022; ours is an independent numpy re-implementation."
+  ],
+  "runs": [
+    {
+      "key": "G024:control",
+      "rule": {
+        "model": "Particle Lenia",
+        "mu_k": 4.0,
+        "sigma_k": 1.0,
+        "w_k": 0.022,
+        "mu_g": 0.6,
+        "sigma_g": 0.15,
+        "c_rep": 1.0,
+        "dt": 0.1
+      },
+      "particles": 200,
+      "steps": 20000,
+      "intervention": null,
+      "initial_state": "200 particles uniform in [-6, 6]^2 from default_rng([19, 0])",
+      "initial_state_sha256": "9dca8c7fb01e1d7d8f5b78e70408583fd7e16307f8924c42d13aae5eea765e52",
+      "final_state_sha256": "7561601f4d547055660f2fe8ae4833dd565ff7c9b74fd268745bcbe541d6e5df"
+    },
+    {
+      "key": "G024:mirror",
+      "rule": {
+        "model": "Particle Lenia",
+        "mu_k": 4.0,
+        "sigma_k": 1.0,
+        "w_k": 0.022,
+        "mu_g": 0.6,
+        "sigma_g": 0.15,
+        "c_rep": 1.0,
+        "dt": 0.1
+      },
+      "particles": 200,
+      "steps": 20000,
+      "intervention": "x -> -x at t 1000",
+      "initial_state": "200 particles uniform in [-6, 6]^2 from default_rng([19, 0])",
+      "initial_state_sha256": "9dca8c7fb01e1d7d8f5b78e70408583fd7e16307f8924c42d13aae5eea765e52",
+      "final_state_sha256": "f3d180e0a49df3013524e4108f81cbe7cf8908bcb7f29d9572d0b9182e420b54"
+    },
+    {
+      "key": "G024:cull",
+      "rule": {
+        "model": "Particle Lenia",
+        "mu_k": 4.0,
+        "sigma_k": 1.0,
+        "w_k": 0.022,
+        "mu_g": 0.6,
+        "sigma_g": 0.15,
+        "c_rep": 1.0,
+        "dt": 0.1
+      },
+      "particles": 200,
+      "steps": 20000,
+      "intervention": "50 particles removed at t 1000 (default_rng([23, 0]))",
+      "initial_state": "200 particles uniform in [-6, 6]^2 from default_rng([19, 0])",
+      "initial_state_sha256": "9dca8c7fb01e1d7d8f5b78e70408583fd7e16307f8924c42d13aae5eea765e52",
+      "final_state_sha256": "25275bad1d1b56c66384fc97a0eb1c5660cc4d13d5785c422e1392a43d675dc6"
+    }
+  ],
+  "simulator": {
+    "package": "research/experiments/WINGS (flow_lenia.py, other_worlds.py, nd_lenia.py)",
+    "git_commit": "32bec56d6800e323224fd237dcc900da3b5142b8",
+    "git_dirty": false
+  },
+  "render": {
+    "script": "research/experiments/WINGS/film_wings.py"
+  },
+  "reproduce": "git checkout <this commit> && .venv/bin/python research/experiments/WINGS/film_wings.py G024   # verify only: film_wings.py verify G024"
+}

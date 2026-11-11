@@ -1,7 +1,7 @@
 {
   "ledger": "research/claims.md",
-  "ledger_sha256": "49b019a5d50f68dc9d23d9ca5c4a00c0c6b23b514ea898ba980c3b68aec5b2b6",
-  "ledger_commit": "c8f50aa",
+  "ledger_sha256": "a03c04168851b431fefd4730c59927860d93888089324559737372f005afcbcd",
+  "ledger_commit": "8a10eff",
   "conventions_sha256": "0e237384e0425b3c325229cf650ab6f9807fb08c1bedc991433b54b13c2eb02f",
   "claims": {
     "C001": {
@@ -270,6 +270,62 @@
       "rooms": [
         "field-trip"
       ]
+    },
+    "C064": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "conserved-matter"
+      ]
+    },
+    "C065": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "conserved-matter"
+      ]
+    },
+    "C066": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "other-models"
+      ]
+    },
+    "C067": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "other-models"
+      ]
+    },
+    "C068": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "other-models"
+      ]
+    },
+    "C069": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "more-dimensions"
+      ]
+    },
+    "C070": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "more-dimensions"
+      ]
+    },
+    "C071": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "more-dimensions"
+      ]
     }
   },
   "sources": {
@@ -391,6 +447,35 @@
       "research/gallery/exhibits/G021-convergence/provenance.json",
       "research/reports/reef-expedition-2026-10-20.md",
       "research/reports/visual-specimens-2026-11-07.md"
+    ],
+    "more-dimensions": [
+      "research/experiments/WINGS/WINGS.md",
+      "research/experiments/WINGS/flatten.jsonl",
+      "research/experiments/WINGS/mc_knockout.jsonl",
+      "research/experiments/WINGS/nd_lenia.py",
+      "research/gallery/exhibits/G026-three-dimensions/provenance.json",
+      "research/gallery/exhibits/G026-three-dimensions/three-d.mp4",
+      "research/gallery/exhibits/G027-three-channel-aquarium/aquarium.mp4",
+      "research/gallery/exhibits/G027-three-channel-aquarium/provenance.json"
+    ],
+    "conserved-matter": [
+      "research/experiments/WINGS/WINGS.md",
+      "research/experiments/WINGS/flow_lenia.py",
+      "research/experiments/WINGS/flow_rings.jsonl",
+      "research/gallery/exhibits/G022-conservation-makes-individuals/conservation.mp4",
+      "research/gallery/exhibits/G022-conservation-makes-individuals/provenance.json",
+      "research/gallery/exhibits/G028-sixty-flow-worlds/provenance.json"
+    ],
+    "other-models": [
+      "research/experiments/WINGS/WINGS.md",
+      "research/experiments/WINGS/other_worlds.py",
+      "research/experiments/WINGS/sl_scan.jsonl",
+      "research/gallery/exhibits/G023-spots-that-divide/provenance.json",
+      "research/gallery/exhibits/G023-spots-that-divide/spots.mp4",
+      "research/gallery/exhibits/G024-particle-pinwheel/pinwheel.mp4",
+      "research/gallery/exhibits/G024-particle-pinwheel/provenance.json",
+      "research/gallery/exhibits/G025-smoothlife-glider/glider.mp4",
+      "research/gallery/exhibits/G025-smoothlife-glider/provenance.json"
     ],
     "collection": [
       "research/experiments/L6-field/make_seeds.py",

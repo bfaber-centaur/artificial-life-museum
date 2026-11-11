@@ -1,0 +1,64 @@
+<!--meta {
+  "slug": "more-dimensions", "order": 70, "title": "East wing I: more dimensions, more chemicals",
+  "nav_label": "9 · Dimensions & chemicals",
+  "kicker": "East wing · Other laws of physics · Room 9",
+  "summary": "Lenia with a third dimension and with three interacting chemicals: Chan's catalogued species run in our own engine, flattened, and with one chemical taken away.",
+  "expect": {"C069": "OBSERVED", "C070": "OBSERVED", "C071": "OBSERVED"}
+} -->
+<h1>More dimensions, more chemicals</h1>
+<p class="lede">The first eight rooms stay in one flat world with one chemical. The east wing
+changes the laws of physics. This room keeps Lenia's rule but gives it a third dimension, or
+three chemicals that feed each other. All the animals here were found and named by Bert Chan.
+What is ours is the engine they run in and the two tests: flattening a 3-D animal, and
+removing one of its chemicals.</p>
+
+<h2>Lenia in three dimensions</h2>
+<figure class="vitrine">
+  <img src="{{asset:research/gallery/exhibits/G026-three-dimensions/three-d.gif}}" width="600" height="507" loading="lazy"
+       alt="Top row: three glowing 3-D creatures seen from above, one gliding. Bottom row: a slice through each, run as a flat world; one fills with dust, one stays a small ring, one fades away.">
+  <figcaption><strong>Three 3-D species and their flattened slices.</strong> Top: Triguttome
+  labens, Ovome ellipsis and Sphaerome ventilans in a 64 × 64 × 64 world, shown as the density summed
+  along each line of sight. Bottom: the slice through each one's middle, run in 2-D under
+  the same rule. {{src:research/gallery/exhibits/G026-three-dimensions/three-d.mp4|Full video}} ·
+  {{src:research/gallery/exhibits/G026-three-dimensions/provenance.json|provenance}}.</figcaption>
+</figure>
+<div class="label">
+  <p class="obs"><strong>What you see.</strong> The 3-D animals keep their shape, and one glides.
+  Their slices behave in three different ways. The glider's slice boils over into dust. The
+  ellipsoid's slice shrinks to a small, steady ring, and the sphere's slice fades out.</p>
+  <p class="open"><strong>What the ledger says.</strong> Our engine keeps 33 of Chan's 36 3-D
+  species alive for 100 time units {{claim:C069}}. Flattened, 42 of 101 slices die, 47 more
+  than double their mass, and only 12 keep it {{claim:C070}}. A 3-D animal is not a stack of
+  2-D animals.</p>
+</div>
+
+<h2>A three-chemical aquarium</h2>
+<figure class="vitrine">
+  <img src="{{asset:research/gallery/exhibits/G027-three-channel-aquarium/aquarium.gif}}" width="600" height="526" loading="lazy"
+       alt="Twelve tiles of red, green and blue creatures: small swimmers, spinning crescents, a still disc, and discs with one to four crescents attached like a molecule.">
+  <figcaption><strong>Chan's three-channel creatures.</strong> Red, green and blue are three
+  chemicals, each grown by kernels that read the others. Some creatures are a still disc
+  (lithos) with one to four spinning crescents (gyrans) attached.
+  {{src:research/gallery/exhibits/G027-three-channel-aquarium/aquarium.mp4|Full video}} ·
+  {{src:research/gallery/exhibits/G027-three-channel-aquarium/provenance.json|provenance}}.</figcaption>
+</figure>
+<div class="label">
+  <p class="obs"><strong>What you see.</strong> Twelve creatures that swim, spin or sit still, all
+  under one set of fifteen kernels. The compound ones hold together like molecules.</p>
+  <p class="open"><strong>What the ledger says.</strong> All twelve survive a tenfold smaller
+  timestep. Remove any one of the three chemicals and every creature dies within 200 time units
+  {{claim:C071}}. No chemical is optional, though this test also removes a third of the mass, and
+  a mass-matched control has not been run.</p>
+</div>
+
+<div class="caveat"><p><strong>Caveat.</strong> Our engine follows Chan's own code, read
+line by line, and agrees with our classic simulator to twelve decimal places in the flat,
+single-chemical case. It has not yet been run side by side with Chan's code on these animals.</p></div>
+
+<h2>Sources</h2>
+<ul>
+  <li>{{src:research/experiments/WINGS/WINGS.md|Wings notes}}</li>
+  <li>{{src:research/experiments/WINGS/nd_lenia.py|N-dimensional, multi-channel engine}}</li>
+  <li>{{src:research/experiments/WINGS/flatten.jsonl|Flattening results}} and
+      {{src:research/experiments/WINGS/mc_knockout.jsonl|knockout results}}</li>
+</ul>

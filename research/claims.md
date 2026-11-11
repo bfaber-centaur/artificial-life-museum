@@ -1978,3 +1978,150 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
 - **Known caveats:** "same motion class" is a coarse test, not a shape test. Thumbnails in `convergence-matrix.png` show the same shape by eye, except star A under poly/poly (a rounder ring at f 0.88). Single implementation. 200 tu is short next to the catalogue's persistence standard. Not novel: the body plans are catalogued; the observation is that they recur when the kernel and growth curves change
 - **History:**
   - 2026-11-10 — OBSERVED — species-hunt thread.
+
+### C064 — In Flow-Lenia rule FL-43 a noise patch condenses into separate ring cells, and the number of cells follows the mass: about one cell per 58 units of mass, from 4 to 57 cells
+
+- **Status:** OBSERVED
+- **Owner lane:** wings thread (WINGS, 2026-11-11)
+- **Sources:** `research/experiments/WINGS/flow_rings.py`, `flow_rings.jsonl`; scout `flow_scan.py`, `flow_scan.jsonl`; gallery G022
+- **Specimen / version:** none catalogued; FL-43 = `FlowRule.random(default_rng([7, 43]))` (10 kernels), noise patches from `default_rng([17, k])`
+- **Simulator / version:** `research/experiments/WINGS/flow_lenia.py` (our numpy implementation of Plantec et al. 2023: Sobel gradients, reintegration tracking, dt 0.2, s 0.65, dd 5, θ_A 2, n 2)
+- **Parameters:** R 13, 256² torus, 3000 steps (600 time units)
+- **Intervention:** initial mass, via patch side p ∈ {20, 28, 40, 56, 80} (mass ≈ p²/2), 4 noise seeds each
+- **Metric:** components of A > 0.05 (torus-merged) at the end; fixed before the runs
+- **Result:** cells 4/4/4/4, 7/6/7/6, 15/15/14/15, 28/29/28/28, 55/57/51/53; mass per cell 48–66 (least-squares n = mass / 58.1). Total mass drift ≤ 1.3 × 10⁻¹² relative in every run.
+- **Run IDs:** `flow_rings.jsonl` keys `size-<p>-s<k>` with final_sha256
+- **Search / parameter bounds:** one rule out of a 60-rule scout; most scout rules made one droplet, membrane or crystal (contact sheet in the WINGS notes)
+- **Reproduction command:** `.venv/bin/python research/experiments/WINGS/flow_rings.py sizes`
+- **Known caveats:** components are counted, not checked to be rings one by one; at p 28 some cells are doubled up (mass per cell up to 66). One grid, one dt; the Flow-Lenia code is ours, not the authors'.
+- **Prior literature:** Plantec et al. 2023 (Flow-Lenia) report that mass conservation yields bounded, individual creatures; a per-rule body size is implied there, not measured for this rule.
+- **History:**
+  - 2026-11-11 — OBSERVED — wings thread.
+
+### C065 — Switch off mass conservation (classic update A ← clip(A + dt U) with FL-43's kernels) and the same noise patch fills the world: mass ×21 and 225–231 fragments by 300 time units
+
+- **Status:** OBSERVED
+- **Owner lane:** wings thread (WINGS, 2026-11-11)
+- **Sources:** `research/experiments/WINGS/flow_rings.py` (`classic` arm), `flow_rings.jsonl`; gallery G022
+- **Specimen / version:** as C064, p 40, seeds 0–3
+- **Simulator / version:** `flow_lenia.FlowLenia(conserve=False)`
+- **Parameters:** as C064, 1500 steps (300 time units)
+- **Intervention:** remove the flow / reintegration step (the conservation law), keep kernels and affinity
+- **Metric:** total mass ratio, components of A > 0.05, cover
+- **Result:** mass ×20.6–21.2, cover 0.28–0.29, 225–231 components in all 4 seeds (with conservation: 14–15 cells, C064)
+- **Run IDs:** `flow_rings.jsonl` keys `classic-s<k>`
+- **Search / parameter bounds:** one rule, one patch size, 4 seeds
+- **Reproduction command:** `.venv/bin/python research/experiments/WINGS/flow_rings.py classic`
+- **Known caveats:** the affinity U ∈ [−1, 1] is used as the growth field without retuning; a classic-Lenia rule tuned for these kernels might behave differently.
+- **History:**
+  - 2026-11-11 — OBSERVED — wings thread.
+
+### C066 — A single Gray-Scott spot (F 0.0367, k 0.0649) divides until about 300 spots tile the world; wipe half the world at t 20000 and division refills it to the control count by t 40000
+
+- **Status:** OBSERVED
+- **Owner lane:** wings thread (WINGS, 2026-11-11)
+- **Sources:** `research/experiments/WINGS/gs_mitosis.py`, `gs_mitosis.jsonl`; gallery G023
+- **Specimen / version:** one 10 × 10 seed, noise from `default_rng([11, seed])`, seeds 0–2
+- **Simulator / version:** `research/experiments/WINGS/other_worlds.GrayScott` (Pearson 1993; Du 0.2, Dv 0.1, 5-point Laplacian, Euler)
+- **Parameters:** 256² torus, dt 1, 40000 time units
+- **Intervention:** at t 20000 reset x < 128 to u 1, v 0 (`wipe`); numerical arm dt 0.5
+- **Metric:** spots = 8-connected components of v > 0.2, every 500 time units
+- **Result:** control 1 → 54–60 (t 10000) → 237–258 (t 20000) → 301–305 (t 40000). Wipe: 122–136 right after → 289–292 at t 30000 → 302–303 at t 40000 (control 301–305). dt 0.5 within 2 % of dt 1 at every listed time (237–254 vs 237–258 at t 20000; 304–307 at t 40000).
+- **Run IDs:** `gs_mitosis.jsonl` (arm, seed) with final_v_sha256
+- **Search / parameter bounds:** one (F, k), one world size, 3 seeds
+- **Reproduction command:** `.venv/bin/python research/experiments/WINGS/gs_mitosis.py 0 1 2`
+- **Known caveats:** dividing spots are Pearson's (1993) result; the claim is only about these runs. A dividing pair counts as one spot until it separates.
+- **History:**
+  - 2026-11-11 — OBSERVED — wings thread.
+
+### C067 — 200 Particle Lenia particles at the published default parameters assemble into a body that spins at about 0.2 rad per 100 time units; the direction is not fixed by the rule, and removing a quarter of the particles slows the spin to 0.02–0.12
+
+- **Status:** OBSERVED
+- **Owner lane:** wings thread (WINGS, 2026-11-11)
+- **Sources:** `research/experiments/WINGS/pl_rotor.py`, `pl_rotor.jsonl`; gallery G024
+- **Specimen / version:** 200 particles uniform in [−6, 6]² from `default_rng([19, k])`, k 0–4
+- **Simulator / version:** `research/experiments/WINGS/other_worlds.ParticleLenia` (Mordvintsev, Niklasson & Randazzo 2022; analytic gradient, unit-tested against finite differences)
+- **Parameters:** μ_k 4, σ_k 1, w_k 0.022, μ_G 0.6, σ_G 0.15, c_rep 1, dt 0.1, 2000 time units
+- **Intervention:** at t 1000: mirror x → −x (`mirror`); delete 50 particles chosen by `default_rng([23, k])` (`cull`); numerical arm dt 0.05
+- **Metric:** mean change of each particle's polar angle about the centroid per 100 time units; mean of the last 5 windows
+- **Result:** control |spin| 0.195–0.201 in 4 of 5 seeds (0.138 in k 4), sign + in 2, − in 3. Mirror: exactly the negated spin. Cull: |spin| 0.017–0.117 by t 2000, in 2 of 5 seeds with the opposite sign. dt 0.05: the same speed reached in 3 of 5 seeds, but the direction differs from dt 0.1 in 2 of them (0 and 2), and seeds 3, 4 were still slower at t 2000.
+- **Run IDs:** `pl_rotor.jsonl` (arm, k) with final_sha256
+- **Search / parameter bounds:** one parameter set, one particle count, 5 seeds, 2000 time units
+- **Reproduction command:** `.venv/bin/python research/experiments/WINGS/pl_rotor.py`
+- **Known caveats:** the mirror arm is a symmetry check, not a finding. Spin direction depends on the integration step, so it is a property of the run, not of the rule.
+- **Prior literature:** Mordvintsev et al. 2022 show rotating particle bodies at these parameters.
+- **History:**
+  - 2026-11-11 — OBSERVED — wings thread.
+
+### C068 — A SmoothLife glider (rule SL-32) survives 1000 time units at dt 0.1, 0.05 and 0.025 and at double resolution, but its speed in units of the outer radius is 46 % higher at double resolution
+
+- **Status:** OBSERVED
+- **Owner lane:** wings thread (WINGS, 2026-11-11)
+- **Sources:** `research/experiments/WINGS/sl_glider.py`, `sl_glider.jsonl`; scout `sl_scan.py`, `sl_scan.jsonl`; gallery G025
+- **Specimen / version:** 40 × 40 window at (116, 167) of the scout's rule-32 world at step 1500 (`sl_glider.build`)
+- **Simulator / version:** `research/experiments/WINGS/other_worlds.SmoothLife` (Rafler 2011 transition, smooth time step)
+- **Parameters:** ra 8.830, ri ra/3, b 0.2552–0.2983, d 0.2057–0.2950, α_n 0.028, α_m 0.147; 192² torus (384² and ra ×2 for `res2`)
+- **Intervention:** timestep (0.1 → 0.05 → 0.025); resolution ×2; a still ring from the same world placed 60 cells ahead (`ring`)
+- **Metric:** components of A > 0.5 every 10 time units; speed = slope of the unwrapped centroid
+- **Result:** alive at every check in all four arms. Speed 0.268 / 0.266 / 0.258 cells per time unit (0.0303 / 0.0302 / 0.0292 ra per time unit) at dt 0.1 / 0.05 / 0.025; 0.784 cells (0.0444 ra) per time unit at double resolution. `ring`: glider and ring merge by t 200 and a single body moves off on a new heading.
+- **Run IDs:** `sl_glider.jsonl` arms with final_sha256
+- **Search / parameter bounds:** 80 random rules in the scout; 5 of them left 1–3 isolated bodies, and rule 32 is the only one where one was seen to move
+- **Reproduction command:** `.venv/bin/python research/experiments/WINGS/sl_glider.py`
+- **Known caveats:** the speed is not converged in resolution, so it should not be quoted as a property of the continuum rule. Gliders in SmoothLife are Rafler's result.
+- **History:**
+  - 2026-11-11 — OBSERVED — wings thread.
+
+### C069 — Our independent N-D Lenia keeps 33 of Chan's 36 catalogued 3-D species alive for 100 time units, and 161 of 205 sampled multi-channel / multi-kernel "found" creatures
+
+- **Status:** OBSERVED
+- **Owner lane:** wings thread (WINGS, 2026-11-11)
+- **Sources:** `research/experiments/WINGS/nd_lenia.py`, `nd_survey.py`, `nd_survey_3d.jsonl`, `nd_survey_found.jsonl`; gallery G026, G027
+- **Specimen / version:** upstream `animals3D.json` (all 36 entries with params) and the first 12 entries of each 2-D `found/<D><C><K>.json` (pinned adfc542)
+- **Simulator / version:** `nd_lenia.NDLenia`, written from upstream `LeniaNDKC.py` (CPU path); 1-channel 2-D equals `alm.lenia.Lenia` to 10⁻¹² (`tests/test_wings.py`)
+- **Parameters:** each entry's own; 64³ (3-D) or 256² (2-D) torus; 100 time units
+- **Intervention:** none (re-implementation check)
+- **Metric:** DIED (< 1 % of start mass), FILLED (cover > 0.5), else PERSISTED
+- **Result:** 3-D: 33 PERSISTED, 3 DIED. Found 2-D (first 12 entries of each of the 19 parseable 2-D files, fewer where a file is shorter): 161 PERSISTED, 41 DIED, 3 FILLED.
+- **Run IDs:** survey rows with final_sha256
+- **Search / parameter bounds:** first 12 entries per found file; 233p could not be parsed by upstream's own reader either
+- **Reproduction command:** `.venv/bin/python research/experiments/WINGS/nd_survey.py 3d` and `nd_survey.py found <stem> 12`
+- **Known caveats:** persistence only, not shape. Some found entries are Chan's work-in-progress (unnamed), so a death is not a disagreement with upstream until upstream is run on it.
+- **History:**
+  - 2026-11-11 — OBSERVED — wings thread.
+
+### C070 — Flattened to 2-D, Chan's 3-D species mostly do not survive as bodies: of 101 non-empty mid-slices run under the same rule, 47 grew over 2× (most fill with dust), 42 died and 12 kept their mass
+
+- **Status:** OBSERVED
+- **Owner lane:** wings thread (WINGS, 2026-11-11)
+- **Sources:** `research/experiments/WINGS/flatten.py`, `flatten.jsonl`; gallery G026
+- **Specimen / version:** all 36 `animals3D.json` entries
+- **Simulator / version:** `nd_lenia.NDLenia`
+- **Parameters:** settle 20 time units in 64³; slice through the centroid normal to each axis; 2-D run 100 time units on 128²
+- **Intervention:** dimension 3 → 2 (same R, T, μ, σ, shells; the kernel becomes a disk)
+- **Metric:** final / initial mass: < 0.01 DIED, > 2 GREW, else KEPT. **These three bins were set after looking at the first results** (the script's own pre-set outcome field missed growth below 50 % cover).
+- **Result:** GREW 47, DIED 42, KEPT 12, empty slice 7. 28 of 36 species have no slice that keeps its mass. Slices that keep their mass include Sphaerome lithos (1Sp1l, all three) and Ovome ellipsis (3Ov1e), which becomes a small 2-D ring. 3-D controls: 35 of 36 persisted.
+- **Run IDs:** `flatten.jsonl` slices with final_sha256
+- **Search / parameter bounds:** one slice position per axis, one world size
+- **Reproduction command:** `.venv/bin/python research/experiments/WINGS/flatten.py`
+- **Known caveats:** a 2-D kernel normalised over a disk weighs the slice differently from the ball; this is the point of the test, not a confound. "KEPT" means mass only.
+- **History:**
+  - 2026-11-11 — OBSERVED — wings thread.
+
+### C071 — Each of Chan's twelve three-channel "aquarium" creatures (found/233 entries 0–11) dies within 200 time units when any one of its three channels is zeroed, and all twelve survive a tenfold smaller timestep
+
+- **Status:** OBSERVED
+- **Owner lane:** wings thread (WINGS, 2026-11-11)
+- **Sources:** `research/experiments/WINGS/mc_knockout.py`, `mc_knockout.jsonl`; gallery G027
+- **Specimen / version:** found/233.json entries 0–11 (code 5N7KKM: limus, gyrans, paragyrans, lithos, tardus, paratardus, lithos+n gyrans, 2lithos+gyrans, egg)
+- **Simulator / version:** `nd_lenia.NDLenia`
+- **Parameters:** 3 channels, 15 kernels, R 24, dt 1 (upstream reads T = 1 from params[0]); 256² torus; settle 20 time units
+- **Intervention:** zero channel 0, 1 or 2 after settling; numerical arm dt 0.1
+- **Metric:** as C069 over 200 time units
+- **Result:** control 12/12 PERSISTED (mass ratio 1.0, egg 1.2); every knockout 36/36 DIED; dt 0.1 12/12 PERSISTED
+- **Run IDs:** `mc_knockout.jsonl` (index, arm) with final_sha256
+- **Search / parameter bounds:** 12 creatures of one family; whole-channel knockouts only
+- **Reproduction command:** `.venv/bin/python research/experiments/WINGS/mc_knockout.py`
+- **Known caveats:** knocking out a channel also removes a third or more of the mass; a mass-matched control (scaling all channels down) was not run.
+- **Prior literature:** Chan 2020 (multi-channel Lenia) describes these creatures; we did not find a channel-knockout test there.
+- **History:**
+  - 2026-11-11 — OBSERVED — wings thread.

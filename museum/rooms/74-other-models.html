@@ -1,0 +1,69 @@
+<!--meta {
+  "slug": "other-models", "order": 74, "title": "East wing III: cousins from other models",
+  "nav_label": "11 · Other models",
+  "kicker": "East wing · Other laws of physics · Room 11",
+  "summary": "Three older or stranger relatives of Lenia: dividing chemical spots, a glider in SmoothLife, and a spinning body made of particles.",
+  "expect": {"C066": "OBSERVED", "C067": "OBSERVED", "C068": "OBSERVED"}
+} -->
+<h1>Cousins from other models</h1>
+<p class="lede">Lenia has relatives. Reaction-diffusion chemistry is forty years older,
+SmoothLife is Game of Life made continuous, and Particle Lenia swaps the grid for free-moving
+particles. Each has life-like bodies of its own. We wrote each one from its paper and gave
+each animal one test.</p>
+
+<h2>Spots that divide</h2>
+<figure class="vitrine">
+  <img src="{{asset:research/gallery/exhibits/G023-spots-that-divide/spots.gif}}" width="520" height="329" loading="lazy"
+       alt="Two worlds of glowing spots. One spot divides again and again until spots tile the world; in the right world the left half is wiped clean and refills.">
+  <figcaption><strong>Gray-Scott reaction-diffusion</strong> (Pearson 1993). One spot of chemical
+  divides until spots tile the world. Right: half the world wiped clean halfway through.
+  {{src:research/gallery/exhibits/G023-spots-that-divide/spots.mp4|Full video}} ·
+  {{src:research/gallery/exhibits/G023-spots-that-divide/provenance.json|provenance}}.</figcaption>
+</figure>
+<div class="label">
+  <p class="obs"><strong>What you see.</strong> Spots stretch, pinch in two and push apart. After
+  the wipe, the spots at the edge divide into the empty half.</p>
+  <p class="open"><strong>What the ledger says.</strong> About 300 spots at the end, and the
+  wiped world is back to the same count {{claim:C066}}. Dividing spots are Pearson's discovery.</p>
+</div>
+
+<h2>A SmoothLife glider</h2>
+<figure class="vitrine">
+  <img src="{{asset:research/gallery/exhibits/G025-smoothlife-glider/glider.gif}}" width="520" height="320" loading="lazy"
+       alt="Left: a small bean-shaped body sliding steadily. Right: the same body runs into a still ring, swallows it and moves off in a new direction.">
+  <figcaption><strong>SmoothLife</strong> (Rafler 2011), one of 80 random rules we drew. Left: the
+  glider alone. Right: aimed at a still ring.
+  {{src:research/gallery/exhibits/G025-smoothlife-glider/glider.mp4|Full video}} ·
+  {{src:research/gallery/exhibits/G025-smoothlife-glider/provenance.json|provenance}}.</figcaption>
+</figure>
+<div class="label">
+  <p class="obs"><strong>What you see.</strong> A bean that slides at a steady pace. When it meets
+  the ring, the two merge into one body, which slides off in a new direction.</p>
+  <p class="open"><strong>What the ledger says.</strong> It survives 1000 time units at three
+  timesteps and at double resolution, but its speed changes with resolution {{claim:C068}},
+  so the speed belongs to the grid, not to the animal.</p>
+</div>
+
+<h2>A pinwheel made of particles</h2>
+<figure class="vitrine">
+  <img src="{{asset:research/gallery/exhibits/G024-particle-pinwheel/pinwheel.gif}}" width="600" height="269" loading="lazy"
+       alt="Three spiky rings of dots turning slowly; the middle one turns the other way after being mirrored; the right one loses a quarter of its dots and slows.">
+  <figcaption><strong>Particle Lenia</strong> (Mordvintsev and colleagues, 2022), 200 particles.
+  Left: untouched. Middle: mirrored at t = 1000. Right: 50 particles removed at t = 1000.
+  {{src:research/gallery/exhibits/G024-particle-pinwheel/pinwheel.mp4|Full video}} ·
+  {{src:research/gallery/exhibits/G024-particle-pinwheel/provenance.json|provenance}}.</figcaption>
+</figure>
+<div class="label">
+  <p class="obs"><strong>What you see.</strong> Scattered particles gather into a ring with
+  spikes that turns like a pinwheel. Its mirror image turns the other way. With a quarter of
+  its particles gone, it turns much more slowly.</p>
+  <p class="open"><strong>What the ledger says.</strong> The spin is about the same in most seeds,
+  but its direction is a coin toss that even the timestep can flip {{claim:C067}}.</p>
+</div>
+
+<h2>Sources</h2>
+<ul>
+  <li>{{src:research/experiments/WINGS/WINGS.md|Wings notes}}</li>
+  <li>{{src:research/experiments/WINGS/other_worlds.py|Gray-Scott, SmoothLife and Particle Lenia}}</li>
+  <li>{{src:research/experiments/WINGS/sl_scan.jsonl|SmoothLife scout}}</li>
+</ul>

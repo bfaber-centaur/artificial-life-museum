@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>East wing III: cousins from other models · ALM museum</title>
+<meta name="description" content="Three older or stranger relatives of Lenia: dividing chemical spots, a glider in SmoothLife, and a spinning body made of particles.">
+<link rel="stylesheet" href="museum.css">
+</head>
+<body class="room-other-models">
+<header class="site">
+  <a class="brand" href="index.html">ALM <span>an artificial-life natural history museum</span></a>
+  <details class="map"><summary>Rooms</summary><ol>
+<li><a href="index.html">Entrance</a></li>
+<li><a href="orbium.html">1 · The ruler: Orbium</a></li>
+<li><a href="wobbles.html">2 · The wobble that wasn&#x27;t</a></li>
+<li><a href="edges.html">3 · How much can it take?</a></li>
+<li><a href="one-rule.html">4 · Three animals, one rule</a></li>
+<li><a href="how-we-know.html">5 · How we know</a></li>
+<li><a href="under-review.html">6 · Still being argued (provisional)</a></li>
+<li><a href="reef.html">7 · When the glider meets the ring (provisional)</a></li>
+<li><a href="field-trip.html">8 · Field trip</a></li>
+<li><a href="more-dimensions.html">9 · Dimensions &amp; chemicals</a></li>
+<li><a href="conserved-matter.html">10 · Conserved matter</a></li>
+<li><a class="here" href="other-models.html">11 · Other models</a></li>
+<li><a href="collection.html">Reference · The collection</a></li>
+<li><a href="claims.html">Reference · Claims on display</a></li>
+  </ol></details>
+</header>
+<main>
+<p class="kicker">East wing · Other laws of physics · Room 11</p>
+<h1>Cousins from other models</h1>
+<p class="lede">Lenia has relatives. Reaction-diffusion chemistry is forty years older,
+SmoothLife is Game of Life made continuous, and Particle Lenia swaps the grid for free-moving
+particles. Each has life-like bodies of its own. We wrote each one from its paper and gave
+each animal one test.</p>
+
+<h2>Spots that divide</h2>
+<figure class="vitrine">
+  <img src="../../research/gallery/exhibits/G023-spots-that-divide/spots.gif" width="520" height="329" loading="lazy"
+       alt="Two worlds of glowing spots. One spot divides again and again until spots tile the world; in the right world the left half is wiped clean and refills.">
+  <figcaption><strong>Gray-Scott reaction-diffusion</strong> (Pearson 1993). One spot of chemical
+  divides until spots tile the world. Right: half the world wiped clean halfway through.
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G023-spots-that-divide/spots.mp4">Full video</a> ·
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G023-spots-that-divide/provenance.json">provenance</a>.</figcaption>
+</figure>
+<div class="label">
+  <p class="obs"><strong>What you see.</strong> Spots stretch, pinch in two and push apart. After
+  the wipe, the spots at the edge divide into the empty half.</p>
+  <p class="open"><strong>What the ledger says.</strong> About 300 spots at the end, and the
+  wiped world is back to the same count <a class="claim" href="claims.html#C066" title="A single Gray-Scott spot (F 0.0367, k 0.0649) divides until about 300 spots tile the world; wipe half the world at t 20000 and division refills it to the control count by t 40000"><span class="cid">C066</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>. Dividing spots are Pearson's discovery.</p>
+</div>
+
+<h2>A SmoothLife glider</h2>
+<figure class="vitrine">
+  <img src="../../research/gallery/exhibits/G025-smoothlife-glider/glider.gif" width="520" height="320" loading="lazy"
+       alt="Left: a small bean-shaped body sliding steadily. Right: the same body runs into a still ring, swallows it and moves off in a new direction.">
+  <figcaption><strong>SmoothLife</strong> (Rafler 2011), one of 80 random rules we drew. Left: the
+  glider alone. Right: aimed at a still ring.
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G025-smoothlife-glider/glider.mp4">Full video</a> ·
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G025-smoothlife-glider/provenance.json">provenance</a>.</figcaption>
+</figure>
+<div class="label">
+  <p class="obs"><strong>What you see.</strong> A bean that slides at a steady pace. When it meets
+  the ring, the two merge into one body, which slides off in a new direction.</p>
+  <p class="open"><strong>What the ledger says.</strong> It survives 1000 time units at three
+  timesteps and at double resolution, but its speed changes with resolution <a class="claim" href="claims.html#C068" title="A SmoothLife glider (rule SL-32) survives 1000 time units at dt 0.1, 0.05 and 0.025 and at double resolution, but its speed in units of the outer radius is 46 % higher at double resolution"><span class="cid">C068</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>,
+  so the speed belongs to the grid, not to the animal.</p>
+</div>
+
+<h2>A pinwheel made of particles</h2>
+<figure class="vitrine">
+  <img src="../../research/gallery/exhibits/G024-particle-pinwheel/pinwheel.gif" width="600" height="269" loading="lazy"
+       alt="Three spiky rings of dots turning slowly; the middle one turns the other way after being mirrored; the right one loses a quarter of its dots and slows.">
+  <figcaption><strong>Particle Lenia</strong> (Mordvintsev and colleagues, 2022), 200 particles.
+  Left: untouched. Middle: mirrored at t = 1000. Right: 50 particles removed at t = 1000.
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G024-particle-pinwheel/pinwheel.mp4">Full video</a> ·
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G024-particle-pinwheel/provenance.json">provenance</a>.</figcaption>
+</figure>
+<div class="label">
+  <p class="obs"><strong>What you see.</strong> Scattered particles gather into a ring with
+  spikes that turns like a pinwheel. Its mirror image turns the other way. With a quarter of
+  its particles gone, it turns much more slowly.</p>
+  <p class="open"><strong>What the ledger says.</strong> The spin is about the same in most seeds,
+  but its direction is a coin toss that even the timestep can flip <a class="claim" href="claims.html#C067" title="200 Particle Lenia particles at the published default parameters assemble into a body that spins at about 0.2 rad per 100 time units; the direction is not fixed by the rule, and removing a quarter of the particles slows the spin to 0.02–0.12"><span class="cid">C067</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>.</p>
+</div>
+
+<h2>Sources</h2>
+<ul>
+  <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/WINGS/WINGS.md">Wings notes</a></li>
+  <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/WINGS/other_worlds.py">Gray-Scott, SmoothLife and Particle Lenia</a></li>
+  <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/WINGS/sl_scan.jsonl">SmoothLife scout</a></li>
+</ul>
+
+<nav class="walk" aria-label="Tour"><a class="prev" href="conserved-matter.html"><small>Back</small>East wing II: matter that cannot be destroyed</a><span></span></nav>
+</main>
+<footer class="site">
+  <p>Claim statuses read from <code>research/claims.md</code> (sha256 <code>a03c04168851</code>) when this page was built.</p>
+  <p>Every picture here is a recorded simulation or a figure drawn from committed data. Statuses
+  are the claims ledger's, not the museum's: a badge never says more than
+  <a href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/claims.md">research/claims.md</a> does.</p>
+</footer>
+</body>
+</html>

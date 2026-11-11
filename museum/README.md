@@ -27,6 +27,9 @@ Opening `museum/site/index.html` straight from disk works too. Pages load images
 | `under-review.html` | 6 · Still being argued (provisional) | S102 lifetimes and S101 coupling: L6-007, L6-008, L3-003 and HR-009 on main, not yet ledgered; G002, G004, C038, C041, C047 |
 | `reef.html` | 7 · When the glider meets the ring (provisional) | REEF expedition 2026-10-21: report, REEF-behavior exhibit panels A–F, C038, C052–C055 |
 | `field-trip.html` | 8 · Field trip: what Lenia can look like | gallery G007–G018 (VIS-talk, 2026-11-07), C052, C053, C056–C060 |
+| `more-dimensions.html` | 9 · East wing I: more dimensions, more chemicals | WINGS 2026-11-11: G026, G027, C069–C071 |
+| `conserved-matter.html` | 10 · East wing II: matter that cannot be destroyed | WINGS: G022, G028, C064, C065 |
+| `other-models.html` | 11 · East wing III: cousins from other models | WINGS: G023–G025, C066–C068 |
 | `collection.html` | Reference: the four specimens | dossiers, gallery runs |
 | `claims.html` | Reference: every claim on display | generated from the ledger |
 

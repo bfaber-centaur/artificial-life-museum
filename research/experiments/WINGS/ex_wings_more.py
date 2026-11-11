@@ -98,7 +98,7 @@ def g026(render=True):
         f3, f2 = [], []
         for s in range(int(film_tu * T) + 1):
             if render and s % int(T // fpt) == 0:
-                f3.append(follow(L3.A[0], 48, axes=(0, 1, 2)).max(0).astype(np.float32))
+                f3.append(follow(L3.A[0], 48, axes=(0, 1, 2)).sum(0).astype(np.float32))
                 f2.append(L2.A[0].astype(np.float32).copy())
             if s < film_tu * T:
                 L3.step(); L2.step()
@@ -120,11 +120,11 @@ def g026(render=True):
     out = []
     n = min(len(v) for v in frames3.values())
     for k in range(n):
-        img = canvas(W_, H_, "Lenia in three dimensions", f"top: 3-D species, brightest voxel along the line of sight   t = {k / fpt:5.1f}")
+        img = canvas(W_, H_, "Lenia in three dimensions", f"top: 3-D species, density summed along the line of sight   t = {k / fpt:5.1f}")
         for j, (idx, label) in enumerate(SPECIES_3D):
             x = pad + j * (T_ + pad)
             text(img, (x, top + 6), label, 13)
-            img.paste(tile(frames3[idx][k], T_), (x, top + head))
+            img.paste(tile(frames3[idx][k], T_, 0.0, float(frames3[idx][0].max())), (x, top + head))
             y2 = top + T_ + head + mid
             if j == 0:
                 text(img, (pad, y2 - 22), "bottom: one slice through the middle, run in 2-D under the same rule", 13, fill=DIM)
@@ -135,7 +135,7 @@ def g026(render=True):
     save_provenance(folder, {
         "exhibit": "G026", "title": "Lenia in three dimensions", "media": media + ["three-d-final.png"],
         "frames": {"frames_per_tu": fpt, "mp4_fps": 20},
-        "view": "top: maximum along axis 0 of a 48^3 box following the 3-D centroid; bottom: whole 128^2 2-D world; inferno, [0, 1]",
+        "view": "top: sum along axis 0 of a 48^3 box following the 3-D centroid, scaled to the first frame's maximum per species; bottom: whole 128^2 2-D world; inferno, [0, 1]",
         "claim": ["C069", "C070"],
         "caveats": ["Species, names and seeds are Chan's (animals3D.json, pinned adfc542); the engine is ours (nd_lenia.py).",
                     "The flattening is our intervention; one plane per species is shown, all three planes are in flatten.jsonl."],

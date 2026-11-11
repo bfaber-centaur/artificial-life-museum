@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>East wing II: matter that cannot be destroyed · ALM museum</title>
+<meta name="description" content="Flow-Lenia moves matter instead of creating it. Sixty random worlds, a colony of ring cells whose number follows the mass, and what happens when the conservation law is switched off.">
+<link rel="stylesheet" href="museum.css">
+</head>
+<body class="room-conserved-matter">
+<header class="site">
+  <a class="brand" href="index.html">ALM <span>an artificial-life natural history museum</span></a>
+  <details class="map"><summary>Rooms</summary><ol>
+<li><a href="index.html">Entrance</a></li>
+<li><a href="orbium.html">1 · The ruler: Orbium</a></li>
+<li><a href="wobbles.html">2 · The wobble that wasn&#x27;t</a></li>
+<li><a href="edges.html">3 · How much can it take?</a></li>
+<li><a href="one-rule.html">4 · Three animals, one rule</a></li>
+<li><a href="how-we-know.html">5 · How we know</a></li>
+<li><a href="under-review.html">6 · Still being argued (provisional)</a></li>
+<li><a href="reef.html">7 · When the glider meets the ring (provisional)</a></li>
+<li><a href="field-trip.html">8 · Field trip</a></li>
+<li><a href="more-dimensions.html">9 · Dimensions &amp; chemicals</a></li>
+<li><a class="here" href="conserved-matter.html">10 · Conserved matter</a></li>
+<li><a href="other-models.html">11 · Other models</a></li>
+<li><a href="collection.html">Reference · The collection</a></li>
+<li><a href="claims.html">Reference · Claims on display</a></li>
+  </ol></details>
+</header>
+<main>
+<p class="kicker">East wing · Other laws of physics · Room 10</p>
+<h1>Matter that cannot be destroyed</h1>
+<p class="lede">In classic Lenia a cell's value goes up or down, so matter appears and
+disappears. In Flow-Lenia (Plantec and colleagues, with Chan, 2023) the same field only says
+where matter wants to go, and matter flows there. Nothing is made or lost. We wrote our own
+Flow-Lenia from the paper and drew sixty random rules.</p>
+
+<figure class="vitrine">
+  <img src="../../research/gallery/exhibits/G028-sixty-flow-worlds/sixty-flow-worlds.png" width="684" height="488" loading="lazy"
+       alt="Sixty small square worlds: droplets, ringed membranes, crystals of dots inside a membrane, spoked wheels, an H-shaped body and colonies of small rings.">
+  <figcaption><strong>Sixty Flow-Lenia worlds.</strong> One random rule and one noise patch each,
+  after 600 time units. <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G028-sixty-flow-worlds/provenance.json">provenance</a>.</figcaption>
+</figure>
+
+<h2>A colony of ring cells</h2>
+<figure class="vitrine">
+  <img src="../../research/gallery/exhibits/G022-conservation-makes-individuals/conservation.gif" width="520" height="329" loading="lazy"
+       alt="Left: a square of noise condenses into about fifteen small rings that drift apart. Right: the same noise under the same kernels without conservation grows into a maze that fills the world.">
+  <figcaption><strong>One noise patch, two laws.</strong> Left: Flow-Lenia rule FL-43. Right: the
+  same kernels with the classic update, where matter can be created.
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G022-conservation-makes-individuals/conservation.mp4">Full video</a> ·
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G022-conservation-makes-individuals/provenance.json">provenance</a>.</figcaption>
+</figure>
+<div class="label">
+  <p class="obs"><strong>What you see.</strong> With conservation, the patch splits into separate
+  ring cells that spread out and keep their distance. Without it, the same patch grows without
+  limit into a maze.</p>
+  <p class="open"><strong>What the ledger says.</strong> The number of cells follows the mass:
+  about one cell per 58 units, from 4 cells to 57, in 20 runs <a class="claim" href="claims.html#C064" title="In Flow-Lenia rule FL-43 a noise patch condenses into separate ring cells, and the number of cells follows the mass: about one cell per 58 units of mass, from 4 to 57 cells"><span class="cid">C064</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>. Without
+  conservation the mass grows 21-fold <a class="claim" href="claims.html#C065" title="Switch off mass conservation (classic update A ← clip(A + dt U) with FL-43&#x27;s kernels) and the same noise patch fills the world: mass ×21 and 225–231 fragments by 300 time units"><span class="cid">C065</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>. Here, conservation is what makes
+  individuals.</p>
+</div>
+
+<h2>Sources</h2>
+<ul>
+  <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/WINGS/WINGS.md">Wings notes</a></li>
+  <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/WINGS/flow_lenia.py">Our Flow-Lenia</a> and
+      <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/WINGS/flow_rings.jsonl">the cell counts</a></li>
+</ul>
+
+<nav class="walk" aria-label="Tour"><a class="prev" href="more-dimensions.html"><small>Back</small>East wing I: more dimensions, more chemicals</a><a class="next" href="other-models.html"><small>Next room</small>East wing III: cousins from other models</a></nav>
+</main>
+<footer class="site">
+  <p>Claim statuses read from <code>research/claims.md</code> (sha256 <code>a03c04168851</code>) when this page was built.</p>
+  <p>Every picture here is a recorded simulation or a figure drawn from committed data. Statuses
+  are the claims ledger's, not the museum's: a badge never says more than
+  <a href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/claims.md">research/claims.md</a> does.</p>
+</footer>
+</body>
+</html>

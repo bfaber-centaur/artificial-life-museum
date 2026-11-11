@@ -36,6 +36,13 @@ made of, ten times per unit of time. Some of them travel; one of them never chan
 | [G019](#g019--rule-90-inside-lenia) | Rule 90 inside Lenia (animated; *discrete limit*) | one cell, 1-D Lenia R 2, T 1 | 2026-11-08 |
 | [G020](#g020--rule-90-squared) | Rule 90 squared (animated; *discrete limit*) | one cell, 2-D Lenia R 2, T 1 | 2026-11-08 |
 | [G021](#g021--same-body-plan-different-physics) | Same body plan, different physics (animated) | Orbium, crescent, star + 3 catalogue cousins | 2026-11-10 |
+| [G022](#g022--matter-that-cannot-be-destroyed) | Matter that cannot be destroyed (animated; *Flow-Lenia*) | FL-43 noise patch, with and without conservation | 2026-11-11 |
+| [G023](#g023--spots-that-divide) | Spots that divide (animated; *Gray-Scott*) | one reaction-diffusion spot | 2026-11-11 |
+| [G024](#g024--a-pinwheel-made-of-particles) | A pinwheel made of particles (animated; *Particle Lenia*) | 200 particles | 2026-11-11 |
+| [G025](#g025--a-smoothlife-glider) | A SmoothLife glider (animated; *SmoothLife*) | SL-32 glider | 2026-11-11 |
+| [G026](#g026--lenia-in-three-dimensions) | Lenia in three dimensions (animated; *3-D*) | 4Gu3l, 3Ov1e, 1Sp1v and their slices | 2026-11-11 |
+| [G027](#g027--a-three-channel-aquarium) | A three-channel aquarium (animated; *3 channels*) | Chan's found/233 entries 0–11 | 2026-11-11 |
+| [G028](#g028--sixty-flow-lenia-worlds) | Sixty Flow-Lenia worlds (still; *Flow-Lenia*) | 60 random rules | 2026-11-11 |
 
 ### G001 — Four ways to move
 
@@ -481,6 +488,94 @@ Video: [`convergence.mp4`](exhibits/G021-convergence/convergence.mp4) ·
   The star runs at R 18 and Asterium at R 27, so their fine texture differs. Each top-row body is one seeded soup.
 
 
+
+## Other worlds (G022–G028)
+
+Worlds beyond classic 2-D Lenia, each with its own simulator in `research/experiments/WINGS/`
+(notes: [`WINGS.md`](../experiments/WINGS/WINGS.md)). Films: `film_wings.py G0xx`, checked by
+`film_wings.py verify`. Single-channel worlds use inferno; the three-channel aquarium maps
+channels to red, green and blue; particles are drawn as discs.
+
+### G022 — Matter that cannot be destroyed
+
+![One noise patch in two worlds: left, about fifteen separate ring cells; right, a maze filling the world](exhibits/G022-conservation-makes-individuals/conservation.gif)
+
+Film: [`conservation.mp4`](exhibits/G022-conservation-makes-individuals/conservation.mp4) ·
+[`provenance.json`](exhibits/G022-conservation-makes-individuals/provenance.json)
+
+- **Observation (claims C064, C065).** Under Flow-Lenia rule FL-43 a 40 × 40 noise patch splits
+  into separate ring cells with total mass fixed to 10⁻¹². The same kernels with the classic
+  update grow the patch 21-fold into a maze.
+- **Interpretation.** Conservation turns a growth rule into a sharing rule: each cell can only
+  take matter from its neighbours, so bodies have a size, and more matter makes more bodies.
+- **Caveats.** One rule out of sixty (G028). Our Flow-Lenia is written from the paper.
+
+### G023 — Spots that divide
+
+![Gray-Scott spots dividing until they tile the world; the right world is half wiped and refills](exhibits/G023-spots-that-divide/spots.gif)
+
+Film: [`spots.mp4`](exhibits/G023-spots-that-divide/spots.mp4) ·
+[`provenance.json`](exhibits/G023-spots-that-divide/provenance.json)
+
+- **Observation (claim C066).** One spot becomes about 300. After the left half is wiped at
+  t = 20000, the spots on the border divide back into it and reach the control count by 40000.
+- **Caveats.** Pearson's (1993) regime; v in [0, 0.45] on inferno.
+
+### G024 — A pinwheel made of particles
+
+![Three spiky rings of particles turning; the mirrored one turns the other way; the culled one slows](exhibits/G024-particle-pinwheel/pinwheel.gif)
+
+Film: [`pinwheel.mp4`](exhibits/G024-particle-pinwheel/pinwheel.mp4) ·
+[`provenance.json`](exhibits/G024-particle-pinwheel/provenance.json)
+
+- **Observation (claim C067).** 200 particles assemble into a spiky ring that spins at about
+  0.2 rad per 100 time units. Mirrored, it spins the other way; with 50 particles removed it
+  slows.
+- **Caveats.** The direction of spin depends on the seed and even on the timestep.
+
+### G025 — A SmoothLife glider
+
+![A bean-shaped SmoothLife glider sliding, and the same glider swallowing a still ring](exhibits/G025-smoothlife-glider/glider.gif)
+
+Film: [`glider.mp4`](exhibits/G025-smoothlife-glider/glider.mp4) ·
+[`provenance.json`](exhibits/G025-smoothlife-glider/provenance.json)
+
+- **Observation (claim C068).** The glider from SmoothLife rule SL-32 slides for 1000 time
+  units. Aimed at a still ring, it merges with it and leaves on a new heading.
+- **Caveats.** Its speed is not converged in resolution (+46 % per outer radius at ×2).
+
+### G026 — Lenia in three dimensions
+
+![Three 3-D Lenia species seen from above, and below them their middle slices run as flat worlds](exhibits/G026-three-dimensions/three-d.gif)
+
+Film: [`three-d.mp4`](exhibits/G026-three-dimensions/three-d.mp4) ·
+[`provenance.json`](exhibits/G026-three-dimensions/provenance.json)
+
+- **Observation (claims C069, C070).** Chan's Triguttome labens glides in 3-D; Ovome ellipsis
+  and Sphaerome ventilans hold still. Their middle slices, run in 2-D under the same rule, boil
+  into dust, settle into a ring, and fade, respectively.
+- **Rendering.** Top: density summed along the line of sight in a 48³ box following the body, scaled per species.
+
+### G027 — A three-channel aquarium
+
+![Twelve red-green-blue creatures: swimmers, spinning crescents, still discs and compound bodies](exhibits/G027-three-channel-aquarium/aquarium.gif)
+
+Film: [`aquarium.mp4`](exhibits/G027-three-channel-aquarium/aquarium.mp4) ·
+[`provenance.json`](exhibits/G027-three-channel-aquarium/provenance.json)
+
+- **Observation (claims C069, C071).** Chan's twelve three-channel creatures under their own
+  15-kernel rule. Zeroing any one channel kills every one of them.
+- **Caveats.** Creatures, names and rule are Chan's (found/233.json); the engine is ours.
+
+### G028 — Sixty Flow-Lenia worlds
+
+![Sixty small Flow-Lenia worlds: droplets, membranes, crystals, wheels and colonies](exhibits/G028-sixty-flow-worlds/sixty-flow-worlds.png)
+
+[`provenance.json`](exhibits/G028-sixty-flow-worlds/provenance.json)
+
+- **Observation (scout for C064).** Sixty random rules, one noise patch each, after 600 time
+  units. Most make one body (droplet, ringed membrane, crystal inside a membrane, wheel); a few
+  make colonies (FL-9, FL-11, FL-41, FL-43, FL-53).
 
 ## Field note, 7 October 2026
 
