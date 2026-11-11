@@ -33,6 +33,8 @@ made of, ten times per unit of time. Some of them travel; one of them never chan
 | [G016](#g016--changing-the-laws-of-physics-under-a-living-creature) | Changing the laws of physics under a living creature (animated; *modified rule*) | S001 Orbium, μ or σ ramped in time | 2026-11-07 |
 | [G017](#g017--rush-hour) | Rush hour (animated) | 30 × S001 Orbium | 2026-11-07 |
 | [G018](#g018--the-invisible-wall) | The invisible wall (animated; *modified rule*) | S001 Orbium, μ step in space | 2026-11-07 |
+| [G019](#g019--rule-90-inside-lenia) | Rule 90 inside Lenia (animated; *discrete limit*) | one cell, 1-D Lenia R 2, T 1 | 2026-11-08 |
+| [G020](#g020--rule-90-squared) | Rule 90 squared (animated; *discrete limit*) | one cell, 2-D Lenia R 2, T 1 | 2026-11-08 |
 | [G021](#g021--same-body-plan-different-physics) | Same body plan, different physics (animated) | Orbium, crescent, star + 3 catalogue cousins | 2026-11-10 |
 
 ### G001 — Four ways to move
@@ -426,6 +428,41 @@ Video: [`invisible-wall.mp4`](exhibits/G018-invisible-wall/invisible-wall.mp4) �
   arrives. Each lane uses one phase and one approach angle. A "cross" means a body with Orbium's
   mass persisted, not that its shape is unchanged.
 
+### G019 — Rule 90 inside Lenia
+
+![A Sierpinski triangle grown from one cell by a one-row Lenia world, time running downward](exhibits/G019-rule-90-inside-lenia/rule90-lenia.png)
+
+Films: [`rule90-grows.mp4`](exhibits/G019-rule-90-inside-lenia/rule90-grows.mp4) (the triangle drawing
+itself) · [`melt-sweep.mp4`](exhibits/G019-rule-90-inside-lenia/melt-sweep.mp4) (σ 0.10 → 0.30 and
+back) · still: [`melt-grid.png`](exhibits/G019-rule-90-inside-lenia/melt-grid.png) ·
+[`provenance.json`](exhibits/G019-rule-90-inside-lenia/provenance.json)
+
+![Twelve space-time diagrams from one cell: rows are time step 1, 1/2 and 1/4, columns widen the growth bump](exhibits/G019-rule-90-inside-lenia/melt-grid.png)
+
+- **Observation (claim C061).** Shrink Lenia to one row, a kernel of radius 2 and a time step of 1, and
+  a single cell grows Wolfram's Rule 90, the Sierpinski triangle, to within 7.5 × 10⁻⁶. Widen the
+  growth bump or shrink the time step and the triangle first survives with blurred edges
+  (dt = 1/2, 1/4 at σ 0.17), then dissolves into a disordered cone.
+- **Interpretation.** This is the 1-D version of Chan's observation that Game of Life is a corner of
+  Lenia (Chan 2019 §2.1.6). Only seven elementary rules sit exactly in this corner, and Rule 90 is
+  the only chaotic one. Rule 30 and Rule 110 cannot appear, because Lenia's kernel is mirror-symmetric.
+- **Caveats.** T = 1 is far from where Lenia's creatures live (T = 10). The melt grid is descriptive.
+
+### G020 — Rule 90 squared
+
+![A 2-D Lenia world grown from one cell: four solid squares at step 191](exhibits/G020-rule-90-squared/rule90-squared-step191.png)
+
+Film: [`rule90-squared.mp4`](exhibits/G020-rule-90-squared/rule90-squared.mp4) · time exposure:
+[`rule90-squared-exposure.png`](exhibits/G020-rule-90-squared/rule90-squared-exposure.png) ·
+[`provenance.json`](exhibits/G020-rule-90-squared/provenance.json)
+
+- **Observation (claim C062).** In 2-D, with the growth centred on the weight of exactly one diagonal
+  neighbour, one cell grows a pattern that is, at every step and with zero error, Rule 90 times
+  Rule 90: fractal dust that fills a square at steps 2^k − 1 and collapses to four cells at 2^k.
+  The time exposure shows the fractal carpet left behind.
+- **Rendering.** Live cells sit on a checkerboard, so each pixel block shows a 2 × 2 block of cells
+  (max for frames, sum for the exposure).
+
 ## Species hunt (G021)
 
 ### G021 — Same body plan, different physics
@@ -444,6 +481,8 @@ Video: [`convergence.mp4`](exhibits/G021-convergence/convergence.mp4) ·
   The star runs at R 18 and Asterium at R 27, so their fine texture differs. Each top-row body is one seeded soup.
 
 
+
+## Field note, 7 October 2026
 
 > *What I saw.* Four animals, four temperaments. The Orbium set off at once along a line it never
 > left, steady as a commuter. The pair travelled the same way, shoulder to shoulder, slightly

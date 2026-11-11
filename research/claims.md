@@ -1924,6 +1924,43 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
 - **History:**
   - 2026-11-07 — OBSERVED — VIS-talk thread.
 
+### C061 — In classic 1-D Lenia's discrete limit (R = 2, T = 1) a single cell grows Wolfram's Rule 90 (the Sierpinski triangle) to within 7.5 × 10⁻⁶; the only elementary rules reached exactly are 0, 4, 5, 72, 90, 128 and 160
+
+- **Status:** OBSERVED
+- **Owner lane:** VIS-talk thread (fractal round)
+- **Sources:** gallery G019; `research/experiments/VIS-talk/eca_reach.py`
+- **Specimen / version:** none; one cell set to 1 on a zero 1 × 1024 ring
+- **Simulator / version:** `alm.lenia.Lenia` unchanged, on a 1 × N world (the kernel then only sees offsets along the row)
+- **Parameters:** poly kernel core, R = 2 (weight 1/2 at offsets ±1, 0 at the cell itself), exp growth μ = 0.5, σ = 0.1, T = 1; 511 steps
+- **Intervention:** none (rule choice)
+- **Metric:** max |A − Rule 90| over all 512 rows, Rule 90 computed independently by integer XOR; for the reachable set, all eight neighbourhoods must map to 0 or 1 within 10⁻³ over a μ × σ grid for both growth families
+- **Result:** max difference 7.45 × 10⁻⁶, identical after thresholding at 0.5. Reached set {0, 4, 5, 72, 90, 128, 160}; Rule 90 is the only one of Wolfram's class 3. Why the set is small: a birth (0 → 1) needs G(u) = +1 exactly, which only happens at u = μ, so at most one neighbour sum can cause births; and the kernel is mirror-symmetric with zero self-weight, so left–right asymmetric rules such as Rule 30 and Rule 110 are out of reach.
+- **Run IDs:** `G019:rule90`; melt grid `G019:melt:T<T>:s<σ>`; sweep `G019:sweep:T1:s<σ>`
+- **Search / parameter bounds:** reachability only at R = 2, T = 1, binary states, single kernel, β = [1]; μ on 401 points in [0, 1], σ on 300 log-spaced points in [0.005, 1]. The melt grid (T 1, 2, 4 × σ 0.10, 0.17, 0.20, 0.30) is descriptive only: the triangle persists at T = 2 and T = 4 for σ = 0.17 with intermediate cell values, and dissolves as σ widens
+- **Reproduction command:** `.venv/bin/python research/experiments/VIS-talk/film.py G019` (verify: `film.py verify G019`); `python research/experiments/VIS-talk/eca_reach.py`
+- **Prior literature:** Chan 2019 §2.1.6 embeds Game of Life in discrete Lenia (R = T = P = 1, rectangular core and growth); this is the same move in 1-D. No Lenia paper we hold mentions Rule 90 or Sierpinski patterns. Chan 2019 §3.3.1 maps Wolfram's four classes onto Lenia's μ–σ landscapes, which is a different statement.
+- **Known caveats:** T = 1 is far from the Orbium regime (T = 10); the reached set depends on the 10⁻³ exactness tolerance and the sampled grid (the analytic argument above covers births but not every keep-state case)
+- **History:**
+  - 2026-11-08 — OBSERVED — VIS-talk thread (fractal round).
+
+### C062 — In 2-D Lenia with R = 2, T = 1 and growth centred on the weight of one diagonal neighbour, a single cell's state at every step is exactly the outer product of two Rule 90 rows
+
+- **Status:** OBSERVED
+- **Owner lane:** VIS-talk thread (fractal round)
+- **Sources:** gallery G020
+- **Specimen / version:** none; one cell set to 1 on a zero 512² torus
+- **Simulator / version:** `alm.lenia.Lenia` unchanged
+- **Parameters:** poly kernel R = 2, poly growth μ = k[1,1] = 0.0800471273… (normalised weight of one diagonal neighbour), σ = 0.004, T = 1; 255 steps
+- **Intervention:** none (rule choice)
+- **Metric:** max |A_t − r_t ⊗ r_t| over all 256 frames, r_t = Rule 90 row from one cell (integer XOR)
+- **Result:** 0.0 at every step, and every frame is exactly 0 or 1. The reason: with A = a(y)a(x), the diagonal-neighbour sum factorises into (a(y−1) + a(y+1))(a(x−1) + a(x+1)), which equals 1 only when both factors are 1
+- **Run IDs:** `G020:diag`
+- **Search / parameter bounds:** one seed, one world size, 255 steps. A 1,200-rule random search at R 2–5, T 1–3 from 1–9-cell seeds found symmetric growing crystals and textures but no other exact fractal
+- **Reproduction command:** `.venv/bin/python research/experiments/VIS-talk/film.py G020` (verify: `film.py verify G020`)
+- **Known caveats:** discrete limit only; the product structure holds for product-form seeds and is not claimed for other starts
+- **History:**
+  - 2026-11-08 — OBSERVED — VIS-talk thread (fractal round).
+
 ### C063 — Four bodies (Orbium, a crescent glider, two shapeshifting stars) keep their motion class for 200 tu when moved into each of the four poly/exp kernel × growth combinations
 
 - **Status:** OBSERVED
