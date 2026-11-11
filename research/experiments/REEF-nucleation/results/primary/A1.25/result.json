@@ -1,0 +1,50 @@
+{
+  "N": 256,
+  "censored_at": null,
+  "center_yx": [
+    128.3510148974147,
+    127.87640202215817
+  ],
+  "condition": "A1.25",
+  "engine": "alm",
+  "files": {
+    "final.npy": "e1246dff5a051ef75958bd5297d9f1dcdb24e1bf591ec6a9ed0c855e779da1c8",
+    "initial.npy": "b136e827590ff7c7dc4d88ee141bdf5146d817fe238b739e29b6eea54b6f4e8f",
+    "series.csv": "71b64176a065344d1e46a0c36234ad997339e7e6d221d5d6c328fe2f01718919",
+    "snapshots.npz": "a7a2a07d6a7b2ff73297ff6c2e846ca8ccc1eaf72433fc92e2fc128c58419b74",
+    "steps.csv": "ff1c580dc1279dfd25d9d20783bec96673a85ad602e0c333bc2b3af3ce543e9e"
+  },
+  "final": {
+    "bodies": 0,
+    "mass": 0.0,
+    "max_change": 0.0,
+    "radius": 0.0,
+    "time": 25.0
+  },
+  "final_sha256": "07854d2fef297a06ba81685e660c332de36d5d18d546927d30daad6d7fda1541",
+  "final_time": 25.0,
+  "horizon": 25,
+  "initial": {
+    "bodies": 1,
+    "mass": 0.6091289750772779,
+    "max_change": 0.0,
+    "radius": 1.004962596592533,
+    "time": 0.0
+  },
+  "initial_sha256": "63921958c2cb8fc77986fabd5c08b5da07042ad33d8c0ec40dc9f0286f47f176",
+  "outcome": "EVAPORATION",
+  "peak": 0.8470872004251552,
+  "rule": {
+    "R": 13,
+    "T": 10,
+    "beta": [
+      1.0
+    ],
+    "dt": 0.1,
+    "growth": "poly",
+    "kernel": "poly",
+    "mu": 0.155,
+    "sigma": 0.02
+  },
+  "scored_through": 25.0
+}

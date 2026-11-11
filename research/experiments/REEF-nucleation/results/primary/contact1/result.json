@@ -1,0 +1,50 @@
+{
+  "N": 256,
+  "censored_at": 20.8,
+  "center_yx": [
+    128.3510148974147,
+    127.87640202215817
+  ],
+  "condition": "contact1",
+  "engine": "alm",
+  "files": {
+    "final.npy": "7ff21317fd3dbc1558b45829e51ddbb1a6cf7439f12ed08ae736deb387732067",
+    "initial.npy": "868a79a7b7bf2377d744d4bb48b6a87c8af35a91e7e61f44dc92d4a6cc220311",
+    "series.csv": "c2268b67f16d9acd1c1ae8ee972e0e84929047d2fdc0fb487e15f017f79a817a",
+    "snapshots.npz": "b97dd543a3a7e1a5d7fd04fcbe8b63dc7c3fc5c65c415d210d5261f75870e9e6",
+    "steps.csv": "7c107cd8ebf9b15ee05b854bae24f9a7abd78a5d5a9bad2501e1dc11de499ad8"
+  },
+  "final": {
+    "bodies": 77,
+    "mass": 34.67801966609057,
+    "max_change": 0.9765349922218647,
+    "radius": 8.548976456153467,
+    "time": 20.0
+  },
+  "final_sha256": "1ba5b5301ed3f9357cef598aa3813051efa09715ce0e660ad46572e70b92e253",
+  "final_time": 20.8,
+  "horizon": 25,
+  "initial": {
+    "bodies": 2,
+    "mass": 0.8660014049138933,
+    "max_change": 0.0,
+    "radius": 2.2167453370651033,
+    "time": 0.0
+  },
+  "initial_sha256": "0a40cf44e51db550a13180643149372821d4be150ccba4236d6aa94c55c82072",
+  "outcome": "EXPANDING_COLONY",
+  "peak": 1.0,
+  "rule": {
+    "R": 13,
+    "T": 10,
+    "beta": [
+      1.0
+    ],
+    "dt": 0.1,
+    "growth": "poly",
+    "kernel": "poly",
+    "mu": 0.155,
+    "sigma": 0.02
+  },
+  "scored_through": 20.0
+}

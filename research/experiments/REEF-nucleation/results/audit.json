@@ -1,0 +1,403 @@
+{
+  "all_recorded_file_hashes_verified": true,
+  "checks": [
+    {
+      "class_agrees": true,
+      "common_through": 25.0,
+      "condition": "blank",
+      "exact_final_hash": null,
+      "group": "N512",
+      "mass_rel_max_above_001": 0,
+      "radius_abs_max_R": 0.0,
+      "within_numeric_tolerance": true
+    },
+    {
+      "class_agrees": true,
+      "common_through": 25.0,
+      "condition": "contact0.5",
+      "exact_final_hash": null,
+      "group": "N512",
+      "mass_rel_max_above_001": 0.0,
+      "radius_abs_max_R": 0.0,
+      "within_numeric_tolerance": true
+    },
+    {
+      "class_agrees": true,
+      "common_through": 25.0,
+      "condition": "B16",
+      "exact_final_hash": null,
+      "group": "N512",
+      "mass_rel_max_above_001": 3.979945601149758e-16,
+      "radius_abs_max_R": 0.0,
+      "within_numeric_tolerance": true
+    },
+    {
+      "class_agrees": true,
+      "common_through": 25.0,
+      "condition": "A1.45",
+      "exact_final_hash": null,
+      "group": "N512",
+      "mass_rel_max_above_001": 0.0,
+      "radius_abs_max_R": 0.0,
+      "within_numeric_tolerance": true
+    },
+    {
+      "class_agrees": true,
+      "common_through": 19.0,
+      "condition": "contact0.75",
+      "exact_final_hash": null,
+      "group": "N512",
+      "mass_rel_max_above_001": 3.7550276354385917e-13,
+      "radius_abs_max_R": 0.0,
+      "within_numeric_tolerance": true
+    },
+    {
+      "class_agrees": true,
+      "common_through": 25.0,
+      "condition": "ring",
+      "exact_final_hash": null,
+      "group": "N512",
+      "mass_rel_max_above_001": 0.0,
+      "radius_abs_max_R": 0.0,
+      "within_numeric_tolerance": true
+    },
+    {
+      "class_agrees": true,
+      "common_through": 25.0,
+      "condition": "blank",
+      "exact_final_hash": null,
+      "group": "T20",
+      "mass_rel_max_above_001": 0,
+      "radius_abs_max_R": 0.0,
+      "within_numeric_tolerance": true
+    },
+    {
+      "class_agrees": true,
+      "common_through": 25.0,
+      "condition": "contact0.5",
+      "exact_final_hash": null,
+      "group": "T20",
+      "mass_rel_max_above_001": 0.0,
+      "radius_abs_max_R": 0.0,
+      "within_numeric_tolerance": true
+    },
+    {
+      "class_agrees": true,
+      "common_through": 25.0,
+      "condition": "B16",
+      "exact_final_hash": null,
+      "group": "T20",
+      "mass_rel_max_above_001": 0.9365147057074678,
+      "radius_abs_max_R": 0.4905255286052351,
+      "within_numeric_tolerance": false
+    },
+    {
+      "class_agrees": true,
+      "common_through": 25.0,
+      "condition": "A1.45",
+      "exact_final_hash": null,
+      "group": "T20",
+      "mass_rel_max_above_001": 0.3101119227782936,
+      "radius_abs_max_R": 0.04114401898448061,
+      "within_numeric_tolerance": false
+    },
+    {
+      "class_agrees": true,
+      "common_through": 19.0,
+      "condition": "contact0.75",
+      "exact_final_hash": null,
+      "group": "T20",
+      "mass_rel_max_above_001": 0.14177147075417726,
+      "radius_abs_max_R": 0.6045597959888873,
+      "within_numeric_tolerance": false
+    },
+    {
+      "class_agrees": true,
+      "common_through": 25.0,
+      "condition": "ring",
+      "exact_final_hash": null,
+      "group": "T20",
+      "mass_rel_max_above_001": 0.0,
+      "radius_abs_max_R": 0.0,
+      "within_numeric_tolerance": true
+    },
+    {
+      "class_agrees": true,
+      "common_through": 25.0,
+      "condition": "blank",
+      "exact_final_hash": null,
+      "group": "direct",
+      "mass_rel_max_above_001": 0,
+      "radius_abs_max_R": 0.0,
+      "within_numeric_tolerance": true
+    },
+    {
+      "class_agrees": true,
+      "common_through": 25.0,
+      "condition": "contact0.5",
+      "exact_final_hash": null,
+      "group": "direct",
+      "mass_rel_max_above_001": 0.0,
+      "radius_abs_max_R": 0.0,
+      "within_numeric_tolerance": true
+    },
+    {
+      "class_agrees": true,
+      "common_through": 25.0,
+      "condition": "B16",
+      "exact_final_hash": null,
+      "group": "direct",
+      "mass_rel_max_above_001": 3.4492861876631234e-15,
+      "radius_abs_max_R": 0.0,
+      "within_numeric_tolerance": true
+    },
+    {
+      "class_agrees": true,
+      "common_through": 25.0,
+      "condition": "A1.45",
+      "exact_final_hash": null,
+      "group": "direct",
+      "mass_rel_max_above_001": 2.4480115706341345e-16,
+      "radius_abs_max_R": 0.0,
+      "within_numeric_tolerance": true
+    },
+    {
+      "class_agrees": true,
+      "common_through": 19.0,
+      "condition": "contact0.75",
+      "exact_final_hash": null,
+      "group": "direct",
+      "mass_rel_max_above_001": 5.020521586196197e-13,
+      "radius_abs_max_R": 0.0,
+      "within_numeric_tolerance": true
+    },
+    {
+      "class_agrees": true,
+      "common_through": 25.0,
+      "condition": "ring",
+      "exact_final_hash": null,
+      "group": "direct",
+      "mass_rel_max_above_001": 0.0,
+      "radius_abs_max_R": 0.0,
+      "within_numeric_tolerance": true
+    },
+    {
+      "class_agrees": true,
+      "common_through": 25.0,
+      "condition": "blank",
+      "exact_final_hash": true,
+      "group": "replay",
+      "mass_rel_max_above_001": 0,
+      "radius_abs_max_R": 0.0,
+      "within_numeric_tolerance": true
+    },
+    {
+      "class_agrees": true,
+      "common_through": 25.0,
+      "condition": "contact0.5",
+      "exact_final_hash": true,
+      "group": "replay",
+      "mass_rel_max_above_001": 0.0,
+      "radius_abs_max_R": 0.0,
+      "within_numeric_tolerance": true
+    },
+    {
+      "class_agrees": true,
+      "common_through": 25.0,
+      "condition": "B16",
+      "exact_final_hash": true,
+      "group": "replay",
+      "mass_rel_max_above_001": 0.0,
+      "radius_abs_max_R": 0.0,
+      "within_numeric_tolerance": true
+    },
+    {
+      "class_agrees": true,
+      "common_through": 25.0,
+      "condition": "A1.45",
+      "exact_final_hash": true,
+      "group": "replay",
+      "mass_rel_max_above_001": 0.0,
+      "radius_abs_max_R": 0.0,
+      "within_numeric_tolerance": true
+    },
+    {
+      "class_agrees": true,
+      "common_through": 19.0,
+      "condition": "contact0.75",
+      "exact_final_hash": true,
+      "group": "replay",
+      "mass_rel_max_above_001": 0.0,
+      "radius_abs_max_R": 0.0,
+      "within_numeric_tolerance": true
+    },
+    {
+      "class_agrees": true,
+      "common_through": 25.0,
+      "condition": "ring",
+      "exact_final_hash": true,
+      "group": "replay",
+      "mass_rel_max_above_001": 0.0,
+      "radius_abs_max_R": 0.0,
+      "within_numeric_tolerance": true
+    }
+  ],
+  "inputs": [
+    {
+      "condition": "B16",
+      "extinct_by_tu": 1.7,
+      "mass_R2": 7.796830301406818,
+      "peak": 0.6799555168792724,
+      "rms_radius_about_seed_R": 1.9080250451797967,
+      "support_radius_R": 3.9244735278532312
+    },
+    {
+      "condition": "B8",
+      "extinct_by_tu": 1.0,
+      "mass_R2": 3.8984111668321826,
+      "peak": 0.6798028935374144,
+      "rms_radius_about_seed_R": 1.3491725956667855,
+      "support_radius_R": 2.7747134264207642
+    },
+    {
+      "condition": "A0.75",
+      "extinct_by_tu": 1.8,
+      "mass_R2": 0.36547738504636673,
+      "peak": 0.5082523202550931,
+      "rms_radius_about_seed_R": 0.47701073025872304,
+      "support_radius_R": 0.9470625308963648
+    },
+    {
+      "condition": "A1.25",
+      "extinct_by_tu": 1.6,
+      "mass_R2": 0.6091289750772779,
+      "peak": 0.8470872004251552,
+      "rms_radius_about_seed_R": 0.47701073025872304,
+      "support_radius_R": 1.004962596592533
+    },
+    {
+      "condition": "B4",
+      "extinct_by_tu": 1.1,
+      "mass_R2": 1.9492046432397445,
+      "peak": 0.6794977496198698,
+      "rms_radius_about_seed_R": 0.9540075413051172,
+      "support_radius_R": 1.962287052114207
+    },
+    {
+      "condition": "A0.5",
+      "extinct_by_tu": 0.4,
+      "mass_R2": 0.24365159003091114,
+      "peak": 0.3388348801700621,
+      "rms_radius_about_seed_R": 0.47701073025872304,
+      "support_radius_R": 0.8961861794181535
+    },
+    {
+      "condition": "contact0.5",
+      "extinct_by_tu": null,
+      "mass_R2": 0.6223498148829821,
+      "peak": 1.0,
+      "rms_radius_about_seed_R": 1.446563196185699,
+      "support_radius_R": 2.2167453370651033
+    },
+    {
+      "condition": "B3",
+      "extinct_by_tu": 1.1,
+      "mass_R2": 1.4619084814494003,
+      "peak": 0.6792943964399168,
+      "rms_radius_about_seed_R": 0.8262046105154337,
+      "support_radius_R": 1.6987879416540166
+    },
+    {
+      "condition": "blank",
+      "extinct_by_tu": 0.0,
+      "mass_R2": 0.0,
+      "peak": 0.0,
+      "rms_radius_about_seed_R": null,
+      "support_radius_R": 0.0
+    },
+    {
+      "condition": "B2",
+      "extinct_by_tu": 1.1,
+      "mass_R2": 0.9746039882301109,
+      "peak": 0.6788878726342165,
+      "rms_radius_about_seed_R": 0.6745891405803094,
+      "support_radius_R": 1.3872437163370699
+    },
+    {
+      "condition": "A1",
+      "extinct_by_tu": 1.5,
+      "mass_R2": 0.48730318006182227,
+      "peak": 0.6776697603401242,
+      "rms_radius_about_seed_R": 0.47701073025872304,
+      "support_radius_R": 0.9810692979160585
+    },
+    {
+      "condition": "ring",
+      "extinct_by_tu": null,
+      "mass_R2": 0.378698224852071,
+      "peak": 1.0,
+      "rms_radius_about_seed_R": 1.8145180669979566,
+      "support_radius_R": 2.2167453370651033
+    },
+    {
+      "condition": "B6",
+      "extinct_by_tu": 1.1,
+      "mass_R2": 2.9238153706017425,
+      "peak": 0.6797011636755137,
+      "rms_radius_about_seed_R": 1.1684275760367027,
+      "support_radius_R": 2.4031646659809223
+    },
+    {
+      "condition": "A1.45",
+      "extinct_by_tu": 1.8,
+      "mass_R2": 0.7065896110896424,
+      "peak": 0.98262115249318,
+      "rms_radius_about_seed_R": 0.47701073025872304,
+      "support_radius_R": 1.0233975333621013
+    },
+    {
+      "condition": "B1.5",
+      "extinct_by_tu": 1.1,
+      "mass_R2": 0.730948196107232,
+      "peak": 0.6784815921127321,
+      "rms_radius_about_seed_R": 0.5841979033997545,
+      "support_radius_R": 1.2013979701517543
+    },
+    {
+      "condition": "contact1",
+      "extinct_by_tu": null,
+      "mass_R2": 0.8660014049138933,
+      "peak": 1.0,
+      "rms_radius_about_seed_R": 1.2521266609957684,
+      "support_radius_R": 2.2167453370651033
+    },
+    {
+      "condition": "A0.25",
+      "extinct_by_tu": 0.2,
+      "mass_R2": 0.12182579501545557,
+      "peak": 0.16941744008503104,
+      "rms_radius_about_seed_R": 0.47701073025872304,
+      "support_radius_R": 0.8022623991418496
+    },
+    {
+      "condition": "B12",
+      "extinct_by_tu": 1.1,
+      "mass_R2": 5.8476282556413866,
+      "peak": 0.6799046386250723,
+      "rms_radius_about_seed_R": 1.6524036277799612,
+      "support_radius_R": 3.398700467534753
+    },
+    {
+      "condition": "contact0.75",
+      "extinct_by_tu": null,
+      "mass_R2": 0.7441756098984378,
+      "peak": 1.0,
+      "rms_radius_about_seed_R": 1.336874331669984,
+      "support_radius_R": 2.2167453370651033
+    }
+  ],
+  "negative_controls": {
+    "half_contact_returns_ring": true,
+    "ring_bitwise_fixed": true
+  }
+}
