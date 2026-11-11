@@ -1,0 +1,66 @@
+{
+  "exhibit": "G020",
+  "title": "Rule 90 squared",
+  "media": [
+    "rule90-squared.mp4",
+    "rule90-squared.gif",
+    "rule90-squared-step63.png",
+    "rule90-squared-step64.png",
+    "rule90-squared-step100.png",
+    "rule90-squared-step191.png",
+    "rule90-squared-step255.png",
+    "rule90-squared-exposure.png"
+  ],
+  "outer_product_check": {
+    "claim": "A_t(y, x) == r_t(y) * r_t(x), r_t = Rule 90 row from one cell",
+    "max_abs_difference_all_steps": 0.0,
+    "all_frames_exactly_0_or_1": true
+  },
+  "why_it_works": "With A_t = a(y) a(x), the diagonal-neighbour sum factorises as (a(y-1) + a(y+1)) (a(x-1) + a(x+1)); it equals exactly 1 iff both factors equal 1, i.e. iff Rule 90 turns on both coordinates.",
+  "view": "whole 512^2 torus; each pixel block is a 2 x 2 block of cells (max for frames, sum for the exposure), {sc} px per block; inferno",
+  "caveats": [
+    "T = 1 discrete limit, as in G019; not a regime where Lenia's gliders live."
+  ],
+  "runs": [
+    {
+      "key": "G020:diag",
+      "rule": {
+        "R": 2,
+        "T": 1,
+        "mu": 0.08004712734842875,
+        "sigma": 0.004,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 1.0
+      },
+      "grid": {
+        "shape": [
+          512,
+          512
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 255,
+      "time_units": 255.0,
+      "initial_state": "one cell set to 1 at the centre of a zero 512^2 torus",
+      "initial_state_sha256": "bb680e0d71dbbb84e0c73a061570951f2058658bdfb2cf22b5dd385ffad2cf42",
+      "final_state_sha256": "c95275ffd15df532bca95fb53d638aaca61ea43adddd4618a3ebe1bf1254f5cb",
+      "rule_note": "mu is set to the normalised kernel weight of ONE diagonal neighbour (k[1,1]); sigma 0.004 poly growth makes G = -1 exactly for every other neighbour sum"
+    }
+  ],
+  "simulator": {
+    "package": "alm.lenia.Lenia (unchanged)",
+    "git_commit": "9f13a5660b501176a966cf902b37041998febbe0",
+    "git_dirty": false
+  },
+  "render": {
+    "colormap": "matplotlib inferno, A in [0,1] mapped linearly, nearest-neighbour",
+    "script": "research/experiments/VIS-talk/film.py"
+  },
+  "reproduce": "git checkout <this commit> && .venv/bin/python research/experiments/VIS-talk/film.py G020   # verify only: film.py verify G020"
+}
