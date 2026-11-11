@@ -35,6 +35,7 @@ made of, ten times per unit of time. Some of them travel; one of them never chan
 | [G018](#g018--the-invisible-wall) | The invisible wall (animated; *modified rule*) | S001 Orbium, μ step in space | 2026-11-07 |
 | [G019](#g019--rule-90-inside-lenia) | Rule 90 inside Lenia (animated; *discrete limit*) | one cell, 1-D Lenia R 2, T 1 | 2026-11-08 |
 | [G020](#g020--rule-90-squared) | Rule 90 squared (animated; *discrete limit*) | one cell, 2-D Lenia R 2, T 1 | 2026-11-08 |
+| [G021](#g021--same-body-plan-different-physics) | Same body plan, different physics (animated) | Orbium, crescent, star + 3 catalogue cousins | 2026-11-10 |
 
 ### G001 — Four ways to move
 
@@ -462,6 +463,25 @@ Film: [`rule90-squared.mp4`](exhibits/G020-rule-90-squared/rule90-squared.mp4) �
 - **Rendering.** Live cells sit on a checkerboard, so each pixel block shows a 2 × 2 block of cells
   (max for frames, sum for the exposure).
 
+## Species hunt (G021)
+
+### G021 — Same body plan, different physics
+
+![Six tiles. Top row: an Orbium, a crescent glider and a shapeshifting star found under the exponential kernel or growth curve. Bottom row: their catalogued cousins under the polynomial rule: Orbium, a hollow two-segment glider, and Asterium metamorpha](exhibits/G021-convergence/convergence.gif)
+
+Video: [`convergence.mp4`](exhibits/G021-convergence/convergence.mp4) ·
+[`convergence-still.png`](exhibits/G021-convergence/convergence-still.png) ·
+[`provenance.json`](exhibits/G021-convergence/provenance.json)
+
+- **Observation (claim C063).** The species hunt (`research/experiments/SPECIES-scout/SCOUT.md`) looked in
+  kernel/growth families that the catalogue barely uses. Everything it found already had a catalogued body plan.
+  Moved into all four poly/exp kernel × growth combinations, the four test bodies keep their motion class.
+  Top: ours. Bottom: the nearest catalogue entry under its own poly/poly rule.
+- **Caveats.** Nothing here is a new species. The crescent is a single hollow segment, and its cousin P4cf has two.
+  The star runs at R 18 and Asterium at R 27, so their fine texture differs. Each top-row body is one seeded soup.
+
+
+
 ## Field note, 7 October 2026
 
 > *What I saw.* Four animals, four temperaments. The Orbium set off at once along a line it never
@@ -602,6 +622,7 @@ heading values come from `galintervene.chord_heading("S102", 3002)`. The G004 S0
 
 ## Cycle log
 
+- **2026-11-10, G021 (species-hunt thread).** Convergence exhibit from the SPECIES-scout hunt, claim C063.
 - **2026-11-07, G014–G018 (lightning-talk thread, round two).** Five "stranger worlds". G015,
   G016 and G018 use a spatially or temporally varying rule (`FieldLenia`, checked bitwise against
   `Lenia` at uniform parameters) and are labelled *modified rule*.

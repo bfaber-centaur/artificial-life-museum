@@ -1,7 +1,7 @@
 {
   "ledger": "research/claims.md",
-  "ledger_sha256": "0bd5b17b1fb9c661c271f282477267445d6ebcaf8cbad6bed0c2222b572f1f33",
-  "ledger_commit": "941c169",
+  "ledger_sha256": "49b019a5d50f68dc9d23d9ca5c4a00c0c6b23b514ea898ba980c3b68aec5b2b6",
+  "ledger_commit": "c8f50aa",
   "conventions_sha256": "0e237384e0425b3c325229cf650ab6f9807fb08c1bedc991433b54b13c2eb02f",
   "claims": {
     "C001": {
@@ -263,6 +263,13 @@
       "rooms": [
         "field-trip"
       ]
+    },
+    "C063": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "field-trip"
+      ]
     }
   },
   "sources": {
@@ -360,6 +367,7 @@
       "research/reports/reef-expedition-2026-10-20.md"
     ],
     "field-trip": [
+      "research/experiments/SPECIES-scout/SCOUT.md",
       "research/experiments/VIS-talk/SURVEY.md",
       "research/experiments/VIS-talk/film.py",
       "research/gallery/README.md",
@@ -380,6 +388,7 @@
       "research/gallery/exhibits/G016-live-mutation/provenance.json",
       "research/gallery/exhibits/G017-rush-hour/provenance.json",
       "research/gallery/exhibits/G018-invisible-wall/provenance.json",
+      "research/gallery/exhibits/G021-convergence/provenance.json",
       "research/reports/reef-expedition-2026-10-20.md",
       "research/reports/visual-specimens-2026-11-07.md"
     ],

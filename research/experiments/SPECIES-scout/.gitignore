@@ -1,0 +1,3 @@
+conv/
+*.log
+__pycache__/

@@ -1,0 +1,212 @@
+{
+  "exhibit": "G021",
+  "title": "Same body plan, different physics",
+  "media": [
+    "convergence.mp4",
+    "convergence.gif",
+    "convergence-still.png"
+  ],
+  "frames": {
+    "window_tu": 30,
+    "frames_per_tu": 5,
+    "mp4_fps": 20,
+    "time_compression": "4 tu per second"
+  },
+  "view": "each tile follows its body's periodic centroid (integer shift), window 6 R, nearest-neighbour",
+  "claim": "C063",
+  "caveats": [
+    "Nothing here is claimed as a new species. Each top-row body has a catalogued cousin with the same body plan (bottom row); the point is that the plan recurs when the kernel and growth curves change.",
+    "Top-row bodies come from one seeded soup (or S001) each, at one sigma; their survival windows across families are in research/experiments/SPECIES-scout/convergence.jsonl (C063).",
+    "The star runs at R 18 and its cousin at R 27: different resolutions, so fine texture differs."
+  ],
+  "runs": [
+    {
+      "key": "G021:orbium-ee",
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.15,
+        "sigma": 0.016,
+        "beta": [
+          1.0
+        ],
+        "kernel": "exp",
+        "growth": "exp",
+        "dt": 0.1
+      },
+      "grid": {
+        "shape": [
+          256,
+          256
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 300,
+      "time_units": 30.0,
+      "initial_state": "S001 cells centred on 256^2; settled 200 tu under the S001 rule, then moved unchanged into the rule below",
+      "initial_state_sha256": "481025ef3c71c99a33ac7ccfe1167fb0b516b5bb3bf42cb8b73dfde1c12d227d",
+      "final_state_sha256": "30d9f95608edf2ffeb04d1380d36eb0f8de65f1c98bc26f8766e9c858d618e83"
+    },
+    {
+      "key": "G021:crescent",
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.2817,
+        "sigma": 0.0406,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "exp",
+        "dt": 0.1
+      },
+      "grid": {
+        "shape": [
+          256,
+          256
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 2300,
+      "time_units": 230.0,
+      "initial_state": "SPECIES-scout R4 soup: numpy default_rng([1, 56]), sample_rule then seeds(), world 2 of 8, 256^2",
+      "initial_state_sha256": "6cf7bafbb6f940830b6324ca5c7d3560739e0eef4be3555b51f2519d43514d95",
+      "final_state_sha256": "402fea6cdbed1855dd4b08577872414bac3bea50474c0e849b6dac7cf72fe8d3"
+    },
+    {
+      "key": "G021:starA",
+      "rule": {
+        "R": 18,
+        "T": 10,
+        "mu": 0.1803,
+        "sigma": 0.0204,
+        "beta": [
+          1.0,
+          0.16666666666666666,
+          0.9166666666666666
+        ],
+        "kernel": "exp",
+        "growth": "exp",
+        "dt": 0.1
+      },
+      "grid": {
+        "shape": [
+          256,
+          256
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 2300,
+      "time_units": 230.0,
+      "initial_state": "SPECIES-scout R5 soup: numpy default_rng([1, 27]), sample_rule then seeds(), world 3 of 8, 256^2",
+      "initial_state_sha256": "f294446b2b69031ded9dfe93fb75b2ee13a74bfef3571c5e42f0e360b4ed5ea3",
+      "final_state_sha256": "97a01b456cafbaf06bd14a47ad71029395934237611b0a6997ecb7c25a997ad1"
+    },
+    {
+      "key": "G021:cat4:O2u",
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.15,
+        "sigma": 0.015,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "grid": {
+        "shape": [
+          128,
+          128
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 900,
+      "time_units": 90.0,
+      "initial_state": "catalog entry #4 (O2u Orbium unicaudatus) cells centred on zero 128^2 (VIS-talk survey.place)",
+      "initial_state_sha256": "81e9e30780fc4ea435a8d4ee870d832ee860f180f65fbffc066359cbaf129003",
+      "final_state_sha256": "c7ab033dcf6a4679cf883ea1ed5cf85adfdabef8f0051fb5d8260d7a0dec54cc"
+    },
+    {
+      "key": "G021:cat96:P4cf",
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.297,
+        "sigma": 0.0405,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "grid": {
+        "shape": [
+          128,
+          128
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 900,
+      "time_units": 90.0,
+      "initial_state": "catalog entry #96 (P4cf Paraptera cavus furiosus) cells centred on zero 128^2 (VIS-talk survey.place)",
+      "initial_state_sha256": "922eb2ccec410ffbec9496734e1eef6d3d8148d930ac168a963a7fe9432616bc",
+      "final_state_sha256": "5d8c8c3e41ef324a3541c52e4cf20a9d3890eb7ba23ee5ef981a0763a92ea39a"
+    },
+    {
+      "key": "G021:cat407:3R5m",
+      "rule": {
+        "R": 27,
+        "T": 10,
+        "mu": 0.21,
+        "sigma": 0.023,
+        "beta": [
+          1.0,
+          0.08333333333333333,
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "grid": {
+        "shape": [
+          256,
+          256
+        ],
+        "boundary": "periodic",
+        "dtype": "float64"
+      },
+      "integrator": "euler+clip[0,1]",
+      "steps": 900,
+      "time_units": 90.0,
+      "initial_state": "catalog entry #407 (3R5m Asterium metamorpha) cells centred on zero 256^2 (VIS-talk survey.place)",
+      "initial_state_sha256": "2ee0082e70acdf013f87d19959c456a523a43f8347f6a72b4ef852277a3fe33a",
+      "final_state_sha256": "f1863e1d0c90b5b6b23914051a1af4db0bcbfbefb11e1605cb5d86e18b3f304c"
+    }
+  ],
+  "simulator": {
+    "package": "alm.lenia.Lenia (unchanged)",
+    "git_commit": "4c3cee800c244138600f2a650de8d9a4eee47702",
+    "git_dirty": false
+  },
+  "render": {
+    "colormap": "matplotlib inferno, A in [0,1] mapped linearly, nearest-neighbour",
+    "script": "research/experiments/VIS-talk/film.py"
+  },
+  "reproduce": "git checkout <this commit> && .venv/bin/python research/experiments/VIS-talk/film.py G021   # verify only: film.py verify G021"
+}

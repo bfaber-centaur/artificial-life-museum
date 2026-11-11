@@ -153,6 +153,7 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
 | REEF expedition 2026-10-20 (reef/coordinator integration PR; lanes reef/field, reef/numerics, reef/behavior) | C052 / C053 / C054 / C055; amendments to C038, C041 |
 | VIS-talk lightning-talk thread 2026-11-07 (`research/experiments/VIS-talk/`, gallery G007–G013) | C056 / C057 / C058 |
 | VIS-talk round two 2026-11-07 (gallery G014–G018) | C059 / C060 |
+| Species hunt 2026-11-10 (`research/experiments/SPECIES-scout/`, gallery G021) | C063 (C061–C062 reserved by the open fractal PR #44) |
 
 ## Claims
 
@@ -1959,3 +1960,21 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
 - **Known caveats:** discrete limit only; the product structure holds for product-form seeds and is not claimed for other starts
 - **History:**
   - 2026-11-08 — OBSERVED — VIS-talk thread (fractal round).
+
+### C063 — Four bodies (Orbium, a crescent glider, two shapeshifting stars) keep their motion class for 200 tu when moved into each of the four poly/exp kernel × growth combinations
+
+- **Status:** OBSERVED
+- **Owner lane:** species-hunt thread
+- **Sources:** `research/experiments/SPECIES-scout/convergence.py`, `convergence.jsonl`, `convergence-matrix.png`; gallery G021
+- **Specimen / version:** S001 (Orbium) on 256²; crescent = SPECIES-scout R4 soup `default_rng([1, 56])` world 2; star A = R5 soup `[1, 27]` world 3; star B = R5 soup `[1, 55]` world 0. Each is settled 200 tu under its home rule. Seeded runs are bitwise equal to the scout runs (`convergence.py check`)
+- **Simulator / version:** `alm.lenia.Lenia`
+- **Parameters:** home rules: Orbium poly/poly μ 0.15 σ 0.015 R13; crescent poly/exp μ 0.2817 σ 0.0406 R13 b=[1]; star A exp/exp μ 0.1803 σ 0.0204 R18 b=[1,1/6,11/12]; star B exp/exp μ 0.1722 σ 0.0158 R18 b=[1,1/6,2/3]; T10, N256. Transplant: same R, T, μ and shells, with kernel ∈ {poly, exp} × growth ∈ {poly, exp} and σ = home σ × f, for f = 0.70 … 1.30 in steps of 0.03
+- **Intervention:** change of kernel core and growth curve (each is still classic Lenia)
+- **Metric:** `scout.classify` at 200 tu: BODY means 1–3 compact components each < 6 R across, with subclass GLIDER / STATIC / OSC from the 20-tu shift-correlation
+- **Result:** every body survives in all 4 families, in its home motion class (Orbium and crescent GLIDER, stars OSC), within a σ window. That window contains the home σ (f = 1.00) in 15 of 16 cells; the exception is star A under poly/poly (OSC only at f 0.79–0.88). Windows: Orbium f 0.88–1.30, crescent 0.94–1.12 (narrowest), star A 0.73–1.06, star B 0.79–1.09. Each body's nearest catalogue cousin is O2u, the hollow Pterifera (P4cf/P5cf), and 3R5m *Asterium metamorpha* for both stars
+- **Run IDs:** `convergence.jsonl` rows (body, fam, i) with final_sha256
+- **Search / parameter bounds:** one seed per body, one μ, one R; σ only; 200 tu horizon; 256² world
+- **Reproduction command:** `PYTHONPATH=src:research/experiments/SPECIES-scout .venv/bin/python research/experiments/SPECIES-scout/convergence.py run`
+- **Known caveats:** "same motion class" is a coarse test, not a shape test. Thumbnails in `convergence-matrix.png` show the same shape by eye, except star A under poly/poly (a rounder ring at f 0.88). Single implementation. 200 tu is short next to the catalogue's persistence standard. Not novel: the body plans are catalogued; the observation is that they recur when the kernel and growth curves change
+- **History:**
+  - 2026-11-10 — OBSERVED — species-hunt thread.
