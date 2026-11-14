@@ -1,0 +1,73 @@
+{
+  "exhibit": "G048",
+  "title": "Two Orbia fuse into S101",
+  "media": [
+    "fusion-s101.png"
+  ],
+  "claim": "C094",
+  "view": "61x61 windows centred on the largest component, 300 tu after contact (S101: after 500 tu alone), A linear onto inferno, nearest-neighbour 150 px; mass in R^2 units averaged over the next 50 tu",
+  "measurements": "research/experiments/ZOO/fused_check.json",
+  "runs": [
+    {
+      "theta": 60,
+      "b_R": -0.5,
+      "replay_ok": true
+    },
+    {
+      "theta": 60,
+      "b_R": -0.25,
+      "replay_ok": true
+    },
+    {
+      "theta": 60,
+      "b_R": 0.0,
+      "replay_ok": true
+    },
+    {
+      "theta": 75,
+      "b_R": -0.25,
+      "replay_ok": true
+    },
+    {
+      "theta": 75,
+      "b_R": -0.5,
+      "replay_ok": true
+    },
+    {
+      "theta": 75,
+      "b_R": 0.25,
+      "replay_ok": true
+    },
+    {
+      "theta": 90,
+      "b_R": -0.5,
+      "replay_ok": true
+    },
+    {
+      "theta": 90,
+      "b_R": -0.25,
+      "replay_ok": true
+    },
+    {
+      "theta": 90,
+      "b_R": 0.0,
+      "replay_ok": true
+    },
+    {
+      "theta": 105,
+      "b_R": -0.25,
+      "replay_ok": true
+    },
+    {
+      "theta": 120,
+      "b_R": -0.5,
+      "replay_ok": true
+    },
+    {
+      "theta": 165,
+      "b_R": 0.0,
+      "replay_ok": true
+    }
+  ],
+  "command": "PYTHONPATH=src:research/experiments/ZOO:research/experiments/VIS-talk .venv/bin/python research/experiments/ZOO/exhibits.py G048"
+}

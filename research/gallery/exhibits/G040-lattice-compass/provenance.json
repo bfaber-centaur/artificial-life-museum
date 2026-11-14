@@ -1,0 +1,35 @@
+{
+  "exhibit": "G040",
+  "title": "The lattice is the compass",
+  "media": [
+    "compass.png"
+  ],
+  "claim": "C087",
+  "sources": {
+    "square": "research/experiments/H001-lattice-wobble/x1_R13.csv",
+    "hex": "research/experiments/GEOM/heading_hex.csv",
+    "glass": "research/experiments/GEOM/heading_glass.csv"
+  },
+  "summary": {
+    "square": {
+      "runs": 46,
+      "alive": 46,
+      "dead": 0,
+      "distinct_final_headings_0.15deg": 14
+    },
+    "hex": {
+      "runs": 31,
+      "alive": 31,
+      "dead": 0,
+      "distinct_final_headings_0.15deg": 6
+    },
+    "glass": {
+      "runs": 16,
+      "alive": 2,
+      "dead": 14,
+      "distinct_final_headings_0.15deg": 2
+    }
+  },
+  "view": "polar plot of the heading of the centroid velocity over steps 7000-8000; this is a chart, not a photograph",
+  "command": "PYTHONPATH=src .venv/bin/python research/experiments/GEOM/compass.py"
+}

@@ -49,6 +49,14 @@ made of, ten times per unit of time. Some of them travel; one of them never chan
 | [G032](#g032--same-world-two-kinds-of-heredity) | Same world, two kinds of heredity (animated; *Flow-Lenia with genomes*) | soup runs B16s0, D16s0 | 2026-11-14 |
 | [G033](#g033--where-the-variation-goes) | Where the variation goes (*Flow-Lenia with genomes*) | soup runs B16s0–3, D16s0–3 | 2026-11-14 |
 | [G034](#g034--one-physics-many-body-plans) | One physics, many body plans (*Flow-Lenia with genomes*) | eight soup worlds | 2026-11-14 |
+| [G035](#g035--two-orbia-204-collisions) | Two Orbia, 204 collisions (still + animated) | S001-rule Orbium × 2 | 2026-11-14 |
+| [G036](#g036--the-arc-that-eats-rings) | The arc that eats rings (animated) | P6al fed C0v; P6al–P10al | 2026-11-14 |
+| [G037](#g037--tip-or-belly) | Tip or belly (still) | P6al–P10al × C0v | 2026-11-14 |
+| [G038](#g038--parallel-lines-meet) | Parallel lines meet (animated; *sphere*) | S001 pairs, eight Orbia, six tiny planets | 2026-11-14 |
+| [G039](#g039--parallel-lines-part) | Parallel lines part (animated; *hyperbolic plane*) | S001 pair | 2026-11-14 |
+| [G040](#g040--the-lattice-is-the-compass) | The lattice is the compass (chart) | S001, 93 headings on three lattices | 2026-11-14 |
+| [G047](#g047--no-keeper) | No keeper (animated) | P6al loose among 8 × C0v | 2026-11-14 |
+| [G048](#g048--two-orbia-fuse-into-s101) | Two Orbia fuse into S101 (still) | fused bodies of G035, S101 | 2026-11-14 |
 
 ### G001 — Four ways to move
 
@@ -675,6 +683,133 @@ final frame: [`duel-final.png`](exhibits/G032-two-heredities/duel-final.png) ·
   one world the founders build different bodies from the same kernels. Most worlds settle into a
   still mosaic; kernel set 16 did not.
 
+## Collision zoo (G035–G037, G047–G048)
+
+### G035 — Two Orbia, 204 collisions
+
+![A grid of 204 small time exposures: pairs of glowing tracks that cross, bend, end in a dot, merge into one thick track, or burst into a round labyrinth](exhibits/G035-orbium-collision-atlas/atlas.png)
+
+Film: [`detonation.mp4`](exhibits/G035-orbium-collision-atlas/detonation.mp4) ·
+[`detonation.gif`](exhibits/G035-orbium-collision-atlas/detonation.gif) ·
+[`provenance.json`](exhibits/G035-orbium-collision-atlas/provenance.json)
+
+- **Observation (claim C080).** Every tile is one collision of two S001-rule Orbia, drawn as a
+  time exposure (the brightest value each cell ever reached), so tracks show as trails. Rows are
+  the angle between the two headings (180° = head-on), columns the sideways offset. The border
+  colour is the outcome: glance off, touch and part, one dies, fuse, both die, detonate. The film
+  is the 75° detonation: two gliders touch and a labyrinth fills the world. G009 showed nine of
+  these meetings; this is the whole grid.
+- **Caveats.** Time exposures use A^0.7 to show faint trails (disclosed). The map is one
+  discretisation: at half the timestep the same six outcomes appear, but only 54 % of tiles keep
+  their outcome (C080).
+
+### G036 — The arc that eats rings
+
+![A thin glowing arc gliding across a dark world; small rings appear ahead of it and each one it touches makes it a segment longer](exhibits/G036-the-arc-that-eats-rings/feeding.gif)
+
+Film: [`feeding.mp4`](exhibits/G036-the-arc-that-eats-rings/feeding.mp4) ·
+still: [`ladder.png`](exhibits/G036-the-arc-that-eats-rings/ladder.png) ·
+[`provenance.json`](exhibits/G036-the-arc-that-eats-rings/provenance.json)
+
+- **Observation (claims C082, C083).** A catalogue Hexapteryx (P6al) is offered one Circium ring
+  (C0v) at a time, at its wing tip. Each ring it swallows adds one segment. `ladder.png` puts the
+  fed arc after 0–4 meals under the catalogue's P6al–P10al: same shape, same mass. The film runs
+  25 meals, to about 31 segments.
+- **Caveats.** A keeper places every ring by hand and rewinds meals that did not grow the arc
+  (each try is logged in `feed-altfilm.json`). The film shows the 512² torus at half resolution.
+
+### G037 — Tip or belly
+
+![Five striped bars of grey, yellow and red cells, and below them three time exposures: an arc swallowing a ring, a round explosion, and an arc passing a ring](exhibits/G037-tip-or-belly/tip-or-belly.png)
+
+[`provenance.json`](exhibits/G037-tip-or-belly/provenance.json)
+
+- **Observation (claim C081).** Each Pteryx arc (P6al–P10al) is aimed head-on at a still ring,
+  offset sideways in quarter-radius steps. A ring that meets the body detonates the arc; one that
+  meets a wing tip is swallowed; further out it is missed. The swallow window moves out by half
+  a radius per segment, with the tip.
+- **Caveats.** One timestep and one world size. Exposures use A^0.7 (disclosed).
+
+### G047 — No keeper
+
+![A thin arc gliding through a dark world dotted with small rings; it swallows one, glides on, and then bursts into a spreading disc when it meets another](exhibits/G047-no-keeper/no-keeper.gif)
+
+Film: [`no-keeper.mp4`](exhibits/G047-no-keeper/no-keeper.mp4) ·
+[`provenance.json`](exhibits/G047-no-keeper/provenance.json)
+
+- **Observation (claim C093).** A Hexapteryx loose among eight still rings, nobody placing
+  anything. At t 110 it meets a ring with a wing tip and swallows it (now seven segments); at
+  t 205 it meets the next ring with its body and detonates. This is one of the 6 lucky runs out
+  of 64; the other 58 detonated on their first ring.
+- **Caveats.** The 512² torus is shown at half resolution.
+
+### G048 — Two Orbia fuse into S101
+
+![A grid of small two-lobed bodies, each a pair of bright crescents joined by a faint ring, next to the registered bound pair; one tile shows a single Orbium and one a field of stripes](exhibits/G048-fusion-makes-s101/fusion-s101.png)
+
+[`provenance.json`](exhibits/G048-fusion-makes-s101/provenance.json)
+
+- **Observation (claim C094).** First tile: S101, the registered bound Orbium pair. The others:
+  every collision of G035 that fused, 300 tu after contact. Nine have S101's mass, size and
+  speed. One shed a lobe and is a single Orbium again; one detonated late.
+- **Caveats.** Tiles are 61×61 cells, nearest-neighbour; bodies are at whatever heading they
+  locked to.
+
+## Strange geometries (G038–G040)
+
+Made by `research/experiments/GEOM/film.py` and `compass.py` (strange-geometries thread). The
+worlds are point clouds, not square grids, so each pixel shows its *nearest cell* (the cell
+mosaic shows when zoomed in); A maps linearly onto `inferno` as everywhere else. Globes add a
+disclosed Lambert shading (0.5 + 0.5 cos) and a faint blue lift on empty cells so the ball is
+visible. `film.py verify` replays every run and compares final hashes.
+
+### G038 — Parallel lines meet
+
+![Two Orbia on a small ball drift together and travel on joined by a shared membrane, beside the same pair on a flat world that never comes closer](exhibits/G038-parallel-lines-meet/meet.gif)
+
+Film: [`meet.mp4`](exhibits/G038-parallel-lines-meet/meet.mp4) ·
+[`meet-strip.png`](exhibits/G038-parallel-lines-meet/meet-strip.png) ·
+planet: [`planet.mp4`](exhibits/G038-parallel-lines-meet/planet.mp4),
+[`planet-still.png`](exhibits/G038-parallel-lines-meet/planet-still.png) ·
+[`tiny-planets.png`](exhibits/G038-parallel-lines-meet/tiny-planets.png) ·
+[`provenance.json`](exhibits/G038-parallel-lines-meet/provenance.json)
+
+- **Observation.** Two Orbia 3 R apart and heading the same way: on the flat torus they keep
+  their distance; on a sphere of radius 40 cells they lean together, touch within 7 tu and go on
+  as one joined body. Eight Orbia on a sphere of radius 60 collide until two remain (80 tu).
+  On planets of radius 25 down to 7 cells one Orbium wraps into a band and keeps gliding; at 6
+  and 5 cells only slow patches remain.
+- **Ledger.** C084 (pairs on spheres: 14 of 16 meet, outcomes), C085 (they follow great
+  circles), C086 (tiny planets); all *observed*.
+- **Caveats.** Icosahedral geodesic grid (12 five-fold defects), area-weighted kernel. The fused
+  body is matched to S101 by mass and size only.
+
+### G039 — Parallel lines part
+
+![A Poincaré disk: two Orbia start near the left side and curve apart along arcs that meet the rim at right angles](exhibits/G039-parallel-lines-part/part.gif)
+
+Film: [`part.mp4`](exhibits/G039-parallel-lines-part/part.mp4) ·
+[`part-still.png`](exhibits/G039-parallel-lines-part/part-still.png) ·
+[`provenance.json`](exhibits/G039-parallel-lines-part/provenance.json)
+
+- **Observation.** The same pair on the hyperbolic plane (curvature radius 2 R), drawn as a
+  Poincaré disk: they spread apart along circular arcs, the geodesics of the disk picture, and
+  look smaller near the rim because the picture shrinks distances there.
+- **Ledger.** C085 (separation follows the geodesic law within 0.27 R), *observed*.
+- **Caveats.** The world is a disk of radius 4 κ (104 cells), empty beyond; the animals leave
+  it after about 25 tu. {3,7} geodesic grid with exact cell areas.
+
+### G040 — The lattice is the compass
+
+![Compass roses of Orbium's final heading on a square grid, a hex lattice and an amorphous glass](exhibits/G040-lattice-compass/compass.png)
+
+[`provenance.json`](exhibits/G040-lattice-compass/provenance.json)
+
+- **Observation (chart).** Final headings after 800 tu from many start angles: on the square
+  and hex lattices they bunch onto a few spokes with the lattice's symmetry; on the glass they
+  do not.
+- **Ledger.** C011 (square grid, *independently checked*), C087 (hex and glass, *observed*).
+
 ## Field note, 7 October 2026
 
 > *What I saw.* Four animals, four temperaments. The Orbium set off at once along a line it never
@@ -815,8 +950,13 @@ heading values come from `galintervene.chord_heading("S102", 3002)`. The G004 S0
 
 ## Cycle log
 
+- **2026-11-14, G047–G048 (collision-zoo thread, round 2).** Free-world forager and fusion-into-S101 exhibits, claims C093–C094.
 - **2026-11-14, G029–G031 (replicators thread).** Self-replicating creatures from Chan's found
   catalogue: a tracked family tree, a growth-rate ladder and a 3-D replicator. Claims C072–C074.
+- **2026-11-14, G035–G037 (collision-zoo thread).** Collision atlas, ring feeding and tip-or-belly exhibits from `research/experiments/ZOO/exhibits.py`, claims C080–C083. Each `provenance.json` records state hashes; the atlas sheets replay every atlas row and check its hash.
+
+- **2026-11-14, G038–G040 (strange-geometries thread).** Orbium on a sphere, on the hyperbolic
+  plane and on hex and glass lattices; claims C084–C087, museum room 79.
 - **2026-11-10, G021 (species-hunt thread).** Convergence exhibit from the SPECIES-scout hunt, claim C063.
 - **2026-11-07, G014–G018 (lightning-talk thread, round two).** Five "stranger worlds". G015,
   G016 and G018 use a spatially or temporally varying rule (`FieldLenia`, checked bitwise against

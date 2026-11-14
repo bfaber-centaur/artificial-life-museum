@@ -1,0 +1,93 @@
+{
+  "exhibit": "G036",
+  "title": "The arc that eats rings",
+  "media": [
+    "feeding.mp4",
+    "feeding.gif",
+    "feeding-final.png",
+    "ladder.png"
+  ],
+  "claims": [
+    "C082",
+    "C083"
+  ],
+  "view": "feeding: whole 512^2 torus downsampled 2x (every other cell), every 2 tu, A linear onto inferno (frames stored as uint8). ladder.png: settled catalogue bodies (top) and fed arc after k meals (bottom), 141x141 windows, 2x nearest-neighbour.",
+  "run": {
+    "rule": {
+      "R": 13,
+      "T": 10,
+      "mu": 0.38,
+      "sigma": 0.07,
+      "beta": [
+        1.0
+      ],
+      "kernel": "poly",
+      "growth": "poly",
+      "dt": 0.1
+    },
+    "grid": [
+      512,
+      512
+    ],
+    "boundary": "periodic",
+    "start": "settled catalogue P6al (Hexapteryx arcus labens), alone",
+    "food": "settled catalogue C0v (Circium ventilans), stamped ahead of the arc, alternating sides",
+    "feed_log": "research/experiments/ZOO/feed-altfilm.json",
+    "meals_accepted": 25,
+    "stopped": {
+      "t": 1410.0,
+      "meal": 26,
+      "event": "no offset grew",
+      "tries": [
+        {
+          "off": 0.95,
+          "b": -15.892,
+          "outcome": "exploded",
+          "mass": 62524.3
+        },
+        {
+          "off": 0.8,
+          "b": -15.742,
+          "outcome": "exploded",
+          "mass": 61832.5
+        },
+        {
+          "off": 1.1,
+          "b": -16.042,
+          "outcome": "exploded",
+          "mass": 63441.7
+        },
+        {
+          "off": 0.7,
+          "b": -15.642,
+          "outcome": "exploded",
+          "mass": 61504.1
+        },
+        {
+          "off": 1.25,
+          "b": -16.192,
+          "outcome": "exploded",
+          "mass": 60115.6
+        },
+        {
+          "off": 0.6,
+          "b": -15.542,
+          "outcome": "exploded",
+          "mass": 62351.1
+        },
+        {
+          "off": 1.4,
+          "b": -16.342,
+          "outcome": "exploded",
+          "mass": 60148.4
+        }
+      ]
+    },
+    "final_state_sha256": "dbfd34e98e6bce7b897e2cebb7f16227a94ed23968dc448fe2d40ae23186a938"
+  },
+  "caveats": [
+    "The feeding is an intervention by a keeper: each ring is placed by hand, and a meal that did not grow the arc is rewound and retried at another offset (every try is logged).",
+    "Segment counts are estimated from mass with the catalogue ladder P6al-P10al and checked by eye in ladder.png for 0-4 meals only."
+  ],
+  "command": "PYTHONPATH=src:research/experiments/ZOO:research/experiments/VIS-talk .venv/bin/python research/experiments/ZOO/exhibits.py G036"
+}

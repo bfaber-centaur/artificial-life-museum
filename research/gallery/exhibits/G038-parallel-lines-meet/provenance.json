@@ -1,0 +1,256 @@
+{
+  "exhibit": "G038",
+  "title": "Parallel lines meet",
+  "media": [
+    "meet.mp4",
+    "meet.gif",
+    "meet-strip.png",
+    "planet.mp4",
+    "planet.gif",
+    "planet-still.png",
+    "tiny-planets.png"
+  ],
+  "frames": {
+    "meet": "every 3 steps (0.3 tu), 30 fps = 9 tu per second",
+    "planet": "every 3 steps, 30 fps = 9 tu per second; camera circles 1.25 times while bobbing in latitude; still: four moments, each globe turned to the largest body"
+  },
+  "view": "flat panel: window 140 x 140 cells following the pair, rotated so travel is up, nearest cell. Globes: orthographic, nearest cell per pixel, Lambert shading 0.5 + 0.5 cos and a faint blue lift on empty cells so the ball is visible. The meet globe follows the pair's centroid (smoothed).",
+  "claim": "C084 (pairs, planet), C086 (tiny planets)",
+  "caveats": [
+    "tiny-planets.png: each planet after 300 tu, drawn at the same 16 pixels per cell, turned to face the animal; the same six runs are in sphere.py curvature (curvature.jsonl, matching final hashes).",
+    "The sphere is an icosahedral geodesic grid with 12 five-fold defects; kernel weights use each cell's spherical-Voronoi area. Same R, T, mu, sigma as S001.",
+    "One pair, one sphere radius in the film; the sweep over 4 radii x 4 separations is research/experiments/GEOM/meet.jsonl."
+  ],
+  "runs": [
+    {
+      "key": "G038:flat-pair-3R",
+      "world": "square torus 256^2 (alm.lenia)",
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.15,
+        "sigma": 0.015,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "steps": 900,
+      "initial_sha256": "93ec3412063747af6e920ef0b05647b2338ce276090b06ca2d5d6a0eda8c4f21",
+      "final_sha256": "ec06c965aea1bd351e0040c0d7a745ee52879ac07e1a597233ea90d42f9701a9"
+    },
+    {
+      "key": "G038:sphere-pair-rho40-3R",
+      "world": "icosphere rho 40",
+      "world_sha256": "0e715008a5eb7204df80990a1b2e64748ece16da8075e8b9d867429dea05b551",
+      "n_cells": 20252,
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.15,
+        "sigma": 0.015,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "steps": 900,
+      "initial_sha256": "427783e53f91225622af9dc3915b502457e46381c5c035e018ba2b5d4cd89de6",
+      "final_sha256": "293d7eacedf345a4abe59e61b6890f0094e0d63c91519302a7b771a98184ae89"
+    },
+    {
+      "key": "G038:planet-rho60-8",
+      "world": "icosphere rho 60",
+      "world_sha256": "0826a1e7e5b1e700054eb18a458872b5a0e1c23e9225f6469bb8050d9f958129",
+      "n_cells": 44892,
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.15,
+        "sigma": 0.015,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "steps": 1500,
+      "seed": "numpy default_rng(38): 8 points >= 4 R apart, random tangent headings",
+      "initial_sha256": "d2c3335cc425483534667b8d33956f1008b7f3c53fdc62d6d52abc3e4f1314a3",
+      "final_sha256": "842106421108e91c962978782de46780662fd3016d0100feb720e7c5425b5861",
+      "mass_R2_every_50_steps": [
+        3.706,
+        3.4845,
+        3.2558,
+        2.9668,
+        2.9787,
+        2.0317,
+        1.7307,
+        1.7402,
+        1.7371,
+        1.7714,
+        1.7343,
+        1.7384,
+        1.7394,
+        1.737,
+        1.7363,
+        1.7304,
+        0.8899,
+        0.8687,
+        0.868,
+        0.8685,
+        0.8802,
+        0.8678,
+        0.8687,
+        0.8689,
+        0.8728,
+        0.8686,
+        0.8732,
+        0.8728,
+        0.8686,
+        0.8724,
+        0.8717
+      ],
+      "bodies_final": 2
+    },
+    {
+      "key": "G038:tiny-planet-rho25",
+      "world": "icosphere rho 25",
+      "world_sha256": "26f4b845c3038ac46e5923416d0640f5d8caa1f9a821dd7029371359809239fe",
+      "n_cells": 7842,
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.15,
+        "sigma": 0.015,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "steps": 3000,
+      "final_sha256": "ca3c3abf5783ac992466fde01b266e255f6dc53ea775a653305398d784fa15ba",
+      "mass_R2_final": 0.4333154419549679
+    },
+    {
+      "key": "G038:tiny-planet-rho14",
+      "world": "icosphere rho 14",
+      "world_sha256": "6f65348dd78a9517710346c71564c7d24b8aa44455a3cd18183bf6bbd58cf80a",
+      "n_cells": 2562,
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.15,
+        "sigma": 0.015,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "steps": 3000,
+      "final_sha256": "8e6e3baa28fd715f7540d37c3095dc2380108035d97d0990098f0f123fa07825",
+      "mass_R2_final": 0.42067456037429823
+    },
+    {
+      "key": "G038:tiny-planet-rho9",
+      "world": "icosphere rho 9",
+      "world_sha256": "09050c3c539f14139c63e58253af57ea8baf3b5eb97b5249f47fdf3a83eb1769",
+      "n_cells": 1002,
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.15,
+        "sigma": 0.015,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "steps": 3000,
+      "final_sha256": "5b85f6ade5ceb8bccb49ba4eb7b28c54c3166577413a2d677645625ed14e12c9",
+      "mass_R2_final": 0.4046019782365216
+    },
+    {
+      "key": "G038:tiny-planet-rho7",
+      "world": "icosphere rho 7",
+      "world_sha256": "18be7f246f321351a6f859421340703170a0db507e606e6b72e3718d39afe91c",
+      "n_cells": 642,
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.15,
+        "sigma": 0.015,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "steps": 3000,
+      "final_sha256": "cfeba8d6f26d792368cacb1ba8c72bc104c6347495a7bfea24183fb71a5dc2e8",
+      "mass_R2_final": 0.38443991233326436
+    },
+    {
+      "key": "G038:tiny-planet-rho6",
+      "world": "icosphere rho 6",
+      "world_sha256": "68d9f8c8927c161233a50654972764e70ca9aab42de61e142e9d5cc2dd551536",
+      "n_cells": 492,
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.15,
+        "sigma": 0.015,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "steps": 3000,
+      "final_sha256": "08851a86b1d97c85b5d820ee4b31ea85cd6e571d8f8b2c4551984b1b33455ea3",
+      "mass_R2_final": 0.5640112412682631
+    },
+    {
+      "key": "G038:tiny-planet-rho5",
+      "world": "icosphere rho 5",
+      "world_sha256": "7b783ea60871dd6c15e85824a13068f68f880703558004bcad4cab46f8b36541",
+      "n_cells": 362,
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.15,
+        "sigma": 0.015,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "steps": 3000,
+      "final_sha256": "61cb42377eb369bac800c8144bb78f0927c88bef90a1968ed861f9c69f5747c2",
+      "mass_R2_final": 0.32443898308247193
+    }
+  ],
+  "code_version": {
+    "package": "alm",
+    "version": "0.1.0",
+    "git_commit": "704f6b2fe2c41437c0777dfed8d74377d73105c3",
+    "git_dirty": false,
+    "git_dirty_paths": []
+  },
+  "command": "PYTHONPATH=src .venv/bin/python research/experiments/GEOM/film.py G038"
+}

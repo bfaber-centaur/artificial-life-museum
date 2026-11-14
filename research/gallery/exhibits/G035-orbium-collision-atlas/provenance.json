@@ -1,0 +1,76 @@
+{
+  "exhibit": "G035",
+  "title": "Two Orbia, 204 collisions",
+  "media": [
+    "atlas.png",
+    "detonation.mp4",
+    "detonation.gif",
+    "detonation-final.png"
+  ],
+  "claim": "C080",
+  "view": "atlas.png: each tile is max over time of A (sampled every 0.5 tu), 220x220 window around the contact point, A^0.7 onto inferno; border colour = outcome class. detonation: whole 384^2 torus, A linear onto inferno, every 1 tu (gif: every 2 tu, 320 px).",
+  "atlas": {
+    "rows": "research/experiments/ZOO/atlas-O.jsonl",
+    "replayed": 204,
+    "hash_mismatches": 0
+  },
+  "runs": [
+    {
+      "key": "G035:detonation",
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.15,
+        "sigma": 0.015,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "grid": [
+        384,
+        384
+      ],
+      "boundary": "periodic",
+      "time_units": 130,
+      "theta_deg": 75,
+      "b_R": 0.75,
+      "initial_state": "two settled S001-rule Orbia (atlas.body), placed by zoocore.place_pair",
+      "initial_state_sha256": "8cb88c56f0b600cc9766d6a43a52abcea09a897ffa4bfb6f9e657fc49a2ba1de",
+      "final_state_sha256": "912991313d7729ffd08642abda2f1138fd5146939a63993126614b75a1659b88",
+      "atlas_row_final_sha256_checked_at_tu": 35,
+      "mass_every_5tu": [
+        146.67,
+        150.96,
+        353.46,
+        826.59,
+        1828.24,
+        3467.27,
+        5699.54,
+        8503.22,
+        11951.41,
+        16010.94,
+        20784.8,
+        25370.68,
+        28099.38,
+        29923.91,
+        30752.65,
+        30898.11,
+        30911.82,
+        30917.49,
+        30935.17,
+        30973.76,
+        30947.35,
+        30975.38,
+        30996.21,
+        30997.14,
+        30988.1,
+        31049.93,
+        31038.9
+      ]
+    }
+  ],
+  "command": "PYTHONPATH=src:research/experiments/ZOO:research/experiments/VIS-talk .venv/bin/python research/experiments/ZOO/exhibits.py G035"
+}
