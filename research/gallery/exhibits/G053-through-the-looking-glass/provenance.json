@@ -1,0 +1,37 @@
+{
+  "exhibit": "G053",
+  "title": "Through the looking glass",
+  "media": [
+    "looking-glass.mp4",
+    "looking-glass.gif",
+    "looking-glass-final.png"
+  ],
+  "frames": {
+    "every_steps": 2,
+    "mp4_fps": 24,
+    "time_compression": "4.8 tu per second"
+  },
+  "view": "left: the Klein bottle's chart (fundamental domain), nearest cell per pixel, 4 px per cell; grey dots: the animal's mass centre every 0.6 tu, drawn where the chart shows it. Right: the same state on the standard immersed Klein bottle, nearest cell per sample, Lambert shading 0.35 + 0.65 |cos|, glass drawn transparent (four nearest layers composited). The camera turns 100 degrees during the film. The 3-D bottle distorts areas (its neck is thin) and passes through itself; the simulated world does neither.",
+  "claim": "C102",
+  "caveats": [
+    "The animal is simulated on the bottle's double cover (an ordinary 96 x 192 torus kept glide-symmetric), with alm.lenia; nothing is simulated on the 3-D surface."
+  ],
+  "runs": [
+    {
+      "key": "G053",
+      "world": "Klein bottle 96 x 96",
+      "seed": "S001 cells (k = 0) centred at (y 70, x 30)",
+      "steps": 600,
+      "crossings": 4,
+      "final_sha256": "60016d69ccb5c797b4c87c8f921ac24da8be7b0d07f5300a37cb0bb05a448df4"
+    }
+  ],
+  "code_version": {
+    "package": "alm",
+    "version": "0.1.0",
+    "git_commit": "9ee9c3ef8c4225db17e2ad64849c8d667fa81cee",
+    "git_dirty": false,
+    "git_dirty_paths": []
+  },
+  "command": "PYTHONPATH=src .venv/bin/python research/experiments/KLEIN/kfilm.py G053"
+}

@@ -1,0 +1,139 @@
+{
+ "exhibit": "G034",
+ "title": "One physics, many body plans",
+ "claim": [],
+ "media": [
+  "worlds.png"
+ ],
+ "engine": "research/experiments/SOUP/soup.Soup (our parameter-embedded Flow-Lenia, written from Plantec et al. 2023; not the authors' code)",
+ "runs": [
+  {
+   "name": "v9",
+   "kernel_set": 9,
+   "seed": 0,
+   "heredity": "blend",
+   "grid": [
+    256,
+    256
+   ],
+   "steps": 6000,
+   "time_units": 1200.0,
+   "snapshot_every_steps": 50,
+   "final_state_sha256": "de851b23a6ffd83258d6159b57521b4b6d8a30aa03a2e499263c25086b2ee7b8",
+   "command": "SOUP_OUT=<dir> python research/experiments/SOUP/run.py v9 --rule 9 --seed 0 --steps 6000 --every 50"
+  },
+  {
+   "name": "v41",
+   "kernel_set": 41,
+   "seed": 0,
+   "heredity": "blend",
+   "grid": [
+    256,
+    256
+   ],
+   "steps": 6000,
+   "time_units": 1200.0,
+   "snapshot_every_steps": 50,
+   "final_state_sha256": "c42d96d200f246db6f77854b8e684bd694d3de813154120120d12e863f22ac53",
+   "command": "SOUP_OUT=<dir> python research/experiments/SOUP/run.py v41 --rule 41 --seed 0 --steps 6000 --every 50"
+  },
+  {
+   "name": "v33",
+   "kernel_set": 33,
+   "seed": 0,
+   "heredity": "blend",
+   "grid": [
+    256,
+    256
+   ],
+   "steps": 6000,
+   "time_units": 1200.0,
+   "snapshot_every_steps": 50,
+   "final_state_sha256": "7ebd3c052c290b495221867f11d13b856349dc0c43ba03cb2dbf374a475bc4af",
+   "command": "SOUP_OUT=<dir> python research/experiments/SOUP/run.py v33 --rule 33 --seed 0 --steps 6000 --every 50"
+  },
+  {
+   "name": "v43",
+   "kernel_set": 43,
+   "seed": 0,
+   "heredity": "blend",
+   "grid": [
+    256,
+    256
+   ],
+   "steps": 6000,
+   "time_units": 1200.0,
+   "snapshot_every_steps": 50,
+   "final_state_sha256": "7806a203d9caa6b1beddcbf7f1969effabb36ee2d02849be872d7a0eb8df6f46",
+   "command": "SOUP_OUT=<dir> python research/experiments/SOUP/run.py v43 --rule 43 --seed 0 --steps 6000 --every 50"
+  },
+  {
+   "name": "L4",
+   "kernel_set": 4,
+   "seed": 0,
+   "heredity": "blend",
+   "grid": [
+    256,
+    256
+   ],
+   "steps": 12000,
+   "time_units": 2400.0,
+   "snapshot_every_steps": 40,
+   "final_state_sha256": "8a0c4f673b9ff8113c344d8e35e8c55673a8124478be39f56e7ce264f5139c6b",
+   "command": "SOUP_OUT=<dir> python research/experiments/SOUP/run.py L4 --rule 4 --seed 0 --steps 12000 --every 40"
+  },
+  {
+   "name": "B16s0",
+   "kernel_set": 16,
+   "seed": 0,
+   "heredity": "blend",
+   "grid": [
+    256,
+    256
+   ],
+   "steps": 12000,
+   "time_units": 2400.0,
+   "snapshot_every_steps": 40,
+   "final_state_sha256": "ed919d105615c417400aa057de700bc674d875162a6381f46627e5f2aa1a2184",
+   "command": "SOUP_OUT=<dir> python research/experiments/SOUP/run.py B16s0 --rule 16 --seed 0 --steps 12000 --every 40"
+  },
+  {
+   "name": "L38",
+   "kernel_set": 38,
+   "seed": 0,
+   "heredity": "blend",
+   "grid": [
+    256,
+    256
+   ],
+   "steps": 12000,
+   "time_units": 2400.0,
+   "snapshot_every_steps": 40,
+   "final_state_sha256": "19ea13d05ac0e66163a1082d1c87865962dbbcab5d86483a109073ee7b407e61",
+   "command": "SOUP_OUT=<dir> python research/experiments/SOUP/run.py L38 --rule 38 --seed 0 --steps 12000 --every 40"
+  },
+  {
+   "name": "L59",
+   "kernel_set": 59,
+   "seed": 0,
+   "heredity": "blend",
+   "grid": [
+    256,
+    256
+   ],
+   "steps": 12000,
+   "time_units": 2400.0,
+   "snapshot_every_steps": 40,
+   "final_state_sha256": "2c30be73831ed23edfb8468a406b0cb5954cc3d0c847cd63cdff1fa45fef133b",
+   "command": "SOUP_OUT=<dir> python research/experiments/SOUP/run.py L59 --rule 59 --seed 0 --steps 12000 --every 40"
+  }
+ ],
+ "view": "final state of each run; colour = genome projection (viz.PROJ), brightness = matter scaled to that frame's 99th percentile",
+ "commands": [
+  "python research/experiments/SOUP/viz.py worlds worlds.png <dir>/v9.npz:'kernel set 9' <dir>/v41.npz:'kernel set 41' <dir>/v33.npz:'kernel set 33' <dir>/v43.npz:'kernel set 43' <dir>/L4.npz:'kernel set 4' <dir>/B16s0.npz:'kernel set 16' <dir>/L38.npz:'kernel set 38' <dir>/L59.npz:'kernel set 59'"
+ ],
+ "caveats": [
+  "Observation only, no claim: each world is one seed. The v* runs are 6000 steps, the others 12 000.",
+  "v* and L* runs were made before the inherit option was added; the blend code path is unchanged (re-run of v43 and B16s1 checked against their hashes, see SOUP.md)."
+ ]
+}

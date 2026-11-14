@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>East wing: Orbium on strange worlds · ALM museum</title>
+<meta name="description" content="Orbium on a planet, on the hyperbolic plane, past a cone point, inside a Klein bottle and on a hex grid: parallel lines meet, parallel lines part, a lens made of nothing, the mirror next door, and the lattice picks the compass.">
+<link rel="stylesheet" href="museum.css">
+</head>
+<body class="room-strange-geometries">
+<header class="site">
+  <a class="brand" href="index.html">ALM <span>an artificial-life natural history museum</span></a>
+  <details class="map"><summary>Rooms</summary><ol>
+<li><a href="index.html">Entrance</a></li>
+<li><a href="orbium.html">1 · The ruler: Orbium</a></li>
+<li><a href="wobbles.html">2 · The wobble that wasn&#x27;t</a></li>
+<li><a href="edges.html">3 · How much can it take?</a></li>
+<li><a href="one-rule.html">4 · Three animals, one rule</a></li>
+<li><a href="how-we-know.html">5 · How we know</a></li>
+<li><a href="under-review.html">6 · Still being argued (provisional)</a></li>
+<li><a href="reef.html">7 · When the glider meets the ring (provisional)</a></li>
+<li><a href="field-trip.html">8 · Field trip</a></li>
+<li><a href="more-dimensions.html">9 · Dimensions &amp; chemicals</a></li>
+<li><a href="conserved-matter.html">10 · Conserved matter</a></li>
+<li><a href="other-models.html">11 · Other models</a></li>
+<li><a href="replicators.html">12 · Replicators</a></li>
+<li><a href="evolution-soup.html">13 · Evolution soup</a></li>
+<li><a href="collision-zoo.html">Collision zoo</a></li>
+<li><a class="here" href="strange-geometries.html">Strange worlds</a></li>
+<li><a href="collection.html">Reference · The collection</a></li>
+<li><a href="claims.html">Reference · Claims on display</a></li>
+  </ol></details>
+</header>
+<main>
+<p class="kicker">East wing · Other geometries</p>
+<h1>Orbium on strange worlds</h1>
+<p class="lede">Every other room keeps its animals on a flat, square-tiled torus. Here we moved
+Orbium, unchanged, onto a ball, onto the hyperbolic plane (the saddle-shaped world of Escher's
+<em>Circle Limit</em> prints), past single points of curvature, into a Klein bottle and onto a
+hexagonal tiling. The rule is the same everywhere: each
+cell looks at its neighbours within 13 cells of true distance, weighted by the same ring-shaped
+kernel. Only the shape of space changes.</p>
+
+<h2>Parallel lines meet</h2>
+<figure class="vitrine">
+  <img src="../../research/gallery/exhibits/G038-parallel-lines-meet/meet.gif" width="638" height="348" loading="lazy"
+       alt="Left: two Orbia gliding side by side on a flat world, keeping their distance. Right: the same pair on a small glowing ball; they drift together, touch, and travel on joined by a shared membrane.">
+  <figcaption><strong>The same pair, flat and round.</strong> Two Orbia start three kernel radii
+  apart, heading the same way. Left: the flat world. Right: a sphere of radius 40 cells (3.1 R).
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G038-parallel-lines-meet/meet.mp4">Full video</a> ·
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G038-parallel-lines-meet/meet-strip.png">strip</a> ·
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G038-parallel-lines-meet/provenance.json">provenance</a>.</figcaption>
+</figure>
+<div class="label">
+  <p class="obs"><strong>What you see.</strong> On the flat world the pair never comes closer.
+  On the ball they lean together after a few time units, touch, and go on as one joined body.</p>
+  <p class="open"><strong>What the ledger says.</strong> On a sphere there are no parallel lines:
+  every two great circles cross. In 16 runs (four sphere sizes, four starting gaps) 14 pairs
+  touched; on the flat world none of 4 did. What happens next varies: in 9 runs both glide on, in
+  3 one dies, and in 4 they fuse into one body whose mass and size match the catalogued bound
+  pair <em>Synorbium ignis</em> (S101 here) <a class="claim" href="claims.html#C084" title="On a sphere, two Orbia launched side by side and parallel always meet; on the flat torus they never do. Of 16 sphere runs, 14 touch (all 12 with a start gap of at least 3 R), and the meeting ends three ways: both glide on (9), they fuse into one body with the bound pair&#x27;s mass (4), or one dies (3)"><span class="cid">C084</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>. We matched mass and size only, not
+  shape <a class="claim" href="claims.html#C043" title="S101, S102 and S103 are catalogued species carried to nearby rules, not new forms"><span class="cid">C043</span><span class="badge s-OBSERVED" title="OBSERVED (any novelty claim for S101–S103 is REFUTED)">observed</span></a>.</p>
+</div>
+
+<figure class="vitrine">
+  <img src="../../research/gallery/exhibits/G038-parallel-lines-meet/planet.gif" width="448" height="448" loading="lazy"
+       alt="A slowly turning ball with eight Orbia scattered over it. They cross paths, collide and vanish one by one until two remain.">
+  <figcaption><strong>A planet of eight.</strong> Eight Orbia at random places and headings on a
+  sphere of radius 60 cells. The camera circles the planet.
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G038-parallel-lines-meet/planet.mp4">Full video</a> ·
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G038-parallel-lines-meet/planet-still.png">four moments</a>.</figcaption>
+</figure>
+<div class="label">
+  <p class="obs"><strong>What you see.</strong> Collisions come quickly, because every path
+  crosses every other path. After 80 time units two animals are left, and they keep circling the
+  planet.</p>
+</div>
+
+<h2>How small can a planet be?</h2>
+<figure class="vitrine">
+  <img src="../../research/gallery/exhibits/G038-parallel-lines-meet/tiny-planets.png" width="900" height="269" loading="lazy"
+       alt="Six balls of shrinking size. On the larger ones an Orbium sits as on a flat world; on the smaller ones it wraps around the ball as a glowing band; on the two smallest only bright patches remain.">
+  <figcaption><strong>One Orbium on planets of radius 25 down to 5 cells</strong>, after 300 time
+  units, all drawn at the same scale.
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G038-parallel-lines-meet/tiny-planets.png">Full size</a>.</figcaption>
+</figure>
+<div class="label">
+  <p class="obs"><strong>What you see.</strong> As the planet shrinks, the animal wraps around it.
+  On the planet of radius 7 cells it is a band reaching nearly all the way round.</p>
+  <p class="open"><strong>What the ledger says.</strong> It still glides at full speed on a planet
+  of radius 7 cells, about half its own kernel radius: the whole world is smaller than what one
+  cell can see. At 6 cells and below it becomes a slow or still patch <a class="claim" href="claims.html#C086" title="Orbium keeps gliding on a sphere whose radius is 0.54 R (7 cells, circumference 3.4 R, smaller than its own kernel): it wraps into a band round the planet; at 0.46 R and below it stops being a glider"><span class="cid">C086</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>.</p>
+</div>
+
+<h2>Parallel lines part</h2>
+<figure class="vitrine">
+  <img src="../../research/gallery/exhibits/G039-parallel-lines-part/part.gif" width="736" height="466" loading="lazy"
+       alt="Left: two Orbia gliding side by side on a flat world. Right: a dark disk; the same pair starts near the left side and the two animals curve apart, one up and one down, along arcs that meet the rim at right angles, shrinking as they near the rim.">
+  <figcaption><strong>The same pair on the hyperbolic plane</strong>, drawn as a Poincaré disk:
+  the whole infinite-looking world fits in the circle, and things look smaller the nearer they
+  are to the rim. Grey dots trace each animal's path.
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G039-parallel-lines-part/part.mp4">Full video</a> ·
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G039-parallel-lines-part/part-still.png">still</a> ·
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G039-parallel-lines-part/provenance.json">provenance</a>.</figcaption>
+</figure>
+<div class="label">
+  <p class="obs"><strong>What you see.</strong> The animals keep their size and shape, but they
+  fly apart along circular arcs, which are the straight lines of this world.</p>
+  <p class="open"><strong>What the ledger says.</strong> Here space spreads out, so lines that
+  start parallel diverge. The pair's separation follows the textbook formula for diverging
+  geodesics to within a quarter of a kernel radius, and on the sphere the closing distance follows
+  its formula just as closely, up to the moment of contact <a class="claim" href="claims.html#C085" title="Orbia travel along geodesics: two parallel Orbia on a sphere close, and on the hyperbolic plane spread apart, exactly as the geodesic law sin(d/2ρ) = sin(a/2ρ)·cos(s/ρ) or sinh(d/2κ) = sinh(a/2κ)·cosh(s/κ) predicts, within 0.27 R until they touch or leave the world"><span class="cid">C085</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>. Orbium goes straight,
+  whatever straight means in the world it lives in.</p>
+</div>
+<div class="caveat"><strong>How these worlds are built.</strong> A ball or a saddle cannot be tiled
+by squares, so these worlds use a hexagonal tiling folded over an icosahedron (the ball, like a
+geodesic dome) or over Escher-style triangles, seven to a corner (the saddle). Each cell's
+neighbours are weighted by true distance and cell area. On the ordinary square grid the same code
+reproduces the museum's simulator to thirteen decimal places.</div>
+
+<h2>A lens made of nothing</h2>
+<figure class="vitrine">
+  <img src="../../research/gallery/exhibits/G049-a-lens-made-of-nothing/lens.gif" width="734" height="258" loading="lazy"
+       alt="Three dark disks, each with a pair of Orbia gliding from left to right past the centre. Left: the pair bends together and meets. Middle: the pair goes straight. Right: the pair flies apart.">
+  <figcaption><strong>One point of curvature.</strong> Each world is flat everywhere except its
+  centre. Left: a hexagonal sheet with one 60° slice cut out and the edges glued, a cone. Middle:
+  the flat sheet. Right: a sheet with one extra 60° slice glued in, a saddle point. Each disk is
+  drawn opened out, so angles are stretched (left) or squeezed (right).
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G049-a-lens-made-of-nothing/lens.mp4">Full video</a> ·
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G049-a-lens-made-of-nothing/provenance.json">provenance</a>.</figcaption>
+</figure>
+<div class="label">
+  <p class="obs"><strong>What you see.</strong> Nothing pulls on the animals, yet the pair that
+  passes the cone point bends together and collides, and the pair that passes the saddle point
+  bends apart.</p>
+  <p class="open"><strong>What the ledger says.</strong> Both pairs go exactly where straight
+  lines on the cut-and-glued sheet go: the cone makes 3 of 3 pairs meet <a class="claim" href="claims.html#C096" title="A cone point with a 60° deficit acts as a lens: two Orbia that pass it side by side on parallel courses converge and touch, 3 of 3, following the straight lines of the cut-and-glued sheet within 0.28 R; on the flat control they never touch"><span class="cid">C096</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>, the
+  saddle spreads them three to four times wider than the flat world does <a class="claim" href="claims.html#C097" title="A cone point with a 60° excess (a saddle point) acts as a diverging lens: parallel Orbia pairs that pass it spread to 11.4–14.5 R apart from 3–6 R, matching the unfolded straight lines within 0.71 R"><span class="cid">C097</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>.
+  Physicists know this lens as the cosmic string: a line of concentrated curvature that bends
+  light without pulling on it.</p>
+</div>
+
+<figure class="vitrine">
+  <img src="../../research/gallery/exhibits/G050-straight-at-the-point/apex.gif" width="734" height="258" loading="lazy"
+       alt="Three dark disks, each with one Orbium gliding straight at the centre. It crosses the centre of the left and middle disks unharmed; in the right disk it fades away at the centre.">
+  <figcaption><strong>Straight at the point.</strong> One Orbium aimed dead centre at each kind
+  of point.
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G050-straight-at-the-point/apex.mp4">Full video</a> ·
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G050-straight-at-the-point/provenance.json">provenance</a>.</figcaption>
+</figure>
+<div class="label">
+  <p class="obs"><strong>What you see.</strong> The cone point and the flat centre let the animal
+  through. The saddle point kills it.</p>
+  <p class="open"><strong>What the ledger says.</strong> Only the dead-centre shot dies; aimed a
+  quarter of a kernel radius to one side, it survives <a class="claim" href="claims.html#C098" title="An Orbium aimed dead centre at the 60°-excess saddle point dies there (19 tu); offset by 0.25 R or more it passes, and every shot at the 60°-deficit point and the flat control survives (12 shots)"><span class="cid">C098</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>. A knife-edge, not a wall.</p>
+</div>
+
+<h2>Through the looking glass</h2>
+<figure class="vitrine">
+  <img src="../../research/gallery/exhibits/G053-through-the-looking-glass/looking-glass.gif" width="566" height="318" loading="lazy"
+       alt="Left: a square map whose top and bottom edges are marked as glued with a flip; an Orbium leaves through the top and comes back at the bottom with its path mirrored. Right: the same world drawn on a slowly turning glass Klein bottle, the animal gliding through its neck.">
+  <figcaption><strong>A Klein bottle.</strong> Left: the world's map, a square whose left and
+  right edges are glued straight, as on every other world in the museum, but whose top and
+  bottom edges are glued with a flip. Right: the same world drawn as the famous glass bottle that
+  has no inside. The drawing passes through itself and stretches the neck; the world does
+  neither.
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G053-through-the-looking-glass/looking-glass.mp4">Full video</a> ·
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G053-through-the-looking-glass/provenance.json">provenance</a>.</figcaption>
+</figure>
+<div class="label">
+  <p class="obs"><strong>What you see.</strong> Each time Orbium crosses the flipped edge, the map
+  shows it coming back as its own mirror image, and its trail turns the other way.</p>
+  <p class="open"><strong>What the ledger says.</strong> The animal notices nothing. Through 45
+  crossings in 1000 time units it moves within a fifth of a cell of the same animal on an ordinary
+  torus <a class="claim" href="claims.html#C102" title="On a Klein bottle, Orbium cannot feel the twist: through 18 and 45 passages of the twisted seam in 1000 tu its path stays within 0.18 cells of the same Orbium on an ordinary torus and its mass within 2 × 10⁻⁴ of it; only the bottle&#x27;s chart shows it as its mirror image after every odd passage"><span class="cid">C102</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>. A Klein bottle is flat everywhere; the twist is only in how the whole
+  thing is glued together, and nothing that small can see the whole thing.</p>
+</div>
+
+<figure class="vitrine">
+  <img src="../../research/gallery/exhibits/G054-the-mirror-next-door/mirror-next-door.gif" width="384" height="544" loading="lazy"
+       alt="Two long, narrow worlds, each drawn with dim copies of what lies beyond its top and bottom edges. Top, a torus: the Orbium glides along with copies of itself. Bottom, a Klein bottle: its neighbours are mirror images, they rub past each other, and the world fills with wavy stripes.">
+  <figcaption><strong>The mirror next door.</strong> The same Orbium in a world only 24 cells
+  high, less than twice its kernel radius. Dim bands show what lies across the top and bottom
+  edges: on the torus, the animal itself; on the Klein bottle, its mirror image.
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G054-the-mirror-next-door/mirror-next-door.mp4">Full video</a> ·
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G054-the-mirror-next-door/provenance.json">provenance</a>.</figcaption>
+</figure>
+<div class="label">
+  <p class="obs"><strong>What you see.</strong> On the torus the animal glides on, touching
+  copies of itself that move in step. On the Klein bottle its mirror image slides past the other
+  way, and within 30 time units the world fills with stripes.</p>
+  <p class="open"><strong>What the ledger says.</strong> In worlds 23 to 26 cells high, heading
+  across the short way, Orbium survives 32 of 32 times on a torus and 3 of 32 times on a Klein
+  bottle; from 28 cells up it always survives on both <a class="claim" href="claims.html#C103" title="In a world 23–26 cells (1.8–2.0 R) high, an Orbium heading across the short way survives on a torus, 32 of 32, but not on a Klein bottle, 3 of 32 (23 fill the world, 6 die): across the glued edge it meets its own mirror image instead of its own copy"><span class="cid">C103</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>. So the twist does matter,
+  but only when the world is so narrow that the animal can reach around it. Spinners turning in
+  place beside their own mirror images do not start to swim, as a pair of vortices would
+  <a class="claim" href="claims.html#C104" title="A spinner beside its own mirror image does not swim: the catalogued spinners Gyropteron arcus and Gyrorbium gyrans on Klein bottles 2.5–8 R high keep their turning rate and drift at most 0.0046 R/tu, as on tori of the same size"><span class="cid">C104</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>.</p>
+</div>
+
+<h2>The lattice is the compass</h2>
+<figure class="vitrine">
+  <img src="../../research/gallery/exhibits/G040-lattice-compass/compass.png" width="900" height="350" loading="lazy"
+       alt="Three compass roses. Square grid: final headings bunch into about a dozen spokes with four-fold symmetry. Hex lattice: they bunch into six spokes with six-fold symmetry. Glass: only two animals survive, pointing in unrelated directions.">
+  <figcaption><strong>Where Orbium ends up heading</strong> after 800 time units, from many
+  starting angles, on a square grid, a hexagonal grid and an amorphous "glass" of irregular cells.
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G040-lattice-compass/provenance.json">provenance</a>.</figcaption>
+</figure>
+<div class="label">
+  <p class="obs"><strong>What you see.</strong> On both regular grids the animal does not keep the
+  heading it starts with: it settles onto one of a few favourite directions, and the favourites
+  repeat with the symmetry of the grid.</p>
+  <p class="open"><strong>What the ledger says.</strong> The square grid's lock <a class="claim" href="claims.html#C011" title="At R = 13, S001&#x27;s travel heading locks onto a discrete set of lattice directions"><span class="cid">C011</span><span class="badge s-INDEPENDENTLY_CHECKED" title="INDEPENDENTLY_CHECKED">indep. checked</span></a> is
+  not a quirk of squares: a hexagonal grid locks Orbium too, onto its own directions, and an
+  irregular glass does not lock it: the heading wanders, but 14 of 16 animals die within 600 time units <a class="claim" href="claims.html#C087" title="The heading lock (C011) is not special to square grids: on a hexagonal lattice Orbium also settles onto a few lattice-symmetric headings (29 of 31 starts on 6 headings), while on an amorphous glass of irregular cells it does not lock, its heading wanders, and 14 of 16 die within 600 tu"><span class="cid">C087</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>.</p>
+</div>
+
+<h2>Sources</h2>
+<ul class="sources">
+  <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/GEOM/README.md">GEOM notes</a> ·
+      <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/GEOM/geomlenia.py">point-cloud Lenia</a> ·
+      <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/GEOM/summarize.py">summarize.py</a> (prints every number above)</li>
+  <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/GEOM/meet.jsonl">meet.jsonl</a> ·
+      <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/GEOM/pair.jsonl">pair.jsonl</a> ·
+      <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/GEOM/curvature.jsonl">curvature.jsonl</a> ·
+      <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/GEOM/heading_hex.csv">heading_hex.csv</a> ·
+      <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/GEOM/heading_glass.csv">heading_glass.csv</a> ·
+      <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/GEOM/cone.jsonl">cone.jsonl</a></li>
+  <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/KLEIN/README.md">KLEIN notes</a> ·
+      <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/KLEIN/klein.py">Klein-bottle Lenia</a> ·
+      <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/KLEIN/twist.jsonl">twist.jsonl</a> ·
+      <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/KLEIN/narrow.jsonl">narrow.jsonl</a> ·
+      <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/KLEIN/spin.jsonl">spin.jsonl</a> ·
+      <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/KLEIN/summarize.py">summarize.py</a></li>
+  <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/claims.md">Claims ledger</a>: C084–C087, C096–C098, C102–C104</li>
+</ul>
+
+<nav class="walk" aria-label="Tour"><a class="prev" href="collision-zoo.html"><small>Back</small>The collision zoo</a><span></span></nav>
+</main>
+<footer class="site">
+  <p>Claim statuses read from <code>research/claims.md</code> (sha256 <code>7ab51d0c0550</code>) when this page was built.</p>
+  <p>Every picture here is a recorded simulation or a figure drawn from committed data. Statuses
+  are the claims ledger's, not the museum's: a badge never says more than
+  <a href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/claims.md">research/claims.md</a> does.</p>
+</footer>
+</body>
+</html>

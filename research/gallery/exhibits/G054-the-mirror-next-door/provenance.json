@@ -1,0 +1,45 @@
+{
+  "exhibit": "G054",
+  "title": "The mirror next door",
+  "media": [
+    "mirror-next-door.mp4",
+    "mirror-next-door.gif",
+    "mirror-next-door-t10.png"
+  ],
+  "frames": {
+    "every_steps": 2,
+    "mp4_fps": 24,
+    "time_compression": "4.8 tu per second"
+  },
+  "view": "each panel: the 128 x 24 world (middle band, nearest cell per pixel, 4 px per cell) with the copy of the world that lies across its top and bottom edges drawn above and below it at half brightness: a plain copy on the torus, the left-right mirror image on the Klein bottle.",
+  "claim": "C103",
+  "caveats": [
+    "One seed of the 64 in narrow.jsonl at heights 23-26 for this heading; 29 of 32 such Klein runs fail, 0 of 32 torus runs (kb.py narrow)."
+  ],
+  "runs": [
+    {
+      "key": "G054-torus",
+      "world": "torus 128 x 24",
+      "seed": "S001 cells (k = 0) centred at (y 12, x 16)",
+      "steps": 400,
+      "final_mass_orbia": 1.0193011843012885,
+      "final_sha256": "ff27c143e9eeff361e66ecc86501814844a17164433897179c8d8b9b7c277f7d"
+    },
+    {
+      "key": "G054-klein",
+      "world": "klein 128 x 24",
+      "seed": "S001 cells (k = 0) centred at (y 12, x 16)",
+      "steps": 400,
+      "final_mass_orbia": 9.69802566752169,
+      "final_sha256": "6b1f7df96500e259770cc11cf829a83f7ed8546c15b83a61f7334cfc33d9a8d0"
+    }
+  ],
+  "code_version": {
+    "package": "alm",
+    "version": "0.1.0",
+    "git_commit": "9ee9c3ef8c4225db17e2ad64849c8d667fa81cee",
+    "git_dirty": false,
+    "git_dirty_paths": []
+  },
+  "command": "PYTHONPATH=src .venv/bin/python research/experiments/KLEIN/kfilm.py G054"
+}

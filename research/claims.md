@@ -155,8 +155,11 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
 | VIS-talk round two 2026-11-07 (gallery G014–G018) | C059 / C060 |
 | Species hunt 2026-11-10 (`research/experiments/SPECIES-scout/`, gallery G021) | C063 (C061–C062 reserved by the open fractal PR #44) |
 | Replicators thread 2026-11-14 (`research/experiments/REPLICATORS/`, gallery G029–G031) | C072 / C073 / C074 / C075 |
+| Evolution soup thread 2026-11-14 (`research/experiments/SOUP/`, gallery G032–G034) | C076 / C077 / C078 |
 | Replicators thread round 2 2026-11-14 (GenomeLenia, `research/experiments/REPLICATORS/genome.py`, gallery G045–G046) | C090 / C091 / C092 |
 | Collision zoo 2026-11-14 (`research/experiments/ZOO/`, gallery G035–G037, museum room 78) | C080 / C081 / C082 / C083 |
+| Collision zoo round 2, 2026-11-14 (`research/experiments/ZOO/`, gallery G047–G048, room 78) | C093 / C094 / C095; history line on C081 |
+| Evolution soup round 2, 2026-11-14 (`research/experiments/SOUP/`, gallery G051–G052, room 77) | C099 / C100 / C101 |
 
 ## Claims
 
@@ -2203,6 +2206,61 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
 - **History:**
   - 2026-11-14 — OBSERVED — replicators thread.
 
+### C076 — In a Flow-Lenia soup whose cells carry mutating genomes, genome diversity falls when genomes blend and rises when they are inherited whole, in 4 of 4 paired worlds
+
+- **Status:** OBSERVED
+- **Owner lane:** evolution soup thread (SOUP, 2026-11-14)
+- **Sources:** `research/experiments/SOUP/soup.py`, `run.py`, `diversity.py`, `diversity.jsonl`, `runs.jsonl`, `SOUP.md`; gallery G033
+- **Specimen / version:** none; 16 founder genomes (kernel set's own weights h + N(0, 0.25), clipped) on a Voronoi patchwork of uniform(0, 0.3) noise, `default_rng([99, seed])`, seeds 0–3
+- **Simulator / version:** `SOUP/soup.Soup` (our parameter-embedded Flow-Lenia: genome = the 10 growth weights h_k per cell, transported with the matter; written from Plantec et al. 2023, not the authors' code)
+- **Parameters:** kernel set 16 (`Kernels(default_rng([7, 16]))`, K 10, R 13); 256² torus; dt 0.2, s 0.65, dd 5, θ 2, n 2; genome halo 4; one mutation (disc r 10, N(0, 0.15) on all 10 weights) every 20 steps; 12 000 steps = 2400 time units
+- **Intervention:** heredity. `blend`: a cell's genome is the mass-weighted mean of the parcels that arrive. `dominant`: it is the genome of the largest single arriving parcel. Each seed is run under both from the identical start with the identical mutation rng
+- **Metric:** genome spread = mass-weighted RMS distance of cell genomes (A > 0.05) from their mass-weighted mean, every 40 steps
+- **Result:** start 0.58–0.67. Blend at 2400 tu: 0.409, 0.322, 0.398, 0.391 (seeds 0–3). Dominant: 0.819, 0.812, 0.841, 0.839. Every blend run is below its start and every dominant run above it from 1000 tu on (blend 0.41–0.49, dominant 0.70–0.74 at 1000 tu)
+- **Run IDs:** `runs.jsonl` B16s0–B16s3, D16s0–D16s3 (final_sha256)
+- **Search / parameter bounds:** one kernel set (chosen as the liveliest of 60 in `scout.py`), one world size, one mutation rate, 4 seeds
+- **Reproduction command:** `SOUP_OUT=… .venv/bin/python research/experiments/SOUP/run.py B16s<k> --rule 16 --seed <k> --steps 12000 --every 40 [--inherit dominant]` (D16s<k> with `--inherit dominant`), then `summarize.py diversity`
+- **Known caveats:** part of the rise under `dominant` is accumulation of mutations that are never averaged away, not selection; dominant heredity also makes bodies into genome mosaics, which changes how they move. Single implementation.
+- **Prior literature:** the blending-inheritance objection is Fleeming Jenkin's (1867, *North British Review*); parameter localisation in Flow-Lenia is Plantec et al. 2023.
+- **History:**
+  - 2026-11-14 — OBSERVED — evolution soup thread.
+
+### C077 — In the same soup, blending ends with one body holding 68–89 % of all matter in bodies after 2400 time units (4 of 4 worlds); inheriting genomes whole keeps 70–150 bodies, the largest holding 18–47 %
+
+- **Status:** OBSERVED
+- **Owner lane:** evolution soup thread (SOUP, 2026-11-14)
+- **Sources:** `research/experiments/SOUP/species.py` (`bodies`), `summarize.py bodies`; gallery G032
+- **Specimen / version:** as C076
+- **Simulator / version:** as C076
+- **Parameters:** as C076
+- **Intervention:** heredity, as C076
+- **Metric:** final state; bodies = 8-connected components of A > 0.05 on the torus with mass ≥ 5; share = largest body's mass / total body mass
+- **Result:** blend (seeds 0–3): 24, 17, 10, 7 bodies; largest share 0.68, 0.82, 0.70, 0.89; top three 0.91–0.98. Dominant: 130, 70, 102, 150 bodies; largest share 0.18, 0.47, 0.27, 0.24. In the film of seed 0 (G032) the large blend body is seen engulfing a colony of small dot-shaped bodies, which survive under dominant heredity
+- **Run IDs:** as C076
+- **Search / parameter bounds:** as C076
+- **Reproduction command:** as C076, then `summarize.py bodies`
+- **Known caveats:** a "body" is a thresholded component; touching bodies count as one. The comparison is between whole worlds and does not say which part of the dynamics (heredity itself, or the mosaic bodies it produces) causes the condensation.
+- **History:**
+  - 2026-11-14 — OBSERVED — evolution soup thread.
+
+### C078 — A single mutant patch in a one-species soup is gone within 1000 time units under blending (12 of 12), but under whole-genome inheritance 10 of 12 persist and 4 end with more matter than they started with
+
+- **Status:** OBSERVED
+- **Owner lane:** evolution soup thread (SOUP, 2026-11-14)
+- **Sources:** `research/experiments/SOUP/mutant.py`, `mutant.jsonl`, `summarize.py mutant`
+- **Specimen / version:** none; one species (every genome = kernel set 16's own weights h) settled 2000 steps from uniform(0, 0.3) noise, `default_rng([99, 1000])`
+- **Simulator / version:** as C076
+- **Parameters:** as C076 but no background mutation; 256²; 5000 steps (1000 tu) after the mutation
+- **Intervention:** one mutant disc (radius 10, centred on a mass-weighted random cell; h + N(0, 0.15) per weight, clipped), mutants 0–11 from `default_rng([555, k])`; each then run under `blend` and `dominant` from the same mutated state
+- **Metric:** mutant mass = matter (A > 0.05) whose genome lies more than halfway from h towards the mutant along the mutation direction, every 50 steps
+- **Result:** start 49–86. Blend: 0 at 1000 tu in 12 of 12 (0 by 500 tu in 10 of 12). Dominant at 1000 tu: 10 of 12 above 0 (21.6–124.5); mutants 2, 4, 7, 10 grew (60.5→124.5, 57.2→112.5, 77.8→98.8, 51.3→107.1); mutants 1 and 11 died out
+- **Run IDs:** `mutant.jsonl` (mutant, mode, final_sha256)
+- **Search / parameter bounds:** one kernel set, one settled world, 12 mutations, 1000 tu
+- **Reproduction command:** `SOUP_OUT=… .venv/bin/python research/experiments/SOUP/mutant.py 0 12`, then `summarize.py mutant`
+- **Known caveats:** under blending the mutant's genome is not destroyed but diluted (the matter-weighted genome total is conserved; `tests/test_soup.py`); the metric counts only matter that is still more than half mutant. Growth under `dominant` may be drift as much as advantage; we did not replicate the growers.
+- **Prior literature:** Jenkin 1867 (as C076).
+- **History:**
+  - 2026-11-14 — OBSERVED — evolution soup thread.
 ### C080 — Two S001 Orbia that collide produce six kinds of outcome, depending on angle and offset: glance off, touch and part, one dies, fuse into a two-lobed glider, both die, or detonate into a world-filling labyrinth
 
 - **Status:** OBSERVED
@@ -2221,6 +2279,7 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
 - **Prior literature:** Chan 2019 §3.5.5 (Complex Systems 28(3)) names Orbium–Orbium collision outcomes, including detonation, qualitatively and under unspecified rules (see `research/experiments/REEF-behavior/LITERATURE.md`). What is new here is the map under the exact S001 rule and its timestep check
 - **History:**
   - 2026-11-14 — OBSERVED — collision-zoo thread.
+  - 2026-11-14 — OBSERVED (unchanged), caveat added — the map also moves with floating-point rounding. On a CPU path without AVX-512 (`NPY_DISABLE_CPU_FEATURES="AVX512_SPR AVX512_ICL X86_V4"`, as on some CI runners) numpy's FFT rounds differently; the 30 tu re-settle after rotation amplifies that to visibly different bodies (A's heading 0.08° vs 357.27°), and the rebuilt atlas agrees in only 100 of 204 cells, with the same six classes (SURVIVOR 77, MISS 60, ANNIHILATE 24, SCATTER 24, FUSE 15, EXPLODE 4). Given the committed bodies, the collisions themselves replay all 204 classes on that path. The repertoire stands; the map is one realisation. See ZOO.md "Floating point".
 
 ### C081 — In the Pteryx rule (μ 0.38, σ 0.07) any contact between two Pteryx arcs detonates; a still Circium ring is swallowed when it meets an arc's wing tip and detonates the arc when it meets the body
 
@@ -2239,6 +2298,7 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
 - **Known caveats:** EXPLODE is decided 25 tu after contact (mass > 2 × the pair); all of them were far past that (15–60 ×). Not checked at a smaller timestep or larger grid
 - **History:**
   - 2026-11-14 — OBSERVED — collision-zoo thread.
+  - 2026-11-14 — OBSERVED — ring scan repeated at T 20: 361 of 365 rows keep their class (C095).
 
 ### C082 — A Hexapteryx (P6al) that swallows k Circium rings becomes the catalogued Pteryx with 6 + k segments, for k = 1–4 (shape correlation 0.993–0.998, mass within 0.3 %)
 
@@ -2276,6 +2336,299 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
 - **Known caveats:** where the climb ends depends on the feeding protocol and the timestep, so no top rung is claimed. The arc straightens as it grows (G036), so the fixed offsets may simply stop finding the tip; a better keeper might go higher
 - **History:**
   - 2026-11-14 — OBSERVED — collision-zoo thread.
+
+### C084 — On a sphere, two Orbia launched side by side and parallel always meet; on the flat torus they never do. Of 16 sphere runs, 14 touch (all 12 with a start gap of at least 3 R), and the meeting ends three ways: both glide on (9), they fuse into one body with the bound pair's mass (4), or one dies (3)
+
+- **Status:** OBSERVED
+- **Owner lane:** strange-geometries thread (GEOM, 2026-11-14)
+- **Sources:** `research/experiments/GEOM/sphere.py` (`meet`, `flat`), `meet.jsonl`, `flat.jsonl`, `summarize.py`; gallery G038
+- **Specimen / version:** S001 cells, cubic-interpolated onto each world (`geomlenia.patch_sampler`; on the square lattice it returns the cells exactly)
+- **Simulator / version:** `geomlenia.GraphLenia`: classic Lenia with the kernel as a sparse matrix over any point set (equal to `alm.lenia.Lenia` on the square torus to 6 × 10⁻¹³, `tests/test_geom.py`). Sphere = icosahedral geodesic grid (locally a hex lattice, 12 five-fold defects), about one cell per unit area, kernel weights × spherical-Voronoi cell area, rows normalised; distance = great-circle distance
+- **Parameters:** S001 rule (poly/poly, μ 0.15, σ 0.015, R 13, T 10); sphere radius ρ = 30, 40, 60, 80 cells (2.3–6.2 R); start gap 2, 3, 4, 6 R along a meridian, both animals heading along the equator's direction (parallel: both perpendicular to the arc joining them); 2000 steps. Flat control: same pairs on the 256² square torus with `alm.lenia.Lenia`
+- **Intervention:** world geometry
+- **Metric:** blobs = cells with A > 0.1 linked within 2.5 cells; "touch" = one blob (checked every 10 steps); at the end, each blob with mass > 0.2 R² is one body
+- **Result:** flat: 0 of 4 pairs touch, both Orbia glide on (total mass 0.8706 R² at gaps 3–6 R, 0.8742 at 2 R). Sphere: 14 of 16 touch, first at 3–17 tu (later on bigger spheres); the two that never touch are the 2 R starts on the two biggest spheres. Outcomes after 200 tu: two bodies 9, one fused body 4 (ρ 30 at 3 and 4 R, ρ 40 at 3 R, ρ 80 at 6 R), one survivor 3. Fused bodies: mass 0.841–0.849 R², gyradius 0.794–0.810 R, against 0.414–0.429 R² for a lone Orbium on these spheres; the flat bound pair S101 (*Synorbium ignis* under the S001 rule) has 0.8737 R² and 0.8154 R. G038's film run (ρ 40, gap 3 R) fuses within 7 tu. G038's "planet" run (8 Orbia, random positions ≥ 4 R apart and headings, ρ 60) keeps 2 bodies (0.87 R² in all) after 80 tu
+- **Run IDs:** `meet.jsonl` and `flat.jsonl` rows (rho, sep_R) with final_sha256; G038 provenance.json
+- **Search / parameter bounds:** one rule, one start heading per pair, 4 radii × 4 gaps, 200 tu
+- **Reproduction command:** `cd research/experiments/GEOM && PYTHONPATH=../../../src ../../../.venv/bin/python sphere.py meet` (and `sphere.py flat`; numbers: `summarize.py`)
+- **Known caveats:** the fused body is matched to S101 by mass and gyradius only, not by shape or speed (on the flat torus, C094 finds that nine of twelve Orbium–Orbium fusions settle into S101 by mass, gyradius and speed). Which outcome a pair gets depends on contact geometry and is not predicted here (no monotone pattern in ρ or gap). One grid per radius; the icosahedral grid has its own lattice directions (see C087)
+- **Prior literature:** none found for Lenia on curved surfaces. Geodesics on a sphere all cross, which is why the meeting is expected; the outcome mix is the observation
+- **History:**
+  - 2026-11-14 — OBSERVED — strange-geometries thread.
+
+### C085 — Orbia travel along geodesics: two parallel Orbia on a sphere close, and on the hyperbolic plane spread apart, exactly as the geodesic law sin(d/2ρ) = sin(a/2ρ)·cos(s/ρ) or sinh(d/2κ) = sinh(a/2κ)·cosh(s/κ) predicts, within 0.27 R until they touch or leave the world
+
+- **Status:** OBSERVED
+- **Owner lane:** strange-geometries thread (GEOM, 2026-11-14)
+- **Sources:** `research/experiments/GEOM/pair.py`, `pair.jsonl`, `summarize.py`; gallery G038, G039
+- **Specimen / version:** S001 cells as in C084
+- **Simulator / version:** `geomlenia.GraphLenia`. Sphere as in C084. Hyperbolic plane = the {3,7} triangle tiling subdivided like the icosphere (locally hex, seven-fold defects), exact hyperbolic cell areas as kernel weights, hyperbolic distance; disk of geodesic radius 4 κ (κ 26) or 3 κ (κ 39), empty beyond (rows near the rim keep the interior normalisation)
+- **Parameters:** S001 rule. Sphere ρ 40, 60, 80 cells × gap a = 3, 4, 6 R; hyperbolic curvature radius κ = 26, 39 cells (2 R, 3 R) × a = 2, 3, 4 R; up to 600 steps
+- **Intervention:** world geometry
+- **Metric:** d = geodesic distance between the mass centres of the two halves (Einstein midpoint on the hyperboloid; normalised mean on the sphere); s = distance from each seed point to its centre after 2 tu plus the accumulated centre path, averaged over the two; prediction from the seeded a and that s. Compared every 1 tu while d > 2.5 R and, on the sphere, before the first closest approach
+- **Result:** hyperbolic, 6 runs: separation grows 3.0–5.1 × over 5.9–7.3 R of travel; largest |d − law| 0.23 R (κ 39, a 2 R), 0.03–0.14 R in the other five. Sphere, 9 runs: separation closes to 1.4–1.6 R; |d − law| at most 0.27 R (ρ 40, a 6 R), at most 0.08 R in the other eight; at contact the bodies stop at 1.4–1.6 R where the law gives 0.9–1.6 R. In the flat control (C084) the separation does not change
+- **Run IDs:** `pair.jsonl` rows (world, L, sep_R) with final_sha256
+- **Search / parameter bounds:** two curvatures each side of flat, 3 gaps, one start heading; travel 3–8 R before contact or the rim
+- **Reproduction command:** `cd research/experiments/GEOM && PYTHONPATH=../../../src ../../../.venv/bin/python pair.py run` (one run: `pair.py one hyperbolic 26 3`)
+- **Known caveats:** worlds are small next to the hyperbolic plane's growth: the animals reach the rim of the κ 26 disk within about 7 R of travel. One case in the sweep (ρ 80, a 3 R) never touches: the pair closes to 1.60 R as predicted, then swings between 1.7 and 3 R for 29 R of travel, which the law (non-interacting) does not describe. That geodesic motion holds at R/κ = 0.5 is the observation; we did not look for a curvature at which it fails
+- **History:**
+  - 2026-11-14 — OBSERVED — strange-geometries thread.
+
+### C086 — Orbium keeps gliding on a sphere whose radius is 0.54 R (7 cells, circumference 3.4 R, smaller than its own kernel): it wraps into a band round the planet; at 0.46 R and below it stops being a glider
+
+- **Status:** OBSERVED
+- **Owner lane:** strange-geometries thread (GEOM, 2026-11-14)
+- **Sources:** `research/experiments/GEOM/sphere.py` (`curvature`), `curvature.jsonl`, `summarize.py`; gallery G038 `tiny-planets.png`
+- **Specimen / version:** S001 cells as in C084, seeded by the exponential map at one point (cells farther than 60 cells cut, irrelevant on small spheres)
+- **Simulator / version:** `geomlenia.GraphLenia` on the icosahedral grid (C084)
+- **Parameters:** S001 rule; ρ = 5, 6, 7, 8, 9, 10, 12, 14, 16, 20, 25 cells (362–7842 cells); 3000 steps (300 tu)
+- **Intervention:** world size (curvature)
+- **Metric:** area-weighted mass / R²; speed = angular speed of the mass centre × ρ over the last 50 tu; bodies as in C084
+- **Result:** ρ 7–25 (0.54–1.92 R): one body, gliding at 0.470–0.479 R/tu (flat S001: 0.479); mass falls smoothly with ρ, 0.433 → 0.384 R² (flat 0.4353). ρ 6 (0.46 R): two blobs of saturated cells, mass 0.564 R², speed 0.086 R/tu. ρ 5 (0.38 R): mass 0.324 R², speed 0.009 R/tu (almost still). Nothing died in 300 tu
+- **Run IDs:** `curvature.jsonl` rows (rho) with final_sha256; G038 runs `G038:tiny-planet-rho*` (same hashes)
+- **Search / parameter bounds:** 11 radii, one start, 300 tu
+- **Reproduction command:** `cd research/experiments/GEOM && PYTHONPATH=../../../src ../../../.venv/bin/python sphere.py curvature`
+- **Known caveats:** small spheres are coarse (642 cells at ρ 7), so the grid's own effects are larger there; the cell spacing is fixed at about 1 so R/ρ grows while R stays 13 cells. The ρ 6 and 5 bodies were not classified beyond mass and speed
+- **History:**
+  - 2026-11-14 — OBSERVED — strange-geometries thread.
+
+### C087 — The heading lock (C011) is not special to square grids: on a hexagonal lattice Orbium also settles onto a few lattice-symmetric headings (29 of 31 starts on 6 headings), while on an amorphous glass of irregular cells it does not lock, its heading wanders, and 14 of 16 die within 600 tu
+
+- **Status:** OBSERVED
+- **Owner lane:** strange-geometries thread (GEOM, 2026-11-14)
+- **Sources:** `research/experiments/GEOM/heading.py`, `heading_hex.csv`, `heading_glass.csv`, `summarize.py`; square-grid comparison H001-X1 (`research/experiments/H001-lattice-wobble/x1_R13.csv`, C011); gallery G040
+- **Specimen / version:** S001 cells, cubic-interpolated and rotated by θ counter-clockwise (`geomlenia.seed_torus`)
+- **Simulator / version:** `geomlenia.GraphLenia` on a 128 × 128 torus at one cell per unit area: hex = triangular lattice (spacing √(2/√3), 16 422 cells); glass = 16 384 uniform random points relaxed 120 times by soft repulsion (`glass_torus(128, 0)`, one realisation)
+- **Parameters:** S001 rule; θ = 0–30° by 1° (hex: this covers the lattice's symmetry domain), 0–30° by 2° (glass); 8000 steps (800 tu)
+- **Intervention:** start rotation; lattice type
+- **Metric:** heading of the periodic-centroid velocity in 1000-step windows (as H001-X1); "settled" = last two windows within 0.05°; alive = mass > 1 at the end
+- **Result:** hex: 31/31 alive, 29 settled on 6 headings, 80.76° (×12), 84.26° (×2), 86.09° (×2), 86.89° (×4), 93.10° (×5), 95.74° (×4); two pairs (86.89/93.10, 84.26/95.74) are mirror images about 90°, a mirror line of the lattice; the median miss from the rotated start heading (68.2° + θ) is 1.9°, at most 12.6°. Square (C011, H001-X1): 40/46 settled on 10 headings, median miss 2.4°, at most 7.9°. Glass: 2/16 alive at 800 tu, none settled; 5 died within 100 tu and all 14 within 600 tu; the two survivors' window headings span the compass (e.g. 135°, 232°, 272°, 104°, 110°, 98°, 139°, 6°)
+- **Run IDs:** rows of `heading_hex.csv`, `heading_glass.csv` (lattice, rot)
+- **Search / parameter bounds:** R 13 only; one glass realisation; one start position
+- **Reproduction command:** `cd research/experiments/GEOM && PYTHONPATH=../../../src ../../../.venv/bin/python heading.py hex 1 30 > heading_hex.csv` (and `heading.py glass 2 30 > heading_glass.csv`)
+- **Known caveats:** the glass result is about this discretisation at R 13: random cell positions give the kernel a quenched noise (pilots on glass realisations 1 and 2 survived 150 tu with mass swings about 5× those on the hex lattice), and a finer glass (larger R) was not tried, so "glass frees the heading" is not separated from "glass is noisy". The hex plateaus are not identified with lattice vectors
+- **History:**
+  - 2026-11-14 — OBSERVED — strange-geometries thread.
+
+### C093 — Without a keeper there is no climb: 64 of 64 Hexapteryxes loose among eight Circium rings detonate, after 30–385 time units; 6 eat one ring first and none eats two
+
+- **Status:** OBSERVED
+- **Owner lane:** collision-zoo thread (ZOO round 2, 2026-11-14)
+- **Sources:** `research/experiments/ZOO/forage.py`, `forage-K8.jsonl`, `forage-K60.jsonl`, `summarize.py`; gallery G047
+- **Specimen / version:** catalogue P6al, rotated to a random heading and re-settled (`atlas.body`); catalogue C0v, settled
+- **Simulator / version:** `alm.lenia.Lenia`
+- **Parameters:** the C081 rule, 512² torus, T 10
+- **Intervention:** none after setup. Setup per seed (`default_rng([23, seed, K, N])`): one arc at a random place and heading, K rings at random places at least 4 R apart and 6 R from the arc's start. K = 8 for seeds 0–63; K = 60 for seeds 0–15
+- **Metric:** census every 5 tu (components of A ≥ 0.1 on the torus: the arc is the heaviest > 400 cells, rings 80–250 cells); a run ends when total mass > 4 × start or support > 20 % of the world. A ring disappearing is a meal if the arc stays 60–250 cells heavier for the next 20 tu, "destroyed" if it stays within 60 cells, else a detonation
+- **Result:** K = 8: all 64 runs detonated (median 80 tu, range 30–385). First encounter: detonation 56, meal 6 (the arc becomes a 7-segment arc, mass ≈ 886), ring destroyed without growth 2. Every arc that ate later detonated on its next ring. K = 60: all 16 detonated by 55 tu with no meal
+- **Run IDs:** forage rows (seed, K) with init and final sha256
+- **Search / parameter bounds:** one start species, two ring densities, one world size, one timestep; rings never move, so an arc meets only what lies on its straight path
+- **Reproduction command:** `PYTHONPATH=src:research/experiments/ZOO .venv/bin/python research/experiments/ZOO/forage.py SEED 8 3000` for SEED 0–63
+- **Known caveats:** 6 of 64 (9 %) is about half of what the tip windows' share of the contact width would suggest (6 of 33 contact rows in the P6al scan, 18 %); small numbers and random headings. The census can call a detonation onset a meal, so meals are counted only when the arc's mass holds for 20 tu
+- **History:**
+  - 2026-11-14 — OBSERVED — collision-zoo thread.
+
+### C094 — Nine of the twelve fused bodies in the Orbium collision atlas settle into S101, the registered bound Orbium pair (mass, gyradius and speed equal to S101's within 0.0011 R², 0.0008 R and 0.0008 R/tu)
+
+- **Status:** OBSERVED
+- **Owner lane:** collision-zoo thread (ZOO round 2, 2026-11-14)
+- **Sources:** `research/experiments/ZOO/fused_check.py`, `fused_check.json`; gallery G048
+- **Specimen / version:** the 12 FUSE rows of `atlas-O.jsonl` (C080), each replayed (hash checked at the row's classification time); S101 settled 500 tu alone on the same torus
+- **Simulator / version:** `alm.lenia.Lenia`
+- **Parameters:** S001 rule, 384² torus, T 10
+- **Intervention:** none beyond C080's collision; run to contact + 300 tu
+- **Metric:** mean over the next 50 tu of mass ΣA/R², gyradius (R) and speed (R/tu); best normalised correlation against settled S101 over 1° rotations and all shifts
+- **Result:** S101: 0.8731, 0.8151, 0.4727. Nine bodies: mass 0.8735–0.8742, gyradius 0.8143–0.8155, speed 0.4719–0.4726, correlation 0.964–0.984. The other three: θ 60° b −0.5 shed a lobe and is one Orbium (mass 0.436); θ 90° b −0.5 is near but not on S101 (0.8461, 0.7961, 0.4585); θ 165° b 0 detonated after the 25 tu classification window (mass 184 R²)
+- **Run IDs:** `fused_check.json` rows with replay_ok
+- **Search / parameter bounds:** one timestep, contact + 300 tu
+- **Reproduction command:** `PYTHONPATH=src:research/experiments/ZOO .venv/bin/python research/experiments/ZOO/fused_check.py`
+- **Known caveats:** correlations stay below 0.99 because the bodies glide at lattice-locked headings that differ from S101's reference run; the scalar statistics are the stronger match. C080's "FUSE" class is therefore mostly S101, but not always, and a fused body can still detonate later
+- **Prior literature:** S101 is the catalogued Synorbium ignis (O4i) carried to S001's rule (S101 dossier); its dossier found it from 7 of 175 two-Orbium starts placed side by side. This finds it from collisions
+- **History:**
+  - 2026-11-14 — OBSERVED — collision-zoo thread.
+
+### C095 — The tip-or-belly map of C081 survives halving the timestep: 361 of 365 ring-scan rows keep their outcome at T 20
+
+- **Status:** OBSERVED
+- **Owner lane:** collision-zoo thread (ZOO round 2, 2026-11-14)
+- **Sources:** `research/experiments/ZOO/atlas.py` world PC20, `atlas-PC20.jsonl`, `summarize.py`
+- **Specimen / version:** as C081, every body settled and rotated anew at T 20
+- **Simulator / version:** `alm.lenia.Lenia`
+- **Parameters:** the C081 rule at T 20, 512² torus
+- **Intervention:** as C081's ring scan (P6al–P10al head-on at C0v, b −9…+9 R in 0.25 R steps)
+- **Metric:** C080's classifier
+- **Result:** 361 of 365 rows agree with T 10. The four changes are all on the +b side, one 0.25 R step at a swallow window's edge: P8al +4.25 and P9al +4.75 swallow at T 10 but detonate at T 20; P9al +5.5 and P10al +6.0 miss at T 10 but swallow at T 20. So the +b windows sit about a quarter radius further out at T 20. Every belly hit detonates at both timesteps
+- **Run IDs:** `atlas-PC20.jsonl` rows with final_sha256
+- **Search / parameter bounds:** head-on only; one grid
+- **Reproduction command:** `PYTHONPATH=src:research/experiments/ZOO .venv/bin/python research/experiments/ZOO/atlas.py run PC20`
+- **Known caveats:** not checked at a larger grid or R
+- **History:**
+  - 2026-11-14 — OBSERVED — collision-zoo thread.
+
+### C096 — A cone point with a 60° deficit acts as a lens: two Orbia that pass it side by side on parallel courses converge and touch, 3 of 3, following the straight lines of the cut-and-glued sheet within 0.28 R; on the flat control they never touch
+
+- **Status:** OBSERVED
+- **Owner lane:** strange-geometries thread (GEOM round 2, 2026-11-14)
+- **Sources:** `research/experiments/GEOM/cone.py`, `cone.jsonl`, `summarize.py`; gallery G049
+- **Specimen / version:** S001 cells as in C084, seeded in a flat chart unfolded around the meridian opposite the seam (`geomlenia.seed_cone`)
+- **Simulator / version:** `geomlenia.GraphLenia` on `geomlenia.cone(sectors, 150)`: a hex lattice (one cell per unit area) cut into 60° sectors around a lattice point and re-glued with 5 (300°, deficit), 6 (flat control) or 7 (420°, excess) sectors; the hex lattice is 6-fold symmetric about that point, so the seams are invisible to the lattice. Exact cone geodesic distance; apex cell area sectors/6; world radius 150 cells
+- **Parameters:** S001 rule; start 6 R before the apex at chart heights ±b, both heading straight past it; gap 2b = 3, 4, 6 R; up to 800 steps
+- **Intervention:** world geometry (one conical point)
+- **Metric:** d = cone geodesic distance between the two halves' mass centres; prediction = distance between the two unfolded straight lines after the same path length (s = s0 + path, as C085), which on the 300° cone cross at radius 2b; stop at contact (d < 1.6 R or one blob) or within 2.5 R of the edge
+- **Result:** 300°: all 3 pairs close and touch at 15–21 tu, with their centres 2.0, 3.1, 5.3 R from the apex (the lines cross at 3, 4, 6 R); |d − lines| ≤ 0.28 R while d > 2.5 R. Flat: no pair touches before the edge (31–32 tu); the gaps end at 2.1, 3.9, 6.4 R from 3, 4, 6 R, a drift of up to 0.54 R from straight lines
+- **Run IDs:** `cone.jsonl` rows (sectors, b_R) with final_sha256
+- **Search / parameter bounds:** one deficit angle (60°, the only one the hex lattice glues seamlessly), 3 gaps, one start distance
+- **Reproduction command:** `cd research/experiments/GEOM && PYTHONPATH=../../../src ../../../.venv/bin/python cone.py run`
+- **Known caveats:** the flat control's drift (up to 0.54 R over 9 R of travel) is the heading lock (C087) and sets the precision of the comparison; what happens after contact is not scored here (in G049's film the pair fuses). This is the geometry of a cosmic string (a conical deficit); no claim is made beyond the geometry
+- **History:**
+  - 2026-11-14 — OBSERVED — strange-geometries thread.
+
+### C097 — A cone point with a 60° excess (a saddle point) acts as a diverging lens: parallel Orbia pairs that pass it spread to 11.4–14.5 R apart from 3–6 R, matching the unfolded straight lines within 0.71 R
+
+- **Status:** OBSERVED
+- **Owner lane:** strange-geometries thread (GEOM round 2, 2026-11-14)
+- **Sources:** as C096; gallery G049
+- **Specimen / version:** as C096
+- **Simulator / version:** as C096, 7 sectors (420°)
+- **Parameters:** as C096
+- **Intervention:** world geometry
+- **Metric:** as C096
+- **Result:** gaps 3, 4, 6 R grow to 11.37, 13.21, 14.45 R after about 9 R of travel past the apex (straight lines: 11.63, 12.50, 13.75 R); |d − lines| ≤ 0.28, 0.71, 0.70 R. Flat control as C096 (2.1–6.4 R). Both animals survive every pass (total mass 0.868–0.874 R²)
+- **Run IDs:** `cone.jsonl` rows (7, b_R)
+- **Search / parameter bounds:** as C096
+- **Reproduction command:** as C096
+- **Known caveats:** the error is about that of the flat control (heading lock), so the agreement is good to about 0.5 R, not better
+- **History:**
+  - 2026-11-14 — OBSERVED — strange-geometries thread.
+
+### C098 — An Orbium aimed dead centre at the 60°-excess saddle point dies there (19 tu); offset by 0.25 R or more it passes, and every shot at the 60°-deficit point and the flat control survives (12 shots)
+
+- **Status:** OBSERVED
+- **Owner lane:** strange-geometries thread (GEOM round 2, 2026-11-14)
+- **Sources:** `research/experiments/GEOM/cone.py` (`apex`), `cone.jsonl` rows with `apex_shot`; gallery G050
+- **Specimen / version:** as C096, one Orbium
+- **Simulator / version:** as C096
+- **Parameters:** S001 rule; start 6 R before the apex at chart height b = 0, 0.25, 0.5, 1 R, heading straight past it; 300°, 360°, 420°; until within 2.5 R of the edge (31–32 tu) or death
+- **Intervention:** world geometry; aim
+- **Metric:** total mass / R² every 1 tu (died = below 0.01); closest approach of the mass centre to the apex
+- **Result:** 420°, b = 0: mass 0.40 R² at 17 tu, 0.21 at 18 tu, 0 at 19 tu, with the centre within 0.21 R of the apex. 420° at b = 0.25, 0.5, 1 R and all 8 shots at 300° and 360°: one body at the end (0.417–0.428 R²), mass never below 0.414 R², closest approach 0.17–1.2 R
+- **Run IDs:** `cone.jsonl` rows (sectors, b_R, apex_shot) with final_sha256
+- **Search / parameter bounds:** one start distance and heading per aim, one seed
+- **Reproduction command:** `cd research/experiments/GEOM && PYTHONPATH=../../../src ../../../.venv/bin/python cone.py apex`
+- **Known caveats:** a single knife-edge case: the only death needs a dead-centre aim, and offsets were tried only on one side. Why the excess point kills and the deficit point does not was not studied
+- **History:**
+  - 2026-11-14 — OBSERVED — strange-geometries thread.
+
+### C099 — A mutant's first trial does not predict how its genome does elsewhere: replaying the 12 C078 genomes at six new places each, the replay median does not follow the first-trial result (Spearman 0.07), and the four biggest first-trial growers grew in 10 of 24 replays against 27 of 48 for the rest
+
+- **Status:** OBSERVED
+- **Owner lane:** evolution soup thread (SOUP, round 2, 2026-11-14)
+- **Sources:** `research/experiments/SOUP/replay.py`, `replay.jsonl`, `mutant.jsonl`, `summarize.py replay`
+- **Specimen / version:** none; the settled one-species world of C078 (kernel set 16, 256²)
+- **Simulator / version:** as C076 (`soup.Soup`, inherit = dominant, no background mutation)
+- **Parameters:** as C078; 2500 steps (500 tu) after the mutation
+- **Intervention:** each of the 12 C078 mutant genomes (clip(h + delta), delta from `mutant.jsonl`) written into a disc of radius 10 at six new places, each centred on a mass-weighted random cell from `default_rng([777, k, j])`, j = 0–5; 72 runs. The first trial is C078's own dominant run at its own place, read at the same 500 tu
+- **Metric:** mutant mass as C078 (matter with A > 0.05 more than halfway from h towards the mutant), ratio end / start at 500 tu
+- **Result:** first-trial ratios 0.00–2.07; replay medians 0.05–1.46. Spearman rank correlation between the two over 12 genomes: 0.07. The four biggest first-trial growers (mutants 10, 2, 4, 9: ×2.07, ×2.01, ×1.93, ×1.60) grew in 10 of 24 replays; mutant 4 grew in 1 of 6 (median ×0.37) and mutant 2 in 2 of 6 (two died out). Mutant 8, which shrank to ×0.52 in its first trial, grew in 6 of 6 (×1.07–×1.89)
+- **Run IDs:** `replay.jsonl` (mutant, placement, final_sha256); `mutant.jsonl` dominant rows
+- **Search / parameter bounds:** one kernel set, one settled world, 12 genomes, 6 places each, 500 tu
+- **Reproduction command:** `SOUP_OUT=… .venv/bin/python research/experiments/SOUP/replay.py 0 12 6 2500`, then `summarize.py replay` (four processes over mutant ranges 0–3, 3–6, 6–9, 9–12 give the same rows)
+- **Known caveats:** 12 genomes is a small sample for a rank correlation; "grew" is a ratio above 1 at one time (500 tu). Original growers in C078 were named at 1000 tu (2, 4, 7, 10); at 500 tu the top four are 10, 2, 4, 9; mutant 7 grew in 5 of 6 replays
+- **Prior literature:** the distinction between selection and drift in small populations (fixation of a new mutant is mostly luck; Fisher 1922, Haldane 1927 on the survival probability of a beneficial mutant)
+- **History:**
+  - 2026-11-14 — OBSERVED — evolution soup thread, round 2.
+
+### C100 — Still, genomes differ: across 72 replays, which genome it is matters (permutation p = 0.006); mutants 8, 0, 5 and 7 grew in 5 or 6 of 6 places, mutant 3 shrank in 5 of 6 (median ×0.05)
+
+- **Status:** OBSERVED
+- **Owner lane:** evolution soup thread (SOUP, round 2, 2026-11-14)
+- **Sources:** `research/experiments/SOUP/replay.py`, `replay.jsonl`, `mutant.jsonl`, `summarize.py replay`
+- **Specimen / version:** none; the settled one-species world of C078 (kernel set 16, 256²)
+- **Simulator / version:** as C076 (`soup.Soup`, inherit = dominant, no background mutation)
+- **Parameters:** as C078; 2500 steps (500 tu) after the mutation
+- **Intervention:** each of the 12 C078 mutant genomes (clip(h + delta), delta from `mutant.jsonl`) written into a disc of radius 10 at six new places, each centred on a mass-weighted random cell from `default_rng([777, k, j])`, j = 0–5; 72 runs. The first trial is C078's own dominant run at its own place, read at the same 500 tu
+- **Metric:** mutant mass as C078 (matter with A > 0.05 more than halfway from h towards the mutant), ratio end / start at 500 tu
+- **Result:** grew in 6/6: mutant 8; 5/6: mutants 0, 5, 7; 4/6: 9; 3/6: 6, 10; 2/6: 2; 1/6: 1, 3, 4, 11. Test: log ratio (floored at 0.001), statistic = variance of the 12 genome means (1.44), against 10 000 shuffles of the genome labels over the 72 runs (`default_rng(0)`): p = 0.0058
+- **Run IDs:** `replay.jsonl` (mutant, placement, final_sha256); `mutant.jsonl` dominant rows
+- **Search / parameter bounds:** one kernel set, one settled world, 12 genomes, 6 places each, 500 tu
+- **Reproduction command:** `SOUP_OUT=… .venv/bin/python research/experiments/SOUP/replay.py 0 12 6 2500`, then `summarize.py replay` (four processes over mutant ranges 0–3, 3–6, 6–9, 9–12 give the same rows)
+- **Known caveats:** "fitter" here means more likely to gain matter from this one resident species in this world in 500 tu, nothing broader. The test treats the six places as independent draws of the same settled world; they share the same resident. Why some genomes win was not studied; the size of the mutation |delta| does not explain it (Spearman 0.37 with the replay median over 12 genomes, not significant)
+- **Prior literature:** as C099
+- **History:**
+  - 2026-11-14 — OBSERVED — evolution soup thread, round 2.
+
+### C101 — Where a mutant lands matters more than what it is: the spread of outcomes among one genome's six places (variance of log ratio 2.75) is about twice the spread between genomes (1.44); 37 of 72 replays grew and 6 fell below 1 % of their start
+
+- **Status:** OBSERVED
+- **Owner lane:** evolution soup thread (SOUP, round 2, 2026-11-14)
+- **Sources:** `research/experiments/SOUP/replay.py`, `replay.jsonl`, `mutant.jsonl`, `summarize.py replay`
+- **Specimen / version:** none; the settled one-species world of C078 (kernel set 16, 256²)
+- **Simulator / version:** as C076 (`soup.Soup`, inherit = dominant, no background mutation)
+- **Parameters:** as C078; 2500 steps (500 tu) after the mutation
+- **Intervention:** each of the 12 C078 mutant genomes (clip(h + delta), delta from `mutant.jsonl`) written into a disc of radius 10 at six new places, each centred on a mass-weighted random cell from `default_rng([777, k, j])`, j = 0–5; 72 runs. The first trial is C078's own dominant run at its own place, read at the same 500 tu
+- **Metric:** mutant mass as C078 (matter with A > 0.05 more than halfway from h towards the mutant), ratio end / start at 500 tu
+- **Result:** within-genome variance of log ratio, averaged over genomes: 2.75; variance of genome means: 1.44 (both with the 0.001 floor). Even the most consistent genome spans ×1.07–×1.89 and the best on average (mutant 7) spans ×0.52–×1.94; mutant 6 ranges from extinct to ×1.22. 37 of 72 replays end above ×1; 6 end below ×0.01
+- **Run IDs:** `replay.jsonl` (mutant, placement, final_sha256); `mutant.jsonl` dominant rows
+- **Search / parameter bounds:** one kernel set, one settled world, 12 genomes, 6 places each, 500 tu
+- **Reproduction command:** `SOUP_OUT=… .venv/bin/python research/experiments/SOUP/replay.py 0 12 6 2500`, then `summarize.py replay` (four processes over mutant ranges 0–3, 3–6, 6–9, 9–12 give the same rows)
+- **Known caveats:** the numbers depend on the floor chosen for extinct runs: floor 0.01 gives 1.39 within against 0.89 between, floor 0.0001 gives 4.74 against 2.15, so within stays larger (1.6–2.2×). Six places per genome
+- **Prior literature:** as C099
+- **History:**
+  - 2026-11-14 — OBSERVED — evolution soup thread, round 2.
+
+### C102 — On a Klein bottle, Orbium cannot feel the twist: through 18 and 45 passages of the twisted seam in 1000 tu its path stays within 0.18 cells of the same Orbium on an ordinary torus and its mass within 2 × 10⁻⁴ of it; only the bottle's chart shows it as its mirror image after every odd passage
+
+- **Status:** OBSERVED
+- **Owner lane:** strange-geometries thread (KLEIN, round 3, 2026-11-14)
+- **Sources:** `research/experiments/KLEIN/klein.py`, `kb.py twist`, `twist.jsonl`, `summarize.py`; gallery G053
+- **Specimen / version:** S001 cells, placed as registered (k = 0) and turned a quarter turn (k = 1), exact `np.rot90`
+- **Simulator / version:** `klein.Klein`: the Nx × Ny Klein bottle (left and right edges glued straight, top and bottom glued with a flip, (x, y + Ny) ~ (−x, y)) run as its double cover, an Nx × 2Ny torus stepped by `alm.lenia.Lenia` and kept glide-symmetric (A[y + Ny, x] = A[y, −x]) by copying the mirrored lower half over the upper half after each step; `tests/test_klein.py` checks that a plain step keeps the symmetry to 1e-12, so the copy only removes round-off
+- **Parameters:** S001 rule; Klein bottle 128 × 128; control: the same seed alone on the 128 × 256 torus (the cover without the mirror twin); 10 000 steps
+- **Intervention:** world topology (non-orientable)
+- **Metric:** the bottle's animal followed continuously on the cover, compared with the torus animal: path difference, mass in an 80 × 80 window around each; seam passages; heading on the cover and as drawn on the chart
+- **Result:** k = 0 passes the twisted seam 45 times, k = 1 18 times, each travelling 479.5 R. Max path difference 0.176 and 0.177 cells, max mass difference 1.7 × 10⁻⁴ and 1.3 × 10⁻⁵ (mass 73.5). On the cover the heading stays on one lattice-locked direction (291.2–293.8° and 21.2–23.9°, as on the torus); on the chart it alternates between the two mirror lock families (≈ 21.8° and ≈ 68.2° modulo 90°) at each passage
+- **Run IDs:** `twist.jsonl` rows k = 0, 1 with final_sha256 and torus_final_sha256
+- **Search / parameter bounds:** one bottle size, two headings, one seed position
+- **Reproduction command:** `cd research/experiments/KLEIN && PYTHONPATH=../../../src ../../../.venv/bin/python kb.py twist`
+- **Known caveats:** this is the expected result for a flat world, which a Klein bottle is everywhere; the remaining differences are round-off, carried along the neutral translation direction. Orbium is bilaterally symmetric, so the mirror image is not a different animal; a handed creature that travels was not found (the catalogued spinners in C104 turn in place)
+- **History:**
+  - 2026-11-14 — OBSERVED — strange-geometries thread.
+
+### C103 — In a world 23–26 cells (1.8–2.0 R) high, an Orbium heading across the short way survives on a torus, 32 of 32, but not on a Klein bottle, 3 of 32 (23 fill the world, 6 die): across the glued edge it meets its own mirror image instead of its own copy
+
+- **Status:** OBSERVED
+- **Owner lane:** strange-geometries thread (KLEIN, round 3, 2026-11-14)
+- **Sources:** `research/experiments/KLEIN/kb.py narrow`, `narrow.jsonl`, `summarize.py`; gallery G054
+- **Specimen / version:** S001 cells turned k = 0, 1, 2, 3 quarter turns (k = 0, 2: locked heading 22° off the short direction; k = 1, 3: 22° off the long direction), centred at mid-height and x = 0, 16, 32, 48
+- **Simulator / version:** as C102 (`klein.Klein`, `klein.Torus`, both `alm.lenia`)
+- **Parameters:** S001 rule; width 128, heights 18–40 cells; same seed on the Klein bottle and on the torus of the same size; 4000 steps (400 tu)
+- **Intervention:** world topology at fixed size
+- **Metric:** outcome at 400 tu, counting bodies on the double cover for the bottle: glider (every body within 10 % of Orbium's mass), filled (mass > 5 Orbia), died (mass < 1), other
+- **Result:** heading across the short way, heights 23–26: torus 32/32 gliders; Klein 3 gliders, 23 filled, 6 died. Heading along the long way, 23–26: torus 32/32, Klein 31/32 (1 died). Height 27: across-the-short-way seeds die on both (8/8 each), along-the-long-way seeds live on both. Heights 28–40: 208/208 gliders on each. Heights 18–21: no glider on either; height 22: Klein 3/16, torus 0/16 (all 16 fill)
+- **Run IDs:** `narrow.jsonl` (736 rows: kind, ny, k, x0, final_sha256)
+- **Search / parameter bounds:** one width, 4 headings × 4 positions per height, one length of run
+- **Reproduction command:** `cd research/experiments/KLEIN && PYTHONPATH=../../../src ../../../.venv/bin/python kb.py narrow`
+- **Known caveats:** below 2.2 R the kernel reaches across the short way, so the animal overlaps the neighbour that lies across the glued edge; on the torus that neighbour is itself, moving in step, on the bottle it is its mirror image, sliding the other way. The mechanism of the failure (when the fill starts, what it looks like) was filmed for one seed (G054) but not studied
+- **History:**
+  - 2026-11-14 — OBSERVED — strange-geometries thread.
+
+### C104 — A spinner beside its own mirror image does not swim: the catalogued spinners Gyropteron arcus and Gyrorbium gyrans on Klein bottles 2.5–8 R high keep their turning rate and drift at most 0.0046 R/tu, as on tori of the same size
+
+- **Status:** OBSERVED
+- **Owner lane:** strange-geometries thread (KLEIN, round 3, 2026-11-14)
+- **Sources:** `research/experiments/KLEIN/kb.py spin`, `spin.jsonl`, `summarize.py`
+- **Specimen / version:** catalogue cells `PG1a` (Gyropteron arcus) and `OG2g` (Gyrorbium gyrans), `alm.specimens.from_catalog`, each under its own catalogue rule; both turn in place (handed: the mirror image turns the other way)
+- **Simulator / version:** as C102
+- **Parameters:** width 8 R, heights 1.5–8 R, the spinner placed on the line x = 0, so on the bottle its mirror image (turning the other way) sits directly across the twisted edge, at distance equal to the height; 400 tu
+- **Intervention:** world topology (mirror-image vs same-handed neighbour)
+- **Metric:** net drift of the followed body over the last three quarters of the run; path speed; turning rate
+- **Result:** PG1a: Klein drift 0.0015–0.0046 R/tu, torus 0.0008–0.0027, against a path speed of 0.361–0.364 R/tu; turning −32.0 to −32.4°/tu on both. OG2g: Klein drift 0.0003–0.0007, torus 0.0002–0.0023 R/tu, path speed 0.475–0.486 R/tu, turning −95.5 to −97.3°/tu. At heights 1.5 and 2 R both spinners grow without bound on both worlds
+- **Run IDs:** `spin.jsonl` (36 rows)
+- **Search / parameter bounds:** two spinners, one position, 9 heights
+- **Reproduction command:** `cd research/experiments/KLEIN && PYTHONPATH=../../../src ../../../.venv/bin/python kb.py spin`
+- **Known caveats:** this tests the vortex-pair idea (two vortices turning opposite ways push each other along) and finds no effect at the distances where the spinners survive; closer pairs are not reachable this way because both worlds grow at 2 R and below
+- **History:**
+  - 2026-11-14 — OBSERVED — strange-geometries thread.
 
 ### C090 — In GenomeLenia (our modified rule: each pixel's matter carries a heritable position g on the line from Chan's "division well" to "division uncontrolled"), mutation plus inheritance raises the mean genome from 0.3 to 0.47–0.55 in 2000 time units, against 0.36–0.43 when the genome is only a neutral marker; every one of 4 paired seeds ends higher in the selected arm
 

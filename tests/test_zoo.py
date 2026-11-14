@@ -43,16 +43,50 @@ def test_place_pair_contact_geometry():
     assert A0.sum() == pytest.approx(50.0)
 
 
-@needs_refs
-def test_atlas_rows_replay():
-    """Two committed atlas rows replay bit for bit (one head-on, one fusion)."""
-    from atlas import job
+# Replays are compared by physics, not by sha256. numpy's FFT picks its kernels by the CPU's SIMD
+# level (AVX-512 vs AVX2 round differently), and the committed hashes were made on an AVX-512
+# machine, so they only reproduce bit for bit there; CI runners vary. Reproduce the other path
+# with NPY_DISABLE_CPU_FEATURES="AVX512_SPR AVX512_ICL X86_V4". The atlas bodies come from a
+# rotate-and-resettle transient that amplifies those rounding differences to O(1) (ZOO.md,
+# "Floating point"), so the atlas test replays from the committed bodies in tests/fixtures.
+FIXTURE_STATES = Path(__file__).resolve().parent / "fixtures" / "zoo-states"
 
+
+def test_atlas_rows_replay(monkeypatch, tmp_path):
+    """Two committed atlas rows (head-on, fusion) replay to the same class and mass series."""
+    import shutil
+
+    import atlas
+
+    for f in FIXTURE_STATES.glob("*.npz"):
+        shutil.copy(f, tmp_path / f.name)
+    monkeypatch.setattr(atlas, "STATES", tmp_path)
     rows = {(r["theta"], r["b_R"]): r for r in map(json.loads, (ZOO / "atlas-O.jsonl").read_text().splitlines())}
     for key in [(180, 0.0), (90, 0.0)]:
-        r = job(("O", "O2u", "O2u", key[0], key[1]))
-        assert r["final_sha256"] == rows[key]["final_sha256"]
+        r = atlas.job(("O", "O2u", "O2u", key[0], key[1]))
+        assert sorted(p.name for p in tmp_path.iterdir()) == sorted(p.name for p in FIXTURE_STATES.glob("*.npz"))
         assert r["class"] == rows[key]["class"]
+        assert r["n"] == rows[key]["n"]
+        np.testing.assert_allclose(r["mass_series"], rows[key]["mass_series"], rtol=1e-4)
+
+
+@needs_refs
+def test_forage_row_replays():
+    """A short free-foraging run (seed 2, K 8) replays its committed census and ends the same way."""
+    import forage
+    from alm.lenia import Lenia
+
+    row = next(json.loads(l) for l in (ZOO / "forage-K8.jsonl").read_text().splitlines() if json.loads(l)["seed"] == 2)
+    A0, *_ = forage.setup(2, 8, row["N"])
+    assert float(A0.sum()) == pytest.approx(row["series"][0][4], rel=0.02)  # before any step vs t 5
+    L = Lenia(forage.RULE, A0)
+    for t, m_arc, n_rings, n, M in row["series"]:
+        for _ in range(5 * forage.RULE.T):
+            L.step()
+        got = forage.census(L.A)
+        assert got[1] == n_rings and got[2] == n, t
+        assert got[0] == pytest.approx(m_arc, rel=1e-4, abs=0.2), t
+        assert float(L.A.sum()) == pytest.approx(M, rel=1e-4), t
 
 
 def test_ledger_numbers_match_logs():

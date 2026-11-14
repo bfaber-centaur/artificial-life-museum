@@ -1,0 +1,689 @@
+{
+ "exhibit": "G051",
+ "title": "Fit, or lucky?",
+ "claim": [
+  "C099",
+  "C100",
+  "C101"
+ ],
+ "media": [
+  "replay.png"
+ ],
+ "engine": "research/experiments/SOUP/soup.Soup (our parameter-embedded Flow-Lenia, written from Plantec et al. 2023; not the authors' code)",
+ "world": "settled one-species world of C078: kernel set 16, 256², 2000 steps from uniform(0, 0.3) noise default_rng([99, 1000]); cached by mutant.settled",
+ "runs": {
+  "first_trials": [
+   {
+    "mutant": 0,
+    "y": 56,
+    "x": 80,
+    "final_state_sha256": "208ebd19ab6afc9f52214ab66b444199604615b53d89aaa73243dac3e731449d",
+    "note": "C078 dominant run, 5000 steps; read at step 2500"
+   },
+   {
+    "mutant": 1,
+    "y": 79,
+    "x": 35,
+    "final_state_sha256": "3f7a8bd3b0c4fd596f4e2306178ebfa5d3b80ec49e473312afeb48f39f526363",
+    "note": "C078 dominant run, 5000 steps; read at step 2500"
+   },
+   {
+    "mutant": 2,
+    "y": 196,
+    "x": 228,
+    "final_state_sha256": "19621277b1df8a678c79b37559a7c72558de55bc8f45df88c2f494f42e7e6d0f",
+    "note": "C078 dominant run, 5000 steps; read at step 2500"
+   },
+   {
+    "mutant": 3,
+    "y": 249,
+    "x": 96,
+    "final_state_sha256": "3dbc28ed52f826dc08232294a010abaf6f0c14c58255bf410712d5d4263152c1",
+    "note": "C078 dominant run, 5000 steps; read at step 2500"
+   },
+   {
+    "mutant": 4,
+    "y": 252,
+    "x": 159,
+    "final_state_sha256": "d365229ba3c6367beccceed604111620b5a9224e577887f31b8976e121b24425",
+    "note": "C078 dominant run, 5000 steps; read at step 2500"
+   },
+   {
+    "mutant": 5,
+    "y": 214,
+    "x": 166,
+    "final_state_sha256": "f00b5a37b589711bdab06c3a7723a6109418406c2365bb3dd7166dc7cc09baf7",
+    "note": "C078 dominant run, 5000 steps; read at step 2500"
+   },
+   {
+    "mutant": 6,
+    "y": 241,
+    "x": 99,
+    "final_state_sha256": "8d0ac96ca022e5e71a7b4731494f5744473f622cd96b7fd0a11ec7c97e452b93",
+    "note": "C078 dominant run, 5000 steps; read at step 2500"
+   },
+   {
+    "mutant": 7,
+    "y": 153,
+    "x": 6,
+    "final_state_sha256": "889722265ffced76bceb57797b2a6c17b41e72eef1ec8967499f71f4223c189e",
+    "note": "C078 dominant run, 5000 steps; read at step 2500"
+   },
+   {
+    "mutant": 8,
+    "y": 238,
+    "x": 66,
+    "final_state_sha256": "75a96c84d7c594a1b9c5dfcbbb90ffa321a7f97d7a620dee01eaece4e2fb92e7",
+    "note": "C078 dominant run, 5000 steps; read at step 2500"
+   },
+   {
+    "mutant": 9,
+    "y": 52,
+    "x": 149,
+    "final_state_sha256": "4b12643d4ce77744e024a7c03b2953b11d380e812c36518c5112a6dcc008846e",
+    "note": "C078 dominant run, 5000 steps; read at step 2500"
+   },
+   {
+    "mutant": 10,
+    "y": 237,
+    "x": 164,
+    "final_state_sha256": "8ea9c2df2aab4208dbec6911b0f0dfbcd849f25fdd6c7c05be157f0f4897abb5",
+    "note": "C078 dominant run, 5000 steps; read at step 2500"
+   },
+   {
+    "mutant": 11,
+    "y": 78,
+    "x": 248,
+    "final_state_sha256": "d5618e3b51582e062d455d68927adcac0402119506b96825ff0174638fdaef95",
+    "note": "C078 dominant run, 5000 steps; read at step 2500"
+   }
+  ],
+  "replays": [
+   {
+    "mutant": 6,
+    "placement": 0,
+    "y": 150,
+    "x": 248,
+    "steps": 2500,
+    "final_state_sha256": "e9405aeae501f92bfc68e3a25bd50ad85702055e51837074a81a1853e67d97e3"
+   },
+   {
+    "mutant": 3,
+    "placement": 0,
+    "y": 99,
+    "x": 14,
+    "steps": 2500,
+    "final_state_sha256": "5b95a754253d486a6aba78c2ac4d3fcab16fa89252e276cb277a9c61aaac8dbc"
+   },
+   {
+    "mutant": 9,
+    "placement": 0,
+    "y": 66,
+    "x": 22,
+    "steps": 2500,
+    "final_state_sha256": "5df5cd36fad0fee2a65492afde0a66982c3d6fb2ff458e1f10f4673ecff5c194"
+   },
+   {
+    "mutant": 0,
+    "placement": 0,
+    "y": 158,
+    "x": 120,
+    "steps": 2500,
+    "final_state_sha256": "dc5ff52c3def0b74553347545bfd9073ca434c0c85a7faf1a73e5362e1fae9c0"
+   },
+   {
+    "mutant": 0,
+    "placement": 1,
+    "y": 229,
+    "x": 102,
+    "steps": 2500,
+    "final_state_sha256": "f6321b5f4986ac1c1a8eb5579993ebfcf6e377e7f6af3479568b1b4a68e0b016"
+   },
+   {
+    "mutant": 3,
+    "placement": 1,
+    "y": 227,
+    "x": 111,
+    "steps": 2500,
+    "final_state_sha256": "cea21022bfa1bf0cb51aa7df291153e7887f84ea3d4275d334b266cfa7b73308"
+   },
+   {
+    "mutant": 6,
+    "placement": 1,
+    "y": 134,
+    "x": 198,
+    "steps": 2500,
+    "final_state_sha256": "819fd526238c4816fef145bccdfc1bc48cbb2619af87bf1022f8756f41f559d0"
+   },
+   {
+    "mutant": 9,
+    "placement": 1,
+    "y": 29,
+    "x": 63,
+    "steps": 2500,
+    "final_state_sha256": "be31197ab17e8edd9a39655964511837be82ba2341d1b77d43cea84ad8903dec"
+   },
+   {
+    "mutant": 6,
+    "placement": 2,
+    "y": 242,
+    "x": 225,
+    "steps": 2500,
+    "final_state_sha256": "78824089de32067af907f066d647f13727c8deacb71db022397b0ebda55c9857"
+   },
+   {
+    "mutant": 3,
+    "placement": 2,
+    "y": 105,
+    "x": 57,
+    "steps": 2500,
+    "final_state_sha256": "95e92d124db284c9f8374c0a0aefff3209a424640cfbccae5809862c92363f80"
+   },
+   {
+    "mutant": 0,
+    "placement": 2,
+    "y": 29,
+    "x": 230,
+    "steps": 2500,
+    "final_state_sha256": "2d26a44581b510e7abc879171a0892d4890f92d01aba2db0457d8c53544be97d"
+   },
+   {
+    "mutant": 9,
+    "placement": 2,
+    "y": 97,
+    "x": 177,
+    "steps": 2500,
+    "final_state_sha256": "907a3404b5df5f971d0e850d2e6c1774f6dc3e8a4d37122c109d6040b9ef1670"
+   },
+   {
+    "mutant": 6,
+    "placement": 3,
+    "y": 114,
+    "x": 184,
+    "steps": 2500,
+    "final_state_sha256": "d1069e092b749794723a9f816b33eca220feead8bc0d281e94627545fb5a1072"
+   },
+   {
+    "mutant": 3,
+    "placement": 3,
+    "y": 53,
+    "x": 148,
+    "steps": 2500,
+    "final_state_sha256": "cb0102c5a9aa549b3d83bae7641dd492bc63a4218c9d0a9fcd1ec182d4b743fa"
+   },
+   {
+    "mutant": 0,
+    "placement": 3,
+    "y": 214,
+    "x": 156,
+    "steps": 2500,
+    "final_state_sha256": "cc55bafc0ed23b4a97911c9cbac10860e6f1c89515375db4efd50aeec7232f5c"
+   },
+   {
+    "mutant": 9,
+    "placement": 3,
+    "y": 210,
+    "x": 139,
+    "steps": 2500,
+    "final_state_sha256": "3afe80ef9c00542ebf3be696f42b0ea5be073fa1a2488ba7ee156e50f29996f6"
+   },
+   {
+    "mutant": 6,
+    "placement": 4,
+    "y": 8,
+    "x": 216,
+    "steps": 2500,
+    "final_state_sha256": "ca52bb17cd96bb6fdec7c009ecf92844a7ce8bd9f085a0cc5bc540d2045fbae1"
+   },
+   {
+    "mutant": 3,
+    "placement": 4,
+    "y": 235,
+    "x": 24,
+    "steps": 2500,
+    "final_state_sha256": "35bda590cf6a05a8dee6d1202cbbd48ef2269d4891559c3504ed9e16c35eb61d"
+   },
+   {
+    "mutant": 0,
+    "placement": 4,
+    "y": 54,
+    "x": 141,
+    "steps": 2500,
+    "final_state_sha256": "97a4847a8eddadd83170ffd8158c8479e526bbc97715b82b7a19ebbb0d0f4fdc"
+   },
+   {
+    "mutant": 9,
+    "placement": 4,
+    "y": 69,
+    "x": 60,
+    "steps": 2500,
+    "final_state_sha256": "a6ce0ab0446eb11686a0f8eb04593cb79e3b29d17e696781bd99a6be8645fb76"
+   },
+   {
+    "mutant": 3,
+    "placement": 5,
+    "y": 20,
+    "x": 21,
+    "steps": 2500,
+    "final_state_sha256": "5642edf38d5caa40c91b3158e545ca69bc1df23d04c41da7e24091e9e2569154"
+   },
+   {
+    "mutant": 6,
+    "placement": 5,
+    "y": 155,
+    "x": 118,
+    "steps": 2500,
+    "final_state_sha256": "7f741cf051d0119602108cf234a81442022874ec7442005f8955369f45d9bf80"
+   },
+   {
+    "mutant": 0,
+    "placement": 5,
+    "y": 212,
+    "x": 67,
+    "steps": 2500,
+    "final_state_sha256": "dd407353121e26d160337b3973da18f28a081b77e0071ecb4e6824f8bc8912ff"
+   },
+   {
+    "mutant": 9,
+    "placement": 5,
+    "y": 143,
+    "x": 108,
+    "steps": 2500,
+    "final_state_sha256": "bc1c769dfa04365590cd077790693f743197ec4d52a4d8add475a0589ab753f0"
+   },
+   {
+    "mutant": 4,
+    "placement": 0,
+    "y": 222,
+    "x": 210,
+    "steps": 2500,
+    "final_state_sha256": "9ff701c41765429f651a1c9a9e141be5a707b65b6f185df16879624076365755"
+   },
+   {
+    "mutant": 7,
+    "placement": 0,
+    "y": 84,
+    "x": 42,
+    "steps": 2500,
+    "final_state_sha256": "d33b36f2f6ea3afe696e42755fc9a59a263a451b34671d153e5fbe6c09a87dba"
+   },
+   {
+    "mutant": 10,
+    "placement": 0,
+    "y": 104,
+    "x": 118,
+    "steps": 2500,
+    "final_state_sha256": "4c5cf35c58b03e142defc28702e8ea29bc6ca288bc530af041b582ab42c1ffd1"
+   },
+   {
+    "mutant": 1,
+    "placement": 0,
+    "y": 115,
+    "x": 254,
+    "steps": 2500,
+    "final_state_sha256": "ca4b1281a3462273b100ba94911fe6c6f01209007f8a61f867d2e7af12814abb"
+   },
+   {
+    "mutant": 4,
+    "placement": 1,
+    "y": 250,
+    "x": 143,
+    "steps": 2500,
+    "final_state_sha256": "61d0ec6e4e4783c7b7254d0bfa9ed9c5ff9abc9bbb25b5c18bf1f07dd5996fd3"
+   },
+   {
+    "mutant": 7,
+    "placement": 1,
+    "y": 176,
+    "x": 63,
+    "steps": 2500,
+    "final_state_sha256": "254ec8e08dc018dc95196a436a42f180ebbda1c270fcf4d371cad933282b9fd8"
+   },
+   {
+    "mutant": 1,
+    "placement": 1,
+    "y": 184,
+    "x": 183,
+    "steps": 2500,
+    "final_state_sha256": "d01d07ab16c38e8a8a4d042f51e19bbaecaef71caa9efa5e735f11a8ca493716"
+   },
+   {
+    "mutant": 10,
+    "placement": 1,
+    "y": 187,
+    "x": 182,
+    "steps": 2500,
+    "final_state_sha256": "e7ab8355bde850b0b470bfc1bbd8ed128998dc5170b5e3cbfd2e710e9ebbd5dd"
+   },
+   {
+    "mutant": 4,
+    "placement": 2,
+    "y": 191,
+    "x": 177,
+    "steps": 2500,
+    "final_state_sha256": "e0fe6e54a28e458473d489839198f3de645944a1c2c60c16665ecf46cabfe2fe"
+   },
+   {
+    "mutant": 7,
+    "placement": 2,
+    "y": 151,
+    "x": 152,
+    "steps": 2500,
+    "final_state_sha256": "45b70f40534aae45e053ea38ac78212f419218c4a162262ac46492a48ec4f2d0"
+   },
+   {
+    "mutant": 1,
+    "placement": 2,
+    "y": 62,
+    "x": 138,
+    "steps": 2500,
+    "final_state_sha256": "d3f50994e73633a0cd5b5032562b94fb73dd337f146e5490aad857da95f11fd2"
+   },
+   {
+    "mutant": 10,
+    "placement": 2,
+    "y": 229,
+    "x": 78,
+    "steps": 2500,
+    "final_state_sha256": "487ae1146dd06cfa59314962696f672a6206167651a2cc611a0d07b25c4bd349"
+   },
+   {
+    "mutant": 4,
+    "placement": 3,
+    "y": 161,
+    "x": 43,
+    "steps": 2500,
+    "final_state_sha256": "1e77e91c9cce78d7816f1802f539e55cb7eb6d4ca218a43da718a179185942e0"
+   },
+   {
+    "mutant": 7,
+    "placement": 3,
+    "y": 163,
+    "x": 124,
+    "steps": 2500,
+    "final_state_sha256": "d78048798530ea9c6bd4e084956c889ab4e7f4c0e0e90df10b6b45c6f1777e1e"
+   },
+   {
+    "mutant": 10,
+    "placement": 3,
+    "y": 23,
+    "x": 94,
+    "steps": 2500,
+    "final_state_sha256": "60db964259d4d10f7c943ddc6baacc8dc2d6f74c07281834260a8aeea1379f6d"
+   },
+   {
+    "mutant": 1,
+    "placement": 3,
+    "y": 130,
+    "x": 17,
+    "steps": 2500,
+    "final_state_sha256": "165d49f773f9626c5d5960db285632b12a8ccf2c0a5d35797fabf49da3b9c83b"
+   },
+   {
+    "mutant": 4,
+    "placement": 4,
+    "y": 107,
+    "x": 96,
+    "steps": 2500,
+    "final_state_sha256": "9deda6637881b5d8ae6dd5dce9057cb60104dce5a47c19b956ec4bcea951d231"
+   },
+   {
+    "mutant": 7,
+    "placement": 4,
+    "y": 88,
+    "x": 18,
+    "steps": 2500,
+    "final_state_sha256": "67292f34ffc103fe9059e34b7baf0e5292d109bc8e908fe6b29de245b340745e"
+   },
+   {
+    "mutant": 10,
+    "placement": 4,
+    "y": 59,
+    "x": 25,
+    "steps": 2500,
+    "final_state_sha256": "6dc81a236c730d1f6ac329b1486b5aa3ba5c9414e7e644a1864520cfa3b06b9c"
+   },
+   {
+    "mutant": 1,
+    "placement": 4,
+    "y": 51,
+    "x": 78,
+    "steps": 2500,
+    "final_state_sha256": "f98d35831aa87dd0e90a9ba082f6dd3a0263bb43c9a79f944600297b4aa8ab32"
+   },
+   {
+    "mutant": 4,
+    "placement": 5,
+    "y": 63,
+    "x": 254,
+    "steps": 2500,
+    "final_state_sha256": "c5f66b30eb13ed6139dbb3e4aa51c317a838128d124f09efb187c40fa45122dd"
+   },
+   {
+    "mutant": 7,
+    "placement": 5,
+    "y": 92,
+    "x": 114,
+    "steps": 2500,
+    "final_state_sha256": "d75f7a60790d49fec90fccff2ee336211804f910cb2265272e39e699c2b62edb"
+   },
+   {
+    "mutant": 10,
+    "placement": 5,
+    "y": 254,
+    "x": 191,
+    "steps": 2500,
+    "final_state_sha256": "0fa9682b26d221bc779be5aaaa1492c8702e417a64cdb46e3b4af8d8aeaf01ad"
+   },
+   {
+    "mutant": 1,
+    "placement": 5,
+    "y": 229,
+    "x": 78,
+    "steps": 2500,
+    "final_state_sha256": "8e8c94bff263d609870b6a53e71f556aa48e29d19cdc5b8be562c6ef000e389b"
+   },
+   {
+    "mutant": 5,
+    "placement": 0,
+    "y": 141,
+    "x": 55,
+    "steps": 2500,
+    "final_state_sha256": "9a555c15f47c07a44e24eb18b0a71b7418230144672a540cd4cd0fbdfb03698b"
+   },
+   {
+    "mutant": 11,
+    "placement": 0,
+    "y": 11,
+    "x": 94,
+    "steps": 2500,
+    "final_state_sha256": "2b496661e35f22957065e66309aca15e09903781dc3c1f096475d72127cee639"
+   },
+   {
+    "mutant": 8,
+    "placement": 0,
+    "y": 168,
+    "x": 77,
+    "steps": 2500,
+    "final_state_sha256": "9cc74a89a32975ab83afcf5eb06873fa6157f8b852794a1b0293aa33def62976"
+   },
+   {
+    "mutant": 2,
+    "placement": 0,
+    "y": 119,
+    "x": 209,
+    "steps": 2500,
+    "final_state_sha256": "2b44334aa7d0857ef7e806f31fc810ca5deb20a2dfa71a6afdc25fadb9237d5b"
+   },
+   {
+    "mutant": 5,
+    "placement": 1,
+    "y": 201,
+    "x": 86,
+    "steps": 2500,
+    "final_state_sha256": "1b2da75e656e9dfc55d0d851ca69e69784ab4ecc1c78d1a9b93636b44a552acc"
+   },
+   {
+    "mutant": 11,
+    "placement": 1,
+    "y": 54,
+    "x": 150,
+    "steps": 2500,
+    "final_state_sha256": "583851a6e6d836836d2f3ed1949dff0bdd8c7e01e4f708772ce5564062ffd3f5"
+   },
+   {
+    "mutant": 8,
+    "placement": 1,
+    "y": 65,
+    "x": 209,
+    "steps": 2500,
+    "final_state_sha256": "e5127696dabf136b0b05a48875b379de846a830003de9d28a61d8d24fea12922"
+   },
+   {
+    "mutant": 2,
+    "placement": 1,
+    "y": 138,
+    "x": 1,
+    "steps": 2500,
+    "final_state_sha256": "eb8fc8c9a76d17dcb59183aa179cf4ca828fc87a28bb67fbfbe603c732534201"
+   },
+   {
+    "mutant": 5,
+    "placement": 2,
+    "y": 215,
+    "x": 99,
+    "steps": 2500,
+    "final_state_sha256": "d53a9f2b0e8671198543d8d28d9c5f2f800987f79adae117246163db28fb5959"
+   },
+   {
+    "mutant": 11,
+    "placement": 2,
+    "y": 136,
+    "x": 159,
+    "steps": 2500,
+    "final_state_sha256": "85f7f1ee825ec565803242a6880800099c423575b9b801965ac07afe5313cf07"
+   },
+   {
+    "mutant": 8,
+    "placement": 2,
+    "y": 55,
+    "x": 140,
+    "steps": 2500,
+    "final_state_sha256": "f6ff6f37c8a3b72f8bc1322a6783eb02a283e8e83427fa77ad613f110c969dde"
+   },
+   {
+    "mutant": 2,
+    "placement": 2,
+    "y": 103,
+    "x": 171,
+    "steps": 2500,
+    "final_state_sha256": "a4e068a3bd53fd1a0d4aefdc5d0e2131f4d06570d7f493469d6f345d91018404"
+   },
+   {
+    "mutant": 11,
+    "placement": 3,
+    "y": 213,
+    "x": 105,
+    "steps": 2500,
+    "final_state_sha256": "fc3d2350241cf38cf944a886d0fb416c3bfa9281eb5da9b50e5762db2e458f46"
+   },
+   {
+    "mutant": 5,
+    "placement": 3,
+    "y": 2,
+    "x": 23,
+    "steps": 2500,
+    "final_state_sha256": "16d2f80aacce245b2e9f811f41f8101440d41cd77b3841a76b73b2c0eb118dcd"
+   },
+   {
+    "mutant": 8,
+    "placement": 3,
+    "y": 180,
+    "x": 199,
+    "steps": 2500,
+    "final_state_sha256": "50abdcb2c54ff72d5b1a8b4f15ade5b7e6a8d706d8fbec2e0bd23b74e1401629"
+   },
+   {
+    "mutant": 2,
+    "placement": 3,
+    "y": 225,
+    "x": 209,
+    "steps": 2500,
+    "final_state_sha256": "9862441df576d767727050fded5812d25aacdff267c090d136a6dd5ab661f904"
+   },
+   {
+    "mutant": 5,
+    "placement": 4,
+    "y": 59,
+    "x": 81,
+    "steps": 2500,
+    "final_state_sha256": "6d7cfb6482d1261dbe77ce6048c4f2720c3b7934de86876fa5f4dff3f7f469fe"
+   },
+   {
+    "mutant": 11,
+    "placement": 4,
+    "y": 116,
+    "x": 250,
+    "steps": 2500,
+    "final_state_sha256": "c43187269e1a65f0103b690e5434aae8aa28a5ae9366e147ed960189c507124f"
+   },
+   {
+    "mutant": 8,
+    "placement": 4,
+    "y": 73,
+    "x": 21,
+    "steps": 2500,
+    "final_state_sha256": "d962e3863fb89d54b70df9edcb96daf8a658afb294ba8c43818c2e166945cbd3"
+   },
+   {
+    "mutant": 2,
+    "placement": 4,
+    "y": 233,
+    "x": 33,
+    "steps": 2500,
+    "final_state_sha256": "9987cf2624f4b0e45b3bd563e8abbc7f49ed8d16a1b82727737deccdc6858b6f"
+   },
+   {
+    "mutant": 11,
+    "placement": 5,
+    "y": 212,
+    "x": 237,
+    "steps": 2500,
+    "final_state_sha256": "daf582244dc7c793a498b56ab5b5c92901220cde0f36995a0378192e983f597f"
+   },
+   {
+    "mutant": 5,
+    "placement": 5,
+    "y": 8,
+    "x": 246,
+    "steps": 2500,
+    "final_state_sha256": "622be7a19ced82977750a98ea412a8e2fa0da087d06e59b04be60633d56b698c"
+   },
+   {
+    "mutant": 8,
+    "placement": 5,
+    "y": 77,
+    "x": 139,
+    "steps": 2500,
+    "final_state_sha256": "708527ab1816c2ce1bba2822681074ced4f0a09810745d2ab865fa0614f210f5"
+   },
+   {
+    "mutant": 2,
+    "placement": 5,
+    "y": 32,
+    "x": 185,
+    "steps": 2500,
+    "final_state_sha256": "22e5c643de964fb37d2c611df170b4551a0d787d528d9855b8b9e7047fdb92fc"
+   }
+  ]
+ },
+ "view": "one column per genome, sorted by replay median; dots = the six replays (orange grew, grey shrank), bar = median, open diamond = first trial at the same 500 tu; log axis, values below 0.01 drawn at 0.01",
+ "commands": [
+  "SOUP_OUT=<dir> python research/experiments/SOUP/replay.py 0 12 6 2500",
+  "python research/experiments/SOUP/plots.py replay replay.png",
+  "python research/experiments/SOUP/summarize.py replay"
+ ],
+ "caveats": [
+  "Six places per genome; one world; 500 time units."
+ ]
+}

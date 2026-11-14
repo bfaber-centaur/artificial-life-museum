@@ -46,11 +46,25 @@ made of, ten times per unit of time. Some of them travel; one of them never chan
 | [G029](#g029--a-family-tree) | A family tree (animated; *multi-kernel*) | one cell of Chan's *division well* (found/213 #84) | 2026-11-14 |
 | [G030](#g030--how-fast-one-cell-fills-the-world) | How fast one cell fills the world (animated; *multi-kernel, interpolated rules*) | the same cell under four rules, *well* → *uncontrolled* | 2026-11-14 |
 | [G031](#g031--a-replicator-in-three-dimensions) | A replicator in three dimensions (animated; *3-D, multi-kernel*) | Chan's found/312 #21 | 2026-11-14 |
+| [G032](#g032--same-world-two-kinds-of-heredity) | Same world, two kinds of heredity (animated; *Flow-Lenia with genomes*) | soup runs B16s0, D16s0 | 2026-11-14 |
+| [G033](#g033--where-the-variation-goes) | Where the variation goes (*Flow-Lenia with genomes*) | soup runs B16s0–3, D16s0–3 | 2026-11-14 |
+| [G034](#g034--one-physics-many-body-plans) | One physics, many body plans (*Flow-Lenia with genomes*) | eight soup worlds | 2026-11-14 |
 | [G035](#g035--two-orbia-204-collisions) | Two Orbia, 204 collisions (still + animated) | S001-rule Orbium × 2 | 2026-11-14 |
 | [G036](#g036--the-arc-that-eats-rings) | The arc that eats rings (animated) | P6al fed C0v; P6al–P10al | 2026-11-14 |
 | [G037](#g037--tip-or-belly) | Tip or belly (still) | P6al–P10al × C0v | 2026-11-14 |
+| [G038](#g038--parallel-lines-meet) | Parallel lines meet (animated; *sphere*) | S001 pairs, eight Orbia, six tiny planets | 2026-11-14 |
+| [G039](#g039--parallel-lines-part) | Parallel lines part (animated; *hyperbolic plane*) | S001 pair | 2026-11-14 |
+| [G040](#g040--the-lattice-is-the-compass) | The lattice is the compass (chart) | S001, 93 headings on three lattices | 2026-11-14 |
 | [G045](#g045--selection-for-faster-division) | Selection for faster division (animated; *modified rule: GenomeLenia*) | one cell with a heritable genome, with and without selection | 2026-11-14 |
 | [G046](#g046--the-fast-genome-invades) | The fast genome invades (animated; *modified rule: GenomeLenia*) | *well* tissue against *uncontrolled* tissue | 2026-11-14 |
+| [G047](#g047--no-keeper) | No keeper (animated) | P6al loose among 8 × C0v | 2026-11-14 |
+| [G048](#g048--two-orbia-fuse-into-s101) | Two Orbia fuse into S101 (still) | fused bodies of G035, S101 | 2026-11-14 |
+| [G049](#g049--a-lens-made-of-nothing) | A lens made of nothing (animated; *cone points*) | S001 pairs past a 300°, 360° and 420° point | 2026-11-14 |
+| [G050](#g050--straight-at-the-point) | Straight at the point (animated; *cone points*) | S001 aimed at each point | 2026-11-14 |
+| [G051](#g051--fit-or-lucky) | Fit, or lucky? (*Flow-Lenia with genomes*) | 12 mutant genomes × 6 replays | 2026-11-14 |
+| [G052](#g052--one-genome-seven-landings) | One genome, seven landings (animated; *Flow-Lenia with genomes*) | mutants 8 and 4 | 2026-11-14 |
+| [G053](#g053--through-the-looking-glass) | Through the looking glass (animated; *Klein bottle*) | S001 | 2026-11-14 |
+| [G054](#g054--the-mirror-next-door) | The mirror next door (animated; *Klein bottle*) | S001 on a narrow torus and Klein bottle | 2026-11-14 |
 
 ### G001 — Four ways to move
 
@@ -636,6 +650,74 @@ Film: [`replicator3d.mp4`](exhibits/G031-replicating-in-3d/replicator3d.mp4) ·
   above 0.25 along the line of sight, lit from the upper left; each separate body has its own
   hue. Because the box is periodic, bodies leaving one side reappear on the other.
 
+## Evolution soup (G032–G034, G051–G052)
+
+Flow-Lenia worlds in which every cell carries a genome (ten growth weights) that travels with
+its matter and now and then mutates; matter is conserved, so bodies compete for it. Engine and
+notes: [`SOUP.md`](../experiments/SOUP/SOUP.md). Colour is the genome (a fixed random projection
+of the ten weights to RGB), brightness is the matter.
+
+### G032 — Same world, two kinds of heredity
+
+![Two copies of one world: on the left a purple amoeba spreads and swallows a colony of dots; on the right the dots survive among mottled blobs; a diversity curve below rises for the right world and falls for the left](exhibits/G032-two-heredities/duel.gif)
+
+Film: [`duel.mp4`](exhibits/G032-two-heredities/duel.mp4) ·
+final frame: [`duel-final.png`](exhibits/G032-two-heredities/duel-final.png) ·
+[`provenance.json`](exhibits/G032-two-heredities/provenance.json)
+
+- **Observation (claims C077, C076).** Kernel set 16, seed 0, 2400 time units, from the identical
+  start. Left, genomes average where matter meets: a slime grows into a giant that engulfs the
+  dot-shaped plankton. Right, a cell keeps the genome of the biggest parcel that arrives: the
+  plankton survive and the blobs become genome mosaics.
+- **Caveats.** One seed is shown; the ledger numbers cover four.
+
+### G033 — Where the variation goes
+
+![Population bands collapsing on the left and staying many on the right; genome fans with tapering wedges on the left; eight diversity curves, four rising and four falling](exhibits/G033-blending-swamps-variation/heredity.png)
+
+[`provenance.json`](exhibits/G033-blending-swamps-variation/provenance.json)
+
+- **Observation (claim C076).** Top: mass per species (bodies with similar genomes; a drawing
+  convention). Middle: all matter binned along the main genome axis; under blending each mutation
+  leaves a wedge that tapers back into the mean. Bottom: genome spread in all eight runs.
+
+### G034 — One physics, many body plans
+
+![Eight worlds: worms and dots, ringed cells, hatched blobs, chains and a giant amoeba](exhibits/G034-one-physics-many-bodies/worlds.png)
+
+[`provenance.json`](exhibits/G034-one-physics-many-bodies/provenance.json)
+
+- **Observation (no claim).** Eight worlds, one kernel set each, 16 founder genomes each. Inside
+  one world the founders build different bodies from the same kernels. Most worlds settle into a
+  still mosaic; kernel set 16 did not.
+
+### G051 — Fit, or lucky?
+
+![Twelve columns of dots on a log scale; the left columns sit mostly above the ×1 line in orange, the right ones mostly below in grey; open diamonds marking each genome's first trial are scattered with no relation to the columns' order](exhibits/G051-fit-or-lucky/replay.png)
+
+[`provenance.json`](exhibits/G051-fit-or-lucky/provenance.json)
+
+- **Observation (claims C099, C100, C101).** Each column is one of the twelve C078 mutant genomes
+  dropped into the same one-species world at six new places, under whole-genome inheritance.
+  Dots: how much matter the mutant holds after 500 time units, relative to its start. Diamond:
+  the genome's first trial. The columns are sorted by replay median; the diamonds do not follow.
+
+### G052 — One genome, seven landings
+
+![Two rows of seven copies of one dark world of blue-grey membranes and dots; small orange mutant patches swell in six of seven squares of the top row and shrink or vanish in most squares of the bottom row](exhibits/G052-seven-landings/landings.gif)
+
+Film: [`landings.mp4`](exhibits/G052-seven-landings/landings.mp4) ·
+final frame: [`landings-final.png`](exhibits/G052-seven-landings/landings-final.png) ·
+[`provenance.json`](exhibits/G052-seven-landings/provenance.json)
+
+- **Observation (claims C099, C100).** Top row: mutant 8, which shrank in its first trial (left)
+  and grew in all six replays. Bottom row: mutant 4, which nearly doubled in its first trial and
+  shrank in five of six replays. Orange = matter carrying the mutant genome; blue-grey = the
+  resident species. The replays were re-made for the film and match their recorded final hashes; the two first
+  trials are re-created from the stored (rounded) mutation and track the record within 0.06.
+
+## Collision zoo (G035–G037, G047–G048)
+
 ### G035 — Two Orbia, 204 collisions
 
 ![A grid of 204 small time exposures: pairs of glowing tracks that cross, bend, end in a dot, merge into one thick track, or burst into a round labyrinth](exhibits/G035-orbium-collision-atlas/atlas.png)
@@ -681,6 +763,140 @@ still: [`ladder.png`](exhibits/G036-the-arc-that-eats-rings/ladder.png) ·
   a radius per segment, with the tip.
 - **Caveats.** One timestep and one world size. Exposures use A^0.7 (disclosed).
 
+### G047 — No keeper
+
+![A thin arc gliding through a dark world dotted with small rings; it swallows one, glides on, and then bursts into a spreading disc when it meets another](exhibits/G047-no-keeper/no-keeper.gif)
+
+Film: [`no-keeper.mp4`](exhibits/G047-no-keeper/no-keeper.mp4) ·
+[`provenance.json`](exhibits/G047-no-keeper/provenance.json)
+
+- **Observation (claim C093).** A Hexapteryx loose among eight still rings, nobody placing
+  anything. At t 110 it meets a ring with a wing tip and swallows it (now seven segments); at
+  t 205 it meets the next ring with its body and detonates. This is one of the 6 lucky runs out
+  of 64; the other 58 detonated on their first ring.
+- **Caveats.** The 512² torus is shown at half resolution.
+
+### G048 — Two Orbia fuse into S101
+
+![A grid of small two-lobed bodies, each a pair of bright crescents joined by a faint ring, next to the registered bound pair; one tile shows a single Orbium and one a field of stripes](exhibits/G048-fusion-makes-s101/fusion-s101.png)
+
+[`provenance.json`](exhibits/G048-fusion-makes-s101/provenance.json)
+
+- **Observation (claim C094).** First tile: S101, the registered bound Orbium pair. The others:
+  every collision of G035 that fused, 300 tu after contact. Nine have S101's mass, size and
+  speed. One shed a lobe and is a single Orbium again; one detonated late.
+- **Caveats.** Tiles are 61×61 cells, nearest-neighbour; bodies are at whatever heading they
+  locked to.
+
+## Strange geometries (G038–G040, G049–G050, G053–G054)
+
+Made by `research/experiments/GEOM/film.py` and `compass.py` (strange-geometries thread). The
+worlds are point clouds, not square grids, so each pixel shows its *nearest cell* (the cell
+mosaic shows when zoomed in); A maps linearly onto `inferno` as everywhere else. Globes add a
+disclosed Lambert shading (0.5 + 0.5 cos) and a faint blue lift on empty cells so the ball is
+visible. `film.py verify` replays every run and compares final hashes.
+
+### G038 — Parallel lines meet
+
+![Two Orbia on a small ball drift together and travel on joined by a shared membrane, beside the same pair on a flat world that never comes closer](exhibits/G038-parallel-lines-meet/meet.gif)
+
+Film: [`meet.mp4`](exhibits/G038-parallel-lines-meet/meet.mp4) ·
+[`meet-strip.png`](exhibits/G038-parallel-lines-meet/meet-strip.png) ·
+planet: [`planet.mp4`](exhibits/G038-parallel-lines-meet/planet.mp4),
+[`planet-still.png`](exhibits/G038-parallel-lines-meet/planet-still.png) ·
+[`tiny-planets.png`](exhibits/G038-parallel-lines-meet/tiny-planets.png) ·
+[`provenance.json`](exhibits/G038-parallel-lines-meet/provenance.json)
+
+- **Observation.** Two Orbia 3 R apart and heading the same way: on the flat torus they keep
+  their distance; on a sphere of radius 40 cells they lean together, touch within 7 tu and go on
+  as one joined body. Eight Orbia on a sphere of radius 60 collide until two remain (80 tu).
+  On planets of radius 25 down to 7 cells one Orbium wraps into a band and keeps gliding; at 6
+  and 5 cells only slow patches remain.
+- **Ledger.** C084 (pairs on spheres: 14 of 16 meet, outcomes), C085 (they follow great
+  circles), C086 (tiny planets); all *observed*.
+- **Caveats.** Icosahedral geodesic grid (12 five-fold defects), area-weighted kernel. The fused
+  body is matched to S101 by mass and size only.
+
+### G039 — Parallel lines part
+
+![A Poincaré disk: two Orbia start near the left side and curve apart along arcs that meet the rim at right angles](exhibits/G039-parallel-lines-part/part.gif)
+
+Film: [`part.mp4`](exhibits/G039-parallel-lines-part/part.mp4) ·
+[`part-still.png`](exhibits/G039-parallel-lines-part/part-still.png) ·
+[`provenance.json`](exhibits/G039-parallel-lines-part/provenance.json)
+
+- **Observation.** The same pair on the hyperbolic plane (curvature radius 2 R), drawn as a
+  Poincaré disk: they spread apart along circular arcs, the geodesics of the disk picture, and
+  look smaller near the rim because the picture shrinks distances there.
+- **Ledger.** C085 (separation follows the geodesic law within 0.27 R), *observed*.
+- **Caveats.** The world is a disk of radius 4 κ (104 cells), empty beyond; the animals leave
+  it after about 25 tu. {3,7} geodesic grid with exact cell areas.
+
+### G049 — A lens made of nothing
+
+![Three disks: a pair of Orbia bends together past a cone point, goes straight on a flat sheet, and bends apart past a saddle point](exhibits/G049-a-lens-made-of-nothing/lens.gif)
+
+Film: [`lens.mp4`](exhibits/G049-a-lens-made-of-nothing/lens.mp4) ·
+[`lens-final.png`](exhibits/G049-a-lens-made-of-nothing/lens-final.png) ·
+[`provenance.json`](exhibits/G049-a-lens-made-of-nothing/provenance.json)
+
+- **Observation.** Pairs 4 R apart pass a single conical point: 300° (60° cut out) bends them
+  together until they meet; flat keeps them parallel; 420° (60° added) bends them apart.
+- **Ledger.** C096, C097, *observed*.
+- **Caveats.** Disks are drawn opened out (angle × 360/Θ), so straight paths look bent at the
+  apex; the film runs until the animals near the world's edge.
+
+### G050 — Straight at the point
+
+![Three disks: one Orbium crosses the centre of a cone and of a flat sheet, and dies at a saddle point](exhibits/G050-straight-at-the-point/apex.gif)
+
+Film: [`apex.mp4`](exhibits/G050-straight-at-the-point/apex.mp4) ·
+[`apex-t20.png`](exhibits/G050-straight-at-the-point/apex-t20.png) ·
+[`provenance.json`](exhibits/G050-straight-at-the-point/provenance.json)
+
+- **Observation.** Aimed dead centre, Orbium crosses the cone point and the flat centre and dies
+  at the saddle point (19 tu).
+- **Ledger.** C098, *observed*: offsets of 0.25 R or more survive.
+
+### G053 — Through the looking glass
+
+![Left: a square chart with glued edges marked; an Orbium crosses the top edge and reappears at the bottom with its path mirrored. Right: the same world drawn on a turning glass Klein bottle](exhibits/G053-through-the-looking-glass/looking-glass.gif)
+
+Film: [`looking-glass.mp4`](exhibits/G053-through-the-looking-glass/looking-glass.mp4) ·
+[`looking-glass-final.png`](exhibits/G053-through-the-looking-glass/looking-glass-final.png) ·
+[`provenance.json`](exhibits/G053-through-the-looking-glass/provenance.json)
+
+- **Observation.** One Orbium on a 96 × 96 Klein bottle for 60 tu. Each time it leaves through
+  the top or bottom edge of the chart it comes back on the other side of the picture, mirrored;
+  on the glass bottle it simply glides on, through the neck and round.
+- **Ledger.** C102, *observed*: it moves exactly as on a torus.
+- **Caveats.** The 3-D bottle is a drawing (nearest cell per sample, Lambert shading, transparent
+  glass); it stretches areas and passes through itself. The simulation runs on the bottle's
+  double cover with `alm.lenia`.
+
+### G054 — The mirror next door
+
+![Two narrow worlds, each shown with the strips that lie across its top and bottom edges. On the torus the Orbium travels with copies of itself; on the Klein bottle its neighbours are mirror images and the world fills with stripes](exhibits/G054-the-mirror-next-door/mirror-next-door.gif)
+
+Film: [`mirror-next-door.mp4`](exhibits/G054-the-mirror-next-door/mirror-next-door.mp4) ·
+[`mirror-next-door-t10.png`](exhibits/G054-the-mirror-next-door/mirror-next-door-t10.png) ·
+[`provenance.json`](exhibits/G054-the-mirror-next-door/provenance.json)
+
+- **Observation.** The same Orbium in a world 128 × 24 cells: on the torus it glides on; on the
+  Klein bottle it fills the world with stripes within 30 tu.
+- **Ledger.** C103, *observed*: 3 of 32 such Klein runs survive, 32 of 32 torus runs.
+- **Caveats.** One seed of 32; the dim bands are copies drawn for explanation, not extra world.
+
+### G040 — The lattice is the compass
+
+![Compass roses of Orbium's final heading on a square grid, a hex lattice and an amorphous glass](exhibits/G040-lattice-compass/compass.png)
+
+[`provenance.json`](exhibits/G040-lattice-compass/provenance.json)
+
+- **Observation (chart).** Final headings after 800 tu from many start angles: on the square
+  and hex lattices they bunch onto a few spokes with the lattice's symmetry; on the glass they
+  do not.
+- **Ledger.** C011 (square grid, *independently checked*), C087 (hex and glass, *observed*).
 ## Replicators, round two: heredity (G045–G046)
 
 GenomeLenia (`research/experiments/REPLICATORS/genome.py`) is a *modified rule* of ours: the
@@ -855,11 +1071,19 @@ heading values come from `galintervene.chord_heading("S102", 3002)`. The G004 S0
 
 ## Cycle log
 
+- **2026-11-14, G047–G048 (collision-zoo thread, round 2).** Free-world forager and fusion-into-S101 exhibits, claims C093–C094.
 - **2026-11-14, G045–G046 (replicators thread, round 2).** Heredity and selection in GenomeLenia, a
   modified rule of ours. Claims C090–C092.
 - **2026-11-14, G029–G031 (replicators thread).** Self-replicating creatures from Chan's found
   catalogue: a tracked family tree, a growth-rate ladder and a 3-D replicator. Claims C072–C074.
 - **2026-11-14, G035–G037 (collision-zoo thread).** Collision atlas, ring feeding and tip-or-belly exhibits from `research/experiments/ZOO/exhibits.py`, claims C080–C083. Each `provenance.json` records state hashes; the atlas sheets replay every atlas row and check its hash.
+
+- **2026-11-14, G053–G054 (strange-geometries thread, round 3).** Orbium on a Klein bottle,
+  claims C102–C104, room 79.
+- **2026-11-14, G049–G050 (strange-geometries thread, round 2).** A cone point as a lens, claims
+  C096–C098, room 79.
+- **2026-11-14, G038–G040 (strange-geometries thread).** Orbium on a sphere, on the hyperbolic
+  plane and on hex and glass lattices; claims C084–C087, museum room 79.
 - **2026-11-10, G021 (species-hunt thread).** Convergence exhibit from the SPECIES-scout hunt, claim C063.
 - **2026-11-07, G014–G018 (lightning-talk thread, round two).** Five "stranger worlds". G015,
   G016 and G018 use a spatially or temporally varying rule (`FieldLenia`, checked bitwise against

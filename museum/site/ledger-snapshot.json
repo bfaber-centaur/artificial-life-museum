@@ -1,7 +1,7 @@
 {
   "ledger": "research/claims.md",
-  "ledger_sha256": "2ee5faa75f7bc6f20205b5918efb9ef86aa761dfc2b2052abf5911cb86de59b2",
-  "ledger_commit": "0e28947",
+  "ledger_sha256": "7ab51d0c055023ac07fcbd57e2415a1c756ed9c8764681aa543261fd6dfa2029",
+  "ledger_commit": "592c9be",
   "conventions_sha256": "0e237384e0425b3c325229cf650ab6f9807fb08c1bedc991433b54b13c2eb02f",
   "claims": {
     "C001": {
@@ -63,6 +63,7 @@
       "status_text": "INDEPENDENTLY_CHECKED",
       "rooms": [
         "orbium",
+        "strange-geometries",
         "wobbles"
       ]
     },
@@ -181,7 +182,8 @@
         "collection",
         "how-we-know",
         "index",
-        "one-rule"
+        "one-rule",
+        "strange-geometries"
       ]
     },
     "C044": {
@@ -356,6 +358,27 @@
         "replicators"
       ]
     },
+    "C076": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "evolution-soup"
+      ]
+    },
+    "C077": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "evolution-soup"
+      ]
+    },
+    "C078": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "evolution-soup"
+      ]
+    },
     "C080": {
       "status": "OBSERVED",
       "status_text": "OBSERVED",
@@ -384,6 +407,34 @@
         "collision-zoo"
       ]
     },
+    "C084": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "strange-geometries"
+      ]
+    },
+    "C085": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "strange-geometries"
+      ]
+    },
+    "C086": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "strange-geometries"
+      ]
+    },
+    "C087": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "strange-geometries"
+      ]
+    },
     "C090": {
       "status": "OBSERVED",
       "status_text": "OBSERVED",
@@ -403,6 +454,90 @@
       "status_text": "OBSERVED",
       "rooms": [
         "replicators"
+      ]
+    },
+    "C093": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "collision-zoo"
+      ]
+    },
+    "C094": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "collision-zoo"
+      ]
+    },
+    "C095": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "collision-zoo"
+      ]
+    },
+    "C096": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "strange-geometries"
+      ]
+    },
+    "C097": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "strange-geometries"
+      ]
+    },
+    "C098": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "strange-geometries"
+      ]
+    },
+    "C099": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "evolution-soup"
+      ]
+    },
+    "C100": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "evolution-soup"
+      ]
+    },
+    "C101": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "evolution-soup"
+      ]
+    },
+    "C102": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "strange-geometries"
+      ]
+    },
+    "C103": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "strange-geometries"
+      ]
+    },
+    "C104": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "strange-geometries"
       ]
     }
   },
@@ -574,17 +709,74 @@
       "research/gallery/exhibits/G046-the-fast-genome-invades/invasion.mp4",
       "research/gallery/exhibits/G046-the-fast-genome-invades/provenance.json"
     ],
+    "evolution-soup": [
+      "research/experiments/SOUP/SOUP.md",
+      "research/experiments/SOUP/diversity.jsonl",
+      "research/experiments/SOUP/mutant.jsonl",
+      "research/experiments/SOUP/replay.jsonl",
+      "research/experiments/SOUP/runs.jsonl",
+      "research/experiments/SOUP/scout.jsonl",
+      "research/experiments/SOUP/soup.py",
+      "research/gallery/exhibits/G032-two-heredities/duel.mp4",
+      "research/gallery/exhibits/G032-two-heredities/provenance.json",
+      "research/gallery/exhibits/G033-blending-swamps-variation/provenance.json",
+      "research/gallery/exhibits/G034-one-physics-many-bodies/provenance.json",
+      "research/gallery/exhibits/G051-fit-or-lucky/provenance.json",
+      "research/gallery/exhibits/G052-seven-landings/landings.mp4",
+      "research/gallery/exhibits/G052-seven-landings/provenance.json"
+    ],
     "collision-zoo": [
       "research/experiments/REEF-behavior/LITERATURE.md",
       "research/experiments/ZOO/ZOO.md",
       "research/experiments/ZOO/atlas.py",
       "research/experiments/ZOO/feed.py",
+      "research/experiments/ZOO/forage.py",
+      "research/experiments/ZOO/fused_check.py",
       "research/experiments/ZOO/summarize.py",
       "research/gallery/exhibits/G035-orbium-collision-atlas/detonation.mp4",
       "research/gallery/exhibits/G035-orbium-collision-atlas/provenance.json",
       "research/gallery/exhibits/G036-the-arc-that-eats-rings/feeding.mp4",
       "research/gallery/exhibits/G036-the-arc-that-eats-rings/provenance.json",
-      "research/gallery/exhibits/G037-tip-or-belly/provenance.json"
+      "research/gallery/exhibits/G037-tip-or-belly/provenance.json",
+      "research/gallery/exhibits/G047-no-keeper/no-keeper.mp4",
+      "research/gallery/exhibits/G047-no-keeper/provenance.json",
+      "research/gallery/exhibits/G048-fusion-makes-s101/provenance.json"
+    ],
+    "strange-geometries": [
+      "research/claims.md",
+      "research/experiments/GEOM/README.md",
+      "research/experiments/GEOM/cone.jsonl",
+      "research/experiments/GEOM/curvature.jsonl",
+      "research/experiments/GEOM/geomlenia.py",
+      "research/experiments/GEOM/heading_glass.csv",
+      "research/experiments/GEOM/heading_hex.csv",
+      "research/experiments/GEOM/meet.jsonl",
+      "research/experiments/GEOM/pair.jsonl",
+      "research/experiments/GEOM/summarize.py",
+      "research/experiments/KLEIN/README.md",
+      "research/experiments/KLEIN/klein.py",
+      "research/experiments/KLEIN/narrow.jsonl",
+      "research/experiments/KLEIN/spin.jsonl",
+      "research/experiments/KLEIN/summarize.py",
+      "research/experiments/KLEIN/twist.jsonl",
+      "research/gallery/exhibits/G038-parallel-lines-meet/meet-strip.png",
+      "research/gallery/exhibits/G038-parallel-lines-meet/meet.mp4",
+      "research/gallery/exhibits/G038-parallel-lines-meet/planet-still.png",
+      "research/gallery/exhibits/G038-parallel-lines-meet/planet.mp4",
+      "research/gallery/exhibits/G038-parallel-lines-meet/provenance.json",
+      "research/gallery/exhibits/G038-parallel-lines-meet/tiny-planets.png",
+      "research/gallery/exhibits/G039-parallel-lines-part/part-still.png",
+      "research/gallery/exhibits/G039-parallel-lines-part/part.mp4",
+      "research/gallery/exhibits/G039-parallel-lines-part/provenance.json",
+      "research/gallery/exhibits/G040-lattice-compass/provenance.json",
+      "research/gallery/exhibits/G049-a-lens-made-of-nothing/lens.mp4",
+      "research/gallery/exhibits/G049-a-lens-made-of-nothing/provenance.json",
+      "research/gallery/exhibits/G050-straight-at-the-point/apex.mp4",
+      "research/gallery/exhibits/G050-straight-at-the-point/provenance.json",
+      "research/gallery/exhibits/G053-through-the-looking-glass/looking-glass.mp4",
+      "research/gallery/exhibits/G053-through-the-looking-glass/provenance.json",
+      "research/gallery/exhibits/G054-the-mirror-next-door/mirror-next-door.mp4",
+      "research/gallery/exhibits/G054-the-mirror-next-door/provenance.json"
     ],
     "collection": [
       "research/experiments/L6-field/make_seeds.py",

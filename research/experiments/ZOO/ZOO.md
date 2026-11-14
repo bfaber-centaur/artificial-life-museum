@@ -14,9 +14,11 @@ that share one rule, aim them at each other at many angles and offsets, and map 
 | `feed.py` | the keeper: feeds a Hexapteryx one Circium ring at a time, rewinding meals that did not grow it |
 | `feed-*.json` | feeding logs (every try, sha256 per accepted meal) |
 | `ladder_match.py` | fed arc vs catalogue P6al–P10al: best normalised correlation over rotations and shifts |
+| `forage.py`, `forage-K8.jsonl`, `forage-K60.jsonl` | free-world foraging, no keeper (round 2) |
+| `fused_check.py`, `fused_check.json` | fused Orbium pairs vs S101 (round 2) |
 | `aquarium.py`, `aq-bombard.jsonl` | gyrans thrown at a lithos in Chan's 3-channel aquarium (notes only) |
-| `exhibits.py` | gallery G035–G037 |
-| `summarize.py` | prints every number quoted in C080–C083 and museum room 78 |
+| `exhibits.py` | gallery G035–G037, G047–G048 |
+| `summarize.py` | prints every number quoted in C080–C083, C093–C095 and museum room 78 |
 | `zoofilm.py`, `eat_check.py`, `aq_tracks.py`, `aq_peek.py`, `rot_test.py`, `settle_test.py`, `grid.py` | scouting tools (quick films, text grids) |
 
 `states/` (gitignored) caches settled bodies and feeding snapshots; everything is rebuilt
@@ -52,11 +54,42 @@ ventilans) share μ 0.38, σ 0.07, R 13, T 10; Chan's twelve three-channel aquar
    curve (limus, egg) or spin (gyrans), so the straight-line aiming used elsewhere does not
    apply; a proper aquarium atlas needs a different placement scheme.
 
+## Round 2 (2026-11-14, same thread)
+
+6. **No keeper (C093).** `forage.py`: one P6al at a random heading among K still rings, no
+   intervention. K = 8, 64 seeds: all detonate (median 80 tu); first encounters are 56
+   detonations, 6 meals, 2 rings destroyed; nobody eats twice. K = 60: all 16 detonate by 55 tu.
+   G047 films seed 62 (meal at t 110, detonation at t 205).
+7. **Fusion makes S101 (C094).** `fused_check.py`: 9 of the 12 C080 FUSE bodies settle into S101
+   (mass, gyradius, speed within 0.001); one sheds a lobe, one sits near S101, one detonates
+   late. G048.
+8. **Tip-or-belly at T 20 (C095).** `atlas.py run PC20`: 361 of 365 rows agree with T 10; the
+   four changes are one-step shifts at the +b swallow windows.
+
+## Floating point (2026-11-14)
+
+The committed hashes were made on an AVX-512 machine. numpy picks its FFT kernels by the CPU's
+SIMD level, and the AVX2 kernels round differently, so on other CPUs (some GitHub runners) every
+sha256 differs. Reproduce that path with
+`NPY_DISABLE_CPU_FEATURES="AVX512_SPR AVX512_ICL X86_V4"`.
+
+- **The bodies amplify it.** Each heading is made by rotating the settled Orbium and re-settling
+  it 30 tu. That transient grows a perturbation about e-fold every 2–3 tu (1e-12 → 3e-7 by
+  30 tu, measured), and the bit-level difference in the base body ends as a different body:
+  the heading-0 Orbium settles at 0.08° on AVX-512 and at 357.27° without it. Rebuilt on the
+  AVX2 path, the O atlas agrees with the committed one in 100 of 204 cells, with the same six
+  classes (SURVIVOR 77, MISS 60, ANNIHILATE 24, SCATTER 24, FUSE 15, EXPLODE 4). Like the T 20
+  check (54 %), this says the repertoire is robust and the map is one realisation.
+- **The collisions do not.** Given the committed (AVX-512) bodies, the AVX2 path reproduces the
+  class of all 204 rows.
+- **Tests.** `tests/test_zoo.py` replays atlas rows from the four bodies committed in
+  `tests/fixtures/zoo-states/` and compares class, component count and mass series (rtol 1e-4);
+  the forage replay compares the census every 5 tu. Neither compares hashes. `chamber.py`'s hash
+  check still holds only on an AVX-512 machine.
+
 ## Ideas not done
 
-- Pteryx × Pteryx below the detonation threshold (is there *any* gentle contact?), and the T 20
-  check of C081.
-- A free world with arcs and many rings (does any arc find its own food?).
-- The fused two-lobed Orbium: is it Chan's Synorbium / our S101?
+- Pteryx × Pteryx below the detonation threshold (is there *any* gentle contact?).
+- Foraging with moving food (rings never move, so an arc only meets what is on its line).
 - Later fates in the O atlas beyond contact + 25 tu.
 - Coexistence world (glider, S102 circler, S103 ring) beyond the reef's glider–ring result.

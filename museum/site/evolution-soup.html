@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>East wing V: evolution in a soup · ALM museum</title>
+<meta name="description" content="Flow-Lenia worlds where every cell carries its own genome: one physics, many body plans; a giant that swallows a colony; Darwin&#x27;s oldest problem, blending inheritance, played out in a petri dish; and whether a winning mutant is fit or just lucky.">
+<link rel="stylesheet" href="museum.css">
+</head>
+<body class="room-evolution-soup">
+<header class="site">
+  <a class="brand" href="index.html">ALM <span>an artificial-life natural history museum</span></a>
+  <details class="map"><summary>Rooms</summary><ol>
+<li><a href="index.html">Entrance</a></li>
+<li><a href="orbium.html">1 · The ruler: Orbium</a></li>
+<li><a href="wobbles.html">2 · The wobble that wasn&#x27;t</a></li>
+<li><a href="edges.html">3 · How much can it take?</a></li>
+<li><a href="one-rule.html">4 · Three animals, one rule</a></li>
+<li><a href="how-we-know.html">5 · How we know</a></li>
+<li><a href="under-review.html">6 · Still being argued (provisional)</a></li>
+<li><a href="reef.html">7 · When the glider meets the ring (provisional)</a></li>
+<li><a href="field-trip.html">8 · Field trip</a></li>
+<li><a href="more-dimensions.html">9 · Dimensions &amp; chemicals</a></li>
+<li><a href="conserved-matter.html">10 · Conserved matter</a></li>
+<li><a href="other-models.html">11 · Other models</a></li>
+<li><a href="replicators.html">12 · Replicators</a></li>
+<li><a class="here" href="evolution-soup.html">13 · Evolution soup</a></li>
+<li><a href="collision-zoo.html">Collision zoo</a></li>
+<li><a href="strange-geometries.html">Strange worlds</a></li>
+<li><a href="collection.html">Reference · The collection</a></li>
+<li><a href="claims.html">Reference · Claims on display</a></li>
+  </ol></details>
+</header>
+<main>
+<p class="kicker">East wing · Other laws of physics · Room 13</p>
+<h1>Evolution in a soup</h1>
+<p class="lede">In the conserved-matter room next door, matter flows and is never made or
+destroyed. Here every cell also carries a small genome, ten numbers that set how it responds to
+its neighbours, and the genome rides along with the matter. Now and then a patch of genome
+mutates. Bodies can only grow by taking matter from other bodies. We seeded worlds with
+sixteen founder species and let them run.</p>
+
+<h2>One physics, many body plans</h2>
+<figure class="vitrine">
+  <img src="../../research/gallery/exhibits/G034-one-physics-many-bodies/worlds.png" width="1024" height="576" loading="lazy"
+       alt="Eight dark squares full of glowing creatures: worms and dots, ringed cells, hatched blobs, chains, and a single giant purple amoeba.">
+  <figcaption><strong>Eight worlds.</strong> Each square is one world with one set of ten
+  kernels shared by everyone in it; only the genomes differ. Colour shows the genome, brightness
+  the matter. <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G034-one-physics-many-bodies/provenance.json">provenance</a>.</figcaption>
+</figure>
+<div class="label">
+  <p class="obs"><strong>What you see.</strong> Within one world, founders that differ only in
+  their genomes build different bodies: in the top-left world, worms next to rings next to
+  dots. Most worlds then go quiet: the mosaic settles and sits. One kernel set (16, bottom row)
+  never settled, and that is where the rest of this room happens.</p>
+</div>
+
+<h2>The amoeba and the plankton</h2>
+<figure class="vitrine">
+  <img src="../../research/gallery/exhibits/G032-two-heredities/duel.gif" width="520" height="361" loading="lazy"
+       alt="Two copies of the same world side by side. On the left a purple amoeba spreads and swallows a colony of dots; on the right the dots survive among many smaller, mottled blobs. Below, the right world's diversity curve rises while the left's falls.">
+  <figcaption><strong>Same world, two kinds of heredity.</strong> Both start from the identical
+  state. Left: where matter meets, genomes average. Right: a cell keeps the genome of the
+  biggest parcel that arrived, so genomes are passed on whole.
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G032-two-heredities/duel.mp4">Full video</a> ·
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G032-two-heredities/provenance.json">provenance</a>.</figcaption>
+</figure>
+<div class="label">
+  <p class="obs"><strong>What you see.</strong> On the left a slime grows into a giant amoeba
+  and engulfs the colony of dot-shaped plankton; whatever it swallows takes its genome. On the
+  right the plankton survive, and the blobs become mottled mosaics of many genomes.</p>
+  <p class="open"><strong>What the ledger says.</strong> In four starting worlds out of four,
+  blending ends with one body holding 68–89% of all matter in bodies; particulate heredity keeps
+  70–150 bodies, the largest holding at most 47% <a class="claim" href="claims.html#C077" title="In the same soup, blending ends with one body holding 68–89 % of all matter in bodies after 2400 time units (4 of 4 worlds); inheriting genomes whole keeps 70–150 bodies, the largest holding 18–47 %"><span class="cid">C077</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>.</p>
+</div>
+
+<h2>Darwin's nightmare, in a petri dish</h2>
+<figure class="vitrine">
+  <img src="../../research/gallery/exhibits/G033-blending-swamps-variation/heredity.png" width="1390" height="992" loading="lazy"
+       alt="Three charts. Top: species populations, collapsing to a few big bands on the left and staying many on the right. Middle: genome fans, where each mutation on the left is a bright wedge that tapers away. Bottom: diversity over time for eight runs, four rising and four falling.">
+  <figcaption><strong>Where the variation goes.</strong> Top: mass of each species (a drawing
+  convention: bodies with similar mean genomes). Middle: all matter binned along the main genome
+  axis over time. Bottom: genome diversity in all eight runs.
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G033-blending-swamps-variation/provenance.json">provenance</a>.</figcaption>
+</figure>
+<div class="label">
+  <p class="obs"><strong>What you see.</strong> In the left fan every mutation leaves a bright
+  wedge that tapers back into the crowd as its matter mixes with its neighbours'. On the right
+  the stripes stay sharp.</p>
+  <p class="open"><strong>What the ledger says.</strong> Genome diversity falls under blending
+  and rises under particulate heredity in all four paired worlds <a class="claim" href="claims.html#C076" title="In a Flow-Lenia soup whose cells carry mutating genomes, genome diversity falls when genomes blend and rises when they are inherited whole, in 4 of 4 paired worlds"><span class="cid">C076</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>. In a world of
+  one species, a single mutant patch dissolves under blending but persists when genomes are
+  passed on whole <a class="claim" href="claims.html#C078" title="A single mutant patch in a one-species soup is gone within 1000 time units under blending (12 of 12), but under whole-genome inheritance 10 of 12 persist and 4 end with more matter than they started with"><span class="cid">C078</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>.</p>
+  <p class="open"><strong>Why it matters.</strong> In 1867 the engineer Fleeming Jenkin raised
+  this exact objection to Darwin: if offspring blend their parents, a new variant is halved at
+  every mating and soon vanishes, so selection has nothing to work with. The answer was Mendel's:
+  inheritance comes in particles that do not mix. The soup asks the same question of physics
+  and gets the same answer. The particulate world keeps more variety, but we do not claim that
+  its extra variety is adaptive: some of it is mutations piling up because nothing averages them
+  away.</p>
+</div>
+
+<h2>Fit, or lucky?</h2>
+<p>Under whole-genome inheritance four of the twelve mutants above grew. Did they win because of
+what they are, or because of where they landed? We took each of the twelve mutant genomes and
+dropped it into the same world again, at six new places each: 72 more runs.</p>
+<figure class="vitrine">
+  <img src="../../research/gallery/exhibits/G052-seven-landings/landings.gif" width="920" height="304" loading="lazy"
+       alt="Two rows of seven copies of one dark world of blue-grey membranes and dots. Small orange mutant patches swell in six of seven squares of the top row and shrink or vanish in most squares of the bottom row.">
+  <figcaption><strong>One genome, seven landings.</strong> Top row: mutant 8. Bottom row: mutant 4.
+  The first square of each row is the original trial; the other six are replays at new places.
+  Orange is matter carrying the mutant genome; the number is how much of it there is compared
+  with the start. <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G052-seven-landings/landings.mp4">Full video</a> ·
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G052-seven-landings/provenance.json">provenance</a>.</figcaption>
+</figure>
+<div class="label">
+  <p class="obs"><strong>What you see.</strong> Mutant 8 lost half its matter the first time and
+  grew in all six replays. Mutant 4 nearly doubled the first time and shrank in five of six.</p>
+</div>
+<figure class="vitrine">
+  <img src="../../research/gallery/exhibits/G051-fit-or-lucky/replay.png" width="1115" height="581" loading="lazy"
+       alt="Twelve columns of dots on a log scale. The left columns sit mostly above the times-one line in orange, the right ones mostly below in grey. Open diamonds for each genome's first trial are scattered with no relation to the order of the columns.">
+  <figcaption><strong>All twelve genomes.</strong> Dots: the six replays. Bar: their median.
+  Diamond: the first trial. Columns are sorted by replay median.
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G051-fit-or-lucky/provenance.json">provenance</a>.</figcaption>
+</figure>
+<div class="label">
+  <p class="open"><strong>What the ledger says.</strong> The first trial does not predict the
+  replays: the four biggest first-trial growers grew in 10 of 24 replays, the other genomes in 27
+  of 48 <a class="claim" href="claims.html#C099" title="A mutant&#x27;s first trial does not predict how its genome does elsewhere: replaying the 12 C078 genomes at six new places each, the replay median does not follow the first-trial result (Spearman 0.07), and the four biggest first-trial growers grew in 10 of 24 replays against 27 of 48 for the rest"><span class="cid">C099</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>. Genomes do differ: four grew in five or six places out of six, one shrank
+  in five, and shuffling the labels rarely spreads them that far <a class="claim" href="claims.html#C100" title="Still, genomes differ: across 72 replays, which genome it is matters (permutation p = 0.006); mutants 8, 0, 5 and 7 grew in 5 or 6 of 6 places, mutant 3 shrank in 5 of 6 (median ×0.05)"><span class="cid">C100</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>. But one genome's
+  outcomes at different places vary about twice as much as the genomes differ from each other
+  <a class="claim" href="claims.html#C101" title="Where a mutant lands matters more than what it is: the spread of outcomes among one genome&#x27;s six places (variance of log ratio 2.75) is about twice the spread between genomes (1.44); 37 of 72 replays grew and 6 fell below 1 % of their start"><span class="cid">C101</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>.</p>
+  <p class="open"><strong>Why it matters.</strong> Population geneticists have said this since
+  the 1920s: a new mutation, even a good one, is usually lost to bad luck, and a winner is often
+  just a lucky one. Fitness tilts the odds; it does not decide the single case. To call a
+  creature fitter you have to rerun it.</p>
+</div>
+
+<h2>Sources</h2>
+<ul>
+  <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/SOUP/SOUP.md">Soup notes</a> and
+      <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/SOUP/soup.py">the engine</a></li>
+  <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/SOUP/runs.jsonl">every run</a>,
+      <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/SOUP/diversity.jsonl">diversity series</a>,
+      <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/SOUP/mutant.jsonl">the mutant test</a>,
+      <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/SOUP/replay.jsonl">the 72 replays</a>,
+      <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/SOUP/scout.jsonl">the 60-world scout</a></li>
+</ul>
+
+<nav class="walk" aria-label="Tour"><a class="prev" href="replicators.html"><small>Back</small>East wing IV: creatures that copy themselves</a><a class="next" href="collision-zoo.html"><small>Next room</small>The collision zoo</a></nav>
+</main>
+<footer class="site">
+  <p>Claim statuses read from <code>research/claims.md</code> (sha256 <code>7ab51d0c0550</code>) when this page was built.</p>
+  <p>Every picture here is a recorded simulation or a figure drawn from committed data. Statuses
+  are the claims ledger's, not the museum's: a badge never says more than
+  <a href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/claims.md">research/claims.md</a> does.</p>
+</footer>
+</body>
+</html>
