@@ -60,9 +60,18 @@ cells to grow faster. Faster dividers simply leave more descendants.
 A first inheritance rule that re-averaged *all* matter each step was dropped before the runs
 above: it diffused genomes through the dot lattice like heat.
 
+## Round 3: how far selection goes (C110–C111, G060–G061)
+
+On a 512² world for 6000 time units, a single cell at genome 0.1 evolves to 0.65–0.69 (the
+neutral marker reaches 0.31–0.35). The climb is fast for the first 1000 time units and then
+slows. Runs that started at 0.7 stayed at 0.68–0.69. Selection seems to level off near 0.7,
+where the growth-speed curve of C073 flattens: past that point, faster division barely pays.
+The cells did not evolve all the way to *uncontrolled*. Two seeds per arm; whether 0.7 is a
+resting point or a slow approach to 1 is still open.
+
 ## Not done / next
 
-- Larger worlds and longer runs: does the genome reach 1 from 0.3, and how fast?
+- Start above 0.7 (0.9, 1.0) and run longer, to tell a resting point from a slow climb.
 - Let more of the rule mutate (kernel shells, R) instead of one line between two rules.
 - The 2-channel *mitosis* creature (found/221 #35) and the egg-laying three-channel *egg*
   (233 #11; dies in our engine at 256², C071 shows its relatives are fragile).
@@ -75,6 +84,7 @@ above: it diffused genomes through the dot lattice like heat.
   → G029. `interp.py` (the λ line), `growth.py` → `growth.jsonl` (C073), `film_ladder.py` → G030.
 - `replicate3d.py` → `replicate3d.jsonl` (C074, C075), `film3d.py` → G031.
 - `summarize.py` prints every number quoted here. `states/` is gitignored.
+- Round 3: `evolve.py … 512 6000 0.1 0.03` (C110), `chart_evolve.py` → G061, `film_genome.py long` → G060.
 - Round 2: `genome.py` (GenomeLenia), `evolve.py` → `evolve.jsonl` (C090, C091), `invasion.py` →
   `invasion.jsonl` (C092), `film_genome.py` → G045, G046.
 - Exploration helpers: `peek.py`, `peek3d.py`, `lineage.py` (first tracker, superseded by

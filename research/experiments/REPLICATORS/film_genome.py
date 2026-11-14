@@ -3,6 +3,8 @@
 
 usage: film_genome.py evolve SEED TU OUTDIR    (selected | neutral side by side, one 213 #84 cell at g 0.3, mutation 0.03)
        film_genome.py invasion SEED TU OUTDIR  (well tissue | uncontrolled tissue, no mutation)
+       film_genome.py long SEED TU OUTDIR      (G060: one cell at g 0.1 on 512^2, mutation 0.03, selected arm only;
+                                                the grey line is the neutral arm of the same seed from evolve.jsonl)
 """
 import json
 import subprocess
@@ -42,6 +44,15 @@ if kind == "evolve":
               GenomeLenia(A[0], np.full((N, N), 0.3), mut_amp=0.03, seed=seed, rule_g=0.3)]
     labels = ["genome sets the rule", "neutral marker (rule fixed at 0.3)"]
     H, W = N, N
+elif kind == "long":
+    N = 512
+    _, A = nd.entry_state(found_entry("213", 84), 2, N)
+    worlds = [GenomeLenia(A[0], np.full((N, N), 0.1), mut_amp=0.03, seed=seed)]
+    labels = ["genome 0.1 at start; grey line: neutral marker"]
+    H, W = N, N
+    neutral_ref = next(json.loads(l) for l in open(Path(__file__).with_name("evolve.jsonl"))
+                       if json.loads(l)["N"] == 512 and json.loads(l)["seed"] == seed and json.loads(l)["neutral"])
+    neutral_ref = {r["t"]: r.get("gmean", 0.1) for r in neutral_ref["trace"]}
 else:
     import invasion  # noqa: E402  (tissues)
     L, Rt = invasion.tissue(("213", 84), 2000, seed), invasion.tissue(("213", 83), 400, seed)
@@ -51,13 +62,14 @@ else:
     H, W = A.shape
 h0 = [state_hash(np.stack([w.A, w.g])) for w in worlds]
 PADT, PLOT = 20, 70
+SCALE = 1 if kind == "long" else 2
 CW = W * len(worlds)
 CH = H + PADT + PLOT
-ff = subprocess.Popen(["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{CW * 2}x{CH * 2}",
+ff = subprocess.Popen(["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{CW * SCALE}x{CH * SCALE}",
                        "-r", "30", "-i", "-", "-c:v", "libx264", "-pix_fmt", "yuv420p", "-crf", "28", "-preset", "slow",
                        str(out / f"{kind}.mp4")], stdin=subprocess.PIPE)
 dt = worlds[0].dt
-steps = int(round(TU / dt)); every = int(round(4 / dt))
+steps = int(round(TU / dt)); every = int(round((10 if kind == "long" else 4) / dt))
 hist = [[] for _ in worlds]
 last = None
 cols = [(250, 140, 110), (180, 180, 180)]
@@ -72,12 +84,17 @@ for s in range(steps + 1):
         y0, y1 = CH - 6, PADT + H + 8
         d.line([(30, y0), (CW - 10, y0)], fill=(90, 90, 90)); d.text((4, y1 - 4), "1", fill=(150, 150, 150), font=font)
         d.text((4, y0 - 12), "0", fill=(150, 150, 150), font=font)
+        if kind == "long":
+            ref = [neutral_ref.get(round(i * every * dt, 1), None) for i in range(len(hist[0]))]
+            pts = [(30 + (CW - 40) * i / (steps / every), y0 - (y0 - y1) * h) for i, h in enumerate(ref) if h is not None]
+            if len(pts) > 1:
+                d.line(pts, fill=cols[1], width=2)
         for k in range(len(worlds)):
             pts = [(30 + (CW - 40) * i / (steps / every), y0 - (y0 - y1) * h) for i, h in enumerate(hist[k])]
             if len(pts) > 1:
                 d.line(pts, fill=cols[k], width=2)
         d.text((CW - 190, CH - PLOT + 4), f"mean genome   t = {s * dt:4.0f}", fill=(200, 200, 200), font=font)
-        img = canvas.resize((CW * 2, CH * 2), Image.NEAREST)
+        img = canvas.resize((CW * SCALE, CH * SCALE), Image.NEAREST)
         ff.stdin.write(np.asarray(img).tobytes()); last = img
     if s < steps:
         for w in worlds:

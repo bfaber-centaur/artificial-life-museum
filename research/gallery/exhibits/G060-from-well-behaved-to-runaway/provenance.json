@@ -1,0 +1,35 @@
+{
+ "exhibit": "G060",
+ "title": "From well-behaved to runaway",
+ "claim": "C110",
+ "media": [
+  "long.mp4",
+  "long.gif",
+  "long-final.png",
+  "long.json"
+ ],
+ "engine": "research/experiments/REPLICATORS/genome.GenomeLenia (modified rule of ours: per-pixel genome g on the line 213 #84 -> 213 #83; persisting matter keeps g, new matter inherits the 2-px mass-weighted g)",
+ "dt": 0.1,
+ "start": "one 213 #84 cell, g 0.1 everywhere, 512\u00b2 torus",
+ "mutation": "every 10 tu, g += 0.03 x smoothed (8 px) unit noise, seed 2",
+ "time_units": 6000,
+ "initial_state_sha256_prefix": [
+  "63cac48af9d82386"
+ ],
+ "final_state_sha256_prefix": [
+  "975c16018f673b45"
+ ],
+ "frames": {
+  "every_tu": 10,
+  "mp4": "rendered 512 px, re-encoded to 384 px wide, crf 30",
+  "gif": "ffmpeg fps 5, 320 px, 48-colour palette"
+ },
+ "view": "colour = genome on coolwarm, brightness = 0.1 + 0.9 x field; coral line = this run's mean genome, grey = neutral arm of seed 2 (evolve.jsonl)",
+ "commands": [
+  "film_genome.py long 2 6000 OUT"
+ ],
+ "caveats": [
+  "Modified rule (ours).",
+  "Neutral arm not filmed; its curve is read from evolve.jsonl."
+ ]
+}

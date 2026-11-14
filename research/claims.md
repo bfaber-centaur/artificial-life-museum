@@ -157,6 +157,7 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
 | Replicators thread 2026-11-14 (`research/experiments/REPLICATORS/`, gallery G029–G031) | C072 / C073 / C074 / C075 |
 | Evolution soup thread 2026-11-14 (`research/experiments/SOUP/`, gallery G032–G034) | C076 / C077 / C078 |
 | Replicators thread round 2 2026-11-14 (GenomeLenia, `research/experiments/REPLICATORS/genome.py`, gallery G045–G046) | C090 / C091 / C092 |
+| Replicators thread round 3 2026-11-14 (long GenomeLenia runs, gallery G060–G061) | C110 / C111 |
 | Collision zoo 2026-11-14 (`research/experiments/ZOO/`, gallery G035–G037, museum room 78) | C080 / C081 / C082 / C083 |
 | Collision zoo round 2, 2026-11-14 (`research/experiments/ZOO/`, gallery G047–G048, room 78) | C093 / C094 / C095; history line on C081 |
 | Evolution soup round 2, 2026-11-14 (`research/experiments/SOUP/`, gallery G051–G052, room 77) | C099 / C100 / C101 |
@@ -2683,3 +2684,39 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
 - **Known caveats:** there is no neutral arm here; part of the spread is genome blending where the tissues touch (our inheritance rule). The asymmetry (well half changes, uncontrolled half barely) is the observation.
 - **History:**
   - 2026-11-14 — OBSERVED — replicators thread (round 2).
+
+### C110 — Over 6000 time units on a 512² torus, GenomeLenia started from one cell at genome 0.1 climbs to a mean genome of 0.65–0.69, against 0.31–0.35 when the genome is only a neutral marker (2 paired seeds); the climb slows after about t 3500
+
+- **Status:** OBSERVED
+- **Owner lane:** replicators thread, round 3 (REPLICATORS, 2026-11-14)
+- **Sources:** `research/experiments/REPLICATORS/evolve.py`, `evolve.jsonl` (N 512); gallery G060, G061
+- **Specimen / version:** one 213 #84 cell, genome 0.1 everywhere
+- **Simulator / version:** `genome.GenomeLenia` (modified rule, as C090)
+- **Parameters:** as C090 but 512² torus, 6000 time units, start genome 0.1
+- **Intervention:** selected vs neutral (rule fixed at 0.1), same mutation noise per seed
+- **Metric:** mass-weighted mean genome every 10 tu; quoted at t 6000 and at every 500 tu
+- **Result:** selected seed 1: 0.20 (t 500), 0.45 (t 2000), 0.57 (t 3500), 0.65 (t 6000); seed 2: 0.16, 0.50, 0.63, 0.69. Neutral seed 1: 0.30 (t 2000), 0.35 (t 6000); seed 2: 0.24, 0.31
+- **Run IDs:** `evolve.jsonl` (N 512, g0 0.1, seed, neutral)
+- **Search / parameter bounds:** 2 seeds, one mutation size
+- **Reproduction command:** `.venv/bin/python evolve.py SEED 512 6000 0.1 0.03 [neutral]` (from `research/experiments/REPLICATORS`; about 50 minutes each)
+- **Known caveats:** as C090. The neutral marker also drifts upward (0.1 → 0.31–0.35), so only the gap is evidence of selection.
+- **History:**
+  - 2026-11-14 — OBSERVED — replicators thread (round 3).
+
+### C111 — Selection in GenomeLenia levels off near genome 0.7 from both sides: runs started at 0.1 (512², 6000 tu) end at 0.65–0.69 and runs started at 0.7 (256², 2000 tu) end at 0.68–0.69 under selection
+
+- **Status:** OBSERVED
+- **Owner lane:** replicators thread, round 3 (REPLICATORS, 2026-11-14)
+- **Sources:** `evolve.jsonl`; `chart_evolve.py` → gallery G061
+- **Specimen / version:** as C090, C091, C110
+- **Simulator / version:** `genome.GenomeLenia`
+- **Parameters:** as C091 and C110
+- **Intervention:** starting genome 0.1 vs 0.7
+- **Metric:** selected arms' mean genome, averaged over t ≥ 1800 (start 0.7: 0.675–0.687) and at t 6000 (start 0.1: 0.651, 0.687)
+- **Result:** the two groups overlap within 0.04. This matches where the growth-speed curve of C073 flattens (median half-fill time 110 at λ 0.7, 90 at λ 0.9–1).
+- **Run IDs:** `evolve.jsonl`
+- **Search / parameter bounds:** two world sizes and durations, so the comparison is not like-for-like
+- **Reproduction command:** as C091 and C110; chart: `chart_evolve.py OUT.png`
+- **Known caveats:** different world sizes and run lengths; we did not run a start above 0.7 or past 6000 tu, so whether 0.7 is a stable level or a slow approach to 1 is open. Linking it to C073 is our reading.
+- **History:**
+  - 2026-11-14 — OBSERVED — replicators thread (round 3).

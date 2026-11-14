@@ -1,7 +1,7 @@
 {
   "ledger": "research/claims.md",
-  "ledger_sha256": "7ab51d0c055023ac07fcbd57e2415a1c756ed9c8764681aa543261fd6dfa2029",
-  "ledger_commit": "592c9be",
+  "ledger_sha256": "f0c28de7111102069b2417ad804b3e24924715ff853b254925c80802eba3b905",
+  "ledger_commit": "a2db31c",
   "conventions_sha256": "0e237384e0425b3c325229cf650ab6f9807fb08c1bedc991433b54b13c2eb02f",
   "claims": {
     "C001": {
@@ -539,6 +539,20 @@
       "rooms": [
         "strange-geometries"
       ]
+    },
+    "C110": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "replicators"
+      ]
+    },
+    "C111": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "replicators"
+      ]
     }
   },
   "sources": {
@@ -707,7 +721,9 @@
       "research/gallery/exhibits/G045-selection-for-faster-division/evolve.mp4",
       "research/gallery/exhibits/G045-selection-for-faster-division/provenance.json",
       "research/gallery/exhibits/G046-the-fast-genome-invades/invasion.mp4",
-      "research/gallery/exhibits/G046-the-fast-genome-invades/provenance.json"
+      "research/gallery/exhibits/G046-the-fast-genome-invades/provenance.json",
+      "research/gallery/exhibits/G060-from-well-behaved-to-runaway/long.mp4",
+      "research/gallery/exhibits/G060-from-well-behaved-to-runaway/provenance.json"
     ],
     "evolution-soup": [
       "research/experiments/SOUP/SOUP.md",

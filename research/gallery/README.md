@@ -65,6 +65,8 @@ made of, ten times per unit of time. Some of them travel; one of them never chan
 | [G052](#g052--one-genome-seven-landings) | One genome, seven landings (animated; *Flow-Lenia with genomes*) | mutants 8 and 4 | 2026-11-14 |
 | [G053](#g053--through-the-looking-glass) | Through the looking glass (animated; *Klein bottle*) | S001 | 2026-11-14 |
 | [G054](#g054--the-mirror-next-door) | The mirror next door (animated; *Klein bottle*) | S001 on a narrow torus and Klein bottle | 2026-11-14 |
+| [G060](#g060--from-well-behaved-to-runaway) | From well-behaved to runaway (animated; *modified rule: GenomeLenia*) | one cell at genome 0.1, 512², 6000 tu | 2026-11-14 |
+| [G061](#g061--how-far-selection-goes) | How far selection goes (chart; *modified rule: GenomeLenia*) | every evolution run, selected vs neutral | 2026-11-14 |
 
 ### G001 — Four ways to move
 
@@ -897,7 +899,7 @@ Film: [`mirror-next-door.mp4`](exhibits/G054-the-mirror-next-door/mirror-next-do
   and hex lattices they bunch onto a few spokes with the lattice's symmetry; on the glass they
   do not.
 - **Ledger.** C011 (square grid, *independently checked*), C087 (hex and glass, *observed*).
-## Replicators, round two: heredity (G045–G046)
+## Replicators, rounds two and three: heredity (G045–G046, G060–G061)
 
 GenomeLenia (`research/experiments/REPLICATORS/genome.py`) is a *modified rule* of ours: the
 rule at each point is set by a heritable genome carried with the matter. Colour is the genome on
@@ -930,6 +932,28 @@ Film: [`invasion.mp4`](exhibits/G046-the-fast-genome-invades/invasion.mp4) ·
   tissue (right, g 1) on a 256 × 512 torus, so there are two borders. Over 1000 time units the
   red genome spreads into the blue half; the red half stays red.
 - **Caveats.** No mutation and no neutral arm; part of the spread is blending at the borders.
+
+### G060 — From well-behaved to runaway
+
+![A large world fills with blue cells that warm to pink and red over 6000 time units, with red patches of dot lattice; the mean-genome line climbs well above the grey neutral line](exhibits/G060-from-well-behaved-to-runaway/long.gif)
+
+Film: [`long.mp4`](exhibits/G060-from-well-behaved-to-runaway/long.mp4) ·
+[`provenance.json`](exhibits/G060-from-well-behaved-to-runaway/provenance.json)
+
+- **Observation (claim C110).** One cell at genome 0.1 on a 512² world, mutation on, 6000
+  time units (seed 2). Its descendants' mean genome climbs to 0.69. The grey line is the same
+  seed with the genome as a neutral marker (from `evolve.jsonl`; that arm is not filmed).
+- **Caveats.** Modified rule (ours); one frame per 10 time units.
+
+### G061 — How far selection goes
+
+![Three panels of mean genome against time: coral selected lines climb from 0.1 to about 0.67 and from 0.3 to about 0.5, grey neutral lines stay lower, and runs started at 0.7 stay near 0.7](exhibits/G061-how-far-selection-goes/genome-curves.png)
+
+[`provenance.json`](exhibits/G061-how-far-selection-goes/provenance.json)
+
+- **Observation (claims C090, C091, C110, C111).** Every GenomeLenia evolution run. Coral: the
+  genome sets the rule; grey: the genome is only a marker. Selected runs from 0.1 and from 0.7
+  end near the same level, about 0.7.
 
 ## Field note, 7 October 2026
 
@@ -1071,6 +1095,8 @@ heading values come from `galintervene.chord_heading("S102", 3002)`. The G004 S0
 
 ## Cycle log
 
+- **2026-11-14, G060–G061 (replicators thread, round 3).** Long GenomeLenia evolution and a chart of
+  every evolution run. Claims C110–C111.
 - **2026-11-14, G047–G048 (collision-zoo thread, round 2).** Free-world forager and fusion-into-S101 exhibits, claims C093–C094.
 - **2026-11-14, G045–G046 (replicators thread, round 2).** Heredity and selection in GenomeLenia, a
   modified rule of ours. Claims C090–C092.

@@ -1,0 +1,18 @@
+{
+ "exhibit": "G061",
+ "title": "How far selection goes",
+ "claims": [
+  "C090",
+  "C091",
+  "C110",
+  "C111"
+ ],
+ "media": [
+  "genome-curves.png"
+ ],
+ "data": "research/experiments/REPLICATORS/evolve.jsonl (every run)",
+ "commands": [
+  "chart_evolve.py genome-curves.png"
+ ],
+ "view": "mass-weighted mean genome vs time; coral selected, grey neutral marker; dotted line = starting genome; one shared y-axis"
+}
