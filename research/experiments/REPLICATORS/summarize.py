@@ -45,6 +45,10 @@ ev = defaultdict(dict)
 for l in open(H / "evolve.jsonl"):
     r = json.loads(l)
     end = [x["gmean"] for x in r["trace"] if x["t"] >= 1800 and "gmean" in x]
+    if r["N"] != 256:
+        print(f"  long run N {r['N']} g0 {r['g0']} seed {r['seed']} {'neutral' if r['neutral'] else 'selected'}: "
+              + ", ".join(f"t{int(x['t'])} {x['gmean']}" for x in r["trace"] if x["t"] % 500 == 0 and "gmean" in x))
+        continue
     ev[(r["g0"], r["seed"])]["neutral" if r["neutral"] else "selected"] = sum(end) / len(end)
 for g0 in sorted({k[0] for k in ev}):
     rows = [(s, ev[(g0, s)]) for (g, s) in sorted(ev) if g == g0 and len(ev[(g, s)]) == 2]

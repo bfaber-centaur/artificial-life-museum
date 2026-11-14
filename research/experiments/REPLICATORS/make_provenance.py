@@ -69,8 +69,25 @@ for ex, kind, claim, title, extra in (
     (EX / ex / "provenance.json").write_text(json.dumps(dict(
         exhibit=ex[:4], title=title, claim=claim, media=[f"{kind}.mp4", f"{kind}.gif", f"{kind}-final.png", f"{kind}.json"],
         engine=GENOME, dt=0.1, **extra, initial_state_sha256_prefix=rec["initial_sha"], final_state_sha256_prefix=rec["final_sha"],
-        frames=dict(every_tu=4, mp4_fps=30, gif="ffmpeg fps 8, 512 px, 96-colour palette"),
+        frames=(dict(every_tu=4, mp4_fps=30, gif="ffmpeg fps 5, 384 px, 64-colour palette", mp4="re-encoded to 768 px wide, crf 30")
+                if kind == "evolve" else dict(every_tu=4, mp4_fps=30, gif="ffmpeg fps 8, 512 px, 96-colour palette")),
         view="colour = genome on coolwarm, brightness = 0.1 + 0.9 x field; bottom: mass-weighted mean genome",
         commands=[f"film_genome.py {kind} {rec['seed']} {int(rec['tu'])} OUT"],
         caveats=["Modified rule (ours).", "Inheritance blends genomes where cells grow into each other."]), indent=1))
 print("ok round 2")
+
+# --- round 3 ---
+rec = json.loads((EX / "G060-from-well-behaved-to-runaway" / "long.json").read_text())
+(EX / "G060-from-well-behaved-to-runaway" / "provenance.json").write_text(json.dumps(dict(
+    exhibit="G060", title="From well-behaved to runaway", claim="C110", media=["long.mp4", "long.gif", "long-final.png", "long.json"],
+    engine=GENOME, dt=0.1, start="one 213 #84 cell, g 0.1 everywhere, 512² torus",
+    mutation="every 10 tu, g += 0.03 x smoothed (8 px) unit noise, seed 2", time_units=6000,
+    initial_state_sha256_prefix=rec["initial_sha"], final_state_sha256_prefix=rec["final_sha"],
+    frames=dict(every_tu=10, mp4="rendered 512 px, re-encoded to 384 px wide, crf 30", gif="ffmpeg fps 5, 320 px, 48-colour palette"),
+    view="colour = genome on coolwarm, brightness = 0.1 + 0.9 x field; coral line = this run's mean genome, grey = neutral arm of seed 2 (evolve.jsonl)",
+    commands=["film_genome.py long 2 6000 OUT"], caveats=["Modified rule (ours).", "Neutral arm not filmed; its curve is read from evolve.jsonl."]), indent=1))
+(EX / "G061-how-far-selection-goes" / "provenance.json").write_text(json.dumps(dict(
+    exhibit="G061", title="How far selection goes", claims=["C090", "C091", "C110", "C111"], media=["genome-curves.png"],
+    data="research/experiments/REPLICATORS/evolve.jsonl (every run)", commands=["chart_evolve.py genome-curves.png"],
+    view="mass-weighted mean genome vs time; coral selected, grey neutral marker; dotted line = starting genome; one shared y-axis"), indent=1))
+print("ok round 3")

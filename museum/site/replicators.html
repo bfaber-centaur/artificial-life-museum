@@ -143,6 +143,32 @@ random smear nudges genomes up or down.</p>
   <a class="claim" href="claims.html#C092" title="When grown &quot;division well&quot; tissue (g 0) meets grown &quot;division uncontrolled&quot; tissue (g 1) in GenomeLenia, the uncontrolled genome spreads into the well half (mean 0.34–0.38 there by t 1000) while the uncontrolled half stays at 0.98–0.99 (3 seeds)"><span class="cid">C092</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>. Some of the spread is blending where the tissues touch.</p>
 </div>
 
+<h2>How far does it go?</h2>
+<figure class="vitrine">
+  <img src="../../research/gallery/exhibits/G060-from-well-behaved-to-runaway/long.gif" width="320" height="377" loading="lazy"
+       alt="A large world fills with blue cells that warm to pink and red over 6000 time units, with red patches of dot lattice; the mean-genome line climbs well above the grey neutral line.">
+  <figcaption><strong>6000 time units of evolution.</strong> One cell at genome 0.1 in a world
+  four times larger. The grey line is the same run with the genome as a neutral marker.
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G060-from-well-behaved-to-runaway/long.mp4">Full video</a> ·
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G060-from-well-behaved-to-runaway/provenance.json">provenance</a>.</figcaption>
+</figure>
+<figure class="vitrine">
+  <img src="../../research/gallery/exhibits/G061-how-far-selection-goes/genome-curves.png" width="720" height="233" loading="lazy"
+       alt="Three panels of mean genome against time: coral selected lines climb from 0.1 to about 0.67 and from 0.3 to about 0.5, grey neutral lines stay lower, and runs started at 0.7 stay near 0.7.">
+  <figcaption><strong>Every evolution run.</strong> Coral: the genome sets the rule. Grey: it is
+  only a marker.</figcaption>
+</figure>
+<div class="label">
+  <p class="obs"><strong>What you see.</strong> The world turns from blue to warm within the
+  first thousand time units, then keeps warming more and more slowly.</p>
+  <p class="open"><strong>What the ledger says.</strong> From 0.1 the genome reaches 0.65–0.69,
+  against 0.31–0.35 for the marker <a class="claim" href="claims.html#C110" title="Over 6000 time units on a 512² torus, GenomeLenia started from one cell at genome 0.1 climbs to a mean genome of 0.65–0.69, against 0.31–0.35 when the genome is only a neutral marker (2 paired seeds); the climb slows after about t 3500"><span class="cid">C110</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>. Runs that started at 0.7 stay at
+  0.68–0.69, so selection seems to level off near 0.7 from both sides <a class="claim" href="claims.html#C111" title="Selection in GenomeLenia levels off near genome 0.7 from both sides: runs started at 0.1 (512², 6000 tu) end at 0.65–0.69 and runs started at 0.7 (256², 2000 tu) end at 0.68–0.69 under selection"><span class="cid">C111</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>. That is
+  about where faster division stops paying (Chan's <em>well</em> → <em>uncontrolled</em> speed
+  curve flattens). These cells did not evolve all the way to runaway, at least in 6000 time
+  units.</p>
+</div>
+
 <h2>Sources</h2>
 <ul>
   <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/REPLICATORS/REPLICATORS.md">Replicator notes</a></li>
@@ -157,7 +183,7 @@ random smear nudges genomes up or down.</p>
 <nav class="walk" aria-label="Tour"><a class="prev" href="other-models.html"><small>Back</small>East wing III: cousins from other models</a><a class="next" href="evolution-soup.html"><small>Next room</small>East wing V: evolution in a soup</a></nav>
 </main>
 <footer class="site">
-  <p>Claim statuses read from <code>research/claims.md</code> (sha256 <code>7ab51d0c0550</code>) when this page was built.</p>
+  <p>Claim statuses read from <code>research/claims.md</code> (sha256 <code>f0c28de71111</code>) when this page was built.</p>
   <p>Every picture here is a recorded simulation or a figure drawn from committed data. Statuses
   are the claims ledger's, not the museum's: a badge never says more than
   <a href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/claims.md">research/claims.md</a> does.</p>
