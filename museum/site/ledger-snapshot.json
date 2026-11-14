@@ -1,7 +1,7 @@
 {
   "ledger": "research/claims.md",
-  "ledger_sha256": "a03c04168851b431fefd4730c59927860d93888089324559737372f005afcbcd",
-  "ledger_commit": "8a10eff",
+  "ledger_sha256": "a912583cccb9ea59a877889936fc151bcdafe74853962b9da2f09f2bbf41d224",
+  "ledger_commit": "a35e6d2",
   "conventions_sha256": "0e237384e0425b3c325229cf650ab6f9807fb08c1bedc991433b54b13c2eb02f",
   "claims": {
     "C001": {
@@ -326,6 +326,34 @@
       "rooms": [
         "more-dimensions"
       ]
+    },
+    "C072": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "replicators"
+      ]
+    },
+    "C073": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "replicators"
+      ]
+    },
+    "C074": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "replicators"
+      ]
+    },
+    "C075": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "replicators"
+      ]
     }
   },
   "sources": {
@@ -476,6 +504,18 @@
       "research/gallery/exhibits/G024-particle-pinwheel/provenance.json",
       "research/gallery/exhibits/G025-smoothlife-glider/glider.mp4",
       "research/gallery/exhibits/G025-smoothlife-glider/provenance.json"
+    ],
+    "replicators": [
+      "research/experiments/REPLICATORS/REPLICATORS.md",
+      "research/experiments/REPLICATORS/growth.jsonl",
+      "research/experiments/REPLICATORS/replicate3d.jsonl",
+      "research/experiments/REPLICATORS/tree.py",
+      "research/gallery/exhibits/G029-family-tree/family-tree.mp4",
+      "research/gallery/exhibits/G029-family-tree/provenance.json",
+      "research/gallery/exhibits/G030-four-growth-rates/ladder.mp4",
+      "research/gallery/exhibits/G030-four-growth-rates/provenance.json",
+      "research/gallery/exhibits/G031-replicating-in-3d/provenance.json",
+      "research/gallery/exhibits/G031-replicating-in-3d/replicator3d.mp4"
     ],
     "collection": [
       "research/experiments/L6-field/make_seeds.py",

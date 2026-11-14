@@ -154,6 +154,7 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
 | VIS-talk lightning-talk thread 2026-11-07 (`research/experiments/VIS-talk/`, gallery G007–G013) | C056 / C057 / C058 |
 | VIS-talk round two 2026-11-07 (gallery G014–G018) | C059 / C060 |
 | Species hunt 2026-11-10 (`research/experiments/SPECIES-scout/`, gallery G021) | C063 (C061–C062 reserved by the open fractal PR #44) |
+| Replicators thread 2026-11-14 (`research/experiments/REPLICATORS/`, gallery G029–G031) | C072 / C073 / C074 / C075 |
 
 ## Claims
 
@@ -2125,3 +2126,77 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
 - **Prior literature:** Chan 2020 (multi-channel Lenia) describes these creatures; we did not find a channel-knockout test there.
 - **History:**
   - 2026-11-11 — OBSERVED — wings thread.
+
+### C072 — One cell of Chan's "division well" (found/213 #84) on a 384² torus becomes 81 tracked cells in 2000 time units, through 135 divisions, 14 generations deep
+
+- **Status:** OBSERVED
+- **Owner lane:** replicators thread (REPLICATORS, 2026-11-14)
+- **Sources:** `research/experiments/REPLICATORS/record.py`, `tree.py`, `film_tree.py`; gallery G029 (`tree.json`)
+- **Specimen / version:** found/213.json entry 84 ("division well", code Found #94), cells as in the catalogue, centred
+- **Simulator / version:** `research/experiments/WINGS/nd_lenia.NDLenia`
+- **Parameters:** 1 channel, 3 kernels, R 15, T 10 (dt 0.1), poly kernel and growth; 384² torus; 2000 time units
+- **Intervention:** none (a growth record)
+- **Metric:** cells = local maxima of the field blurred by a 4-px Gaussian (above 0.05), sampled every time unit; linked by nearest neighbour (≤ 8 px, up to 3 missing frames); a new peak within 30 px of a cell is a daughter only if she and the continuing mother both last ≥ 10 frames (else flicker or peak jump). Tracker settings fixed on a 400-tu test run before this run.
+- **Result:** 135 divisions, 51 tracks ended early, deepest generation 14, 81 cells at t 2000 (1 cell until t ≈ 95; 8 at t 750; 49 at t 1500). 2159 candidate births were dropped as flicker.
+- **Run IDs:** `G029-family-tree/tree.json` (initial and final state sha256 prefixes c140d22989efafa3, 405175b7c50cb1f4)
+- **Search / parameter bounds:** one run, one world size
+- **Reproduction command:** `.venv/bin/python research/experiments/REPLICATORS/record.py 213 84 384 2000 states/well384.npz` then `film_tree.py states/well384.npz OUT "…"` (from that folder)
+- **Known caveats:** the counts depend on the tracker's thresholds; the tracker cannot tell a merger from a cell that fades. Single floating-point trajectory.
+- **Prior literature:** Chan found and named this creature (found/213.json; Chan 2020, multi-kernel Lenia). We did not find a lineage analysis of it.
+- **History:**
+  - 2026-11-14 — OBSERVED — replicators thread.
+
+### C073 — Moving every rule number from Chan's "division well" (213 #84) to "division uncontrolled" (213 #83) shortens the time for one well cell to cover half of a 256² torus about fifteen-fold, from 1175–1530 to 85–95 time units, with no step where the median rises
+
+- **Status:** OBSERVED
+- **Owner lane:** replicators thread (REPLICATORS, 2026-11-14)
+- **Sources:** `research/experiments/REPLICATORS/interp.py`, `growth.py`, `growth.jsonl`; gallery G030
+- **Specimen / version:** 213 #84's cells in every arm; seed 0 = exact, seeds 1–2 = ±10⁻³ uniform jitter on occupied cells
+- **Simulator / version:** `nd_lenia.NDLenia`
+- **Parameters:** rule(λ): each kernel's shell heights b, μ and σ = (1 − λ)·well + λ·uncontrolled (R 15, T 10, three kernels); λ 0, 0.1, …, 1; 256² torus
+- **Intervention:** the rule (λ); numerical arm T 20 (dt 0.05) at λ 0, 0.5, 1
+- **Metric:** occupancy = fraction of cells where the field blurred by a 4-px Gaussian exceeds 0.05, every 5 time units; t50 = first time occupancy ≥ 0.5 (defined before the runs)
+- **Result:** median t50 by λ (seeds 0–2): 1335, 560, 355, 230, 180, 140, 130, 110, 100, 90, 90 (ranges λ 0: 1175–1530; λ 1: 85–95). Plateau occupancy 0.59–0.66 at λ 0 and 0.99–1.00 at λ 1. dt 0.05: 1155, 155, 90 at λ 0, 0.5, 1.
+- **Run IDs:** `growth.jsonl` (lam, seed, dtfac) with final-state sha256 prefix
+- **Search / parameter bounds:** one straight line between two catalogue rules; one world size; 3 seeds
+- **Reproduction command:** `.venv/bin/python growth.py 256 2500 1 SEED 0 0.1 … 1.0` and `growth.py 256 2500 2 0 0 0.5 1.0` (from `research/experiments/REPLICATORS`); `summarize.py` prints the table
+- **Known caveats:** intermediate rules are ours, not catalogue entries; seed 0 at λ 0.8 (115) is slower than at 0.7 (110), so single runs are not monotone, only the medians. "Fills" includes the fine dot lattice that appears at high λ.
+- **History:**
+  - 2026-11-14 — OBSERVED — replicators thread.
+
+### C074 — Chan's 3-D "self-replicate... unstable" (found/312 #21) buds from one body into 4 by t 100 and keeps multiplying until its periodic box is packed, at two timesteps and in 64³, 80³ and 96³ boxes
+
+- **Status:** OBSERVED
+- **Owner lane:** replicators thread (REPLICATORS, 2026-11-14)
+- **Sources:** `research/experiments/REPLICATORS/replicate3d.py`, `replicate3d.jsonl`, `film3d.py`; gallery G031 (`replicator3d.json`)
+- **Specimen / version:** found/312.json entry 21, cells centred
+- **Simulator / version:** `nd_lenia.NDLenia` (D = 3)
+- **Parameters:** 1 channel, 2 kernels, R 15, T 10 (dt 0.1); boxes 64³, 80³, 96³ (film); 300–320 time units
+- **Intervention:** box size; numerical arm T 20 at 64³
+- **Metric:** bodies = 26-connected components (torus) of the field blurred by 1.5 voxels above 0.08, every 10 time units (5 in the film); total mass
+- **Result:** 64³: 1 → 4 (t 100) → 13 (t 200), mass 1062 → 42 812 (×40) at t 300, box full. 64³ dt 0.05: 1 → 4 (t 100) → 16 (t 250), mass ×37. 80³: 4 at t 100, 31 at t 250, mass ×78. 96³ (film): up to 53 bodies, mass 1062 → 128 634 (×121) at t 320. Counts fall once the box fills because bodies touch.
+- **Run IDs:** `replicate3d.jsonl` (N, dtfac) and `G031-replicating-in-3d/replicator3d.json`, with state sha256 prefixes
+- **Search / parameter bounds:** one creature; three box sizes
+- **Reproduction command:** `.venv/bin/python replicate3d.py 312 21 64 300 1` (and `… 64 300 2`, `… 80 300 1`); film `film3d.py 312 21 96 320 OUT replicator3d` (from `research/experiments/REPLICATORS`)
+- **Known caveats:** Chan named it "unstable"; the claim is about these runs only. Body counts in a packed box are not meaningful.
+- **Prior literature:** Chan 2020 reports self-replication in multi-kernel and 3-D Lenia; this creature and its name are his.
+- **History:**
+  - 2026-11-14 — OBSERVED — replicators thread.
+
+### C075 — Chan's 3-D "divide" (found/312 #7) splits into four bodies by t 50 and stays at four through t 300 in 64³ and 96³ boxes at dt 0.1; at dt 0.05 a fifth body appears after t 100
+
+- **Status:** OBSERVED
+- **Owner lane:** replicators thread (REPLICATORS, 2026-11-14)
+- **Sources:** `research/experiments/REPLICATORS/replicate3d.py`, `replicate3d.jsonl`
+- **Specimen / version:** found/312.json entry 7, cells centred
+- **Simulator / version:** `nd_lenia.NDLenia` (D = 3)
+- **Parameters:** 1 channel, 2 kernels, R 16, T 10; boxes 64³ and 96³; 300 time units
+- **Intervention:** box size; numerical arm T 20 at 64³
+- **Metric:** as C074
+- **Result:** 64³ and 96³: 1 body → 4 at t 50 → 4 at every sample to t 300; mass 1730 → 5800–6100 (on average each daughter holds about 0.85 of the founder's mass). dt 0.05 (64³): 4 at t 50 and t 100, then 5 from t 150 with mass rising to 7400–8300, so "stops at four" depends on the timestep.
+- **Run IDs:** `replicate3d.jsonl` (stem 312, idx 7)
+- **Search / parameter bounds:** one creature; two box sizes
+- **Reproduction command:** `.venv/bin/python replicate3d.py 312 7 64 300 1` (and `… 96 300 1`, `… 64 300 2`)
+- **Known caveats:** not robust in the timestep (above); we did not run past 300 time units.
+- **History:**
+  - 2026-11-14 — OBSERVED — replicators thread.

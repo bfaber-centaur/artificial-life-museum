@@ -1,0 +1,242 @@
+{
+ "exhibit": "G030",
+ "title": "How fast one cell fills the world",
+ "claim": "C073",
+ "media": [
+  "ladder.mp4",
+  "ladder.gif",
+  "ladder-final.png",
+  "ladder.json"
+ ],
+ "engine": "research/experiments/WINGS/nd_lenia.NDLenia (independent numpy port of upstream LeniaNDKC, pinned adfc542)",
+ "runs": [
+  {
+   "lam": 0.0,
+   "rule": [
+    {
+     "R": 15,
+     "T": 10,
+     "b": "1.0,0.08333333333333333,0.5833333333333334",
+     "m": 0.149,
+     "s": 0.0128,
+     "kn": 1,
+     "gn": 1,
+     "c": [
+      0,
+      0
+     ]
+    },
+    {
+     "R": 15,
+     "T": 10,
+     "b": "0.25,1.0",
+     "m": 0.195,
+     "s": 0.0542,
+     "kn": 1,
+     "gn": 1,
+     "c": [
+      0,
+      0
+     ]
+    },
+    {
+     "R": 15,
+     "T": 10,
+     "b": "1.0",
+     "m": 0.347,
+     "s": 0.0863,
+     "kn": 1,
+     "gn": 1,
+     "c": [
+      0,
+      0
+     ]
+    }
+   ],
+   "seed": "found/213.json #84 cells, centred",
+   "grid": [
+    256,
+    256
+   ],
+   "boundary": "periodic",
+   "time_units": 600,
+   "dt": 0.1,
+   "initial_state_sha256_prefix": "92ef703e6708e418",
+   "final_state_sha256_prefix": "9ba7d6a6676d5606"
+  },
+  {
+   "lam": 0.2,
+   "rule": [
+    {
+     "R": 15,
+     "T": 10,
+     "b": "1.0,0.06666666666666667,0.5333333333333334",
+     "m": 0.1418,
+     "s": 0.01328,
+     "kn": 1,
+     "gn": 1,
+     "c": [
+      0,
+      0
+     ]
+    },
+    {
+     "R": 15,
+     "T": 10,
+     "b": "0.2,1.0",
+     "m": 0.18700000000000003,
+     "s": 0.055360000000000006,
+     "kn": 1,
+     "gn": 1,
+     "c": [
+      0,
+      0
+     ]
+    },
+    {
+     "R": 15,
+     "T": 10,
+     "b": "1.0",
+     "m": 0.3396,
+     "s": 0.08642000000000001,
+     "kn": 1,
+     "gn": 1,
+     "c": [
+      0,
+      0
+     ]
+    }
+   ],
+   "seed": "found/213.json #84 cells, centred",
+   "grid": [
+    256,
+    256
+   ],
+   "boundary": "periodic",
+   "time_units": 600,
+   "dt": 0.1,
+   "initial_state_sha256_prefix": "92ef703e6708e418",
+   "final_state_sha256_prefix": "7042b7f4c0409827"
+  },
+  {
+   "lam": 0.5,
+   "rule": [
+    {
+     "R": 15,
+     "T": 10,
+     "b": "1.0,0.041666666666666664,0.45833333333333337",
+     "m": 0.131,
+     "s": 0.014,
+     "kn": 1,
+     "gn": 1,
+     "c": [
+      0,
+      0
+     ]
+    },
+    {
+     "R": 15,
+     "T": 10,
+     "b": "0.125,1.0",
+     "m": 0.175,
+     "s": 0.0571,
+     "kn": 1,
+     "gn": 1,
+     "c": [
+      0,
+      0
+     ]
+    },
+    {
+     "R": 15,
+     "T": 10,
+     "b": "1.0",
+     "m": 0.3285,
+     "s": 0.08660000000000001,
+     "kn": 1,
+     "gn": 1,
+     "c": [
+      0,
+      0
+     ]
+    }
+   ],
+   "seed": "found/213.json #84 cells, centred",
+   "grid": [
+    256,
+    256
+   ],
+   "boundary": "periodic",
+   "time_units": 600,
+   "dt": 0.1,
+   "initial_state_sha256_prefix": "92ef703e6708e418",
+   "final_state_sha256_prefix": "d7e29e59753da846"
+  },
+  {
+   "lam": 1.0,
+   "rule": [
+    {
+     "R": 15,
+     "T": 10,
+     "b": "1.0,0.0,0.3333333333333333",
+     "m": 0.113,
+     "s": 0.0152,
+     "kn": 1,
+     "gn": 1,
+     "c": [
+      0,
+      0
+     ]
+    },
+    {
+     "R": 15,
+     "T": 10,
+     "b": "0.0,1.0",
+     "m": 0.155,
+     "s": 0.06,
+     "kn": 1,
+     "gn": 1,
+     "c": [
+      0,
+      0
+     ]
+    },
+    {
+     "R": 15,
+     "T": 10,
+     "b": "1.0",
+     "m": 0.31,
+     "s": 0.0869,
+     "kn": 1,
+     "gn": 1,
+     "c": [
+      0,
+      0
+     ]
+    }
+   ],
+   "seed": "found/213.json #84 cells, centred",
+   "grid": [
+    256,
+    256
+   ],
+   "boundary": "periodic",
+   "time_units": 600,
+   "dt": 0.1,
+   "initial_state_sha256_prefix": "92ef703e6708e418",
+   "final_state_sha256_prefix": "77887ff9417b28f2"
+  }
+ ],
+ "frames": {
+  "every_tu": 2,
+  "mp4_fps": 30,
+  "gif": "ffmpeg fps 8, 384 px, 96-colour palette"
+ },
+ "view": "field on inferno, linear [0, 1]; bar = occupancy (blur 4 px > 0.05)",
+ "commands": [
+  "film_ladder.py 600 OUT"
+ ],
+ "caveats": [
+  "lam 0 and 1 are Chan's rules; lam 0.2 and 0.5 are interpolations of ours."
+ ]
+}
