@@ -2461,3 +2461,57 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
 - **Known caveats:** not checked at a larger grid or R
 - **History:**
   - 2026-11-14 — OBSERVED — collision-zoo thread.
+
+### C096 — A cone point with a 60° deficit acts as a lens: two Orbia that pass it side by side on parallel courses converge and touch, 3 of 3, following the straight lines of the cut-and-glued sheet within 0.28 R; on the flat control they never touch
+
+- **Status:** OBSERVED
+- **Owner lane:** strange-geometries thread (GEOM round 2, 2026-11-14)
+- **Sources:** `research/experiments/GEOM/cone.py`, `cone.jsonl`, `summarize.py`; gallery G049
+- **Specimen / version:** S001 cells as in C084, seeded in a flat chart unfolded around the meridian opposite the seam (`geomlenia.seed_cone`)
+- **Simulator / version:** `geomlenia.GraphLenia` on `geomlenia.cone(sectors, 150)`: a hex lattice (one cell per unit area) cut into 60° sectors around a lattice point and re-glued with 5 (300°, deficit), 6 (flat control) or 7 (420°, excess) sectors; the hex lattice is 6-fold symmetric about that point, so the seams are invisible to the lattice. Exact cone geodesic distance; apex cell area sectors/6; world radius 150 cells
+- **Parameters:** S001 rule; start 6 R before the apex at chart heights ±b, both heading straight past it; gap 2b = 3, 4, 6 R; up to 800 steps
+- **Intervention:** world geometry (one conical point)
+- **Metric:** d = cone geodesic distance between the two halves' mass centres; prediction = distance between the two unfolded straight lines after the same path length (s = s0 + path, as C085), which on the 300° cone cross at radius 2b; stop at contact (d < 1.6 R or one blob) or within 2.5 R of the edge
+- **Result:** 300°: all 3 pairs close and touch at 15–21 tu, with their centres 2.0, 3.1, 5.3 R from the apex (the lines cross at 3, 4, 6 R); |d − lines| ≤ 0.28 R while d > 2.5 R. Flat: no pair touches before the edge (31–32 tu); the gaps end at 2.1, 3.9, 6.4 R from 3, 4, 6 R, a drift of up to 0.54 R from straight lines
+- **Run IDs:** `cone.jsonl` rows (sectors, b_R) with final_sha256
+- **Search / parameter bounds:** one deficit angle (60°, the only one the hex lattice glues seamlessly), 3 gaps, one start distance
+- **Reproduction command:** `cd research/experiments/GEOM && PYTHONPATH=../../../src ../../../.venv/bin/python cone.py run`
+- **Known caveats:** the flat control's drift (up to 0.54 R over 9 R of travel) is the heading lock (C087) and sets the precision of the comparison; what happens after contact is not scored here (in G049's film the pair fuses). This is the geometry of a cosmic string (a conical deficit); no claim is made beyond the geometry
+- **History:**
+  - 2026-11-14 — OBSERVED — strange-geometries thread.
+
+### C097 — A cone point with a 60° excess (a saddle point) acts as a diverging lens: parallel Orbia pairs that pass it spread to 11.4–14.5 R apart from 3–6 R, matching the unfolded straight lines within 0.71 R
+
+- **Status:** OBSERVED
+- **Owner lane:** strange-geometries thread (GEOM round 2, 2026-11-14)
+- **Sources:** as C096; gallery G049
+- **Specimen / version:** as C096
+- **Simulator / version:** as C096, 7 sectors (420°)
+- **Parameters:** as C096
+- **Intervention:** world geometry
+- **Metric:** as C096
+- **Result:** gaps 3, 4, 6 R grow to 11.37, 13.21, 14.45 R after about 9 R of travel past the apex (straight lines: 11.63, 12.50, 13.75 R); |d − lines| ≤ 0.28, 0.71, 0.70 R. Flat control as C096 (2.1–6.4 R). Both animals survive every pass (total mass 0.868–0.874 R²)
+- **Run IDs:** `cone.jsonl` rows (7, b_R)
+- **Search / parameter bounds:** as C096
+- **Reproduction command:** as C096
+- **Known caveats:** the error is about that of the flat control (heading lock), so the agreement is good to about 0.5 R, not better
+- **History:**
+  - 2026-11-14 — OBSERVED — strange-geometries thread.
+
+### C098 — An Orbium aimed dead centre at the 60°-excess saddle point dies there (19 tu); offset by 0.25 R or more it passes, and every shot at the 60°-deficit point and the flat control survives (12 shots)
+
+- **Status:** OBSERVED
+- **Owner lane:** strange-geometries thread (GEOM round 2, 2026-11-14)
+- **Sources:** `research/experiments/GEOM/cone.py` (`apex`), `cone.jsonl` rows with `apex_shot`; gallery G050
+- **Specimen / version:** as C096, one Orbium
+- **Simulator / version:** as C096
+- **Parameters:** S001 rule; start 6 R before the apex at chart height b = 0, 0.25, 0.5, 1 R, heading straight past it; 300°, 360°, 420°; until within 2.5 R of the edge (31–32 tu) or death
+- **Intervention:** world geometry; aim
+- **Metric:** total mass / R² every 1 tu (died = below 0.01); closest approach of the mass centre to the apex
+- **Result:** 420°, b = 0: mass 0.40 R² at 17 tu, 0.21 at 18 tu, 0 at 19 tu, with the centre within 0.21 R of the apex. 420° at b = 0.25, 0.5, 1 R and all 8 shots at 300° and 360°: one body at the end (0.417–0.428 R²), mass never below 0.414 R², closest approach 0.17–1.2 R
+- **Run IDs:** `cone.jsonl` rows (sectors, b_R, apex_shot) with final_sha256
+- **Search / parameter bounds:** one start distance and heading per aim, one seed
+- **Reproduction command:** `cd research/experiments/GEOM && PYTHONPATH=../../../src ../../../.venv/bin/python cone.py apex`
+- **Known caveats:** a single knife-edge case: the only death needs a dead-centre aim, and offsets were tried only on one side. Why the excess point kills and the deficit point does not was not studied
+- **History:**
+  - 2026-11-14 — OBSERVED — strange-geometries thread.

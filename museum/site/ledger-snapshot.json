@@ -1,7 +1,7 @@
 {
   "ledger": "research/claims.md",
-  "ledger_sha256": "3d6777578a343e85d9bac48b82a7bad0d236b766b42afa8ea1e99798c2ede594",
-  "ledger_commit": "624d7e1",
+  "ledger_sha256": "86a0be75aaf3effa697419fade6f4bbee6f4e1308ebe0b6e0e45e8ec24577529",
+  "ledger_commit": "da6a0f8",
   "conventions_sha256": "0e237384e0425b3c325229cf650ab6f9807fb08c1bedc991433b54b13c2eb02f",
   "claims": {
     "C001": {
@@ -455,6 +455,27 @@
       "rooms": [
         "collision-zoo"
       ]
+    },
+    "C096": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "strange-geometries"
+      ]
+    },
+    "C097": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "strange-geometries"
+      ]
+    },
+    "C098": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "strange-geometries"
+      ]
     }
   },
   "sources": {
@@ -650,6 +671,7 @@
     "strange-geometries": [
       "research/claims.md",
       "research/experiments/GEOM/README.md",
+      "research/experiments/GEOM/cone.jsonl",
       "research/experiments/GEOM/curvature.jsonl",
       "research/experiments/GEOM/geomlenia.py",
       "research/experiments/GEOM/heading_glass.csv",
@@ -666,7 +688,11 @@
       "research/gallery/exhibits/G039-parallel-lines-part/part-still.png",
       "research/gallery/exhibits/G039-parallel-lines-part/part.mp4",
       "research/gallery/exhibits/G039-parallel-lines-part/provenance.json",
-      "research/gallery/exhibits/G040-lattice-compass/provenance.json"
+      "research/gallery/exhibits/G040-lattice-compass/provenance.json",
+      "research/gallery/exhibits/G049-a-lens-made-of-nothing/lens.mp4",
+      "research/gallery/exhibits/G049-a-lens-made-of-nothing/provenance.json",
+      "research/gallery/exhibits/G050-straight-at-the-point/apex.mp4",
+      "research/gallery/exhibits/G050-straight-at-the-point/provenance.json"
     ],
     "collection": [
       "research/experiments/L6-field/make_seeds.py",
