@@ -2515,3 +2515,57 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
 - **Known caveats:** a single knife-edge case: the only death needs a dead-centre aim, and offsets were tried only on one side. Why the excess point kills and the deficit point does not was not studied
 - **History:**
   - 2026-11-14 — OBSERVED — strange-geometries thread.
+
+### C102 — On a Klein bottle, Orbium cannot feel the twist: through 18 and 45 passages of the twisted seam in 1000 tu its path stays within 0.18 cells of the same Orbium on an ordinary torus and its mass within 2 × 10⁻⁴ of it; only the bottle's chart shows it as its mirror image after every odd passage
+
+- **Status:** OBSERVED
+- **Owner lane:** strange-geometries thread (KLEIN, round 3, 2026-11-14)
+- **Sources:** `research/experiments/KLEIN/klein.py`, `kb.py twist`, `twist.jsonl`, `summarize.py`; gallery G053
+- **Specimen / version:** S001 cells, placed as registered (k = 0) and turned a quarter turn (k = 1), exact `np.rot90`
+- **Simulator / version:** `klein.Klein`: the Nx × Ny Klein bottle (left and right edges glued straight, top and bottom glued with a flip, (x, y + Ny) ~ (−x, y)) run as its double cover, an Nx × 2Ny torus stepped by `alm.lenia.Lenia` and kept glide-symmetric (A[y + Ny, x] = A[y, −x]) by copying the mirrored lower half over the upper half after each step; `tests/test_klein.py` checks that a plain step keeps the symmetry to 1e-12, so the copy only removes round-off
+- **Parameters:** S001 rule; Klein bottle 128 × 128; control: the same seed alone on the 128 × 256 torus (the cover without the mirror twin); 10 000 steps
+- **Intervention:** world topology (non-orientable)
+- **Metric:** the bottle's animal followed continuously on the cover, compared with the torus animal: path difference, mass in an 80 × 80 window around each; seam passages; heading on the cover and as drawn on the chart
+- **Result:** k = 0 passes the twisted seam 45 times, k = 1 18 times, each travelling 479.5 R. Max path difference 0.176 and 0.177 cells, max mass difference 1.7 × 10⁻⁴ and 1.3 × 10⁻⁵ (mass 73.5). On the cover the heading stays on one lattice-locked direction (291.2–293.8° and 21.2–23.9°, as on the torus); on the chart it alternates between the two mirror lock families (≈ 21.8° and ≈ 68.2° modulo 90°) at each passage
+- **Run IDs:** `twist.jsonl` rows k = 0, 1 with final_sha256 and torus_final_sha256
+- **Search / parameter bounds:** one bottle size, two headings, one seed position
+- **Reproduction command:** `cd research/experiments/KLEIN && PYTHONPATH=../../../src ../../../.venv/bin/python kb.py twist`
+- **Known caveats:** this is the expected result for a flat world, which a Klein bottle is everywhere; the remaining differences are round-off, carried along the neutral translation direction. Orbium is bilaterally symmetric, so the mirror image is not a different animal; a handed creature that travels was not found (the catalogued spinners in C104 turn in place)
+- **History:**
+  - 2026-11-14 — OBSERVED — strange-geometries thread.
+
+### C103 — In a world 23–26 cells (1.8–2.0 R) high, an Orbium heading across the short way survives on a torus, 32 of 32, but not on a Klein bottle, 3 of 32 (23 fill the world, 6 die): across the glued edge it meets its own mirror image instead of its own copy
+
+- **Status:** OBSERVED
+- **Owner lane:** strange-geometries thread (KLEIN, round 3, 2026-11-14)
+- **Sources:** `research/experiments/KLEIN/kb.py narrow`, `narrow.jsonl`, `summarize.py`; gallery G054
+- **Specimen / version:** S001 cells turned k = 0, 1, 2, 3 quarter turns (k = 0, 2: locked heading 22° off the short direction; k = 1, 3: 22° off the long direction), centred at mid-height and x = 0, 16, 32, 48
+- **Simulator / version:** as C102 (`klein.Klein`, `klein.Torus`, both `alm.lenia`)
+- **Parameters:** S001 rule; width 128, heights 18–40 cells; same seed on the Klein bottle and on the torus of the same size; 4000 steps (400 tu)
+- **Intervention:** world topology at fixed size
+- **Metric:** outcome at 400 tu, counting bodies on the double cover for the bottle: glider (every body within 10 % of Orbium's mass), filled (mass > 5 Orbia), died (mass < 1), other
+- **Result:** heading across the short way, heights 23–26: torus 32/32 gliders; Klein 3 gliders, 23 filled, 6 died. Heading along the long way, 23–26: torus 32/32, Klein 31/32 (1 died). Height 27: across-the-short-way seeds die on both (8/8 each), along-the-long-way seeds live on both. Heights 28–40: 208/208 gliders on each. Heights 18–21: no glider on either; height 22: Klein 3/16, torus 0/16 (all 16 fill)
+- **Run IDs:** `narrow.jsonl` (736 rows: kind, ny, k, x0, final_sha256)
+- **Search / parameter bounds:** one width, 4 headings × 4 positions per height, one length of run
+- **Reproduction command:** `cd research/experiments/KLEIN && PYTHONPATH=../../../src ../../../.venv/bin/python kb.py narrow`
+- **Known caveats:** below 2.2 R the kernel reaches across the short way, so the animal overlaps the neighbour that lies across the glued edge; on the torus that neighbour is itself, moving in step, on the bottle it is its mirror image, sliding the other way. The mechanism of the failure (when the fill starts, what it looks like) was filmed for one seed (G054) but not studied
+- **History:**
+  - 2026-11-14 — OBSERVED — strange-geometries thread.
+
+### C104 — A spinner beside its own mirror image does not swim: the catalogued spinners Gyropteron arcus and Gyrorbium gyrans on Klein bottles 2.5–8 R high keep their turning rate and drift at most 0.0046 R/tu, as on tori of the same size
+
+- **Status:** OBSERVED
+- **Owner lane:** strange-geometries thread (KLEIN, round 3, 2026-11-14)
+- **Sources:** `research/experiments/KLEIN/kb.py spin`, `spin.jsonl`, `summarize.py`
+- **Specimen / version:** catalogue cells `PG1a` (Gyropteron arcus) and `OG2g` (Gyrorbium gyrans), `alm.specimens.from_catalog`, each under its own catalogue rule; both turn in place (handed: the mirror image turns the other way)
+- **Simulator / version:** as C102
+- **Parameters:** width 8 R, heights 1.5–8 R, the spinner placed on the line x = 0, so on the bottle its mirror image (turning the other way) sits directly across the twisted edge, at distance equal to the height; 400 tu
+- **Intervention:** world topology (mirror-image vs same-handed neighbour)
+- **Metric:** net drift of the followed body over the last three quarters of the run; path speed; turning rate
+- **Result:** PG1a: Klein drift 0.0015–0.0046 R/tu, torus 0.0008–0.0027, against a path speed of 0.361–0.364 R/tu; turning −32.0 to −32.4°/tu on both. OG2g: Klein drift 0.0003–0.0007, torus 0.0002–0.0023 R/tu, path speed 0.475–0.486 R/tu, turning −95.5 to −97.3°/tu. At heights 1.5 and 2 R both spinners grow without bound on both worlds
+- **Run IDs:** `spin.jsonl` (36 rows)
+- **Search / parameter bounds:** two spinners, one position, 9 heights
+- **Reproduction command:** `cd research/experiments/KLEIN && PYTHONPATH=../../../src ../../../.venv/bin/python kb.py spin`
+- **Known caveats:** this tests the vortex-pair idea (two vortices turning opposite ways push each other along) and finds no effect at the distances where the spinners survive; closer pairs are not reachable this way because both worlds grow at 2 R and below
+- **History:**
+  - 2026-11-14 — OBSERVED — strange-geometries thread.

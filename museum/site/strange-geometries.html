@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>East wing: Orbium on strange worlds · ALM museum</title>
-<meta name="description" content="Orbium on a planet, on the hyperbolic plane, past a cone point and on a hex grid: parallel lines meet, parallel lines part, a lens made of nothing, and the lattice picks the compass.">
+<meta name="description" content="Orbium on a planet, on the hyperbolic plane, past a cone point, inside a Klein bottle and on a hex grid: parallel lines meet, parallel lines part, a lens made of nothing, the mirror next door, and the lattice picks the compass.">
 <link rel="stylesheet" href="museum.css">
 </head>
 <body class="room-strange-geometries">
@@ -36,7 +36,8 @@
 <h1>Orbium on strange worlds</h1>
 <p class="lede">Every other room keeps its animals on a flat, square-tiled torus. Here we moved
 Orbium, unchanged, onto a ball, onto the hyperbolic plane (the saddle-shaped world of Escher's
-<em>Circle Limit</em> prints) and onto a hexagonal tiling. The rule is the same everywhere: each
+<em>Circle Limit</em> prints), past single points of curvature, into a Klein bottle and onto a
+hexagonal tiling. The rule is the same everywhere: each
 cell looks at its neighbours within 13 cells of true distance, weighted by the same ring-shaped
 kernel. Only the shape of space changes.</p>
 
@@ -154,6 +155,48 @@ reproduces the museum's simulator to thirteen decimal places.</div>
   quarter of a kernel radius to one side, it survives <a class="claim" href="claims.html#C098" title="An Orbium aimed dead centre at the 60°-excess saddle point dies there (19 tu); offset by 0.25 R or more it passes, and every shot at the 60°-deficit point and the flat control survives (12 shots)"><span class="cid">C098</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>. A knife-edge, not a wall.</p>
 </div>
 
+<h2>Through the looking glass</h2>
+<figure class="vitrine">
+  <img src="../../research/gallery/exhibits/G053-through-the-looking-glass/looking-glass.gif" width="566" height="318" loading="lazy"
+       alt="Left: a square map whose top and bottom edges are marked as glued with a flip; an Orbium leaves through the top and comes back at the bottom with its path mirrored. Right: the same world drawn on a slowly turning glass Klein bottle, the animal gliding through its neck.">
+  <figcaption><strong>A Klein bottle.</strong> Left: the world's map, a square whose left and
+  right edges are glued straight, as on every other world in the museum, but whose top and
+  bottom edges are glued with a flip. Right: the same world drawn as the famous glass bottle that
+  has no inside. The drawing passes through itself and stretches the neck; the world does
+  neither.
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G053-through-the-looking-glass/looking-glass.mp4">Full video</a> ·
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G053-through-the-looking-glass/provenance.json">provenance</a>.</figcaption>
+</figure>
+<div class="label">
+  <p class="obs"><strong>What you see.</strong> Each time Orbium crosses the flipped edge, the map
+  shows it coming back as its own mirror image, and its trail turns the other way.</p>
+  <p class="open"><strong>What the ledger says.</strong> The animal notices nothing. Through 45
+  crossings in 1000 time units it moves within a fifth of a cell of the same animal on an ordinary
+  torus <a class="claim" href="claims.html#C102" title="On a Klein bottle, Orbium cannot feel the twist: through 18 and 45 passages of the twisted seam in 1000 tu its path stays within 0.18 cells of the same Orbium on an ordinary torus and its mass within 2 × 10⁻⁴ of it; only the bottle&#x27;s chart shows it as its mirror image after every odd passage"><span class="cid">C102</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>. A Klein bottle is flat everywhere; the twist is only in how the whole
+  thing is glued together, and nothing that small can see the whole thing.</p>
+</div>
+
+<figure class="vitrine">
+  <img src="../../research/gallery/exhibits/G054-the-mirror-next-door/mirror-next-door.gif" width="384" height="544" loading="lazy"
+       alt="Two long, narrow worlds, each drawn with dim copies of what lies beyond its top and bottom edges. Top, a torus: the Orbium glides along with copies of itself. Bottom, a Klein bottle: its neighbours are mirror images, they rub past each other, and the world fills with wavy stripes.">
+  <figcaption><strong>The mirror next door.</strong> The same Orbium in a world only 24 cells
+  high, less than twice its kernel radius. Dim bands show what lies across the top and bottom
+  edges: on the torus, the animal itself; on the Klein bottle, its mirror image.
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G054-the-mirror-next-door/mirror-next-door.mp4">Full video</a> ·
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G054-the-mirror-next-door/provenance.json">provenance</a>.</figcaption>
+</figure>
+<div class="label">
+  <p class="obs"><strong>What you see.</strong> On the torus the animal glides on, touching
+  copies of itself that move in step. On the Klein bottle its mirror image slides past the other
+  way, and within 30 time units the world fills with stripes.</p>
+  <p class="open"><strong>What the ledger says.</strong> In worlds 23 to 26 cells high, heading
+  across the short way, Orbium survives 32 of 32 times on a torus and 3 of 32 times on a Klein
+  bottle; from 28 cells up it always survives on both <a class="claim" href="claims.html#C103" title="In a world 23–26 cells (1.8–2.0 R) high, an Orbium heading across the short way survives on a torus, 32 of 32, but not on a Klein bottle, 3 of 32 (23 fill the world, 6 die): across the glued edge it meets its own mirror image instead of its own copy"><span class="cid">C103</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>. So the twist does matter,
+  but only when the world is so narrow that the animal can reach around it. Spinners turning in
+  place beside their own mirror images do not start to swim, as a pair of vortices would
+  <a class="claim" href="claims.html#C104" title="A spinner beside its own mirror image does not swim: the catalogued spinners Gyropteron arcus and Gyrorbium gyrans on Klein bottles 2.5–8 R high keep their turning rate and drift at most 0.0046 R/tu, as on tori of the same size"><span class="cid">C104</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>.</p>
+</div>
+
 <h2>The lattice is the compass</h2>
 <figure class="vitrine">
   <img src="../../research/gallery/exhibits/G040-lattice-compass/compass.png" width="900" height="350" loading="lazy"
@@ -182,13 +225,19 @@ reproduces the museum's simulator to thirteen decimal places.</div>
       <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/GEOM/heading_hex.csv">heading_hex.csv</a> ·
       <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/GEOM/heading_glass.csv">heading_glass.csv</a> ·
       <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/GEOM/cone.jsonl">cone.jsonl</a></li>
-  <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/claims.md">Claims ledger</a>: C084–C087, C096–C098</li>
+  <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/KLEIN/README.md">KLEIN notes</a> ·
+      <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/KLEIN/klein.py">Klein-bottle Lenia</a> ·
+      <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/KLEIN/twist.jsonl">twist.jsonl</a> ·
+      <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/KLEIN/narrow.jsonl">narrow.jsonl</a> ·
+      <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/KLEIN/spin.jsonl">spin.jsonl</a> ·
+      <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/KLEIN/summarize.py">summarize.py</a></li>
+  <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/claims.md">Claims ledger</a>: C084–C087, C096–C098, C102–C104</li>
 </ul>
 
 <nav class="walk" aria-label="Tour"><a class="prev" href="collision-zoo.html"><small>Back</small>The collision zoo</a><span></span></nav>
 </main>
 <footer class="site">
-  <p>Claim statuses read from <code>research/claims.md</code> (sha256 <code>86a0be75aaf3</code>) when this page was built.</p>
+  <p>Claim statuses read from <code>research/claims.md</code> (sha256 <code>f53dd3d262b4</code>) when this page was built.</p>
   <p>Every picture here is a recorded simulation or a figure drawn from committed data. Statuses
   are the claims ledger's, not the museum's: a badge never says more than
   <a href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/claims.md">research/claims.md</a> does.</p>

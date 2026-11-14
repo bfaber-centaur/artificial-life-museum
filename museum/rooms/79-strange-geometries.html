@@ -2,15 +2,17 @@
   "slug": "strange-geometries", "order": 79, "title": "East wing: Orbium on strange worlds",
   "nav_label": "Strange worlds",
   "kicker": "East wing · Other geometries",
-  "summary": "Orbium on a planet, on the hyperbolic plane, past a cone point and on a hex grid: parallel lines meet, parallel lines part, a lens made of nothing, and the lattice picks the compass.",
+  "summary": "Orbium on a planet, on the hyperbolic plane, past a cone point, inside a Klein bottle and on a hex grid: parallel lines meet, parallel lines part, a lens made of nothing, the mirror next door, and the lattice picks the compass.",
   "expect": {"C084": "OBSERVED", "C085": "OBSERVED", "C086": "OBSERVED", "C087": "OBSERVED",
              "C096": "OBSERVED", "C097": "OBSERVED", "C098": "OBSERVED",
+             "C102": "OBSERVED", "C103": "OBSERVED", "C104": "OBSERVED",
              "C011": "INDEPENDENTLY_CHECKED", "C043": "OBSERVED"}
 } -->
 <h1>Orbium on strange worlds</h1>
 <p class="lede">Every other room keeps its animals on a flat, square-tiled torus. Here we moved
 Orbium, unchanged, onto a ball, onto the hyperbolic plane (the saddle-shaped world of Escher's
-<em>Circle Limit</em> prints) and onto a hexagonal tiling. The rule is the same everywhere: each
+<em>Circle Limit</em> prints), past single points of curvature, into a Klein bottle and onto a
+hexagonal tiling. The rule is the same everywhere: each
 cell looks at its neighbours within 13 cells of true distance, weighted by the same ring-shaped
 kernel. Only the shape of space changes.</p>
 
@@ -128,6 +130,48 @@ reproduces the museum's simulator to thirteen decimal places.</div>
   quarter of a kernel radius to one side, it survives {{claim:C098}}. A knife-edge, not a wall.</p>
 </div>
 
+<h2>Through the looking glass</h2>
+<figure class="vitrine">
+  <img src="{{asset:research/gallery/exhibits/G053-through-the-looking-glass/looking-glass.gif}}" width="566" height="318" loading="lazy"
+       alt="Left: a square map whose top and bottom edges are marked as glued with a flip; an Orbium leaves through the top and comes back at the bottom with its path mirrored. Right: the same world drawn on a slowly turning glass Klein bottle, the animal gliding through its neck.">
+  <figcaption><strong>A Klein bottle.</strong> Left: the world's map, a square whose left and
+  right edges are glued straight, as on every other world in the museum, but whose top and
+  bottom edges are glued with a flip. Right: the same world drawn as the famous glass bottle that
+  has no inside. The drawing passes through itself and stretches the neck; the world does
+  neither.
+  {{src:research/gallery/exhibits/G053-through-the-looking-glass/looking-glass.mp4|Full video}} ·
+  {{src:research/gallery/exhibits/G053-through-the-looking-glass/provenance.json|provenance}}.</figcaption>
+</figure>
+<div class="label">
+  <p class="obs"><strong>What you see.</strong> Each time Orbium crosses the flipped edge, the map
+  shows it coming back as its own mirror image, and its trail turns the other way.</p>
+  <p class="open"><strong>What the ledger says.</strong> The animal notices nothing. Through 45
+  crossings in 1000 time units it moves within a fifth of a cell of the same animal on an ordinary
+  torus {{claim:C102}}. A Klein bottle is flat everywhere; the twist is only in how the whole
+  thing is glued together, and nothing that small can see the whole thing.</p>
+</div>
+
+<figure class="vitrine">
+  <img src="{{asset:research/gallery/exhibits/G054-the-mirror-next-door/mirror-next-door.gif}}" width="384" height="544" loading="lazy"
+       alt="Two long, narrow worlds, each drawn with dim copies of what lies beyond its top and bottom edges. Top, a torus: the Orbium glides along with copies of itself. Bottom, a Klein bottle: its neighbours are mirror images, they rub past each other, and the world fills with wavy stripes.">
+  <figcaption><strong>The mirror next door.</strong> The same Orbium in a world only 24 cells
+  high, less than twice its kernel radius. Dim bands show what lies across the top and bottom
+  edges: on the torus, the animal itself; on the Klein bottle, its mirror image.
+  {{src:research/gallery/exhibits/G054-the-mirror-next-door/mirror-next-door.mp4|Full video}} ·
+  {{src:research/gallery/exhibits/G054-the-mirror-next-door/provenance.json|provenance}}.</figcaption>
+</figure>
+<div class="label">
+  <p class="obs"><strong>What you see.</strong> On the torus the animal glides on, touching
+  copies of itself that move in step. On the Klein bottle its mirror image slides past the other
+  way, and within 30 time units the world fills with stripes.</p>
+  <p class="open"><strong>What the ledger says.</strong> In worlds 23 to 26 cells high, heading
+  across the short way, Orbium survives 32 of 32 times on a torus and 3 of 32 times on a Klein
+  bottle; from 28 cells up it always survives on both {{claim:C103}}. So the twist does matter,
+  but only when the world is so narrow that the animal can reach around it. Spinners turning in
+  place beside their own mirror images do not start to swim, as a pair of vortices would
+  {{claim:C104}}.</p>
+</div>
+
 <h2>The lattice is the compass</h2>
 <figure class="vitrine">
   <img src="{{asset:research/gallery/exhibits/G040-lattice-compass/compass.png}}" width="900" height="350" loading="lazy"
@@ -156,5 +200,11 @@ reproduces the museum's simulator to thirteen decimal places.</div>
       {{src:research/experiments/GEOM/heading_hex.csv|heading_hex.csv}} ·
       {{src:research/experiments/GEOM/heading_glass.csv|heading_glass.csv}} ·
       {{src:research/experiments/GEOM/cone.jsonl|cone.jsonl}}</li>
-  <li>{{src:research/claims.md|Claims ledger}}: C084–C087, C096–C098</li>
+  <li>{{src:research/experiments/KLEIN/README.md|KLEIN notes}} ·
+      {{src:research/experiments/KLEIN/klein.py|Klein-bottle Lenia}} ·
+      {{src:research/experiments/KLEIN/twist.jsonl|twist.jsonl}} ·
+      {{src:research/experiments/KLEIN/narrow.jsonl|narrow.jsonl}} ·
+      {{src:research/experiments/KLEIN/spin.jsonl|spin.jsonl}} ·
+      {{src:research/experiments/KLEIN/summarize.py|summarize.py}}</li>
+  <li>{{src:research/claims.md|Claims ledger}}: C084–C087, C096–C098, C102–C104</li>
 </ul>
