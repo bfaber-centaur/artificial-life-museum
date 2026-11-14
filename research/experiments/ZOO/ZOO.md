@@ -66,6 +66,27 @@ ventilans) share μ 0.38, σ 0.07, R 13, T 10; Chan's twelve three-channel aquar
 8. **Tip-or-belly at T 20 (C095).** `atlas.py run PC20`: 361 of 365 rows agree with T 10; the
    four changes are one-step shifts at the +b swallow windows.
 
+## Floating point (2026-11-14)
+
+The committed hashes were made on an AVX-512 machine. numpy picks its FFT kernels by the CPU's
+SIMD level, and the AVX2 kernels round differently, so on other CPUs (some GitHub runners) every
+sha256 differs. Reproduce that path with
+`NPY_DISABLE_CPU_FEATURES="AVX512_SPR AVX512_ICL X86_V4"`.
+
+- **The bodies amplify it.** Each heading is made by rotating the settled Orbium and re-settling
+  it 30 tu. That transient grows a perturbation about e-fold every 2–3 tu (1e-12 → 3e-7 by
+  30 tu, measured), and the bit-level difference in the base body ends as a different body:
+  the heading-0 Orbium settles at 0.08° on AVX-512 and at 357.27° without it. Rebuilt on the
+  AVX2 path, the O atlas agrees with the committed one in 100 of 204 cells, with the same six
+  classes (SURVIVOR 77, MISS 60, ANNIHILATE 24, SCATTER 24, FUSE 15, EXPLODE 4). Like the T 20
+  check (54 %), this says the repertoire is robust and the map is one realisation.
+- **The collisions do not.** Given the committed (AVX-512) bodies, the AVX2 path reproduces the
+  class of all 204 rows.
+- **Tests.** `tests/test_zoo.py` replays atlas rows from the four bodies committed in
+  `tests/fixtures/zoo-states/` and compares class, component count and mass series (rtol 1e-4);
+  the forage replay compares the census every 5 tu. Neither compares hashes. `chamber.py`'s hash
+  check still holds only on an AVX-512 machine.
+
 ## Ideas not done
 
 - Pteryx × Pteryx below the detonation threshold (is there *any* gentle contact?).

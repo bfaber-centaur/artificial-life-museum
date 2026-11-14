@@ -2278,6 +2278,7 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
 - **Prior literature:** Chan 2019 §3.5.5 (Complex Systems 28(3)) names Orbium–Orbium collision outcomes, including detonation, qualitatively and under unspecified rules (see `research/experiments/REEF-behavior/LITERATURE.md`). What is new here is the map under the exact S001 rule and its timestep check
 - **History:**
   - 2026-11-14 — OBSERVED — collision-zoo thread.
+  - 2026-11-14 — OBSERVED (unchanged), caveat added — the map also moves with floating-point rounding. On a CPU path without AVX-512 (`NPY_DISABLE_CPU_FEATURES="AVX512_SPR AVX512_ICL X86_V4"`, as on some CI runners) numpy's FFT rounds differently; the 30 tu re-settle after rotation amplifies that to visibly different bodies (A's heading 0.08° vs 357.27°), and the rebuilt atlas agrees in only 100 of 204 cells, with the same six classes (SURVIVOR 77, MISS 60, ANNIHILATE 24, SCATTER 24, FUSE 15, EXPLODE 4). Given the committed bodies, the collisions themselves replay all 204 classes on that path. The repertoire stands; the map is one realisation. See ZOO.md "Floating point".
 
 ### C081 — In the Pteryx rule (μ 0.38, σ 0.07) any contact between two Pteryx arcs detonates; a still Circium ring is swallowed when it meets an arc's wing tip and detonates the arc when it meets the body
 
