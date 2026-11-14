@@ -2,8 +2,8 @@
   "slug": "evolution-soup", "order": 77, "title": "East wing V: evolution in a soup",
   "nav_label": "13 · Evolution soup",
   "kicker": "East wing · Other laws of physics · Room 13",
-  "summary": "Flow-Lenia worlds where every cell carries its own genome: one physics, many body plans; a giant that swallows a colony; and Darwin's oldest problem, blending inheritance, played out in a petri dish.",
-  "expect": {"C076": "OBSERVED", "C077": "OBSERVED", "C078": "OBSERVED"}
+  "summary": "Flow-Lenia worlds where every cell carries its own genome: one physics, many body plans; a giant that swallows a colony; Darwin's oldest problem, blending inheritance, played out in a petri dish; and whether a winning mutant is fit or just lucky.",
+  "expect": {"C076": "OBSERVED", "C077": "OBSERVED", "C078": "OBSERVED", "C099": "OBSERVED", "C100": "OBSERVED", "C101": "OBSERVED"}
 } -->
 <h1>Evolution in a soup</h1>
 <p class="lede">In the conserved-matter room next door, matter flows and is never made or
@@ -72,6 +72,43 @@ sixteen founder species and let them run.</p>
   away.</p>
 </div>
 
+<h2>Fit, or lucky?</h2>
+<p>Under whole-genome inheritance four of the twelve mutants above grew. Did they win because of
+what they are, or because of where they landed? We took each of the twelve mutant genomes and
+dropped it into the same world again, at six new places each: 72 more runs.</p>
+<figure class="vitrine">
+  <img src="{{asset:research/gallery/exhibits/G052-seven-landings/landings.gif}}" width="920" height="304" loading="lazy"
+       alt="Two rows of seven copies of one dark world of blue-grey membranes and dots. Small orange mutant patches swell in six of seven squares of the top row and shrink or vanish in most squares of the bottom row.">
+  <figcaption><strong>One genome, seven landings.</strong> Top row: mutant 8. Bottom row: mutant 4.
+  The first square of each row is the original trial; the other six are replays at new places.
+  Orange is matter carrying the mutant genome; the number is how much of it there is compared
+  with the start. {{src:research/gallery/exhibits/G052-seven-landings/landings.mp4|Full video}} ·
+  {{src:research/gallery/exhibits/G052-seven-landings/provenance.json|provenance}}.</figcaption>
+</figure>
+<div class="label">
+  <p class="obs"><strong>What you see.</strong> Mutant 8 lost half its matter the first time and
+  grew in all six replays. Mutant 4 nearly doubled the first time and shrank in five of six.</p>
+</div>
+<figure class="vitrine">
+  <img src="{{asset:research/gallery/exhibits/G051-fit-or-lucky/replay.png}}" width="1115" height="581" loading="lazy"
+       alt="Twelve columns of dots on a log scale. The left columns sit mostly above the times-one line in orange, the right ones mostly below in grey. Open diamonds for each genome's first trial are scattered with no relation to the order of the columns.">
+  <figcaption><strong>All twelve genomes.</strong> Dots: the six replays. Bar: their median.
+  Diamond: the first trial. Columns are sorted by replay median.
+  {{src:research/gallery/exhibits/G051-fit-or-lucky/provenance.json|provenance}}.</figcaption>
+</figure>
+<div class="label">
+  <p class="open"><strong>What the ledger says.</strong> The first trial does not predict the
+  replays: the four biggest first-trial growers grew in 10 of 24 replays, the other genomes in 27
+  of 48 {{claim:C099}}. Genomes do differ: four grew in five or six places out of six, one shrank
+  in five, and shuffling the labels rarely spreads them that far {{claim:C100}}. But one genome's
+  outcomes at different places vary about twice as much as the genomes differ from each other
+  {{claim:C101}}.</p>
+  <p class="open"><strong>Why it matters.</strong> Population geneticists have said this since
+  the 1920s: a new mutation, even a good one, is usually lost to bad luck, and a winner is often
+  just a lucky one. Fitness tilts the odds; it does not decide the single case. To call a
+  creature fitter you have to rerun it.</p>
+</div>
+
 <h2>Sources</h2>
 <ul>
   <li>{{src:research/experiments/SOUP/SOUP.md|Soup notes}} and
@@ -79,5 +116,6 @@ sixteen founder species and let them run.</p>
   <li>{{src:research/experiments/SOUP/runs.jsonl|every run}},
       {{src:research/experiments/SOUP/diversity.jsonl|diversity series}},
       {{src:research/experiments/SOUP/mutant.jsonl|the mutant test}},
+      {{src:research/experiments/SOUP/replay.jsonl|the 72 replays}},
       {{src:research/experiments/SOUP/scout.jsonl|the 60-world scout}}</li>
 </ul>

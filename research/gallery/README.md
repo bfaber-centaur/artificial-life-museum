@@ -59,6 +59,8 @@ made of, ten times per unit of time. Some of them travel; one of them never chan
 | [G048](#g048--two-orbia-fuse-into-s101) | Two Orbia fuse into S101 (still) | fused bodies of G035, S101 | 2026-11-14 |
 | [G049](#g049--a-lens-made-of-nothing) | A lens made of nothing (animated; *cone points*) | S001 pairs past a 300°, 360° and 420° point | 2026-11-14 |
 | [G050](#g050--straight-at-the-point) | Straight at the point (animated; *cone points*) | S001 aimed at each point | 2026-11-14 |
+| [G051](#g051--fit-or-lucky) | Fit, or lucky? (*Flow-Lenia with genomes*) | 12 mutant genomes × 6 replays | 2026-11-14 |
+| [G052](#g052--one-genome-seven-landings) | One genome, seven landings (animated; *Flow-Lenia with genomes*) | mutants 8 and 4 | 2026-11-14 |
 | [G053](#g053--through-the-looking-glass) | Through the looking glass (animated; *Klein bottle*) | S001 | 2026-11-14 |
 | [G054](#g054--the-mirror-next-door) | The mirror next door (animated; *Klein bottle*) | S001 on a narrow torus and Klein bottle | 2026-11-14 |
 
@@ -646,7 +648,7 @@ Film: [`replicator3d.mp4`](exhibits/G031-replicating-in-3d/replicator3d.mp4) ·
   above 0.25 along the line of sight, lit from the upper left; each separate body has its own
   hue. Because the box is periodic, bodies leaving one side reappear on the other.
 
-## Evolution soup (G032–G034)
+## Evolution soup (G032–G034, G051–G052)
 
 Flow-Lenia worlds in which every cell carries a genome (ten growth weights) that travels with
 its matter and now and then mutates; matter is conserved, so bodies compete for it. Engine and
@@ -686,6 +688,31 @@ final frame: [`duel-final.png`](exhibits/G032-two-heredities/duel-final.png) ·
 - **Observation (no claim).** Eight worlds, one kernel set each, 16 founder genomes each. Inside
   one world the founders build different bodies from the same kernels. Most worlds settle into a
   still mosaic; kernel set 16 did not.
+
+### G051 — Fit, or lucky?
+
+![Twelve columns of dots on a log scale; the left columns sit mostly above the ×1 line in orange, the right ones mostly below in grey; open diamonds marking each genome's first trial are scattered with no relation to the columns' order](exhibits/G051-fit-or-lucky/replay.png)
+
+[`provenance.json`](exhibits/G051-fit-or-lucky/provenance.json)
+
+- **Observation (claims C099, C100, C101).** Each column is one of the twelve C078 mutant genomes
+  dropped into the same one-species world at six new places, under whole-genome inheritance.
+  Dots: how much matter the mutant holds after 500 time units, relative to its start. Diamond:
+  the genome's first trial. The columns are sorted by replay median; the diamonds do not follow.
+
+### G052 — One genome, seven landings
+
+![Two rows of seven copies of one dark world of blue-grey membranes and dots; small orange mutant patches swell in six of seven squares of the top row and shrink or vanish in most squares of the bottom row](exhibits/G052-seven-landings/landings.gif)
+
+Film: [`landings.mp4`](exhibits/G052-seven-landings/landings.mp4) ·
+final frame: [`landings-final.png`](exhibits/G052-seven-landings/landings-final.png) ·
+[`provenance.json`](exhibits/G052-seven-landings/provenance.json)
+
+- **Observation (claims C099, C100).** Top row: mutant 8, which shrank in its first trial (left)
+  and grew in all six replays. Bottom row: mutant 4, which nearly doubled in its first trial and
+  shrank in five of six replays. Orange = matter carrying the mutant genome; blue-grey = the
+  resident species. The replays were re-made for the film and match their recorded final hashes; the two first
+  trials are re-created from the stored (rounded) mutation and track the record within 0.06.
 
 ## Collision zoo (G035–G037, G047–G048)
 

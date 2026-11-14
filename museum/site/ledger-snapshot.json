@@ -1,7 +1,7 @@
 {
   "ledger": "research/claims.md",
-  "ledger_sha256": "f53dd3d262b4731888c730258b02e23d60c4f027295e19eca7ae8c73e98a0d2b",
-  "ledger_commit": "eacc875",
+  "ledger_sha256": "62d523c679adf6e3ed2b03c0a7cd5c3d56bea3f26627212a4f57724332c6051a",
+  "ledger_commit": "d919407",
   "conventions_sha256": "0e237384e0425b3c325229cf650ab6f9807fb08c1bedc991433b54b13c2eb02f",
   "claims": {
     "C001": {
@@ -477,6 +477,27 @@
         "strange-geometries"
       ]
     },
+    "C099": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "evolution-soup"
+      ]
+    },
+    "C100": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "evolution-soup"
+      ]
+    },
+    "C101": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "evolution-soup"
+      ]
+    },
     "C102": {
       "status": "OBSERVED",
       "status_text": "OBSERVED",
@@ -664,13 +685,17 @@
       "research/experiments/SOUP/SOUP.md",
       "research/experiments/SOUP/diversity.jsonl",
       "research/experiments/SOUP/mutant.jsonl",
+      "research/experiments/SOUP/replay.jsonl",
       "research/experiments/SOUP/runs.jsonl",
       "research/experiments/SOUP/scout.jsonl",
       "research/experiments/SOUP/soup.py",
       "research/gallery/exhibits/G032-two-heredities/duel.mp4",
       "research/gallery/exhibits/G032-two-heredities/provenance.json",
       "research/gallery/exhibits/G033-blending-swamps-variation/provenance.json",
-      "research/gallery/exhibits/G034-one-physics-many-bodies/provenance.json"
+      "research/gallery/exhibits/G034-one-physics-many-bodies/provenance.json",
+      "research/gallery/exhibits/G051-fit-or-lucky/provenance.json",
+      "research/gallery/exhibits/G052-seven-landings/landings.mp4",
+      "research/gallery/exhibits/G052-seven-landings/provenance.json"
     ],
     "collision-zoo": [
       "research/experiments/REEF-behavior/LITERATURE.md",

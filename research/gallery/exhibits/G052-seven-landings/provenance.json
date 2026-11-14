@@ -1,0 +1,150 @@
+{
+ "exhibit": "G052",
+ "title": "One genome, seven landings",
+ "claim": [
+  "C099",
+  "C100"
+ ],
+ "media": [
+  "landings.mp4",
+  "landings.gif",
+  "landings-final.png"
+ ],
+ "engine": "research/experiments/SOUP/soup.Soup (our parameter-embedded Flow-Lenia, written from Plantec et al. 2023; not the authors' code)",
+ "world": "settled one-species world of C078 (kernel set 16, 256²), inherit = dominant, no background mutation",
+ "runs": [
+  {
+   "mutant": 8,
+   "place": "first trial",
+   "y": 238,
+   "x": 66,
+   "steps": 2500,
+   "check": "re-created from mutant.jsonl delta (4 decimals); mutant mass within 0.06 of the recorded series"
+  },
+  {
+   "mutant": 8,
+   "place": "replay 1",
+   "y": 168,
+   "x": 77,
+   "steps": 2500,
+   "final_state_sha256": "9cc74a89a32975ab83afcf5eb06873fa6157f8b852794a1b0293aa33def62976",
+   "check": "final hash matches replay.jsonl"
+  },
+  {
+   "mutant": 8,
+   "place": "replay 2",
+   "y": 65,
+   "x": 209,
+   "steps": 2500,
+   "final_state_sha256": "e5127696dabf136b0b05a48875b379de846a830003de9d28a61d8d24fea12922",
+   "check": "final hash matches replay.jsonl"
+  },
+  {
+   "mutant": 8,
+   "place": "replay 3",
+   "y": 55,
+   "x": 140,
+   "steps": 2500,
+   "final_state_sha256": "f6ff6f37c8a3b72f8bc1322a6783eb02a283e8e83427fa77ad613f110c969dde",
+   "check": "final hash matches replay.jsonl"
+  },
+  {
+   "mutant": 8,
+   "place": "replay 4",
+   "y": 180,
+   "x": 199,
+   "steps": 2500,
+   "final_state_sha256": "50abdcb2c54ff72d5b1a8b4f15ade5b7e6a8d706d8fbec2e0bd23b74e1401629",
+   "check": "final hash matches replay.jsonl"
+  },
+  {
+   "mutant": 8,
+   "place": "replay 5",
+   "y": 73,
+   "x": 21,
+   "steps": 2500,
+   "final_state_sha256": "d962e3863fb89d54b70df9edcb96daf8a658afb294ba8c43818c2e166945cbd3",
+   "check": "final hash matches replay.jsonl"
+  },
+  {
+   "mutant": 8,
+   "place": "replay 6",
+   "y": 77,
+   "x": 139,
+   "steps": 2500,
+   "final_state_sha256": "708527ab1816c2ce1bba2822681074ced4f0a09810745d2ab865fa0614f210f5",
+   "check": "final hash matches replay.jsonl"
+  },
+  {
+   "mutant": 4,
+   "place": "first trial",
+   "y": 252,
+   "x": 159,
+   "steps": 2500,
+   "check": "re-created from mutant.jsonl delta (4 decimals); mutant mass within 0.06 of the recorded series"
+  },
+  {
+   "mutant": 4,
+   "place": "replay 1",
+   "y": 222,
+   "x": 210,
+   "steps": 2500,
+   "final_state_sha256": "9ff701c41765429f651a1c9a9e141be5a707b65b6f185df16879624076365755",
+   "check": "final hash matches replay.jsonl"
+  },
+  {
+   "mutant": 4,
+   "place": "replay 2",
+   "y": 250,
+   "x": 143,
+   "steps": 2500,
+   "final_state_sha256": "61d0ec6e4e4783c7b7254d0bfa9ed9c5ff9abc9bbb25b5c18bf1f07dd5996fd3",
+   "check": "final hash matches replay.jsonl"
+  },
+  {
+   "mutant": 4,
+   "place": "replay 3",
+   "y": 191,
+   "x": 177,
+   "steps": 2500,
+   "final_state_sha256": "e0fe6e54a28e458473d489839198f3de645944a1c2c60c16665ecf46cabfe2fe",
+   "check": "final hash matches replay.jsonl"
+  },
+  {
+   "mutant": 4,
+   "place": "replay 4",
+   "y": 161,
+   "x": 43,
+   "steps": 2500,
+   "final_state_sha256": "1e77e91c9cce78d7816f1802f539e55cb7eb6d4ca218a43da718a179185942e0",
+   "check": "final hash matches replay.jsonl"
+  },
+  {
+   "mutant": 4,
+   "place": "replay 5",
+   "y": 107,
+   "x": 96,
+   "steps": 2500,
+   "final_state_sha256": "9deda6637881b5d8ae6dd5dce9057cb60104dce5a47c19b956ec4bcea951d231",
+   "check": "final hash matches replay.jsonl"
+  },
+  {
+   "mutant": 4,
+   "place": "replay 6",
+   "y": 63,
+   "x": 254,
+   "steps": 2500,
+   "final_state_sha256": "c5f66b30eb13ed6139dbb3e4aa51c317a838128d124f09efb187c40fa45122dd",
+   "check": "final hash matches replay.jsonl"
+  }
+ ],
+ "view": "one 256² world per tile at 1 px per cell; brightness = matter; orange = matter whose genome is more than halfway to the mutant (the C078 metric), blue-grey = resident; labels give mutant mass relative to start; frame every 25 steps (5 tu), 20 fps; GIF 920 px wide, 8 fps",
+ "commands": [
+  "SOUP_OUT=<dir> python research/experiments/SOUP/replay_film.py run 8 o 8 0 8 1 8 2 8 3 8 4 8 5 4 o 4 0 4 1 4 2 4 3 4 4 4 5",
+  "SOUP_OUT=<dir> python research/experiments/SOUP/replay_film.py film landings.mp4 8 4",
+  "ffmpeg -i landings.mp4 -vf \"fps=8,scale=920:-1:flags=lanczos,split[a][b];[a]palettegen=max_colors=48:stats_mode=diff[p];[b][p]paletteuse=dither=none:diff_mode=rectangle\" landings.gif"
+ ],
+ "caveats": [
+  "Two genomes of twelve are shown; chosen as the clearest cases of each pattern."
+ ]
+}

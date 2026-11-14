@@ -1,7 +1,7 @@
 # SOUP: evolution in a conserved-matter soup
 
 Thread "Evolve creatures in an open-ended soup", 2026-11-14. Claims C076–C078, gallery
-G032–G034, museum room 77.
+G032–G034, museum room 77. Round 2 (fit or lucky?): claims C099–C101, gallery G051–G052, same room.
 
 ## The world
 
@@ -39,6 +39,10 @@ body feels that body's rule.
    the identical start, once per heredity (`run.py B16s<k>` / `D16s<k> --inherit dominant`).
 3. **Jenkin's test** (C078, `mutant.py`): one species only, no background mutation; one mutant
    disc, then 1000 time units under each heredity from the same mutated state; 12 mutants.
+4. **Fit or lucky?** (C099–C101, `replay.py`): each of the 12 mutant genomes written into the
+   same settled world at six new places (`default_rng([777, k, j])`), dominant heredity, 500 tu;
+   72 runs. `replay_film.py` re-runs a genome at its first-trial place and its six replay places
+   with frames kept (G052) and checks every final hash against `mutant.jsonl` / `replay.jsonl`.
 
 ## Findings
 
@@ -57,6 +61,16 @@ that swallows another body also swallows its genome, so the giant's genome is an
 everything it ate.
 
 **One mutation, two fates (C078).** See the claim for numbers.
+
+**A first trial says little; the genome says something; the place says more (C099–C101).** Of the
+four genomes that grew most in their first trial, two (mutants 2 and 4, both ×2 at 500 tu)
+shrank in most replays, and mutant 8, which lost half its matter the first time, grew in all
+six. Across all twelve the first-trial result and the replay median are unrelated (Spearman
+0.07). The genomes are not all alike, though: shuffling genome labels over the 72 replays almost
+never spreads the genome means as far as they really are (p = 0.006), and four genomes grew in
+5–6 places of 6. But the spread among one genome's six places is about twice the spread between
+genomes. This is the population-genetics picture of a new mutation: fitness tilts the odds, and
+the dice still decide most single cases. One run of a mutant is an anecdote.
 
 Species bookkeeping (`species.py`, the population and phylogeny panels) is a drawing
 convention, not a species concept: bodies whose mean genomes lie within 0.25 of a species'
@@ -78,7 +92,12 @@ centroid join it, otherwise they found a new species whose parent is the nearest
 - `soup.py` engine; `run.py` one world → snapshots (`SOUP_OUT`, default `states/`, gitignored);
   `runs.jsonl` final-state hashes of every run we made (the v* and L* rows are exploration runs;
   B16s0 was run as L16 and renamed).
-- `scout.py` → `scout.jsonl`; `mutant.py` → `mutant.jsonl`; `diversity.py` → `diversity.jsonl`.
-- `species.py` (bodies, species), `plots.py` (G033), `viz.py` (colours, G034), `film.py` (G032).
-- `summarize.py` prints every number quoted here and in C076–C078.
+- `scout.py` → `scout.jsonl`; `mutant.py` → `mutant.jsonl`; `replay.py` → `replay.jsonl`;
+  `diversity.py` → `diversity.jsonl`.
+- `species.py` (bodies, species), `plots.py` (G033, G051), `replay_film.py` (G052), `viz.py` (colours, G034), `film.py` (G032).
+- `summarize.py` prints every number quoted here and in C076–C078 and C099–C101.
+- Reproducibility checks (2026-11-14): fresh reruns of v43 and B16s1 under the current code
+  matched their `runs.jsonl` hashes bit for bit, and so did the 12 replays re-made for G052. The
+  two first trials in G052 are re-created from the delta as `mutant.jsonl` stores it (4 decimals),
+  so they are not bitwise; their mutant mass stays within 0.06 of the record (end values equal).
 - Tests: `tests/test_soup.py`.
