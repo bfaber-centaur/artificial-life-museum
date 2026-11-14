@@ -155,6 +155,7 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
 | VIS-talk round two 2026-11-07 (gallery G014–G018) | C059 / C060 |
 | Species hunt 2026-11-10 (`research/experiments/SPECIES-scout/`, gallery G021) | C063 (C061–C062 reserved by the open fractal PR #44) |
 | Replicators thread 2026-11-14 (`research/experiments/REPLICATORS/`, gallery G029–G031) | C072 / C073 / C074 / C075 |
+| Evolution soup thread 2026-11-14 (`research/experiments/SOUP/`, gallery G032–G034) | C076 / C077 / C078 |
 | Collision zoo 2026-11-14 (`research/experiments/ZOO/`, gallery G035–G037, museum room 78) | C080 / C081 / C082 / C083 |
 | Collision zoo round 2, 2026-11-14 (`research/experiments/ZOO/`, gallery G047–G048, room 78) | C093 / C094 / C095; history line on C081 |
 
@@ -2203,6 +2204,61 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
 - **History:**
   - 2026-11-14 — OBSERVED — replicators thread.
 
+### C076 — In a Flow-Lenia soup whose cells carry mutating genomes, genome diversity falls when genomes blend and rises when they are inherited whole, in 4 of 4 paired worlds
+
+- **Status:** OBSERVED
+- **Owner lane:** evolution soup thread (SOUP, 2026-11-14)
+- **Sources:** `research/experiments/SOUP/soup.py`, `run.py`, `diversity.py`, `diversity.jsonl`, `runs.jsonl`, `SOUP.md`; gallery G033
+- **Specimen / version:** none; 16 founder genomes (kernel set's own weights h + N(0, 0.25), clipped) on a Voronoi patchwork of uniform(0, 0.3) noise, `default_rng([99, seed])`, seeds 0–3
+- **Simulator / version:** `SOUP/soup.Soup` (our parameter-embedded Flow-Lenia: genome = the 10 growth weights h_k per cell, transported with the matter; written from Plantec et al. 2023, not the authors' code)
+- **Parameters:** kernel set 16 (`Kernels(default_rng([7, 16]))`, K 10, R 13); 256² torus; dt 0.2, s 0.65, dd 5, θ 2, n 2; genome halo 4; one mutation (disc r 10, N(0, 0.15) on all 10 weights) every 20 steps; 12 000 steps = 2400 time units
+- **Intervention:** heredity. `blend`: a cell's genome is the mass-weighted mean of the parcels that arrive. `dominant`: it is the genome of the largest single arriving parcel. Each seed is run under both from the identical start with the identical mutation rng
+- **Metric:** genome spread = mass-weighted RMS distance of cell genomes (A > 0.05) from their mass-weighted mean, every 40 steps
+- **Result:** start 0.58–0.67. Blend at 2400 tu: 0.409, 0.322, 0.398, 0.391 (seeds 0–3). Dominant: 0.819, 0.812, 0.841, 0.839. Every blend run is below its start and every dominant run above it from 1000 tu on (blend 0.41–0.49, dominant 0.70–0.74 at 1000 tu)
+- **Run IDs:** `runs.jsonl` B16s0–B16s3, D16s0–D16s3 (final_sha256)
+- **Search / parameter bounds:** one kernel set (chosen as the liveliest of 60 in `scout.py`), one world size, one mutation rate, 4 seeds
+- **Reproduction command:** `SOUP_OUT=… .venv/bin/python research/experiments/SOUP/run.py B16s<k> --rule 16 --seed <k> --steps 12000 --every 40 [--inherit dominant]` (D16s<k> with `--inherit dominant`), then `summarize.py diversity`
+- **Known caveats:** part of the rise under `dominant` is accumulation of mutations that are never averaged away, not selection; dominant heredity also makes bodies into genome mosaics, which changes how they move. Single implementation.
+- **Prior literature:** the blending-inheritance objection is Fleeming Jenkin's (1867, *North British Review*); parameter localisation in Flow-Lenia is Plantec et al. 2023.
+- **History:**
+  - 2026-11-14 — OBSERVED — evolution soup thread.
+
+### C077 — In the same soup, blending ends with one body holding 68–89 % of all matter in bodies after 2400 time units (4 of 4 worlds); inheriting genomes whole keeps 70–150 bodies, the largest holding 18–47 %
+
+- **Status:** OBSERVED
+- **Owner lane:** evolution soup thread (SOUP, 2026-11-14)
+- **Sources:** `research/experiments/SOUP/species.py` (`bodies`), `summarize.py bodies`; gallery G032
+- **Specimen / version:** as C076
+- **Simulator / version:** as C076
+- **Parameters:** as C076
+- **Intervention:** heredity, as C076
+- **Metric:** final state; bodies = 8-connected components of A > 0.05 on the torus with mass ≥ 5; share = largest body's mass / total body mass
+- **Result:** blend (seeds 0–3): 24, 17, 10, 7 bodies; largest share 0.68, 0.82, 0.70, 0.89; top three 0.91–0.98. Dominant: 130, 70, 102, 150 bodies; largest share 0.18, 0.47, 0.27, 0.24. In the film of seed 0 (G032) the large blend body is seen engulfing a colony of small dot-shaped bodies, which survive under dominant heredity
+- **Run IDs:** as C076
+- **Search / parameter bounds:** as C076
+- **Reproduction command:** as C076, then `summarize.py bodies`
+- **Known caveats:** a "body" is a thresholded component; touching bodies count as one. The comparison is between whole worlds and does not say which part of the dynamics (heredity itself, or the mosaic bodies it produces) causes the condensation.
+- **History:**
+  - 2026-11-14 — OBSERVED — evolution soup thread.
+
+### C078 — A single mutant patch in a one-species soup is gone within 1000 time units under blending (12 of 12), but under whole-genome inheritance 10 of 12 persist and 4 end with more matter than they started with
+
+- **Status:** OBSERVED
+- **Owner lane:** evolution soup thread (SOUP, 2026-11-14)
+- **Sources:** `research/experiments/SOUP/mutant.py`, `mutant.jsonl`, `summarize.py mutant`
+- **Specimen / version:** none; one species (every genome = kernel set 16's own weights h) settled 2000 steps from uniform(0, 0.3) noise, `default_rng([99, 1000])`
+- **Simulator / version:** as C076
+- **Parameters:** as C076 but no background mutation; 256²; 5000 steps (1000 tu) after the mutation
+- **Intervention:** one mutant disc (radius 10, centred on a mass-weighted random cell; h + N(0, 0.15) per weight, clipped), mutants 0–11 from `default_rng([555, k])`; each then run under `blend` and `dominant` from the same mutated state
+- **Metric:** mutant mass = matter (A > 0.05) whose genome lies more than halfway from h towards the mutant along the mutation direction, every 50 steps
+- **Result:** start 49–86. Blend: 0 at 1000 tu in 12 of 12 (0 by 500 tu in 10 of 12). Dominant at 1000 tu: 10 of 12 above 0 (21.6–124.5); mutants 2, 4, 7, 10 grew (60.5→124.5, 57.2→112.5, 77.8→98.8, 51.3→107.1); mutants 1 and 11 died out
+- **Run IDs:** `mutant.jsonl` (mutant, mode, final_sha256)
+- **Search / parameter bounds:** one kernel set, one settled world, 12 mutations, 1000 tu
+- **Reproduction command:** `SOUP_OUT=… .venv/bin/python research/experiments/SOUP/mutant.py 0 12`, then `summarize.py mutant`
+- **Known caveats:** under blending the mutant's genome is not destroyed but diluted (the matter-weighted genome total is conserved; `tests/test_soup.py`); the metric counts only matter that is still more than half mutant. Growth under `dominant` may be drift as much as advantage; we did not replicate the growers.
+- **Prior literature:** Jenkin 1867 (as C076).
+- **History:**
+  - 2026-11-14 — OBSERVED — evolution soup thread.
 ### C080 — Two S001 Orbia that collide produce six kinds of outcome, depending on angle and offset: glance off, touch and part, one dies, fuse into a two-lobed glider, both die, or detonate into a world-filling labyrinth
 
 - **Status:** OBSERVED
