@@ -158,6 +158,7 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
 | Evolution soup thread 2026-11-14 (`research/experiments/SOUP/`, gallery G032–G034) | C076 / C077 / C078 |
 | Collision zoo 2026-11-14 (`research/experiments/ZOO/`, gallery G035–G037, museum room 78) | C080 / C081 / C082 / C083 |
 | Collision zoo round 2, 2026-11-14 (`research/experiments/ZOO/`, gallery G047–G048, room 78) | C093 / C094 / C095; history line on C081 |
+| Evolution soup round 2, 2026-11-14 (`research/experiments/SOUP/`, gallery G051–G052, room 77) | C099 / C100 / C101 |
 
 ## Claims
 
@@ -2515,6 +2516,63 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
 - **Known caveats:** a single knife-edge case: the only death needs a dead-centre aim, and offsets were tried only on one side. Why the excess point kills and the deficit point does not was not studied
 - **History:**
   - 2026-11-14 — OBSERVED — strange-geometries thread.
+
+### C099 — A mutant's first trial does not predict how its genome does elsewhere: replaying the 12 C078 genomes at six new places each, the replay median does not follow the first-trial result (Spearman 0.07), and the four biggest first-trial growers grew in 10 of 24 replays against 27 of 48 for the rest
+
+- **Status:** OBSERVED
+- **Owner lane:** evolution soup thread (SOUP, round 2, 2026-11-14)
+- **Sources:** `research/experiments/SOUP/replay.py`, `replay.jsonl`, `mutant.jsonl`, `summarize.py replay`
+- **Specimen / version:** none; the settled one-species world of C078 (kernel set 16, 256²)
+- **Simulator / version:** as C076 (`soup.Soup`, inherit = dominant, no background mutation)
+- **Parameters:** as C078; 2500 steps (500 tu) after the mutation
+- **Intervention:** each of the 12 C078 mutant genomes (clip(h + delta), delta from `mutant.jsonl`) written into a disc of radius 10 at six new places, each centred on a mass-weighted random cell from `default_rng([777, k, j])`, j = 0–5; 72 runs. The first trial is C078's own dominant run at its own place, read at the same 500 tu
+- **Metric:** mutant mass as C078 (matter with A > 0.05 more than halfway from h towards the mutant), ratio end / start at 500 tu
+- **Result:** first-trial ratios 0.00–2.07; replay medians 0.05–1.46. Spearman rank correlation between the two over 12 genomes: 0.07. The four biggest first-trial growers (mutants 10, 2, 4, 9: ×2.07, ×2.01, ×1.93, ×1.60) grew in 10 of 24 replays; mutant 4 grew in 1 of 6 (median ×0.37) and mutant 2 in 2 of 6 (two died out). Mutant 8, which shrank to ×0.52 in its first trial, grew in 6 of 6 (×1.07–×1.89)
+- **Run IDs:** `replay.jsonl` (mutant, placement, final_sha256); `mutant.jsonl` dominant rows
+- **Search / parameter bounds:** one kernel set, one settled world, 12 genomes, 6 places each, 500 tu
+- **Reproduction command:** `SOUP_OUT=… .venv/bin/python research/experiments/SOUP/replay.py 0 12 6 2500`, then `summarize.py replay` (four processes over mutant ranges 0–3, 3–6, 6–9, 9–12 give the same rows)
+- **Known caveats:** 12 genomes is a small sample for a rank correlation; "grew" is a ratio above 1 at one time (500 tu). Original growers in C078 were named at 1000 tu (2, 4, 7, 10); at 500 tu the top four are 10, 2, 4, 9; mutant 7 grew in 5 of 6 replays
+- **Prior literature:** the distinction between selection and drift in small populations (fixation of a new mutant is mostly luck; Fisher 1922, Haldane 1927 on the survival probability of a beneficial mutant)
+- **History:**
+  - 2026-11-14 — OBSERVED — evolution soup thread, round 2.
+
+### C100 — Still, genomes differ: across 72 replays, which genome it is matters (permutation p = 0.006); mutants 8, 0, 5 and 7 grew in 5 or 6 of 6 places, mutant 3 shrank in 5 of 6 (median ×0.05)
+
+- **Status:** OBSERVED
+- **Owner lane:** evolution soup thread (SOUP, round 2, 2026-11-14)
+- **Sources:** `research/experiments/SOUP/replay.py`, `replay.jsonl`, `mutant.jsonl`, `summarize.py replay`
+- **Specimen / version:** none; the settled one-species world of C078 (kernel set 16, 256²)
+- **Simulator / version:** as C076 (`soup.Soup`, inherit = dominant, no background mutation)
+- **Parameters:** as C078; 2500 steps (500 tu) after the mutation
+- **Intervention:** each of the 12 C078 mutant genomes (clip(h + delta), delta from `mutant.jsonl`) written into a disc of radius 10 at six new places, each centred on a mass-weighted random cell from `default_rng([777, k, j])`, j = 0–5; 72 runs. The first trial is C078's own dominant run at its own place, read at the same 500 tu
+- **Metric:** mutant mass as C078 (matter with A > 0.05 more than halfway from h towards the mutant), ratio end / start at 500 tu
+- **Result:** grew in 6/6: mutant 8; 5/6: mutants 0, 5, 7; 4/6: 9; 3/6: 6, 10; 2/6: 2; 1/6: 1, 3, 4, 11. Test: log ratio (floored at 0.001), statistic = variance of the 12 genome means (1.44), against 10 000 shuffles of the genome labels over the 72 runs (`default_rng(0)`): p = 0.0058
+- **Run IDs:** `replay.jsonl` (mutant, placement, final_sha256); `mutant.jsonl` dominant rows
+- **Search / parameter bounds:** one kernel set, one settled world, 12 genomes, 6 places each, 500 tu
+- **Reproduction command:** `SOUP_OUT=… .venv/bin/python research/experiments/SOUP/replay.py 0 12 6 2500`, then `summarize.py replay` (four processes over mutant ranges 0–3, 3–6, 6–9, 9–12 give the same rows)
+- **Known caveats:** "fitter" here means more likely to gain matter from this one resident species in this world in 500 tu, nothing broader. The test treats the six places as independent draws of the same settled world; they share the same resident. Why some genomes win was not studied; the size of the mutation |delta| does not explain it (Spearman 0.37 with the replay median over 12 genomes, not significant)
+- **Prior literature:** as C099
+- **History:**
+  - 2026-11-14 — OBSERVED — evolution soup thread, round 2.
+
+### C101 — Where a mutant lands matters more than what it is: the spread of outcomes among one genome's six places (variance of log ratio 2.75) is about twice the spread between genomes (1.44); 37 of 72 replays grew and 6 fell below 1 % of their start
+
+- **Status:** OBSERVED
+- **Owner lane:** evolution soup thread (SOUP, round 2, 2026-11-14)
+- **Sources:** `research/experiments/SOUP/replay.py`, `replay.jsonl`, `mutant.jsonl`, `summarize.py replay`
+- **Specimen / version:** none; the settled one-species world of C078 (kernel set 16, 256²)
+- **Simulator / version:** as C076 (`soup.Soup`, inherit = dominant, no background mutation)
+- **Parameters:** as C078; 2500 steps (500 tu) after the mutation
+- **Intervention:** each of the 12 C078 mutant genomes (clip(h + delta), delta from `mutant.jsonl`) written into a disc of radius 10 at six new places, each centred on a mass-weighted random cell from `default_rng([777, k, j])`, j = 0–5; 72 runs. The first trial is C078's own dominant run at its own place, read at the same 500 tu
+- **Metric:** mutant mass as C078 (matter with A > 0.05 more than halfway from h towards the mutant), ratio end / start at 500 tu
+- **Result:** within-genome variance of log ratio, averaged over genomes: 2.75; variance of genome means: 1.44 (both with the 0.001 floor). Even the most consistent genome spans ×1.07–×1.89 and the best on average (mutant 7) spans ×0.52–×1.94; mutant 6 ranges from extinct to ×1.22. 37 of 72 replays end above ×1; 6 end below ×0.01
+- **Run IDs:** `replay.jsonl` (mutant, placement, final_sha256); `mutant.jsonl` dominant rows
+- **Search / parameter bounds:** one kernel set, one settled world, 12 genomes, 6 places each, 500 tu
+- **Reproduction command:** `SOUP_OUT=… .venv/bin/python research/experiments/SOUP/replay.py 0 12 6 2500`, then `summarize.py replay` (four processes over mutant ranges 0–3, 3–6, 6–9, 9–12 give the same rows)
+- **Known caveats:** the numbers depend on the floor chosen for extinct runs: floor 0.01 gives 1.39 within against 0.89 between, floor 0.0001 gives 4.74 against 2.15, so within stays larger (1.6–2.2×). Six places per genome
+- **Prior literature:** as C099
+- **History:**
+  - 2026-11-14 — OBSERVED — evolution soup thread, round 2.
 
 ### C102 — On a Klein bottle, Orbium cannot feel the twist: through 18 and 45 passages of the twisted seam in 1000 tu its path stays within 0.18 cells of the same Orbium on an ordinary torus and its mass within 2 × 10⁻⁴ of it; only the bottle's chart shows it as its mirror image after every odd passage
 

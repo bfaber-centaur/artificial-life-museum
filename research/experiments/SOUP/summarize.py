@@ -1,4 +1,4 @@
-"""Print every number SOUP.md and claims C076–C078 quote.
+"""Print every number SOUP.md and claims C076–C078 and C099–C101 quote.
 
 Needs the run snapshots (SOUP_OUT, default states/): B16s0–3 (blend) and D16s0–3 (dominant), each
 `run.py <name> --rule 16 --seed k --steps 12000 --every 40 [--inherit dominant]`; plus mutant.jsonl.
@@ -72,8 +72,37 @@ def mutant_tab():
     print(f"  mutants with mass > 0 at 1000 tu: blend {alive['blend']}/{len(by)}, dominant {alive['dominant']}/{len(by)}")
 
 
+def replay_tab():
+    """C099-C101: each C078 genome replayed at 6 new spots (replay.py), dominant, 500 tu."""
+    first = {r["mutant"]: r for r in map(json.loads, open(HERE / "mutant.jsonl")) if r["mode"] == "dominant"}
+    rep = [json.loads(l) for l in open(HERE / "replay.jsonl")]
+    ks = sorted(first)
+    R = np.array([[r["mutant_mass"][-1] / r["mutant_mass"][0] for r in sorted((r for r in rep if r["mutant"] == k), key=lambda r: r["placement"])] for k in ks])
+    T = rep[0]["every"] * (len(rep[0]["mutant_mass"]) - 1)
+    o = np.array([first[k]["mutant_mass"][T // first[k]["every"]] / first[k]["mutant_mass"][0] for k in ks])
+    print(f"mutant mass ratio at {T * 0.2:.0f} tu: first trial (C078) | six replays | median, grew")
+    for i, k in enumerate(ks):
+        print(f"  mutant {k:2d}: {o[i]:5.2f} | " + " ".join("%5.2f" % v for v in R[i]) + f" | {np.median(R[i]):5.2f}, {(R[i] > 1).sum()}/6")
+    rank = lambda v: np.argsort(np.argsort(v))
+    med = np.median(R, 1)
+    rho = np.corrcoef(rank(o), rank(med))[0, 1]
+    print(f"  Spearman(first trial, replay median) = {rho:.2f}")
+    top = np.argsort(-o)[:4]
+    print("  top-4 first-trial growers", [ks[i] for i in top], "grew in", int((R[top] > 1).sum()), "of", R[top].size, "replays;",
+          "others", int((np.delete(R, top, 0) > 1).sum()), "of", np.delete(R, top, 0).size)
+    L = np.log(np.maximum(R, 1e-3))
+    stat = lambda X: X.mean(1).var()
+    b, w = stat(L), L.var(1).mean()
+    rng = np.random.default_rng(0); flat = L.ravel()
+    null = [stat(rng.permutation(flat).reshape(L.shape)) for _ in range(10000)]
+    p = (1 + sum(x >= b for x in null)) / 10001
+    print(f"  log ratio (floored at 1e-3): between-genome var {b:.2f}, within-genome var {w:.2f};"
+          f" permutation p = {p:.4f} (10 000 shuffles of genome labels, rng 0)")
+    print(f"  replays grown: {(R > 1).sum()}/{R.size}; below 1 % of start: {(R < 0.01).sum()}")
+
+
 if __name__ == "__main__":
     what = sys.argv[1] if len(sys.argv) > 1 else "all"
-    for name, f in (("diversity", diversity_tab), ("bodies", bodies_tab), ("species", species_tab), ("mutant", mutant_tab)):
+    for name, f in (("diversity", diversity_tab), ("bodies", bodies_tab), ("species", species_tab), ("mutant", mutant_tab), ("replay", replay_tab)):
         if what in (name, "all"):
             f()

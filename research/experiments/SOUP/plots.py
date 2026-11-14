@@ -2,6 +2,7 @@
 
   python plots.py <npz> <species.json> <out.png> [title]
   python plots.py compare <blend-stem> <dominant-stem> <diversity.jsonl> <out.png>   (G033)
+  python plots.py replay <out.png>                                                  (G051)
 """
 import json, sys
 import numpy as np
@@ -177,8 +178,47 @@ def main():
     fig.savefig(out, dpi=110, facecolor=BG, bbox_inches="tight")
 
 
+def replay(out):
+    """G051: each C078 genome's first trial against six replays at new spots (500 tu, dominant)."""
+    from pathlib import Path
+    here = Path(__file__).parent
+    first = {r["mutant"]: r for r in map(json.loads, open(here / "mutant.jsonl")) if r["mode"] == "dominant"}
+    rep = [json.loads(l) for l in open(here / "replay.jsonl")]
+    ks = sorted(first); T = rep[0]["every"] * (len(rep[0]["mutant_mass"]) - 1)
+    R = {k: [r["mutant_mass"][-1] / r["mutant_mass"][0] for r in rep if r["mutant"] == k] for k in ks}
+    o = {k: first[k]["mutant_mass"][T // first[k]["every"]] / first[k]["mutant_mass"][0] for k in ks}
+    order = sorted(ks, key=lambda k: -np.median(R[k]))
+    fl = 0.01
+    GROW, SHRINK, FIRST = "#f0a040", "#7f8a9c", "#e8e6df"
+    fig, ax = plt.subplots(figsize=(12, 5.4), facecolor=BG); ax.set_facecolor(BG)
+    ax.axhline(1, color="#555", lw=1, zorder=1)
+    for i, k in enumerate(order):
+        v = np.maximum(R[k], fl); jit = np.linspace(-0.18, 0.18, len(v))
+        ax.scatter(i + jit, v, s=60, c=[GROW if x > 1 else SHRINK for x in R[k]], edgecolors=BG, linewidths=1.5, zorder=3)
+        ax.plot([i - 0.3, i + 0.3], [np.median(R[k])] * 2, color=FG, lw=2, zorder=2)
+        ax.scatter([i + 0.38], [max(o[k], fl)], s=110, marker="D", facecolors="none", edgecolors=FIRST, linewidths=1.8, zorder=4)
+    ax.set_yscale("log"); ax.set_ylim(fl * 0.8, 3)
+    ax.set_yticks([0.01, 0.1, 0.5, 1, 2]); ax.set_yticklabels(["≤1 %", "×0.1", "×0.5", "×1", "×2"])
+    ax.set_xticks(range(len(order))); ax.set_xticklabels([f"mutant {k}" for k in order], rotation=0, fontsize=9)
+    ax.set_ylabel("mutant mass after 500 tu (vs. start)", color=FG)
+    from matplotlib.lines import Line2D
+    h = [Line2D([], [], ls="", marker="o", ms=8, mfc=GROW, mec=BG, label="replay at a new spot: grew"),
+         Line2D([], [], ls="", marker="o", ms=8, mfc=SHRINK, mec=BG, label="replay: shrank"),
+         Line2D([], [], color=FG, lw=2, label="median of six replays"),
+         Line2D([], [], ls="", marker="D", ms=9, mfc="none", mec=FIRST, mew=1.8, label="first trial (C078)")]
+    leg = ax.legend(handles=h, loc="upper left", bbox_to_anchor=(0, -0.08), frameon=False, fontsize=10, ncol=4)
+    for t in leg.get_texts():
+        t.set_color(FG)
+    ax.set_title("Twelve mutant genomes, each dropped in six new places. Sorted by how they did on replay.",
+                 color=FG, loc="left", fontsize=12)
+    style(fig)
+    fig.savefig(out, dpi=110, facecolor=BG, bbox_inches="tight")
+
+
 if __name__ == "__main__":
     if sys.argv[1] == "compare":
         compare(*sys.argv[2:6])
+    elif sys.argv[1] == "replay":
+        replay(sys.argv[2])
     else:
         main()

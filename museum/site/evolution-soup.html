@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>East wing V: evolution in a soup · ALM museum</title>
-<meta name="description" content="Flow-Lenia worlds where every cell carries its own genome: one physics, many body plans; a giant that swallows a colony; and Darwin&#x27;s oldest problem, blending inheritance, played out in a petri dish.">
+<meta name="description" content="Flow-Lenia worlds where every cell carries its own genome: one physics, many body plans; a giant that swallows a colony; Darwin&#x27;s oldest problem, blending inheritance, played out in a petri dish; and whether a winning mutant is fit or just lucky.">
 <link rel="stylesheet" href="museum.css">
 </head>
 <body class="room-evolution-soup">
@@ -100,6 +100,43 @@ sixteen founder species and let them run.</p>
   away.</p>
 </div>
 
+<h2>Fit, or lucky?</h2>
+<p>Under whole-genome inheritance four of the twelve mutants above grew. Did they win because of
+what they are, or because of where they landed? We took each of the twelve mutant genomes and
+dropped it into the same world again, at six new places each: 72 more runs.</p>
+<figure class="vitrine">
+  <img src="../../research/gallery/exhibits/G052-seven-landings/landings.gif" width="920" height="304" loading="lazy"
+       alt="Two rows of seven copies of one dark world of blue-grey membranes and dots. Small orange mutant patches swell in six of seven squares of the top row and shrink or vanish in most squares of the bottom row.">
+  <figcaption><strong>One genome, seven landings.</strong> Top row: mutant 8. Bottom row: mutant 4.
+  The first square of each row is the original trial; the other six are replays at new places.
+  Orange is matter carrying the mutant genome; the number is how much of it there is compared
+  with the start. <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G052-seven-landings/landings.mp4">Full video</a> ·
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G052-seven-landings/provenance.json">provenance</a>.</figcaption>
+</figure>
+<div class="label">
+  <p class="obs"><strong>What you see.</strong> Mutant 8 lost half its matter the first time and
+  grew in all six replays. Mutant 4 nearly doubled the first time and shrank in five of six.</p>
+</div>
+<figure class="vitrine">
+  <img src="../../research/gallery/exhibits/G051-fit-or-lucky/replay.png" width="1115" height="581" loading="lazy"
+       alt="Twelve columns of dots on a log scale. The left columns sit mostly above the times-one line in orange, the right ones mostly below in grey. Open diamonds for each genome's first trial are scattered with no relation to the order of the columns.">
+  <figcaption><strong>All twelve genomes.</strong> Dots: the six replays. Bar: their median.
+  Diamond: the first trial. Columns are sorted by replay median.
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G051-fit-or-lucky/provenance.json">provenance</a>.</figcaption>
+</figure>
+<div class="label">
+  <p class="open"><strong>What the ledger says.</strong> The first trial does not predict the
+  replays: the four biggest first-trial growers grew in 10 of 24 replays, the other genomes in 27
+  of 48 <a class="claim" href="claims.html#C099" title="A mutant&#x27;s first trial does not predict how its genome does elsewhere: replaying the 12 C078 genomes at six new places each, the replay median does not follow the first-trial result (Spearman 0.07), and the four biggest first-trial growers grew in 10 of 24 replays against 27 of 48 for the rest"><span class="cid">C099</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>. Genomes do differ: four grew in five or six places out of six, one shrank
+  in five, and shuffling the labels rarely spreads them that far <a class="claim" href="claims.html#C100" title="Still, genomes differ: across 72 replays, which genome it is matters (permutation p = 0.006); mutants 8, 0, 5 and 7 grew in 5 or 6 of 6 places, mutant 3 shrank in 5 of 6 (median ×0.05)"><span class="cid">C100</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>. But one genome's
+  outcomes at different places vary about twice as much as the genomes differ from each other
+  <a class="claim" href="claims.html#C101" title="Where a mutant lands matters more than what it is: the spread of outcomes among one genome&#x27;s six places (variance of log ratio 2.75) is about twice the spread between genomes (1.44); 37 of 72 replays grew and 6 fell below 1 % of their start"><span class="cid">C101</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>.</p>
+  <p class="open"><strong>Why it matters.</strong> Population geneticists have said this since
+  the 1920s: a new mutation, even a good one, is usually lost to bad luck, and a winner is often
+  just a lucky one. Fitness tilts the odds; it does not decide the single case. To call a
+  creature fitter you have to rerun it.</p>
+</div>
+
 <h2>Sources</h2>
 <ul>
   <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/SOUP/SOUP.md">Soup notes</a> and
@@ -107,13 +144,14 @@ sixteen founder species and let them run.</p>
   <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/SOUP/runs.jsonl">every run</a>,
       <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/SOUP/diversity.jsonl">diversity series</a>,
       <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/SOUP/mutant.jsonl">the mutant test</a>,
+      <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/SOUP/replay.jsonl">the 72 replays</a>,
       <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/SOUP/scout.jsonl">the 60-world scout</a></li>
 </ul>
 
 <nav class="walk" aria-label="Tour"><a class="prev" href="replicators.html"><small>Back</small>East wing IV: creatures that copy themselves</a><a class="next" href="collision-zoo.html"><small>Next room</small>The collision zoo</a></nav>
 </main>
 <footer class="site">
-  <p>Claim statuses read from <code>research/claims.md</code> (sha256 <code>f53dd3d262b4</code>) when this page was built.</p>
+  <p>Claim statuses read from <code>research/claims.md</code> (sha256 <code>62d523c679ad</code>) when this page was built.</p>
   <p>Every picture here is a recorded simulation or a figure drawn from committed data. Statuses
   are the claims ledger's, not the museum's: a badge never says more than
   <a href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/claims.md">research/claims.md</a> does.</p>
