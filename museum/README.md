@@ -30,6 +30,7 @@ Opening `museum/site/index.html` straight from disk works too. Pages load images
 | `more-dimensions.html` | 9 · East wing I: more dimensions, more chemicals | WINGS 2026-11-11: G026, G027, C069–C071 |
 | `conserved-matter.html` | 10 · East wing II: matter that cannot be destroyed | WINGS: G022, G028, C064, C065 |
 | `other-models.html` | 11 · East wing III: cousins from other models | WINGS: G023–G025, C066–C068 |
+| `replicators.html` | 12 · East wing IV: creatures that copy themselves | REPLICATORS: G029–G031, C072–C075 |
 | `collection.html` | Reference: the four specimens | dossiers, gallery runs |
 | `claims.html` | Reference: every claim on display | generated from the ledger |
 

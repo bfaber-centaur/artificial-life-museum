@@ -1,0 +1,85 @@
+<!--meta {
+  "slug": "replicators", "order": 76, "title": "East wing IV: creatures that copy themselves",
+  "nav_label": "12 · Replicators",
+  "kicker": "East wing · Other laws of physics · Room 12",
+  "summary": "Chan's dividing creatures from the multi-kernel catalogue: a family tree followed cell by cell, how fast one cell fills a world, and a replicator in three dimensions.",
+  "expect": {"C072": "OBSERVED", "C073": "OBSERVED", "C074": "OBSERVED", "C075": "OBSERVED"}
+} -->
+<h1>Creatures that copy themselves</h1>
+<p class="lede">Give Lenia several kernels instead of one and some creatures stop being
+single animals. They grow, pinch in two, and each half grows again. Bert Chan found these
+while searching multi-kernel rules and named them plainly in his catalogue: <em>replicator</em>,
+<em>division too slow</em>, <em>division well</em>, <em>division uncontrolled</em>. We ran them
+in our own engine and asked three questions: who descends from whom, how fast can a world
+fill up, and does it work in three dimensions?</p>
+
+<h2>A family tree</h2>
+<figure class="vitrine">
+  <img src="{{asset:research/gallery/exhibits/G029-family-tree/family-tree.gif}}" width="320" height="320" loading="lazy"
+       alt="One cell divides again and again until about eighty cells cover the world, each coloured by its ancestry.">
+  <figcaption><strong>One cell, 2000 time units.</strong> Chan's <em>division well</em>
+  (found/213 #84) on a 384² world. Colour is inherited: a daughter takes her mother's hue,
+  shifted slightly at random, so families share colours.
+  {{src:research/gallery/exhibits/G029-family-tree/family-tree.mp4|Full video}} ·
+  {{src:research/gallery/exhibits/G029-family-tree/provenance.json|provenance}}.</figcaption>
+</figure>
+<figure class="vitrine">
+  <img src="{{asset:research/gallery/exhibits/G029-family-tree/tree.png}}" width="720" height="480" loading="lazy"
+       alt="A family tree branching from one founder into 81 living cells, with the cell count below rising slowly and then steadily.">
+  <figcaption><strong>Who came from whom.</strong> Each line is a cell; a fork is a division; a
+  dot is a cell whose track ended. Below: the number of cells.</figcaption>
+</figure>
+<div class="label">
+  <p class="obs"><strong>What you see.</strong> For the first few hundred time units the founder
+  and her first daughters wander and divide rarely. Then the count climbs steadily as the
+  world fills with membrane-wrapped cells.</p>
+  <p class="open"><strong>What the ledger says.</strong> 135 divisions, 14 generations, 81
+  cells at the end, in one run {{claim:C072}}. A cell here is a peak of the blurred field;
+  the tracker cannot tell a cell that merged from one that faded.</p>
+</div>
+
+<h2>How fast one cell fills the world</h2>
+<figure class="vitrine">
+  <img src="{{asset:research/gallery/exhibits/G030-four-growth-rates/ladder.gif}}" width="384" height="432" loading="lazy"
+       alt="Four worlds start from the same cell: the first still has three cells while the other three fill up, the last with a lattice of dots between the cells.">
+  <figcaption><strong>Same cell, four rules.</strong> Each rule moves every number a fraction
+  λ of the way from <em>division well</em> to <em>division uncontrolled</em>. The bar is the
+  fraction of the world covered.
+  {{src:research/gallery/exhibits/G030-four-growth-rates/ladder.mp4|Full video}} ·
+  {{src:research/gallery/exhibits/G030-four-growth-rates/provenance.json|provenance}}.</figcaption>
+</figure>
+<div class="label">
+  <p class="obs"><strong>What you see.</strong> At λ 0 there are still three cells at t 600.
+  At λ 1 the world is full by t 100, and the gaps between cells fill with a fine lattice of
+  dots.</p>
+  <p class="open"><strong>What the ledger says.</strong> Time to cover half the world falls
+  about fifteen-fold, from 1175–1530 time units to 85–95, and the median never rises along the
+  way {{claim:C073}}. There is no single switch between a healthy and a runaway rule: the
+  growth rate rises smoothly.</p>
+</div>
+
+<h2>A replicator in three dimensions</h2>
+<figure class="vitrine">
+  <img src="{{asset:research/gallery/exhibits/G031-replicating-in-3d/replicator3d.gif}}" width="320" height="320" loading="lazy"
+       alt="A 3-D blob buds into a chain, the chain breaks into separate bodies, and the bodies multiply until they pack the box.">
+  <figcaption><strong>Budding in a box.</strong> Chan's <em>self-replicate... unstable</em>
+  (found/312 #21) in a 96³ world that wraps around. Each body has its own colour.
+  {{src:research/gallery/exhibits/G031-replicating-in-3d/replicator3d.mp4|Full video}} ·
+  {{src:research/gallery/exhibits/G031-replicating-in-3d/provenance.json|provenance}}.</figcaption>
+</figure>
+<div class="label">
+  <p class="obs"><strong>What you see.</strong> The blob stretches into a chain of beads, the
+  beads separate, and each grows and buds again until the box is packed.</p>
+  <p class="open"><strong>What the ledger says.</strong> One body becomes about fifty by t 300 in the largest box;
+  it multiplies at two timesteps and in three box sizes {{claim:C074}}. Its catalogue neighbour <em>divide</em>
+  (found/312 #7) splits into four bodies and then, at the catalogue timestep, stops; at half the
+  timestep a fifth body appears {{claim:C075}}.</p>
+</div>
+
+<h2>Sources</h2>
+<ul>
+  <li>{{src:research/experiments/REPLICATORS/REPLICATORS.md|Replicator notes}}</li>
+  <li>{{src:research/experiments/REPLICATORS/tree.py|The cell tracker}},
+      {{src:research/experiments/REPLICATORS/growth.jsonl|the growth runs}} and
+      {{src:research/experiments/REPLICATORS/replicate3d.jsonl|the 3-D runs}}</li>
+</ul>
