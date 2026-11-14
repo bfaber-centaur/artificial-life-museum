@@ -1,7 +1,7 @@
 {
   "ledger": "research/claims.md",
-  "ledger_sha256": "ba1a7ccc1600864ca444211d39a56495953f5cb3f2ae7d7c67533d4c3dfb78ad",
-  "ledger_commit": "a35e6d2",
+  "ledger_sha256": "b74f65dea6ffcfd04930e867ca16063e4bc3f9a88aa65c3b26df2cc1f4af091f",
+  "ledger_commit": "0109bba",
   "conventions_sha256": "0e237384e0425b3c325229cf650ab6f9807fb08c1bedc991433b54b13c2eb02f",
   "claims": {
     "C001": {
@@ -9,6 +9,7 @@
       "status_text": "INDEPENDENTLY_CHECKED",
       "rooms": [
         "collection",
+        "collision-zoo",
         "index",
         "orbium"
       ]
@@ -329,6 +330,62 @@
         "more-dimensions"
       ]
     },
+    "C072": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "replicators"
+      ]
+    },
+    "C073": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "replicators"
+      ]
+    },
+    "C074": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "replicators"
+      ]
+    },
+    "C075": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "replicators"
+      ]
+    },
+    "C080": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "collision-zoo"
+      ]
+    },
+    "C081": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "collision-zoo"
+      ]
+    },
+    "C082": {
+      "status": "REPRODUCED",
+      "status_text": "REPRODUCED",
+      "rooms": [
+        "collision-zoo"
+      ]
+    },
+    "C083": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "collision-zoo"
+      ]
+    },
     "C084": {
       "status": "OBSERVED",
       "status_text": "OBSERVED",
@@ -355,6 +412,27 @@
       "status_text": "OBSERVED",
       "rooms": [
         "strange-geometries"
+      ]
+    },
+    "C093": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "collision-zoo"
+      ]
+    },
+    "C094": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "collision-zoo"
+      ]
+    },
+    "C095": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "collision-zoo"
       ]
     }
   },
@@ -506,6 +584,35 @@
       "research/gallery/exhibits/G024-particle-pinwheel/provenance.json",
       "research/gallery/exhibits/G025-smoothlife-glider/glider.mp4",
       "research/gallery/exhibits/G025-smoothlife-glider/provenance.json"
+    ],
+    "replicators": [
+      "research/experiments/REPLICATORS/REPLICATORS.md",
+      "research/experiments/REPLICATORS/growth.jsonl",
+      "research/experiments/REPLICATORS/replicate3d.jsonl",
+      "research/experiments/REPLICATORS/tree.py",
+      "research/gallery/exhibits/G029-family-tree/family-tree.mp4",
+      "research/gallery/exhibits/G029-family-tree/provenance.json",
+      "research/gallery/exhibits/G030-four-growth-rates/ladder.mp4",
+      "research/gallery/exhibits/G030-four-growth-rates/provenance.json",
+      "research/gallery/exhibits/G031-replicating-in-3d/provenance.json",
+      "research/gallery/exhibits/G031-replicating-in-3d/replicator3d.mp4"
+    ],
+    "collision-zoo": [
+      "research/experiments/REEF-behavior/LITERATURE.md",
+      "research/experiments/ZOO/ZOO.md",
+      "research/experiments/ZOO/atlas.py",
+      "research/experiments/ZOO/feed.py",
+      "research/experiments/ZOO/forage.py",
+      "research/experiments/ZOO/fused_check.py",
+      "research/experiments/ZOO/summarize.py",
+      "research/gallery/exhibits/G035-orbium-collision-atlas/detonation.mp4",
+      "research/gallery/exhibits/G035-orbium-collision-atlas/provenance.json",
+      "research/gallery/exhibits/G036-the-arc-that-eats-rings/feeding.mp4",
+      "research/gallery/exhibits/G036-the-arc-that-eats-rings/provenance.json",
+      "research/gallery/exhibits/G037-tip-or-belly/provenance.json",
+      "research/gallery/exhibits/G047-no-keeper/no-keeper.mp4",
+      "research/gallery/exhibits/G047-no-keeper/provenance.json",
+      "research/gallery/exhibits/G048-fusion-makes-s101/provenance.json"
     ],
     "strange-geometries": [
       "research/claims.md",

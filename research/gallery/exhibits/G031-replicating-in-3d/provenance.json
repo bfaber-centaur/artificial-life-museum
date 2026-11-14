@@ -1,0 +1,58 @@
+{
+ "exhibit": "G031",
+ "title": "A replicator in three dimensions",
+ "claim": "C074",
+ "media": [
+  "replicator3d.mp4",
+  "replicator3d.gif",
+  "replicator3d-strip.png",
+  "replicator3d.json"
+ ],
+ "engine": "research/experiments/WINGS/nd_lenia.NDLenia (independent numpy port of upstream LeniaNDKC, pinned adfc542)",
+ "run": {
+  "specimen": "found/312.json #21 'self-replicate... unstable' (Chan)",
+  "rule": [
+   {
+    "R": 15,
+    "T": 10,
+    "b": "1",
+    "m": 0.12,
+    "s": 0.0222,
+    "kn": 1,
+    "gn": 1
+   },
+   {
+    "R": 15,
+    "T": 10,
+    "b": "1,5/6,1/12",
+    "m": 0.235,
+    "s": 0.0508,
+    "kn": 1,
+    "gn": 1
+   }
+  ],
+  "grid": [
+   96,
+   96,
+   96
+  ],
+  "boundary": "periodic",
+  "time_units": 320.0,
+  "dt": 0.1,
+  "initial_state_sha256_prefix": "a2543c591501f8b6",
+  "final_state_sha256_prefix": "efb7d58a1bee3713"
+ },
+ "frames": {
+  "every_tu": 1,
+  "mp4_fps": 30,
+  "gif": "ffmpeg fps 15, 320 px, 128-colour palette"
+ },
+ "view": "box rotated 0.6 deg per tu about the vertical axis; first voxel > 0.25 along the line of sight, Lambert-lit; hue per body",
+ "commands": [
+  "film3d.py 312 21 96 320 OUT replicator3d"
+ ],
+ "caveats": [
+  "Periodic box: bodies leaving one side reappear on the other, and rotation shows wrapped copies at the edges.",
+  "Chan named the creature unstable."
+ ]
+}

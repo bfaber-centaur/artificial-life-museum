@@ -1,0 +1,25 @@
+{
+  "exhibit": "G037",
+  "title": "Tip or belly",
+  "media": [
+    "tip-or-belly.png"
+  ],
+  "claim": "C081",
+  "view": "Strip: outcome class of each atlas-PC row (Pteryx vs C0v, head-on, b step 0.25 R). Bottom: time exposures (max over the run of A, A^0.7 onto inferno), 300x300 window around the contact point, replayed and hash-checked against atlas-PC rows.",
+  "atlas": "research/experiments/ZOO/atlas-PC.jsonl",
+  "runs": [
+    {
+      "key": "G037:P8al-b4.5",
+      "final_state_sha256": "d172d72ed47286e09cbe9c9384663bcbe353cabbdcdd9fb31bcce87a9730dc22"
+    },
+    {
+      "key": "G037:P8al-b0",
+      "final_state_sha256": "9513eba7e1d1f945c24d60791a60fc7ba96002039d22331b9b682e83613dd6b4"
+    },
+    {
+      "key": "G037:P8al-b6",
+      "final_state_sha256": "306dd00a901abe2c681e8f3a1798700c16d3eca8fda475dfc5cae6e46fe95612"
+    }
+  ],
+  "command": "PYTHONPATH=src:research/experiments/ZOO:research/experiments/VIS-talk .venv/bin/python research/experiments/ZOO/exhibits.py G037"
+}

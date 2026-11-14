@@ -1,0 +1,154 @@
+<!--meta {
+  "slug": "collision-zoo", "order": 78, "title": "The collision zoo",
+  "nav_label": "Collision zoo",
+  "kicker": "Ecology by collision",
+  "summary": "Catalogued animals that share one rule, thrown at each other: two Orbia have six ways to meet, Pteryx arcs explode at a touch, and a Hexapteryx that eats rings grows into the next species.",
+  "expect": {"C001": "INDEPENDENTLY_CHECKED", "C080": "OBSERVED", "C081": "OBSERVED", "C082": "REPRODUCED", "C083": "OBSERVED", "C093": "OBSERVED", "C094": "OBSERVED", "C095": "OBSERVED"}
+} -->
+<h1>The collision zoo</h1>
+<p class="lede">An animal alone tells you what it is. Two animals meeting tell you what it does.
+Every creature in this room lives under exactly the rule its catalogue entry gives, and shares
+that rule with the animal it meets, so nothing about the physics changes when they collide. We
+aimed them at each other from many angles and offsets and wrote down what came out.</p>
+
+<h2>Two Orbia, 204 collisions</h2>
+<figure class="vitrine">
+  <img src="{{asset:research/gallery/exhibits/G035-orbium-collision-atlas/atlas.png}}" width="896" height="691" loading="lazy"
+       alt="A grid of 204 small time exposures: pairs of glowing tracks that cross, bend, end in a dot, merge into one thick track, or burst into a round labyrinth.">
+  <figcaption><strong>Collision atlas.</strong> Each tile is one collision drawn as a time
+  exposure: the brightest each cell ever got, so the gliders leave trails like particles in a
+  bubble chamber. Rows: the angle between the two headings (180° is head-on). Columns: the
+  sideways offset, in kernel radii. Border: what came out.
+  {{src:research/gallery/exhibits/G035-orbium-collision-atlas/provenance.json|provenance}}.</figcaption>
+</figure>
+<div class="label">
+  <p class="obs"><strong>What you see.</strong> Six fates. Most glancing blows bend both tracks.
+  Near head-on, the two touch and part. Very often one track simply ends: one Orbium dies and
+  the other glides on untouched. In a band near 90° the two tracks become one thick track, a
+  two-lobed glider with the mass of both. Some meetings kill both. And in three tiles near 60–75°
+  the pair detonates.</p>
+  <p class="open"><strong>What the ledger says.</strong> {{claim:C080}}. Chan named these
+  outcomes in 2019 without a map; this is the map, for the exact rule of Room 1. Halve the
+  timestep and all six outcomes are still there, but only about half of the tiles keep theirs.</p>
+</div>
+
+<figure class="vitrine">
+  <img src="{{asset:research/gallery/exhibits/G035-orbium-collision-atlas/detonation.gif}}" width="320" height="347" loading="lazy"
+       alt="Two small gliders meet; a knot forms and grows into a disc of winding stripes that fills the whole square world.">
+  <figcaption><strong>Detonation.</strong> Two Orbia meet at 75°, offset by three quarters of a
+  radius. Whole 384² world.
+  {{src:research/gallery/exhibits/G035-orbium-collision-atlas/detonation.mp4|Full video}}.</figcaption>
+</figure>
+<div class="label">
+  <p class="obs"><strong>What you see.</strong> The two gliders fuse into a knot that will not
+  settle. It throws out stripes, and the stripes fill the world in about 70 time units: two
+  hundred times the mass of the two animals that started it.</p>
+  <p class="open"><strong>What the ledger says.</strong> A lone Orbium glides under this rule
+  for at least 20 000 steps {{claim:C001}}. Two of them, meeting badly, are enough to end
+  the world.</p>
+</div>
+
+<h2>Tip or belly</h2>
+<figure class="vitrine">
+  <img src="{{asset:research/gallery/exhibits/G037-tip-or-belly/tip-or-belly.png}}" width="720" height="485" loading="lazy"
+       alt="Five striped bars of grey, yellow and red cells, and below them three time exposures: an arc swallowing a ring, a round explosion, and an arc passing a ring.">
+  <figcaption><strong>Pteryx arcs and a ring.</strong> Five catalogued arcs (Hexapteryx to
+  Decapteryx) and the still ring Circium ventilans all live under one rule. Each arc meets the
+  ring head-on, offset sideways in quarter-radius steps.
+  {{src:research/gallery/exhibits/G037-tip-or-belly/provenance.json|provenance}}.</figcaption>
+</figure>
+<div class="label">
+  <p class="obs"><strong>What you see.</strong> Two arcs that touch always explode: there is no
+  bounce and no fusion in this world. A ring that meets an arc's body explodes it too. But a ring
+  that meets the very tip of a wing is swallowed, and the arc comes out heavier. Bigger arcs have
+  their tips further out, and the swallow window moves with them.</p>
+  <p class="open"><strong>What the ledger says.</strong> 204 of 204 touching arc pairs detonated;
+  each arc has a swallow window about one radius wide at each tip {{claim:C081}}. At half the
+  timestep 361 of the 365 ring meetings end the same way {{claim:C095}}.</p>
+</div>
+
+<h2>The arc that eats rings</h2>
+<figure class="vitrine">
+  <img src="{{asset:research/gallery/exhibits/G036-the-arc-that-eats-rings/feeding.gif}}" width="384" height="432" loading="lazy"
+       alt="A thin glowing arc gliding across a dark world; small rings appear ahead of it and each one it touches makes it a segment longer.">
+  <figcaption><strong>Feeding.</strong> A keeper drops one ring at a time in front of a
+  Hexapteryx's wing tip, alternating sides. 512² world at half resolution.
+  {{src:research/gallery/exhibits/G036-the-arc-that-eats-rings/feeding.mp4|Full video}} ·
+  {{src:research/gallery/exhibits/G036-the-arc-that-eats-rings/provenance.json|provenance}}.</figcaption>
+</figure>
+<figure class="vitrine">
+  <img src="{{asset:research/gallery/exhibits/G036-the-arc-that-eats-rings/ladder.png}}" width="896" height="458" loading="lazy"
+       alt="Two rows of five curved arcs with holes. Top: catalogue species with six to ten segments. Bottom: the fed arc after zero to four meals; each matches the one above it.">
+  <figcaption><strong>Is it the same animal?</strong> Top: the catalogue's Pteryx species with 6
+  to 10 segments. Bottom: the Hexapteryx after 0 to 4 meals.</figcaption>
+</figure>
+<div class="label">
+  <p class="obs"><strong>What you see.</strong> Every ring the arc swallows adds one segment.
+  After one meal it is a Heptapteryx, after two an Octapteryx, and so on: the same shape and the
+  same mass as the catalogued species. A ring holds just about one segment's worth of matter. The
+  arc keeps gliding at the same speed as it grows, and gets straighter.</p>
+  <p class="open"><strong>What the ledger says.</strong> Shape correlation 0.993–0.998 with the
+  right catalogue species and mass within 0.3 % {{claim:C082}}. Fed on alternating sides it
+  reaches about 31 segments before a meal explodes it; fed on one side it stalls at 21; at half
+  the timestep it reached 25 {{claim:C083}}. So the climb is real, but where it stops depends on
+  the keeper and the grid.</p>
+</div>
+<div class="caveat">
+  <p><strong>A keeper is not a free world.</strong> Every ring was placed by hand, and a meal that
+  did not grow the arc was rewound and tried again at another offset; every try is logged. In
+  the first 15 meals of the one-sided run no rewind was needed. Nobody has seen an arc find its
+  own rings.</p>
+</div>
+
+<h2>No keeper</h2>
+<figure class="vitrine">
+  <img src="{{asset:research/gallery/exhibits/G047-no-keeper/no-keeper.gif}}" width="320" height="360" loading="lazy"
+       alt="A thin arc gliding through a dark world dotted with small rings; it swallows one, glides on, and then bursts into a spreading disc when it meets another.">
+  <figcaption><strong>Left alone.</strong> A Hexapteryx among eight rings, nothing placed by
+  hand. 512² world at half resolution.
+  {{src:research/gallery/exhibits/G047-no-keeper/no-keeper.mp4|Full video}} ·
+  {{src:research/gallery/exhibits/G047-no-keeper/provenance.json|provenance}}.</figcaption>
+</figure>
+<div class="label">
+  <p class="obs"><strong>What you see.</strong> The arc glides until it meets a ring with a wing
+  tip and swallows it, a segment longer. A hundred time units later it meets the next ring with
+  its body, and the world catches fire.</p>
+  <p class="open"><strong>What the ledger says.</strong> We let 64 arcs loose. Every one
+  detonated, after 30 to 385 time units. Only 6 ate a ring first, and none ate two
+  {{claim:C093}}. The belly is a much bigger target than the tips, so in the wild a ring is
+  mostly a bomb. The ladder of the room above exists, but only a keeper can climb it.</p>
+</div>
+
+<h2>Fusion makes a known animal</h2>
+<figure class="vitrine">
+  <img src="{{asset:research/gallery/exhibits/G048-fusion-makes-s101/fusion-s101.png}}" width="784" height="347" loading="lazy"
+       alt="A grid of small two-lobed bodies, each a pair of bright crescents joined by a faint ring, next to the registered bound pair; one tile shows a single Orbium and one a field of stripes.">
+  <figcaption><strong>Where the fused gliders go.</strong> First tile: S101, the bound Orbium
+  pair of Room 4. The others: every collision in the atlas above that fused, 300 time units
+  later.
+  {{src:research/gallery/exhibits/G048-fusion-makes-s101/provenance.json|provenance}}.</figcaption>
+</figure>
+<div class="label">
+  <p class="obs"><strong>What you see.</strong> Two crescents riding inside one faint ring, again
+  and again: the same animal as S101. One fused body shed a lobe and went back to being a single
+  Orbium. One detonated, long after it looked settled.</p>
+  <p class="open"><strong>What the ledger says.</strong> Nine of twelve match S101's mass, size
+  and speed to the third decimal {{claim:C094}}. S101 was first found by placing two Orbia side
+  by side; collisions make it too.</p>
+</div>
+
+<h2>A rock that does not feed</h2>
+<p>We also threw Chan's three-channel gyrans at the still lithos of Room 9's aquarium (24
+bombardments, one to four gyrans each). The rock always survived; no gyrans ever stayed bound
+to it, and crowded gyrans destroyed each other. That is in the notes only, not on the ledger.</p>
+
+<h2>Sources</h2>
+<ul>
+  <li>{{src:research/experiments/ZOO/ZOO.md|Collision zoo notes}}</li>
+  <li>{{src:research/experiments/ZOO/atlas.py|Collision harness and atlas runner}}</li>
+  <li>{{src:research/experiments/ZOO/feed.py|The keeper (ring feeding)}}</li>
+  <li>{{src:research/experiments/ZOO/forage.py|Free-world foraging}}</li>
+  <li>{{src:research/experiments/ZOO/fused_check.py|Fused bodies against S101}}</li>
+  <li>{{src:research/experiments/ZOO/summarize.py|Every number on this page}}</li>
+  <li>{{src:research/experiments/REEF-behavior/LITERATURE.md|Literature on collisions (Chan 2019)}}</li>
+</ul>

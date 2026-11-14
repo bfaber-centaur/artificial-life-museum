@@ -1,0 +1,90 @@
+{
+ "exhibit": "G029",
+ "title": "A family tree",
+ "claim": "C072",
+ "media": [
+  "family-tree.mp4",
+  "family-tree.gif",
+  "family-tree-final.png",
+  "tree.png",
+  "tree.json"
+ ],
+ "engine": "research/experiments/WINGS/nd_lenia.NDLenia (independent numpy port of upstream LeniaNDKC, pinned adfc542)",
+ "run": {
+  "specimen": "found/213.json #84 'division well' (Chan)",
+  "rule": [
+   {
+    "R": 15,
+    "T": 10,
+    "b": "1,1/12,7/12",
+    "m": 0.149,
+    "s": 0.0128,
+    "kn": 1,
+    "gn": 1,
+    "c": [
+     0,
+     0
+    ]
+   },
+   {
+    "R": 15,
+    "T": 10,
+    "b": "1/4,1",
+    "m": 0.195,
+    "s": 0.0542,
+    "kn": 1,
+    "gn": 1,
+    "c": [
+     0,
+     0
+    ]
+   },
+   {
+    "R": 15,
+    "T": 10,
+    "b": "1",
+    "m": 0.347,
+    "s": 0.0863,
+    "kn": 1,
+    "gn": 1,
+    "c": [
+     0,
+     0
+    ]
+   }
+  ],
+  "grid": [
+   384,
+   384
+  ],
+  "boundary": "periodic",
+  "time_units": 2000,
+  "dt": 0.1,
+  "initial_state_sha256_prefix": "c140d22989efafa3",
+  "final_state_sha256_prefix": "405175b7c50cb1f4"
+ },
+ "frames": {
+  "sampled_every_tu": 1,
+  "video_every_tu": 2,
+  "mp4_fps": 30,
+  "gif": "ffmpeg fps 8, 320 px, 96-colour palette"
+ },
+ "tracker": {
+  "SIG": 4.0,
+  "THR": 0.05,
+  "LINK": 8.0,
+  "GAP": 3,
+  "BIRTH": 30.0,
+  "MINLIFE": 10
+ },
+ "view": "whole 384\u00b2 torus at 2x; hue = inherited neutral marker (founder 0.55, +N(0, 0.08) per division, seed 2026); value = field",
+ "commands": [
+  "record.py 213 84 384 2000 states/well384.npz",
+  "film_tree.py states/well384.npz OUT \"Division well (Chan's found/213 #84)\" 2 2"
+ ],
+ "caveats": [
+  "Cells are peaks of the blurred field; thresholds set on a 400-tu test run.",
+  "The tracker cannot tell a merger from a cell that fades.",
+  "Creature and name are Chan's."
+ ]
+}
