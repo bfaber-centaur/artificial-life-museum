@@ -153,7 +153,28 @@ def heading():
                     print(f"   survivor rot {row['rot']}: window headings {ws}")
 
 
+def cone():
+    rows = jl("cone.jsonl")
+    if not rows:
+        return
+    print("\n== C096-C098 cone point (round 2): 5 / 6 / 7 hex sectors = 300 / 360 / 420 degrees")
+    for r in sorted([r for r in rows if not r.get("apex_shot")], key=lambda r: (r["sectors"], r["b_R"])):
+        x = r["rows"][-1]
+        d = np.array([y["d"] for y in r["rows"]]) / R
+        p = np.array([y["pred"] for y in r["rows"]]) / R
+        print(f"pair {r['Theta_deg']} deg, gap {2 * r['b_R']:g} R: end {r['end']} at step {x['t']}; "
+              f"d {d[0]:.2f} -> {d[-1]:.2f} R (straight lines: {p[-1]:.2f}); "
+              f"max |d - lines| while d > 2.5 R {r['max_abs_err_R']:.2f} R; "
+              f"centres at r {x['r'][0] / R:.2f}, {x['r'][1] / R:.2f} R; mass {x['mass_R2']:.3f} R2")
+    for r in sorted([r for r in rows if r.get("apex_shot")], key=lambda r: (r["sectors"], r["b_R"])):
+        print(f"single {r['Theta_deg']} deg, aimed {r['b_R']:g} R off the apex: {r['end']} at step "
+              f"{r['steps']}; closest centre {r['min_r_R']} R; bodies "
+              f"{[round(b['mass_R2'], 3) for b in r['bodies']]}; mass min "
+              f"{min(r['mass_R2_every_10']):.3f}")
+
+
 if __name__ == "__main__":
+    cone()
     meet()
     pair()
     curvature()

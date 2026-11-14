@@ -1,0 +1,93 @@
+{
+  "exhibit": "G050",
+  "title": "Straight at the point",
+  "media": [
+    "apex.mp4",
+    "apex.gif",
+    "apex-t20.png"
+  ],
+  "frames": {
+    "every_steps": 2,
+    "mp4_fps": 24,
+    "time_compression": "4.8 tu per second"
+  },
+  "view": "each panel is the cone opened into a disk: polar angle scaled by 360/Theta (the 300-degree cone looks 6/5 wider in angle, the 420-degree saddle 6/7 narrower), radius true; nearest cell per pixel. Faint rays: seams between the 60-degree hex sectors (invisible to the lattice). Grey dots: mass centres every 0.2 tu. The apex is the centre of each disk; the world ends at radius 150 cells.",
+  "claim": "C098",
+  "caveats": [
+    "Straight lines through the opened-up picture look bent at the apex: that bend is the geometry, not a force. The flat panel is the same code with six sectors (a plain hex lattice).",
+    "Kernel rows near the world's edge are renormalised; the runs used for claims stop before a body comes within 2.5 R of it (cone.py)."
+  ],
+  "runs": [
+    {
+      "key": "G050:cone5-apex",
+      "world": "cone, 5 hex sectors (300 deg), radius 150 cells",
+      "world_sha256": "6179d6aa87fb8703822ba6d09a9567144f9dc799dc8c46987f12adc0c06bbc9b",
+      "n_cells": 58936,
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.15,
+        "sigma": 0.015,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "steps": 320,
+      "initial_sha256": "4d7587d12ca2cb75b09f4ff571c67881b9c74314dc3df15ccd88870c953eaa82",
+      "final_sha256": "2b4e847ee67a798d2615d0afe81cb7f9d30e3162263e3fe8bf66e0d2e4552a80"
+    },
+    {
+      "key": "G050:cone6-apex",
+      "world": "cone, 6 hex sectors (360 deg), radius 150 cells",
+      "world_sha256": "56f9ad0e14c1ef0716e8c4dd0e34c1e7f7ae63668bfdaf3e0b08b95065714964",
+      "n_cells": 70723,
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.15,
+        "sigma": 0.015,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "steps": 320,
+      "initial_sha256": "28a9a918f207951dcc539a4a134b617929617e8340715251c5c1c5ac3e94153d",
+      "final_sha256": "ff20aa68acafbba58be4a9df427a374a7565d0d08658f1229892d8c1145e9607"
+    },
+    {
+      "key": "G050:cone7-apex",
+      "world": "cone, 7 hex sectors (420 deg), radius 150 cells",
+      "world_sha256": "c50e1297acf3be80939f0feb23472fe045c1d03704c4e2b4f11e545e298bf4f9",
+      "n_cells": 82510,
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.15,
+        "sigma": 0.015,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "steps": 320,
+      "initial_sha256": "f8426c382eacae41821dad46e57c383258578d2de45fe76ff945246556afb8df",
+      "final_sha256": "9ab76b8512f49682bf2b188b865df7e833f75ee17656ece250f8c186e2f8c360"
+    }
+  ],
+  "code_version": {
+    "package": "alm",
+    "version": "0.1.0",
+    "git_commit": "1103049fff11723e07d1b15eca6e704e2b4f1944",
+    "git_dirty": false,
+    "git_dirty_paths": []
+  },
+  "command": "PYTHONPATH=src .venv/bin/python research/experiments/GEOM/film.py G050"
+}

@@ -498,6 +498,8 @@ def components(world: World, A: np.ndarray, thr=0.1, link=2.5):
     if len(idx) == 0:
         return []
     sub = World(world.kind, world.xy[idx], world.params, world.box)
+    if world.kind == "cone":
+        sub.r, sub.theta = world.r[idx], world.theta[idx]
     i, j, _ = sub.pairs(link)
     g = sp.csr_matrix((np.ones(len(i)), (i, j)), shape=(len(idx), len(idx)))
     nc, lab = connected_components(g, directed=False)
@@ -538,3 +540,114 @@ def disk_centroid(world: World, A: np.ndarray, mask=None) -> complex:
     c = (a[:, None] * X).sum(0)
     c = c / np.sqrt(c[0] ** 2 - c[1] ** 2 - c[2] ** 2)
     return complex(c[1] / (1 + c[0]), c[2] / (1 + c[0]))
+
+
+# ---------------------------------------------------------------------------------------------
+# cones: a flat sheet with one conical point (round 2)
+
+
+def cone(sectors: int, rmax: float) -> World:
+    """A hex lattice around a lattice point, cut into 60-degree sectors and re-glued with
+    `sectors` of them: 6 = flat plane, 5 = cone with a 60-degree deficit (positive curvature
+    concentrated at the apex, like a vertex of the icosphere), 7 = 60-degree excess (negative
+    curvature at the apex). The hex lattice has 6-fold symmetry about the apex, so the seams are
+    invisible to the lattice. Cells keep one unit of area (spacing as hex_torus); the apex cell
+    gets sectors/6. Stored: cone polar coordinates (r, theta in [0, Theta)), Theta = sectors*60
+    degrees; xy = a display picture with angle theta * 2 pi / Theta. Empty beyond rmax."""
+    s = np.sqrt(2 / np.sqrt(3))
+    n = int(np.ceil(rmax / s)) + 2
+    jj, ii = np.mgrid[-n:n + 1, -n:n + 1]
+    x = (ii + 0.5 * jj) * s
+    y = jj * s * np.sqrt(3) / 2
+    r = np.hypot(x, y)
+    th = np.arctan2(y, x)
+    sec = (r > 0) & (r <= rmax) & (th >= -1e-12) & (th < np.pi / 3 - 1e-9)
+    r0, t0 = r[sec], np.maximum(th[sec], 0.0)
+    R_ = np.concatenate([[0.0]] + [r0] * sectors)
+    T_ = np.concatenate([[0.0]] + [t0 + k * np.pi / 3 for k in range(sectors)])
+    Theta = sectors * np.pi / 3
+    area = np.ones(len(R_))
+    area[0] = sectors / 6
+    disp = T_ * 2 * np.pi / Theta
+    xy = np.stack([R_ * np.cos(disp), R_ * np.sin(disp)], 1)
+    w = World("cone", xy, {"sectors": sectors, "Theta": Theta, "rmax": rmax, "n": len(R_)},
+              area=area)
+    w.r, w.theta = R_, T_
+    return w
+
+
+def cone_dist(r1, t1, r2, t2, Theta):
+    """Geodesic distance on a cone of total angle Theta (polar coordinates on the cone)."""
+    phi = np.abs(t1 - t2) % Theta
+    phi = np.minimum(phi, Theta - phi)
+    d = np.sqrt(np.maximum(r1**2 + r2**2 - 2 * r1 * r2 * np.cos(np.minimum(phi, np.pi)), 0))
+    return np.where(phi < np.pi, d, r1 + r2)
+
+
+def _cone_pairs(world, rq):
+    Theta = world.params["Theta"]
+    scale = max(1.0, 2 * np.pi / Theta)
+    t = cKDTree(world.xy)
+    I, J, D = [], [], []
+    for c0 in range(0, world.n, 4000):
+        lists = t.query_ball_point(world.xy[c0:c0 + 4000], rq * scale + 1.0)
+        ii = np.repeat(np.arange(c0, c0 + len(lists)), [len(a) for a in lists])
+        jj = np.concatenate([np.asarray(a, dtype=np.int64) for a in lists])
+        dd = cone_dist(world.r[ii], world.theta[ii], world.r[jj], world.theta[jj], Theta)
+        k = (ii != jj) & (dd < rq)
+        I.append(ii[k].astype(np.int32))
+        J.append(jj[k].astype(np.int32))
+        D.append(dd[k])
+    return np.concatenate(I), np.concatenate(J), np.concatenate(D)
+
+
+_orig_pairs = World.pairs
+
+
+def _pairs(self, r):
+    if self.kind == "cone":
+        return _cone_pairs(self, r)
+    return _orig_pairs(self, r)
+
+
+World.pairs = _pairs
+
+
+def cone_chart(world, theta_m):
+    """Flat chart of the cone unfolded around the meridian theta_m: the meridian points to -X
+    (apex at the origin). Valid where |phi| < pi; elsewhere NaN."""
+    Theta = world.params["Theta"]
+    phi = (world.theta - theta_m + Theta / 2) % Theta - Theta / 2
+    ok = np.abs(phi) < np.pi
+    X = np.where(ok, -world.r * np.cos(phi), np.nan)
+    Y = np.where(ok, -world.r * np.sin(phi), np.nan)
+    return X, Y
+
+
+def seed_cone(world, f, theta_m, start_xy, heading_deg, home_deg=68.198):
+    """Place patch f at chart point start_xy (chart of meridian theta_m), heading heading_deg in
+    that chart."""
+    X, Y = cone_chart(world, theta_m)
+    dv = np.stack([X - start_xy[0], Y - start_xy[1]], 1)
+    q = (dv @ rot2(heading_deg)) @ rot2(home_deg).T  # R(home) R(-heading) dv
+    v = np.zeros(world.n)
+    ok = np.isfinite(X) & (np.hypot(dv[:, 0], dv[:, 1]) < 40)
+    v[ok] = f(q[ok, 0], q[ok, 1])
+    return v
+
+
+def cone_centroid(world, A, mask):
+    """Mass centre of the cells in mask, as cone polar coordinates (r, theta): averaged in the
+    flat chart unfolded around the mask's heaviest cell."""
+    a = A * world.area * mask
+    if a.sum() <= 0:
+        return None
+    k = int(np.argmax(a))
+    X, Y = cone_chart(world, world.theta[k] + np.pi)  # chart where cell k sits on +X side
+    ok = np.isfinite(X) & (a > 0)
+    cx = (a[ok] * X[ok]).sum() / a[ok].sum()
+    cy = (a[ok] * Y[ok]).sum() / a[ok].sum()
+    rr = np.hypot(cx, cy)
+    # invert the chart: X = -r cos(phi), Y = -r sin(phi), phi = theta - theta_m
+    phi = np.arctan2(-cy, -cx)
+    return rr, (world.theta[k] + np.pi + phi) % world.params["Theta"]

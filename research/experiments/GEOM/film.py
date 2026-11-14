@@ -352,8 +352,105 @@ def g039(render=True):
     return runs
 
 
-EXHIBITS = {"G038": g038, "G039": g039}
-DIRS = {"G038": "G038-parallel-lines-meet", "G039": "G039-parallel-lines-part"}
+# ------------------------------------------------------------------------------------- G049/G050
+
+
+def _cone_panels(pair, render, steps=320, every=2):
+    import cone as K
+
+    s, f = s001()
+    sims, views, trails = [], [], []
+    for sec in (5, 6, 7):
+        if pair:
+            _, w, tm, A = K.setup(sec, 2.0)
+        else:
+            _, w, tm, A = K.setup(sec, 0, apex=True)
+        G = g.GraphLenia(w, s.rule, A)
+        Th = w.params["Theta"]
+        phi = (w.theta - tm + Th / 2) % Th - Th / 2
+        sims.append((sec, w, G, A.copy(), (phi < 0).astype(float), (phi >= 0).astype(float)))
+        views.append(rd.ConeView(w, 400) if render else None)
+        trails.append([])
+    frames = []
+    names = {5: "300° cone (60° cut out)", 6: "flat (360°)", 7: "420° saddle (60° added)"}
+    for t in range(steps + 1):
+        if t % every == 0:
+            panels = []
+            for k, (sec, w, G, _, m1, m2) in enumerate(sims):
+                for m in ((m1, m2) if pair else (np.ones(w.n),)):
+                    if (G.A * m).sum() > 1:
+                        trails[k].append(g.cone_centroid(w, G.A, m))
+                if render:
+                    img = views[k].frame(G.A)
+                    for (rr, th) in trails[k][:-2]:
+                        x, y = views[k].to_px(rr, th)
+                        img[y - 1:y + 1, x - 1:x + 1] = (200, 200, 210)
+                    panels.append(rd.label(img, names[sec], (8, 6), size=14))
+            if render:
+                fr = side_by_side(*panels)
+                frames.append(caption_bar(fr, [(10, f"t = {t / 10:5.1f}")], h=30))
+        if t < steps:
+            for (_, _, G, *_rest) in sims:
+                G.step()
+    runs = [{"key": f"{'G049' if pair else 'G050'}:cone{sec}-{'pair-b2R' if pair else 'apex'}",
+             "world": f"cone, {sec} hex sectors ({sec * 60} deg), radius 150 cells",
+             "world_sha256": w.sha256(), "n_cells": w.n, "rule": s.rule.to_dict(), "steps": steps,
+             "initial_sha256": state_sha256(A0), "final_sha256": state_sha256(G.A)}
+            for (sec, w, G, A0, *_r) in sims]
+    return frames, runs
+
+
+def g049(render=True):
+    frames, runs = _cone_panels(True, render)
+    if not render:
+        return runs
+    out = GAL / "G049-a-lens-made-of-nothing"
+    out.mkdir(parents=True, exist_ok=True)
+    rd.write_mp4(frames, out / "lens.mp4", fps=24)
+    gif(frames, out / "lens.gif", every=2, scale=0.6, fps=12)
+    rd.save_png(frames[-1], out / "lens-final.png")
+    _cone_prov(out, "G049", "A lens made of nothing", ["lens.mp4", "lens.gif", "lens-final.png"],
+               "C096, C097", runs)
+    return runs
+
+
+def g050(render=True):
+    frames, runs = _cone_panels(False, render)
+    if not render:
+        return runs
+    out = GAL / "G050-straight-at-the-point"
+    out.mkdir(parents=True, exist_ok=True)
+    rd.write_mp4(frames, out / "apex.mp4", fps=24)
+    gif(frames, out / "apex.gif", every=2, scale=0.6, fps=12)
+    rd.save_png(frames[100], out / "apex-t20.png")
+    _cone_prov(out, "G050", "Straight at the point", ["apex.mp4", "apex.gif", "apex-t20.png"],
+               "C098", runs)
+    return runs
+
+
+def _cone_prov(out, ex, title, media, claim, runs):
+    prov = {
+        "exhibit": ex, "title": title, "media": media,
+        "frames": {"every_steps": 2, "mp4_fps": 24, "time_compression": "4.8 tu per second"},
+        "view": "each panel is the cone opened into a disk: polar angle scaled by 360/Theta "
+                "(the 300-degree cone looks 6/5 wider in angle, the 420-degree saddle 6/7 "
+                "narrower), radius true; nearest cell per pixel. Faint rays: seams between the "
+                "60-degree hex sectors (invisible to the lattice). Grey dots: mass centres every "
+                "0.2 tu. The apex is the centre of each disk; the world ends at radius 150 cells.",
+        "claim": claim,
+        "caveats": ["Straight lines through the opened-up picture look bent at the apex: that "
+                    "bend is the geometry, not a force. The flat panel is the same code with six "
+                    "sectors (a plain hex lattice).",
+                    "Kernel rows near the world's edge are renormalised; the runs used for claims "
+                    "stop before a body comes within 2.5 R of it (cone.py)."],
+        "runs": runs, "code_version": code_version(), "command": f"{CMD} {ex}",
+    }
+    (out / "provenance.json").write_text(json.dumps(prov, indent=2) + "\n")
+
+
+EXHIBITS = {"G038": g038, "G039": g039, "G049": g049, "G050": g050}
+DIRS = {"G038": "G038-parallel-lines-meet", "G039": "G039-parallel-lines-part",
+        "G049": "G049-a-lens-made-of-nothing", "G050": "G050-straight-at-the-point"}
 
 if __name__ == "__main__":
     args = sys.argv[1:]

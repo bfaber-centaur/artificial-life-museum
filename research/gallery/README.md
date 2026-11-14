@@ -57,6 +57,8 @@ made of, ten times per unit of time. Some of them travel; one of them never chan
 | [G040](#g040--the-lattice-is-the-compass) | The lattice is the compass (chart) | S001, 93 headings on three lattices | 2026-11-14 |
 | [G047](#g047--no-keeper) | No keeper (animated) | P6al loose among 8 × C0v | 2026-11-14 |
 | [G048](#g048--two-orbia-fuse-into-s101) | Two Orbia fuse into S101 (still) | fused bodies of G035, S101 | 2026-11-14 |
+| [G049](#g049--a-lens-made-of-nothing) | A lens made of nothing (animated; *cone points*) | S001 pairs past a 300°, 360° and 420° point | 2026-11-14 |
+| [G050](#g050--straight-at-the-point) | Straight at the point (animated; *cone points*) | S001 aimed at each point | 2026-11-14 |
 
 ### G001 — Four ways to move
 
@@ -755,7 +757,7 @@ Film: [`no-keeper.mp4`](exhibits/G047-no-keeper/no-keeper.mp4) ·
 - **Caveats.** Tiles are 61×61 cells, nearest-neighbour; bodies are at whatever heading they
   locked to.
 
-## Strange geometries (G038–G040)
+## Strange geometries (G038–G040, G049–G050)
 
 Made by `research/experiments/GEOM/film.py` and `compass.py` (strange-geometries thread). The
 worlds are point clouds, not square grids, so each pixel shows its *nearest cell* (the cell
@@ -798,6 +800,32 @@ Film: [`part.mp4`](exhibits/G039-parallel-lines-part/part.mp4) ·
 - **Ledger.** C085 (separation follows the geodesic law within 0.27 R), *observed*.
 - **Caveats.** The world is a disk of radius 4 κ (104 cells), empty beyond; the animals leave
   it after about 25 tu. {3,7} geodesic grid with exact cell areas.
+
+### G049 — A lens made of nothing
+
+![Three disks: a pair of Orbia bends together past a cone point, goes straight on a flat sheet, and bends apart past a saddle point](exhibits/G049-a-lens-made-of-nothing/lens.gif)
+
+Film: [`lens.mp4`](exhibits/G049-a-lens-made-of-nothing/lens.mp4) ·
+[`lens-final.png`](exhibits/G049-a-lens-made-of-nothing/lens-final.png) ·
+[`provenance.json`](exhibits/G049-a-lens-made-of-nothing/provenance.json)
+
+- **Observation.** Pairs 4 R apart pass a single conical point: 300° (60° cut out) bends them
+  together until they meet; flat keeps them parallel; 420° (60° added) bends them apart.
+- **Ledger.** C096, C097, *observed*.
+- **Caveats.** Disks are drawn opened out (angle × 360/Θ), so straight paths look bent at the
+  apex; the film runs until the animals near the world's edge.
+
+### G050 — Straight at the point
+
+![Three disks: one Orbium crosses the centre of a cone and of a flat sheet, and dies at a saddle point](exhibits/G050-straight-at-the-point/apex.gif)
+
+Film: [`apex.mp4`](exhibits/G050-straight-at-the-point/apex.mp4) ·
+[`apex-t20.png`](exhibits/G050-straight-at-the-point/apex-t20.png) ·
+[`provenance.json`](exhibits/G050-straight-at-the-point/provenance.json)
+
+- **Observation.** Aimed dead centre, Orbium crosses the cone point and the flat centre and dies
+  at the saddle point (19 tu).
+- **Ledger.** C098, *observed*: offsets of 0.25 R or more survive.
 
 ### G040 — The lattice is the compass
 
@@ -955,6 +983,8 @@ heading values come from `galintervene.chord_heading("S102", 3002)`. The G004 S0
   catalogue: a tracked family tree, a growth-rate ladder and a 3-D replicator. Claims C072–C074.
 - **2026-11-14, G035–G037 (collision-zoo thread).** Collision atlas, ring feeding and tip-or-belly exhibits from `research/experiments/ZOO/exhibits.py`, claims C080–C083. Each `provenance.json` records state hashes; the atlas sheets replay every atlas row and check its hash.
 
+- **2026-11-14, G049–G050 (strange-geometries thread, round 2).** A cone point as a lens, claims
+  C096–C098, room 79.
 - **2026-11-14, G038–G040 (strange-geometries thread).** Orbium on a sphere, on the hyperbolic
   plane and on hex and glass lattices; claims C084–C087, museum room 79.
 - **2026-11-10, G021 (species-hunt thread).** Convergence exhibit from the SPECIES-scout hunt, claim C063.

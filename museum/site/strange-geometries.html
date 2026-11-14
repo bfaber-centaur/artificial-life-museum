@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>East wing: Orbium on strange worlds · ALM museum</title>
-<meta name="description" content="Orbium on a planet, on the hyperbolic plane and on a hex grid: parallel lines meet, parallel lines part, and the lattice picks the compass.">
+<meta name="description" content="Orbium on a planet, on the hyperbolic plane, past a cone point and on a hex grid: parallel lines meet, parallel lines part, a lens made of nothing, and the lattice picks the compass.">
 <link rel="stylesheet" href="museum.css">
 </head>
 <body class="room-strange-geometries">
@@ -117,6 +117,43 @@ geodesic dome) or over Escher-style triangles, seven to a corner (the saddle). E
 neighbours are weighted by true distance and cell area. On the ordinary square grid the same code
 reproduces the museum's simulator to thirteen decimal places.</div>
 
+<h2>A lens made of nothing</h2>
+<figure class="vitrine">
+  <img src="../../research/gallery/exhibits/G049-a-lens-made-of-nothing/lens.gif" width="734" height="258" loading="lazy"
+       alt="Three dark disks, each with a pair of Orbia gliding from left to right past the centre. Left: the pair bends together and meets. Middle: the pair goes straight. Right: the pair flies apart.">
+  <figcaption><strong>One point of curvature.</strong> Each world is flat everywhere except its
+  centre. Left: a hexagonal sheet with one 60° slice cut out and the edges glued, a cone. Middle:
+  the flat sheet. Right: a sheet with one extra 60° slice glued in, a saddle point. Each disk is
+  drawn opened out, so angles are stretched (left) or squeezed (right).
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G049-a-lens-made-of-nothing/lens.mp4">Full video</a> ·
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G049-a-lens-made-of-nothing/provenance.json">provenance</a>.</figcaption>
+</figure>
+<div class="label">
+  <p class="obs"><strong>What you see.</strong> Nothing pulls on the animals, yet the pair that
+  passes the cone point bends together and collides, and the pair that passes the saddle point
+  bends apart.</p>
+  <p class="open"><strong>What the ledger says.</strong> Both pairs go exactly where straight
+  lines on the cut-and-glued sheet go: the cone makes 3 of 3 pairs meet <a class="claim" href="claims.html#C096" title="A cone point with a 60° deficit acts as a lens: two Orbia that pass it side by side on parallel courses converge and touch, 3 of 3, following the straight lines of the cut-and-glued sheet within 0.28 R; on the flat control they never touch"><span class="cid">C096</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>, the
+  saddle spreads them three to four times wider than the flat world does <a class="claim" href="claims.html#C097" title="A cone point with a 60° excess (a saddle point) acts as a diverging lens: parallel Orbia pairs that pass it spread to 11.4–14.5 R apart from 3–6 R, matching the unfolded straight lines within 0.71 R"><span class="cid">C097</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>.
+  Physicists know this lens as the cosmic string: a line of concentrated curvature that bends
+  light without pulling on it.</p>
+</div>
+
+<figure class="vitrine">
+  <img src="../../research/gallery/exhibits/G050-straight-at-the-point/apex.gif" width="734" height="258" loading="lazy"
+       alt="Three dark disks, each with one Orbium gliding straight at the centre. It crosses the centre of the left and middle disks unharmed; in the right disk it fades away at the centre.">
+  <figcaption><strong>Straight at the point.</strong> One Orbium aimed dead centre at each kind
+  of point.
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G050-straight-at-the-point/apex.mp4">Full video</a> ·
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G050-straight-at-the-point/provenance.json">provenance</a>.</figcaption>
+</figure>
+<div class="label">
+  <p class="obs"><strong>What you see.</strong> The cone point and the flat centre let the animal
+  through. The saddle point kills it.</p>
+  <p class="open"><strong>What the ledger says.</strong> Only the dead-centre shot dies; aimed a
+  quarter of a kernel radius to one side, it survives <a class="claim" href="claims.html#C098" title="An Orbium aimed dead centre at the 60°-excess saddle point dies there (19 tu); offset by 0.25 R or more it passes, and every shot at the 60°-deficit point and the flat control survives (12 shots)"><span class="cid">C098</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>. A knife-edge, not a wall.</p>
+</div>
+
 <h2>The lattice is the compass</h2>
 <figure class="vitrine">
   <img src="../../research/gallery/exhibits/G040-lattice-compass/compass.png" width="900" height="350" loading="lazy"
@@ -143,14 +180,15 @@ reproduces the museum's simulator to thirteen decimal places.</div>
       <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/GEOM/pair.jsonl">pair.jsonl</a> ·
       <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/GEOM/curvature.jsonl">curvature.jsonl</a> ·
       <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/GEOM/heading_hex.csv">heading_hex.csv</a> ·
-      <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/GEOM/heading_glass.csv">heading_glass.csv</a></li>
-  <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/claims.md">Claims ledger</a>: C084–C087</li>
+      <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/GEOM/heading_glass.csv">heading_glass.csv</a> ·
+      <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/GEOM/cone.jsonl">cone.jsonl</a></li>
+  <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/claims.md">Claims ledger</a>: C084–C087, C096–C098</li>
 </ul>
 
 <nav class="walk" aria-label="Tour"><a class="prev" href="collision-zoo.html"><small>Back</small>The collision zoo</a><span></span></nav>
 </main>
 <footer class="site">
-  <p>Claim statuses read from <code>research/claims.md</code> (sha256 <code>3d6777578a34</code>) when this page was built.</p>
+  <p>Claim statuses read from <code>research/claims.md</code> (sha256 <code>86a0be75aaf3</code>) when this page was built.</p>
   <p>Every picture here is a recorded simulation or a figure drawn from committed data. Statuses
   are the claims ledger's, not the museum's: a badge never says more than
   <a href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/claims.md">research/claims.md</a> does.</p>

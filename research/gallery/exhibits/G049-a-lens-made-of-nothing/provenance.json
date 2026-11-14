@@ -1,0 +1,93 @@
+{
+  "exhibit": "G049",
+  "title": "A lens made of nothing",
+  "media": [
+    "lens.mp4",
+    "lens.gif",
+    "lens-final.png"
+  ],
+  "frames": {
+    "every_steps": 2,
+    "mp4_fps": 24,
+    "time_compression": "4.8 tu per second"
+  },
+  "view": "each panel is the cone opened into a disk: polar angle scaled by 360/Theta (the 300-degree cone looks 6/5 wider in angle, the 420-degree saddle 6/7 narrower), radius true; nearest cell per pixel. Faint rays: seams between the 60-degree hex sectors (invisible to the lattice). Grey dots: mass centres every 0.2 tu. The apex is the centre of each disk; the world ends at radius 150 cells.",
+  "claim": "C096, C097",
+  "caveats": [
+    "Straight lines through the opened-up picture look bent at the apex: that bend is the geometry, not a force. The flat panel is the same code with six sectors (a plain hex lattice).",
+    "Kernel rows near the world's edge are renormalised; the runs used for claims stop before a body comes within 2.5 R of it (cone.py)."
+  ],
+  "runs": [
+    {
+      "key": "G049:cone5-pair-b2R",
+      "world": "cone, 5 hex sectors (300 deg), radius 150 cells",
+      "world_sha256": "6179d6aa87fb8703822ba6d09a9567144f9dc799dc8c46987f12adc0c06bbc9b",
+      "n_cells": 58936,
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.15,
+        "sigma": 0.015,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "steps": 320,
+      "initial_sha256": "52a435117cb2c9eb012218ea02bdbbefc43a482f8b8e787930832b0026a4825b",
+      "final_sha256": "477b0008f81f98f83243450d91d24441547166b80b46d8e3015fae887de922a8"
+    },
+    {
+      "key": "G049:cone6-pair-b2R",
+      "world": "cone, 6 hex sectors (360 deg), radius 150 cells",
+      "world_sha256": "56f9ad0e14c1ef0716e8c4dd0e34c1e7f7ae63668bfdaf3e0b08b95065714964",
+      "n_cells": 70723,
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.15,
+        "sigma": 0.015,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "steps": 320,
+      "initial_sha256": "215d92f22baaacfa9735d98e142d6b47367a727d3fa2b828253f5e6df21d7970",
+      "final_sha256": "303c070a77d83a409084d58c2cf9a0e8aa1053742dce9185130540f646fb32fc"
+    },
+    {
+      "key": "G049:cone7-pair-b2R",
+      "world": "cone, 7 hex sectors (420 deg), radius 150 cells",
+      "world_sha256": "c50e1297acf3be80939f0feb23472fe045c1d03704c4e2b4f11e545e298bf4f9",
+      "n_cells": 82510,
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.15,
+        "sigma": 0.015,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "steps": 320,
+      "initial_sha256": "74933d059917f0f395097fc21bda6d4aa0a5e0b35b286fecb310541f08d8b7fc",
+      "final_sha256": "ef7408088365d8ebd78f49da7bb0d9902a24cb9902acfc795fbed20452a3c03b"
+    }
+  ],
+  "code_version": {
+    "package": "alm",
+    "version": "0.1.0",
+    "git_commit": "1103049fff11723e07d1b15eca6e704e2b4f1944",
+    "git_dirty": false,
+    "git_dirty_paths": []
+  },
+  "command": "PYTHONPATH=src .venv/bin/python research/experiments/GEOM/film.py G049"
+}

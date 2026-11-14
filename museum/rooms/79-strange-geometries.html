@@ -2,8 +2,9 @@
   "slug": "strange-geometries", "order": 79, "title": "East wing: Orbium on strange worlds",
   "nav_label": "Strange worlds",
   "kicker": "East wing · Other geometries",
-  "summary": "Orbium on a planet, on the hyperbolic plane and on a hex grid: parallel lines meet, parallel lines part, and the lattice picks the compass.",
+  "summary": "Orbium on a planet, on the hyperbolic plane, past a cone point and on a hex grid: parallel lines meet, parallel lines part, a lens made of nothing, and the lattice picks the compass.",
   "expect": {"C084": "OBSERVED", "C085": "OBSERVED", "C086": "OBSERVED", "C087": "OBSERVED",
+             "C096": "OBSERVED", "C097": "OBSERVED", "C098": "OBSERVED",
              "C011": "INDEPENDENTLY_CHECKED", "C043": "OBSERVED"}
 } -->
 <h1>Orbium on strange worlds</h1>
@@ -90,6 +91,43 @@ geodesic dome) or over Escher-style triangles, seven to a corner (the saddle). E
 neighbours are weighted by true distance and cell area. On the ordinary square grid the same code
 reproduces the museum's simulator to thirteen decimal places.</div>
 
+<h2>A lens made of nothing</h2>
+<figure class="vitrine">
+  <img src="{{asset:research/gallery/exhibits/G049-a-lens-made-of-nothing/lens.gif}}" width="734" height="258" loading="lazy"
+       alt="Three dark disks, each with a pair of Orbia gliding from left to right past the centre. Left: the pair bends together and meets. Middle: the pair goes straight. Right: the pair flies apart.">
+  <figcaption><strong>One point of curvature.</strong> Each world is flat everywhere except its
+  centre. Left: a hexagonal sheet with one 60° slice cut out and the edges glued, a cone. Middle:
+  the flat sheet. Right: a sheet with one extra 60° slice glued in, a saddle point. Each disk is
+  drawn opened out, so angles are stretched (left) or squeezed (right).
+  {{src:research/gallery/exhibits/G049-a-lens-made-of-nothing/lens.mp4|Full video}} ·
+  {{src:research/gallery/exhibits/G049-a-lens-made-of-nothing/provenance.json|provenance}}.</figcaption>
+</figure>
+<div class="label">
+  <p class="obs"><strong>What you see.</strong> Nothing pulls on the animals, yet the pair that
+  passes the cone point bends together and collides, and the pair that passes the saddle point
+  bends apart.</p>
+  <p class="open"><strong>What the ledger says.</strong> Both pairs go exactly where straight
+  lines on the cut-and-glued sheet go: the cone makes 3 of 3 pairs meet {{claim:C096}}, the
+  saddle spreads them three to four times wider than the flat world does {{claim:C097}}.
+  Physicists know this lens as the cosmic string: a line of concentrated curvature that bends
+  light without pulling on it.</p>
+</div>
+
+<figure class="vitrine">
+  <img src="{{asset:research/gallery/exhibits/G050-straight-at-the-point/apex.gif}}" width="734" height="258" loading="lazy"
+       alt="Three dark disks, each with one Orbium gliding straight at the centre. It crosses the centre of the left and middle disks unharmed; in the right disk it fades away at the centre.">
+  <figcaption><strong>Straight at the point.</strong> One Orbium aimed dead centre at each kind
+  of point.
+  {{src:research/gallery/exhibits/G050-straight-at-the-point/apex.mp4|Full video}} ·
+  {{src:research/gallery/exhibits/G050-straight-at-the-point/provenance.json|provenance}}.</figcaption>
+</figure>
+<div class="label">
+  <p class="obs"><strong>What you see.</strong> The cone point and the flat centre let the animal
+  through. The saddle point kills it.</p>
+  <p class="open"><strong>What the ledger says.</strong> Only the dead-centre shot dies; aimed a
+  quarter of a kernel radius to one side, it survives {{claim:C098}}. A knife-edge, not a wall.</p>
+</div>
+
 <h2>The lattice is the compass</h2>
 <figure class="vitrine">
   <img src="{{asset:research/gallery/exhibits/G040-lattice-compass/compass.png}}" width="900" height="350" loading="lazy"
@@ -116,6 +154,7 @@ reproduces the museum's simulator to thirteen decimal places.</div>
       {{src:research/experiments/GEOM/pair.jsonl|pair.jsonl}} ·
       {{src:research/experiments/GEOM/curvature.jsonl|curvature.jsonl}} ·
       {{src:research/experiments/GEOM/heading_hex.csv|heading_hex.csv}} ·
-      {{src:research/experiments/GEOM/heading_glass.csv|heading_glass.csv}}</li>
-  <li>{{src:research/claims.md|Claims ledger}}: C084–C087</li>
+      {{src:research/experiments/GEOM/heading_glass.csv|heading_glass.csv}} ·
+      {{src:research/experiments/GEOM/cone.jsonl|cone.jsonl}}</li>
+  <li>{{src:research/claims.md|Claims ledger}}: C084–C087, C096–C098</li>
 </ul>
