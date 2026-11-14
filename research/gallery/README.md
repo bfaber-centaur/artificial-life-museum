@@ -577,6 +577,50 @@ Film: [`aquarium.mp4`](exhibits/G027-three-channel-aquarium/aquarium.mp4) ·
   units. Most make one body (droplet, ringed membrane, crystal inside a membrane, wheel); a few
   make colonies (FL-9, FL-11, FL-41, FL-43, FL-53).
 
+### G035 — Two Orbia, 204 collisions
+
+![A grid of 204 small time exposures: pairs of glowing tracks that cross, bend, end in a dot, merge into one thick track, or burst into a round labyrinth](exhibits/G035-orbium-collision-atlas/atlas.png)
+
+Film: [`detonation.mp4`](exhibits/G035-orbium-collision-atlas/detonation.mp4) ·
+[`detonation.gif`](exhibits/G035-orbium-collision-atlas/detonation.gif) ·
+[`provenance.json`](exhibits/G035-orbium-collision-atlas/provenance.json)
+
+- **Observation (claim C080).** Every tile is one collision of two S001-rule Orbia, drawn as a
+  time exposure (the brightest value each cell ever reached), so tracks show as trails. Rows are
+  the angle between the two headings (180° = head-on), columns the sideways offset. The border
+  colour is the outcome: glance off, touch and part, one dies, fuse, both die, detonate. The film
+  is the 75° detonation: two gliders touch and a labyrinth fills the world.
+- **Caveats.** Time exposures use A^0.7 to show faint trails (disclosed). The map is one
+  discretisation: at half the timestep the same six outcomes appear, but only 54 % of tiles keep
+  their outcome (C080).
+
+### G036 — The arc that eats rings
+
+![A thin glowing arc gliding across a dark world; small rings appear ahead of it and each one it touches makes it a segment longer](exhibits/G036-the-arc-that-eats-rings/feeding.gif)
+
+Film: [`feeding.mp4`](exhibits/G036-the-arc-that-eats-rings/feeding.mp4) ·
+still: [`ladder.png`](exhibits/G036-the-arc-that-eats-rings/ladder.png) ·
+[`provenance.json`](exhibits/G036-the-arc-that-eats-rings/provenance.json)
+
+- **Observation (claims C082, C083).** A catalogue Hexapteryx (P6al) is offered one Circium ring
+  (C0v) at a time, at its wing tip. Each ring it swallows adds one segment. `ladder.png` puts the
+  fed arc after 0–4 meals under the catalogue's P6al–P10al: same shape, same mass. The film runs
+  25 meals, to about 31 segments.
+- **Caveats.** A keeper places every ring by hand and rewinds meals that did not grow the arc
+  (each try is logged in `feed-altfilm.json`). The film shows the 512² torus at half resolution.
+
+### G037 — Tip or belly
+
+![Five striped bars of grey, yellow and red cells, and below them three time exposures: an arc swallowing a ring, a round explosion, and an arc passing a ring](exhibits/G037-tip-or-belly/tip-or-belly.png)
+
+[`provenance.json`](exhibits/G037-tip-or-belly/provenance.json)
+
+- **Observation (claim C081).** Each Pteryx arc (P6al–P10al) is aimed head-on at a still ring,
+  offset sideways in quarter-radius steps. A ring that meets the body detonates the arc; one that
+  meets a wing tip is swallowed; further out it is missed. The swallow window moves out by half
+  a radius per segment, with the tip.
+- **Caveats.** One timestep and one world size. Exposures use A^0.7 (disclosed).
+
 ## Field note, 7 October 2026
 
 > *What I saw.* Four animals, four temperaments. The Orbium set off at once along a line it never
@@ -717,6 +761,7 @@ heading values come from `galintervene.chord_heading("S102", 3002)`. The G004 S0
 
 ## Cycle log
 
+- **2026-11-14, G035–G037 (collision-zoo thread).** Collision atlas, ring feeding and tip-or-belly exhibits from `research/experiments/ZOO/exhibits.py`, claims C080–C083. Each `provenance.json` records state hashes; the atlas sheets replay every atlas row and check its hash.
 - **2026-11-10, G021 (species-hunt thread).** Convergence exhibit from the SPECIES-scout hunt, claim C063.
 - **2026-11-07, G014–G018 (lightning-talk thread, round two).** Five "stranger worlds". G015,
   G016 and G018 use a spatially or temporally varying rule (`FieldLenia`, checked bitwise against

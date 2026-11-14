@@ -154,6 +154,7 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
 | VIS-talk lightning-talk thread 2026-11-07 (`research/experiments/VIS-talk/`, gallery G007–G013) | C056 / C057 / C058 |
 | VIS-talk round two 2026-11-07 (gallery G014–G018) | C059 / C060 |
 | Species hunt 2026-11-10 (`research/experiments/SPECIES-scout/`, gallery G021) | C063 (C061–C062 reserved by the open fractal PR #44) |
+| Collision zoo 2026-11-14 (`research/experiments/ZOO/`, gallery G035–G037, museum room 78) | C080 / C081 / C082 / C083 |
 
 ## Claims
 
@@ -2125,3 +2126,77 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
 - **Prior literature:** Chan 2020 (multi-channel Lenia) describes these creatures; we did not find a channel-knockout test there.
 - **History:**
   - 2026-11-11 — OBSERVED — wings thread.
+
+### C080 — Two S001 Orbia that collide produce six kinds of outcome, depending on angle and offset: glance off, touch and part, one dies, fuse into a two-lobed glider, both die, or detonate into a world-filling labyrinth
+
+- **Status:** OBSERVED
+- **Owner lane:** collision-zoo thread (ZOO, 2026-11-14)
+- **Sources:** `research/experiments/ZOO/zoocore.py`, `atlas.py`, `atlas-O.jsonl`, `atlas-O20.jsonl`, `chamber.py`, `summarize.py`; gallery G035
+- **Specimen / version:** catalogue O2u (as S001's rule executes it), settled 100 tu alone on 384², cropped 41×41; each heading made by rotating the settled patch (`scipy.ndimage.rotate`, order 1) and re-settling 30 tu alone on 256²; velocities and masses are measured after settling, not assumed
+- **Simulator / version:** `alm.lenia.Lenia`
+- **Parameters:** S001 rule (poly/poly, μ 0.15, σ 0.015, R 13, T 10); 384² torus. Numerical arm: T 20, everything else equal
+- **Intervention:** two settled Orbia placed so that their straight-line paths pass at impact parameter b (in R) in the relative frame, with about 2.5 R of empty space between them at the start (`place_pair`). Angle between headings θ = 15°…180° in 15° steps (180° = head-on), b = −2…+2 R in 0.25 R steps: 12 × 17 = 204 collisions
+- **Metric:** at contact + 25 tu (rounded up to 5 tu): components of A ≥ 0.1 on the torus heavier than 0.15 × one Orbium. EXPLODE: total mass > 2 × the pair or support > 25 % of the world; ANNIHILATE: mass < 0.15 Orbium; one component heavier than 1.3 Orbium: FUSE, else SURVIVOR; two components: SCATTER if the pair was ever one component, else MISS; ≥ 3: MULTIPLY. Classes were defined before the T 10 run and not changed after
+- **Result:** T 10: MISS 62, SURVIVOR 71, SCATTER 33, ANNIHILATE 23, FUSE 12, EXPLODE 3, MULTIPLY 0. Survivors keep 0.97–1.00 of one Orbium's mass (one body vanishes, the other is untouched); fused bodies weigh 1.94–1.98 Orbia and glide at Orbium speed as a two-lobed body; detonations (θ 60° b +0.75; θ 75° b +0.75, +1.0) reach 53–63 × the pair's mass 25 tu after contact and fill the 384² world with a labyrinth by about 70 tu (mass ×210). T 20: the same six classes (SURVIVOR 59, MISS 59, SCATTER 32, FUSE 29, ANNIHILATE 19, EXPLODE 6), detonations again at θ 75° b +0.75 and +1.0 plus four new cells (θ 75°, 105°, 120°). Cell by cell only 110 of 204 (54 %) agree between T 10 and T 20, and 60 of the 142 contact cells
+- **Run IDs:** `atlas-O.jsonl` / `atlas-O20.jsonl` rows (theta, b_R) with final_sha256; `chamber.py` replays all 204 T 10 rows and matched every hash
+- **Search / parameter bounds:** one species, one rule, one settled seed per heading, one world size, one horizon (contact + 25 tu); later fates beyond that horizon not classified (spot checks: fused bodies keep gliding for 120 tu)
+- **Reproduction command:** `PYTHONPATH=src:research/experiments/ZOO .venv/bin/python research/experiments/ZOO/atlas.py run O` (and `run O20`); `.venv/bin/python research/experiments/ZOO/summarize.py`
+- **Known caveats:** the *repertoire* of outcomes survives halving the timestep; the *map* (which outcome at which θ, b) does not, so read G035 as a picture of one discretisation, not as the continuous-time answer. Heading after rotation drifts up to 5°, so the nominal θ is approximate (lattice locking, C013); the measured headings are in each row. The classifier is coarse: "SURVIVOR" does not say which Orbium survived, and SCATTER vs MISS depends on the 0.1 threshold
+- **Prior literature:** Chan 2019 §3.5.5 (Complex Systems 28(3)) names Orbium–Orbium collision outcomes, including detonation, qualitatively and under unspecified rules (see `research/experiments/REEF-behavior/LITERATURE.md`). What is new here is the map under the exact S001 rule and its timestep check
+- **History:**
+  - 2026-11-14 — OBSERVED — collision-zoo thread.
+
+### C081 — In the Pteryx rule (μ 0.38, σ 0.07) any contact between two Pteryx arcs detonates; a still Circium ring is swallowed when it meets an arc's wing tip and detonates the arc when it meets the body
+
+- **Status:** OBSERVED
+- **Owner lane:** collision-zoo thread (ZOO, 2026-11-14)
+- **Sources:** `research/experiments/ZOO/atlas.py` worlds P and PC, `atlas-P.jsonl`, `atlas-P6-dense.jsonl`, `atlas-PC.jsonl`, `summarize.py`; gallery G037
+- **Specimen / version:** catalogue P6al, P7al, P8al, P10al (atlas P), P6al–P10al (atlas PC) and C0v (Circium ventilans), all catalogued under this one rule; each settled 100 tu alone, rotated copies re-settled 30 tu
+- **Simulator / version:** `alm.lenia.Lenia`
+- **Parameters:** poly/poly, μ 0.38, σ 0.07, R 13, T 10; 512² torus
+- **Intervention:** pair placement as in C080. Atlas P: every pair of {P6al, P7al, P8al, P10al, C0v}, θ ∈ {60°, 120°, 180°}, b = −8…+8 R in 2 R steps. Atlas PC: each of P6al…P10al head-on at a still C0v, b = −9…+9 R in 0.25 R steps. A first denser pass of P6al × P6al (θ 30°…180°, b −3…+3 R) is kept as `atlas-P6-dense.jsonl`
+- **Metric:** C080's classifier; for C0v rows "SURVIVOR" means one body left, whose mass is compared with the arc's
+- **Result:** Pteryx × Pteryx: 270 rows, EXPLODE 204, MISS 66, nothing else (dense pass: 82 of 82 EXPLODE). Pteryx × C0v (PC): for every species the outcome along b is miss | swallow | detonate | swallow | miss. The swallow windows are 0.75–1 R wide on each side, centred at |b| ≈ 3.75 (P6al), 4.25 (P7al), 4.75 (P8al), 5.25 (P9al), 5.75 (P10al) R, moving out by 0.5 R per segment, i.e. with the wing tip; every b between them detonates. A swallowing arc gains 118–141 cells of mass (one ring is 146; one outlier at P7al b −4.25 gains 58)
+- **Run IDs:** rows with final_sha256 in the three jsonl files
+- **Search / parameter bounds:** head-on only for the ring scan; one world size; contact + 25 tu horizon; one timestep (not checked at T 20)
+- **Reproduction command:** `PYTHONPATH=src:research/experiments/ZOO .venv/bin/python research/experiments/ZOO/atlas.py run P` (and `run PC`)
+- **Known caveats:** EXPLODE is decided 25 tu after contact (mass > 2 × the pair); all of them were far past that (15–60 ×). Not checked at a smaller timestep or larger grid
+- **History:**
+  - 2026-11-14 — OBSERVED — collision-zoo thread.
+
+### C082 — A Hexapteryx (P6al) that swallows k Circium rings becomes the catalogued Pteryx with 6 + k segments, for k = 1–4 (shape correlation 0.993–0.998, mass within 0.3 %)
+
+- **Status:** REPRODUCED
+- **Owner lane:** collision-zoo thread (ZOO, 2026-11-14)
+- **Sources:** `research/experiments/ZOO/feed.py`, `feed-alt.json`, `feed-altfilm.json`, `ladder_match.py`, `ladder_match.json`; gallery G036 (`ladder.png`)
+- **Specimen / version:** catalogue P6al (start), C0v (food), P7al–P10al (comparison); all settled 100 tu alone
+- **Simulator / version:** `alm.lenia.Lenia`
+- **Parameters:** the C081 rule, 512² torus
+- **Intervention:** a keeper stamps one settled C0v 3 R ahead of the arc's leading edge and (lateral half-width + 0.95) R to its side, alternating sides; after the arc is one body again it digests 40 tu; a meal counts only if the arc grew by 0.5–1.5 ring masses, otherwise the keeper rewinds and tries offsets +0.8, +1.1, +0.7, +1.25, +0.6, +1.4 R (every try is logged). Meals 1–4 were all accepted at the first offset
+- **Metric:** mass; best normalised cross-correlation of the fed arc's 141×141 window against each catalogue body over rotations (0.5° steps) and all shifts
+- **Result:** after k = 1, 2, 3, 4 meals the arc weighs 894.1, 1030.5, 1165.5, 1299.1 against P7al 894, P8al 1029, P9al 1163, P10al 1296. Its correlation with P(6+k)al is 0.9978, 0.9986, 0.9955, 0.9934; with every other rung it is at most 0.89. Two clean processes (`feed-alt`, `feed-altfilm`) give bitwise-equal states at every meal
+- **Run IDs:** sha256 per meal in `feed-alt.json` / `feed-altfilm.json`
+- **Search / parameter bounds:** one start, one feeding protocol, k ≤ 4 checked by shape (beyond P10al the catalogue has only P24al)
+- **Reproduction command:** `PYTHONPATH=src:research/experiments/ZOO .venv/bin/python research/experiments/ZOO/feed.py run --meals 30 --alternate --tag=-alt`, then `ladder_match.py` (needs `--tag=-altfilm`, made with the same command plus `--film`)
+- **Known caveats:** placement is a hand intervention (a keeper), not something that happens in a free world. Same implementation, so REPRODUCED and not independently checked; not tested at T 20 by shape (the T 20 feeding run shows the same mass steps, C083)
+- **Prior literature:** the Pteryx ladder (P6al…P10al, P24al) is Chan's catalogue; we did not find it reported that rings feed one rung to the next
+- **History:**
+  - 2026-11-14 — REPRODUCED — collision-zoo thread.
+
+### C083 — Fed one Circium at a time, a Hexapteryx keeps adding one segment per meal up to 21 (one-sided feeding) or 31 segments (alternating sides); feeding then stops working, by detonation or by meals that add no segment
+
+- **Status:** OBSERVED
+- **Owner lane:** collision-zoo thread (ZOO, 2026-11-14)
+- **Sources:** `research/experiments/ZOO/feed.py`, `feed-run1.json`, `feed-alt.json`, `feed-T20.json`, `summarize.py`; gallery G036
+- **Specimen / version:** as C082
+- **Simulator / version:** `alm.lenia.Lenia`
+- **Parameters:** the C081 rule, 512² torus, T 10; numerical arm T 20 (seeds settled at T 10)
+- **Intervention:** C082's keeper protocol, 30 meals offered
+- **Metric:** segments estimated from mass with the catalogue ladder (134.9 per segment from P6al→P10al); a meal "grows" if mass rises by 0.5–1.5 ring masses and one body remains
+- **Result:** alternating sides, T 10: 25 meals grow the arc (4 retries in all) to mass 4144, about 31 segments; it still glides at 4.68 cells/tu (P6al: 4.63); at meal 26 every offset detonates it. One side, T 10: 15 meals to about 21 segments, then the ring is eaten without growth at 5 offsets and detonates at 2. One side, T 20: 18 meals (11 retries) to about 25 segments, then 6 offsets detonate and 1 eats without growth
+- **Run IDs:** sha256 per meal in the feed logs
+- **Search / parameter bounds:** one start, three protocols, one world size; segment counts beyond 10 are mass estimates, not shape checks
+- **Reproduction command:** `PYTHONPATH=src:research/experiments/ZOO .venv/bin/python research/experiments/ZOO/feed.py run --meals 30 [--alternate] [--T 20] --tag=-<name>`
+- **Known caveats:** where the climb ends depends on the feeding protocol and the timestep, so no top rung is claimed. The arc straightens as it grows (G036), so the fixed offsets may simply stop finding the tip; a better keeper might go higher
+- **History:**
+  - 2026-11-14 — OBSERVED — collision-zoo thread.

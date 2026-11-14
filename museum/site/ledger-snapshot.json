@@ -1,7 +1,7 @@
 {
   "ledger": "research/claims.md",
-  "ledger_sha256": "a03c04168851b431fefd4730c59927860d93888089324559737372f005afcbcd",
-  "ledger_commit": "8a10eff",
+  "ledger_sha256": "4833329c9f2b104bc02bc68f7ac81764fa1eabbc30c8fa00b8226465e27a444c",
+  "ledger_commit": "a35e6d2",
   "conventions_sha256": "0e237384e0425b3c325229cf650ab6f9807fb08c1bedc991433b54b13c2eb02f",
   "claims": {
     "C001": {
@@ -9,6 +9,7 @@
       "status_text": "INDEPENDENTLY_CHECKED",
       "rooms": [
         "collection",
+        "collision-zoo",
         "index",
         "orbium"
       ]
@@ -326,6 +327,34 @@
       "rooms": [
         "more-dimensions"
       ]
+    },
+    "C080": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "collision-zoo"
+      ]
+    },
+    "C081": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "collision-zoo"
+      ]
+    },
+    "C082": {
+      "status": "REPRODUCED",
+      "status_text": "REPRODUCED",
+      "rooms": [
+        "collision-zoo"
+      ]
+    },
+    "C083": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "collision-zoo"
+      ]
     }
   },
   "sources": {
@@ -476,6 +505,18 @@
       "research/gallery/exhibits/G024-particle-pinwheel/provenance.json",
       "research/gallery/exhibits/G025-smoothlife-glider/glider.mp4",
       "research/gallery/exhibits/G025-smoothlife-glider/provenance.json"
+    ],
+    "collision-zoo": [
+      "research/experiments/REEF-behavior/LITERATURE.md",
+      "research/experiments/ZOO/ZOO.md",
+      "research/experiments/ZOO/atlas.py",
+      "research/experiments/ZOO/feed.py",
+      "research/experiments/ZOO/summarize.py",
+      "research/gallery/exhibits/G035-orbium-collision-atlas/detonation.mp4",
+      "research/gallery/exhibits/G035-orbium-collision-atlas/provenance.json",
+      "research/gallery/exhibits/G036-the-arc-that-eats-rings/feeding.mp4",
+      "research/gallery/exhibits/G036-the-arc-that-eats-rings/provenance.json",
+      "research/gallery/exhibits/G037-tip-or-belly/provenance.json"
     ],
     "collection": [
       "research/experiments/L6-field/make_seeds.py",
