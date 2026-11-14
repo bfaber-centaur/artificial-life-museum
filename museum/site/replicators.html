@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>East wing IV: creatures that copy themselves · ALM museum</title>
-<meta name="description" content="Chan&#x27;s dividing creatures from the multi-kernel catalogue: a family tree followed cell by cell, how fast one cell fills a world, and a replicator in three dimensions.">
+<meta name="description" content="Chan&#x27;s dividing creatures from the multi-kernel catalogue: a family tree followed cell by cell, how fast one cell fills a world, a replicator in three dimensions, and what happens when daughters inherit their rule.">
 <link rel="stylesheet" href="museum.css">
 </head>
 <body class="room-replicators">
@@ -102,18 +102,60 @@ fill up, and does it work in three dimensions?</p>
   timestep a fifth body appears <a class="claim" href="claims.html#C075" title="Chan&#x27;s 3-D &quot;divide&quot; (found/312 #7) splits into four bodies by t 50 and stays at four through t 300 in 64³ and 96³ boxes at dt 0.1; at dt 0.05 a fifth body appears after t 100"><span class="cid">C075</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>.</p>
 </div>
 
+<h2>When daughters inherit their rule</h2>
+<p>Copying is half of evolution. The other half is copies that differ. So we changed the
+physics, and this part of the room is a <em>modified rule</em> of ours, not Chan's. Every bit
+of matter now carries a number, its genome, between 0 (<em>division well</em>, blue) and 1
+(<em>division uncontrolled</em>, red), and the rule at each point is the rule for its genome.
+New matter inherits the genome of the matter around it, and every ten time units a faint
+random smear nudges genomes up or down.</p>
+<figure class="vitrine">
+  <img src="../../research/gallery/exhibits/G045-selection-for-faster-division/evolve.gif" width="384" height="260" loading="lazy"
+       alt="Two worlds of dividing cells coloured blue to red by genome; on the left red patches with a dot lattice appear and the mean-genome line climbs above the grey neutral line.">
+  <figcaption><strong>Same start, same mutations.</strong> Left: the genome sets the rule.
+  Right: the rule is fixed and the genome is only a marker. The lines at the bottom are the
+  mean genome of each world.
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G045-selection-for-faster-division/evolve.mp4">Full video</a> ·
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G045-selection-for-faster-division/provenance.json">provenance</a>.</figcaption>
+</figure>
+<div class="label">
+  <p class="obs"><strong>What you see.</strong> On the left, warmer cells spread and red patches
+  appear, with the dot lattice of the runaway rule around them. On the right the colours wander
+  but stay cool.</p>
+  <p class="open"><strong>What the ledger says.</strong> From 0.3 the mean genome reaches
+  0.47–0.55 when it matters and 0.36–0.43 when it is only a marker, in all four paired seeds
+  <a class="claim" href="claims.html#C090" title="In GenomeLenia (our modified rule: each pixel&#x27;s matter carries a heritable position g on the line from Chan&#x27;s &quot;division well&quot; to &quot;division uncontrolled&quot;), mutation plus inheritance raises the mean genome from 0.3 to 0.47–0.55 in 2000 time units, against 0.36–0.43 when the genome is only a neutral marker; every one of 4 paired seeds ends higher in the selected arm"><span class="cid">C090</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>. From 0.7, where growth speed has levelled off, the gap is only 0.03–0.06
+  <a class="claim" href="claims.html#C091" title="Started at genome 0.7, where growth speed has nearly saturated (C073), the same mutation and inheritance end only 0.03–0.06 above the neutral marker (3 paired seeds)"><span class="cid">C091</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>. Nothing here rewards speed. Faster dividers just leave more descendants.</p>
+</div>
+<figure class="vitrine">
+  <img src="../../research/gallery/exhibits/G046-the-fast-genome-invades/invasion.gif" width="512" height="346" loading="lazy"
+       alt="Blue well tissue on the left and red uncontrolled tissue on the right; red and pink spreads into the blue half from both borders while the red half stays red.">
+  <figcaption><strong>Tissue against tissue.</strong> Grown <em>well</em> tissue meets grown
+  <em>uncontrolled</em> tissue; the world wraps, so there are two borders.
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G046-the-fast-genome-invades/invasion.mp4">Full video</a> ·
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G046-the-fast-genome-invades/provenance.json">provenance</a>.</figcaption>
+</figure>
+<div class="label">
+  <p class="open"><strong>What the ledger says.</strong> By t 1000 the well half's mean genome has
+  risen from 0 to 0.34–0.38, while the uncontrolled half has stayed at 0.98–0.99, in three seeds
+  <a class="claim" href="claims.html#C092" title="When grown &quot;division well&quot; tissue (g 0) meets grown &quot;division uncontrolled&quot; tissue (g 1) in GenomeLenia, the uncontrolled genome spreads into the well half (mean 0.34–0.38 there by t 1000) while the uncontrolled half stays at 0.98–0.99 (3 seeds)"><span class="cid">C092</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>. Some of the spread is blending where the tissues touch.</p>
+</div>
+
 <h2>Sources</h2>
 <ul>
   <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/REPLICATORS/REPLICATORS.md">Replicator notes</a></li>
   <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/REPLICATORS/tree.py">The cell tracker</a>,
       <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/REPLICATORS/growth.jsonl">the growth runs</a> and
       <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/REPLICATORS/replicate3d.jsonl">the 3-D runs</a></li>
+  <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/REPLICATORS/genome.py">GenomeLenia</a>,
+      <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/REPLICATORS/evolve.jsonl">the evolution runs</a> and
+      <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/REPLICATORS/invasion.jsonl">the invasion runs</a></li>
 </ul>
 
 <nav class="walk" aria-label="Tour"><a class="prev" href="other-models.html"><small>Back</small>East wing III: cousins from other models</a><a class="next" href="collision-zoo.html"><small>Next room</small>The collision zoo</a></nav>
 </main>
 <footer class="site">
-  <p>Claim statuses read from <code>research/claims.md</code> (sha256 <code>c8bbe169d5f1</code>) when this page was built.</p>
+  <p>Claim statuses read from <code>research/claims.md</code> (sha256 <code>2ee5faa75f7b</code>) when this page was built.</p>
   <p>Every picture here is a recorded simulation or a figure drawn from committed data. Statuses
   are the claims ledger's, not the museum's: a badge never says more than
   <a href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/claims.md">research/claims.md</a> does.</p>

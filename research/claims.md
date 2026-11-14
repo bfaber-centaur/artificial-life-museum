@@ -155,6 +155,7 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
 | VIS-talk round two 2026-11-07 (gallery G014–G018) | C059 / C060 |
 | Species hunt 2026-11-10 (`research/experiments/SPECIES-scout/`, gallery G021) | C063 (C061–C062 reserved by the open fractal PR #44) |
 | Replicators thread 2026-11-14 (`research/experiments/REPLICATORS/`, gallery G029–G031) | C072 / C073 / C074 / C075 |
+| Replicators thread round 2 2026-11-14 (GenomeLenia, `research/experiments/REPLICATORS/genome.py`, gallery G045–G046) | C090 / C091 / C092 |
 | Collision zoo 2026-11-14 (`research/experiments/ZOO/`, gallery G035–G037, museum room 78) | C080 / C081 / C082 / C083 |
 
 ## Claims
@@ -2275,3 +2276,57 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
 - **Known caveats:** where the climb ends depends on the feeding protocol and the timestep, so no top rung is claimed. The arc straightens as it grows (G036), so the fixed offsets may simply stop finding the tip; a better keeper might go higher
 - **History:**
   - 2026-11-14 — OBSERVED — collision-zoo thread.
+
+### C090 — In GenomeLenia (our modified rule: each pixel's matter carries a heritable position g on the line from Chan's "division well" to "division uncontrolled"), mutation plus inheritance raises the mean genome from 0.3 to 0.47–0.55 in 2000 time units, against 0.36–0.43 when the genome is only a neutral marker; every one of 4 paired seeds ends higher in the selected arm
+
+- **Status:** OBSERVED
+- **Owner lane:** replicators thread, round 2 (REPLICATORS, 2026-11-14)
+- **Sources:** `research/experiments/REPLICATORS/genome.py`, `evolve.py`, `evolve.jsonl`; gallery G045
+- **Specimen / version:** one 213 #84 cell, genome 0.3 everywhere
+- **Simulator / version:** `genome.GenomeLenia` (modified rule; equals `nd_lenia` with 213 #84 at g ≡ 0 and 213 #83 at g ≡ 1 to 10⁻¹², `tests/test_replicators.py`)
+- **Parameters:** U_k = (1 − g)·(K_k^well ∗ A) + g·(K_k^uncontrolled ∗ A); μ_k, σ_k linear in g; dt 0.1; 256² torus; inheritance: matter that persists keeps its genome, new matter takes the mass-weighted genome within a 2-px Gaussian; mutation every 10 tu: g += 0.03 × (Gaussian noise smoothed over 8 px, unit sd), clipped to [0, 1]
+- **Intervention:** selected arm (the genome sets the local rule) vs neutral arm (rule fixed at 0.3, genome carried and mutated identically, same noise seed)
+- **Metric:** mass-weighted mean genome, averaged over samples at t ≥ 1800 (sampled every 10 tu); defined before the neutral arms were run
+- **Result:** selected 0.539, 0.528, 0.468, 0.552; neutral 0.356, 0.372, 0.427, 0.365 (seeds 1–4); paired differences +0.18, +0.16, +0.04, +0.19
+- **Run IDs:** `evolve.jsonl` (seed, g0 0.3, neutral) with final-state sha256 prefix
+- **Search / parameter bounds:** one mutation size and scale, one world size, 4 seeds
+- **Reproduction command:** `.venv/bin/python evolve.py SEED 256 2000 0.3 0.03 [neutral]` (from `research/experiments/REPLICATORS`); `summarize.py`
+- **Known caveats:** the inheritance rule is ours and blends genomes where touching cells grow into each other; the neutral arm also drifts upward (clipping at 0 and mass weighting), which is why it is the comparison. A first version that re-averaged all matter every step was discarded before these runs because it diffused genomes through the dot lattice.
+- **History:**
+  - 2026-11-14 — OBSERVED — replicators thread (round 2).
+
+### C091 — Started at genome 0.7, where growth speed has nearly saturated (C073), the same mutation and inheritance end only 0.03–0.06 above the neutral marker (3 paired seeds)
+
+- **Status:** OBSERVED
+- **Owner lane:** replicators thread, round 2 (REPLICATORS, 2026-11-14)
+- **Sources:** `evolve.py`, `evolve.jsonl`
+- **Specimen / version:** one 213 #84 cell, genome 0.7 everywhere
+- **Simulator / version:** `genome.GenomeLenia`
+- **Parameters:** as C090
+- **Intervention:** as C090 (selected vs neutral, rule fixed at 0.7)
+- **Metric:** as C090
+- **Result:** selected 0.685, 0.687, 0.675; neutral 0.659, 0.653, 0.618 (seeds 1–3); paired differences +0.03, +0.03, +0.06
+- **Run IDs:** `evolve.jsonl` (seed, g0 0.7, neutral)
+- **Search / parameter bounds:** 3 seeds
+- **Reproduction command:** `.venv/bin/python evolve.py SEED 256 2000 0.7 0.03 [neutral]`
+- **Known caveats:** that selection is weaker here because growth speed is flatter above λ 0.7 is our reading (C073 medians 110 → 90), not tested directly.
+- **History:**
+  - 2026-11-14 — OBSERVED — replicators thread (round 2).
+
+### C092 — When grown "division well" tissue (g 0) meets grown "division uncontrolled" tissue (g 1) in GenomeLenia, the uncontrolled genome spreads into the well half (mean 0.34–0.38 there by t 1000) while the uncontrolled half stays at 0.98–0.99 (3 seeds)
+
+- **Status:** OBSERVED
+- **Owner lane:** replicators thread, round 2 (REPLICATORS, 2026-11-14)
+- **Sources:** `invasion.py`, `invasion.jsonl`; gallery G046
+- **Specimen / version:** tissues grown from one 213 #84 cell on 256² under the catalogue rules: 2000 tu under "well", 400 tu under "uncontrolled" (seeds 1–2: founder jittered by ±10⁻³); placed side by side on a 256 × 512 torus (two borders)
+- **Simulator / version:** `genome.GenomeLenia`, no mutation
+- **Parameters:** as C090, mutation off; 1000 time units
+- **Intervention:** contact between the two tissues
+- **Metric:** mass-weighted mean genome over the whole world and over each half, every 10 tu
+- **Result:** whole world 0.51–0.56 → 0.64–0.66; well half → 0.335, 0.341, 0.382; uncontrolled half → 0.978, 0.980, 0.990 (seeds 0, 1, 2)
+- **Run IDs:** `invasion.jsonl` (seed)
+- **Search / parameter bounds:** one world shape, 3 seeds
+- **Reproduction command:** `.venv/bin/python invasion.py SEED 1000`
+- **Known caveats:** there is no neutral arm here; part of the spread is genome blending where the tissues touch (our inheritance rule). The asymmetry (well half changes, uncontrolled half barely) is the observation.
+- **History:**
+  - 2026-11-14 — OBSERVED — replicators thread (round 2).

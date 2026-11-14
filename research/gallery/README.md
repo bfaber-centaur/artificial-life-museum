@@ -49,6 +49,8 @@ made of, ten times per unit of time. Some of them travel; one of them never chan
 | [G035](#g035--two-orbia-204-collisions) | Two Orbia, 204 collisions (still + animated) | S001-rule Orbium × 2 | 2026-11-14 |
 | [G036](#g036--the-arc-that-eats-rings) | The arc that eats rings (animated) | P6al fed C0v; P6al–P10al | 2026-11-14 |
 | [G037](#g037--tip-or-belly) | Tip or belly (still) | P6al–P10al × C0v | 2026-11-14 |
+| [G045](#g045--selection-for-faster-division) | Selection for faster division (animated; *modified rule: GenomeLenia*) | one cell with a heritable genome, with and without selection | 2026-11-14 |
+| [G046](#g046--the-fast-genome-invades) | The fast genome invades (animated; *modified rule: GenomeLenia*) | *well* tissue against *uncontrolled* tissue | 2026-11-14 |
 
 ### G001 — Four ways to move
 
@@ -679,6 +681,40 @@ still: [`ladder.png`](exhibits/G036-the-arc-that-eats-rings/ladder.png) ·
   a radius per segment, with the tip.
 - **Caveats.** One timestep and one world size. Exposures use A^0.7 (disclosed).
 
+## Replicators, round two: heredity (G045–G046)
+
+GenomeLenia (`research/experiments/REPLICATORS/genome.py`) is a *modified rule* of ours: the
+rule at each point is set by a heritable genome carried with the matter. Colour is the genome on
+coolwarm (blue = *division well*, red = *division uncontrolled*), brightness the field value.
+Films: `film_genome.py evolve|invasion`.
+
+### G045 — Selection for faster division
+
+![Two worlds of dividing cells coloured blue to red by genome; on the left red patches with a dot lattice appear and the mean-genome line climbs above the grey neutral line](exhibits/G045-selection-for-faster-division/evolve.gif)
+
+Film: [`evolve.mp4`](exhibits/G045-selection-for-faster-division/evolve.mp4) ·
+[`provenance.json`](exhibits/G045-selection-for-faster-division/provenance.json)
+
+- **Observation (claims C090, C091).** GenomeLenia: each cell's matter carries a genome g on
+  the line from *division well* (blue, 0) to *division uncontrolled* (red, 1), inherited by
+  new matter and mutated a little every 10 time units. Left, the genome sets the local rule;
+  right, the rule is fixed at 0.3 and the genome is only a marker, with the same mutations.
+  Both start from one cell at 0.3. The left mean climbs to 0.56, the right to 0.37.
+- **Caveats.** A modified rule of ours. Inheritance blends genomes where cells grow into each
+  other. Seed 4 of four (C090 gives all four).
+
+### G046 — The fast genome invades
+
+![Blue well tissue on the left and red uncontrolled tissue on the right; red and pink spreads into the blue half from both borders while the red half stays red](exhibits/G046-the-fast-genome-invades/invasion.gif)
+
+Film: [`invasion.mp4`](exhibits/G046-the-fast-genome-invades/invasion.mp4) ·
+[`provenance.json`](exhibits/G046-the-fast-genome-invades/provenance.json)
+
+- **Observation (claim C092).** Grown *well* tissue (left, g 0) meets grown *uncontrolled*
+  tissue (right, g 1) on a 256 × 512 torus, so there are two borders. Over 1000 time units the
+  red genome spreads into the blue half; the red half stays red.
+- **Caveats.** No mutation and no neutral arm; part of the spread is blending at the borders.
+
 ## Field note, 7 October 2026
 
 > *What I saw.* Four animals, four temperaments. The Orbium set off at once along a line it never
@@ -819,6 +855,8 @@ heading values come from `galintervene.chord_heading("S102", 3002)`. The G004 S0
 
 ## Cycle log
 
+- **2026-11-14, G045–G046 (replicators thread, round 2).** Heredity and selection in GenomeLenia, a
+  modified rule of ours. Claims C090–C092.
 - **2026-11-14, G029–G031 (replicators thread).** Self-replicating creatures from Chan's found
   catalogue: a tracked family tree, a growth-rate ladder and a 3-D replicator. Claims C072–C074.
 - **2026-11-14, G035–G037 (collision-zoo thread).** Collision atlas, ring feeding and tip-or-belly exhibits from `research/experiments/ZOO/exhibits.py`, claims C080–C083. Each `provenance.json` records state hashes; the atlas sheets replay every atlas row and check its hash.

@@ -39,3 +39,22 @@ for l in open(H / "replicate3d.jsonl"):
 f3 = json.loads((EX / "G031-replicating-in-3d" / "replicator3d.json").read_text())
 tr = f3["trace"]
 print(f"  film N {f3['N']}: bodies max {max(x[1] for x in tr)}, mass {tr[0][2]} -> {tr[-1][2]}")
+
+print("== C090/C091 evolution (evolve.jsonl): mass-weighted mean genome averaged over t >= 1800, paired by seed")
+ev = defaultdict(dict)
+for l in open(H / "evolve.jsonl"):
+    r = json.loads(l)
+    end = [x["gmean"] for x in r["trace"] if x["t"] >= 1800 and "gmean" in x]
+    ev[(r["g0"], r["seed"])]["neutral" if r["neutral"] else "selected"] = sum(end) / len(end)
+for g0 in sorted({k[0] for k in ev}):
+    rows = [(s, ev[(g0, s)]) for (g, s) in sorted(ev) if g == g0 and len(ev[(g, s)]) == 2]
+    sel = [v["selected"] for _, v in rows]; neu = [v["neutral"] for _, v in rows]
+    print(f"  g0 {g0}: selected {min(sel):.3f}-{max(sel):.3f}, neutral {min(neu):.3f}-{max(neu):.3f}; "
+          f"paired differences {[round(v['selected'] - v['neutral'], 3) for _, v in rows]} (seeds {[s for s, _ in rows]})")
+
+print("== C092 invasion (invasion.jsonl): mass-weighted mean genome, start -> t 1000")
+for l in open(H / "invasion.jsonl"):
+    r = json.loads(l)
+    tr = r["trace"]
+    print(f"  seed {r['seed']}: {tr[0]['gmean']} -> {tr[-1]['gmean']}; well-half columns (0-31) mean genome at t 1000 "
+          f"{sum(tr[-1]['cols'][:32]) / 32:.3f}, uncontrolled half {sum(tr[-1]['cols'][32:]) / 32:.3f}")

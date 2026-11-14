@@ -1,7 +1,7 @@
 {
   "ledger": "research/claims.md",
-  "ledger_sha256": "c8bbe169d5f1af338d83239d77c0551b182ee242c7f85da612fc3d54e04d558b",
-  "ledger_commit": "1388254",
+  "ledger_sha256": "2ee5faa75f7bc6f20205b5918efb9ef86aa761dfc2b2052abf5911cb86de59b2",
+  "ledger_commit": "0e28947",
   "conventions_sha256": "0e237384e0425b3c325229cf650ab6f9807fb08c1bedc991433b54b13c2eb02f",
   "claims": {
     "C001": {
@@ -383,6 +383,27 @@
       "rooms": [
         "collision-zoo"
       ]
+    },
+    "C090": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "replicators"
+      ]
+    },
+    "C091": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "replicators"
+      ]
+    },
+    "C092": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "replicators"
+      ]
     }
   },
   "sources": {
@@ -536,7 +557,10 @@
     ],
     "replicators": [
       "research/experiments/REPLICATORS/REPLICATORS.md",
+      "research/experiments/REPLICATORS/evolve.jsonl",
+      "research/experiments/REPLICATORS/genome.py",
       "research/experiments/REPLICATORS/growth.jsonl",
+      "research/experiments/REPLICATORS/invasion.jsonl",
       "research/experiments/REPLICATORS/replicate3d.jsonl",
       "research/experiments/REPLICATORS/tree.py",
       "research/gallery/exhibits/G029-family-tree/family-tree.mp4",
@@ -544,7 +568,11 @@
       "research/gallery/exhibits/G030-four-growth-rates/ladder.mp4",
       "research/gallery/exhibits/G030-four-growth-rates/provenance.json",
       "research/gallery/exhibits/G031-replicating-in-3d/provenance.json",
-      "research/gallery/exhibits/G031-replicating-in-3d/replicator3d.mp4"
+      "research/gallery/exhibits/G031-replicating-in-3d/replicator3d.mp4",
+      "research/gallery/exhibits/G045-selection-for-faster-division/evolve.mp4",
+      "research/gallery/exhibits/G045-selection-for-faster-division/provenance.json",
+      "research/gallery/exhibits/G046-the-fast-genome-invades/invasion.mp4",
+      "research/gallery/exhibits/G046-the-fast-genome-invades/provenance.json"
     ],
     "collision-zoo": [
       "research/experiments/REEF-behavior/LITERATURE.md",

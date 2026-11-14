@@ -69,3 +69,27 @@ def test_interp_endpoints_are_the_catalogue_rules():
         for p, q in zip(mix(lam), ref["params"]):
             assert p["m"] == pytest.approx(q["m"]) and p["s"] == pytest.approx(q["s"])
             assert [float(x) for x in p["b"].split(",")] == pytest.approx([float(Fraction(x)) for x in q["b"].split(",")])
+
+
+@needs_refs
+def test_genome_lenia_reduces_to_the_catalogue_rules():
+    from common import found_entry, nd
+    from genome import GenomeLenia
+    _, A = nd.entry_state(found_entry("213", 84), 2, 96)
+    for g, idx in ((0.0, 84), (1.0, 83)):
+        a = GenomeLenia(A[0], np.full((96, 96), g))
+        b = nd.NDLenia(found_entry("213", idx)["params"], A)
+        for _ in range(20):
+            a.step()
+            b.step()
+        assert np.abs(a.A - b.A[0]).max() < 1e-12
+        assert np.abs(a.g - g).max() < 1e-12  # a uniform genome stays uniform
+    # neutral mode: the rule ignores a non-uniform genome
+    gmix = np.random.default_rng(0).uniform(0, 1, (96, 96))
+    a = GenomeLenia(A[0], gmix, rule_g=0.0)
+    b = nd.NDLenia(found_entry("213", 84)["params"], A)
+    for _ in range(20):
+        a.step()
+        b.step()
+    assert np.abs(a.A - b.A[0]).max() < 1e-12
+    assert a.g.min() >= 0 and a.g.max() <= 1
