@@ -1,7 +1,7 @@
 {
   "ledger": "research/claims.md",
-  "ledger_sha256": "86a0be75aaf3effa697419fade6f4bbee6f4e1308ebe0b6e0e45e8ec24577529",
-  "ledger_commit": "da6a0f8",
+  "ledger_sha256": "f53dd3d262b4731888c730258b02e23d60c4f027295e19eca7ae8c73e98a0d2b",
+  "ledger_commit": "eacc875",
   "conventions_sha256": "0e237384e0425b3c325229cf650ab6f9807fb08c1bedc991433b54b13c2eb02f",
   "claims": {
     "C001": {
@@ -476,6 +476,27 @@
       "rooms": [
         "strange-geometries"
       ]
+    },
+    "C102": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "strange-geometries"
+      ]
+    },
+    "C103": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "strange-geometries"
+      ]
+    },
+    "C104": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "strange-geometries"
+      ]
     }
   },
   "sources": {
@@ -679,6 +700,12 @@
       "research/experiments/GEOM/meet.jsonl",
       "research/experiments/GEOM/pair.jsonl",
       "research/experiments/GEOM/summarize.py",
+      "research/experiments/KLEIN/README.md",
+      "research/experiments/KLEIN/klein.py",
+      "research/experiments/KLEIN/narrow.jsonl",
+      "research/experiments/KLEIN/spin.jsonl",
+      "research/experiments/KLEIN/summarize.py",
+      "research/experiments/KLEIN/twist.jsonl",
       "research/gallery/exhibits/G038-parallel-lines-meet/meet-strip.png",
       "research/gallery/exhibits/G038-parallel-lines-meet/meet.mp4",
       "research/gallery/exhibits/G038-parallel-lines-meet/planet-still.png",
@@ -692,7 +719,11 @@
       "research/gallery/exhibits/G049-a-lens-made-of-nothing/lens.mp4",
       "research/gallery/exhibits/G049-a-lens-made-of-nothing/provenance.json",
       "research/gallery/exhibits/G050-straight-at-the-point/apex.mp4",
-      "research/gallery/exhibits/G050-straight-at-the-point/provenance.json"
+      "research/gallery/exhibits/G050-straight-at-the-point/provenance.json",
+      "research/gallery/exhibits/G053-through-the-looking-glass/looking-glass.mp4",
+      "research/gallery/exhibits/G053-through-the-looking-glass/provenance.json",
+      "research/gallery/exhibits/G054-the-mirror-next-door/mirror-next-door.mp4",
+      "research/gallery/exhibits/G054-the-mirror-next-door/provenance.json"
     ],
     "collection": [
       "research/experiments/L6-field/make_seeds.py",

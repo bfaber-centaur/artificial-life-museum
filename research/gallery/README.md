@@ -59,6 +59,8 @@ made of, ten times per unit of time. Some of them travel; one of them never chan
 | [G048](#g048--two-orbia-fuse-into-s101) | Two Orbia fuse into S101 (still) | fused bodies of G035, S101 | 2026-11-14 |
 | [G049](#g049--a-lens-made-of-nothing) | A lens made of nothing (animated; *cone points*) | S001 pairs past a 300°, 360° and 420° point | 2026-11-14 |
 | [G050](#g050--straight-at-the-point) | Straight at the point (animated; *cone points*) | S001 aimed at each point | 2026-11-14 |
+| [G053](#g053--through-the-looking-glass) | Through the looking glass (animated; *Klein bottle*) | S001 | 2026-11-14 |
+| [G054](#g054--the-mirror-next-door) | The mirror next door (animated; *Klein bottle*) | S001 on a narrow torus and Klein bottle | 2026-11-14 |
 
 ### G001 — Four ways to move
 
@@ -757,7 +759,7 @@ Film: [`no-keeper.mp4`](exhibits/G047-no-keeper/no-keeper.mp4) ·
 - **Caveats.** Tiles are 61×61 cells, nearest-neighbour; bodies are at whatever heading they
   locked to.
 
-## Strange geometries (G038–G040, G049–G050)
+## Strange geometries (G038–G040, G049–G050, G053–G054)
 
 Made by `research/experiments/GEOM/film.py` and `compass.py` (strange-geometries thread). The
 worlds are point clouds, not square grids, so each pixel shows its *nearest cell* (the cell
@@ -826,6 +828,35 @@ Film: [`apex.mp4`](exhibits/G050-straight-at-the-point/apex.mp4) ·
 - **Observation.** Aimed dead centre, Orbium crosses the cone point and the flat centre and dies
   at the saddle point (19 tu).
 - **Ledger.** C098, *observed*: offsets of 0.25 R or more survive.
+
+### G053 — Through the looking glass
+
+![Left: a square chart with glued edges marked; an Orbium crosses the top edge and reappears at the bottom with its path mirrored. Right: the same world drawn on a turning glass Klein bottle](exhibits/G053-through-the-looking-glass/looking-glass.gif)
+
+Film: [`looking-glass.mp4`](exhibits/G053-through-the-looking-glass/looking-glass.mp4) ·
+[`looking-glass-final.png`](exhibits/G053-through-the-looking-glass/looking-glass-final.png) ·
+[`provenance.json`](exhibits/G053-through-the-looking-glass/provenance.json)
+
+- **Observation.** One Orbium on a 96 × 96 Klein bottle for 60 tu. Each time it leaves through
+  the top or bottom edge of the chart it comes back on the other side of the picture, mirrored;
+  on the glass bottle it simply glides on, through the neck and round.
+- **Ledger.** C102, *observed*: it moves exactly as on a torus.
+- **Caveats.** The 3-D bottle is a drawing (nearest cell per sample, Lambert shading, transparent
+  glass); it stretches areas and passes through itself. The simulation runs on the bottle's
+  double cover with `alm.lenia`.
+
+### G054 — The mirror next door
+
+![Two narrow worlds, each shown with the strips that lie across its top and bottom edges. On the torus the Orbium travels with copies of itself; on the Klein bottle its neighbours are mirror images and the world fills with stripes](exhibits/G054-the-mirror-next-door/mirror-next-door.gif)
+
+Film: [`mirror-next-door.mp4`](exhibits/G054-the-mirror-next-door/mirror-next-door.mp4) ·
+[`mirror-next-door-t10.png`](exhibits/G054-the-mirror-next-door/mirror-next-door-t10.png) ·
+[`provenance.json`](exhibits/G054-the-mirror-next-door/provenance.json)
+
+- **Observation.** The same Orbium in a world 128 × 24 cells: on the torus it glides on; on the
+  Klein bottle it fills the world with stripes within 30 tu.
+- **Ledger.** C103, *observed*: 3 of 32 such Klein runs survive, 32 of 32 torus runs.
+- **Caveats.** One seed of 32; the dim bands are copies drawn for explanation, not extra world.
 
 ### G040 — The lattice is the compass
 
@@ -983,6 +1014,8 @@ heading values come from `galintervene.chord_heading("S102", 3002)`. The G004 S0
   catalogue: a tracked family tree, a growth-rate ladder and a 3-D replicator. Claims C072–C074.
 - **2026-11-14, G035–G037 (collision-zoo thread).** Collision atlas, ring feeding and tip-or-belly exhibits from `research/experiments/ZOO/exhibits.py`, claims C080–C083. Each `provenance.json` records state hashes; the atlas sheets replay every atlas row and check its hash.
 
+- **2026-11-14, G053–G054 (strange-geometries thread, round 3).** Orbium on a Klein bottle,
+  claims C102–C104, room 79.
 - **2026-11-14, G049–G050 (strange-geometries thread, round 2).** A cone point as a lens, claims
   C096–C098, room 79.
 - **2026-11-14, G038–G040 (strange-geometries thread).** Orbium on a sphere, on the hyperbolic
