@@ -49,6 +49,8 @@ made of, ten times per unit of time. Some of them travel; one of them never chan
 | [G035](#g035--two-orbia-204-collisions) | Two Orbia, 204 collisions (still + animated) | S001-rule Orbium × 2 | 2026-11-14 |
 | [G036](#g036--the-arc-that-eats-rings) | The arc that eats rings (animated) | P6al fed C0v; P6al–P10al | 2026-11-14 |
 | [G037](#g037--tip-or-belly) | Tip or belly (still) | P6al–P10al × C0v | 2026-11-14 |
+| [G047](#g047--no-keeper) | No keeper (animated) | P6al loose among 8 × C0v | 2026-11-14 |
+| [G048](#g048--two-orbia-fuse-into-s101) | Two Orbia fuse into S101 (still) | fused bodies of G035, S101 | 2026-11-14 |
 
 ### G001 — Four ways to move
 
@@ -679,6 +681,31 @@ still: [`ladder.png`](exhibits/G036-the-arc-that-eats-rings/ladder.png) ·
   a radius per segment, with the tip.
 - **Caveats.** One timestep and one world size. Exposures use A^0.7 (disclosed).
 
+### G047 — No keeper
+
+![A thin arc gliding through a dark world dotted with small rings; it swallows one, glides on, and then bursts into a spreading disc when it meets another](exhibits/G047-no-keeper/no-keeper.gif)
+
+Film: [`no-keeper.mp4`](exhibits/G047-no-keeper/no-keeper.mp4) ·
+[`provenance.json`](exhibits/G047-no-keeper/provenance.json)
+
+- **Observation (claim C093).** A Hexapteryx loose among eight still rings, nobody placing
+  anything. At t 110 it meets a ring with a wing tip and swallows it (now seven segments); at
+  t 205 it meets the next ring with its body and detonates. This is one of the 6 lucky runs out
+  of 64; the other 58 detonated on their first ring.
+- **Caveats.** The 512² torus is shown at half resolution.
+
+### G048 — Two Orbia fuse into S101
+
+![A grid of small two-lobed bodies, each a pair of bright crescents joined by a faint ring, next to the registered bound pair; one tile shows a single Orbium and one a field of stripes](exhibits/G048-fusion-makes-s101/fusion-s101.png)
+
+[`provenance.json`](exhibits/G048-fusion-makes-s101/provenance.json)
+
+- **Observation (claim C094).** First tile: S101, the registered bound Orbium pair. The others:
+  every collision of G035 that fused, 300 tu after contact. Nine have S101's mass, size and
+  speed. One shed a lobe and is a single Orbium again; one detonated late.
+- **Caveats.** Tiles are 61×61 cells, nearest-neighbour; bodies are at whatever heading they
+  locked to.
+
 ## Field note, 7 October 2026
 
 > *What I saw.* Four animals, four temperaments. The Orbium set off at once along a line it never
@@ -819,6 +846,7 @@ heading values come from `galintervene.chord_heading("S102", 3002)`. The G004 S0
 
 ## Cycle log
 
+- **2026-11-14, G047–G048 (collision-zoo thread, round 2).** Free-world forager and fusion-into-S101 exhibits, claims C093–C094.
 - **2026-11-14, G029–G031 (replicators thread).** Self-replicating creatures from Chan's found
   catalogue: a tracked family tree, a growth-rate ladder and a 3-D replicator. Claims C072–C074.
 - **2026-11-14, G035–G037 (collision-zoo thread).** Collision atlas, ring feeding and tip-or-belly exhibits from `research/experiments/ZOO/exhibits.py`, claims C080–C083. Each `provenance.json` records state hashes; the atlas sheets replay every atlas row and check its hash.

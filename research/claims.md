@@ -156,6 +156,7 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
 | Species hunt 2026-11-10 (`research/experiments/SPECIES-scout/`, gallery G021) | C063 (C061–C062 reserved by the open fractal PR #44) |
 | Replicators thread 2026-11-14 (`research/experiments/REPLICATORS/`, gallery G029–G031) | C072 / C073 / C074 / C075 |
 | Collision zoo 2026-11-14 (`research/experiments/ZOO/`, gallery G035–G037, museum room 78) | C080 / C081 / C082 / C083 |
+| Collision zoo round 2, 2026-11-14 (`research/experiments/ZOO/`, gallery G047–G048, room 78) | C093 / C094 / C095; history line on C081 |
 
 ## Claims
 
@@ -2238,6 +2239,7 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
 - **Known caveats:** EXPLODE is decided 25 tu after contact (mass > 2 × the pair); all of them were far past that (15–60 ×). Not checked at a smaller timestep or larger grid
 - **History:**
   - 2026-11-14 — OBSERVED — collision-zoo thread.
+  - 2026-11-14 — OBSERVED — ring scan repeated at T 20: 361 of 365 rows keep their class (C095).
 
 ### C082 — A Hexapteryx (P6al) that swallows k Circium rings becomes the catalogued Pteryx with 6 + k segments, for k = 1–4 (shape correlation 0.993–0.998, mass within 0.3 %)
 
@@ -2273,5 +2275,60 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
 - **Search / parameter bounds:** one start, three protocols, one world size; segment counts beyond 10 are mass estimates, not shape checks
 - **Reproduction command:** `PYTHONPATH=src:research/experiments/ZOO .venv/bin/python research/experiments/ZOO/feed.py run --meals 30 [--alternate] [--T 20] --tag=-<name>`
 - **Known caveats:** where the climb ends depends on the feeding protocol and the timestep, so no top rung is claimed. The arc straightens as it grows (G036), so the fixed offsets may simply stop finding the tip; a better keeper might go higher
+- **History:**
+  - 2026-11-14 — OBSERVED — collision-zoo thread.
+
+### C093 — Without a keeper there is no climb: 64 of 64 Hexapteryxes loose among eight Circium rings detonate, after 30–385 time units; 6 eat one ring first and none eats two
+
+- **Status:** OBSERVED
+- **Owner lane:** collision-zoo thread (ZOO round 2, 2026-11-14)
+- **Sources:** `research/experiments/ZOO/forage.py`, `forage-K8.jsonl`, `forage-K60.jsonl`, `summarize.py`; gallery G047
+- **Specimen / version:** catalogue P6al, rotated to a random heading and re-settled (`atlas.body`); catalogue C0v, settled
+- **Simulator / version:** `alm.lenia.Lenia`
+- **Parameters:** the C081 rule, 512² torus, T 10
+- **Intervention:** none after setup. Setup per seed (`default_rng([23, seed, K, N])`): one arc at a random place and heading, K rings at random places at least 4 R apart and 6 R from the arc's start. K = 8 for seeds 0–63; K = 60 for seeds 0–15
+- **Metric:** census every 5 tu (components of A ≥ 0.1 on the torus: the arc is the heaviest > 400 cells, rings 80–250 cells); a run ends when total mass > 4 × start or support > 20 % of the world. A ring disappearing is a meal if the arc stays 60–250 cells heavier for the next 20 tu, "destroyed" if it stays within 60 cells, else a detonation
+- **Result:** K = 8: all 64 runs detonated (median 80 tu, range 30–385). First encounter: detonation 56, meal 6 (the arc becomes a 7-segment arc, mass ≈ 886), ring destroyed without growth 2. Every arc that ate later detonated on its next ring. K = 60: all 16 detonated by 55 tu with no meal
+- **Run IDs:** forage rows (seed, K) with init and final sha256
+- **Search / parameter bounds:** one start species, two ring densities, one world size, one timestep; rings never move, so an arc meets only what lies on its straight path
+- **Reproduction command:** `PYTHONPATH=src:research/experiments/ZOO .venv/bin/python research/experiments/ZOO/forage.py SEED 8 3000` for SEED 0–63
+- **Known caveats:** 6 of 64 (9 %) is about half of what the tip windows' share of the contact width would suggest (6 of 33 contact rows in the P6al scan, 18 %); small numbers and random headings. The census can call a detonation onset a meal, so meals are counted only when the arc's mass holds for 20 tu
+- **History:**
+  - 2026-11-14 — OBSERVED — collision-zoo thread.
+
+### C094 — Nine of the twelve fused bodies in the Orbium collision atlas settle into S101, the registered bound Orbium pair (mass, gyradius and speed equal to S101's within 0.0011 R², 0.0008 R and 0.0008 R/tu)
+
+- **Status:** OBSERVED
+- **Owner lane:** collision-zoo thread (ZOO round 2, 2026-11-14)
+- **Sources:** `research/experiments/ZOO/fused_check.py`, `fused_check.json`; gallery G048
+- **Specimen / version:** the 12 FUSE rows of `atlas-O.jsonl` (C080), each replayed (hash checked at the row's classification time); S101 settled 500 tu alone on the same torus
+- **Simulator / version:** `alm.lenia.Lenia`
+- **Parameters:** S001 rule, 384² torus, T 10
+- **Intervention:** none beyond C080's collision; run to contact + 300 tu
+- **Metric:** mean over the next 50 tu of mass ΣA/R², gyradius (R) and speed (R/tu); best normalised correlation against settled S101 over 1° rotations and all shifts
+- **Result:** S101: 0.8731, 0.8151, 0.4727. Nine bodies: mass 0.8735–0.8742, gyradius 0.8143–0.8155, speed 0.4719–0.4726, correlation 0.964–0.984. The other three: θ 60° b −0.5 shed a lobe and is one Orbium (mass 0.436); θ 90° b −0.5 is near but not on S101 (0.8461, 0.7961, 0.4585); θ 165° b 0 detonated after the 25 tu classification window (mass 184 R²)
+- **Run IDs:** `fused_check.json` rows with replay_ok
+- **Search / parameter bounds:** one timestep, contact + 300 tu
+- **Reproduction command:** `PYTHONPATH=src:research/experiments/ZOO .venv/bin/python research/experiments/ZOO/fused_check.py`
+- **Known caveats:** correlations stay below 0.99 because the bodies glide at lattice-locked headings that differ from S101's reference run; the scalar statistics are the stronger match. C080's "FUSE" class is therefore mostly S101, but not always, and a fused body can still detonate later
+- **Prior literature:** S101 is the catalogued Synorbium ignis (O4i) carried to S001's rule (S101 dossier); its dossier found it from 7 of 175 two-Orbium starts placed side by side. This finds it from collisions
+- **History:**
+  - 2026-11-14 — OBSERVED — collision-zoo thread.
+
+### C095 — The tip-or-belly map of C081 survives halving the timestep: 361 of 365 ring-scan rows keep their outcome at T 20
+
+- **Status:** OBSERVED
+- **Owner lane:** collision-zoo thread (ZOO round 2, 2026-11-14)
+- **Sources:** `research/experiments/ZOO/atlas.py` world PC20, `atlas-PC20.jsonl`, `summarize.py`
+- **Specimen / version:** as C081, every body settled and rotated anew at T 20
+- **Simulator / version:** `alm.lenia.Lenia`
+- **Parameters:** the C081 rule at T 20, 512² torus
+- **Intervention:** as C081's ring scan (P6al–P10al head-on at C0v, b −9…+9 R in 0.25 R steps)
+- **Metric:** C080's classifier
+- **Result:** 361 of 365 rows agree with T 10. The four changes are all on the +b side, one 0.25 R step at a swallow window's edge: P8al +4.25 and P9al +4.75 swallow at T 10 but detonate at T 20; P9al +5.5 and P10al +6.0 miss at T 10 but swallow at T 20. So the +b windows sit about a quarter radius further out at T 20. Every belly hit detonates at both timesteps
+- **Run IDs:** `atlas-PC20.jsonl` rows with final_sha256
+- **Search / parameter bounds:** head-on only; one grid
+- **Reproduction command:** `PYTHONPATH=src:research/experiments/ZOO .venv/bin/python research/experiments/ZOO/atlas.py run PC20`
+- **Known caveats:** not checked at a larger grid or R
 - **History:**
   - 2026-11-14 — OBSERVED — collision-zoo thread.

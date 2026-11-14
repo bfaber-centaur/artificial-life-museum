@@ -230,7 +230,87 @@ def g037():
     })
 
 
+def g047(seed=62, K=8, tail=15):
+    """A free Hexapteryx among rings: forage.py seed 62 (one meal, then detonation)."""
+    import forage
+
+    folder = EXHIBITS / "G047-no-keeper"
+    folder.mkdir(parents=True, exist_ok=True)
+    row = next(json.loads(l) for l in (HERE / f"forage-K{K}.jsonl").read_text().splitlines()
+               if json.loads(l)["seed"] == seed)
+    A0, arc, m_ring, heading, Kp = forage.setup(seed, K, row["N"])
+    assert sha(A0) == row["init_sha256"]
+    rule = forage.RULE
+    L = Lenia(rule, A0)
+    t_end = row["t_end"]
+    frames = []
+    meal_t = 110
+    for s in range(0, (t_end + tail) * rule.T + 1):
+        if s:
+            L.step()
+        if s == t_end * rule.T:
+            assert sha(L.A) == row["final_sha256"], "replay differs from forage row"
+        if s % rule.T == 0:
+            t = s // rule.T
+            im = Image.new("RGB", (512, 512 + 64), BG)
+            im.paste(Image.fromarray(colorize(L.A[::2, ::2], 2)), (0, 64))
+            text(im, (14, 10), "No keeper", 22, bold=True)
+            note = "hunting" if t < meal_t else ("ate one ring: now 7 segments" if t < 205 else "met the next ring with its body")
+            text(im, (14, 38), f"t = {t:4d}   {note}   (512² torus at half resolution)", 15, fill=DIM)
+            frames.append(im)
+    media = write_media(frames, folder, "no-keeper", fps=20, gif_width=320, gif_every=2, gif_colors=96)
+    provenance(folder, {
+        "exhibit": "G047", "title": "No keeper", "media": media, "claim": "C093",
+        "view": "whole 512^2 torus downsampled 2x (every other cell), every 1 tu, A linear onto inferno",
+        "run": {"forage_row": f"research/experiments/ZOO/forage-K{K}.jsonl seed {seed}", "rule": rule.to_dict(),
+                "grid": [row["N"], row["N"]], "boundary": "periodic", "rings": Kp, "heading0": heading,
+                "initial_state_sha256": row["init_sha256"], "final_state_sha256_at_t_end": row["final_sha256"],
+                "t_end": t_end, "extra_tu_shown": tail},
+        "command": f"{CMD} G047",
+    })
+
+
+def g048():
+    """The fused Orbium pairs of C080 next to S101 (fused_check.py)."""
+    import fused_check as fc
+
+    folder = EXHIBITS / "G048-fusion-makes-s101"
+    folder.mkdir(parents=True, exist_ok=True)
+    rows = [json.loads(l) for l in (HERE / "atlas-O.jsonl").read_text().splitlines()]
+    fused = [r for r in rows if r["class"] == "FUSE"]
+    from multiprocessing import Pool
+    with Pool(4) as pool:
+        res = pool.map(fc.one, fused)
+    ref, rm, rg, rv = fc.s101_ref()
+    chk = json.loads((HERE / "fused_check.json").read_text())
+    tw = 150
+    cols = 7
+    im = Image.new("RGB", (14 + cols * (tw + 8), 100 + 2 * (tw + 48)), BG)
+    text(im, (14, 10), "Two Orbia fuse into S101", 22, bold=True)
+    text(im, (14, 40), "First tile: the registered bound pair S101. Others: each fused body of the Orbium atlas, "
+                       "300 tu after contact.", 14, fill=DIM)
+    tiles = [("S101", ref, f"mass {rm:.4f}")] + [
+        (f"{x['theta']}°, b {x['b_R']:g}", x["patch"] if x["patch"] is not None else np.zeros((61, 61)),
+         f"mass {x['mass_R2']:.4f}" if x["n_bodies"] == 1 else "detonated") for x in res]
+    for i, (lab, P, sub) in enumerate(tiles):
+        x = 14 + (i % cols) * (tw + 8)
+        y = 80 + (i // cols) * (tw + 48)
+        tile = Image.fromarray(colorize(P, 1)).resize((tw, tw), Image.Resampling.NEAREST)
+        im.paste(tile, (x, y))
+        text(im, (x, y + tw + 4), lab, 13, fill=ACCENT if i == 0 else INK)
+        text(im, (x, y + tw + 22), sub, 12, fill=DIM)
+    im.save(folder / "fusion-s101.png")
+    provenance(folder, {
+        "exhibit": "G048", "title": "Two Orbia fuse into S101", "media": ["fusion-s101.png"], "claim": "C094",
+        "view": "61x61 windows centred on the largest component, 300 tu after contact (S101: after 500 tu alone), "
+                "A linear onto inferno, nearest-neighbour 150 px; mass in R^2 units averaged over the next 50 tu",
+        "measurements": "research/experiments/ZOO/fused_check.json",
+        "runs": [{"theta": x["theta"], "b_R": x["b_R"], "replay_ok": x["replay_ok"]} for x in res],
+        "command": f"{CMD} G048",
+    })
+
+
 if __name__ == "__main__":
     for g in sys.argv[1:]:
-        {"G035": g035, "G036": g036, "G037": g037}[g]()
+        {"G035": g035, "G036": g036, "G037": g037, "G047": g047, "G048": g048}[g]()
         print(g, "done", flush=True)
