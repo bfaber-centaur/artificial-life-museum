@@ -141,3 +141,37 @@ def write_mp4(frames, path, fps=30):
 
 def save_png(img, path):
     Image.fromarray(img).save(path, optimize=True)
+
+
+class ConeView:
+    """Display picture of a cone world: polar angle scaled by 2 pi / Theta (so a 300-degree cone
+    is opened to a full disk and angles look 6/5 wider; a 420-degree cone is squeezed by 6/7);
+    nearest cell per pixel."""
+
+    def __init__(self, world, size=400, margin=6):
+        self.w, self.size = world, size
+        rmax = world.params["rmax"]
+        self.scale = (size / 2 - margin) / rmax
+        yy, xx = np.mgrid[0:size, 0:size]
+        X = (xx - size / 2 + 0.5) / self.scale
+        Y = -(yy - size / 2 + 0.5) / self.scale
+        self.inside = np.hypot(X, Y) < rmax
+        d, self.idx = cKDTree(world.xy).query(np.stack([X[self.inside], Y[self.inside]], 1))
+
+    def to_px(self, r, theta):
+        a = theta * 2 * np.pi / self.w.params["Theta"]
+        return (int(self.size / 2 + r * np.cos(a) * self.scale),
+                int(self.size / 2 - r * np.sin(a) * self.scale))
+
+    def frame(self, A):
+        img = np.empty((self.size, self.size, 3), dtype=np.uint8)
+        img[:] = BG
+        c = colour(A[self.idx]) + (1 - np.clip(A[self.idx], 0, 1))[:, None] * np.array([10, 12, 24])
+        img[self.inside] = np.clip(c, 0, 255).astype(np.uint8)
+        # seams between the glued 60-degree sectors, faint
+        for k in range(self.w.params["sectors"]):
+            for rr in np.arange(4, self.w.params["rmax"], 2.0):
+                x, y = self.to_px(rr, k * np.pi / 3)
+                if 0 <= x < self.size and 0 <= y < self.size and (img[y, x] < 60).all():
+                    img[y, x] = (34, 36, 54)
+        return img
