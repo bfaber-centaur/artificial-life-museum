@@ -1,7 +1,7 @@
 {
   "ledger": "research/claims.md",
-  "ledger_sha256": "a912583cccb9ea59a877889936fc151bcdafe74853962b9da2f09f2bbf41d224",
-  "ledger_commit": "a35e6d2",
+  "ledger_sha256": "5d6302d930b9881be1b0c393f692621751a27d1ad2c2a4aa17bd1282cc8eab2d",
+  "ledger_commit": "91dd28b",
   "conventions_sha256": "0e237384e0425b3c325229cf650ab6f9807fb08c1bedc991433b54b13c2eb02f",
   "claims": {
     "C001": {
@@ -354,6 +354,27 @@
       "rooms": [
         "replicators"
       ]
+    },
+    "C076": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "evolution-soup"
+      ]
+    },
+    "C077": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "evolution-soup"
+      ]
+    },
+    "C078": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "evolution-soup"
+      ]
     }
   },
   "sources": {
@@ -516,6 +537,18 @@
       "research/gallery/exhibits/G030-four-growth-rates/provenance.json",
       "research/gallery/exhibits/G031-replicating-in-3d/provenance.json",
       "research/gallery/exhibits/G031-replicating-in-3d/replicator3d.mp4"
+    ],
+    "evolution-soup": [
+      "research/experiments/SOUP/SOUP.md",
+      "research/experiments/SOUP/diversity.jsonl",
+      "research/experiments/SOUP/mutant.jsonl",
+      "research/experiments/SOUP/runs.jsonl",
+      "research/experiments/SOUP/scout.jsonl",
+      "research/experiments/SOUP/soup.py",
+      "research/gallery/exhibits/G032-two-heredities/duel.mp4",
+      "research/gallery/exhibits/G032-two-heredities/provenance.json",
+      "research/gallery/exhibits/G033-blending-swamps-variation/provenance.json",
+      "research/gallery/exhibits/G034-one-physics-many-bodies/provenance.json"
     ],
     "collection": [
       "research/experiments/L6-field/make_seeds.py",

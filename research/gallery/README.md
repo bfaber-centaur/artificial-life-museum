@@ -46,6 +46,9 @@ made of, ten times per unit of time. Some of them travel; one of them never chan
 | [G029](#g029--a-family-tree) | A family tree (animated; *multi-kernel*) | one cell of Chan's *division well* (found/213 #84) | 2026-11-14 |
 | [G030](#g030--how-fast-one-cell-fills-the-world) | How fast one cell fills the world (animated; *multi-kernel, interpolated rules*) | the same cell under four rules, *well* → *uncontrolled* | 2026-11-14 |
 | [G031](#g031--a-replicator-in-three-dimensions) | A replicator in three dimensions (animated; *3-D, multi-kernel*) | Chan's found/312 #21 | 2026-11-14 |
+| [G032](#g032--same-world-two-kinds-of-heredity) | Same world, two kinds of heredity (animated; *Flow-Lenia with genomes*) | soup runs B16s0, D16s0 | 2026-11-14 |
+| [G033](#g033--where-the-variation-goes) | Where the variation goes (*Flow-Lenia with genomes*) | soup runs B16s0–3, D16s0–3 | 2026-11-14 |
+| [G034](#g034--one-physics-many-body-plans) | One physics, many body plans (*Flow-Lenia with genomes*) | eight soup worlds | 2026-11-14 |
 
 ### G001 — Four ways to move
 
@@ -630,6 +633,47 @@ Film: [`replicator3d.mp4`](exhibits/G031-replicating-in-3d/replicator3d.mp4) ·
 - **Rendering.** The box turns slowly about the vertical axis. Each pixel shows the first voxel
   above 0.25 along the line of sight, lit from the upper left; each separate body has its own
   hue. Because the box is periodic, bodies leaving one side reappear on the other.
+
+## Evolution soup (G032–G034)
+
+Flow-Lenia worlds in which every cell carries a genome (ten growth weights) that travels with
+its matter and now and then mutates; matter is conserved, so bodies compete for it. Engine and
+notes: [`SOUP.md`](../experiments/SOUP/SOUP.md). Colour is the genome (a fixed random projection
+of the ten weights to RGB), brightness is the matter.
+
+### G032 — Same world, two kinds of heredity
+
+![Two copies of one world: on the left a purple amoeba spreads and swallows a colony of dots; on the right the dots survive among mottled blobs; a diversity curve below rises for the right world and falls for the left](exhibits/G032-two-heredities/duel.gif)
+
+Film: [`duel.mp4`](exhibits/G032-two-heredities/duel.mp4) ·
+final frame: [`duel-final.png`](exhibits/G032-two-heredities/duel-final.png) ·
+[`provenance.json`](exhibits/G032-two-heredities/provenance.json)
+
+- **Observation (claims C077, C076).** Kernel set 16, seed 0, 2400 time units, from the identical
+  start. Left, genomes average where matter meets: a slime grows into a giant that engulfs the
+  dot-shaped plankton. Right, a cell keeps the genome of the biggest parcel that arrives: the
+  plankton survive and the blobs become genome mosaics.
+- **Caveats.** One seed is shown; the ledger numbers cover four.
+
+### G033 — Where the variation goes
+
+![Population bands collapsing on the left and staying many on the right; genome fans with tapering wedges on the left; eight diversity curves, four rising and four falling](exhibits/G033-blending-swamps-variation/heredity.png)
+
+[`provenance.json`](exhibits/G033-blending-swamps-variation/provenance.json)
+
+- **Observation (claim C076).** Top: mass per species (bodies with similar genomes; a drawing
+  convention). Middle: all matter binned along the main genome axis; under blending each mutation
+  leaves a wedge that tapers back into the mean. Bottom: genome spread in all eight runs.
+
+### G034 — One physics, many body plans
+
+![Eight worlds: worms and dots, ringed cells, hatched blobs, chains and a giant amoeba](exhibits/G034-one-physics-many-bodies/worlds.png)
+
+[`provenance.json`](exhibits/G034-one-physics-many-bodies/provenance.json)
+
+- **Observation (no claim).** Eight worlds, one kernel set each, 16 founder genomes each. Inside
+  one world the founders build different bodies from the same kernels. Most worlds settle into a
+  still mosaic; kernel set 16 did not.
 
 ## Field note, 7 October 2026
 

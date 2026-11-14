@@ -1,0 +1,142 @@
+{
+ "exhibit": "G033",
+ "title": "Where the variation goes",
+ "claim": [
+  "C076"
+ ],
+ "media": [
+  "heredity.png"
+ ],
+ "engine": "research/experiments/SOUP/soup.Soup (our parameter-embedded Flow-Lenia, written from Plantec et al. 2023; not the authors' code)",
+ "runs": [
+  {
+   "name": "B16s0",
+   "kernel_set": 16,
+   "seed": 0,
+   "heredity": "blend",
+   "grid": [
+    256,
+    256
+   ],
+   "steps": 12000,
+   "time_units": 2400.0,
+   "snapshot_every_steps": 40,
+   "final_state_sha256": "ed919d105615c417400aa057de700bc674d875162a6381f46627e5f2aa1a2184",
+   "command": "SOUP_OUT=<dir> python research/experiments/SOUP/run.py B16s0 --rule 16 --seed 0 --steps 12000 --every 40"
+  },
+  {
+   "name": "B16s1",
+   "kernel_set": 16,
+   "seed": 1,
+   "heredity": "blend",
+   "grid": [
+    256,
+    256
+   ],
+   "steps": 12000,
+   "time_units": 2400.0,
+   "snapshot_every_steps": 40,
+   "final_state_sha256": "1948350a69ca7e215fae215271d63c353ff84edf1d6df274a898b52719624946",
+   "command": "SOUP_OUT=<dir> python research/experiments/SOUP/run.py B16s1 --rule 16 --seed 1 --steps 12000 --every 40"
+  },
+  {
+   "name": "B16s2",
+   "kernel_set": 16,
+   "seed": 2,
+   "heredity": "blend",
+   "grid": [
+    256,
+    256
+   ],
+   "steps": 12000,
+   "time_units": 2400.0,
+   "snapshot_every_steps": 40,
+   "final_state_sha256": "13b42f34d84549f04bed511ce778a231adb1c4e3ef6627a1b82cb2142241a553",
+   "command": "SOUP_OUT=<dir> python research/experiments/SOUP/run.py B16s2 --rule 16 --seed 2 --steps 12000 --every 40"
+  },
+  {
+   "name": "B16s3",
+   "kernel_set": 16,
+   "seed": 3,
+   "heredity": "blend",
+   "grid": [
+    256,
+    256
+   ],
+   "steps": 12000,
+   "time_units": 2400.0,
+   "snapshot_every_steps": 40,
+   "final_state_sha256": "3b46a92a20560453899de650036ef308cb7ead21671c3600e2798447c6ad777d",
+   "command": "SOUP_OUT=<dir> python research/experiments/SOUP/run.py B16s3 --rule 16 --seed 3 --steps 12000 --every 40"
+  },
+  {
+   "name": "D16s0",
+   "kernel_set": 16,
+   "seed": 0,
+   "heredity": "dominant",
+   "grid": [
+    256,
+    256
+   ],
+   "steps": 12000,
+   "time_units": 2400.0,
+   "snapshot_every_steps": 40,
+   "final_state_sha256": "c127520fd312f7a6a9fbaf088f9fbaf130c5954b74fa56e4b5629cb39ff9928e",
+   "command": "SOUP_OUT=<dir> python research/experiments/SOUP/run.py D16s0 --rule 16 --seed 0 --steps 12000 --every 40 --inherit dominant"
+  },
+  {
+   "name": "D16s1",
+   "kernel_set": 16,
+   "seed": 1,
+   "heredity": "dominant",
+   "grid": [
+    256,
+    256
+   ],
+   "steps": 12000,
+   "time_units": 2400.0,
+   "snapshot_every_steps": 40,
+   "final_state_sha256": "64a7b5012a710714199965591a5db3ffca210c663f48041eef57c71b4bb41e36",
+   "command": "SOUP_OUT=<dir> python research/experiments/SOUP/run.py D16s1 --rule 16 --seed 1 --steps 12000 --every 40 --inherit dominant"
+  },
+  {
+   "name": "D16s2",
+   "kernel_set": 16,
+   "seed": 2,
+   "heredity": "dominant",
+   "grid": [
+    256,
+    256
+   ],
+   "steps": 12000,
+   "time_units": 2400.0,
+   "snapshot_every_steps": 40,
+   "final_state_sha256": "96ea5284da7b228f657e7a512636b65c498fcde67a73f230cc5e9190e9642a58",
+   "command": "SOUP_OUT=<dir> python research/experiments/SOUP/run.py D16s2 --rule 16 --seed 2 --steps 12000 --every 40 --inherit dominant"
+  },
+  {
+   "name": "D16s3",
+   "kernel_set": 16,
+   "seed": 3,
+   "heredity": "dominant",
+   "grid": [
+    256,
+    256
+   ],
+   "steps": 12000,
+   "time_units": 2400.0,
+   "snapshot_every_steps": 40,
+   "final_state_sha256": "6e62ffa2bd3749bdd8a6b41e0756ca3fc8f733a4e1f3c30eaf326ca30e007f7e",
+   "command": "SOUP_OUT=<dir> python research/experiments/SOUP/run.py D16s3 --rule 16 --seed 3 --steps 12000 --every 40 --inherit dominant"
+  }
+ ],
+ "view": "top: species.py bookkeeping (threshold 0.25), stacked mass per species coloured by centroid genome; middle: all matter (A > 0.05) binned along the first principal axis of the pooled genome cloud of both runs, brightness = sqrt(mass), colour = mean genome; bottom: diversity.jsonl spread for all 8 runs",
+ "commands": [
+  "python research/experiments/SOUP/species.py <dir>/B16s0.npz <dir>/B16s0_sp.json (and D16s0)",
+  "python research/experiments/SOUP/diversity.py <dir>/B16s{0..3}.npz <dir>/D16s{0..3}.npz",
+  "python research/experiments/SOUP/plots.py compare <dir>/B16s0 <dir>/D16s0 research/experiments/SOUP/diversity.jsonl heredity.png"
+ ],
+ "caveats": [
+  "'Species' is a drawing convention, not a biological species concept."
+ ]
+}
