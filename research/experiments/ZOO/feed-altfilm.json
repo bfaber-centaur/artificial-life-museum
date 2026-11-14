@@ -1,0 +1,564 @@
+{
+ "args": {
+  "cmd": "run",
+  "b": [
+   0.95,
+   0.8,
+   1.1,
+   0.7,
+   1.25,
+   0.6,
+   1.4
+  ],
+  "alternate": true,
+  "ahead": 3.0,
+  "meals": 30,
+  "digest": 40,
+  "wait": 60,
+  "start": "P6al",
+  "film": "states/feed-alt-film.npz",
+  "tag": "-altfilm",
+  "T": 10
+ },
+ "ladder": {
+  "P6al": 756.664850578219,
+  "P7al": 894.1243785694592,
+  "P8al": 1029.406385384732,
+  "P9al": 1163.276333036044,
+  "P10al": 1296.3806087092403
+ },
+ "ring_mass": 146.41870682229072,
+ "per_segment": 134.92893953275532,
+ "log": [
+  {
+   "t": 60.0,
+   "meal": 1,
+   "b": 3.753,
+   "half_width_R": 2.803,
+   "mass": 894.1,
+   "segments_est": 7.02,
+   "cells": 1440,
+   "tries": [
+    {
+     "off": 0.95,
+     "b": 3.753,
+     "outcome": "grew",
+     "mass": 894.1
+    }
+   ],
+   "sha256": "59c4baa02a96c8f45ed64ef2cd0cb10332249c2b46f04ca74b6f96246d132121"
+  },
+  {
+   "t": 115.0,
+   "meal": 2,
+   "b": -4.243,
+   "half_width_R": 3.293,
+   "mass": 1030.5,
+   "segments_est": 8.03,
+   "cells": 1668,
+   "tries": [
+    {
+     "off": 0.95,
+     "b": -4.243,
+     "outcome": "grew",
+     "mass": 1030.5
+    }
+   ],
+   "sha256": "36961ec54d412b07802d5db036ef7ee76147ee1593f4a63ff160ac331552a791"
+  },
+  {
+   "t": 165.0,
+   "meal": 3,
+   "b": 4.745,
+   "half_width_R": 3.795,
+   "mass": 1165.5,
+   "segments_est": 9.03,
+   "cells": 1853,
+   "tries": [
+    {
+     "off": 0.95,
+     "b": 4.745,
+     "outcome": "grew",
+     "mass": 1165.5
+    }
+   ],
+   "sha256": "b75b5320305a458d1fa64f2dd27c4a70aa2581c74f1f84b22f878a0b132e4fa8"
+  },
+  {
+   "t": 220.0,
+   "meal": 4,
+   "b": -5.237,
+   "half_width_R": 4.287,
+   "mass": 1299.1,
+   "segments_est": 10.02,
+   "cells": 2072,
+   "tries": [
+    {
+     "off": 0.95,
+     "b": -5.237,
+     "outcome": "grew",
+     "mass": 1299.1
+    }
+   ],
+   "sha256": "f5138fb8c901509414ba9024f420c9ab766bdc600b55b2c291c6a2b55539c464"
+  },
+  {
+   "t": 270.0,
+   "meal": 5,
+   "b": 5.726,
+   "half_width_R": 4.776,
+   "mass": 1435.3,
+   "segments_est": 11.03,
+   "cells": 2288,
+   "tries": [
+    {
+     "off": 0.95,
+     "b": 5.726,
+     "outcome": "grew",
+     "mass": 1435.3
+    }
+   ],
+   "sha256": "4145932c8fd6b5a7fea0556037a9c66a007768c7580b6bafd3ea72ccde5141fe"
+  },
+  {
+   "t": 325.0,
+   "meal": 6,
+   "b": -6.229,
+   "half_width_R": 5.279,
+   "mass": 1571.3,
+   "segments_est": 12.04,
+   "cells": 2514,
+   "tries": [
+    {
+     "off": 0.95,
+     "b": -6.229,
+     "outcome": "grew",
+     "mass": 1571.3
+    }
+   ],
+   "sha256": "cc53208d0d7c5621447157720f3e6e780fb685ad2d0214c93a72ba1f711b8ed0"
+  },
+  {
+   "t": 375.0,
+   "meal": 7,
+   "b": 6.728,
+   "half_width_R": 5.778,
+   "mass": 1708.7,
+   "segments_est": 13.06,
+   "cells": 2727,
+   "tries": [
+    {
+     "off": 0.95,
+     "b": 6.728,
+     "outcome": "grew",
+     "mass": 1708.7
+    }
+   ],
+   "sha256": "875b0729b7b950327fa009e8e2c81afb38aa180b04f1cce3886a8c209553a723"
+  },
+  {
+   "t": 430.0,
+   "meal": 8,
+   "b": -7.221,
+   "half_width_R": 6.271,
+   "mass": 1846.7,
+   "segments_est": 14.08,
+   "cells": 2934,
+   "tries": [
+    {
+     "off": 0.95,
+     "b": -7.221,
+     "outcome": "grew",
+     "mass": 1846.7
+    }
+   ],
+   "sha256": "83dc52adb1bfa15145ce9b1ebf41396342a7b22bd0d5d4a37c1027d6dc131c25"
+  },
+  {
+   "t": 485.0,
+   "meal": 9,
+   "b": 7.745,
+   "half_width_R": 6.795,
+   "mass": 1985.1,
+   "segments_est": 15.1,
+   "cells": 3185,
+   "tries": [
+    {
+     "off": 0.95,
+     "b": 7.745,
+     "outcome": "grew",
+     "mass": 1985.1
+    }
+   ],
+   "sha256": "5e4500de35d7b509d68a141c31b4c33434cd90f65c54b78f6950558ac1848da1"
+  },
+  {
+   "t": 540.0,
+   "meal": 10,
+   "b": -8.252,
+   "half_width_R": 7.302,
+   "mass": 2123.1,
+   "segments_est": 16.13,
+   "cells": 3394,
+   "tries": [
+    {
+     "off": 0.95,
+     "b": -8.252,
+     "outcome": "grew",
+     "mass": 2123.1
+    }
+   ],
+   "sha256": "332afbda93dae9de15aa965a7d828923ed13b36d674c4dd4e8964f15735c1792"
+  },
+  {
+   "t": 595.0,
+   "meal": 11,
+   "b": 8.761,
+   "half_width_R": 7.811,
+   "mass": 2258.1,
+   "segments_est": 17.13,
+   "cells": 3607,
+   "tries": [
+    {
+     "off": 0.95,
+     "b": 8.761,
+     "outcome": "grew",
+     "mass": 2258.1
+    }
+   ],
+   "sha256": "a63b3e42e66bc352ec8d72d484b391cf28a1cbd162d6376f5ff035f51a0b429f"
+  },
+  {
+   "t": 650.0,
+   "meal": 12,
+   "b": -9.262,
+   "half_width_R": 8.312,
+   "mass": 2395.0,
+   "segments_est": 18.14,
+   "cells": 3830,
+   "tries": [
+    {
+     "off": 0.95,
+     "b": -9.262,
+     "outcome": "grew",
+     "mass": 2395.0
+    }
+   ],
+   "sha256": "251b45b3fbb70bd21939219dbc4f9a54b0335f40313a257fc78762761b062adf"
+  },
+  {
+   "t": 705.0,
+   "meal": 13,
+   "b": 9.761,
+   "half_width_R": 8.811,
+   "mass": 2527.1,
+   "segments_est": 19.12,
+   "cells": 4043,
+   "tries": [
+    {
+     "off": 0.95,
+     "b": 9.761,
+     "outcome": "grew",
+     "mass": 2527.1
+    }
+   ],
+   "sha256": "0a12d5957bc9bd4d324ab07fa8895d7c8d717c44fc5c624490dac4e035568dc9"
+  },
+  {
+   "t": 760.0,
+   "meal": 14,
+   "b": -10.243,
+   "half_width_R": 9.293,
+   "mass": 2661.5,
+   "segments_est": 20.12,
+   "cells": 4263,
+   "tries": [
+    {
+     "off": 0.95,
+     "b": -10.243,
+     "outcome": "grew",
+     "mass": 2661.5
+    }
+   ],
+   "sha256": "f41da28138b682473da36032078299bd15ce6a362b3b0abdc27e86de40c4b91d"
+  },
+  {
+   "t": 815.0,
+   "meal": 15,
+   "b": 10.739,
+   "half_width_R": 9.789,
+   "mass": 2804.5,
+   "segments_est": 21.18,
+   "cells": 4492,
+   "tries": [
+    {
+     "off": 0.95,
+     "b": 10.739,
+     "outcome": "grew",
+     "mass": 2804.5
+    }
+   ],
+   "sha256": "037f6ac65ba617bd41d91248945ed75b4f0848742f94519993c7345512e1973f"
+  },
+  {
+   "t": 870.0,
+   "meal": 16,
+   "b": -11.274,
+   "half_width_R": 10.324,
+   "mass": 2894.6,
+   "segments_est": 21.84,
+   "cells": 4615,
+   "tries": [
+    {
+     "off": 0.95,
+     "b": -11.274,
+     "outcome": "grew",
+     "mass": 2894.6
+    }
+   ],
+   "sha256": "da7b2e8abf98219c83ecc24c416a0074c6758977905cf6a2c3dc19fd8e209150"
+  },
+  {
+   "t": 925.0,
+   "meal": 17,
+   "b": 11.576,
+   "half_width_R": 10.626,
+   "mass": 3070.1,
+   "segments_est": 23.15,
+   "cells": 4897,
+   "tries": [
+    {
+     "off": 0.95,
+     "b": 11.576,
+     "outcome": "grew",
+     "mass": 3070.1
+    }
+   ],
+   "sha256": "e88e2b0fc094f07dfd92d5d468c700de8ed5b814066e70d47d6c6ce80193a0ac"
+  },
+  {
+   "t": 980.0,
+   "meal": 18,
+   "b": -12.26,
+   "half_width_R": 11.31,
+   "mass": 3200.1,
+   "segments_est": 24.11,
+   "cells": 5106,
+   "tries": [
+    {
+     "off": 0.95,
+     "b": -12.26,
+     "outcome": "grew",
+     "mass": 3200.1
+    }
+   ],
+   "sha256": "02c5adb7d1e1b379fed0afaaf9546ed48095c3dec930e6b29e7f6001d5f7f76f"
+  },
+  {
+   "t": 1035.0,
+   "meal": 19,
+   "b": 12.712,
+   "half_width_R": 11.762,
+   "mass": 3284.3,
+   "segments_est": 24.73,
+   "cells": 5250,
+   "tries": [
+    {
+     "off": 0.95,
+     "b": 12.712,
+     "outcome": "grew",
+     "mass": 3284.3
+    }
+   ],
+   "sha256": "5d07630958e5f245fd393c43be5e087923c2d58a74598293c69b68ab757eb027"
+  },
+  {
+   "t": 1090.0,
+   "meal": 20,
+   "b": -13.09,
+   "half_width_R": 12.14,
+   "mass": 3473.2,
+   "segments_est": 26.13,
+   "cells": 5548,
+   "tries": [
+    {
+     "off": 0.95,
+     "b": -13.09,
+     "outcome": "grew",
+     "mass": 3473.2
+    }
+   ],
+   "sha256": "f2c9b4212a7ec2c1a705258dc79eaf77dec8fe85010de3d639132b2f322b9117"
+  },
+  {
+   "t": 1145.0,
+   "meal": 21,
+   "b": 13.73,
+   "half_width_R": 12.78,
+   "mass": 3607.1,
+   "segments_est": 27.13,
+   "cells": 5778,
+   "tries": [
+    {
+     "off": 0.95,
+     "b": 13.73,
+     "outcome": "grew",
+     "mass": 3607.1
+    }
+   ],
+   "sha256": "0742e20f88c123af4d07411ccc7c48625c7ebfe9119a48c35d2d5fbaec0ae435"
+  },
+  {
+   "t": 1200.0,
+   "meal": 22,
+   "b": -14.284,
+   "half_width_R": 13.334,
+   "mass": 3710.8,
+   "segments_est": 27.89,
+   "cells": 5924,
+   "tries": [
+    {
+     "off": 0.95,
+     "b": -14.284,
+     "outcome": "grew",
+     "mass": 3710.8
+    }
+   ],
+   "sha256": "f25ff5280019f8395aacd79ea2750d4ef387fdbdeda2235aefa1368b6f732b40"
+  },
+  {
+   "t": 1255.0,
+   "meal": 23,
+   "b": 14.624,
+   "half_width_R": 13.674,
+   "mass": 3897.0,
+   "segments_est": 29.27,
+   "cells": 6272,
+   "tries": [
+    {
+     "off": 0.95,
+     "b": 14.624,
+     "outcome": "grew",
+     "mass": 3897.0
+    }
+   ],
+   "sha256": "305d0f1c6214b06ea1ae91bc0e77941bb917e4b6e4e0fe16890a4c2c614570cb"
+  },
+  {
+   "t": 1355.0,
+   "meal": 24,
+   "b": -15.647,
+   "half_width_R": 14.397,
+   "mass": 3992.4,
+   "segments_est": 29.98,
+   "cells": 6368,
+   "tries": [
+    {
+     "off": 0.95,
+     "b": -15.347,
+     "outcome": "missed",
+     "mass": 3998.2
+    },
+    {
+     "off": 0.8,
+     "b": -15.197,
+     "outcome": "ate, no growth",
+     "mass": 3937.1
+    },
+    {
+     "off": 1.1,
+     "b": -15.497,
+     "outcome": "missed",
+     "mass": 3998.2
+    },
+    {
+     "off": 0.7,
+     "b": -15.097,
+     "outcome": "ate, no growth",
+     "mass": 3938.5
+    },
+    {
+     "off": 1.25,
+     "b": -15.647,
+     "outcome": "grew",
+     "mass": 3992.4
+    }
+   ],
+   "sha256": "c3891ec67aaccb3bb3e63574a7f7f2632d00b26cd8b7a529e27f3cd325893e69"
+  },
+  {
+   "t": 1410.0,
+   "meal": 25,
+   "b": 15.551,
+   "half_width_R": 14.601,
+   "mass": 4144.1,
+   "segments_est": 31.11,
+   "cells": 6639,
+   "tries": [
+    {
+     "off": 0.95,
+     "b": 15.551,
+     "outcome": "grew",
+     "mass": 4144.1
+    }
+   ],
+   "sha256": "dbfd34e98e6bce7b897e2cebb7f16227a94ed23968dc448fe2d40ae23186a938"
+  },
+  {
+   "t": 1410.0,
+   "meal": 26,
+   "event": "no offset grew",
+   "tries": [
+    {
+     "off": 0.95,
+     "b": -15.892,
+     "outcome": "exploded",
+     "mass": 62524.3
+    },
+    {
+     "off": 0.8,
+     "b": -15.742,
+     "outcome": "exploded",
+     "mass": 61832.5
+    },
+    {
+     "off": 1.1,
+     "b": -16.042,
+     "outcome": "exploded",
+     "mass": 63441.7
+    },
+    {
+     "off": 0.7,
+     "b": -15.642,
+     "outcome": "exploded",
+     "mass": 61504.1
+    },
+    {
+     "off": 1.25,
+     "b": -16.192,
+     "outcome": "exploded",
+     "mass": 60115.6
+    },
+    {
+     "off": 0.6,
+     "b": -15.542,
+     "outcome": "exploded",
+     "mass": 62351.1
+    },
+    {
+     "off": 1.4,
+     "b": -16.342,
+     "outcome": "exploded",
+     "mass": 60148.4
+    }
+   ]
+  },
+  {
+   "t": 1430.0,
+   "event": "final cruise",
+   "mass": 4079.0,
+   "speed": 4.677,
+   "sha256": "d6c7aeecbfd200538f2318dd39b24bc9de7c30bf93a6f217a6e4ad09e1047a71"
+  }
+ ]
+}

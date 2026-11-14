@@ -46,6 +46,9 @@ made of, ten times per unit of time. Some of them travel; one of them never chan
 | [G029](#g029--a-family-tree) | A family tree (animated; *multi-kernel*) | one cell of Chan's *division well* (found/213 #84) | 2026-11-14 |
 | [G030](#g030--how-fast-one-cell-fills-the-world) | How fast one cell fills the world (animated; *multi-kernel, interpolated rules*) | the same cell under four rules, *well* → *uncontrolled* | 2026-11-14 |
 | [G031](#g031--a-replicator-in-three-dimensions) | A replicator in three dimensions (animated; *3-D, multi-kernel*) | Chan's found/312 #21 | 2026-11-14 |
+| [G035](#g035--two-orbia-204-collisions) | Two Orbia, 204 collisions (still + animated) | S001-rule Orbium × 2 | 2026-11-14 |
+| [G036](#g036--the-arc-that-eats-rings) | The arc that eats rings (animated) | P6al fed C0v; P6al–P10al | 2026-11-14 |
+| [G037](#g037--tip-or-belly) | Tip or belly (still) | P6al–P10al × C0v | 2026-11-14 |
 
 ### G001 — Four ways to move
 
@@ -631,6 +634,51 @@ Film: [`replicator3d.mp4`](exhibits/G031-replicating-in-3d/replicator3d.mp4) ·
   above 0.25 along the line of sight, lit from the upper left; each separate body has its own
   hue. Because the box is periodic, bodies leaving one side reappear on the other.
 
+### G035 — Two Orbia, 204 collisions
+
+![A grid of 204 small time exposures: pairs of glowing tracks that cross, bend, end in a dot, merge into one thick track, or burst into a round labyrinth](exhibits/G035-orbium-collision-atlas/atlas.png)
+
+Film: [`detonation.mp4`](exhibits/G035-orbium-collision-atlas/detonation.mp4) ·
+[`detonation.gif`](exhibits/G035-orbium-collision-atlas/detonation.gif) ·
+[`provenance.json`](exhibits/G035-orbium-collision-atlas/provenance.json)
+
+- **Observation (claim C080).** Every tile is one collision of two S001-rule Orbia, drawn as a
+  time exposure (the brightest value each cell ever reached), so tracks show as trails. Rows are
+  the angle between the two headings (180° = head-on), columns the sideways offset. The border
+  colour is the outcome: glance off, touch and part, one dies, fuse, both die, detonate. The film
+  is the 75° detonation: two gliders touch and a labyrinth fills the world. G009 showed nine of
+  these meetings; this is the whole grid.
+- **Caveats.** Time exposures use A^0.7 to show faint trails (disclosed). The map is one
+  discretisation: at half the timestep the same six outcomes appear, but only 54 % of tiles keep
+  their outcome (C080).
+
+### G036 — The arc that eats rings
+
+![A thin glowing arc gliding across a dark world; small rings appear ahead of it and each one it touches makes it a segment longer](exhibits/G036-the-arc-that-eats-rings/feeding.gif)
+
+Film: [`feeding.mp4`](exhibits/G036-the-arc-that-eats-rings/feeding.mp4) ·
+still: [`ladder.png`](exhibits/G036-the-arc-that-eats-rings/ladder.png) ·
+[`provenance.json`](exhibits/G036-the-arc-that-eats-rings/provenance.json)
+
+- **Observation (claims C082, C083).** A catalogue Hexapteryx (P6al) is offered one Circium ring
+  (C0v) at a time, at its wing tip. Each ring it swallows adds one segment. `ladder.png` puts the
+  fed arc after 0–4 meals under the catalogue's P6al–P10al: same shape, same mass. The film runs
+  25 meals, to about 31 segments.
+- **Caveats.** A keeper places every ring by hand and rewinds meals that did not grow the arc
+  (each try is logged in `feed-altfilm.json`). The film shows the 512² torus at half resolution.
+
+### G037 — Tip or belly
+
+![Five striped bars of grey, yellow and red cells, and below them three time exposures: an arc swallowing a ring, a round explosion, and an arc passing a ring](exhibits/G037-tip-or-belly/tip-or-belly.png)
+
+[`provenance.json`](exhibits/G037-tip-or-belly/provenance.json)
+
+- **Observation (claim C081).** Each Pteryx arc (P6al–P10al) is aimed head-on at a still ring,
+  offset sideways in quarter-radius steps. A ring that meets the body detonates the arc; one that
+  meets a wing tip is swallowed; further out it is missed. The swallow window moves out by half
+  a radius per segment, with the tip.
+- **Caveats.** One timestep and one world size. Exposures use A^0.7 (disclosed).
+
 ## Field note, 7 October 2026
 
 > *What I saw.* Four animals, four temperaments. The Orbium set off at once along a line it never
@@ -773,6 +821,7 @@ heading values come from `galintervene.chord_heading("S102", 3002)`. The G004 S0
 
 - **2026-11-14, G029–G031 (replicators thread).** Self-replicating creatures from Chan's found
   catalogue: a tracked family tree, a growth-rate ladder and a 3-D replicator. Claims C072–C074.
+- **2026-11-14, G035–G037 (collision-zoo thread).** Collision atlas, ring feeding and tip-or-belly exhibits from `research/experiments/ZOO/exhibits.py`, claims C080–C083. Each `provenance.json` records state hashes; the atlas sheets replay every atlas row and check its hash.
 - **2026-11-10, G021 (species-hunt thread).** Convergence exhibit from the SPECIES-scout hunt, claim C063.
 - **2026-11-07, G014–G018 (lightning-talk thread, round two).** Five "stranger worlds". G015,
   G016 and G018 use a spatially or temporally varying rule (`FieldLenia`, checked bitwise against
