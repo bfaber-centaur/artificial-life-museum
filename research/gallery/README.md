@@ -43,6 +43,12 @@ made of, ten times per unit of time. Some of them travel; one of them never chan
 | [G026](#g026--lenia-in-three-dimensions) | Lenia in three dimensions (animated; *3-D*) | 4Gu3l, 3Ov1e, 1Sp1v and their slices | 2026-11-11 |
 | [G027](#g027--a-three-channel-aquarium) | A three-channel aquarium (animated; *3 channels*) | Chan's found/233 entries 0–11 | 2026-11-11 |
 | [G028](#g028--sixty-flow-lenia-worlds) | Sixty Flow-Lenia worlds (still; *Flow-Lenia*) | 60 random rules | 2026-11-11 |
+| [G029](#g029--a-family-tree) | A family tree (animated; *multi-kernel*) | one cell of Chan's *division well* (found/213 #84) | 2026-11-14 |
+| [G030](#g030--how-fast-one-cell-fills-the-world) | How fast one cell fills the world (animated; *multi-kernel, interpolated rules*) | the same cell under four rules, *well* → *uncontrolled* | 2026-11-14 |
+| [G031](#g031--a-replicator-in-three-dimensions) | A replicator in three dimensions (animated; *3-D, multi-kernel*) | Chan's found/312 #21 | 2026-11-14 |
+| [G035](#g035--two-orbia-204-collisions) | Two Orbia, 204 collisions (still + animated) | S001-rule Orbium × 2 | 2026-11-14 |
+| [G036](#g036--the-arc-that-eats-rings) | The arc that eats rings (animated) | P6al fed C0v; P6al–P10al | 2026-11-14 |
+| [G037](#g037--tip-or-belly) | Tip or belly (still) | P6al–P10al × C0v | 2026-11-14 |
 
 ### G001 — Four ways to move
 
@@ -577,6 +583,57 @@ Film: [`aquarium.mp4`](exhibits/G027-three-channel-aquarium/aquarium.mp4) ·
   units. Most make one body (droplet, ringed membrane, crystal inside a membrane, wheel); a few
   make colonies (FL-9, FL-11, FL-41, FL-43, FL-53).
 
+## Replicators (G029–G031)
+
+Creatures from Chan's multi-kernel "found" catalogue that make copies of themselves, run in our
+N-D engine (`research/experiments/WINGS/nd_lenia.py`). Notes and scripts:
+[`REPLICATORS.md`](../experiments/REPLICATORS/REPLICATORS.md). The creatures and their names
+are Chan's; the tracking, the rule line and the films are ours.
+
+### G029 — A family tree
+
+![One cell divides again and again until about eighty cells cover the world, each coloured by its ancestry](exhibits/G029-family-tree/family-tree.gif)
+
+Film: [`family-tree.mp4`](exhibits/G029-family-tree/family-tree.mp4) ·
+tree: [`tree.png`](exhibits/G029-family-tree/tree.png) ·
+[`provenance.json`](exhibits/G029-family-tree/provenance.json)
+
+![The family tree: one founder, 135 divisions, 14 generations, and the cell count rising to 81](exhibits/G029-family-tree/tree.png)
+
+- **Observation (claim C072).** One cell of *division well* on a 384² torus becomes 81 cells in
+  2000 time units, through 135 divisions, 14 generations deep.
+- **Rendering.** Every pixel of a cell takes the hue of the nearest tracked cell centre. Hue is
+  a neutral marker: a daughter's hue is her mother's plus a small random step (fixed seed), so
+  families share colours. Brightness is the field value.
+- **Caveats.** A "cell" is a peak of the field blurred by 4 pixels. Births that last under 10
+  time units, and peaks that merely jump, are dropped (`tree.py`). The tracker cannot tell a
+  merger from a cell that fades.
+
+### G030 — How fast one cell fills the world
+
+![Four worlds start from the same cell: the first still has three cells while the other three fill up, the last with a lattice of dots between the cells](exhibits/G030-four-growth-rates/ladder.gif)
+
+Film: [`ladder.mp4`](exhibits/G030-four-growth-rates/ladder.mp4) ·
+[`provenance.json`](exhibits/G030-four-growth-rates/provenance.json)
+
+- **Observation (claim C073).** Every rule number moved a fraction λ of the way from Chan's
+  *division well* to his *division uncontrolled*. Time to cover half the world: about 1300
+  time units at λ 0, 90 at λ 1. Bars show the covered fraction.
+- **Caveats.** The intermediate rules (λ 0.2, 0.5) are ours, not catalogue entries.
+
+### G031 — A replicator in three dimensions
+
+![A 3-D blob buds into a chain, the chain breaks into separate bodies, and the bodies multiply until they pack the box](exhibits/G031-replicating-in-3d/replicator3d.gif)
+
+Film: [`replicator3d.mp4`](exhibits/G031-replicating-in-3d/replicator3d.mp4) ·
+[`provenance.json`](exhibits/G031-replicating-in-3d/provenance.json)
+
+- **Observation (claim C074).** Chan's *self-replicate... unstable* (found/312 #21) in a 96³
+  periodic box: one body, then 4 by t 100, then about 50 by t 300, until the box is full.
+- **Rendering.** The box turns slowly about the vertical axis. Each pixel shows the first voxel
+  above 0.25 along the line of sight, lit from the upper left; each separate body has its own
+  hue. Because the box is periodic, bodies leaving one side reappear on the other.
+
 ### G035 — Two Orbia, 204 collisions
 
 ![A grid of 204 small time exposures: pairs of glowing tracks that cross, bend, end in a dot, merge into one thick track, or burst into a round labyrinth](exhibits/G035-orbium-collision-atlas/atlas.png)
@@ -589,7 +646,8 @@ Film: [`detonation.mp4`](exhibits/G035-orbium-collision-atlas/detonation.mp4) ·
   time exposure (the brightest value each cell ever reached), so tracks show as trails. Rows are
   the angle between the two headings (180° = head-on), columns the sideways offset. The border
   colour is the outcome: glance off, touch and part, one dies, fuse, both die, detonate. The film
-  is the 75° detonation: two gliders touch and a labyrinth fills the world.
+  is the 75° detonation: two gliders touch and a labyrinth fills the world. G009 showed nine of
+  these meetings; this is the whole grid.
 - **Caveats.** Time exposures use A^0.7 to show faint trails (disclosed). The map is one
   discretisation: at half the timestep the same six outcomes appear, but only 54 % of tiles keep
   their outcome (C080).
@@ -761,6 +819,8 @@ heading values come from `galintervene.chord_heading("S102", 3002)`. The G004 S0
 
 ## Cycle log
 
+- **2026-11-14, G029–G031 (replicators thread).** Self-replicating creatures from Chan's found
+  catalogue: a tracked family tree, a growth-rate ladder and a 3-D replicator. Claims C072–C074.
 - **2026-11-14, G035–G037 (collision-zoo thread).** Collision atlas, ring feeding and tip-or-belly exhibits from `research/experiments/ZOO/exhibits.py`, claims C080–C083. Each `provenance.json` records state hashes; the atlas sheets replay every atlas row and check its hash.
 - **2026-11-10, G021 (species-hunt thread).** Convergence exhibit from the SPECIES-scout hunt, claim C063.
 - **2026-11-07, G014–G018 (lightning-talk thread, round two).** Five "stranger worlds". G015,

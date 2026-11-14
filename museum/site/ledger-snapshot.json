@@ -1,7 +1,7 @@
 {
   "ledger": "research/claims.md",
-  "ledger_sha256": "4833329c9f2b104bc02bc68f7ac81764fa1eabbc30c8fa00b8226465e27a444c",
-  "ledger_commit": "a35e6d2",
+  "ledger_sha256": "c8bbe169d5f1af338d83239d77c0551b182ee242c7f85da612fc3d54e04d558b",
+  "ledger_commit": "1388254",
   "conventions_sha256": "0e237384e0425b3c325229cf650ab6f9807fb08c1bedc991433b54b13c2eb02f",
   "claims": {
     "C001": {
@@ -328,6 +328,34 @@
         "more-dimensions"
       ]
     },
+    "C072": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "replicators"
+      ]
+    },
+    "C073": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "replicators"
+      ]
+    },
+    "C074": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "replicators"
+      ]
+    },
+    "C075": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "replicators"
+      ]
+    },
     "C080": {
       "status": "OBSERVED",
       "status_text": "OBSERVED",
@@ -505,6 +533,18 @@
       "research/gallery/exhibits/G024-particle-pinwheel/provenance.json",
       "research/gallery/exhibits/G025-smoothlife-glider/glider.mp4",
       "research/gallery/exhibits/G025-smoothlife-glider/provenance.json"
+    ],
+    "replicators": [
+      "research/experiments/REPLICATORS/REPLICATORS.md",
+      "research/experiments/REPLICATORS/growth.jsonl",
+      "research/experiments/REPLICATORS/replicate3d.jsonl",
+      "research/experiments/REPLICATORS/tree.py",
+      "research/gallery/exhibits/G029-family-tree/family-tree.mp4",
+      "research/gallery/exhibits/G029-family-tree/provenance.json",
+      "research/gallery/exhibits/G030-four-growth-rates/ladder.mp4",
+      "research/gallery/exhibits/G030-four-growth-rates/provenance.json",
+      "research/gallery/exhibits/G031-replicating-in-3d/provenance.json",
+      "research/gallery/exhibits/G031-replicating-in-3d/replicator3d.mp4"
     ],
     "collision-zoo": [
       "research/experiments/REEF-behavior/LITERATURE.md",

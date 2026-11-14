@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>East wing IV: creatures that copy themselves · ALM museum</title>
+<meta name="description" content="Chan&#x27;s dividing creatures from the multi-kernel catalogue: a family tree followed cell by cell, how fast one cell fills a world, and a replicator in three dimensions.">
+<link rel="stylesheet" href="museum.css">
+</head>
+<body class="room-replicators">
+<header class="site">
+  <a class="brand" href="index.html">ALM <span>an artificial-life natural history museum</span></a>
+  <details class="map"><summary>Rooms</summary><ol>
+<li><a href="index.html">Entrance</a></li>
+<li><a href="orbium.html">1 · The ruler: Orbium</a></li>
+<li><a href="wobbles.html">2 · The wobble that wasn&#x27;t</a></li>
+<li><a href="edges.html">3 · How much can it take?</a></li>
+<li><a href="one-rule.html">4 · Three animals, one rule</a></li>
+<li><a href="how-we-know.html">5 · How we know</a></li>
+<li><a href="under-review.html">6 · Still being argued (provisional)</a></li>
+<li><a href="reef.html">7 · When the glider meets the ring (provisional)</a></li>
+<li><a href="field-trip.html">8 · Field trip</a></li>
+<li><a href="more-dimensions.html">9 · Dimensions &amp; chemicals</a></li>
+<li><a href="conserved-matter.html">10 · Conserved matter</a></li>
+<li><a href="other-models.html">11 · Other models</a></li>
+<li><a class="here" href="replicators.html">12 · Replicators</a></li>
+<li><a href="collision-zoo.html">Collision zoo</a></li>
+<li><a href="collection.html">Reference · The collection</a></li>
+<li><a href="claims.html">Reference · Claims on display</a></li>
+  </ol></details>
+</header>
+<main>
+<p class="kicker">East wing · Other laws of physics · Room 12</p>
+<h1>Creatures that copy themselves</h1>
+<p class="lede">Give Lenia several kernels instead of one and some creatures stop being
+single animals. They grow, pinch in two, and each half grows again. Bert Chan found these
+while searching multi-kernel rules and named them plainly in his catalogue: <em>replicator</em>,
+<em>division too slow</em>, <em>division well</em>, <em>division uncontrolled</em>. We ran them
+in our own engine and asked three questions: who descends from whom, how fast can a world
+fill up, and does it work in three dimensions?</p>
+
+<h2>A family tree</h2>
+<figure class="vitrine">
+  <img src="../../research/gallery/exhibits/G029-family-tree/family-tree.gif" width="320" height="320" loading="lazy"
+       alt="One cell divides again and again until about eighty cells cover the world, each coloured by its ancestry.">
+  <figcaption><strong>One cell, 2000 time units.</strong> Chan's <em>division well</em>
+  (found/213 #84) on a 384² world. Colour is inherited: a daughter takes her mother's hue,
+  shifted slightly at random, so families share colours.
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G029-family-tree/family-tree.mp4">Full video</a> ·
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G029-family-tree/provenance.json">provenance</a>.</figcaption>
+</figure>
+<figure class="vitrine">
+  <img src="../../research/gallery/exhibits/G029-family-tree/tree.png" width="720" height="480" loading="lazy"
+       alt="A family tree branching from one founder into 81 living cells, with the cell count below rising slowly and then steadily.">
+  <figcaption><strong>Who came from whom.</strong> Each line is a cell; a fork is a division; a
+  dot is a cell whose track ended. Below: the number of cells.</figcaption>
+</figure>
+<div class="label">
+  <p class="obs"><strong>What you see.</strong> For the first few hundred time units the founder
+  and her first daughters wander and divide rarely. Then the count climbs steadily as the
+  world fills with membrane-wrapped cells.</p>
+  <p class="open"><strong>What the ledger says.</strong> 135 divisions, 14 generations, 81
+  cells at the end, in one run <a class="claim" href="claims.html#C072" title="One cell of Chan&#x27;s &quot;division well&quot; (found/213 #84) on a 384² torus becomes 81 tracked cells in 2000 time units, through 135 divisions, 14 generations deep"><span class="cid">C072</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>. A cell here is a peak of the blurred field;
+  the tracker cannot tell a cell that merged from one that faded.</p>
+</div>
+
+<h2>How fast one cell fills the world</h2>
+<figure class="vitrine">
+  <img src="../../research/gallery/exhibits/G030-four-growth-rates/ladder.gif" width="384" height="432" loading="lazy"
+       alt="Four worlds start from the same cell: the first still has three cells while the other three fill up, the last with a lattice of dots between the cells.">
+  <figcaption><strong>Same cell, four rules.</strong> Each rule moves every number a fraction
+  λ of the way from <em>division well</em> to <em>division uncontrolled</em>. The bar is the
+  fraction of the world covered.
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G030-four-growth-rates/ladder.mp4">Full video</a> ·
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G030-four-growth-rates/provenance.json">provenance</a>.</figcaption>
+</figure>
+<div class="label">
+  <p class="obs"><strong>What you see.</strong> At λ 0 there are still three cells at t 600.
+  At λ 1 the world is full by t 100, and the gaps between cells fill with a fine lattice of
+  dots.</p>
+  <p class="open"><strong>What the ledger says.</strong> Time to cover half the world falls
+  about fifteen-fold, from 1175–1530 time units to 85–95, and the median never rises along the
+  way <a class="claim" href="claims.html#C073" title="Moving every rule number from Chan&#x27;s &quot;division well&quot; (213 #84) to &quot;division uncontrolled&quot; (213 #83) shortens the time for one well cell to cover half of a 256² torus about fifteen-fold, from 1175–1530 to 85–95 time units, with no step where the median rises"><span class="cid">C073</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>. There is no single switch between a healthy and a runaway rule: the
+  growth rate rises smoothly.</p>
+</div>
+
+<h2>A replicator in three dimensions</h2>
+<figure class="vitrine">
+  <img src="../../research/gallery/exhibits/G031-replicating-in-3d/replicator3d.gif" width="320" height="320" loading="lazy"
+       alt="A 3-D blob buds into a chain, the chain breaks into separate bodies, and the bodies multiply until they pack the box.">
+  <figcaption><strong>Budding in a box.</strong> Chan's <em>self-replicate... unstable</em>
+  (found/312 #21) in a 96³ world that wraps around. Each body has its own colour.
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G031-replicating-in-3d/replicator3d.mp4">Full video</a> ·
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G031-replicating-in-3d/provenance.json">provenance</a>.</figcaption>
+</figure>
+<div class="label">
+  <p class="obs"><strong>What you see.</strong> The blob stretches into a chain of beads, the
+  beads separate, and each grows and buds again until the box is packed.</p>
+  <p class="open"><strong>What the ledger says.</strong> One body becomes about fifty by t 300 in the largest box;
+  it multiplies at two timesteps and in three box sizes <a class="claim" href="claims.html#C074" title="Chan&#x27;s 3-D &quot;self-replicate... unstable&quot; (found/312 #21) buds from one body into 4 by t 100 and keeps multiplying until its periodic box is packed, at two timesteps and in 64³, 80³ and 96³ boxes"><span class="cid">C074</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>. Its catalogue neighbour <em>divide</em>
+  (found/312 #7) splits into four bodies and then, at the catalogue timestep, stops; at half the
+  timestep a fifth body appears <a class="claim" href="claims.html#C075" title="Chan&#x27;s 3-D &quot;divide&quot; (found/312 #7) splits into four bodies by t 50 and stays at four through t 300 in 64³ and 96³ boxes at dt 0.1; at dt 0.05 a fifth body appears after t 100"><span class="cid">C075</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>.</p>
+</div>
+
+<h2>Sources</h2>
+<ul>
+  <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/REPLICATORS/REPLICATORS.md">Replicator notes</a></li>
+  <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/REPLICATORS/tree.py">The cell tracker</a>,
+      <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/REPLICATORS/growth.jsonl">the growth runs</a> and
+      <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/REPLICATORS/replicate3d.jsonl">the 3-D runs</a></li>
+</ul>
+
+<nav class="walk" aria-label="Tour"><a class="prev" href="other-models.html"><small>Back</small>East wing III: cousins from other models</a><a class="next" href="collision-zoo.html"><small>Next room</small>The collision zoo</a></nav>
+</main>
+<footer class="site">
+  <p>Claim statuses read from <code>research/claims.md</code> (sha256 <code>c8bbe169d5f1</code>) when this page was built.</p>
+  <p>Every picture here is a recorded simulation or a figure drawn from committed data. Statuses
+  are the claims ledger's, not the museum's: a badge never says more than
+  <a href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/claims.md">research/claims.md</a> does.</p>
+</footer>
+</body>
+</html>

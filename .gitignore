@@ -3,4 +3,6 @@
 __pycache__/
 .pytest_cache/
 *.egg-info/
+research/experiments/REPLICATORS/states/
+research/experiments/REPLICATORS/peeks/
 research/experiments/ZOO/states/
