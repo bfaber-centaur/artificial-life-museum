@@ -53,3 +53,24 @@ f = json.loads((EX / "G031-replicating-in-3d" / "replicator3d.json").read_text()
     caveats=["Periodic box: bodies leaving one side reappear on the other, and rotation shows wrapped copies at the edges.",
              "Chan named the creature unstable."]), indent=1))
 print("ok")
+
+# --- round 2 (GenomeLenia) ---
+GENOME = ("research/experiments/REPLICATORS/genome.GenomeLenia (modified rule of ours: per-pixel genome g on the line "
+          "213 #84 -> 213 #83; persisting matter keeps g, new matter inherits the 2-px mass-weighted g)")
+for ex, kind, claim, title, extra in (
+        ("G045-selection-for-faster-division", "evolve", "C090", "Selection for faster division",
+         dict(start="one 213 #84 cell, g 0.3 everywhere, 256² torus", mutation="every 10 tu, g += 0.03 x smoothed (8 px) unit noise, seed 4",
+              arms=["selected: the genome sets the rule", "neutral: rule fixed at 0.3, genome only a marker (same noise)"],
+              time_units=2000)),
+        ("G046-the-fast-genome-invades", "invasion", "C092", "The fast genome invades",
+         dict(start="256² well tissue (one 213 #84 cell, 2000 tu under 213 #84) | 256² uncontrolled tissue (400 tu under 213 #83), 256 x 512 torus",
+              mutation=None, time_units=1000))):
+    rec = json.loads((EX / ex / f"{kind}.json").read_text())
+    (EX / ex / "provenance.json").write_text(json.dumps(dict(
+        exhibit=ex[:4], title=title, claim=claim, media=[f"{kind}.mp4", f"{kind}.gif", f"{kind}-final.png", f"{kind}.json"],
+        engine=GENOME, dt=0.1, **extra, initial_state_sha256_prefix=rec["initial_sha"], final_state_sha256_prefix=rec["final_sha"],
+        frames=dict(every_tu=4, mp4_fps=30, gif="ffmpeg fps 8, 512 px, 96-colour palette"),
+        view="colour = genome on coolwarm, brightness = 0.1 + 0.9 x field; bottom: mass-weighted mean genome",
+        commands=[f"film_genome.py {kind} {rec['seed']} {int(rec['tu'])} OUT"],
+        caveats=["Modified rule (ours).", "Inheritance blends genomes where cells grow into each other."]), indent=1))
+print("ok round 2")

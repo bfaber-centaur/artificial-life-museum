@@ -2,8 +2,9 @@
   "slug": "replicators", "order": 76, "title": "East wing IV: creatures that copy themselves",
   "nav_label": "12 · Replicators",
   "kicker": "East wing · Other laws of physics · Room 12",
-  "summary": "Chan's dividing creatures from the multi-kernel catalogue: a family tree followed cell by cell, how fast one cell fills a world, and a replicator in three dimensions.",
-  "expect": {"C072": "OBSERVED", "C073": "OBSERVED", "C074": "OBSERVED", "C075": "OBSERVED"}
+  "summary": "Chan's dividing creatures from the multi-kernel catalogue: a family tree followed cell by cell, how fast one cell fills a world, a replicator in three dimensions, and what happens when daughters inherit their rule.",
+  "expect": {"C072": "OBSERVED", "C073": "OBSERVED", "C074": "OBSERVED", "C075": "OBSERVED",
+             "C090": "OBSERVED", "C091": "OBSERVED", "C092": "OBSERVED"}
 } -->
 <h1>Creatures that copy themselves</h1>
 <p class="lede">Give Lenia several kernels instead of one and some creatures stop being
@@ -76,10 +77,52 @@ fill up, and does it work in three dimensions?</p>
   timestep a fifth body appears {{claim:C075}}.</p>
 </div>
 
+<h2>When daughters inherit their rule</h2>
+<p>Copying is half of evolution. The other half is copies that differ. So we changed the
+physics, and this part of the room is a <em>modified rule</em> of ours, not Chan's. Every bit
+of matter now carries a number, its genome, between 0 (<em>division well</em>, blue) and 1
+(<em>division uncontrolled</em>, red), and the rule at each point is the rule for its genome.
+New matter inherits the genome of the matter around it, and every ten time units a faint
+random smear nudges genomes up or down.</p>
+<figure class="vitrine">
+  <img src="{{asset:research/gallery/exhibits/G045-selection-for-faster-division/evolve.gif}}" width="384" height="260" loading="lazy"
+       alt="Two worlds of dividing cells coloured blue to red by genome; on the left red patches with a dot lattice appear and the mean-genome line climbs above the grey neutral line.">
+  <figcaption><strong>Same start, same mutations.</strong> Left: the genome sets the rule.
+  Right: the rule is fixed and the genome is only a marker. The lines at the bottom are the
+  mean genome of each world.
+  {{src:research/gallery/exhibits/G045-selection-for-faster-division/evolve.mp4|Full video}} ·
+  {{src:research/gallery/exhibits/G045-selection-for-faster-division/provenance.json|provenance}}.</figcaption>
+</figure>
+<div class="label">
+  <p class="obs"><strong>What you see.</strong> On the left, warmer cells spread and red patches
+  appear, with the dot lattice of the runaway rule around them. On the right the colours wander
+  but stay cool.</p>
+  <p class="open"><strong>What the ledger says.</strong> From 0.3 the mean genome reaches
+  0.47–0.55 when it matters and 0.36–0.43 when it is only a marker, in all four paired seeds
+  {{claim:C090}}. From 0.7, where growth speed has levelled off, the gap is only 0.03–0.06
+  {{claim:C091}}. Nothing here rewards speed. Faster dividers just leave more descendants.</p>
+</div>
+<figure class="vitrine">
+  <img src="{{asset:research/gallery/exhibits/G046-the-fast-genome-invades/invasion.gif}}" width="512" height="346" loading="lazy"
+       alt="Blue well tissue on the left and red uncontrolled tissue on the right; red and pink spreads into the blue half from both borders while the red half stays red.">
+  <figcaption><strong>Tissue against tissue.</strong> Grown <em>well</em> tissue meets grown
+  <em>uncontrolled</em> tissue; the world wraps, so there are two borders.
+  {{src:research/gallery/exhibits/G046-the-fast-genome-invades/invasion.mp4|Full video}} ·
+  {{src:research/gallery/exhibits/G046-the-fast-genome-invades/provenance.json|provenance}}.</figcaption>
+</figure>
+<div class="label">
+  <p class="open"><strong>What the ledger says.</strong> By t 1000 the well half's mean genome has
+  risen from 0 to 0.34–0.38, while the uncontrolled half has stayed at 0.98–0.99, in three seeds
+  {{claim:C092}}. Some of the spread is blending where the tissues touch.</p>
+</div>
+
 <h2>Sources</h2>
 <ul>
   <li>{{src:research/experiments/REPLICATORS/REPLICATORS.md|Replicator notes}}</li>
   <li>{{src:research/experiments/REPLICATORS/tree.py|The cell tracker}},
       {{src:research/experiments/REPLICATORS/growth.jsonl|the growth runs}} and
       {{src:research/experiments/REPLICATORS/replicate3d.jsonl|the 3-D runs}}</li>
+  <li>{{src:research/experiments/REPLICATORS/genome.py|GenomeLenia}},
+      {{src:research/experiments/REPLICATORS/evolve.jsonl|the evolution runs}} and
+      {{src:research/experiments/REPLICATORS/invasion.jsonl|the invasion runs}}</li>
 </ul>

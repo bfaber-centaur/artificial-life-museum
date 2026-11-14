@@ -1,7 +1,7 @@
 {
   "ledger": "research/claims.md",
-  "ledger_sha256": "5181c67219f866fbab33a15fa1e0d3f2decd6a368b237c9034430ae5a9ed990f",
-  "ledger_commit": "e7844d3",
+  "ledger_sha256": "7ab51d0c055023ac07fcbd57e2415a1c756ed9c8764681aa543261fd6dfa2029",
+  "ledger_commit": "592c9be",
   "conventions_sha256": "0e237384e0425b3c325229cf650ab6f9807fb08c1bedc991433b54b13c2eb02f",
   "claims": {
     "C001": {
@@ -435,6 +435,27 @@
         "strange-geometries"
       ]
     },
+    "C090": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "replicators"
+      ]
+    },
+    "C091": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "replicators"
+      ]
+    },
+    "C092": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "replicators"
+      ]
+    },
     "C093": {
       "status": "OBSERVED",
       "status_text": "OBSERVED",
@@ -671,7 +692,10 @@
     ],
     "replicators": [
       "research/experiments/REPLICATORS/REPLICATORS.md",
+      "research/experiments/REPLICATORS/evolve.jsonl",
+      "research/experiments/REPLICATORS/genome.py",
       "research/experiments/REPLICATORS/growth.jsonl",
+      "research/experiments/REPLICATORS/invasion.jsonl",
       "research/experiments/REPLICATORS/replicate3d.jsonl",
       "research/experiments/REPLICATORS/tree.py",
       "research/gallery/exhibits/G029-family-tree/family-tree.mp4",
@@ -679,7 +703,11 @@
       "research/gallery/exhibits/G030-four-growth-rates/ladder.mp4",
       "research/gallery/exhibits/G030-four-growth-rates/provenance.json",
       "research/gallery/exhibits/G031-replicating-in-3d/provenance.json",
-      "research/gallery/exhibits/G031-replicating-in-3d/replicator3d.mp4"
+      "research/gallery/exhibits/G031-replicating-in-3d/replicator3d.mp4",
+      "research/gallery/exhibits/G045-selection-for-faster-division/evolve.mp4",
+      "research/gallery/exhibits/G045-selection-for-faster-division/provenance.json",
+      "research/gallery/exhibits/G046-the-fast-genome-invades/invasion.mp4",
+      "research/gallery/exhibits/G046-the-fast-genome-invades/provenance.json"
     ],
     "evolution-soup": [
       "research/experiments/SOUP/SOUP.md",

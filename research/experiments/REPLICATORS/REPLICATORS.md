@@ -37,12 +37,33 @@ packed with foam. **One becomes four (C075).** Its neighbour found/312 #7, *divi
 into four bodies and stays at four in 64³ and 96³ boxes, but at half the timestep a fifth
 appears after t 100.
 
+## Round 2: heredity and selection (C090–C092, G045–G046)
+
+**GenomeLenia** (`genome.py`, our modified rule). Every pixel's matter carries a number g, its
+position on the line from *division well* (g 0) to *division uncontrolled* (g 1), and the rule
+at that pixel is the rule at g: each kernel's potential is mixed as (1 − g)·well + g·uncontrolled,
+and μ, σ are interpolated. Matter that persists keeps its g; newly grown matter inherits the
+mass-weighted g of its neighbourhood (2-px Gaussian). Optional mutation adds a small smooth
+noise field to g every 10 time units. At g ≡ 0 or 1 this is exactly Chan's rule (10⁻¹²). A
+*neutral* arm fixes the rule and keeps g only as a marker, with the same mutations.
+
+**Selection for faster division (C090, C091, G045).** From one cell at g 0.3, with mutation,
+the mean genome rises to 0.47–0.55 in 2000 time units; with g as a neutral marker it reaches
+0.36–0.43. All four paired seeds end higher when the genome matters. Started at g 0.7, where the
+growth speed has nearly levelled off (C073), the gap shrinks to 0.03–0.06. Nobody asked these
+cells to grow faster. Faster dividers simply leave more descendants.
+
+**The fast genome invades (C092, G046).** Grown *well* tissue placed against grown
+*uncontrolled* tissue: by t 1000 the uncontrolled genome has spread into the well half (mean
+0.34–0.38 there) while the uncontrolled half stays at 0.98–0.99, in 3 seeds.
+
+A first inheritance rule that re-averaged *all* matter each step was dropped before the runs
+above: it diffused genomes through the dot lattice like heat.
+
 ## Not done / next
 
-- Heritable variation: give each cell its own rule parameters (Flow-Lenia's parameter
-  localisation) so that daughters can differ, and see whether a faster divider takes over.
-- Selection: put *well* and *uncontrolled* cells in the same world (different rules per cell
-  needs the same machinery).
+- Larger worlds and longer runs: does the genome reach 1 from 0.3, and how fast?
+- Let more of the rule mutate (kernel shells, R) instead of one line between two rules.
 - The 2-channel *mitosis* creature (found/221 #35) and the egg-laying three-channel *egg*
   (233 #11; dies in our engine at 256², C071 shows its relatives are fragile).
 
@@ -54,5 +75,7 @@ appears after t 100.
   → G029. `interp.py` (the λ line), `growth.py` → `growth.jsonl` (C073), `film_ladder.py` → G030.
 - `replicate3d.py` → `replicate3d.jsonl` (C074, C075), `film3d.py` → G031.
 - `summarize.py` prints every number quoted here. `states/` is gitignored.
+- Round 2: `genome.py` (GenomeLenia), `evolve.py` → `evolve.jsonl` (C090, C091), `invasion.py` →
+  `invasion.jsonl` (C092), `film_genome.py` → G045, G046.
 - Exploration helpers: `peek.py`, `peek3d.py`, `lineage.py` (first tracker, superseded by
   `tree.py`), `film_lineage.py`, `interp.jsonl` (first λ scan, body counts).

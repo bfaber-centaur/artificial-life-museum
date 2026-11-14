@@ -1,0 +1,42 @@
+{
+ "exhibit": "G045",
+ "title": "Selection for faster division",
+ "claim": "C090",
+ "media": [
+  "evolve.mp4",
+  "evolve.gif",
+  "evolve-final.png",
+  "evolve.json"
+ ],
+ "engine": "research/experiments/REPLICATORS/genome.GenomeLenia (modified rule of ours: per-pixel genome g on the line 213 #84 -> 213 #83; persisting matter keeps g, new matter inherits the 2-px mass-weighted g)",
+ "dt": 0.1,
+ "start": "one 213 #84 cell, g 0.3 everywhere, 256\u00b2 torus",
+ "mutation": "every 10 tu, g += 0.03 x smoothed (8 px) unit noise, seed 4",
+ "arms": [
+  "selected: the genome sets the rule",
+  "neutral: rule fixed at 0.3, genome only a marker (same noise)"
+ ],
+ "time_units": 2000,
+ "initial_state_sha256_prefix": [
+  "b339c7a29033b997",
+  "b339c7a29033b997"
+ ],
+ "final_state_sha256_prefix": [
+  "23ca347a80ce006d",
+  "1a3a35148c10d4db"
+ ],
+ "frames": {
+  "every_tu": 4,
+  "mp4_fps": 30,
+  "gif": "ffmpeg fps 5, 384 px, 64-colour palette",
+  "mp4": "re-encoded to 768 px wide, crf 30"
+ },
+ "view": "colour = genome on coolwarm, brightness = 0.1 + 0.9 x field; bottom: mass-weighted mean genome",
+ "commands": [
+  "film_genome.py evolve 4 2000 OUT"
+ ],
+ "caveats": [
+  "Modified rule (ours).",
+  "Inheritance blends genomes where cells grow into each other."
+ ]
+}

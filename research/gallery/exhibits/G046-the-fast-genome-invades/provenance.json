@@ -1,0 +1,35 @@
+{
+ "exhibit": "G046",
+ "title": "The fast genome invades",
+ "claim": "C092",
+ "media": [
+  "invasion.mp4",
+  "invasion.gif",
+  "invasion-final.png",
+  "invasion.json"
+ ],
+ "engine": "research/experiments/REPLICATORS/genome.GenomeLenia (modified rule of ours: per-pixel genome g on the line 213 #84 -> 213 #83; persisting matter keeps g, new matter inherits the 2-px mass-weighted g)",
+ "dt": 0.1,
+ "start": "256\u00b2 well tissue (one 213 #84 cell, 2000 tu under 213 #84) | 256\u00b2 uncontrolled tissue (400 tu under 213 #83), 256 x 512 torus",
+ "mutation": null,
+ "time_units": 1000,
+ "initial_state_sha256_prefix": [
+  "31ec15d8cf4cef16"
+ ],
+ "final_state_sha256_prefix": [
+  "660d9e5b6a993beb"
+ ],
+ "frames": {
+  "every_tu": 4,
+  "mp4_fps": 30,
+  "gif": "ffmpeg fps 8, 512 px, 96-colour palette"
+ },
+ "view": "colour = genome on coolwarm, brightness = 0.1 + 0.9 x field; bottom: mass-weighted mean genome",
+ "commands": [
+  "film_genome.py invasion 0 1000 OUT"
+ ],
+ "caveats": [
+  "Modified rule (ours).",
+  "Inheritance blends genomes where cells grow into each other."
+ ]
+}

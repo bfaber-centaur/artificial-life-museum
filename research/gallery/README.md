@@ -55,6 +55,8 @@ made of, ten times per unit of time. Some of them travel; one of them never chan
 | [G038](#g038--parallel-lines-meet) | Parallel lines meet (animated; *sphere*) | S001 pairs, eight Orbia, six tiny planets | 2026-11-14 |
 | [G039](#g039--parallel-lines-part) | Parallel lines part (animated; *hyperbolic plane*) | S001 pair | 2026-11-14 |
 | [G040](#g040--the-lattice-is-the-compass) | The lattice is the compass (chart) | S001, 93 headings on three lattices | 2026-11-14 |
+| [G045](#g045--selection-for-faster-division) | Selection for faster division (animated; *modified rule: GenomeLenia*) | one cell with a heritable genome, with and without selection | 2026-11-14 |
+| [G046](#g046--the-fast-genome-invades) | The fast genome invades (animated; *modified rule: GenomeLenia*) | *well* tissue against *uncontrolled* tissue | 2026-11-14 |
 | [G047](#g047--no-keeper) | No keeper (animated) | P6al loose among 8 × C0v | 2026-11-14 |
 | [G048](#g048--two-orbia-fuse-into-s101) | Two Orbia fuse into S101 (still) | fused bodies of G035, S101 | 2026-11-14 |
 | [G049](#g049--a-lens-made-of-nothing) | A lens made of nothing (animated; *cone points*) | S001 pairs past a 300°, 360° and 420° point | 2026-11-14 |
@@ -895,6 +897,39 @@ Film: [`mirror-next-door.mp4`](exhibits/G054-the-mirror-next-door/mirror-next-do
   and hex lattices they bunch onto a few spokes with the lattice's symmetry; on the glass they
   do not.
 - **Ledger.** C011 (square grid, *independently checked*), C087 (hex and glass, *observed*).
+## Replicators, round two: heredity (G045–G046)
+
+GenomeLenia (`research/experiments/REPLICATORS/genome.py`) is a *modified rule* of ours: the
+rule at each point is set by a heritable genome carried with the matter. Colour is the genome on
+coolwarm (blue = *division well*, red = *division uncontrolled*), brightness the field value.
+Films: `film_genome.py evolve|invasion`.
+
+### G045 — Selection for faster division
+
+![Two worlds of dividing cells coloured blue to red by genome; on the left red patches with a dot lattice appear and the mean-genome line climbs above the grey neutral line](exhibits/G045-selection-for-faster-division/evolve.gif)
+
+Film: [`evolve.mp4`](exhibits/G045-selection-for-faster-division/evolve.mp4) ·
+[`provenance.json`](exhibits/G045-selection-for-faster-division/provenance.json)
+
+- **Observation (claims C090, C091).** GenomeLenia: each cell's matter carries a genome g on
+  the line from *division well* (blue, 0) to *division uncontrolled* (red, 1), inherited by
+  new matter and mutated a little every 10 time units. Left, the genome sets the local rule;
+  right, the rule is fixed at 0.3 and the genome is only a marker, with the same mutations.
+  Both start from one cell at 0.3. The left mean climbs to 0.56, the right to 0.37.
+- **Caveats.** A modified rule of ours. Inheritance blends genomes where cells grow into each
+  other. Seed 4 of four (C090 gives all four).
+
+### G046 — The fast genome invades
+
+![Blue well tissue on the left and red uncontrolled tissue on the right; red and pink spreads into the blue half from both borders while the red half stays red](exhibits/G046-the-fast-genome-invades/invasion.gif)
+
+Film: [`invasion.mp4`](exhibits/G046-the-fast-genome-invades/invasion.mp4) ·
+[`provenance.json`](exhibits/G046-the-fast-genome-invades/provenance.json)
+
+- **Observation (claim C092).** Grown *well* tissue (left, g 0) meets grown *uncontrolled*
+  tissue (right, g 1) on a 256 × 512 torus, so there are two borders. Over 1000 time units the
+  red genome spreads into the blue half; the red half stays red.
+- **Caveats.** No mutation and no neutral arm; part of the spread is blending at the borders.
 
 ## Field note, 7 October 2026
 
@@ -1037,6 +1072,8 @@ heading values come from `galintervene.chord_heading("S102", 3002)`. The G004 S0
 ## Cycle log
 
 - **2026-11-14, G047–G048 (collision-zoo thread, round 2).** Free-world forager and fusion-into-S101 exhibits, claims C093–C094.
+- **2026-11-14, G045–G046 (replicators thread, round 2).** Heredity and selection in GenomeLenia, a
+  modified rule of ours. Claims C090–C092.
 - **2026-11-14, G029–G031 (replicators thread).** Self-replicating creatures from Chan's found
   catalogue: a tracked family tree, a growth-rate ladder and a 3-D replicator. Claims C072–C074.
 - **2026-11-14, G035–G037 (collision-zoo thread).** Collision atlas, ring feeding and tip-or-belly exhibits from `research/experiments/ZOO/exhibits.py`, claims C080–C083. Each `provenance.json` records state hashes; the atlas sheets replay every atlas row and check its hash.
