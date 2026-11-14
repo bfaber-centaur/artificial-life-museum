@@ -1,0 +1,77 @@
+{
+  "exhibit": "G025",
+  "title": "A SmoothLife glider",
+  "media": [
+    "glider.mp4",
+    "glider.gif",
+    "glider-still.png"
+  ],
+  "frames": {
+    "every_tu": 4,
+    "mp4_fps": 25
+  },
+  "view": "left: 96x96 window following the periodic centroid; right: whole 192^2 torus; A in [0, 1] on inferno",
+  "claim": "C068",
+  "caveats": [
+    "SmoothLife gliders are Rafler's 2011 result; this one comes from our own random-rule scout (sl_scan.py, rule 32)."
+  ],
+  "runs": [
+    {
+      "key": "G025:dt10",
+      "rule": {
+        "model": "SmoothLife (Rafler 2011), smooth time step",
+        "ra": 8.829825797136717,
+        "ri": 2.943275265712239,
+        "b1": 0.25523234979561865,
+        "b2": 0.29826759401989766,
+        "d1": 0.20573610098373052,
+        "d2": 0.29501611959154006,
+        "alpha_n": 0.028,
+        "alpha_m": 0.147,
+        "dt": 0.1
+      },
+      "grid": [
+        192,
+        192
+      ],
+      "boundary": "periodic",
+      "time_units": 1000,
+      "initial_state": "sl_glider.build('dt10'): 40x40 window of the rule-32 scout world at step 1500",
+      "initial_state_sha256": "5bf081520e414f1fac8d96753126e5c8a271c0a3388d44927dcf86e1dd8af363",
+      "final_state_sha256": "8256868fea191c0f835199d6fc4eb9b4493c7b5a79e022dd221251f950be3caa"
+    },
+    {
+      "key": "G025:ring",
+      "rule": {
+        "model": "SmoothLife (Rafler 2011), smooth time step",
+        "ra": 8.829825797136717,
+        "ri": 2.943275265712239,
+        "b1": 0.25523234979561865,
+        "b2": 0.29826759401989766,
+        "d1": 0.20573610098373052,
+        "d2": 0.29501611959154006,
+        "alpha_n": 0.028,
+        "alpha_m": 0.147,
+        "dt": 0.1
+      },
+      "grid": [
+        192,
+        192
+      ],
+      "boundary": "periodic",
+      "time_units": 1000,
+      "initial_state": "sl_glider.build('ring'): 40x40 window of the rule-32 scout world at step 1500 plus the scout's still ring 60 cells ahead",
+      "initial_state_sha256": "d09866b7a271cd6802751e92bd77a79c251864e87a4f36106b6abed66419991f",
+      "final_state_sha256": "56629e613f5ff58bde2a597b4e2fea5d856b4015f3d384e4afa584961691ba52"
+    }
+  ],
+  "simulator": {
+    "package": "research/experiments/WINGS (flow_lenia.py, other_worlds.py, nd_lenia.py)",
+    "git_commit": "32bec56d6800e323224fd237dcc900da3b5142b8",
+    "git_dirty": false
+  },
+  "render": {
+    "script": "research/experiments/WINGS/film_wings.py"
+  },
+  "reproduce": "git checkout <this commit> && .venv/bin/python research/experiments/WINGS/film_wings.py G025   # verify only: film_wings.py verify G025"
+}

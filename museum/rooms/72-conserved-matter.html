@@ -1,0 +1,45 @@
+<!--meta {
+  "slug": "conserved-matter", "order": 72, "title": "East wing II: matter that cannot be destroyed",
+  "nav_label": "10 · Conserved matter",
+  "kicker": "East wing · Other laws of physics · Room 10",
+  "summary": "Flow-Lenia moves matter instead of creating it. Sixty random worlds, a colony of ring cells whose number follows the mass, and what happens when the conservation law is switched off.",
+  "expect": {"C064": "OBSERVED", "C065": "OBSERVED"}
+} -->
+<h1>Matter that cannot be destroyed</h1>
+<p class="lede">In classic Lenia a cell's value goes up or down, so matter appears and
+disappears. In Flow-Lenia (Plantec and colleagues, with Chan, 2023) the same field only says
+where matter wants to go, and matter flows there. Nothing is made or lost. We wrote our own
+Flow-Lenia from the paper and drew sixty random rules.</p>
+
+<figure class="vitrine">
+  <img src="{{asset:research/gallery/exhibits/G028-sixty-flow-worlds/sixty-flow-worlds.png}}" width="684" height="488" loading="lazy"
+       alt="Sixty small square worlds: droplets, ringed membranes, crystals of dots inside a membrane, spoked wheels, an H-shaped body and colonies of small rings.">
+  <figcaption><strong>Sixty Flow-Lenia worlds.</strong> One random rule and one noise patch each,
+  after 600 time units. {{src:research/gallery/exhibits/G028-sixty-flow-worlds/provenance.json|provenance}}.</figcaption>
+</figure>
+
+<h2>A colony of ring cells</h2>
+<figure class="vitrine">
+  <img src="{{asset:research/gallery/exhibits/G022-conservation-makes-individuals/conservation.gif}}" width="520" height="329" loading="lazy"
+       alt="Left: a square of noise condenses into about fifteen small rings that drift apart. Right: the same noise under the same kernels without conservation grows into a maze that fills the world.">
+  <figcaption><strong>One noise patch, two laws.</strong> Left: Flow-Lenia rule FL-43. Right: the
+  same kernels with the classic update, where matter can be created.
+  {{src:research/gallery/exhibits/G022-conservation-makes-individuals/conservation.mp4|Full video}} ·
+  {{src:research/gallery/exhibits/G022-conservation-makes-individuals/provenance.json|provenance}}.</figcaption>
+</figure>
+<div class="label">
+  <p class="obs"><strong>What you see.</strong> With conservation, the patch splits into separate
+  ring cells that spread out and keep their distance. Without it, the same patch grows without
+  limit into a maze.</p>
+  <p class="open"><strong>What the ledger says.</strong> The number of cells follows the mass:
+  about one cell per 58 units, from 4 cells to 57, in 20 runs {{claim:C064}}. Without
+  conservation the mass grows 21-fold {{claim:C065}}. Here, conservation is what makes
+  individuals.</p>
+</div>
+
+<h2>Sources</h2>
+<ul>
+  <li>{{src:research/experiments/WINGS/WINGS.md|Wings notes}}</li>
+  <li>{{src:research/experiments/WINGS/flow_lenia.py|Our Flow-Lenia}} and
+      {{src:research/experiments/WINGS/flow_rings.jsonl|the cell counts}}</li>
+</ul>

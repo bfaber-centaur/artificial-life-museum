@@ -1,0 +1,76 @@
+{
+  "exhibit": "G023",
+  "title": "Spots that divide",
+  "media": [
+    "spots.mp4",
+    "spots.gif",
+    "spots-final.png"
+  ],
+  "frames": {
+    "every_steps": 100,
+    "mp4_fps": 25
+  },
+  "view": "whole 256^2 torus, v in [0, 0.45] on inferno",
+  "claim": "C066",
+  "caveats": [
+    "Pearson (1993) mapped this regime; the dividing spots are textbook, filmed here as a specimen.",
+    "Spot = 8-connected component of v > 0.2; two touching spots during division count as one."
+  ],
+  "runs": [
+    {
+      "key": "G023:control",
+      "rule": {
+        "model": "Gray-Scott",
+        "F": 0.0367,
+        "k": 0.0649,
+        "Du": 0.2,
+        "Dv": 0.1,
+        "dt": 1.0,
+        "laplacian": "5-point",
+        "integrator": "forward Euler"
+      },
+      "grid": [
+        256,
+        256
+      ],
+      "boundary": "periodic",
+      "steps": 40000,
+      "intervention": null,
+      "initial_state": "u 1, v 0; centre 10x10 u 0.5, v 0.25 + uniform(0, 0.01) from default_rng([11, 0]) (gs_mitosis.seed_state(0))",
+      "initial_state_sha256": "2bbe77d668400a743f79e8998753e01a43e2a65de9090bc0f7cd4ab900823820",
+      "final_state_sha256": "d78354eb036bb267b6b859f2b9e67ebad51ac00243ba79a0e9cef83a3fb27389"
+    },
+    {
+      "key": "G023:wipe",
+      "rule": {
+        "model": "Gray-Scott",
+        "F": 0.0367,
+        "k": 0.0649,
+        "Du": 0.2,
+        "Dv": 0.1,
+        "dt": 1.0,
+        "laplacian": "5-point",
+        "integrator": "forward Euler"
+      },
+      "grid": [
+        256,
+        256
+      ],
+      "boundary": "periodic",
+      "steps": 40000,
+      "intervention": "at t 20000 the left half (x < 128) reset to u 1, v 0",
+      "initial_state": "u 1, v 0; centre 10x10 u 0.5, v 0.25 + uniform(0, 0.01) from default_rng([11, 0]) (gs_mitosis.seed_state(0))",
+      "initial_state_sha256": "2bbe77d668400a743f79e8998753e01a43e2a65de9090bc0f7cd4ab900823820",
+      "final_state_sha256": "4888801152d51b2539e39b888876f611ae1cb5592fff6cd9bc3b6bd141823184"
+    }
+  ],
+  "simulator": {
+    "package": "research/experiments/WINGS (flow_lenia.py, other_worlds.py, nd_lenia.py)",
+    "git_commit": "32bec56d6800e323224fd237dcc900da3b5142b8",
+    "git_dirty": false
+  },
+  "render": {
+    "script": "research/experiments/WINGS/film_wings.py"
+  },
+  "reproduce": "git checkout <this commit> && .venv/bin/python research/experiments/WINGS/film_wings.py G023   # verify only: film_wings.py verify G023"
+}

@@ -1,0 +1,210 @@
+{
+  "exhibit": "G027",
+  "title": "A three-channel aquarium",
+  "media": [
+    "aquarium.mp4",
+    "aquarium.gif",
+    "aquarium-final.png"
+  ],
+  "frames": {
+    "every_tu": 1,
+    "mp4_fps": 10
+  },
+  "view": "each tile: 128x128 window following the centroid of the summed channels; channel c -> RGB component c, [0, 1] linear",
+  "claim": "C071",
+  "caveats": [
+    "Every creature, name and rule is Chan's (found/233.json, pinned adfc542); our engine (nd_lenia.py) runs them.",
+    "Upstream runs these with dt 1 (params[0].T = 1), and so do we."
+  ],
+  "runs": [
+    {
+      "key": "G027:233-0",
+      "rule": "found/233.json entry 0 params (15 kernels, 3 channels), dt 1",
+      "grid": [
+        3,
+        256,
+        256
+      ],
+      "boundary": "periodic",
+      "settle_tu": 20,
+      "time_units": 100,
+      "initial_state": "found/233.json entry 0 (5N7KKM **M limus) centred, settled 20 tu",
+      "initial_state_sha256": "303fbab2b5c13e68ba57254187213120f138918f255ef1fd254083857825896a",
+      "final_state_sha256": "38d249735197ae4c289869a5b11e66207a201af9ffaf700dfad82f33f1e6b161"
+    },
+    {
+      "key": "G027:233-1",
+      "rule": "found/233.json entry 1 params (15 kernels, 3 channels), dt 1",
+      "grid": [
+        3,
+        256,
+        256
+      ],
+      "boundary": "periodic",
+      "settle_tu": 20,
+      "time_units": 100,
+      "initial_state": "found/233.json entry 1 (5N7KKM **M gyrans) centred, settled 20 tu",
+      "initial_state_sha256": "81d608adf786751d0a2910ed160f8c7cc6bb85be816cd740acd0f419758b6c36",
+      "final_state_sha256": "2fcb64b0949fb09703eba22261f8ec5c836b14b9263c0af42bf60764f7e73c71"
+    },
+    {
+      "key": "G027:233-2",
+      "rule": "found/233.json entry 2 params (15 kernels, 3 channels), dt 1",
+      "grid": [
+        3,
+        256,
+        256
+      ],
+      "boundary": "periodic",
+      "settle_tu": 20,
+      "time_units": 100,
+      "initial_state": "found/233.json entry 2 (5N7KKM **M paragyrans) centred, settled 20 tu",
+      "initial_state_sha256": "d7752b45a1e0efec404d7d6be79984ee3eb704da328f2940ce2d4ff65e721199",
+      "final_state_sha256": "ed092f4bee8493f8b3a6efd7fe5083d0fbb60a9b79d642e74d7474efc3312880"
+    },
+    {
+      "key": "G027:233-3",
+      "rule": "found/233.json entry 3 params (15 kernels, 3 channels), dt 1",
+      "grid": [
+        3,
+        256,
+        256
+      ],
+      "boundary": "periodic",
+      "settle_tu": 20,
+      "time_units": 100,
+      "initial_state": "found/233.json entry 3 (5N7KKM **M lithos) centred, settled 20 tu",
+      "initial_state_sha256": "fd9034be51e1825792fa1c457e70a00a700a8424edca5e166faa26a6f806f63f",
+      "final_state_sha256": "c90f34f1593cf06800d1eaf2fe052f630ebe0d43f952d8eed1ffefc5e514d3af"
+    },
+    {
+      "key": "G027:233-4",
+      "rule": "found/233.json entry 4 params (15 kernels, 3 channels), dt 1",
+      "grid": [
+        3,
+        256,
+        256
+      ],
+      "boundary": "periodic",
+      "settle_tu": 20,
+      "time_units": 100,
+      "initial_state": "found/233.json entry 4 (5N7KKM **M tardus) centred, settled 20 tu",
+      "initial_state_sha256": "5391b00febff5bf750250020883cb114e96869e7bef1926051129885f7981edc",
+      "final_state_sha256": "cd28e9281586ccb54d283a1402b624dbac565535e59e7ee9bf34f01c055dfd04"
+    },
+    {
+      "key": "G027:233-5",
+      "rule": "found/233.json entry 5 params (15 kernels, 3 channels), dt 1",
+      "grid": [
+        3,
+        256,
+        256
+      ],
+      "boundary": "periodic",
+      "settle_tu": 20,
+      "time_units": 100,
+      "initial_state": "found/233.json entry 5 (5N7KKM **M paratardus) centred, settled 20 tu",
+      "initial_state_sha256": "7be827729eac6ccb59e0b60c2e46178113cd1d4d7977f7f155a39d0b8646bcd4",
+      "final_state_sha256": "689b16bb77844fd11c3c5b00a11643213ff1319c2aff073dd34ac43942265764"
+    },
+    {
+      "key": "G027:233-6",
+      "rule": "found/233.json entry 6 params (15 kernels, 3 channels), dt 1",
+      "grid": [
+        3,
+        256,
+        256
+      ],
+      "boundary": "periodic",
+      "settle_tu": 20,
+      "time_units": 100,
+      "initial_state": "found/233.json entry 6 (5N7KKM **M lithos+gyrans) centred, settled 20 tu",
+      "initial_state_sha256": "7e09d64cc85053c1fe79f76396ba7c53b462fa8d3270626b3109dda59699e9cf",
+      "final_state_sha256": "ce1ce378f276ace4305d4463a36aa91ebdfddfd5d94d17360322d238251e5587"
+    },
+    {
+      "key": "G027:233-7",
+      "rule": "found/233.json entry 7 params (15 kernels, 3 channels), dt 1",
+      "grid": [
+        3,
+        256,
+        256
+      ],
+      "boundary": "periodic",
+      "settle_tu": 20,
+      "time_units": 100,
+      "initial_state": "found/233.json entry 7 (5N7KKM **M lithos+2gyrans) centred, settled 20 tu",
+      "initial_state_sha256": "559b40c73ba1ab1bb14f110ea6a766c9f118f3c0f379434606ba1ea7a498c935",
+      "final_state_sha256": "c7356dcb18a1a6b679054c3d6bfc2c6961eb007d334c366da74e3728edb8b637"
+    },
+    {
+      "key": "G027:233-8",
+      "rule": "found/233.json entry 8 params (15 kernels, 3 channels), dt 1",
+      "grid": [
+        3,
+        256,
+        256
+      ],
+      "boundary": "periodic",
+      "settle_tu": 20,
+      "time_units": 100,
+      "initial_state": "found/233.json entry 8 (5N7KKM **M lithos+3gyrans) centred, settled 20 tu",
+      "initial_state_sha256": "62c629deab886175c66a1c2c6c886b310f8cb859cf888dbe6700939666653622",
+      "final_state_sha256": "3a39373346025ec7187c626ac253c367cdd2388b7e9eaf4ee752c625b2944be6"
+    },
+    {
+      "key": "G027:233-9",
+      "rule": "found/233.json entry 9 params (15 kernels, 3 channels), dt 1",
+      "grid": [
+        3,
+        256,
+        256
+      ],
+      "boundary": "periodic",
+      "settle_tu": 20,
+      "time_units": 100,
+      "initial_state": "found/233.json entry 9 (5N7KKM **M lithos+4gyrans) centred, settled 20 tu",
+      "initial_state_sha256": "a6a94a9395de5778115e92d62850e3b71eae4d1cbec958b93f422170fcec10c5",
+      "final_state_sha256": "8cc7d420aafe859be9e2d3b0e53c5a1acdefa52f2e28333d0674920dafe7efd5"
+    },
+    {
+      "key": "G027:233-10",
+      "rule": "found/233.json entry 10 params (15 kernels, 3 channels), dt 1",
+      "grid": [
+        3,
+        256,
+        256
+      ],
+      "boundary": "periodic",
+      "settle_tu": 20,
+      "time_units": 100,
+      "initial_state": "found/233.json entry 10 (5N7KKM **M 2lithos+gyrans) centred, settled 20 tu",
+      "initial_state_sha256": "c04f4741828af70108f21d39ffa91f5db68398129af081db19faf55432d9c0aa",
+      "final_state_sha256": "994cc593a92d15db83b967674b59445431d61f3a11ca8c7fad66b376ae5471ac"
+    },
+    {
+      "key": "G027:233-11",
+      "rule": "found/233.json entry 11 params (15 kernels, 3 channels), dt 1",
+      "grid": [
+        3,
+        256,
+        256
+      ],
+      "boundary": "periodic",
+      "settle_tu": 20,
+      "time_units": 100,
+      "initial_state": "found/233.json entry 11 (5N7KKM **M egg) centred, settled 20 tu",
+      "initial_state_sha256": "ee63a144be9decc48f8b8a9b50ccd4847fb6d0375a1db79509e12b97d260d807",
+      "final_state_sha256": "a4c6b609f7ceee8295268d0fea66d71a1801d3d90e4b30f80594254d2e7f2c84"
+    }
+  ],
+  "simulator": {
+    "package": "research/experiments/WINGS (flow_lenia.py, other_worlds.py, nd_lenia.py)",
+    "git_commit": "32bec56d6800e323224fd237dcc900da3b5142b8",
+    "git_dirty": false
+  },
+  "render": {
+    "script": "research/experiments/WINGS/film_wings.py"
+  },
+  "reproduce": "git checkout <this commit> && .venv/bin/python research/experiments/WINGS/film_wings.py G027   # verify only: film_wings.py verify G027"
+}
