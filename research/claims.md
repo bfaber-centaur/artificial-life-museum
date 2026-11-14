@@ -2278,6 +2278,79 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
 - **History:**
   - 2026-11-14 — OBSERVED — collision-zoo thread.
 
+### C084 — On a sphere, two Orbia launched side by side and parallel always meet; on the flat torus they never do. Of 16 sphere runs, 14 touch (all 12 with a start gap of at least 3 R), and the meeting ends three ways: both glide on (9), they fuse into one body with the bound pair's mass (4), or one dies (3)
+
+- **Status:** OBSERVED
+- **Owner lane:** strange-geometries thread (GEOM, 2026-11-14)
+- **Sources:** `research/experiments/GEOM/sphere.py` (`meet`, `flat`), `meet.jsonl`, `flat.jsonl`, `summarize.py`; gallery G038
+- **Specimen / version:** S001 cells, cubic-interpolated onto each world (`geomlenia.patch_sampler`; on the square lattice it returns the cells exactly)
+- **Simulator / version:** `geomlenia.GraphLenia`: classic Lenia with the kernel as a sparse matrix over any point set (equal to `alm.lenia.Lenia` on the square torus to 6 × 10⁻¹³, `tests/test_geom.py`). Sphere = icosahedral geodesic grid (locally a hex lattice, 12 five-fold defects), about one cell per unit area, kernel weights × spherical-Voronoi cell area, rows normalised; distance = great-circle distance
+- **Parameters:** S001 rule (poly/poly, μ 0.15, σ 0.015, R 13, T 10); sphere radius ρ = 30, 40, 60, 80 cells (2.3–6.2 R); start gap 2, 3, 4, 6 R along a meridian, both animals heading along the equator's direction (parallel: both perpendicular to the arc joining them); 2000 steps. Flat control: same pairs on the 256² square torus with `alm.lenia.Lenia`
+- **Intervention:** world geometry
+- **Metric:** blobs = cells with A > 0.1 linked within 2.5 cells; "touch" = one blob (checked every 10 steps); at the end, each blob with mass > 0.2 R² is one body
+- **Result:** flat: 0 of 4 pairs touch, both Orbia glide on (total mass 0.8706 R² at gaps 3–6 R, 0.8742 at 2 R). Sphere: 14 of 16 touch, first at 3–17 tu (later on bigger spheres); the two that never touch are the 2 R starts on the two biggest spheres. Outcomes after 200 tu: two bodies 9, one fused body 4 (ρ 30 at 3 and 4 R, ρ 40 at 3 R, ρ 80 at 6 R), one survivor 3. Fused bodies: mass 0.841–0.849 R², gyradius 0.794–0.810 R, against 0.414–0.429 R² for a lone Orbium on these spheres; the flat bound pair S101 (*Synorbium ignis* under the S001 rule) has 0.8737 R² and 0.8154 R. G038's film run (ρ 40, gap 3 R) fuses within 7 tu. G038's "planet" run (8 Orbia, random positions ≥ 4 R apart and headings, ρ 60) keeps 2 bodies (0.87 R² in all) after 80 tu
+- **Run IDs:** `meet.jsonl` and `flat.jsonl` rows (rho, sep_R) with final_sha256; G038 provenance.json
+- **Search / parameter bounds:** one rule, one start heading per pair, 4 radii × 4 gaps, 200 tu
+- **Reproduction command:** `cd research/experiments/GEOM && PYTHONPATH=../../../src ../../../.venv/bin/python sphere.py meet` (and `sphere.py flat`; numbers: `summarize.py`)
+- **Known caveats:** the fused body is matched to S101 by mass and gyradius only, not by shape or speed (on the flat torus, C094 finds that nine of twelve Orbium–Orbium fusions settle into S101 by mass, gyradius and speed). Which outcome a pair gets depends on contact geometry and is not predicted here (no monotone pattern in ρ or gap). One grid per radius; the icosahedral grid has its own lattice directions (see C087)
+- **Prior literature:** none found for Lenia on curved surfaces. Geodesics on a sphere all cross, which is why the meeting is expected; the outcome mix is the observation
+- **History:**
+  - 2026-11-14 — OBSERVED — strange-geometries thread.
+
+### C085 — Orbia travel along geodesics: two parallel Orbia on a sphere close, and on the hyperbolic plane spread apart, exactly as the geodesic law sin(d/2ρ) = sin(a/2ρ)·cos(s/ρ) or sinh(d/2κ) = sinh(a/2κ)·cosh(s/κ) predicts, within 0.27 R until they touch or leave the world
+
+- **Status:** OBSERVED
+- **Owner lane:** strange-geometries thread (GEOM, 2026-11-14)
+- **Sources:** `research/experiments/GEOM/pair.py`, `pair.jsonl`, `summarize.py`; gallery G038, G039
+- **Specimen / version:** S001 cells as in C084
+- **Simulator / version:** `geomlenia.GraphLenia`. Sphere as in C084. Hyperbolic plane = the {3,7} triangle tiling subdivided like the icosphere (locally hex, seven-fold defects), exact hyperbolic cell areas as kernel weights, hyperbolic distance; disk of geodesic radius 4 κ (κ 26) or 3 κ (κ 39), empty beyond (rows near the rim keep the interior normalisation)
+- **Parameters:** S001 rule. Sphere ρ 40, 60, 80 cells × gap a = 3, 4, 6 R; hyperbolic curvature radius κ = 26, 39 cells (2 R, 3 R) × a = 2, 3, 4 R; up to 600 steps
+- **Intervention:** world geometry
+- **Metric:** d = geodesic distance between the mass centres of the two halves (Einstein midpoint on the hyperboloid; normalised mean on the sphere); s = distance from each seed point to its centre after 2 tu plus the accumulated centre path, averaged over the two; prediction from the seeded a and that s. Compared every 1 tu while d > 2.5 R and, on the sphere, before the first closest approach
+- **Result:** hyperbolic, 6 runs: separation grows 3.0–5.1 × over 5.9–7.3 R of travel; largest |d − law| 0.23 R (κ 39, a 2 R), 0.03–0.14 R in the other five. Sphere, 9 runs: separation closes to 1.4–1.6 R; |d − law| at most 0.27 R (ρ 40, a 6 R), at most 0.08 R in the other eight; at contact the bodies stop at 1.4–1.6 R where the law gives 0.9–1.6 R. In the flat control (C084) the separation does not change
+- **Run IDs:** `pair.jsonl` rows (world, L, sep_R) with final_sha256
+- **Search / parameter bounds:** two curvatures each side of flat, 3 gaps, one start heading; travel 3–8 R before contact or the rim
+- **Reproduction command:** `cd research/experiments/GEOM && PYTHONPATH=../../../src ../../../.venv/bin/python pair.py run` (one run: `pair.py one hyperbolic 26 3`)
+- **Known caveats:** worlds are small next to the hyperbolic plane's growth: the animals reach the rim of the κ 26 disk within about 7 R of travel. One case in the sweep (ρ 80, a 3 R) never touches: the pair closes to 1.60 R as predicted, then swings between 1.7 and 3 R for 29 R of travel, which the law (non-interacting) does not describe. That geodesic motion holds at R/κ = 0.5 is the observation; we did not look for a curvature at which it fails
+- **History:**
+  - 2026-11-14 — OBSERVED — strange-geometries thread.
+
+### C086 — Orbium keeps gliding on a sphere whose radius is 0.54 R (7 cells, circumference 3.4 R, smaller than its own kernel): it wraps into a band round the planet; at 0.46 R and below it stops being a glider
+
+- **Status:** OBSERVED
+- **Owner lane:** strange-geometries thread (GEOM, 2026-11-14)
+- **Sources:** `research/experiments/GEOM/sphere.py` (`curvature`), `curvature.jsonl`, `summarize.py`; gallery G038 `tiny-planets.png`
+- **Specimen / version:** S001 cells as in C084, seeded by the exponential map at one point (cells farther than 60 cells cut, irrelevant on small spheres)
+- **Simulator / version:** `geomlenia.GraphLenia` on the icosahedral grid (C084)
+- **Parameters:** S001 rule; ρ = 5, 6, 7, 8, 9, 10, 12, 14, 16, 20, 25 cells (362–7842 cells); 3000 steps (300 tu)
+- **Intervention:** world size (curvature)
+- **Metric:** area-weighted mass / R²; speed = angular speed of the mass centre × ρ over the last 50 tu; bodies as in C084
+- **Result:** ρ 7–25 (0.54–1.92 R): one body, gliding at 0.470–0.479 R/tu (flat S001: 0.479); mass falls smoothly with ρ, 0.433 → 0.384 R² (flat 0.4353). ρ 6 (0.46 R): two blobs of saturated cells, mass 0.564 R², speed 0.086 R/tu. ρ 5 (0.38 R): mass 0.324 R², speed 0.009 R/tu (almost still). Nothing died in 300 tu
+- **Run IDs:** `curvature.jsonl` rows (rho) with final_sha256; G038 runs `G038:tiny-planet-rho*` (same hashes)
+- **Search / parameter bounds:** 11 radii, one start, 300 tu
+- **Reproduction command:** `cd research/experiments/GEOM && PYTHONPATH=../../../src ../../../.venv/bin/python sphere.py curvature`
+- **Known caveats:** small spheres are coarse (642 cells at ρ 7), so the grid's own effects are larger there; the cell spacing is fixed at about 1 so R/ρ grows while R stays 13 cells. The ρ 6 and 5 bodies were not classified beyond mass and speed
+- **History:**
+  - 2026-11-14 — OBSERVED — strange-geometries thread.
+
+### C087 — The heading lock (C011) is not special to square grids: on a hexagonal lattice Orbium also settles onto a few lattice-symmetric headings (29 of 31 starts on 6 headings), while on an amorphous glass of irregular cells it does not lock, its heading wanders, and 14 of 16 die within 600 tu
+
+- **Status:** OBSERVED
+- **Owner lane:** strange-geometries thread (GEOM, 2026-11-14)
+- **Sources:** `research/experiments/GEOM/heading.py`, `heading_hex.csv`, `heading_glass.csv`, `summarize.py`; square-grid comparison H001-X1 (`research/experiments/H001-lattice-wobble/x1_R13.csv`, C011); gallery G040
+- **Specimen / version:** S001 cells, cubic-interpolated and rotated by θ counter-clockwise (`geomlenia.seed_torus`)
+- **Simulator / version:** `geomlenia.GraphLenia` on a 128 × 128 torus at one cell per unit area: hex = triangular lattice (spacing √(2/√3), 16 422 cells); glass = 16 384 uniform random points relaxed 120 times by soft repulsion (`glass_torus(128, 0)`, one realisation)
+- **Parameters:** S001 rule; θ = 0–30° by 1° (hex: this covers the lattice's symmetry domain), 0–30° by 2° (glass); 8000 steps (800 tu)
+- **Intervention:** start rotation; lattice type
+- **Metric:** heading of the periodic-centroid velocity in 1000-step windows (as H001-X1); "settled" = last two windows within 0.05°; alive = mass > 1 at the end
+- **Result:** hex: 31/31 alive, 29 settled on 6 headings, 80.76° (×12), 84.26° (×2), 86.09° (×2), 86.89° (×4), 93.10° (×5), 95.74° (×4); two pairs (86.89/93.10, 84.26/95.74) are mirror images about 90°, a mirror line of the lattice; the median miss from the rotated start heading (68.2° + θ) is 1.9°, at most 12.6°. Square (C011, H001-X1): 40/46 settled on 10 headings, median miss 2.4°, at most 7.9°. Glass: 2/16 alive at 800 tu, none settled; 5 died within 100 tu and all 14 within 600 tu; the two survivors' window headings span the compass (e.g. 135°, 232°, 272°, 104°, 110°, 98°, 139°, 6°)
+- **Run IDs:** rows of `heading_hex.csv`, `heading_glass.csv` (lattice, rot)
+- **Search / parameter bounds:** R 13 only; one glass realisation; one start position
+- **Reproduction command:** `cd research/experiments/GEOM && PYTHONPATH=../../../src ../../../.venv/bin/python heading.py hex 1 30 > heading_hex.csv` (and `heading.py glass 2 30 > heading_glass.csv`)
+- **Known caveats:** the glass result is about this discretisation at R 13: random cell positions give the kernel a quenched noise (pilots on glass realisations 1 and 2 survived 150 tu with mass swings about 5× those on the hex lattice), and a finer glass (larger R) was not tried, so "glass frees the heading" is not separated from "glass is noisy". The hex plateaus are not identified with lattice vectors
+- **History:**
+  - 2026-11-14 — OBSERVED — strange-geometries thread.
+
 ### C093 — Without a keeper there is no climb: 64 of 64 Hexapteryxes loose among eight Circium rings detonate, after 30–385 time units; 6 eat one ring first and none eats two
 
 - **Status:** OBSERVED
