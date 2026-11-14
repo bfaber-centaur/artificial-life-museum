@@ -1,0 +1,59 @@
+{
+ "exhibit": "G032",
+ "title": "Same world, two kinds of heredity",
+ "claim": [
+  "C077",
+  "C076"
+ ],
+ "media": [
+  "duel.mp4",
+  "duel.gif",
+  "duel-final.png"
+ ],
+ "engine": "research/experiments/SOUP/soup.Soup (our parameter-embedded Flow-Lenia, written from Plantec et al. 2023; not the authors' code)",
+ "runs": [
+  {
+   "name": "B16s0",
+   "kernel_set": 16,
+   "seed": 0,
+   "heredity": "blend",
+   "grid": [
+    256,
+    256
+   ],
+   "steps": 12000,
+   "time_units": 2400.0,
+   "snapshot_every_steps": 40,
+   "final_state_sha256": "ed919d105615c417400aa057de700bc674d875162a6381f46627e5f2aa1a2184",
+   "command": "SOUP_OUT=<dir> python research/experiments/SOUP/run.py B16s0 --rule 16 --seed 0 --steps 12000 --every 40"
+  },
+  {
+   "name": "D16s0",
+   "kernel_set": 16,
+   "seed": 0,
+   "heredity": "dominant",
+   "grid": [
+    256,
+    256
+   ],
+   "steps": 12000,
+   "time_units": 2400.0,
+   "snapshot_every_steps": 40,
+   "final_state_sha256": "c127520fd312f7a6a9fbaf088f9fbaf130c5954b74fa56e4b5629cb39ff9928e",
+   "command": "SOUP_OUT=<dir> python research/experiments/SOUP/run.py D16s0 --rule 16 --seed 0 --steps 12000 --every 40 --inherit dominant"
+  }
+ ],
+ "frames": {
+  "every_tu": 8,
+  "mp4_fps": 30,
+  "gif": "ffmpeg fps 10, 520 px wide, 96-colour palette, Bayer dither"
+ },
+ "view": "colour = fixed random projection of the 10 genome weights to RGB (viz.PROJ, seed 5); brightness = matter, scaled to each run's final 99th percentile; strip = genome spread (diversity.spread)",
+ "commands": [
+  "python research/experiments/SOUP/film.py duel <dir>/B16s0.npz <dir>/D16s0.npz duel.mp4"
+ ],
+ "caveats": [
+  "B16s0 was run under the name L16 and renamed; same arguments and hash.",
+  "Both worlds start from the identical state and use the identical mutation rng; they diverge because heredity changes which genome each cell keeps."
+ ]
+}
