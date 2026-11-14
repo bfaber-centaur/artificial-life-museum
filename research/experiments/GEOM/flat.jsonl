@@ -1,0 +1,4 @@
+{"sep_R": 6, "N": 256, "steps": 2000, "first_touch_step": null, "n_bodies_final": 2, "final_mass_R2": 0.8705586450477344, "final_sha256": "1cb86c85be0694e53f5610406f1a37a8ab35b43173089506ad6c11725ba2f267"}
+{"sep_R": 4, "N": 256, "steps": 2000, "first_touch_step": null, "n_bodies_final": 2, "final_mass_R2": 0.8705586433452713, "final_sha256": "03be5a1b3ae8753d4b97aa7c1205361f57dd811256e0102f6c2469b682bb1c0d"}
+{"sep_R": 3, "N": 256, "steps": 2000, "first_touch_step": null, "n_bodies_final": 2, "final_mass_R2": 0.8705586455454712, "final_sha256": "fc18b78b8282070926df6f2696cdb0fba7ed0ac83195f5b7da696dd9a95b45f3"}
+{"sep_R": 2, "N": 256, "steps": 2000, "first_touch_step": null, "n_bodies_final": 2, "final_mass_R2": 0.8741590344179723, "final_sha256": "a9a598ef0917d377d0935bd1f640c40b3871db6c8ec0738272acf01311fe8410"}

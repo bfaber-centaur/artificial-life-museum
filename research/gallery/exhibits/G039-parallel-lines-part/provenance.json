@@ -1,0 +1,71 @@
+{
+  "exhibit": "G039",
+  "title": "Parallel lines part",
+  "media": [
+    "part.mp4",
+    "part.gif",
+    "part-still.png"
+  ],
+  "frames": {
+    "every_steps": 2,
+    "mp4_fps": 24,
+    "time_compression": "4.8 tu per second"
+  },
+  "view": "left: flat torus window following the pair, rotated so travel is to the right. Right: Poincare disk (the whole hyperbolic world, radius 4 kappa = 104 cells), nearest cell per pixel; the disk picture shrinks distances toward the rim, so both animals look smaller as they move out though they keep their size. Grey dots: each half's mass centre every 0.2 tu. The ring is the world's edge (absorbing: empty beyond).",
+  "claim": "C085",
+  "caveats": [
+    "The hyperbolic world is the {3,7} triangle tiling subdivided 25 times per edge (locally a hex lattice with seven-fold defects), kernel weights use exact cell areas, and kernel rows near the rim keep the interior normalisation (vacuum beyond, not renormalised).",
+    "The animals leave the world after about 30 tu; the separation law is measured until then (research/experiments/GEOM/pair.jsonl)."
+  ],
+  "runs": [
+    {
+      "key": "G039:flat-pair-3R",
+      "world": "square torus 256^2 (alm.lenia)",
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.15,
+        "sigma": 0.015,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "steps": 420,
+      "initial_sha256": "93ec3412063747af6e920ef0b05647b2338ce276090b06ca2d5d6a0eda8c4f21",
+      "final_sha256": "76b7858a108761fffb47f14a831d22a57b571fa72f1fc48f5a3880a3c77a9af5"
+    },
+    {
+      "key": "G039:hyperbolic-pair-k26-3R",
+      "world": "{3,7} geodesic grid, kappa 26, radius 104 cells, Poincare disk",
+      "world_sha256": "3da03847e793c3f41ae833400276a91a10e233d39b117a4c49e941161dd000db",
+      "n_cells": 114899,
+      "rule": {
+        "R": 13,
+        "T": 10,
+        "mu": 0.15,
+        "sigma": 0.015,
+        "beta": [
+          1.0
+        ],
+        "kernel": "poly",
+        "growth": "poly",
+        "dt": 0.1
+      },
+      "steps": 420,
+      "mobius_shift": -0.55,
+      "initial_sha256": "9f9033c28b38bde57a267ffc7849d0421e7d385bd261128c0b0314ee010db1dd",
+      "final_sha256": "429c8f931f4190636e988f09a3dd44725fba59e51a8298c3e0d3b5f05580356a"
+    }
+  ],
+  "code_version": {
+    "package": "alm",
+    "version": "0.1.0",
+    "git_commit": "704f6b2fe2c41437c0777dfed8d74377d73105c3",
+    "git_dirty": false,
+    "git_dirty_paths": []
+  },
+  "command": "PYTHONPATH=src .venv/bin/python research/experiments/GEOM/film.py G039"
+}

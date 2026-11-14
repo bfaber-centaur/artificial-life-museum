@@ -43,6 +43,9 @@ made of, ten times per unit of time. Some of them travel; one of them never chan
 | [G026](#g026--lenia-in-three-dimensions) | Lenia in three dimensions (animated; *3-D*) | 4Gu3l, 3Ov1e, 1Sp1v and their slices | 2026-11-11 |
 | [G027](#g027--a-three-channel-aquarium) | A three-channel aquarium (animated; *3 channels*) | Chan's found/233 entries 0–11 | 2026-11-11 |
 | [G028](#g028--sixty-flow-lenia-worlds) | Sixty Flow-Lenia worlds (still; *Flow-Lenia*) | 60 random rules | 2026-11-11 |
+| [G038](#g038--parallel-lines-meet) | Parallel lines meet (animated; *sphere*) | S001 pairs, eight Orbia, six tiny planets | 2026-11-14 |
+| [G039](#g039--parallel-lines-part) | Parallel lines part (animated; *hyperbolic plane*) | S001 pair | 2026-11-14 |
+| [G040](#g040--the-lattice-is-the-compass) | The lattice is the compass (chart) | S001, 93 headings on three lattices | 2026-11-14 |
 
 ### G001 — Four ways to move
 
@@ -577,6 +580,61 @@ Film: [`aquarium.mp4`](exhibits/G027-three-channel-aquarium/aquarium.mp4) ·
   units. Most make one body (droplet, ringed membrane, crystal inside a membrane, wheel); a few
   make colonies (FL-9, FL-11, FL-41, FL-43, FL-53).
 
+## Strange geometries (G038–G040)
+
+Made by `research/experiments/GEOM/film.py` and `compass.py` (strange-geometries thread). The
+worlds are point clouds, not square grids, so each pixel shows its *nearest cell* (the cell
+mosaic shows when zoomed in); A maps linearly onto `inferno` as everywhere else. Globes add a
+disclosed Lambert shading (0.5 + 0.5 cos) and a faint blue lift on empty cells so the ball is
+visible. `film.py verify` replays every run and compares final hashes.
+
+### G038 — Parallel lines meet
+
+![Two Orbia on a small ball drift together and travel on joined by a shared membrane, beside the same pair on a flat world that never comes closer](exhibits/G038-parallel-lines-meet/meet.gif)
+
+Film: [`meet.mp4`](exhibits/G038-parallel-lines-meet/meet.mp4) ·
+[`meet-strip.png`](exhibits/G038-parallel-lines-meet/meet-strip.png) ·
+planet: [`planet.mp4`](exhibits/G038-parallel-lines-meet/planet.mp4),
+[`planet-still.png`](exhibits/G038-parallel-lines-meet/planet-still.png) ·
+[`tiny-planets.png`](exhibits/G038-parallel-lines-meet/tiny-planets.png) ·
+[`provenance.json`](exhibits/G038-parallel-lines-meet/provenance.json)
+
+- **Observation.** Two Orbia 3 R apart and heading the same way: on the flat torus they keep
+  their distance; on a sphere of radius 40 cells they lean together, touch within 7 tu and go on
+  as one joined body. Eight Orbia on a sphere of radius 60 collide until two remain (80 tu).
+  On planets of radius 25 down to 7 cells one Orbium wraps into a band and keeps gliding; at 6
+  and 5 cells only slow patches remain.
+- **Ledger.** C084 (pairs on spheres: 14 of 16 meet, outcomes), C085 (they follow great
+  circles), C086 (tiny planets); all *observed*.
+- **Caveats.** Icosahedral geodesic grid (12 five-fold defects), area-weighted kernel. The fused
+  body is matched to S101 by mass and size only.
+
+### G039 — Parallel lines part
+
+![A Poincaré disk: two Orbia start near the left side and curve apart along arcs that meet the rim at right angles](exhibits/G039-parallel-lines-part/part.gif)
+
+Film: [`part.mp4`](exhibits/G039-parallel-lines-part/part.mp4) ·
+[`part-still.png`](exhibits/G039-parallel-lines-part/part-still.png) ·
+[`provenance.json`](exhibits/G039-parallel-lines-part/provenance.json)
+
+- **Observation.** The same pair on the hyperbolic plane (curvature radius 2 R), drawn as a
+  Poincaré disk: they spread apart along circular arcs, the geodesics of the disk picture, and
+  look smaller near the rim because the picture shrinks distances there.
+- **Ledger.** C085 (separation follows the geodesic law within 0.27 R), *observed*.
+- **Caveats.** The world is a disk of radius 4 κ (104 cells), empty beyond; the animals leave
+  it after about 25 tu. {3,7} geodesic grid with exact cell areas.
+
+### G040 — The lattice is the compass
+
+![Compass roses of Orbium's final heading on a square grid, a hex lattice and an amorphous glass](exhibits/G040-lattice-compass/compass.png)
+
+[`provenance.json`](exhibits/G040-lattice-compass/provenance.json)
+
+- **Observation (chart).** Final headings after 800 tu from many start angles: on the square
+  and hex lattices they bunch onto a few spokes with the lattice's symmetry; on the glass they
+  do not.
+- **Ledger.** C011 (square grid, *independently checked*), C087 (hex and glass, *observed*).
+
 ## Field note, 7 October 2026
 
 > *What I saw.* Four animals, four temperaments. The Orbium set off at once along a line it never
@@ -717,6 +775,8 @@ heading values come from `galintervene.chord_heading("S102", 3002)`. The G004 S0
 
 ## Cycle log
 
+- **2026-11-14, G038–G040 (strange-geometries thread).** Orbium on a sphere, on the hyperbolic
+  plane and on hex and glass lattices; claims C084–C087, museum room 79.
 - **2026-11-10, G021 (species-hunt thread).** Convergence exhibit from the SPECIES-scout hunt, claim C063.
 - **2026-11-07, G014–G018 (lightning-talk thread, round two).** Five "stranger worlds". G015,
   G016 and G018 use a spatially or temporally varying rule (`FieldLenia`, checked bitwise against
