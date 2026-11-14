@@ -64,3 +64,18 @@ def test_ledger_numbers_match_logs():
     for k, row in enumerate(match, start=1):
         best = max(("P6al", "P7al", "P8al", "P9al", "P10al"), key=lambda c: row[c])
         assert best == f"P{6 + k}al" and row[best] > 0.99
+
+
+@needs_refs
+def test_forage_row_replays():
+    """A short free-foraging run (seed 2, K 8) replays to its committed final hash."""
+    import forage
+    from alm.lenia import Lenia
+
+    row = next(json.loads(l) for l in (ZOO / "forage-K8.jsonl").read_text().splitlines() if json.loads(l)["seed"] == 2)
+    A0, *_ = forage.setup(2, 8, row["N"])
+    assert zoocore.sha(A0) == row["init_sha256"]
+    L = Lenia(forage.RULE, A0)
+    for _ in range(row["t_end"] * forage.RULE.T):
+        L.step()
+    assert zoocore.sha(L.A) == row["final_sha256"]

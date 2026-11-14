@@ -80,3 +80,37 @@ for k in (1, 2, 3, 4):
     left = [len(r["series"][-1]["census"]) - 1 for r in rs]
     multi = [max(c["units"] for c in r["series"][-1]["census"]) for r in rs]
     print(f"k={k}: runs {len(rs)}, free bodies left besides the rock {left}, largest body (units) {multi}")
+
+print("\n== round 2: C093 free foraging (forage-K8 / K60)")
+for K in (8, 60):
+    rs = [json.loads(l) for l in (HERE / f"forage-K{K}.jsonl").read_text().splitlines()]
+    first = collections.Counter()
+    for r in rs:
+        s = r["series"]
+        out = None
+        for i in range(1, len(s)):
+            if s[i][2] < s[i - 1][2]:
+                mb = s[i - 1][1]
+                later = [x[1] for x in s[i + 1:i + 5]]
+                if len(later) >= 3 and all(60 < m - mb < 250 for m in later):
+                    out = "meal"
+                elif len(later) >= 3 and all(abs(m - mb) < 60 for m in later):
+                    out = "ring destroyed"
+                else:
+                    out = "detonate"
+                break
+        first[out] += 1
+    t = sorted(r["t_end"] for r in rs)
+    print(f"K={K}: runs {len(rs)}, ends {dict(collections.Counter(r['end'] for r in rs))}, "
+          f"t_end median {t[len(t) // 2]} (sorted middle) min {t[0]} max {t[-1]}, first encounter {dict(first)}")
+
+print("\n== C094 fused bodies vs S101 (fused_check.json)")
+fc = json.loads((HERE / "fused_check.json").read_text())
+print("S101", fc["S101"])
+for x in fc["fused"]:
+    print(x)
+
+print("\n== C095 ring scan at T 20 (atlas-PC20 vs atlas-PC)")
+a = {(r["a"], r["b_R"]): r["class"] for r in rows("PC")}
+b = {(r["a"], r["b_R"]): r["class"] for r in rows("PC20")}
+print(f"agree {sum(a[k] == b[k] for k in b)} of {len(b)}; changes:", [(k, a[k], b[k]) for k in b if a[k] != b[k]])

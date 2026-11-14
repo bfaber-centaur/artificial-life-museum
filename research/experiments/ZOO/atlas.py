@@ -41,6 +41,10 @@ WORLDS = {
     "PC": dict(rule=Rule(R=13, T=10, mu=0.38, sigma=0.07), N=512, half=70,
                species=["P6al", "P7al", "P8al", "P9al", "P10al", "C0v"], settle_tu=100,
                thetas=[180], bs=[x / 4 for x in range(-36, 37)], only_vs="C0v"),
+    # numerical check of PC at half the timestep
+    "PC20": dict(rule=Rule(R=13, T=20, mu=0.38, sigma=0.07), N=512, half=70,
+                 species=["P6al", "P7al", "P8al", "P9al", "P10al", "C0v"], settle_tu=100,
+                 thetas=[180], bs=[x / 4 for x in range(-36, 37)], only_vs="C0v"),
     "C": dict(rule=Rule(R=13, T=10, mu=0.155, sigma=0.020), N=384, half=30,
               species=["glider", "S102", "S103"], settle_tu=200),
 }
