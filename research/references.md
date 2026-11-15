@@ -306,6 +306,10 @@ Still unread:
 
   Cited by C038.
 
+**Field survey.** A map of current (2022–2026) Lenia and Lenia-like research, grouped by
+question with gaps for the museum, is in [`lenia-research-survey-2026-11.md`](lenia-research-survey-2026-11.md).
+Its entries are abstract-grade and are not yet cited by any claim.
+
 ## Adjacent fields
 
 - **[HoffmanMalletParet2010]** A. Hoffman, J. Mallet-Paret. *Universality of crystallographic
