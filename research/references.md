@@ -464,6 +464,56 @@ that cite them say so in their **Prior literature** field.
   Particle Life, Game of Life, Lenia, NCA; reports previously unseen Lenia and Boids
   lifeforms). Affiliations (Sakana AI, MIT) from memory.
 
+**Who else evolves things in Lenia (survey, 2026-11-15).** One arXiv search (`all:Lenia`,
+`all:"Flow-Lenia"`, newest first, 100 results; plus title searches for "sensorimotor" and
+"Biomaker") to answer Bobby's question "is anyone doing this kind of modelling with Lenia, and
+what are they asking?". Read: abstracts via the arXiv API for all; full text (arXiv PDF) where
+marked. This is a survey for museum prose, not a claim search.
+
+- **[Chan2023]** B. W.-C. Chan. *Towards large-scale simulations of open-ended evolution in
+  continuous cellular automata.* GECCO '23 companion; arXiv:[2304.05639](https://arxiv.org/abs/2304.05639) v1. Read: full
+  text. Evolution inside one Lenia world: reproduction by self-replication, selection by
+  differential survival, localized genomes. Runs "go through a phase of diversity and
+  creativity, gradually converge to domination by fast expanding patterns" (abstract); §3:
+  "eventually the world converges to either total extinction, or domination by expanding
+  patterns". Relevant to C110, C111 (GenomeLenia's climb towards fast division).
+- **[Plantec2025]** E. Plantec, G. Hamon, M. Etcheverry, B. W.-C. Chan, P.-Y. Oudeyer,
+  C. Moulin-Frier. *Flow-Lenia: emergent evolutionary dynamics in mass conservative continuous
+  cellular automata.* Artificial Life 31(2):228–248 (2025); arXiv:[2506.08569](https://arxiv.org/abs/2506.08569) v1 (earlier version
+  arXiv:2212.07906). Read: full text. Parameters embedded in the matter allow multi-species
+  worlds; evolutionary activity (Bedau & Packard; Droop & Hickinbotham) falls with mutation
+  rate (power law, slope −0.5 non-neutral, −0.71 count-based, §5); dissipative and food
+  variants show higher activity, but the ordering reverses when activity is divided by total
+  mass (§5). Our SOUP engine follows this paper's parameter embedding.
+- **[Michel2025]** T. Michel, M. Cvjetko, G. Hamon, P.-Y. Oudeyer, C. Moulin-Frier. *Exploring
+  Flow-Lenia universes with a curiosity-driven AI scientist: discovering diverse ecosystem
+  dynamics.* Proc. ALIFE 2025, 633–643; arXiv:[2505.15998](https://arxiv.org/abs/2505.15998) v4. Read: abstract (IMGEP over
+  whole-ecosystem metrics such as evolutionary activity; scaling study over six spatial scales).
+- **[Papadopoulos2025]** V. Papadopoulos, E. Guichard. *MaCE: general mass conserving dynamics for
+  cellular automata.* arXiv:[2507.12306](https://arxiv.org/abs/2507.12306) v1. Read: abstract ("hints of intrinsic evolution in
+  resource-constrained environments").
+- **[FaldorCully2024]** M. Faldor, A. Cully. *Toward artificial open-ended evolution within Lenia
+  using quality-diversity* (Leniabreeder). arXiv:[2406.04235](https://arxiv.org/abs/2406.04235) v1. Read: abstract.
+- **[Hamon2025]** G. Hamon, M. Etcheverry, B. W.-C. Chan, C. Moulin-Frier, P.-Y. Oudeyer.
+  *Discovering sensorimotor agency in cellular automata using diversity search.* Sci. Adv.
+  11(44):eadp0834 (2025); arXiv:[2402.10236](https://arxiv.org/abs/2402.10236) v1. Read: abstract.
+- **[SayamaNehaniv2024]** H. Sayama, C. L. Nehaniv. *Self-reproduction and evolution in cellular
+  automata: 25 years after Evoloops.* arXiv:[2402.03961](https://arxiv.org/abs/2402.03961) v2 (review). Read: abstract.
+- **[Baid2025]** N. Baid et al. *Guiding evolution of artificial life using vision-language
+  models* (ASAL++). arXiv:[2509.22447](https://arxiv.org/abs/2509.22447) v1. Read: abstract.
+- **[Cool2026a]** J. Cool, B. Hartl, M. Levin, S. Petti. *Agnosiophobia in a virtual agent:
+  behavioral and dynamical architecture in Lenia.* arXiv:[2605.30708](https://arxiv.org/abs/2605.30708) v1. Read: abstract.
+- **[Cvjetko2026]** M. Cvjetko et al. *The artificial experimentalist: discovery and control of
+  self-organizing phenomena with autotelic reinforcement learning.* arXiv:[2608.26116](https://arxiv.org/abs/2608.26116) v2. Read: abstract.
+- **[Akhtyrchenko2026]** M. Akhtyrchenko, M. I. Katsnelson, A. Ustyuzhanin. *Directing open-ended
+  evolution in artificial life via multi-scale path divergence.* arXiv:[2606.17091](https://arxiv.org/abs/2606.17091) v2. Read: abstract.
+
+*What the survey did not find:* no paper in these results measures fixation or loss of
+individual mutants against a neutral control, or tests treatment-like dosing schedules, in
+Lenia or Flow-Lenia. NO MATCH FOUND IN SEARCHED SOURCES is not a novelty claim: the search was
+arXiv only, and the population-genetics literature on Avida and other digital systems has done
+both kinds of experiment.
+
 ## Search log
 
 ### 2026-10-07: seed set C003, C013, C023, C026, C038–C043 (archivist)
@@ -524,3 +574,13 @@ Distill article and Wolfram's essay. Every DOI resolved to the expected paper. P
 statements beyond an abstract are flagged *from memory* in the entries above. The literature
 fields of C112, C114 and C115 cite these sources as PREVIOUSLY REPORTED or CONSISTENT WITH; C113
 cites Pearson 1993. Nothing here changes a status.
+
+### 2026-11-15: who else evolves things in Lenia (population-dynamics round)
+
+arXiv API searches `all:Lenia` (100 newest), `all:"Flow-Lenia"`, `ti:sensorimotor AND
+ti:cellular`, `ti:Biomaker`, `all:"continuous cellular automata" AND all:evolution`. Abstracts of
+the 18 most relevant results read; full text of Chan 2023, Plantec et al. 2025 and MaCE 2025
+(arXiv PDFs). Entries are under "Who else evolves things in Lenia". No paper in these results
+used a neutral-marker control or a dosing schedule in Lenia (NO MATCH FOUND IN SEARCHED SOURCES,
+arXiv only). C116 cites the population-genetics sources of the "So what?" wing; C120 is
+recorded as CONTRADICTORY in outcome to Zhang et al. 2017, not in conditions.

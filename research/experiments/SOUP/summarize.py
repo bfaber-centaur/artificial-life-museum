@@ -101,8 +101,50 @@ def replay_tab():
     print(f"  replays grown: {(R > 1).sum()}/{R.size}; below 1 % of start: {(R < 0.01).sum()}")
 
 
+def neutral_tab():
+    """C116-C118: neutral markers at the same 72 places as the replays (neutral.py)."""
+    rep = {(r["mutant"], r["placement"]): r for r in map(json.loads, open(HERE / "replay.jsonl"))}
+    neu = {(r["place_of_mutant"], r["placement"]): r for r in map(json.loads, open(HERE / "neutral.jsonl"))}
+    keys = sorted(rep)
+    assert sorted(neu) == keys, "neutral.jsonl must cover all 72 replay places"
+    rm = np.array([rep[k]["mutant_mass"][-1] / rep[k]["mutant_mass"][0] for k in keys])
+    rn = np.array([neu[k]["marker_mass"][-1] / neu[k]["marker_mass"][0] for k in keys])
+    Lm, Ln = np.log(np.maximum(rm, 1e-3)), np.log(np.maximum(rn, 1e-3))
+    print("neutral markers at the 72 replay places, 500 tu (ratio end / start)")
+    print(f"  neutral: grew {(rn > 1).sum()}/72, below 1 % of start {(rn < 0.01).sum()}, "
+          f"median {np.median(rn):.2f}, var of log ratio {Ln.var():.2f}")
+    print(f"  mutants: grew {(rm > 1).sum()}/72, below 1 % of start {(rm < 0.01).sum()}, "
+          f"median {np.median(rm):.2f}, var of log ratio {Lm.var():.2f}")
+    rank = lambda v: np.argsort(np.argsort(v))
+    rho = np.corrcoef(rank(Lm), rank(Ln))[0, 1]
+    rng = np.random.default_rng(1)
+    null = [np.corrcoef(rank(Lm), rank(rng.permutation(Ln)))[0, 1] for _ in range(10000)]
+    p = (1 + sum(abs(x) >= abs(rho) for x in null)) / 10001
+    print(f"  same place, mutant vs neutral: Spearman {rho:.2f} (two-sided permutation p = {p:.4f})")
+    both_grew = int(((rm > 1) & (rn > 1)).sum()); both_shrank = int(((rm <= 1) & (rn <= 1)).sum())
+    print(f"  agree on direction at {both_grew + both_shrank}/72 places ({both_grew} both grew, {both_shrank} both shrank)")
+    D = (Lm - Ln).reshape(12, 6)
+    print("  per genome: median log(mutant/neutral) over its 6 places, and places where mutant beat neutral")
+    for k in range(12):
+        print(f"    mutant {k:2d}: {np.median(D[k]):+.2f}  beat neutral {int((D[k] > 0).sum())}/6")
+    beat = int((D > 0).sum())
+    print(f"  mutants beat the neutral marker at {beat}/72 places")
+    # sign test per genome: how many genomes beat neutral at >= 5 of 6 places, or lose at >= 5 of 6
+    stat = lambda X: X.mean(1).var()
+    b = stat(D)
+    rng = np.random.default_rng(2)
+    nullD = [stat(rng.permutation(D.ravel()).reshape(D.shape)) for _ in range(10000)]
+    pD = (1 + sum(x >= b for x in nullD)) / 10001
+    from math import comb
+    p45 = sum(comb(72, i) for i in range(beat, 73)) / 2 ** 72 * 2
+    print(f"  log(mutant/neutral): between-genome var {b:.2f}, within {D.var(1).mean():.2f}; "
+          f"permutation p = {pD:.4f} (10 000 shuffles, rng 2); sign test {beat}/72 two-sided p = {p45:.3f}")
+    print(f"  genomes beating neutral at >=5/6 places: {[k for k in range(12) if (D[k] > 0).sum() >= 5]}; "
+          f"losing at >=5/6: {[k for k in range(12) if (D[k] < 0).sum() >= 5]}")
+
+
 if __name__ == "__main__":
     what = sys.argv[1] if len(sys.argv) > 1 else "all"
-    for name, f in (("diversity", diversity_tab), ("bodies", bodies_tab), ("species", species_tab), ("mutant", mutant_tab), ("replay", replay_tab)):
+    for name, f in (("diversity", diversity_tab), ("bodies", bodies_tab), ("species", species_tab), ("mutant", mutant_tab), ("replay", replay_tab), ("neutral", neutral_tab)):
         if what in (name, "all"):
             f()

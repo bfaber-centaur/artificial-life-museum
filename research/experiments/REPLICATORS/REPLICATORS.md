@@ -89,3 +89,31 @@ resting point or a slow approach to 1 is still open.
   `invasion.jsonl` (C092), `film_genome.py` → G045, G046.
 - Exploration helpers: `peek.py`, `peek3d.py`, `lineage.py` (first tracker, superseded by
   `tree.py`), `film_lineage.py`, `interp.jsonl` (first λ scan, body counts).
+
+## Therapy toy (C119–C121, population-dynamics round, 2026-11-15)
+
+`therapy.py`: a GenomeLenia tumour from one cell at genome 0.7 (mutation 0.03), 128², treated
+from 40% of carrying mass for 2000 tu with a drug `A ← A (1 − dt κ g)` (fast genomes hit
+hardest): none, constant, or adaptive (off at half the starting burden, on again at the
+starting burden; the Zhang et al. 2017 rule with mass for PSA). Four seeds × κ 0.3–0.6.
+Constant dosing eradicates 0/1/2/4 of 4 as κ rises; survivors end mostly slow (C119).
+Adaptive did better in 2 of 16 pairs, worse in 10, tied 4 (C120). Untreated full tumours keep
+5–33% slow matter (C121): nothing makes slow cells lose in a crowd, which is what adaptive
+therapy needs. Film `film_therapy.py 0 0.5 OUT` (G067, checks every final hash against
+`therapy.jsonl`), chart `chart_therapy.py` (G068), numbers at the end of `summarize.py`.
+Ideas not done: a cost of resistance in a full tissue (e.g. slow genomes take up more room or
+lose matter), tuned thresholds, a resistant clone present before treatment.
+
+
+## Cost of resistance (C122–C124, follow-up, 2026-11-15)
+
+Bobby asked for the missing competition. `therapy.crowding_cost` (off by default, so the C119–C121
+runs and hashes are unchanged) makes matter decay at `dt · c · (1 − g) · crowd` after every step,
+crowd = local mass (Gaussian, 4 px) / carrying density, clipped to 1. Runs: all doses at c 0.1 and
+0.3 for 2000 tu (`therapy_cost.jsonl`), and κ 0.3 at c 0, 0.1, 0.3 for 6000 tu (`therapy_long.jsonl`).
+With the cost, untreated tumours stay sensitive (C122), nothing progresses and constant dosing
+eradicates more (C123). At κ 0.3, constant dosing leaves a small fully resistant remnant that never
+regrows under the drug, while adaptive dosing holds a tumour about four times larger that at
+c 0.3 stays sensitive (C124). The mechanism works; the payoff (a delayed relapse) is missing because
+nothing relapses. Next: let slow matter regrow, or take the remnant off the drug.
+Chart `chart_cost.py` (G069).

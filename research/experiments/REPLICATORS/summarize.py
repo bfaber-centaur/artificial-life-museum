@@ -62,3 +62,47 @@ for l in open(H / "invasion.jsonl"):
     tr = r["trace"]
     print(f"  seed {r['seed']}: {tr[0]['gmean']} -> {tr[-1]['gmean']}; well-half columns (0-31) mean genome at t 1000 "
           f"{sum(tr[-1]['cols'][:32]) / 32:.3f}, uncontrolled half {sum(tr[-1]['cols'][32:]) / 32:.3f}")
+
+print("== C119-C121 therapy toy (therapy.jsonl): 128², 2000 tu after treatment starts, B0 = 40% of carrying mass")
+TH = [json.loads(l) for l in open(H / "therapy.jsonl")]
+
+
+def outcome(r):
+    end = r["trace"][-1]
+    if end[1] == 0:
+        return "cured"
+    return f"progressed t{r['progression']:.0f}" if r["progression"] is not None else f"held ({end[1]:.2f} B0)"
+
+
+for r in sorted((r for r in TH if r["arm"] == "none"), key=lambda r: r["seed"]):
+    end = r["trace"][-1]
+    print(f"  untreated seed {r['seed']}: starts at t {r['t_start']}, burden at 2000 tu {end[1]:.2f} B0, "
+          f"mean genome {end[2]:.2f}, resistant (g < 0.4) share {end[3]:.2f}")
+for k in sorted({r["kappa"] for r in TH if r["kappa"] is not None}):
+    print(f"  dose kappa {k}:")
+    for s in sorted({r["seed"] for r in TH}):
+        c = next(r for r in TH if r["seed"] == s and r["kappa"] == k and r["arm"] == "constant")
+        a = next(r for r in TH if r["seed"] == s and r["kappa"] == k and r["arm"] == "adaptive")
+        print(f"    seed {s}: constant {outcome(c)} (resistant share {c['trace'][-1][3]:.2f}) | adaptive {outcome(a)}"
+              f" (resistant share {a['trace'][-1][3]:.2f}, drug on {a['drug_time'] / 20:.0f}% of the time,"
+              f" lowest burden {min(x[1] for x in a['trace'][1:]):.2f} B0)")
+
+print("== C122-C124 cost of resistance (therapy_cost.jsonl 2000 tu, therapy_long.jsonl 6000 tu at kappa 0.3)")
+TC = [json.loads(l) for l in open(H / "therapy_cost.jsonl")]
+TL = [json.loads(l) for l in open(H / "therapy_long.jsonl")]
+for c in (0.0, 0.1, 0.3):
+    un = sorted((r for r in TL if r.get("cost", 0.0) == c and r["arm"] == "none"), key=lambda r: r["seed"])
+    print(f"  untreated, cost {c}, 6000 tu: resistant share " + ", ".join(f"{r['trace'][-1][3]:.2f}" for r in un)
+          + "; mean genome " + ", ".join(f"{r['trace'][-1][2]:.2f}" for r in un))
+for c in (0.1, 0.3):
+    rs = [r for r in TC if r["cost"] == c]
+    erad = {a: sum(r["trace"][-1][1] == 0 for r in rs if r["arm"] == a) for a in ("constant", "adaptive")}
+    prog = {a: sum(r["progression"] is not None for r in rs if r["arm"] == a) for a in ("constant", "adaptive")}
+    fr = sorted(r["drug_time"] / r["tu"] for r in rs if r["arm"] == "adaptive")
+    print(f"  cost {c}, 2000 tu, 16 seed x dose pairs: eradicated constant {erad['constant']}, adaptive {erad['adaptive']};"
+          f" progressed constant {prog['constant']}, adaptive {prog['adaptive']}; adaptive drug-on median {fr[len(fr) // 2 - 1] / 2 + fr[len(fr) // 2] / 2:.2f}")
+for c in (0.0, 0.1, 0.3):
+    for arm in ("constant", "adaptive"):
+        rs = sorted((r for r in TL if r.get("cost", 0.0) == c and r["arm"] == arm), key=lambda r: r["seed"])
+        print(f"  kappa 0.3, 6000 tu, cost {c}, {arm}: " + "; ".join(
+            f"s{r['seed']} {outcome(r)} res {r['trace'][-1][3]:.2f} drug {100 * r['drug_time'] / r['tu']:.0f}%" for r in rs))

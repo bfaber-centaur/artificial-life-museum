@@ -1,0 +1,19 @@
+{
+ "exhibit": "G067",
+ "title": "A drug against fast dividers",
+ "claims": [
+  "C119",
+  "C120"
+ ],
+ "media": [
+  "therapy.gif",
+  "therapy.mp4",
+  "therapy-final.png"
+ ],
+ "data": "research/experiments/REPLICATORS/therapy.jsonl (seed 0, kappa 0.5; the film re-runs all three arms and asserts their final hashes)",
+ "commands": [
+  "film_therapy.py 0 0.5 OUT_DIR"
+ ],
+ "view": "128x128 at 3 px; colour = genome on coolwarm, brightness = field value; one frame per 10 tu for 2000 tu; mp4 20 fps, gif 8 fps at 820 px",
+ "rule": "GenomeLenia (modified rule) + drug step"
+}

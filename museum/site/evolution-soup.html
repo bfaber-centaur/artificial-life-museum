@@ -140,6 +140,38 @@ dropped it into the same world again, at six new places each: 72 more runs.</p>
   creature fitter you have to rerun it.</p>
 </div>
 
+<h2>Luck has a baseline</h2>
+<p>Population geneticists never judge a mutant on its own: they compare it with a neutral
+marker, a patch that differs from its neighbours by nothing that matters, dropped in the same
+place. Whatever happens to the marker is luck. We went back to the 72 places of the replays
+above and dropped a neutral marker at each one: the resident genome nudged by one part in a
+million, so we can follow where its matter goes.</p>
+<figure class="evidence">
+  <img src="../../research/gallery/exhibits/G066-fitness-measured-against-luck/neutral.png" width="1375" height="572" loading="lazy"
+       alt="Left: a scatter of 72 points, the mutant's growth against the neutral marker's growth at the same place; points cluster near the top right and along the diagonal, with a few neutral markers lost entirely at the far left. Right: for each of twelve mutant genomes, six dots of advantage over the neutral marker; mutant 4, in orange, sits highest with all six dots above zero, mutant 8, in blue, sits near zero.">
+  <figcaption><strong>Fitness measured against luck.</strong> Left: each dot is one place; across, how
+  much the neutral marker grew there in 500 time units; up, how much the mutant grew at the same
+  place. Right: each genome's advantage over the neutral marker at its six places; the bar is
+  the median. The small numbers repeat how many replays each genome grew in when judged alone.
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G066-fitness-measured-against-luck/provenance.json">provenance</a>.</figcaption>
+</figure>
+<div class="label">
+  <p class="obs"><strong>What you see.</strong> Points hug the diagonal: where the marker did well,
+  the mutant did well. On the right, mutant 4, which looked like a loser (it grew in only one
+  replay), beats the marker at all six of its places; it was dealt bad places. Mutant 8, which
+  grew everywhere, barely beats the marker: it was dealt good ones.</p>
+  <p class="int"><strong>What the ledger says.</strong> Neutral markers grew at 31 of 72 places
+  and were lost at 10, against 37 and 6 for the mutants <a class="claim" href="claims.html#C116" title="Luck alone does about as well as the mutants: a neutral marker placed at the same 72 places as the C099 replays grew in 31 of 72 (the mutants in 37) and fell below 1% of its start in 10 (the mutants in 6) over 500 tu"><span class="cid">C116</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>. A mutant's fate and the
+  marker's fate at the same place are strongly correlated <a class="claim" href="claims.html#C117" title="Where a patch lands largely sets its fate: at the same place, a mutant&#x27;s growth and a neutral marker&#x27;s growth are correlated (Spearman 0.63 over 72 places, permutation p = 0.0001) and go the same direction at 56 of 72 places"><span class="cid">C117</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>. Against the marker,
+  mutants come out ahead at 45 of 72 places, but the differences between genomes are no
+  longer clearly significant <a class="claim" href="claims.html#C118" title="Judged against the neutral marker at its own places, the verdicts on single mutants change: mutant 4 (grew in only 1 of 6 replays, C099) beats the neutral marker at 6 of 6 places, mutant 8 (grew in 6 of 6) at only 4 of 6 with a median edge of ×1.04; overall the mutants beat neutral at 45 of 72 places, but the differences between genomes are not significant (p = 0.065)"><span class="cid">C118</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>.</p>
+  <p class="open"><strong>Why it matters.</strong> This is the control the earlier replays were
+  missing, and it changes the story: judged alone, mutant 4 looked unfit and mutant 8 fit;
+  judged against luck at the same places, the order flips. Experimental evolutionists compete
+  every strain against a marked reference for exactly this reason. We have not found a Lenia
+  or Flow-Lenia study that does it (see the <a href="so-what-evolution.html">So what? wing</a>).</p>
+</div>
+
 <h2>Sources</h2>
 <ul>
   <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/SOUP/SOUP.md">Soup notes</a> and
@@ -148,13 +180,15 @@ dropped it into the same world again, at six new places each: 72 more runs.</p>
       <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/SOUP/diversity.jsonl">diversity series</a>,
       <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/SOUP/mutant.jsonl">the mutant test</a>,
       <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/SOUP/replay.jsonl">the 72 replays</a>,
-      <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/SOUP/scout.jsonl">the 60-world scout</a></li>
+      <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/SOUP/scout.jsonl">the 60-world scout</a>,
+      <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/SOUP/neutral.jsonl">the 72 neutral markers</a>
+      (<a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/SOUP/neutral.py">code</a>)</li>
 </ul>
 
 <nav class="walk" aria-label="Tour"><a class="prev" href="replicators.html"><small>Back</small>East wing IV: creatures that copy themselves</a><a class="next" href="collision-zoo.html"><small>Next room</small>The collision zoo</a></nav>
 </main>
 <footer class="site">
-  <p>Claim statuses read from <code>research/claims.md</code> (sha256 <code>441d073ccda0</code>) when this page was built.</p>
+  <p>Claim statuses read from <code>research/claims.md</code> (sha256 <code>7a5971a25ae4</code>) when this page was built.</p>
   <p>Every picture here is a recorded simulation or a figure drawn from committed data. Statuses
   are the claims ledger's, not the museum's: a badge never says more than
   <a href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/claims.md">research/claims.md</a> does.</p>

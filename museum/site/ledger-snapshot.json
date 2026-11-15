@@ -1,7 +1,7 @@
 {
   "ledger": "research/claims.md",
-  "ledger_sha256": "441d073ccda043a6e621213eeb06a69b0241185f6ed6e87f46022adb6ea7b049",
-  "ledger_commit": "28f7b21",
+  "ledger_sha256": "7a5971a25ae4213aa801ba090f2e515995cae7cf389c0b1066f341d0fe00fe50",
+  "ledger_commit": "fd0ddc3",
   "conventions_sha256": "0e237384e0425b3c325229cf650ab6f9807fb08c1bedc991433b54b13c2eb02f",
   "claims": {
     "C001": {
@@ -590,6 +590,72 @@
       "rooms": [
         "so-what-crowds"
       ]
+    },
+    "C116": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "evolution-soup"
+      ]
+    },
+    "C117": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "evolution-soup"
+      ]
+    },
+    "C118": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "evolution-soup",
+        "so-what-evolution"
+      ]
+    },
+    "C119": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "replicators"
+      ]
+    },
+    "C120": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "replicators",
+        "so-what-evolution"
+      ]
+    },
+    "C121": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "replicators"
+      ]
+    },
+    "C122": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "replicators"
+      ]
+    },
+    "C123": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "replicators"
+      ]
+    },
+    "C124": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "replicators",
+        "so-what-evolution"
+      ]
     }
   },
   "sources": {
@@ -748,6 +814,10 @@
       "research/experiments/REPLICATORS/growth.jsonl",
       "research/experiments/REPLICATORS/invasion.jsonl",
       "research/experiments/REPLICATORS/replicate3d.jsonl",
+      "research/experiments/REPLICATORS/therapy.jsonl",
+      "research/experiments/REPLICATORS/therapy.py",
+      "research/experiments/REPLICATORS/therapy_cost.jsonl",
+      "research/experiments/REPLICATORS/therapy_long.jsonl",
       "research/experiments/REPLICATORS/tree.py",
       "research/gallery/exhibits/G029-family-tree/family-tree.mp4",
       "research/gallery/exhibits/G029-family-tree/provenance.json",
@@ -760,12 +830,18 @@
       "research/gallery/exhibits/G046-the-fast-genome-invades/invasion.mp4",
       "research/gallery/exhibits/G046-the-fast-genome-invades/provenance.json",
       "research/gallery/exhibits/G060-from-well-behaved-to-runaway/long.mp4",
-      "research/gallery/exhibits/G060-from-well-behaved-to-runaway/provenance.json"
+      "research/gallery/exhibits/G060-from-well-behaved-to-runaway/provenance.json",
+      "research/gallery/exhibits/G067-drug-against-fast-dividers/provenance.json",
+      "research/gallery/exhibits/G067-drug-against-fast-dividers/therapy.mp4",
+      "research/gallery/exhibits/G068-cure-or-control/provenance.json",
+      "research/gallery/exhibits/G069-a-price-for-resistance/provenance.json"
     ],
     "evolution-soup": [
       "research/experiments/SOUP/SOUP.md",
       "research/experiments/SOUP/diversity.jsonl",
       "research/experiments/SOUP/mutant.jsonl",
+      "research/experiments/SOUP/neutral.jsonl",
+      "research/experiments/SOUP/neutral.py",
       "research/experiments/SOUP/replay.jsonl",
       "research/experiments/SOUP/runs.jsonl",
       "research/experiments/SOUP/scout.jsonl",
@@ -776,7 +852,8 @@
       "research/gallery/exhibits/G034-one-physics-many-bodies/provenance.json",
       "research/gallery/exhibits/G051-fit-or-lucky/provenance.json",
       "research/gallery/exhibits/G052-seven-landings/landings.mp4",
-      "research/gallery/exhibits/G052-seven-landings/provenance.json"
+      "research/gallery/exhibits/G052-seven-landings/provenance.json",
+      "research/gallery/exhibits/G066-fitness-measured-against-luck/provenance.json"
     ],
     "collision-zoo": [
       "research/experiments/REEF-behavior/LITERATURE.md",

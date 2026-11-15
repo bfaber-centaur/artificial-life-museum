@@ -162,6 +162,8 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
 | Collision zoo round 2, 2026-11-14 (`research/experiments/ZOO/`, gallery G047–G048, room 78) | C093 / C094 / C095; history line on C081 |
 | Evolution soup round 2, 2026-11-14 (`research/experiments/SOUP/`, gallery G051–G052, room 77) | C099 / C100 / C101 |
 | "So what?" wing 2026-11-15 (`research/experiments/SOWHAT/`, gallery G062–G065, rooms 85–87) | C112 / C113 / C114 / C115 |
+| Population-dynamics round 2026-11-15 (`SOUP/neutral.py`, `REPLICATORS/therapy.py`, gallery G066–G068, rooms 77, 76, 85) | C116 / C117 / C118 / C119 / C120 / C121 |
+| Population-dynamics round, cost of resistance, 2026-11-15 (`REPLICATORS/therapy.py` with `crowding_cost`, gallery G069, rooms 76, 85) | C122 / C123 / C124; history line on C121 |
 
 ## Claims
 
@@ -2797,3 +2799,175 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
 - **Prior literature:** CONSISTENT WITH, similar outcome only: Keeling 1999 (invasion thresholds in structured populations)
 - **History:**
   - 2026-11-15 — OBSERVED — "So what?" wing thread.
+
+### C116 — Luck alone does about as well as the mutants: a neutral marker placed at the same 72 places as the C099 replays grew in 31 of 72 (the mutants in 37) and fell below 1% of its start in 10 (the mutants in 6) over 500 tu
+
+- **Status:** OBSERVED
+- **Owner lane:** population-dynamics round (thread "Model population dynamics in Lenia", 2026-11-15)
+- **Sources:** `research/experiments/SOUP/neutral.py`, `neutral.jsonl`, `summarize.py neutral`; chart `neutral_plot.py` → gallery G066
+- **Specimen / version:** none; the settled one-species world of C078 and C099 (kernel set 16, 256²)
+- **Simulator / version:** as C099 (`soup.Soup`, inherit = dominant, no background mutation)
+- **Parameters:** as C099; 2500 steps (500 tu)
+- **Intervention:** each disc (radius 10, at the C099 place for mutant k and placement j, `default_rng([777, k, j])`) gets the resident genome plus 1e-6 along one genome axis, pointing into [0, 1]; up to ten non-touching discs (torus distance > 21) per run, one axis each, packed greedily into 8 runs
+- **Metric:** as C099, with the marker in place of the mutant: matter with A > 0.05 more than halfway from h towards the marker, ratio end / start at 500 tu
+- **Result:** neutral markers grew 31/72, fell below 1% of start 10/72, median ratio 0.87, variance of ln ratio (floored at 1e-3) 6.02. The 72 mutant replays: 37/72, 6/72, median 1.04, variance 4.19
+- **Run IDs:** `neutral.jsonl` (place, group, axis, `group_final_sha256`)
+- **Search / parameter bounds:** one world, one horizon, the 72 places of C099
+- **Reproduction command:** `SOUP_OUT=… .venv/bin/python research/experiments/SOUP/neutral.py run 0 8` (three processes over groups 0–3, 3–6, 6–8 give the same rows), then `summarize.py neutral`
+- **Known caveats:** a 1e-6 genome change is treated as neutral; we did not run the unmarked world to check that it leaves the dynamics within float noise of it. Several markers share one world, so each marker's world has nine other near-neutral patches in it; the mutant replays had one mutant each
+- **Prior literature:** PREVIOUSLY REPORTED (similar outcome only): a new neutral or beneficial mutation is usually lost by chance (Haldane 1927, Kimura 1962); neutral-marker controls are standard in experimental evolution
+- **History:**
+  - 2026-11-15 — OBSERVED — population-dynamics round.
+
+### C117 — Where a patch lands largely sets its fate: at the same place, a mutant's growth and a neutral marker's growth are correlated (Spearman 0.63 over 72 places, permutation p = 0.0001) and go the same direction at 56 of 72 places
+
+- **Status:** OBSERVED
+- **Owner lane:** population-dynamics round (2026-11-15)
+- **Sources:** as C116 plus `replay.jsonl`
+- **Specimen / version:** as C116
+- **Simulator / version:** as C116
+- **Parameters:** as C116
+- **Intervention:** none beyond C099 and C116; this pairs them by place
+- **Metric:** Spearman rank correlation of ln ratio (floored at 1e-3), mutant vs neutral at the same place; two-sided permutation p (10 000 shuffles, rng 1); direction = ratio above or below 1
+- **Result:** Spearman 0.63, p = 0.0001; same direction at 56/72 (26 both grew, 30 both shrank)
+- **Run IDs:** `neutral.jsonl`, `replay.jsonl`
+- **Search / parameter bounds:** as C116
+- **Reproduction command:** `summarize.py neutral`
+- **Known caveats:** as C116. This is the direct test of C101's reading ("where a mutant lands matters more than what it is")
+- **Prior literature:** none searched beyond C116
+- **History:**
+  - 2026-11-15 — OBSERVED — population-dynamics round.
+
+### C118 — Judged against the neutral marker at its own places, the verdicts on single mutants change: mutant 4 (grew in only 1 of 6 replays, C099) beats the neutral marker at 6 of 6 places, mutant 8 (grew in 6 of 6) at only 4 of 6 with a median edge of ×1.04; overall the mutants beat neutral at 45 of 72 places, but the differences between genomes are not significant (p = 0.065)
+
+- **Status:** OBSERVED
+- **Owner lane:** population-dynamics round (2026-11-15)
+- **Sources:** as C117; chart G066 (right panel)
+- **Specimen / version:** as C116
+- **Simulator / version:** as C116
+- **Parameters:** as C116
+- **Intervention:** as C117
+- **Metric:** advantage at a place = ln(mutant ratio) − ln(neutral ratio), both floored at 1e-3; per genome: median over its 6 places and the count of places with advantage > 0; between-genome variance of the 12 means vs 10 000 label shuffles (rng 2); sign test over 72
+- **Result:** medians (natural log): mutant 4 +1.82 (6/6), 6 +0.65 (3/6), 7 +0.47 (5/6), 5 +0.21 (4/6), 9 +0.18 (6/6), 10 +0.12 (6/6), 2 +0.09 (3/6), 0 +0.07 (5/6), 8 +0.04 (4/6), 11 −0.39 (1/6), 1 −0.45 (0/6), 3 −1.98 (2/6). Mutants beat neutral at 45/72 (two-sided sign test p = 0.044). Between-genome variance 1.41 vs within 4.29, permutation p = 0.065
+- **Run IDs:** `neutral.jsonl`, `replay.jsonl`
+- **Search / parameter bounds:** 12 genomes × 6 places
+- **Reproduction command:** `summarize.py neutral`
+- **Known caveats:** two of mutant 4's six places lost the neutral marker entirely, where the floor at 1e-3 sets the size of the advantage; 12 genomes were looked at, so one 6/6 is not by itself significant. C100's "genomes differ" (p = 0.006) used raw ratios; against the neutral baseline the evidence for genome differences is weaker
+- **Prior literature:** none searched beyond C116
+- **History:**
+  - 2026-11-15 — OBSERVED — population-dynamics round.
+
+### C119 — In a GenomeLenia "tumour", a constant drug that removes matter in proportion to its genome eradicates it in 0, 1, 2 and 4 of 4 seeds at drug strengths κ 0.3, 0.4, 0.5 and 0.6; every tumour that survives constant dosing ends with 64–100% of its matter at genome below 0.4 (the slow, drug-tolerant type)
+
+- **Status:** OBSERVED
+- **Owner lane:** population-dynamics round (thread "Model population dynamics in Lenia", 2026-11-15)
+- **Sources:** `research/experiments/REPLICATORS/therapy.py`, `therapy.jsonl`, `summarize.py` (C119–C121 block); chart `chart_therapy.py` → G068; film `film_therapy.py` → G067
+- **Specimen / version:** one 213 #84 cell (as C090), 128² torus
+- **Simulator / version:** `genome.GenomeLenia` (our modified rule), plus the drug step `A ← A (1 − dt κ g)` after each update while the drug is on
+- **Parameters:** start genome 0.7, mutation amp 0.03 every 10 tu (seed s while growing, 10 000 + s during treatment, identical across arms); treatment starts when mass reaches B0 = 40% of 0.196 × 128² (t 37–47 tu); 2000 tu of treatment; κ ∈ {0.3, 0.4, 0.5, 0.6}; seeds 0–3
+- **Intervention:** constant dosing (drug always on)
+- **Metric:** burden = mass / B0; eradicated = burden 0 at 2000 tu; progression = first time burden > 1.25; resistant share = mass at g < 0.4 / mass
+- **Result:** κ 0.3: 0/4 eradicated, all progressed (t 107–1434); κ 0.4: 1/4 eradicated, 1 progressed (t 1512), 2 held at 0.18 and 0.80 B0; κ 0.5: 2/4 eradicated, 2 progressed (t 1673, 1768); κ 0.6: 4/4 eradicated. Surviving tumours' resistant share at 2000 tu: 0.64–1.00
+- **Run IDs:** `therapy.jsonl` rows with arm "constant" (`final_sha`)
+- **Search / parameter bounds:** four doses, four seeds, one world size, one start genome
+- **Reproduction command:** `cd research/experiments/REPLICATORS && ../../../.venv/bin/python therapy.py SEED 0.3,0.4,0.5,0.6` for SEED 0–3; `summarize.py`
+- **Known caveats:** a toy of our own design: the "drug" is a multiplicative removal of matter, the "tumour" fills a torus with nothing else in it, and resistance is just a slow genome. Nothing here models a real cancer or drug
+- **Prior literature:** CONSISTENT WITH, similar outcome only: evolution of resistance under continuous therapy (Gatenby et al. 2009; Greaves & Maley 2012)
+- **History:**
+  - 2026-11-15 — OBSERVED — population-dynamics round.
+
+### C120 — Adaptive dosing (drug off when the burden halves, on again at the starting burden) did not beat constant dosing in our toy: over 16 seed × dose pairs it did better in 2 (later progression by 28 and 137 tu), worse in 10 (earlier progression, or a surviving resistant tumour where constant dosing eradicated it) and tied in 4, with the drug on for 80–100% of the time
+
+- **Status:** OBSERVED
+- **Owner lane:** population-dynamics round (2026-11-15)
+- **Sources:** as C119
+- **Specimen / version:** as C119
+- **Simulator / version:** as C119
+- **Parameters:** as C119; adaptive switching thresholds LOW 0.5 B0 (off) and HIGH 1.0 B0 (on), checked every step
+- **Intervention:** adaptive vs constant dosing from the identical pre-treatment state and identical mutation noise
+- **Metric:** better = eradicated where the other was not, or no progression where the other progressed, or later progression; tie = same outcome class at the same time, or both eradicated, or both held below 1.25 B0
+- **Result:** better: κ 0.3 seed 3 (t 1417 vs 1389), κ 0.4 seed 0 (t 1649 vs 1512). Worse: κ 0.3 seeds 0, 1; κ 0.4 seeds 1 (constant eradicated), 3; κ 0.5 all four (two of them constant eradicated); κ 0.6 seeds 0, 3 (constant eradicated). Ties: κ 0.3 seed 2 (both t 107), κ 0.4 seed 2 (both held; constant at 0.18 B0, adaptive 0.80), κ 0.6 seeds 1, 2 (both eradicated: after 3.5 and 8 tu of drug the adaptive tumour collapsed without further dosing). Drug on 94–100% of the time except κ 0.6 (80%, 88%, and the two collapses)
+- **Run IDs:** `therapy.jsonl`
+- **Search / parameter bounds:** as C119; one pair of thresholds
+- **Reproduction command:** as C119
+- **Known caveats:** as C119. With these thresholds the burden seldom falls to half, so "adaptive" mostly means constant dosing with short breaks. The pilot trial (Zhang et al. 2017) used the same halve-then-resume rule on PSA; we did not tune thresholds
+- **Prior literature:** CONTRADICTORY in outcome only, not in conditions: Zhang et al. 2017 report longer time to progression with adaptive dosing in patients; their model and Gatenby et al. 2009 assume resistant cells are held back by competition with sensitive ones, which C121 suggests our toy lacks
+- **History:**
+  - 2026-11-15 — OBSERVED — population-dynamics round.
+
+### C121 — Without any drug, slow genomes are not pushed out of a full GenomeLenia tumour: the share of matter at genome below 0.4 rises from 0 to 0.05–0.33 by 2000 tu in all four untreated runs, with mean genome 0.53–0.68
+
+- **Status:** OBSERVED
+- **Owner lane:** population-dynamics round (2026-11-15)
+- **Sources:** as C119 (arm "none")
+- **Specimen / version:** as C119
+- **Simulator / version:** as C119, no drug
+- **Parameters:** as C119
+- **Intervention:** none
+- **Metric:** resistant share and mass-weighted mean genome at 2000 tu
+- **Result:** seeds 0–3: resistant share 0.23, 0.05, 0.33, 0.21; mean genome 0.63, 0.68, 0.53, 0.58; burden 2.27–2.40 B0 (the world is full from about t 100)
+- **Run IDs:** `therapy.jsonl` rows with arm "none"
+- **Search / parameter bounds:** four seeds, 128², 2000 tu
+- **Reproduction command:** as C119
+- **Known caveats:** mutation keeps supplying low genomes, and in a full world a fast genome has little room to show its speed; we did not measure the selection gradient in a full tissue directly. This is our reading of why adaptive dosing fails here (C120), not a test of it
+- **Prior literature:** RELATED: adaptive therapy relies on a fitness cost of resistance in competition (Gatenby et al. 2009)
+- **History:**
+  - 2026-11-15 — OBSERVED — population-dynamics round.
+  - 2026-11-15 — OBSERVED, unchanged — follow-up: adding a crowding cost of resistance keeps untreated tumours almost free of slow matter (C122), consistent with this claim's reading that the base toy lacks such a cost.
+
+### C122 — A crowding cost of resistance (slow matter decays where the tissue is full) keeps untreated GenomeLenia tumours sensitive: after 6000 tu the share of matter at genome below 0.4 is 0.30–0.46 with no cost, 0.07–0.10 at cost 0.1 and 0–0.02 at cost 0.3
+
+- **Status:** OBSERVED
+- **Owner lane:** population-dynamics round, cost-of-resistance follow-up (2026-11-15, asked for by Bobby)
+- **Sources:** `research/experiments/REPLICATORS/therapy.py` (`crowding_cost`), `therapy_cost.jsonl`, `therapy_long.jsonl`, `summarize.py` (C122–C124 block); chart `chart_cost.py` → G069
+- **Specimen / version:** as C119
+- **Simulator / version:** as C119, plus after every step (also while the tumour grows to B0) `A ← A (1 − dt · c · (1 − g) · crowd)`, crowd = Gaussian(A, 4 px) / 0.196 clipped to [0, 1]
+- **Parameters:** as C119; cost c ∈ {0, 0.1, 0.3}; 2000 tu (`therapy_cost.jsonl`, c 0.1 and 0.3) and 6000 tu (`therapy_long.jsonl`, c 0, 0.1, 0.3); seeds 0–3
+- **Intervention:** the cost; no drug
+- **Metric:** resistant share (mass at g < 0.4 / mass) and mass-weighted mean genome
+- **Result:** at 6000 tu, seeds 0–3: no cost 0.33, 0.46, 0.46, 0.30 (mean genome 0.53, 0.47, 0.44, 0.56); c 0.1: 0.07, 0.09, 0.08, 0.10 (0.74, 0.66, 0.66, 0.70); c 0.3: 0.02, 0, 0.02, 0 (0.81, 0.77, 0.74, 0.82). At 2000 tu: c 0.1 0.02, 0, 0.31, 0.11; c 0.3 0, 0, 0.01, 0. Burden 2.18–2.53 B0 in every untreated run
+- **Run IDs:** rows with arm "none" in `therapy_cost.jsonl`, `therapy_long.jsonl` (`final_sha`); the 6000-tu runs match the 2000-tu runs at t 2000
+- **Search / parameter bounds:** two cost strengths, one crowding radius, one form of cost
+- **Reproduction command:** `cd research/experiments/REPLICATORS && ../../../.venv/bin/python therapy.py SEED 0.3,0.4,0.5,0.6 128 2000 COST therapy_cost.jsonl` (COST 0.1, 0.3) and `therapy.py SEED 0.3 128 6000 COST therapy_long.jsonl` (COST 0, 0.1, 0.3), SEED 0–3; `summarize.py`
+- **Known caveats:** we chose the form of the cost so that it would do this; the claim is that it works as intended, not a discovery. Fast matter pays the cost too (in proportion to 1 − g), so it lowers the whole tumour's mass a little
+- **Prior literature:** CONSISTENT WITH, by construction: the competitive cost of resistance assumed in adaptive-therapy models (Gatenby et al. 2009)
+- **History:**
+  - 2026-11-15 — OBSERVED — cost-of-resistance follow-up.
+
+### C123 — With the cost of resistance, no tumour progressed under either schedule in 2000 tu, and constant dosing eradicated more tumours than adaptive dosing: 8 vs 2 of 16 at cost 0.1, 14 vs 9 of 16 at cost 0.3 (without the cost, 7 vs 2, with 7 and 11 progressions)
+
+- **Status:** OBSERVED
+- **Owner lane:** population-dynamics round, cost-of-resistance follow-up (2026-11-15)
+- **Sources:** as C122 (`therapy_cost.jsonl`)
+- **Specimen / version:** as C119
+- **Simulator / version:** as C122
+- **Parameters:** as C119 and C120 (κ 0.3–0.6, adaptive thresholds 0.5 and 1.0 B0), cost 0.1 and 0.3
+- **Intervention:** constant vs adaptive dosing from the identical pre-treatment state and identical mutation noise
+- **Metric:** as C119 and C120
+- **Result:** paired by seed and dose, cost 0.1: both held 8, only constant eradicated 6, both eradicated 2, only adaptive eradicated 0; cost 0.3: both held 2, only constant eradicated 5, both eradicated 9, only adaptive 0. Adaptive drug-on fraction: median 0.79 at cost 0.1 (0–0.92) and 0.05 at cost 0.3 (0–0.93); at cost 0.3 and κ ≥ 0.5 the adaptive tumour died out after 0–3% drug time in all 8 runs
+- **Run IDs:** `therapy_cost.jsonl`
+- **Search / parameter bounds:** as C119 × two costs
+- **Reproduction command:** as C122
+- **Known caveats:** as C119 and C120. Progression within 2000 tu is the only clinical endpoint we measure; with the cost, nothing reached it, so the schedules differ only in eradication, final size and resistance
+- **Prior literature:** RELATED: models of adaptive therapy expect containment to beat maximum dosing only when the tumour cannot be eradicated (Gatenby et al. 2009); here strong doses often could
+- **History:**
+  - 2026-11-15 — OBSERVED — cost-of-resistance follow-up.
+
+### C124 — At the weakest dose (κ 0.3) over 6000 tu with the cost, constant dosing leaves a small remnant that is entirely resistant (0.16–0.18 of the starting burden; all 6 survivors across costs 0.1 and 0.3) while adaptive dosing holds a tumour about four times larger (0.69–0.91) that at cost 0.3 stays sensitive (0–18% resistant) with the drug on 62–93% of the time; nothing progressed and the resistant remnant never regrew
+
+- **Status:** OBSERVED
+- **Owner lane:** population-dynamics round, cost-of-resistance follow-up (2026-11-15)
+- **Sources:** as C122 (`therapy_long.jsonl`); chart G069
+- **Specimen / version:** as C119
+- **Simulator / version:** as C122
+- **Parameters:** κ 0.3, 6000 tu, cost 0, 0.1, 0.3, seeds 0–3
+- **Intervention:** none / constant / adaptive
+- **Metric:** burden, resistant share and drug-on fraction at 6000 tu; progression
+- **Result:** cost 0.3: constant eradicated seeds 2, 3 (t 805, 725), seeds 0, 1 held at 0.17, 0.16 B0, 100% resistant; adaptive held 0.69, 0.73, 0.76, 0.91 B0, resistant 0, 0.18, 0, 0.18, drug on 93, 62, 85, 76%. Cost 0.1: constant held 0.17–0.18 B0, 100% resistant (4/4); adaptive held 0.69–0.75 B0, resistant 1.0, 0.67, 1.0, 0.19, drug on 84–93%. No cost: all eight treated tumours progressed (as C119, C120) and end 81–100% resistant at 1.47–2.23 B0
+- **Run IDs:** `therapy_long.jsonl`
+- **Search / parameter bounds:** one dose, three costs, four seeds
+- **Reproduction command:** as C122; `chart_cost.py OUT.png`
+- **Known caveats:** the remnant under constant dosing stayed small while the drug was still on (it removes κ·g per unit time, little at g ≈ 0.1); we did not stop the drug to see whether it would regrow. In this toy slow matter barely expands, so there is no relapse for adaptive dosing to delay: the payoff adaptive therapy is meant to buy is missing for that reason, not shown to be absent in general
+- **Prior literature:** CONSISTENT WITH the mechanism (competition suppresses resistant cells while the drug is paused; Gatenby et al. 2009; Zhang et al. 2017), not with the clinical payoff, which our toy cannot test
+- **History:**
+  - 2026-11-15 — OBSERVED — cost-of-resistance follow-up.

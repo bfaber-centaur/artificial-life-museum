@@ -172,6 +172,84 @@ random smear nudges genomes up or down.</p>
   units.</p>
 </div>
 
+<h2>A drug against fast dividers</h2>
+<p>Cancer doctors face a version of this room's problem. Chemotherapy hits fast-dividing cells
+hardest, so a tumour under constant treatment is a selection experiment for slow, tolerant
+cells. <em>Adaptive therapy</em> (Gatenby and colleagues) proposes pausing the drug so that
+sensitive cells survive and crowd the resistant ones out; a small pilot trial in prostate cancer
+looked promising. We built a toy version. A GenomeLenia “tumour” grows from one cell at genome
+0.7. Then a drug removes matter in proportion to its genome: red, fast matter is hit hard,
+blue, slow matter hardly at all. One copy gets no drug, one gets the drug all the time, one
+gets it adaptively: off when the tumour has halved, on again when it is back to its starting
+size.</p>
+<figure class="vitrine">
+  <img src="../../research/gallery/exhibits/G067-drug-against-fast-dividers/therapy.gif" width="820" height="425" loading="lazy"
+       alt="Three square worlds of dividing cells. Left, with no drug, warm red tissue fills the world. Middle, under constant drug, the tissue collapses to a few patches that turn blue and then vanish. Right, under on-off dosing, the tissue shrinks and regrows, turning blue, and is still there at the end. A burden chart runs underneath.">
+  <figcaption><strong>No drug, constant drug, adaptive drug</strong> (drug strength κ 0.5, seed
+  0). Colour is the genome (blue slow and drug-tolerant, red fast and drug-sensitive),
+  brightness the matter. Shading in the chart: the adaptive drug is on.
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G067-drug-against-fast-dividers/therapy.mp4">Full video</a> ·
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G067-drug-against-fast-dividers/provenance.json">provenance</a>.</figcaption>
+</figure>
+<figure class="evidence">
+  <img src="../../research/gallery/exhibits/G068-cure-or-control/therapy-runs.png" width="1485" height="682" loading="lazy"
+       alt="Eight panels. Top row: tumour burden against time for four drug strengths; grey untreated lines sit high, orange constant lines often drop to zero at higher strengths, blue adaptive lines wander around the starting burden and cross the progression line. Bottom row: the resistant share climbs to one in most treated runs and creeps up slowly in untreated runs.">
+  <figcaption><strong>Every run.</strong> Four seeds, four drug strengths, three schedules.
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G068-cure-or-control/provenance.json">provenance</a>.</figcaption>
+</figure>
+<div class="label">
+  <p class="obs"><strong>What you see.</strong> Under constant dosing a strong drug wipes the
+  tumour out before slow cells can take over; a weaker drug leaves a blue, slow tumour that
+  regrows. The adaptive tumour never dies: each pause lets it recover, and it turns blue
+  too.</p>
+  <p class="int"><strong>What the ledger says.</strong> Constant dosing eradicates the tumour in
+  0, 1, 2 and 4 of 4 seeds as the drug gets stronger, and every survivor ends up mostly slow
+  <a class="claim" href="claims.html#C119" title="In a GenomeLenia &quot;tumour&quot;, a constant drug that removes matter in proportion to its genome eradicates it in 0, 1, 2 and 4 of 4 seeds at drug strengths κ 0.3, 0.4, 0.5 and 0.6; every tumour that survives constant dosing ends with 64–100% of its matter at genome below 0.4 (the slow, drug-tolerant type)"><span class="cid">C119</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>. In 16 seed-and-dose pairs adaptive dosing did better twice, worse ten times
+  and tied four times <a class="claim" href="claims.html#C120" title="Adaptive dosing (drug off when the burden halves, on again at the starting burden) did not beat constant dosing in our toy: over 16 seed × dose pairs it did better in 2 (later progression by 28 and 137 tu), worse in 10 (earlier progression, or a surviving resistant tumour where constant dosing eradicated it) and tied in 4, with the drug on for 80–100% of the time"><span class="cid">C120</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>. Even with no drug, slow genomes are not driven out of a
+  full tumour <a class="claim" href="claims.html#C121" title="Without any drug, slow genomes are not pushed out of a full GenomeLenia tumour: the share of matter at genome below 0.4 rises from 0 to 0.05–0.33 by 2000 tu in all four untreated runs, with mean genome 0.53–0.68"><span class="cid">C121</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>.</p>
+  <p class="open"><strong>Why it matters, and what it does not show.</strong> Adaptive therapy
+  rests on one assumption: in a crowded tumour, sensitive cells out-compete resistant ones.
+  Our toy lacks that competition (once the world is full, dividing fast buys nothing), and
+  without it the pauses only help the tumour. That matches the theory: Gatenby's models
+  assume resistant cells are less fit than sensitive ones when they compete. It is also why
+  adaptive therapy has been tried in cancers that standard treatment cannot cure, such as
+  metastatic prostate cancer, rather than where a strong drug can wipe the tumour out. It says nothing about any real cancer or drug: this is a toy of our own design,
+  an <em>analogy</em> in the language of the <a href="so-what-evolution.html">So what? wing</a>.</p>
+</div>
+
+<h3>Giving resistance a price</h3>
+<p>So we added the missing competition. In a crowd, slow matter now slowly decays, at a rate
+proportional to how slow it is and how full its neighbourhood is, and fast matter grows into
+the space it frees. This is the cost of resistance that adaptive therapy depends on. We tried
+two strengths of cost, reran every dose, and ran the weakest dose three times longer.</p>
+<figure class="evidence">
+  <img src="../../research/gallery/exhibits/G069-a-price-for-resistance/cost.png" width="1375" height="924" loading="lazy"
+       alt="Six panels in three rows: no cost, cost 0.1, cost 0.3. Left column, tumour burden over 6000 time units: without the cost, blue adaptive and orange constant lines climb past the progression line; with the cost, blue adaptive lines hover just under the starting burden and orange constant lines sit flat near 0.17 or drop to zero. Right column, resistant share: orange lines go to one in every row; with cost 0.3 the blue lines mostly stay near zero.">
+  <figcaption><strong>The same weak drug, with and without a price for resistance.</strong>
+  Drug strength κ 0.3, four seeds per colour, 6000 time units.
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G069-a-price-for-resistance/provenance.json">provenance</a>.</figcaption>
+</figure>
+<div class="label">
+  <p class="obs"><strong>What you see.</strong> With the price, untreated tumours stay red. Under
+  constant dosing the tumour shrinks to a small blue remnant (or vanishes) and stays there.
+  Under adaptive dosing it hovers just below its starting size, and with the stronger price it
+  stays mostly red: still sensitive to the drug, thousands of time units later.</p>
+  <p class="int"><strong>What the ledger says.</strong> The price keeps untreated tumours almost
+  free of slow matter <a class="claim" href="claims.html#C122" title="A crowding cost of resistance (slow matter decays where the tissue is full) keeps untreated GenomeLenia tumours sensitive: after 6000 tu the share of matter at genome below 0.4 is 0.30–0.46 with no cost, 0.07–0.10 at cost 0.1 and 0–0.02 at cost 0.3"><span class="cid">C122</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>. With it, no tumour progressed under either schedule, and
+  constant dosing eradicated far more tumours than adaptive dosing <a class="claim" href="claims.html#C123" title="With the cost of resistance, no tumour progressed under either schedule in 2000 tu, and constant dosing eradicated more tumours than adaptive dosing: 8 vs 2 of 16 at cost 0.1, 14 vs 9 of 16 at cost 0.3 (without the cost, 7 vs 2, with 7 and 11 progressions)"><span class="cid">C123</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>. At the weak
+  dose, constant dosing left a remnant that was entirely resistant; adaptive dosing held a
+  tumour about four times larger that, with the stronger price, stayed sensitive, on 62–93% of
+  the drug <a class="claim" href="claims.html#C124" title="At the weakest dose (κ 0.3) over 6000 tu with the cost, constant dosing leaves a small remnant that is entirely resistant (0.16–0.18 of the starting burden; all 6 survivors across costs 0.1 and 0.3) while adaptive dosing holds a tumour about four times larger (0.69–0.91) that at cost 0.3 stays sensitive (0–18% resistant) with the drug on 62–93% of the time; nothing progressed and the resistant remnant never regrew"><span class="cid">C124</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>.</p>
+  <p class="open"><strong>So who won?</strong> The price turned on adaptive therapy's mechanism:
+  competition did keep resistance down. It did not produce adaptive therapy's payoff, a later
+  relapse, because in our toy nothing relapsed. The resistant remnant under constant dosing
+  just sat there, small, for 6000 time units. In patients the case for adaptive therapy is that
+  the resistant remnant eventually regrows and kills; a toy where it doesn't will always
+  favour the bigger hammer. The next experiment would give resistant cells a way to regrow
+  slowly, and see whether a sensitive, controlled tumour then outlasts a small resistant
+  one.</p>
+</div>
+
 <h2>Sources</h2>
 <ul>
   <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/REPLICATORS/REPLICATORS.md">Replicator notes</a></li>
@@ -181,12 +259,16 @@ random smear nudges genomes up or down.</p>
   <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/REPLICATORS/genome.py">GenomeLenia</a>,
       <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/REPLICATORS/evolve.jsonl">the evolution runs</a> and
       <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/REPLICATORS/invasion.jsonl">the invasion runs</a></li>
+  <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/REPLICATORS/therapy.py">The therapy toy</a> and
+      <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/REPLICATORS/therapy.jsonl">every therapy run</a>;
+      with a cost of resistance: <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/REPLICATORS/therapy_cost.jsonl">all doses</a> and
+      <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/REPLICATORS/therapy_long.jsonl">the long runs</a></li>
 </ul>
 
 <nav class="walk" aria-label="Tour"><a class="prev" href="other-models.html"><small>Back</small>East wing III: cousins from other models</a><a class="next" href="evolution-soup.html"><small>Next room</small>East wing V: evolution in a soup</a></nav>
 </main>
 <footer class="site">
-  <p>Claim statuses read from <code>research/claims.md</code> (sha256 <code>441d073ccda0</code>) when this page was built.</p>
+  <p>Claim statuses read from <code>research/claims.md</code> (sha256 <code>7a5971a25ae4</code>) when this page was built.</p>
   <p>Every picture here is a recorded simulation or a figure drawn from committed data. Statuses
   are the claims ledger's, not the museum's: a badge never says more than
   <a href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/claims.md">research/claims.md</a> does.</p>
