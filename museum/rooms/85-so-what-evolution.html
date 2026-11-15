@@ -1,0 +1,175 @@
+<!--meta {
+  "slug": "so-what-evolution", "order": 85, "title": "So what? I: evolution, in silicon and in us",
+  "nav_label": "So what? I · Evolution",
+  "kicker": "The “So what?” wing · Room 1 of 3",
+  "summary": "Where lessons from artificial life touch real biology: luck versus fitness, digital organisms that evolve complex features, replaying evolution, cancer as evolution, and minimal models of why evolution works. Each example is labelled evidence, tool or analogy.",
+  "expect": {"C112": "OBSERVED", "C099": "OBSERVED", "C101": "OBSERVED", "C092": "OBSERVED", "C111": "OBSERVED"}
+} -->
+<h1>So what?</h1>
+<p class="lede">A friend of the museum asked the fair question: does any of this matter outside
+the screen? This wing is our answer. It shows places where people have learned something
+real from artificial life, or used its methods to do real work. Most of the examples are not
+ours and most are not Lenia. Where our own rooms touch them, we link back and say how strong
+the link is.</p>
+
+<p>We label every example with one of three words, and we try to be strict about them:</p>
+<ul class="kinds">
+  <li><span class="kind evidence">Evidence</span> The artificial system <em>is</em> an instance of
+  the thing studied, or it was tested against the real thing, so its results count as
+  evidence about the real world (usually about a general principle, never about one
+  species).</li>
+  <li><span class="kind tool">Tool</span> Artificial-life methods are used as working
+  instruments in another field: to plan, to design, to search. The tool can be good without
+  telling us anything about life.</li>
+  <li><span class="kind analogy">Analogy</span> A resemblance that helps you think and proves
+  nothing. Most of our own Lenia results are analogies when you hold them up against biology,
+  and we say so.</li>
+</ul>
+<p>The wing has three rooms: evolution (here), {{page:so-what-bodies|how bodies build
+themselves}}, and {{page:so-what-crowds|crowds, contagion and machines that invent}}.
+Three small demos were made for it, and their numbers are in the ledger like everything
+else.</p>
+
+<h2>Fit, or just lucky?</h2>
+<figure class="evidence">
+  <img src="{{asset:research/gallery/exhibits/G062-lost-to-luck/drift.png}}" width="1375" height="528" loading="lazy"
+       alt="Left: 500 lines of mutant frequency against generations; a few orange lines climb to the top between generations 100 and 700, the rest stay pressed against zero. Right: on a log scale, fixation probability against selection coefficient for population sizes 20 and 200; simulated circles sit on the exact curves, and the curve for 20 is much flatter.">
+  <figcaption><strong>Lost to luck.</strong> Left: 500 copies of the same helpful mutation
+  (2% fitter) each start as one individual in a population of 1000 (Wright-Fisher model).
+  Orange: the ones that took over. Right: the chance that one new mutant takes over, by how
+  helpful or harmful it is, in populations of 20 and 200 (Moran model). Circles are our
+  simulation, lines the exact formula, dotted lines the chance for a neutral mutant.
+  {{src:research/gallery/exhibits/G062-lost-to-luck/provenance.json|provenance}}.</figcaption>
+</figure>
+<div class="label">
+  <p class="obs"><strong>What you see.</strong> Twenty-one of the 500 good mutations take over.
+  The other 479 die out, and 435 of those are gone within 20 generations, long before
+  selection has had time to help. On the right, in a population of 20 the curve is almost
+  flat: a harmful mutation does nearly as well as a helpful one.</p>
+  <p class="int"><strong>What the ledger says.</strong> Simulation and exact formula agree in
+  all 20 conditions, and a 5%-harmful mutant takes over 3.0% of the time in a population of
+  20 while a 2%-helpful one manages 2.0% in a population of 200 {{claim:C112}}.</p>
+</div>
+<div class="card">
+  <h3><span class="kind evidence">Evidence</span> The textbook says this, and so did our soup</h3>
+  <p>None of this is new. Haldane worked out in 1927 that a new mutation with a small
+  advantage <em>s</em> survives with a chance of only about 2<em>s</em>; Kimura gave the general
+  formula in 1962; Ohta argued in 1973 that in small populations slightly harmful mutations
+  can spread by chance. We ran the textbook models to show the size of the effect, not to
+  discover it. The real-world consequences are large: small populations (endangered species,
+  a tumour's first cells, a pathogen passing through one host) cannot be relied on to keep
+  their best variants, and one experiment that ends in a takeover does not show that the
+  winner was better.</p>
+  <p class="link-back">Our link: in the {{page:evolution-soup|evolution soup}} we replayed twelve
+  mutant genomes at six new places each. The first trial did not predict the replays
+  {{claim:C099}}, and one genome's fate varied more by where it landed than genomes differed
+  from each other {{claim:C101}}. That is this lesson, found again in a stranger world. It is
+  evidence about the soup, and only an echo of the theory.</p>
+  <p class="cite">Haldane 1927, Kimura 1962, Moran 1958, Ohta 1973, Patwa &amp; Wahl 2008
+  (review). Full references below.</p>
+</div>
+
+<h2>Digital organisms</h2>
+<div class="card">
+  <h3><span class="kind evidence">Evidence</span> Avida: how a complex feature can evolve</h3>
+  <p>In Avida, organisms are small computer programs that copy themselves, mutate and compete
+  for processor time. Nothing in them models chemistry, but they really do replicate, vary
+  and get selected, so Avida is a case of evolution, not a picture of it. Lenski, Ofria,
+  Pennock and Adami (2003) used it to ask an old question: can random mutation and selection
+  build a complex feature? Populations often evolved the most complex logic function the
+  experiment rewarded (EQU, “equals”). It evolved by building on simpler functions, but only when those simpler
+  functions were rewarded too; no single route was necessary; and some steps on the way
+  were mutations that were harmful when they first appeared.</p>
+  <p>Wilke and colleagues (2001) used Avida to test a prediction of quasispecies theory, the
+  “survival of the flattest”: when mutation rates are high, a slower replicator that sits on
+  a flat, mutation-tolerant part of the fitness landscape can beat a faster one on a sharp
+  peak. It did, in every one of their 12 test pairs.</p>
+  <p class="not">anything about the particular molecules of real cells. Its findings are about
+  evolution as a process, which is exactly what makes them general.</p>
+  <p class="link-back">Our link: our {{page:replicators|replicator room}} is a much cruder cousin. Its
+  “division uncontrolled” genome invades well-behaved tissue {{claim:C092}}: selection on
+  copying speed, the same pressure Avida organisms feel.</p>
+  <p class="cite">Lenski et al. 2003; Wilke et al. 2001; Ofria &amp; Wilke 2004 (the platform);
+  Adami 2006 (review).</p>
+</div>
+
+<div class="card">
+  <h3><span class="kind evidence">Evidence</span> Replaying the tape, in real bacteria</h3>
+  <p>Our soup replays are a cheap version of an experiment biologists have done with real
+  cells. In Lenski's long-term evolution experiment, twelve identical populations of
+  <em>E. coli</em> have evolved since 1988 in a medium with citrate they could not eat. Only one
+  population learned to use it, after about 31,500 generations. Blount, Borland and
+  Lenski (2008) replayed evolution from frozen samples of that population's history: clones
+  from later generations were more likely to evolve the trick again, so earlier, invisible
+  “potentiating” mutations had set it up. History mattered.</p>
+  <p class="not">that artificial life was needed. The point is that the replay method,
+  which costs a computer nothing, is the same logic biologists use to separate luck from
+  necessity.</p>
+  <p class="cite">Blount, Borland &amp; Lenski 2008.</p>
+</div>
+
+<h2>Cancer is evolution</h2>
+<div class="card">
+  <h3><span class="kind evidence">Evidence</span> Tumours evolve, and treatment can use that</h3>
+  <p>Nowell proposed in 1976 that a tumour is a population of cells under natural selection:
+  mutant clones arise, compete and take over. That view is now mainstream (Greaves &amp; Maley
+  2012). It has practical teeth. Standard chemotherapy kills the sensitive cells and leaves
+  the resistant ones with no competitors. <em>Adaptive therapy</em> (Gatenby and colleagues
+  2009) instead doses on and off to keep sensitive cells around to hold the resistant ones
+  back. In a small pilot trial in prostate cancer (Zhang et al. 2017), 10 of 11 patients
+  kept their tumour burden oscillating, with median time to progression of at least 27
+  months against about 16.5 months reported for standard dosing, on 47% of the usual drug.
+  The trial was small and not randomised, and the comparison was with
+  published and contemporaneous patients, so larger trials are needed.</p>
+  <p class="link-back">Our link is an <span class="kind analogy">Analogy</span> only. In the
+  {{page:replicators|replicator room}}, GenomeLenia cells carry a genome from “division well” to
+  “division uncontrolled”, and selection pushes it upward until it levels off near 0.7
+  {{claim:C111}}. That stall looks like a tumour reaching a limit set by its own crowding, and
+  it is tempting to say so. But our cells have no tissue, no immune system, no drug and no
+  blood supply. The room shows how selection on copying speed behaves in one invented world,
+  nothing about any cancer.</p>
+  <p class="cite">Nowell 1976; Greaves &amp; Maley 2012; Gatenby et al. 2009; Zhang et al. 2017.</p>
+</div>
+
+<h2>Minimal models of why evolution works</h2>
+<div class="card">
+  <h3><span class="kind tool">Tool</span> Wolfram's evolving cellular automata</h3>
+  <p>In 2024 Stephen Wolfram published a deliberately minimal model: take a simple cellular
+  automaton rule, make random point mutations to it, and keep each mutation that does not
+  shorten how long the pattern lives before dying out. The rules that evolve are intricate,
+  and progress comes in long plateaus broken by sudden jumps, often
+  from a single mutation. He uses it to discuss why blind selection finds such mechanisms at
+  all, and ties the answer to his idea of computational irreducibility.</p>
+  <p class="not">that biology works this way. These are essays, not peer-reviewed papers, and
+  the model is a thought experiment you can run. Its value is that every step is
+  inspectable.</p>
+  <p class="link-back">Our link: in our {{page:replicators|long GenomeLenia runs}} the climb slows
+  and stalls too. Whether our plateaus share a cause with Wolfram's is untested.</p>
+  <p class="cite">Wolfram, “Why does biological evolution work?” (3 May 2024) and “Foundations of
+  biological evolution: more results &amp; more surprises” (5 December 2024).</p>
+</div>
+
+<h2>Sources</h2>
+<ul>
+  <li>{{src:research/experiments/SOWHAT/SOWHAT.md|Wing notes}} and
+      {{src:research/experiments/SOWHAT/drift.py|the drift models}}
+      ({{src:research/experiments/SOWHAT/moran.jsonl|Moran runs}},
+      {{src:research/experiments/SOWHAT/fates.jsonl|Wright-Fisher fates}})</li>
+  <li>{{src:research/references.md|References}}, section “The ‘So what?’ wing”, with links and
+      what was read for each source</li>
+  <li>Haldane, J. B. S. (1927) <a href="https://doi.org/10.1017/S0305004100015644">Math. Proc. Camb. Phil. Soc. 23:838</a> ·
+      Kimura, M. (1962) <a href="https://doi.org/10.1093/genetics/47.6.713">Genetics 47:713</a> ·
+      Moran, P. A. P. (1958) <a href="https://doi.org/10.1017/S0305004100033193">Math. Proc. Camb. Phil. Soc. 54:60</a> ·
+      Ohta, T. (1973) <a href="https://doi.org/10.1038/246096a0">Nature 246:96</a> ·
+      Patwa &amp; Wahl (2008) <a href="https://doi.org/10.1098/rsif.2008.0248">J. R. Soc. Interface 5:1279</a></li>
+  <li>Lenski, Ofria, Pennock &amp; Adami (2003) <a href="https://doi.org/10.1038/nature01568">Nature 423:139</a> ·
+      Wilke et al. (2001) <a href="https://doi.org/10.1038/35085569">Nature 412:331</a> ·
+      Ofria &amp; Wilke (2004) <a href="https://doi.org/10.1162/106454604773563612">Artificial Life 10:191</a> ·
+      Adami (2006) <a href="https://doi.org/10.1038/nrg1771">Nat. Rev. Genet. 7:109</a></li>
+  <li>Blount, Borland &amp; Lenski (2008) <a href="https://doi.org/10.1073/pnas.0803151105">PNAS 105:7899</a></li>
+  <li>Nowell (1976) <a href="https://doi.org/10.1126/science.959840">Science 194:23</a> ·
+      Greaves &amp; Maley (2012) <a href="https://doi.org/10.1038/nature10762">Nature 481:306</a> ·
+      Gatenby et al. (2009) <a href="https://doi.org/10.1158/0008-5472.CAN-08-3658">Cancer Res. 69:4894</a> ·
+      Zhang et al. (2017) <a href="https://doi.org/10.1038/s41467-017-01968-5">Nat. Commun. 8:1816</a></li>
+  <li>Wolfram (2024) <a href="https://writings.stephenwolfram.com/2024/05/why-does-biological-evolution-work-a-minimal-model-for-biological-evolution-and-other-adaptive-processes/">Why does biological evolution work?</a></li>
+</ul>

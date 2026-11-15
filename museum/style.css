@@ -135,3 +135,21 @@ table.claims tr:target { background: #fffbe0; }
 .provisional-banner strong { color: #8a6d00; }
 a.pr { white-space: nowrap; }
 .pending { margin: 1.5rem 0; }
+
+/* "So what?" wing (rooms 85-87): cards that say what kind of link each example is. */
+.kind { display: inline-block; font: 600 .7rem var(--sans); text-transform: uppercase; letter-spacing: .1em;
+        border-radius: 3px; padding: .1em .5em; margin-right: .4em; vertical-align: .15em; color: #fff; }
+.kind.evidence { background: #007a5a; }
+.kind.tool { background: #0072B2; }
+.kind.analogy { background: #8a5a00; }
+.kinds { list-style: none; padding: 0; }
+.kinds li { margin: .5rem 0; }
+.card { background: #fff; border: 1px solid var(--grid); border-radius: 10px; padding: 1rem 1.2rem;
+        margin: 1.2rem 0; max-width: 46rem; }
+.card h3 { margin: .1em 0 .5em; }
+.card p { margin: .45rem 0; }
+.card .link-back { font-size: .92rem; color: var(--muted); border-top: 1px solid var(--grid); padding-top: .5rem; margin-top: .7rem; }
+.card .not { font-size: .95rem; }
+.card .not::before { content: "What it does not show: "; font-weight: 600; }
+.cite { font-size: .85rem; color: var(--muted); }
+.rooms li.wing::before { content: "New wing"; }

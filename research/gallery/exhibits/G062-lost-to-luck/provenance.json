@@ -1,0 +1,16 @@
+{
+ "exhibit": "G062",
+ "title": "Lost to luck",
+ "claims": [
+  "C112"
+ ],
+ "media": [
+  "drift.png"
+ ],
+ "data": "research/experiments/SOWHAT/moran.jsonl, fates.jsonl (the 500 paths are recomputed from drift.FATES's seed)",
+ "commands": [
+  "plots.py drift drift.png"
+ ],
+ "view": "left: Wright-Fisher mutant frequency, N 1000, s 0.02, 500 runs (orange = fixed, grey = lost); right: Moran fixation probability vs s, N 20 and 200, 40,000 runs per circle, error bars ±2 SE of the exact value, lines = exact formula, dotted = 1/N",
+ "rule": "not Lenia: textbook population-genetics models"
+}

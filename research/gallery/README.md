@@ -67,6 +67,10 @@ made of, ten times per unit of time. Some of them travel; one of them never chan
 | [G054](#g054--the-mirror-next-door) | The mirror next door (animated; *Klein bottle*) | S001 on a narrow torus and Klein bottle | 2026-11-14 |
 | [G060](#g060--from-well-behaved-to-runaway) | From well-behaved to runaway (animated; *modified rule: GenomeLenia*) | one cell at genome 0.1, 512², 6000 tu | 2026-11-14 |
 | [G061](#g061--how-far-selection-goes) | How far selection goes (chart; *modified rule: GenomeLenia*) | every evolution run, selected vs neutral | 2026-11-14 |
+| [G062](#g062--lost-to-luck) | Lost to luck (chart; *not Lenia: population genetics*) | Moran and Wright-Fisher models | 2026-11-15 |
+| [G063](#g063--one-chemistry-many-patterns) | One chemistry, many patterns (still; *not Lenia: Gray-Scott*) | 100 feed/kill settings | 2026-11-15 |
+| [G064](#g064--same-disease-three-worlds) | Same disease, three worlds (animated; *not Lenia: SIR epidemic*) | mixed, lattice, 1% shortcuts | 2026-11-15 |
+| [G065](#g065--when-it-takes-off) | When it takes off (chart; *not Lenia: SIR epidemic*) | 30 runs + take-off sweep | 2026-11-15 |
 
 ### G001 — Four ways to move
 
@@ -954,6 +958,56 @@ Film: [`long.mp4`](exhibits/G060-from-well-behaved-to-runaway/long.mp4) ·
 - **Observation (claims C090, C091, C110, C111).** Every GenomeLenia evolution run. Coral: the
   genome sets the rule; grey: the genome is only a marker. Selected runs from 0.1 and from 0.7
   end near the same level, about 0.7.
+
+## The "So what?" wing (G062–G065)
+
+Pictures for museum rooms 85–87, which ask where lessons from artificial life matter outside
+the screen. None of these is a Lenia world; each reproduces a textbook result so the rooms have
+something to watch. Code and notes: `research/experiments/SOWHAT/`.
+
+### G062 — Lost to luck
+
+![Left: 500 lines of mutant frequency; a few orange lines climb to the top, the rest stay pressed against zero. Right: fixation probability against selection coefficient on a log scale for populations of 20 and 200; simulated circles sit on the exact curves](exhibits/G062-lost-to-luck/drift.png)
+
+[`provenance.json`](exhibits/G062-lost-to-luck/provenance.json)
+
+- **Observation (claim C112).** Left: 500 copies of the same 2%-helpful mutation, each starting
+  as one individual among 1000 (Wright-Fisher); 21 take over. Right: the chance that one new
+  mutant takes over in a Moran process, simulated (circles) and exact (lines).
+- **Caveats.** Textbook models; the point is the size of the effect, not a discovery.
+
+### G063 — One chemistry, many patterns
+
+![A ten by ten grid of Gray-Scott worlds: uniform glowing squares at high feed and low kill, labyrinths and spots along a diagonal band, dark empty squares at high kill](exhibits/G063-one-chemistry-many-patterns/atlas.png)
+
+[`provenance.json`](exhibits/G063-one-chemistry-many-patterns/provenance.json)
+
+- **Observation (claim C113).** 100 Gray-Scott worlds with identical equations and seeds,
+  differing only in feed rate F (rows) and kill rate k (columns), at step 10,000.
+- **Caveats.** One seed and one time; the band of patterns would look different at other
+  times and with Pearson's single central seed.
+
+### G064 — Same disease, three worlds
+
+![Three square worlds of people: one turns blue almost at once, one has an orange ring of infection crawling outward, one fills with orange speckles; infection curves below](exhibits/G064-same-disease-three-worlds/epidemic.gif)
+
+Film: [`epidemic.mp4`](exhibits/G064-same-disease-three-worlds/epidemic.mp4) ·
+[`provenance.json`](exhibits/G064-same-disease-three-worlds/provenance.json)
+
+- **Observation (claim C114).** The same SIR rules (each sick person makes 4 contacts per step,
+  β 0.15, γ 0.1) with contacts that are random (left), the four grid neighbours (middle), or
+  neighbours with 1% of contacts sent far (right). Dark = never sick, orange = sick,
+  blue = recovered.
+- **Caveats.** A toy with made-up rates, not a model of any disease. Seed 0 of ten.
+
+### G065 — When it takes off
+
+![Left: percent sick at once against time for 30 runs, a tall early pink spike, a medium orange hump and a low long blue wave. Right: percent ever sick against transmission chance; pink rises first, then orange, then blue](exhibits/G065-when-it-takes-off/threshold.png)
+
+[`provenance.json`](exhibits/G065-when-it-takes-off/provenance.json)
+
+- **Observation (claims C114, C115).** Left: every run of G064's setting. Right: final size
+  against the transmission chance β, five runs per value.
 
 ## Field note, 7 October 2026
 

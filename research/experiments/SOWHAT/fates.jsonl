@@ -1,0 +1,1 @@
+{"model": "wright-fisher", "N": 1000, "s": 0.02, "reps": 500, "gens": 1500, "fixed": 21, "lost": 479, "unresolved": 0, "kimura": 0.03921056084767682, "lost_by_gen20": 435, "seed": [2026, 11, 15, 1]}

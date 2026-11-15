@@ -323,6 +323,143 @@ Still unread:
 
   Cited by C013.
 
+## The ‘So what?’ wing (2026-11-15)
+
+Sources for museum rooms 85–87 ("So what?" wing thread). Metadata (authors, year, title,
+journal, volume, pages) of every DOI below was checked against the Crossref API on
+2026-11-15; arXiv entries against the arXiv API. **Read** says what was read. A fourth grade is
+used here: *abstract* = the publisher abstract via PubMed or arXiv, not the full paper. Where
+the wing says more than the abstract, that sentence is marked *from memory* below, so a later
+reader knows what to check first. These sources mostly support museum prose, not claims; claims
+that cite them say so in their **Prior literature** field.
+
+**Population genetics and digital evolution (room 85).**
+
+- **[Haldane1927]** J. B. S. Haldane. *A mathematical theory of natural and artificial selection,
+  part V.* Math. Proc. Camb. Phil. Soc. 23:838–844. [doi:10.1017/S0305004100015644](https://doi.org/10.1017/S0305004100015644).
+  Read: metadata. The ≈ 2s survival result is standard textbook attribution (from memory). C112.
+- **[Moran1958]** P. A. P. Moran. *Random processes in genetics.* Math. Proc. Camb. Phil. Soc.
+  54:60–71. [doi:10.1017/S0305004100033193](https://doi.org/10.1017/S0305004100033193). Read: metadata; the process and its
+  fixation formula as given in Patwa & Wahl 2008 (from memory). C112.
+- **[Kimura1962]** M. Kimura. *On the probability of fixation of mutant genes in a population.*
+  Genetics 47:713–719. [doi:10.1093/genetics/47.6.713](https://doi.org/10.1093/genetics/47.6.713). Read: metadata. C112.
+- **[Ohta1973]** T. Ohta. *Slightly deleterious mutant substitutions in evolution.* Nature
+  246:96–98. [doi:10.1038/246096a0](https://doi.org/10.1038/246096a0). Read: metadata. C112.
+- **[PatwaWahl2008]** Z. Patwa, L. M. Wahl. *The fixation probability of beneficial mutations.*
+  J. R. Soc. Interface 5:1279–1289. [doi:10.1098/rsif.2008.0248](https://doi.org/10.1098/rsif.2008.0248). Read: metadata (review). C112.
+- **[Lenski2003]** R. E. Lenski, C. Ofria, R. T. Pennock, C. Adami. *The evolutionary origin of
+  complex features.* Nature 423:139–144. [doi:10.1038/nature01568](https://doi.org/10.1038/nature01568). Read: abstract
+  (complex functions evolved by building on simpler ones only when those were also favoured;
+  no single intermediate essential; some deleterious mutations were stepping stones). The name
+  EQU for the most complex rewarded function is from memory.
+- **[Wilke2001]** C. O. Wilke, J. L. Wang, C. Ofria, R. E. Lenski, C. Adami. *Evolution of digital
+  organisms at high mutation rates leads to survival of the flattest.* Nature 412:331–333.
+  [doi:10.1038/35085569](https://doi.org/10.1038/35085569). Read: abstract (40 ancestor pairs; 12 disparate pairs competed; in each,
+  higher mutation rate switched the winner to the slower, flatter genotype).
+- **[OfriaWilke2004]** C. Ofria, C. O. Wilke. *Avida: a software platform for research in
+  computational evolutionary biology.* Artificial Life 10:191–229.
+  [doi:10.1162/106454604773563612](https://doi.org/10.1162/106454604773563612). Read: metadata.
+- **[Adami2006]** C. Adami. *Digital genetics: unravelling the genetic basis of evolution.* Nat.
+  Rev. Genet. 7:109–118. [doi:10.1038/nrg1771](https://doi.org/10.1038/nrg1771). Read: metadata (review).
+- **[Blount2008]** Z. D. Blount, C. Z. Borland, R. E. Lenski. *Historical contingency and the
+  evolution of a key innovation in an experimental population of* Escherichia coli. PNAS
+  105:7899–7906. [doi:10.1073/pnas.0803151105](https://doi.org/10.1073/pnas.0803151105). Read: abstract (Cit+ in one of 12 populations by
+  31,500 generations; replays from frozen clones; potentiation by 20,000 generations).
+- **[Nowell1976]** P. C. Nowell. *The clonal evolution of tumor cell populations.* Science
+  194:23–28. [doi:10.1126/science.959840](https://doi.org/10.1126/science.959840). Read: metadata.
+- **[GreavesMaley2012]** M. Greaves, C. C. Maley. *Clonal evolution in cancer.* Nature
+  481:306–313. [doi:10.1038/nature10762](https://doi.org/10.1038/nature10762). Read: metadata (review).
+- **[Gatenby2009]** R. A. Gatenby, A. S. Silva, R. J. Gillies, B. R. Frieden. *Adaptive therapy.*
+  Cancer Res. 69:4894–4903. [doi:10.1158/0008-5472.CAN-08-3658](https://doi.org/10.1158/0008-5472.CAN-08-3658). Read: abstract.
+- **[Zhang2017]** J. Zhang, J. J. Cunningham, J. S. Brown, R. A. Gatenby. *Integrating evolutionary
+  dynamics into treatment of metastatic castrate-resistant prostate cancer.* Nat. Commun.
+  8:1816. [doi:10.1038/s41467-017-01968-5](https://doi.org/10.1038/s41467-017-01968-5). Read: abstract (pilot trial: 10 of 11 patients
+  kept stable oscillations; median TTP at least 27 months vs ~16.5 with standard dosing;
+  cumulative drug 47% of standard; compared with published studies and a contemporaneous
+  population, not randomised).
+- **[Wolfram2024a]** S. Wolfram. *Why does biological evolution work? A minimal model for
+  biological evolution and other adaptive processes.* Stephen Wolfram Writings, 3 May 2024.
+  [link](https://writings.stephenwolfram.com/2024/05/why-does-biological-evolution-work-a-minimal-model-for-biological-evolution-and-other-adaptive-processes/).
+  Read: full text fetched 2026-11-15 (mutations accepted if lifetime does not shrink; plateaus
+  punctuated by jumps, often from one mutation; links to computational irreducibility). Not
+  peer reviewed. The follow-up "Foundations of biological evolution: more results & more
+  surprises" (5 December 2024) is named on that page; not read.
+
+**Morphogenesis, bodies and robots (room 86).**
+
+- **[Turing1952]** A. M. Turing. *The chemical basis of morphogenesis.* Phil. Trans. R. Soc. B
+  237:37–72. [doi:10.1098/rstb.1952.0012](https://doi.org/10.1098/rstb.1952.0012). Read: metadata. C113.
+- **[Pearson1993]** J. E. Pearson. *Complex patterns in a simple system.* Science 261:189–192.
+  [doi:10.1126/science.261.5118.189](https://doi.org/10.1126/science.261.5118.189). Read: metadata; already the source of WINGS's Gray-Scott
+  (C066). C113.
+- **[KondoAsai1995]** S. Kondo, R. Asai. *A reaction–diffusion wave on the skin of the marine
+  angelfish* Pomacanthus. Nature 376:765–768. [doi:10.1038/376765a0](https://doi.org/10.1038/376765a0). Read: abstract (stripes
+  keep their spacing by rearranging as the fish grows; a Turing-system simulation predicts
+  the rearrangements).
+- **[KondoMiura2010]** S. Kondo, T. Miura. *Reaction-diffusion model as a framework for
+  understanding biological pattern formation.* Science 329:1616–1620.
+  [doi:10.1126/science.1179047](https://doi.org/10.1126/science.1179047). Read: metadata (review).
+- **[Sheth2012]** R. Sheth et al. *Hox genes regulate digit patterning by controlling the
+  wavelength of a Turing-type mechanism.* Science 338:1476–1480.
+  [doi:10.1126/science.1226804](https://doi.org/10.1126/science.1226804). Read: abstract (progressive loss of distal Hox genes on a
+  Gli3-null background gives more, thinner digits; Hox dose modulates wavelength).
+- **[Raspopovic2014]** J. Raspopovic, L. Marcon, L. Russo, J. Sharpe. *Digit patterning is
+  controlled by a Bmp-Sox9-Wnt Turing network modulated by morphogen gradients.* Science
+  345:566–570. [doi:10.1126/science.1252960](https://doi.org/10.1126/science.1252960). Read: abstract.
+- **[Durant2017]** F. Durant et al. *Long-term, stochastic editing of regenerative anatomy via
+  targeting endogenous bioelectric gradients.* Biophys. J. 112:2231–2243.
+  [doi:10.1016/j.bpj.2017.04.011](https://doi.org/10.1016/j.bpj.2017.04.011). Read: abstract (brief bioelectric perturbation gives a constant
+  ratio of two-headed regenerates; normal-looking regenerates re-cut in water give the same
+  ratio; stored in resting-potential patterns, not histology or polarity genes; reversible).
+- **[Levin2021]** M. Levin. *Bioelectric signaling: reprogrammable circuits underlying
+  embryogenesis, regeneration, and cancer.* Cell 184:1971–1989.
+  [doi:10.1016/j.cell.2021.02.034](https://doi.org/10.1016/j.cell.2021.02.034). Read: metadata (review).
+- **[Mordvintsev2020]** A. Mordvintsev, E. Randazzo, E. Niklasson, M. Levin. *Growing neural
+  cellular automata.* Distill 5(2):e23. [doi:10.23915/distill.00023](https://doi.org/10.23915/distill.00023). Read: full text
+  (interactive article) fetched 2026-11-15: growing, persistent and regenerating models;
+  persistent models "often develop some regenerative capabilities without being explicitly
+  trained".
+- **[Kriegman2020]** S. Kriegman, D. Blackiston, M. Levin, J. Bongard. *A scalable pipeline for
+  designing reconfigurable organisms.* PNAS 117:1853–1859. [doi:10.1073/pnas.1910837117](https://doi.org/10.1073/pnas.1910837117).
+  Read: abstract. That the builds used frog (*Xenopus*) skin and heart cells is from memory.
+- **[Kriegman2021]** Same authors. *Kinematic self-replication in reconfigurable organisms.*
+  PNAS 118:e2112672118. [doi:10.1073/pnas.2112672118](https://doi.org/10.1073/pnas.2112672118). Read: abstract.
+- **[Rubenstein2014]** M. Rubenstein, A. Cornejo, R. Nagpal. *Programmable self-assembly in a
+  thousand-robot swarm.* Science 345:795–799. [doi:10.1126/science.1254295](https://doi.org/10.1126/science.1254295). Read: abstract.
+
+**Epidemics, ecology and open-endedness (room 87).**
+
+- **[KermackMcKendrick1927]** W. O. Kermack, A. G. McKendrick. *A contribution to the
+  mathematical theory of epidemics.* Proc. R. Soc. A 115:700–721.
+  [doi:10.1098/rspa.1927.0118](https://doi.org/10.1098/rspa.1927.0118). Read: metadata. C114.
+- **[Keeling1999]** M. J. Keeling. *The effects of local spatial structure on epidemiological
+  invasions.* Proc. R. Soc. B 266:859–867. [doi:10.1098/rspb.1999.0716](https://doi.org/10.1098/rspb.1999.0716). Read: abstract. C114, C115.
+- **[WattsStrogatz1998]** D. J. Watts, S. H. Strogatz. *Collective dynamics of ‘small-world’
+  networks.* Nature 393:440–442. [doi:10.1038/30918](https://doi.org/10.1038/30918). Read: abstract ("infectious diseases spread more
+  easily in small-world networks than in regular lattices"). C114.
+- **[Ferguson2005]** N. M. Ferguson et al. *Strategies for containing an emerging influenza
+  pandemic in Southeast Asia.* Nature 437:209–214. [doi:10.1038/nature04017](https://doi.org/10.1038/nature04017). Read: abstract
+  (elimination feasible with geographically targeted prophylaxis plus social distancing if
+  R0 below 1.8).
+- **[Grimm2005]** V. Grimm et al. *Pattern-oriented modeling of agent-based complex systems:
+  lessons from ecology.* Science 310:987–991. [doi:10.1126/science.1116681](https://doi.org/10.1126/science.1116681). Read: abstract;
+  "test against several patterns at once" is the method's core idea as we remember it.
+- **[NowakMay1992]** M. A. Nowak, R. M. May. *Evolutionary games and spatial chaos.* Nature
+  359:826–829. [doi:10.1038/359826a0](https://doi.org/10.1038/359826a0). Read: metadata only (no PubMed abstract); the description
+  in room 87 is from memory.
+- **[LehmanStanley2011]** J. Lehman, K. O. Stanley. *Abandoning objectives: evolution through the
+  search for novelty alone.* Evol. Comput. 19:189–223. [doi:10.1162/EVCO_a_00025](https://doi.org/10.1162/EVCO_a_00025). Read:
+  metadata.
+- **[Wang2019]** R. Wang, J. Lehman, J. Clune, K. O. Stanley. *Paired Open-Ended Trailblazer
+  (POET).* arXiv:[1901.01753](https://arxiv.org/abs/1901.01753) v1. Read: abstract.
+- **[Hughes2024]** E. Hughes et al. *Open-endedness is essential for artificial superhuman
+  intelligence.* arXiv:[2406.04268](https://arxiv.org/abs/2406.04268) v1 (position paper). Read: abstract. The authors'
+  Google DeepMind affiliation is from memory.
+- **[Kumar2024]** A. Kumar, C. Lu, L. Kirsch, et al. *Automating the search for artificial life
+  with foundation models* (ASAL). arXiv:[2412.17799](https://arxiv.org/abs/2412.17799) v1. Read: abstract (substrates Boids,
+  Particle Life, Game of Life, Lenia, NCA; reports previously unseen Lenia and Boids
+  lifeforms). Affiliations (Sakana AI, MIT) from memory.
+
 ## Search log
 
 ### 2026-10-07: seed set C003, C013, C023, C026, C038–C043 (archivist)
@@ -372,3 +509,14 @@ Two kinds of discretization effect are kept apart:
 
 Only the first kind bears on Davis's Platonic/non-Platonic definition, so the C039 entries for
 Davis 2024 and Yevenko 2024 were downgraded to RELATED.
+
+### 2026-11-15: the "So what?" wing (rooms 85–87)
+
+One bounded pass for museum prose, not a literature review. Candidate sources were named from
+memory for each field Bobby listed, then each was checked: Crossref API for DOI metadata,
+PubMed E-utilities for abstracts, the arXiv API for preprints, and direct fetches of the
+Distill article and Wolfram's essay. Every DOI resolved to the expected paper. Publisher pages
+(science.org, pnas.org) returned 403, so no full texts beyond the two web articles were read;
+statements beyond an abstract are flagged *from memory* in the entries above. The literature
+fields of C112, C114 and C115 cite these sources as PREVIOUSLY REPORTED or CONSISTENT WITH; C113
+cites Pearson 1993. Nothing here changes a status.
