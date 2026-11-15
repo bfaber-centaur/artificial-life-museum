@@ -172,6 +172,51 @@ random smear nudges genomes up or down.</p>
   units.</p>
 </div>
 
+<h2>A drug against fast dividers</h2>
+<p>Cancer doctors face a version of this room's problem. Chemotherapy hits fast-dividing cells
+hardest, so a tumour under constant treatment is a selection experiment for slow, tolerant
+cells. <em>Adaptive therapy</em> (Gatenby and colleagues) proposes pausing the drug so that
+sensitive cells survive and crowd the resistant ones out; a small pilot trial in prostate cancer
+looked promising. We built a toy version. A GenomeLenia “tumour” grows from one cell at genome
+0.7. Then a drug removes matter in proportion to its genome: red, fast matter is hit hard,
+blue, slow matter hardly at all. One copy gets no drug, one gets the drug all the time, one
+gets it adaptively: off when the tumour has halved, on again when it is back to its starting
+size.</p>
+<figure class="vitrine">
+  <img src="../../research/gallery/exhibits/G067-drug-against-fast-dividers/therapy.gif" width="820" height="425" loading="lazy"
+       alt="Three square worlds of dividing cells. Left, with no drug, warm red tissue fills the world. Middle, under constant drug, the tissue collapses to a few patches that turn blue and then vanish. Right, under on-off dosing, the tissue shrinks and regrows, turning blue, and is still there at the end. A burden chart runs underneath.">
+  <figcaption><strong>No drug, constant drug, adaptive drug</strong> (drug strength κ 0.5, seed
+  0). Colour is the genome (blue slow and drug-tolerant, red fast and drug-sensitive),
+  brightness the matter. Shading in the chart: the adaptive drug is on.
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G067-drug-against-fast-dividers/therapy.mp4">Full video</a> ·
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G067-drug-against-fast-dividers/provenance.json">provenance</a>.</figcaption>
+</figure>
+<figure class="evidence">
+  <img src="../../research/gallery/exhibits/G068-cure-or-control/therapy-runs.png" width="1485" height="682" loading="lazy"
+       alt="Eight panels. Top row: tumour burden against time for four drug strengths; grey untreated lines sit high, orange constant lines often drop to zero at higher strengths, blue adaptive lines wander around the starting burden and cross the progression line. Bottom row: the resistant share climbs to one in most treated runs and creeps up slowly in untreated runs.">
+  <figcaption><strong>Every run.</strong> Four seeds, four drug strengths, three schedules.
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G068-cure-or-control/provenance.json">provenance</a>.</figcaption>
+</figure>
+<div class="label">
+  <p class="obs"><strong>What you see.</strong> Under constant dosing a strong drug wipes the
+  tumour out before slow cells can take over; a weaker drug leaves a blue, slow tumour that
+  regrows. The adaptive tumour never dies: each pause lets it recover, and it turns blue
+  too.</p>
+  <p class="int"><strong>What the ledger says.</strong> Constant dosing eradicates the tumour in
+  0, 1, 2 and 4 of 4 seeds as the drug gets stronger, and every survivor ends up mostly slow
+  <a class="claim" href="claims.html#C119" title="In a GenomeLenia &quot;tumour&quot;, a constant drug that removes matter in proportion to its genome eradicates it in 0, 1, 2 and 4 of 4 seeds at drug strengths κ 0.3, 0.4, 0.5 and 0.6; every tumour that survives constant dosing ends with 64–100% of its matter at genome below 0.4 (the slow, drug-tolerant type)"><span class="cid">C119</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>. In 16 seed-and-dose pairs adaptive dosing did better twice, worse ten times
+  and tied four times <a class="claim" href="claims.html#C120" title="Adaptive dosing (drug off when the burden halves, on again at the starting burden) did not beat constant dosing in our toy: over 16 seed × dose pairs it did better in 2 (later progression by 28 and 137 tu), worse in 10 (earlier progression, or a surviving resistant tumour where constant dosing eradicated it) and tied in 4, with the drug on for 80–100% of the time"><span class="cid">C120</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>. Even with no drug, slow genomes are not driven out of a
+  full tumour <a class="claim" href="claims.html#C121" title="Without any drug, slow genomes are not pushed out of a full GenomeLenia tumour: the share of matter at genome below 0.4 rises from 0 to 0.05–0.33 by 2000 tu in all four untreated runs, with mean genome 0.53–0.68"><span class="cid">C121</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>.</p>
+  <p class="open"><strong>Why it matters, and what it does not show.</strong> Adaptive therapy
+  rests on one assumption: in a crowded tumour, sensitive cells out-compete resistant ones.
+  Our toy lacks that competition (once the world is full, dividing fast buys nothing), and
+  without it the pauses only help the tumour. That matches the theory: Gatenby's models
+  assume resistant cells are less fit than sensitive ones when they compete. It is also why
+  adaptive therapy has been tried in cancers that standard treatment cannot cure, such as
+  metastatic prostate cancer, rather than where a strong drug can wipe the tumour out. It says nothing about any real cancer or drug: this is a toy of our own design,
+  an <em>analogy</em> in the language of the <a href="so-what-evolution.html">So what? wing</a>.</p>
+</div>
+
 <h2>Sources</h2>
 <ul>
   <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/REPLICATORS/REPLICATORS.md">Replicator notes</a></li>
@@ -181,12 +226,14 @@ random smear nudges genomes up or down.</p>
   <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/REPLICATORS/genome.py">GenomeLenia</a>,
       <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/REPLICATORS/evolve.jsonl">the evolution runs</a> and
       <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/REPLICATORS/invasion.jsonl">the invasion runs</a></li>
+  <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/REPLICATORS/therapy.py">The therapy toy</a> and
+      <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/REPLICATORS/therapy.jsonl">every therapy run</a></li>
 </ul>
 
 <nav class="walk" aria-label="Tour"><a class="prev" href="other-models.html"><small>Back</small>East wing III: cousins from other models</a><a class="next" href="evolution-soup.html"><small>Next room</small>East wing V: evolution in a soup</a></nav>
 </main>
 <footer class="site">
-  <p>Claim statuses read from <code>research/claims.md</code> (sha256 <code>441d073ccda0</code>) when this page was built.</p>
+  <p>Claim statuses read from <code>research/claims.md</code> (sha256 <code>5af74353b6af</code>) when this page was built.</p>
   <p>Every picture here is a recorded simulation or a figure drawn from committed data. Statuses
   are the claims ledger's, not the museum's: a badge never says more than
   <a href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/claims.md">research/claims.md</a> does.</p>

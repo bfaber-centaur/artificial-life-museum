@@ -76,6 +76,15 @@ Species bookkeeping (`species.py`, the population and phylogeny panels) is a dra
 convention, not a species concept: bodies whose mean genomes lie within 0.25 of a species'
 centroid join it, otherwise they found a new species whose parent is the nearest living one.
 
+**Luck has a baseline (C116–C118, population-dynamics round, 2026-11-15).** `neutral.py` drops a
+neutral marker (resident genome + 1e-6 on one axis) at each of the 72 replay places, ten
+non-touching discs per run on orthogonal axes, 8 runs. Markers grew at 31/72 places and were
+lost at 10 (mutants 37 and 6). Mutant and marker at the same place agree in direction at 56/72
+(Spearman 0.63). Against the marker, mutant 4 (grew in 1/6 replays) beats neutral at 6/6 places,
+mutant 8 (grew 6/6) at 4/6 with a median edge of ×1.04; mutants beat neutral at 45/72 overall
+(sign test p 0.044), but genome differences are not significant (p 0.065). Chart G066
+(`neutral_plot.py`), numbers `summarize.py neutral`.
+
 ## Caveats
 
 - One kernel set (16) for the heredity claims; other kernel sets mostly freeze, so the contrast

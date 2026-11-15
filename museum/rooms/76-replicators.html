@@ -5,7 +5,8 @@
   "summary": "Chan's dividing creatures from the multi-kernel catalogue: a family tree followed cell by cell, how fast one cell fills a world, a replicator in three dimensions, and what happens when daughters inherit their rule.",
   "expect": {"C072": "OBSERVED", "C073": "OBSERVED", "C074": "OBSERVED", "C075": "OBSERVED",
              "C090": "OBSERVED", "C091": "OBSERVED", "C092": "OBSERVED",
-             "C110": "OBSERVED", "C111": "OBSERVED"}
+             "C110": "OBSERVED", "C111": "OBSERVED",
+             "C119": "OBSERVED", "C120": "OBSERVED", "C121": "OBSERVED"}
 } -->
 <h1>Creatures that copy themselves</h1>
 <p class="lede">Give Lenia several kernels instead of one and some creatures stop being
@@ -143,6 +144,51 @@ random smear nudges genomes up or down.</p>
   units.</p>
 </div>
 
+<h2>A drug against fast dividers</h2>
+<p>Cancer doctors face a version of this room's problem. Chemotherapy hits fast-dividing cells
+hardest, so a tumour under constant treatment is a selection experiment for slow, tolerant
+cells. <em>Adaptive therapy</em> (Gatenby and colleagues) proposes pausing the drug so that
+sensitive cells survive and crowd the resistant ones out; a small pilot trial in prostate cancer
+looked promising. We built a toy version. A GenomeLenia “tumour” grows from one cell at genome
+0.7. Then a drug removes matter in proportion to its genome: red, fast matter is hit hard,
+blue, slow matter hardly at all. One copy gets no drug, one gets the drug all the time, one
+gets it adaptively: off when the tumour has halved, on again when it is back to its starting
+size.</p>
+<figure class="vitrine">
+  <img src="{{asset:research/gallery/exhibits/G067-drug-against-fast-dividers/therapy.gif}}" width="820" height="425" loading="lazy"
+       alt="Three square worlds of dividing cells. Left, with no drug, warm red tissue fills the world. Middle, under constant drug, the tissue collapses to a few patches that turn blue and then vanish. Right, under on-off dosing, the tissue shrinks and regrows, turning blue, and is still there at the end. A burden chart runs underneath.">
+  <figcaption><strong>No drug, constant drug, adaptive drug</strong> (drug strength κ 0.5, seed
+  0). Colour is the genome (blue slow and drug-tolerant, red fast and drug-sensitive),
+  brightness the matter. Shading in the chart: the adaptive drug is on.
+  {{src:research/gallery/exhibits/G067-drug-against-fast-dividers/therapy.mp4|Full video}} ·
+  {{src:research/gallery/exhibits/G067-drug-against-fast-dividers/provenance.json|provenance}}.</figcaption>
+</figure>
+<figure class="evidence">
+  <img src="{{asset:research/gallery/exhibits/G068-cure-or-control/therapy-runs.png}}" width="1485" height="682" loading="lazy"
+       alt="Eight panels. Top row: tumour burden against time for four drug strengths; grey untreated lines sit high, orange constant lines often drop to zero at higher strengths, blue adaptive lines wander around the starting burden and cross the progression line. Bottom row: the resistant share climbs to one in most treated runs and creeps up slowly in untreated runs.">
+  <figcaption><strong>Every run.</strong> Four seeds, four drug strengths, three schedules.
+  {{src:research/gallery/exhibits/G068-cure-or-control/provenance.json|provenance}}.</figcaption>
+</figure>
+<div class="label">
+  <p class="obs"><strong>What you see.</strong> Under constant dosing a strong drug wipes the
+  tumour out before slow cells can take over; a weaker drug leaves a blue, slow tumour that
+  regrows. The adaptive tumour never dies: each pause lets it recover, and it turns blue
+  too.</p>
+  <p class="int"><strong>What the ledger says.</strong> Constant dosing eradicates the tumour in
+  0, 1, 2 and 4 of 4 seeds as the drug gets stronger, and every survivor ends up mostly slow
+  {{claim:C119}}. In 16 seed-and-dose pairs adaptive dosing did better twice, worse ten times
+  and tied four times {{claim:C120}}. Even with no drug, slow genomes are not driven out of a
+  full tumour {{claim:C121}}.</p>
+  <p class="open"><strong>Why it matters, and what it does not show.</strong> Adaptive therapy
+  rests on one assumption: in a crowded tumour, sensitive cells out-compete resistant ones.
+  Our toy lacks that competition (once the world is full, dividing fast buys nothing), and
+  without it the pauses only help the tumour. That matches the theory: Gatenby's models
+  assume resistant cells are less fit than sensitive ones when they compete. It is also why
+  adaptive therapy has been tried in cancers that standard treatment cannot cure, such as
+  metastatic prostate cancer, rather than where a strong drug can wipe the tumour out. It says nothing about any real cancer or drug: this is a toy of our own design,
+  an <em>analogy</em> in the language of the {{page:so-what-evolution|So what? wing}}.</p>
+</div>
+
 <h2>Sources</h2>
 <ul>
   <li>{{src:research/experiments/REPLICATORS/REPLICATORS.md|Replicator notes}}</li>
@@ -152,4 +198,6 @@ random smear nudges genomes up or down.</p>
   <li>{{src:research/experiments/REPLICATORS/genome.py|GenomeLenia}},
       {{src:research/experiments/REPLICATORS/evolve.jsonl|the evolution runs}} and
       {{src:research/experiments/REPLICATORS/invasion.jsonl|the invasion runs}}</li>
+  <li>{{src:research/experiments/REPLICATORS/therapy.py|The therapy toy}} and
+      {{src:research/experiments/REPLICATORS/therapy.jsonl|every therapy run}}</li>
 </ul>

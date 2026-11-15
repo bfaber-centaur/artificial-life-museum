@@ -3,7 +3,7 @@
   "nav_label": "13 · Evolution soup",
   "kicker": "East wing · Other laws of physics · Room 13",
   "summary": "Flow-Lenia worlds where every cell carries its own genome: one physics, many body plans; a giant that swallows a colony; Darwin's oldest problem, blending inheritance, played out in a petri dish; and whether a winning mutant is fit or just lucky.",
-  "expect": {"C076": "OBSERVED", "C077": "OBSERVED", "C078": "OBSERVED", "C099": "OBSERVED", "C100": "OBSERVED", "C101": "OBSERVED"}
+  "expect": {"C076": "OBSERVED", "C077": "OBSERVED", "C078": "OBSERVED", "C099": "OBSERVED", "C100": "OBSERVED", "C101": "OBSERVED", "C116": "OBSERVED", "C117": "OBSERVED", "C118": "OBSERVED"}
 } -->
 <h1>Evolution in a soup</h1>
 <p class="lede">In the conserved-matter room next door, matter flows and is never made or
@@ -109,6 +109,38 @@ dropped it into the same world again, at six new places each: 72 more runs.</p>
   creature fitter you have to rerun it.</p>
 </div>
 
+<h2>Luck has a baseline</h2>
+<p>Population geneticists never judge a mutant on its own: they compare it with a neutral
+marker, a patch that differs from its neighbours by nothing that matters, dropped in the same
+place. Whatever happens to the marker is luck. We went back to the 72 places of the replays
+above and dropped a neutral marker at each one: the resident genome nudged by one part in a
+million, so we can follow where its matter goes.</p>
+<figure class="evidence">
+  <img src="{{asset:research/gallery/exhibits/G066-fitness-measured-against-luck/neutral.png}}" width="1375" height="572" loading="lazy"
+       alt="Left: a scatter of 72 points, the mutant's growth against the neutral marker's growth at the same place; points cluster near the top right and along the diagonal, with a few neutral markers lost entirely at the far left. Right: for each of twelve mutant genomes, six dots of advantage over the neutral marker; mutant 4, in orange, sits highest with all six dots above zero, mutant 8, in blue, sits near zero.">
+  <figcaption><strong>Fitness measured against luck.</strong> Left: each dot is one place; across, how
+  much the neutral marker grew there in 500 time units; up, how much the mutant grew at the same
+  place. Right: each genome's advantage over the neutral marker at its six places; the bar is
+  the median. The small numbers repeat how many replays each genome grew in when judged alone.
+  {{src:research/gallery/exhibits/G066-fitness-measured-against-luck/provenance.json|provenance}}.</figcaption>
+</figure>
+<div class="label">
+  <p class="obs"><strong>What you see.</strong> Points hug the diagonal: where the marker did well,
+  the mutant did well. On the right, mutant 4, which looked like a loser (it grew in only one
+  replay), beats the marker at all six of its places; it was dealt bad places. Mutant 8, which
+  grew everywhere, barely beats the marker: it was dealt good ones.</p>
+  <p class="int"><strong>What the ledger says.</strong> Neutral markers grew at 31 of 72 places
+  and were lost at 10, against 37 and 6 for the mutants {{claim:C116}}. A mutant's fate and the
+  marker's fate at the same place are strongly correlated {{claim:C117}}. Against the marker,
+  mutants come out ahead at 45 of 72 places, but the differences between genomes are no
+  longer clearly significant {{claim:C118}}.</p>
+  <p class="open"><strong>Why it matters.</strong> This is the control the earlier replays were
+  missing, and it changes the story: judged alone, mutant 4 looked unfit and mutant 8 fit;
+  judged against luck at the same places, the order flips. Experimental evolutionists compete
+  every strain against a marked reference for exactly this reason. We have not found a Lenia
+  or Flow-Lenia study that does it (see the {{page:so-what-evolution|So what? wing}}).</p>
+</div>
+
 <h2>Sources</h2>
 <ul>
   <li>{{src:research/experiments/SOUP/SOUP.md|Soup notes}} and
@@ -117,5 +149,7 @@ dropped it into the same world again, at six new places each: 72 more runs.</p>
       {{src:research/experiments/SOUP/diversity.jsonl|diversity series}},
       {{src:research/experiments/SOUP/mutant.jsonl|the mutant test}},
       {{src:research/experiments/SOUP/replay.jsonl|the 72 replays}},
-      {{src:research/experiments/SOUP/scout.jsonl|the 60-world scout}}</li>
+      {{src:research/experiments/SOUP/scout.jsonl|the 60-world scout}},
+      {{src:research/experiments/SOUP/neutral.jsonl|the 72 neutral markers}}
+      ({{src:research/experiments/SOUP/neutral.py|code}})</li>
 </ul>

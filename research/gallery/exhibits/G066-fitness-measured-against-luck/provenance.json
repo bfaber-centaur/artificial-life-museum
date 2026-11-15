@@ -1,0 +1,18 @@
+{
+ "exhibit": "G066",
+ "title": "Fitness measured against luck",
+ "claims": [
+  "C116",
+  "C117",
+  "C118"
+ ],
+ "media": [
+  "neutral.png"
+ ],
+ "data": "research/experiments/SOUP/neutral.jsonl, replay.jsonl",
+ "commands": [
+  "neutral_plot.py neutral.png"
+ ],
+ "view": "left: log10 growth ratio over 500 tu of the mutant patch vs the neutral marker at the same place, floored at 0.001; right: log10(mutant ratio / neutral ratio) for each genome at its 6 places, bar = median",
+ "rule": "SOUP (Flow-Lenia with embedded genomes), kernel set 16, dominant heredity"
+}

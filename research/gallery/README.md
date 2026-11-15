@@ -71,6 +71,9 @@ made of, ten times per unit of time. Some of them travel; one of them never chan
 | [G063](#g063--one-chemistry-many-patterns) | One chemistry, many patterns (still; *not Lenia: Gray-Scott*) | 100 feed/kill settings | 2026-11-15 |
 | [G064](#g064--same-disease-three-worlds) | Same disease, three worlds (animated; *not Lenia: SIR epidemic*) | mixed, lattice, 1% shortcuts | 2026-11-15 |
 | [G065](#g065--when-it-takes-off) | When it takes off (chart; *not Lenia: SIR epidemic*) | 30 runs + take-off sweep | 2026-11-15 |
+| [G066](#g066--fitness-measured-against-luck) | Fitness measured against luck (chart; *modified rule: SOUP*) | 72 neutral markers vs 72 mutant replays | 2026-11-15 |
+| [G067](#g067--a-drug-against-fast-dividers) | A drug against fast dividers (animated; *modified rule: GenomeLenia*) | therapy toy, κ 0.5, seed 0 | 2026-11-15 |
+| [G068](#g068--cure-or-control) | Cure or control (chart; *modified rule: GenomeLenia*) | every therapy run | 2026-11-15 |
 
 ### G001 — Four ways to move
 
@@ -1008,6 +1011,39 @@ Film: [`epidemic.mp4`](exhibits/G064-same-disease-three-worlds/epidemic.mp4) ·
 
 - **Observation (claims C114, C115).** Left: every run of G064's setting. Right: final size
   against the transmission chance β, five runs per value.
+
+## Population dynamics (G066–G068)
+
+### G066 — Fitness measured against luck
+
+![Left: scatter of mutant growth against neutral-marker growth at the same 72 places, clustered along the diagonal. Right: each mutant genome's advantage over the neutral marker at its six places; mutant 4 highest, mutant 8 near zero](exhibits/G066-fitness-measured-against-luck/neutral.png)
+
+[`provenance.json`](exhibits/G066-fitness-measured-against-luck/provenance.json)
+
+- **Observation (claims C116–C118).** The 72 fit-or-lucky replay places (G051) again, now with a
+  neutral marker at each. Where the marker grew, the mutant mostly grew; judged against the
+  marker, mutant 4 and mutant 8 swap places.
+- **Caveats.** The marker is the resident genome plus 1e-6; ten markers share each run.
+
+### G067 — A drug against fast dividers
+
+![Three worlds of dividing cells side by side: untreated red tissue fills the world, constant drug wipes the tissue out, on-off drug leaves a blue tumour; burden chart below](exhibits/G067-drug-against-fast-dividers/therapy.gif)
+
+Film: [`therapy.mp4`](exhibits/G067-drug-against-fast-dividers/therapy.mp4) ·
+[`provenance.json`](exhibits/G067-drug-against-fast-dividers/provenance.json)
+
+- **Observation (claims C119, C120).** A GenomeLenia tumour (128², seed 0) with no drug, a
+  constant drug and an adaptive on-off drug (κ 0.5). Colour = genome on coolwarm, brightness =
+  matter, as G045.
+- **Caveats.** A toy of our own; the drug removes matter in proportion to the genome.
+
+### G068 — Cure or control
+
+![Eight panels of tumour burden and resistant share against time for four drug strengths; constant-dose lines drop to zero at strong doses, adaptive lines hover and climb](exhibits/G068-cure-or-control/therapy-runs.png)
+
+[`provenance.json`](exhibits/G068-cure-or-control/provenance.json)
+
+- **Observation (claims C119–C121).** Every therapy run: 4 seeds × 4 drug strengths × 3 schedules.
 
 ## Field note, 7 October 2026
 

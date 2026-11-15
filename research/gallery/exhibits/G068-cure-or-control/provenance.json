@@ -1,0 +1,18 @@
+{
+ "exhibit": "G068",
+ "title": "Cure or control",
+ "claims": [
+  "C119",
+  "C120",
+  "C121"
+ ],
+ "media": [
+  "therapy-runs.png"
+ ],
+ "data": "research/experiments/REPLICATORS/therapy.jsonl",
+ "commands": [
+  "chart_therapy.py therapy-runs.png"
+ ],
+ "view": "top: burden / B0 vs time since treatment for every run, one column per drug strength (untreated runs repeated in each column); bottom: share of matter at genome < 0.4 (blank once a tumour is eradicated); dotted lines at 1.25 (progression) and 0.5 (adaptive switch-off)",
+ "rule": "GenomeLenia (modified rule) + drug step A <- A (1 - dt kappa g)"
+}
