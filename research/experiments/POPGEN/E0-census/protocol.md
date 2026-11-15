@@ -83,4 +83,4 @@ No claim enters `claims.md` from E0 until its PR merges.
 
 ## Amendments
 
-(none yet)
+- A1 (2026-11-15, after the runs): tracker validation done only partly (2 of 9 frames, about ±6%, disagreement from cells mid-division); σ kept. See README.md.
