@@ -1,0 +1,17 @@
+{
+ "exhibit": "G065",
+ "title": "When it takes off",
+ "claims": [
+  "C114",
+  "C115"
+ ],
+ "media": [
+  "threshold.png"
+ ],
+ "data": "research/experiments/SOWHAT/epidemic.jsonl, threshold.jsonl",
+ "commands": [
+  "plots.py threshold threshold.png"
+ ],
+ "view": "left: infectious share vs step for all 30 C114 runs; right: final size vs beta, 5 runs per dot column, line = median",
+ "rule": "not Lenia: stochastic SIR"
+}

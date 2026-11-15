@@ -1,7 +1,7 @@
 {
   "ledger": "research/claims.md",
-  "ledger_sha256": "f0c28de7111102069b2417ad804b3e24924715ff853b254925c80802eba3b905",
-  "ledger_commit": "a2db31c",
+  "ledger_sha256": "441d073ccda043a6e621213eeb06a69b0241185f6ed6e87f46022adb6ea7b049",
+  "ledger_commit": "28f7b21",
   "conventions_sha256": "0e237384e0425b3c325229cf650ab6f9807fb08c1bedc991433b54b13c2eb02f",
   "claims": {
     "C001": {
@@ -271,7 +271,8 @@
       "status": "OBSERVED",
       "status_text": "OBSERVED",
       "rooms": [
-        "field-trip"
+        "field-trip",
+        "so-what-crowds"
       ]
     },
     "C064": {
@@ -292,7 +293,8 @@
       "status": "OBSERVED",
       "status_text": "OBSERVED",
       "rooms": [
-        "other-models"
+        "other-models",
+        "so-what-bodies"
       ]
     },
     "C067": {
@@ -348,7 +350,8 @@
       "status": "OBSERVED",
       "status_text": "OBSERVED",
       "rooms": [
-        "replicators"
+        "replicators",
+        "so-what-bodies"
       ]
     },
     "C075": {
@@ -383,7 +386,8 @@
       "status": "OBSERVED",
       "status_text": "OBSERVED",
       "rooms": [
-        "collision-zoo"
+        "collision-zoo",
+        "so-what-crowds"
       ]
     },
     "C081": {
@@ -453,7 +457,9 @@
       "status": "OBSERVED",
       "status_text": "OBSERVED",
       "rooms": [
-        "replicators"
+        "replicators",
+        "so-what-bodies",
+        "so-what-evolution"
       ]
     },
     "C093": {
@@ -502,7 +508,8 @@
       "status": "OBSERVED",
       "status_text": "OBSERVED",
       "rooms": [
-        "evolution-soup"
+        "evolution-soup",
+        "so-what-evolution"
       ]
     },
     "C100": {
@@ -516,7 +523,8 @@
       "status": "OBSERVED",
       "status_text": "OBSERVED",
       "rooms": [
-        "evolution-soup"
+        "evolution-soup",
+        "so-what-evolution"
       ]
     },
     "C102": {
@@ -551,7 +559,36 @@
       "status": "OBSERVED",
       "status_text": "OBSERVED",
       "rooms": [
-        "replicators"
+        "replicators",
+        "so-what-evolution"
+      ]
+    },
+    "C112": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "so-what-evolution"
+      ]
+    },
+    "C113": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "so-what-bodies"
+      ]
+    },
+    "C114": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "so-what-crowds"
+      ]
+    },
+    "C115": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "so-what-crowds"
       ]
     }
   },
@@ -793,6 +830,31 @@
       "research/gallery/exhibits/G053-through-the-looking-glass/provenance.json",
       "research/gallery/exhibits/G054-the-mirror-next-door/mirror-next-door.mp4",
       "research/gallery/exhibits/G054-the-mirror-next-door/provenance.json"
+    ],
+    "so-what-evolution": [
+      "research/experiments/SOWHAT/SOWHAT.md",
+      "research/experiments/SOWHAT/drift.py",
+      "research/experiments/SOWHAT/fates.jsonl",
+      "research/experiments/SOWHAT/moran.jsonl",
+      "research/gallery/exhibits/G062-lost-to-luck/provenance.json",
+      "research/references.md"
+    ],
+    "so-what-bodies": [
+      "research/experiments/SOWHAT/SOWHAT.md",
+      "research/experiments/SOWHAT/atlas.jsonl",
+      "research/experiments/SOWHAT/turing.py",
+      "research/gallery/exhibits/G063-one-chemistry-many-patterns/provenance.json",
+      "research/references.md"
+    ],
+    "so-what-crowds": [
+      "research/experiments/SOWHAT/SOWHAT.md",
+      "research/experiments/SOWHAT/epidemic.jsonl",
+      "research/experiments/SOWHAT/epidemic.py",
+      "research/experiments/SOWHAT/threshold.jsonl",
+      "research/gallery/exhibits/G064-same-disease-three-worlds/epidemic.mp4",
+      "research/gallery/exhibits/G064-same-disease-three-worlds/provenance.json",
+      "research/gallery/exhibits/G065-when-it-takes-off/provenance.json",
+      "research/references.md"
     ],
     "collection": [
       "research/experiments/L6-field/make_seeds.py",

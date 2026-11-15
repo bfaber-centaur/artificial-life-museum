@@ -1,0 +1,155 @@
+<!--meta {
+  "slug": "so-what-crowds", "order": 87, "title": "So what? III: crowds, contagion and machines that invent",
+  "nav_label": "So what? III · Crowds and AI",
+  "kicker": "The “So what?” wing · Room 3 of 3",
+  "summary": "Agent-based models plan for real epidemics and real ecosystems, spatial games show how cooperation survives, and open-endedness research borrows artificial life's question for AI. Plus what artificial life cannot tell you.",
+  "expect": {"C114": "OBSERVED", "C115": "OBSERVED", "C063": "OBSERVED", "C080": "OBSERVED"}
+} -->
+<h1>Crowds, contagion and machines that invent</h1>
+<p class="lede">Artificial life's habit is to write down simple local rules for many individuals
+and watch what the crowd does. That habit became a working method in epidemiology and
+ecology, where it is used to make real decisions. Its central question, how a system can keep
+producing new things forever, has become a research programme in AI.</p>
+
+<h2>The same disease in three worlds</h2>
+<figure class="vitrine">
+  <img src="{{asset:research/gallery/exhibits/G064-same-disease-three-worlds/epidemic.gif}}" width="760" height="397" loading="lazy"
+       alt="Three square worlds side by side. In the left one everyone turns blue almost at once. In the middle one an orange ring of sick people spreads slowly outward from the centre, leaving blue behind. In the right one orange speckles appear everywhere and the world turns blue within about a hundred steps. Below, three infection curves: a tall early spike, a medium hump, and a low flat wave.">
+  <figcaption><strong>Same disease, three contact patterns.</strong> 40,000 people on a grid.
+  Every sick person makes four contacts per step; each passes the disease on with chance
+  0.15, and a sick person recovers with chance 0.1 per step. Left: the four contacts are
+  random people. Middle: they are the four neighbours. Right: neighbours, but 1 contact in
+  100 goes to a random person far away.
+  {{src:research/gallery/exhibits/G064-same-disease-three-worlds/epidemic.mp4|Full video}} ·
+  {{src:research/gallery/exhibits/G064-same-disease-three-worlds/provenance.json|provenance}}.</figcaption>
+</figure>
+<div class="label">
+  <p class="obs"><strong>What you see.</strong> Well mixed, the disease sweeps everyone in a few
+  dozen steps. Among neighbours only, it crawls outward as a ring and takes hundreds of
+  steps. With one far contact in a hundred, sparks land everywhere and the slow ring is
+  gone.</p>
+</div>
+<figure class="evidence">
+  <img src="{{asset:research/gallery/exhibits/G065-when-it-takes-off/threshold.png}}" width="1375" height="506" loading="lazy"
+       alt="Left: percent sick at once against time; ten pink curves spike to about 53% near step 24, ten orange curves peak near 20% around step 100, ten blue curves form a low wave near 3% that lasts to step 650. Right: percent ever sick against the transmission chance; the pink curve rises first near 0.03, orange near 0.08, blue near 0.1.">
+  <figcaption><strong>Height of the wave, and when it starts.</strong> Left: all 30 runs of the
+  film's setting. Right: how many people are ever infected as the transmission chance
+  changes, five runs per value.
+  {{src:research/gallery/exhibits/G065-when-it-takes-off/provenance.json|provenance}}.</figcaption>
+</figure>
+<div class="label">
+  <p class="int"><strong>What the ledger says.</strong> In the film's setting nearly everyone
+  is infected in all three worlds, but the peak is 53–54% of people sick at once when mixed,
+  20–21% with 1% far contacts and 3–4% among neighbours only; the peak comes about 4 times
+  later with far contacts and 15 to 20 times later among neighbours {{claim:C114}}. For most
+  runs to take off, the transmission chance has to be about three times higher among
+  neighbours (0.10) than in a mixed crowd (0.03); 1% far contacts bring it down to 0.08
+  {{claim:C115}}.</p>
+</div>
+<div class="card">
+  <h3><span class="kind tool">Tool</span> Agent-based models in epidemiology</h3>
+  <p>The classic epidemic equations (Kermack &amp; McKendrick 1927) assume everyone meets everyone
+  at random, the left panel. Keeling (1999) showed how the local structure of who-meets-whom
+  changes whether a disease can invade at all, our right-hand chart. Watts &amp; Strogatz (1998)
+  showed that a few long-range links make a local network “small”, and that
+  infectious diseases spread more easily on such networks than on regular lattices: our
+  third world. Detailed
+  individual-based simulations are used to plan for real outbreaks. Ferguson and colleagues
+  (2005) simulated an emerging influenza in Southeast Asia person by person and found that
+  targeted antivirals plus social distancing could stop it early if its basic reproduction
+  number was below about 1.8.</p>
+  <p>The so-what: the same pathogen can flood hospitals or trickle through, depending only on
+  the contact pattern. Flattening a curve is about who meets whom, and a handful of long
+  trips can undo the protection that local structure gives.</p>
+  <p class="not">anything about a real disease. Our worlds are textbook toys with made-up
+  numbers, and the published models were built and fitted with real data. Our demo
+  reproduces known results; it discovers nothing.</p>
+  <p class="cite">Kermack &amp; McKendrick 1927; Keeling 1999; Watts &amp; Strogatz 1998; Ferguson et al. 2005.</p>
+</div>
+
+<h2>Ecology, one animal at a time</h2>
+<div class="card">
+  <h3><span class="kind tool">Tool</span> Individual-based ecology</h3>
+  <p>Ecologists simulate populations animal by animal when the details of space, age and
+  behaviour matter, for example to manage a fishery or a threatened species. Grimm and
+  colleagues (2005) set out how to keep such models honest: tune and test them against
+  several patterns seen in the field at once, not one. That is the same discipline our
+  {{page:how-we-know|ledger}} tries to impose on Lenia: a claim has to survive more than one
+  check.</p>
+  <p class="cite">Grimm et al. 2005.</p>
+</div>
+<div class="card">
+  <h3><span class="kind evidence">Evidence</span> Spatial games: how cooperation survives</h3>
+  <p>Nowak &amp; May (1992) put the prisoner's dilemma on a grid: each cell either cooperates or
+  defects, plays its neighbours and copies the most successful neighbour. In a well-mixed
+  crowd defectors win; on the grid, cooperators and defectors coexist indefinitely in
+  ever-changing patterns. It is a proof of principle that space alone can protect
+  cooperation, which is why it counts as evidence about game dynamics, though not about any
+  particular species.</p>
+  <p class="link-back">Our link is an <span class="kind analogy">Analogy</span>: in the
+  {{page:collision-zoo|collision zoo}}, what happens when two Orbium meet depends on exactly how
+  they meet {{claim:C080}}. Space and contact geometry decide outcomes in both worlds.</p>
+  <p class="cite">Nowak &amp; May 1992.</p>
+</div>
+
+<h2>Machines that keep inventing</h2>
+<div class="card">
+  <h3><span class="kind tool">Tool</span> Open-endedness in AI</h3>
+  <p>Evolution never stops producing new things. Most AI optimises a fixed goal and stops when
+  it gets there. Artificial life has long asked what a system needs to keep inventing, and
+  that question has moved into AI research. <em>Novelty search</em> (Lehman &amp; Stanley 2011)
+  rewards behaviour that is new instead of behaviour that scores well, and can beat direct
+  optimisation on deceptive problems. <em>POET</em> (Wang, Lehman, Clune &amp; Stanley 2019)
+  invents new obstacle courses while it trains walkers to solve them, and transfers
+  walkers between courses; some courses it solves cannot be solved by training on them
+  directly. A 2024 position paper from Google DeepMind (Hughes et al.) argues that
+  open-endedness is essential for any future artificial superhuman intelligence.</p>
+  <p class="not">that these systems are open-ended in the way evolution is. The DeepMind paper
+  is an argument, not a result.</p>
+  <p class="cite">Lehman &amp; Stanley 2011; Wang et al. 2019; Hughes et al. 2024.</p>
+</div>
+<div class="card">
+  <h3><span class="kind tool">Tool</span> AI that searches artificial life: ASAL</h3>
+  <p>Kumar and colleagues (2024; the team includes Sakana AI and MIT) turned this around and used AI to search
+  artificial life. Their system, ASAL, uses a vision-language foundation model to judge
+  simulations by eye: find a world that looks like a target description, find worlds that
+  keep producing novelty, and map the whole space of possible worlds. It works across Boids,
+  Particle Life, Game of Life, Lenia and neural cellular automata, and reports previously
+  unseen Lenia and Boids lifeforms.</p>
+  <p class="link-back">Our link: our {{page:field-trip|species hunt}} searched Lenia by hand and
+  with simple scores and found no new genus: every body was a catalogued one, and
+  catalogued bodies kept their way of moving even across kernel families {{claim:C063}}. Automated search with a model that “sees” is a different instrument, and
+  testing its finds the way our ledger tests ours would be a natural next exhibit.</p>
+  <p class="cite">Kumar et al. 2024 (preprint).</p>
+</div>
+
+<h2>What artificial life cannot tell you</h2>
+<div class="caveat">
+  <strong>Read this before quoting any room in this wing</strong>
+  A simulation shows what <em>can</em> happen under its rules. It cannot show what <em>does</em>
+  happen in a cell, a patient or a city until it is tested against measurements from that
+  cell, patient or city. Where an example here is labelled evidence, it is either evolution
+  really happening in a computer (and so evidence about evolution in general), or a model
+  that was checked against the real thing. Everything our own Lenia rooms show about biology
+  is analogy. That is still worth something: analogies are where questions come from. But
+  the answers have to come from somewhere else.
+</div>
+
+<h2>Sources</h2>
+<ul>
+  <li>{{src:research/experiments/SOWHAT/SOWHAT.md|Wing notes}},
+      {{src:research/experiments/SOWHAT/epidemic.py|the epidemic model}},
+      {{src:research/experiments/SOWHAT/epidemic.jsonl|the 30 runs}} and
+      {{src:research/experiments/SOWHAT/threshold.jsonl|the take-off sweep}}</li>
+  <li>{{src:research/references.md|References}}, section “The ‘So what?’ wing”</li>
+  <li>Kermack &amp; McKendrick (1927) <a href="https://doi.org/10.1098/rspa.1927.0118">Proc. R. Soc. A 115:700</a> ·
+      Keeling (1999) <a href="https://doi.org/10.1098/rspb.1999.0716">Proc. R. Soc. B 266:859</a> ·
+      Watts &amp; Strogatz (1998) <a href="https://doi.org/10.1038/30918">Nature 393:440</a> ·
+      Ferguson et al. (2005) <a href="https://doi.org/10.1038/nature04017">Nature 437:209</a></li>
+  <li>Grimm et al. (2005) <a href="https://doi.org/10.1126/science.1116681">Science 310:987</a> ·
+      Nowak &amp; May (1992) <a href="https://doi.org/10.1038/359826a0">Nature 359:826</a></li>
+  <li>Lehman &amp; Stanley (2011) <a href="https://doi.org/10.1162/EVCO_a_00025">Evol. Comput. 19:189</a> ·
+      Wang et al. (2019) <a href="https://arxiv.org/abs/1901.01753">arXiv:1901.01753</a> ·
+      Hughes et al. (2024) <a href="https://arxiv.org/abs/2406.04268">arXiv:2406.04268</a> ·
+      Kumar et al. (2024) <a href="https://arxiv.org/abs/2412.17799">arXiv:2412.17799</a></li>
+</ul>

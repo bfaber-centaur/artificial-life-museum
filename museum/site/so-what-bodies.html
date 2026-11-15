@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>So what? II: how bodies build themselves · ALM museum</title>
+<meta name="description" content="Turing&#x27;s chemistry explains real stripes and fingers; bioelectric patterns store a worm&#x27;s body plan; neural cellular automata learn to grow and heal; living robots made of frog cells; a thousand robots that build shapes with local rules.">
+<link rel="stylesheet" href="museum.css">
+</head>
+<body class="room-so-what-bodies">
+<header class="site">
+  <a class="brand" href="index.html">ALM <span>an artificial-life natural history museum</span></a>
+  <details class="map"><summary>Rooms</summary><ol>
+<li><a href="index.html">Entrance</a></li>
+<li><a href="orbium.html">1 · The ruler: Orbium</a></li>
+<li><a href="wobbles.html">2 · The wobble that wasn&#x27;t</a></li>
+<li><a href="edges.html">3 · How much can it take?</a></li>
+<li><a href="one-rule.html">4 · Three animals, one rule</a></li>
+<li><a href="how-we-know.html">5 · How we know</a></li>
+<li><a href="under-review.html">6 · Still being argued (provisional)</a></li>
+<li><a href="reef.html">7 · When the glider meets the ring (provisional)</a></li>
+<li><a href="field-trip.html">8 · Field trip</a></li>
+<li><a href="more-dimensions.html">9 · Dimensions &amp; chemicals</a></li>
+<li><a href="conserved-matter.html">10 · Conserved matter</a></li>
+<li><a href="other-models.html">11 · Other models</a></li>
+<li><a href="replicators.html">12 · Replicators</a></li>
+<li><a href="evolution-soup.html">13 · Evolution soup</a></li>
+<li><a href="collision-zoo.html">Collision zoo</a></li>
+<li><a href="strange-geometries.html">Strange worlds</a></li>
+<li><a href="so-what-evolution.html">So what? I · Evolution</a></li>
+<li><a class="here" href="so-what-bodies.html">So what? II · Bodies</a></li>
+<li><a href="so-what-crowds.html">So what? III · Crowds and AI</a></li>
+<li><a href="collection.html">Reference · The collection</a></li>
+<li><a href="claims.html">Reference · Claims on display</a></li>
+  </ol></details>
+</header>
+<main>
+<p class="kicker">The “So what?” wing · Room 2 of 3</p>
+<h1>How bodies build themselves</h1>
+<p class="lede">No cell in an embryo knows the shape of the whole animal. Each one reacts to its
+neighbours, and a body comes out. That is the same bargain Lenia makes: local rules, global
+form. Here the bargain has paid off in real biology and engineering.</p>
+
+<h2>One chemistry, many patterns</h2>
+<figure class="vitrine">
+  <img src="../../research/gallery/exhibits/G063-one-chemistry-many-patterns/atlas.png" width="1050" height="1080" loading="lazy"
+       alt="A ten by ten grid of small square worlds glowing in magenta and orange on black. Bottom rows are mostly empty; across the middle the squares show spots, then worms and labyrinths, then holes in a filled sheet as the feed rate rises; some squares are still turbulent.">
+  <figcaption><strong>A hundred worlds, two knobs.</strong> Gray-Scott reaction-diffusion
+  (Pearson 1993), the same chemistry as our <a href="other-models.html">dividing spots</a>. Every square
+  runs identical equations from identical seeds for 10,000 steps; only the feed rate (rows)
+  and kill rate (columns) differ. Brightness is the amount of the second chemical.
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G063-one-chemistry-many-patterns/provenance.json">provenance</a>.</figcaption>
+</figure>
+<div class="label">
+  <p class="obs"><strong>What you see.</strong> Top left, the chemical covers everything in a
+  smooth sheet. Bottom right, it dies out. In between runs a narrow diagonal band where all
+  the interesting things live: labyrinths, stripes, spot lattices, a few lonely spots, and
+  worlds that are still churning after 10,000 steps.</p>
+  <p class="int"><strong>What the ledger says.</strong> 40 of the 100 worlds end as a uniform
+  sheet and 28 empty; the other 32 hold spots, labyrinths or moving structure, all in the band
+  between <a class="claim" href="claims.html#C113" title="In a 10 × 10 Gray-Scott atlas (identical equations and seeds, only feed F and kill k varied), patterns appear only in a diagonal band between a uniform sheet (40 of 100 worlds, low k) and an empty world (28 of 100, high k): 32 worlds hold spots, labyrinths or still-moving structures at step 10,000"><span class="cid">C113</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>. Pearson mapped this in 1993; we redrew it to show how small a change
+  in two rates turns one pattern into another.</p>
+</div>
+<div class="card">
+  <h3><span class="kind evidence">Evidence</span> Turing was right about fingers and fish</h3>
+  <p>In 1952 Alan Turing showed on paper that two chemicals that react and spread at different
+  speeds can turn a uniform tissue into spots or stripes, with no blueprint. For decades it
+  was a beautiful idea with little proof. Then the evidence came. Kondo &amp; Asai (1995)
+  watched the stripes of the angelfish <em>Pomacanthus</em> split and rearrange as the fish grew,
+  as a reaction-diffusion model predicts. Sheth and colleagues (2012) reduced the dose of Hox
+  genes in mice and got more, thinner fingers: the wavelength changed, just as turning a knob
+  in the atlas above changes the pattern. Raspopovic and colleagues (2014) identified a
+  three-molecule Turing network (Bmp, Sox9, Wnt) that patterns digits.</p>
+  <p class="not">that every biological pattern is a Turing pattern. Many are not, and the
+  real networks have more molecules than Gray-Scott has.</p>
+  <p class="link-back">Our link: the Gray-Scott room shows spots that divide and recolonise
+  a wiped half-world <a class="claim" href="claims.html#C066" title="A single Gray-Scott spot (F 0.0367, k 0.0649) divides until about 300 spots tile the world; wipe half the world at t 20000 and division refills it to the control count by t 40000"><span class="cid">C066</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>. Lenia itself is a relative of this chemistry, but its
+  creatures are <span class="kind analogy">Analogy</span> for embryos, not models of them.</p>
+  <p class="cite">Turing 1952; Pearson 1993; Kondo &amp; Asai 1995; Kondo &amp; Miura 2010 (review);
+  Sheth et al. 2012; Raspopovic et al. 2014.</p>
+</div>
+
+<h2>A body plan stored as voltage</h2>
+<div class="card">
+  <h3><span class="kind evidence">Evidence</span> Two-headed worms that stay two-headed</h3>
+  <p>Cut a planarian flatworm into pieces and each piece grows back a whole worm. Durant,
+  Levin and colleagues (2017) briefly disturbed the electrical voltage pattern across the
+  cells of regenerating fragments. Some regrew with two heads. More surprising: the ones that
+  looked normal were not. Cut again later, in plain water, they produced two-headed
+  worms in the same ratio. The new body plan was stored not in the genes, which were
+  unchanged, but in a pattern of cell voltages, and it could be switched back. Levin's
+  program treats these voltage patterns as instructions that can be edited, with an eye to
+  regeneration and cancer (Levin 2021).</p>
+  <p class="link-back">Our link is an <span class="kind analogy">Analogy</span>. A Lenia creature
+  is also a pattern that remembers its shape after damage because the shape is a stable
+  state of the rule, not a stored drawing. Our <a href="edges.html">damage room</a> measures how much it
+  can take. Whether voltage patterns in worms behave like attractors in Lenia is a
+  hypothesis, not something our rooms show.</p>
+  <p class="cite">Durant et al. 2017; Levin 2021 (review).</p>
+</div>
+
+<h2>Cellular automata that learn to grow</h2>
+<div class="card">
+  <h3><span class="kind tool">Tool</span> Growing neural cellular automata</h3>
+  <p>Lenia's rule was found by hand. Mordvintsev, Randazzo, Niklasson and Levin (2020) let a
+  neural network <em>learn</em> the local rule instead: every cell runs the same tiny network,
+  sees only its neighbours, and is trained until a single seed grows into a target image (a
+  lizard emoji). Trained to keep the pattern stable, the rules often learned to regenerate
+  it after damage, and could be trained to regenerate it outright. It is a working model of
+  how local rules could encode a whole body, and a tool for studying regeneration and
+  robustness in other systems.</p>
+  <p class="not">how real embryos compute. The network is trained by gradient descent, which
+  no embryo does.</p>
+  <p class="cite">Mordvintsev et al. 2020 (Distill, interactive article).</p>
+</div>
+
+<h2>Living machines</h2>
+<div class="card">
+  <h3><span class="kind tool">Tool</span> Xenobots: designed by evolution in a computer, built from frog cells</h3>
+  <p>Kriegman, Blackiston, Levin and Bongard (2020) used an evolutionary algorithm to design
+  body shapes in simulation, then built the best designs by hand from frog skin and heart
+  cells. The living results moved roughly as predicted. In 2021 the same team found that such
+  cell clusters, put among loose cells, push them into piles that become new clusters:
+  “kinematic self-replication”, a way of reproducing not known in any organism. A design found
+  by AI kept the replication going for more generations.</p>
+  <p class="link-back">Our link: our <a href="replicators.html">replicator room</a> has Lenia creatures that
+  copy themselves by dividing <a class="claim" href="claims.html#C074" title="Chan&#x27;s 3-D &quot;self-replicate... unstable&quot; (found/312 #21) buds from one body into 4 by t 100 and keeps multiplying until its periodic box is packed, at two timesteps and in 64³, 80³ and 96³ boxes"><span class="cid">C074</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>, and genomes that compete <a class="claim" href="claims.html#C092" title="When grown &quot;division well&quot; tissue (g 0) meets grown &quot;division uncontrolled&quot; tissue (g 1) in GenomeLenia, the uncontrolled genome spreads into the well half (mean 0.34–0.38 there by t 1000) while the uncontrolled half stays at 0.98–0.99 (3 seeds)"><span class="cid">C092</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>. Xenobots
+  are real cells and our replicators are numbers, so the link is
+  <span class="kind analogy">Analogy</span>. What they share is the lesson that copying can arise
+  from shape and movement alone.</p>
+  <p class="cite">Kriegman et al. 2020; Kriegman et al. 2021.</p>
+</div>
+<div class="card">
+  <h3><span class="kind tool">Tool</span> A thousand Kilobots</h3>
+  <p>Rubenstein, Cornejo and Nagpal (2014) built a swarm of about a thousand small, cheap
+  robots that cooperate only through local interactions with their neighbours, and
+  programmed them to assemble into complex two-dimensional shapes. No robot sees the shape.
+  The hard part was an algorithm robust to the variability and errors of a thousand
+  unreliable machines. This is
+  artificial-life thinking as engineering: design the local rule and let the crowd build
+  the form.</p>
+  <p class="cite">Rubenstein, Cornejo &amp; Nagpal 2014.</p>
+</div>
+
+<h2>Sources</h2>
+<ul>
+  <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/SOWHAT/SOWHAT.md">Wing notes</a>,
+      <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/SOWHAT/turing.py">the atlas engine</a> and
+      <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/SOWHAT/atlas.jsonl">every world&#x27;s numbers</a></li>
+  <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/references.md">References</a>, section “The ‘So what?’ wing”</li>
+  <li>Turing (1952) <a href="https://doi.org/10.1098/rstb.1952.0012">Phil. Trans. R. Soc. B 237:37</a> ·
+      Pearson (1993) <a href="https://doi.org/10.1126/science.261.5118.189">Science 261:189</a> ·
+      Kondo &amp; Asai (1995) <a href="https://doi.org/10.1038/376765a0">Nature 376:765</a> ·
+      Kondo &amp; Miura (2010) <a href="https://doi.org/10.1126/science.1179047">Science 329:1616</a> ·
+      Sheth et al. (2012) <a href="https://doi.org/10.1126/science.1226804">Science 338:1476</a> ·
+      Raspopovic et al. (2014) <a href="https://doi.org/10.1126/science.1252960">Science 345:566</a></li>
+  <li>Durant et al. (2017) <a href="https://doi.org/10.1016/j.bpj.2017.04.011">Biophys. J. 112:2231</a> ·
+      Levin (2021) <a href="https://doi.org/10.1016/j.cell.2021.02.034">Cell 184:1971</a></li>
+  <li>Mordvintsev et al. (2020) <a href="https://doi.org/10.23915/distill.00023">Distill 5:e23</a></li>
+  <li>Kriegman et al. (2020) <a href="https://doi.org/10.1073/pnas.1910837117">PNAS 117:1853</a> ·
+      Kriegman et al. (2021) <a href="https://doi.org/10.1073/pnas.2112672118">PNAS 118:e2112672118</a> ·
+      Rubenstein, Cornejo &amp; Nagpal (2014) <a href="https://doi.org/10.1126/science.1254295">Science 345:795</a></li>
+</ul>
+
+<nav class="walk" aria-label="Tour"><a class="prev" href="so-what-evolution.html"><small>Back</small>So what? I: evolution, in silicon and in us</a><a class="next" href="so-what-crowds.html"><small>Next room</small>So what? III: crowds, contagion and machines that invent</a></nav>
+</main>
+<footer class="site">
+  <p>Claim statuses read from <code>research/claims.md</code> (sha256 <code>441d073ccda0</code>) when this page was built.</p>
+  <p>Every picture here is a recorded simulation or a figure drawn from committed data. Statuses
+  are the claims ledger's, not the museum's: a badge never says more than
+  <a href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/claims.md">research/claims.md</a> does.</p>
+</footer>
+</body>
+</html>

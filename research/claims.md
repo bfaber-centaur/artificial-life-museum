@@ -161,6 +161,7 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
 | Collision zoo 2026-11-14 (`research/experiments/ZOO/`, gallery G035–G037, museum room 78) | C080 / C081 / C082 / C083 |
 | Collision zoo round 2, 2026-11-14 (`research/experiments/ZOO/`, gallery G047–G048, room 78) | C093 / C094 / C095; history line on C081 |
 | Evolution soup round 2, 2026-11-14 (`research/experiments/SOUP/`, gallery G051–G052, room 77) | C099 / C100 / C101 |
+| "So what?" wing 2026-11-15 (`research/experiments/SOWHAT/`, gallery G062–G065, rooms 85–87) | C112 / C113 / C114 / C115 |
 
 ## Claims
 
@@ -2720,3 +2721,79 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
 - **Known caveats:** different world sizes and run lengths; we did not run a start above 0.7 or past 6000 tu, so whether 0.7 is a stable level or a slow approach to 1 is open. Linking it to C073 is our reading.
 - **History:**
   - 2026-11-14 — OBSERVED — replicators thread (round 3).
+
+### C112 — Textbook drift, reproduced: in a Moran process our simulated chance that one new mutant takes over matches the exact formula within 2 standard errors in all 20 conditions (N 20 and 200, s −0.05 to +0.1), and a 5%-harmful mutant in a population of 20 takes over more often (3.0%) than a 2%-helpful one in a population of 200 (2.0%); in Wright-Fisher (N 1000, s 0.02) 479 of 500 helpful mutants are lost, 435 within 20 generations
+
+- **Status:** OBSERVED
+- **Owner lane:** "So what?" wing thread (SOWHAT, 2026-11-15)
+- **Sources:** `research/experiments/SOWHAT/drift.py`, `moran.jsonl`, `fates.jsonl`, `summarize.py`
+- **Specimen / version:** none (population-genetics models, not Lenia)
+- **Simulator / version:** `drift.moran_fixations` (embedded jump chain of the Moran process: up with probability r/(1+r)); `drift.wright_fisher_paths` (binomial resampling, haploid)
+- **Parameters:** Moran: N ∈ {20, 200}, s ∈ {−0.05, −0.02, −0.01, −0.005, 0, 0.005, 0.01, 0.02, 0.05, 0.1}, 40,000 runs each, seeds `[2026, 11, 15, N, j]`. Wright-Fisher: N 1000, s 0.02, 500 runs, 1500 generations, seed `[2026, 11, 15, 1]`
+- **Intervention:** none; one mutant copy at the start of every run
+- **Metric:** fraction of runs ending at N mutants; z = (sim − exact) / sqrt(exact (1 − exact) / runs) against ρ = (1 − 1/r)/(1 − r^−N)
+- **Result:** max |z| 1.84 over 20 conditions. N 20, s −0.05: 0.0303 (exact 0.0294). N 200, s +0.02: 0.0195 (exact 0.0200). Wright-Fisher: 21 of 500 fixed (Kimura's approximation 0.039), 479 lost, 435 of them by generation 20, none unresolved at 1500
+- **Run IDs:** rows of `moran.jsonl`, `fates.jsonl`
+- **Search / parameter bounds:** two population sizes, ten selection coefficients, one Wright-Fisher setting
+- **Reproduction command:** `.venv/bin/python research/experiments/SOWHAT/drift.py moran moran.jsonl`; `drift.py fates fates.jsonl`; `summarize.py`
+- **Known caveats:** these are the textbook models, and the claim is only that our code reproduces their known answers. Nothing here is new. Haploid, constant population, one mutant, no further mutation
+- **Prior literature:** PREVIOUSLY REPORTED, same conditions: Moran 1958 (the process), Haldane 1927 (survival ≈ 2s), Kimura 1962 (diffusion formula), Ohta 1973 (slightly deleterious substitutions in small populations); review Patwa & Wahl 2008. See references.md, "The ‘So what?’ wing"
+- **History:**
+  - 2026-11-15 — OBSERVED — "So what?" wing thread.
+
+### C113 — In a 10 × 10 Gray-Scott atlas (identical equations and seeds, only feed F and kill k varied), patterns appear only in a diagonal band between a uniform sheet (40 of 100 worlds, low k) and an empty world (28 of 100, high k): 32 worlds hold spots, labyrinths or still-moving structures at step 10,000
+
+- **Status:** OBSERVED
+- **Owner lane:** "So what?" wing thread (SOWHAT, 2026-11-15)
+- **Sources:** `research/experiments/SOWHAT/turing.py`, `atlas.jsonl`, `summarize.py`; picture `plots.py atlas` → gallery G063
+- **Specimen / version:** none (Gray-Scott reaction-diffusion, not Lenia)
+- **Simulator / version:** `turing.run`, batched; equal to `WINGS/other_worlds.GrayScott` step for step (`tests/test_sowhat.py`)
+- **Parameters:** Du 0.2, Dv 0.1, dt 1, 5-point Laplacian, 128² torus, 10,000 steps; F ∈ linspace(0.010, 0.070, 10), k ∈ linspace(0.045, 0.069, 10); start u 1, v 0 with eight squares (12 × 12, u 0.5, v 0.25) plus N(0, 0.01) noise, the same for every world, seed `[2026, 11, 15, 2]`
+- **Intervention:** F and k only
+- **Metric:** labels from `turing.describe` on the final v (threshold 0.2): empty (nothing above), moving (> 5% of pixels changed by > 0.05 between steps 9000 and 10,000), spots (≥ 8 parts, each < 2% of the world), connected (largest part ≥ 20%, cover < 85%), uniform (cover ≥ 85% and std < 0.01), holes (cover ≥ 85%, std ≥ 0.01), other. Chosen before labelling but adjusted once (uniform vs holes split) after looking at the picture
+- **Result:** uniform 40, empty 28, moving 16, connected 7, spots 5, other 3, holes 1. Uniform worlds have k ≤ 0.0583; empty worlds k ≥ 0.0583 or F ≤ 0.0167 (and F 0.01 at k 0.045); every patterned world lies between them. The one "holes" world (F 0.03, k 0.053) is nearly uniform (std 0.0105)
+- **Run IDs:** rows of `atlas.jsonl`
+- **Search / parameter bounds:** one seed, one time, one grid; Pearson 1993 maps a finer region with a single central seed
+- **Reproduction command:** `.venv/bin/python research/experiments/SOWHAT/turing.py atlas OUT/atlas.npz atlas.jsonl` (~10 min); `summarize.py`
+- **Known caveats:** the labels are crude drawing aids, not Pearson's classes; "moving" worlds may still settle later; a body cut by the seam counts twice
+- **Prior literature:** PREVIOUSLY REPORTED, similar conditions: Pearson 1993 (pattern classes across the F–k plane); Turing 1952 (patterns from reaction and diffusion)
+- **History:**
+  - 2026-11-15 — OBSERVED — "So what?" wing thread.
+
+### C114 — The same SIR disease reaches nearly everyone whether people mix at random, meet only their four grid neighbours, or meet neighbours with 1% of contacts sent far away, but the peak share sick at once is 53–54%, 3–4% and 20–21% respectively, and it comes at t 23–25, 364–471 and 94–115 (10 runs each)
+
+- **Status:** OBSERVED
+- **Owner lane:** "So what?" wing thread (SOWHAT, 2026-11-15)
+- **Sources:** `research/experiments/SOWHAT/epidemic.py`, `epidemic.jsonl`, `summarize.py`; film `film.py epidemic` → gallery G064; chart `plots.py threshold` → G065
+- **Specimen / version:** none (stochastic SIR on a 200 × 200 periodic grid of people)
+- **Simulator / version:** `epidemic.Epidemic`: synchronous; each infectious person makes 4 contacts per step, each transmitting with β; a susceptible reached by m infectious contacts escapes with (1 − β)^m; recovery with γ per step after infection is applied
+- **Parameters:** β 0.15, γ 0.1; worlds `mixed` (4 uniformly random contacts), `lattice` (4 von Neumann neighbours), `shortcuts` (neighbours, each contact rewired to a random person with p 0.01); start: 9 infectious people in a 3 × 3 block at the centre; seeds `[2026, 11, 15, 3, 0–9]`
+- **Intervention:** contact pattern only
+- **Metric:** infectious fraction per step; peak and its time; final size = ever infected
+- **Result:** mixed peak 53.0–53.8% at t 23–25, final 99.7–99.8%, over by t 121–147; lattice 3.2–3.6% at t 364–471, final 96.2–96.9%, over by t 630–684; shortcuts 19.7–20.7% at t 94–115, final 96.8–97.1%, over by t 202–228
+- **Run IDs:** rows of `epidemic.jsonl` (every series stored)
+- **Search / parameter bounds:** one β, one γ, one grid size, 10 seeds per world
+- **Reproduction command:** `.venv/bin/python research/experiments/SOWHAT/epidemic.py runs epidemic.jsonl`; `summarize.py`
+- **Known caveats:** a textbook toy with made-up rates, not a model of any disease. Mixed contacts may hit the same person twice or the contact's own cell. The shortcut world makes slightly more random draws, so seeds are not paired across worlds
+- **Prior literature:** CONSISTENT WITH, similar outcome only: Kermack & McKendrick 1927 (mass-action model), Keeling 1999 (local spatial correlations change invasion), Watts & Strogatz 1998 (small-world networks spread disease more easily than lattices)
+- **History:**
+  - 2026-11-15 — OBSERVED — "So what?" wing thread.
+
+### C115 — An outbreak needs a transmission chance about three times higher to take off among grid neighbours than in a randomly mixed crowd: most runs infect more than 10% from β 0.03 when mixed, from β 0.08 with 1% far contacts, and only from β 0.10 among neighbours (5 runs per value)
+
+- **Status:** OBSERVED
+- **Owner lane:** "So what?" wing thread (SOWHAT, 2026-11-15)
+- **Sources:** `research/experiments/SOWHAT/epidemic.py threshold`, `threshold.jsonl`, `summarize.py`; chart G065
+- **Specimen / version:** none
+- **Simulator / version:** as C114
+- **Parameters:** as C114 except β ∈ {0.02, 0.03, 0.04, 0.05, 0.06, 0.08, 0.10, 0.12, 0.15, 0.20}; 5 runs per world and β, seeds `[2026, 11, 15, 4, j, 0–4]`
+- **Intervention:** β and contact pattern
+- **Metric:** final size; "takes off" = more than 10% ever infected; threshold = smallest β where most (≥ 3 of 5) runs take off
+- **Result:** runs taking off: mixed 0/5 at 0.02, 4/5 at 0.03, 5/5 from 0.04; shortcuts 0/5 up to 0.06, 4/5 at 0.08, 5/5 from 0.10; lattice 0/5 up to 0.08 (all ≤ 1.4% infected), 4/5 at 0.10 (27–70%, one 0.1%), 5/5 from 0.12. Thresholds 0.03, 0.08, 0.10
+- **Run IDs:** rows of `threshold.jsonl`
+- **Search / parameter bounds:** the β grid is coarse (thresholds are known only to one grid step); 5 runs per point
+- **Reproduction command:** `.venv/bin/python research/experiments/SOWHAT/epidemic.py threshold threshold.jsonl`; `summarize.py`
+- **Known caveats:** as C114; the mean-field threshold for these rules is β = γ/4 ≈ 0.025 (R0 = 4β/γ), consistent with the mixed result. The lattice threshold is a percolation-type threshold and depends on the grid
+- **Prior literature:** CONSISTENT WITH, similar outcome only: Keeling 1999 (invasion thresholds in structured populations)
+- **History:**
+  - 2026-11-15 — OBSERVED — "So what?" wing thread.

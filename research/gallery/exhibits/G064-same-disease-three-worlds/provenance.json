@@ -1,0 +1,18 @@
+{
+ "exhibit": "G064",
+ "title": "Same disease, three worlds",
+ "claims": [
+  "C114"
+ ],
+ "media": [
+  "epidemic.gif",
+  "epidemic.mp4",
+  "epidemic-t120.png"
+ ],
+ "data": "research/experiments/SOWHAT/epidemic.jsonl (seed 0 of each world is the filmed run)",
+ "commands": [
+  "film.py epidemic epidemic.mp4 epidemic.gif"
+ ],
+ "view": "200 x 200 people at 2 px each; dark = never sick, orange = sick, blue = recovered; one frame per 5 steps to step 700, mp4 at 20 fps, gif at 12 fps scaled to 760 px; epidemic-t120.png is the frame at step 120",
+ "rule": "not Lenia: stochastic SIR, beta 0.15, gamma 0.1"
+}

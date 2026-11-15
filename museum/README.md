@@ -32,6 +32,9 @@ Opening `museum/site/index.html` straight from disk works too. Pages load images
 | `other-models.html` | 11 · East wing III: cousins from other models | WINGS: G023–G025, C066–C068 |
 | `replicators.html` | 12 · East wing IV: creatures that copy themselves | REPLICATORS: G029–G031, G045–G046, G060–G061, C072–C075, C090–C092, C110–C111 |
 | `collision-zoo.html` | Collision zoo | ZOO 2026-11-14: G035–G037, C001, C080–C083 |
+| `so-what-evolution.html` | So what? I · Evolution, in silicon and in us | SOWHAT 2026-11-15: G062, C112; links C092, C099, C101, C111; literature in `research/references.md` |
+| `so-what-bodies.html` | So what? II · How bodies build themselves | SOWHAT: G063, C113; links C066, C074, C092 |
+| `so-what-crowds.html` | So what? III · Crowds, contagion and machines that invent | SOWHAT: G064–G065, C114–C115; links C063, C080 |
 | `collection.html` | Reference: the four specimens | dossiers, gallery runs |
 | `claims.html` | Reference: every claim on display | generated from the ledger |
 
