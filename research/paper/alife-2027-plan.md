@@ -40,8 +40,7 @@ outcome is publishable. "Population genetics holds for emergent individuals" is 
 result. "It breaks, and here is why (fusion, correlated births, spatial clumping)" is a more
 interesting one. B, C and D can each be a section or a follow-up paper, not the spine.
 
-The rest of this plan assumes **A**. If Bobby picks another, sections 3–5 are rewritten before
-any run.
+**Decision (2026-11-15): Bobby chose A.** The rest of this plan assumes it.
 
 ## 3. Experiments for question A
 
