@@ -103,3 +103,17 @@ therapy needs. Film `film_therapy.py 0 0.5 OUT` (G067, checks every final hash a
 `therapy.jsonl`), chart `chart_therapy.py` (G068), numbers at the end of `summarize.py`.
 Ideas not done: a cost of resistance in a full tissue (e.g. slow genomes take up more room or
 lose matter), tuned thresholds, a resistant clone present before treatment.
+
+
+## Cost of resistance (C122–C124, follow-up, 2026-11-15)
+
+Bobby asked for the missing competition. `therapy.crowding_cost` (off by default, so the C119–C121
+runs and hashes are unchanged) makes matter decay at `dt · c · (1 − g) · crowd` after every step,
+crowd = local mass (Gaussian, 4 px) / carrying density, clipped to 1. Runs: all doses at c 0.1 and
+0.3 for 2000 tu (`therapy_cost.jsonl`), and κ 0.3 at c 0, 0.1, 0.3 for 6000 tu (`therapy_long.jsonl`).
+With the cost, untreated tumours stay sensitive (C122), nothing progresses and constant dosing
+eradicates more (C123). At κ 0.3, constant dosing leaves a small fully resistant remnant that never
+regrows under the drug, while adaptive dosing holds a tumour about four times larger that at
+c 0.3 stays sensitive (C124). The mechanism works; the payoff (a delayed relapse) is missing because
+nothing relapses. Next: let slow matter regrow, or take the remnant off the drug.
+Chart `chart_cost.py` (G069).

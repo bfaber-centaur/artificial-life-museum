@@ -1,0 +1,18 @@
+{
+ "exhibit": "G069",
+ "title": "A price for resistance",
+ "claims": [
+  "C122",
+  "C123",
+  "C124"
+ ],
+ "media": [
+  "cost.png"
+ ],
+ "data": "research/experiments/REPLICATORS/therapy_long.jsonl",
+ "commands": [
+  "chart_cost.py cost.png"
+ ],
+ "view": "rows: crowding cost of resistance 0, 0.1, 0.3; left: burden / B0 vs time since treatment (dotted line 1.25 = progression); right: share of matter at genome < 0.4 (blank once a tumour is eradicated); drug strength kappa 0.3, 6000 tu, four seeds per colour",
+ "rule": "GenomeLenia (modified rule) + drug step A <- A (1 - dt kappa g) + crowding cost A <- A (1 - dt c (1 - g) crowd)"
+}

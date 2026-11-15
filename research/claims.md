@@ -163,6 +163,7 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
 | Evolution soup round 2, 2026-11-14 (`research/experiments/SOUP/`, gallery G051–G052, room 77) | C099 / C100 / C101 |
 | "So what?" wing 2026-11-15 (`research/experiments/SOWHAT/`, gallery G062–G065, rooms 85–87) | C112 / C113 / C114 / C115 |
 | Population-dynamics round 2026-11-15 (`SOUP/neutral.py`, `REPLICATORS/therapy.py`, gallery G066–G068, rooms 77, 76, 85) | C116 / C117 / C118 / C119 / C120 / C121 |
+| Population-dynamics round, cost of resistance, 2026-11-15 (`REPLICATORS/therapy.py` with `crowding_cost`, gallery G069, rooms 76, 85) | C122 / C123 / C124; history line on C121 |
 
 ## Claims
 
@@ -2912,3 +2913,61 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
 - **Prior literature:** RELATED: adaptive therapy relies on a fitness cost of resistance in competition (Gatenby et al. 2009)
 - **History:**
   - 2026-11-15 — OBSERVED — population-dynamics round.
+  - 2026-11-15 — OBSERVED, unchanged — follow-up: adding a crowding cost of resistance keeps untreated tumours almost free of slow matter (C122), consistent with this claim's reading that the base toy lacks such a cost.
+
+### C122 — A crowding cost of resistance (slow matter decays where the tissue is full) keeps untreated GenomeLenia tumours sensitive: after 6000 tu the share of matter at genome below 0.4 is 0.30–0.46 with no cost, 0.07–0.10 at cost 0.1 and 0–0.02 at cost 0.3
+
+- **Status:** OBSERVED
+- **Owner lane:** population-dynamics round, cost-of-resistance follow-up (2026-11-15, asked for by Bobby)
+- **Sources:** `research/experiments/REPLICATORS/therapy.py` (`crowding_cost`), `therapy_cost.jsonl`, `therapy_long.jsonl`, `summarize.py` (C122–C124 block); chart `chart_cost.py` → G069
+- **Specimen / version:** as C119
+- **Simulator / version:** as C119, plus after every step (also while the tumour grows to B0) `A ← A (1 − dt · c · (1 − g) · crowd)`, crowd = Gaussian(A, 4 px) / 0.196 clipped to [0, 1]
+- **Parameters:** as C119; cost c ∈ {0, 0.1, 0.3}; 2000 tu (`therapy_cost.jsonl`, c 0.1 and 0.3) and 6000 tu (`therapy_long.jsonl`, c 0, 0.1, 0.3); seeds 0–3
+- **Intervention:** the cost; no drug
+- **Metric:** resistant share (mass at g < 0.4 / mass) and mass-weighted mean genome
+- **Result:** at 6000 tu, seeds 0–3: no cost 0.33, 0.46, 0.46, 0.30 (mean genome 0.53, 0.47, 0.44, 0.56); c 0.1: 0.07, 0.09, 0.08, 0.10 (0.74, 0.66, 0.66, 0.70); c 0.3: 0.02, 0, 0.02, 0 (0.81, 0.77, 0.74, 0.82). At 2000 tu: c 0.1 0.02, 0, 0.31, 0.11; c 0.3 0, 0, 0.01, 0. Burden 2.18–2.53 B0 in every untreated run
+- **Run IDs:** rows with arm "none" in `therapy_cost.jsonl`, `therapy_long.jsonl` (`final_sha`); the 6000-tu runs match the 2000-tu runs at t 2000
+- **Search / parameter bounds:** two cost strengths, one crowding radius, one form of cost
+- **Reproduction command:** `cd research/experiments/REPLICATORS && ../../../.venv/bin/python therapy.py SEED 0.3,0.4,0.5,0.6 128 2000 COST therapy_cost.jsonl` (COST 0.1, 0.3) and `therapy.py SEED 0.3 128 6000 COST therapy_long.jsonl` (COST 0, 0.1, 0.3), SEED 0–3; `summarize.py`
+- **Known caveats:** we chose the form of the cost so that it would do this; the claim is that it works as intended, not a discovery. Fast matter pays the cost too (in proportion to 1 − g), so it lowers the whole tumour's mass a little
+- **Prior literature:** CONSISTENT WITH, by construction: the competitive cost of resistance assumed in adaptive-therapy models (Gatenby et al. 2009)
+- **History:**
+  - 2026-11-15 — OBSERVED — cost-of-resistance follow-up.
+
+### C123 — With the cost of resistance, no tumour progressed under either schedule in 2000 tu, and constant dosing eradicated more tumours than adaptive dosing: 8 vs 2 of 16 at cost 0.1, 14 vs 9 of 16 at cost 0.3 (without the cost, 7 vs 2, with 7 and 11 progressions)
+
+- **Status:** OBSERVED
+- **Owner lane:** population-dynamics round, cost-of-resistance follow-up (2026-11-15)
+- **Sources:** as C122 (`therapy_cost.jsonl`)
+- **Specimen / version:** as C119
+- **Simulator / version:** as C122
+- **Parameters:** as C119 and C120 (κ 0.3–0.6, adaptive thresholds 0.5 and 1.0 B0), cost 0.1 and 0.3
+- **Intervention:** constant vs adaptive dosing from the identical pre-treatment state and identical mutation noise
+- **Metric:** as C119 and C120
+- **Result:** paired by seed and dose, cost 0.1: both held 8, only constant eradicated 6, both eradicated 2, only adaptive eradicated 0; cost 0.3: both held 2, only constant eradicated 5, both eradicated 9, only adaptive 0. Adaptive drug-on fraction: median 0.79 at cost 0.1 (0–0.92) and 0.05 at cost 0.3 (0–0.93); at cost 0.3 and κ ≥ 0.5 the adaptive tumour died out after 0–3% drug time in all 8 runs
+- **Run IDs:** `therapy_cost.jsonl`
+- **Search / parameter bounds:** as C119 × two costs
+- **Reproduction command:** as C122
+- **Known caveats:** as C119 and C120. Progression within 2000 tu is the only clinical endpoint we measure; with the cost, nothing reached it, so the schedules differ only in eradication, final size and resistance
+- **Prior literature:** RELATED: models of adaptive therapy expect containment to beat maximum dosing only when the tumour cannot be eradicated (Gatenby et al. 2009); here strong doses often could
+- **History:**
+  - 2026-11-15 — OBSERVED — cost-of-resistance follow-up.
+
+### C124 — At the weakest dose (κ 0.3) over 6000 tu with the cost, constant dosing leaves a small remnant that is entirely resistant (0.16–0.18 of the starting burden; all 6 survivors across costs 0.1 and 0.3) while adaptive dosing holds a tumour about four times larger (0.69–0.91) that at cost 0.3 stays sensitive (0–18% resistant) with the drug on 62–93% of the time; nothing progressed and the resistant remnant never regrew
+
+- **Status:** OBSERVED
+- **Owner lane:** population-dynamics round, cost-of-resistance follow-up (2026-11-15)
+- **Sources:** as C122 (`therapy_long.jsonl`); chart G069
+- **Specimen / version:** as C119
+- **Simulator / version:** as C122
+- **Parameters:** κ 0.3, 6000 tu, cost 0, 0.1, 0.3, seeds 0–3
+- **Intervention:** none / constant / adaptive
+- **Metric:** burden, resistant share and drug-on fraction at 6000 tu; progression
+- **Result:** cost 0.3: constant eradicated seeds 2, 3 (t 805, 725), seeds 0, 1 held at 0.17, 0.16 B0, 100% resistant; adaptive held 0.69, 0.73, 0.76, 0.91 B0, resistant 0, 0.18, 0, 0.18, drug on 93, 62, 85, 76%. Cost 0.1: constant held 0.17–0.18 B0, 100% resistant (4/4); adaptive held 0.69–0.75 B0, resistant 1.0, 0.67, 1.0, 0.19, drug on 84–93%. No cost: all eight treated tumours progressed (as C119, C120) and end 81–100% resistant at 1.47–2.23 B0
+- **Run IDs:** `therapy_long.jsonl`
+- **Search / parameter bounds:** one dose, three costs, four seeds
+- **Reproduction command:** as C122; `chart_cost.py OUT.png`
+- **Known caveats:** the remnant under constant dosing stayed small while the drug was still on (it removes κ·g per unit time, little at g ≈ 0.1); we did not stop the drug to see whether it would regrow. In this toy slow matter barely expands, so there is no relapse for adaptive dosing to delay: the payoff adaptive therapy is meant to buy is missing for that reason, not shown to be absent in general
+- **Prior literature:** CONSISTENT WITH the mechanism (competition suppresses resistant cells while the drug is paused; Gatenby et al. 2009; Zhang et al. 2017), not with the clinical payoff, which our toy cannot test
+- **History:**
+  - 2026-11-15 — OBSERVED — cost-of-resistance follow-up.

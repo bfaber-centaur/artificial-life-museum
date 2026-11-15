@@ -6,7 +6,8 @@
   "expect": {"C072": "OBSERVED", "C073": "OBSERVED", "C074": "OBSERVED", "C075": "OBSERVED",
              "C090": "OBSERVED", "C091": "OBSERVED", "C092": "OBSERVED",
              "C110": "OBSERVED", "C111": "OBSERVED",
-             "C119": "OBSERVED", "C120": "OBSERVED", "C121": "OBSERVED"}
+             "C119": "OBSERVED", "C120": "OBSERVED", "C121": "OBSERVED",
+             "C122": "OBSERVED", "C123": "OBSERVED", "C124": "OBSERVED"}
 } -->
 <h1>Creatures that copy themselves</h1>
 <p class="lede">Give Lenia several kernels instead of one and some creatures stop being
@@ -189,6 +190,39 @@ size.</p>
   an <em>analogy</em> in the language of the {{page:so-what-evolution|So what? wing}}.</p>
 </div>
 
+<h3>Giving resistance a price</h3>
+<p>So we added the missing competition. In a crowd, slow matter now slowly decays, at a rate
+proportional to how slow it is and how full its neighbourhood is, and fast matter grows into
+the space it frees. This is the cost of resistance that adaptive therapy depends on. We tried
+two strengths of cost, reran every dose, and ran the weakest dose three times longer.</p>
+<figure class="evidence">
+  <img src="{{asset:research/gallery/exhibits/G069-a-price-for-resistance/cost.png}}" width="1375" height="924" loading="lazy"
+       alt="Six panels in three rows: no cost, cost 0.1, cost 0.3. Left column, tumour burden over 6000 time units: without the cost, blue adaptive and orange constant lines climb past the progression line; with the cost, blue adaptive lines hover just under the starting burden and orange constant lines sit flat near 0.17 or drop to zero. Right column, resistant share: orange lines go to one in every row; with cost 0.3 the blue lines mostly stay near zero.">
+  <figcaption><strong>The same weak drug, with and without a price for resistance.</strong>
+  Drug strength κ 0.3, four seeds per colour, 6000 time units.
+  {{src:research/gallery/exhibits/G069-a-price-for-resistance/provenance.json|provenance}}.</figcaption>
+</figure>
+<div class="label">
+  <p class="obs"><strong>What you see.</strong> With the price, untreated tumours stay red. Under
+  constant dosing the tumour shrinks to a small blue remnant (or vanishes) and stays there.
+  Under adaptive dosing it hovers just below its starting size, and with the stronger price it
+  stays mostly red: still sensitive to the drug, thousands of time units later.</p>
+  <p class="int"><strong>What the ledger says.</strong> The price keeps untreated tumours almost
+  free of slow matter {{claim:C122}}. With it, no tumour progressed under either schedule, and
+  constant dosing eradicated far more tumours than adaptive dosing {{claim:C123}}. At the weak
+  dose, constant dosing left a remnant that was entirely resistant; adaptive dosing held a
+  tumour about four times larger that, with the stronger price, stayed sensitive, on 62–93% of
+  the drug {{claim:C124}}.</p>
+  <p class="open"><strong>So who won?</strong> The price turned on adaptive therapy's mechanism:
+  competition did keep resistance down. It did not produce adaptive therapy's payoff, a later
+  relapse, because in our toy nothing relapsed. The resistant remnant under constant dosing
+  just sat there, small, for 6000 time units. In patients the case for adaptive therapy is that
+  the resistant remnant eventually regrows and kills; a toy where it doesn't will always
+  favour the bigger hammer. The next experiment would give resistant cells a way to regrow
+  slowly, and see whether a sensitive, controlled tumour then outlasts a small resistant
+  one.</p>
+</div>
+
 <h2>Sources</h2>
 <ul>
   <li>{{src:research/experiments/REPLICATORS/REPLICATORS.md|Replicator notes}}</li>
@@ -199,5 +233,7 @@ size.</p>
       {{src:research/experiments/REPLICATORS/evolve.jsonl|the evolution runs}} and
       {{src:research/experiments/REPLICATORS/invasion.jsonl|the invasion runs}}</li>
   <li>{{src:research/experiments/REPLICATORS/therapy.py|The therapy toy}} and
-      {{src:research/experiments/REPLICATORS/therapy.jsonl|every therapy run}}</li>
+      {{src:research/experiments/REPLICATORS/therapy.jsonl|every therapy run}};
+      with a cost of resistance: {{src:research/experiments/REPLICATORS/therapy_cost.jsonl|all doses}} and
+      {{src:research/experiments/REPLICATORS/therapy_long.jsonl|the long runs}}</li>
 </ul>

@@ -74,6 +74,7 @@ made of, ten times per unit of time. Some of them travel; one of them never chan
 | [G066](#g066--fitness-measured-against-luck) | Fitness measured against luck (chart; *modified rule: SOUP*) | 72 neutral markers vs 72 mutant replays | 2026-11-15 |
 | [G067](#g067--a-drug-against-fast-dividers) | A drug against fast dividers (animated; *modified rule: GenomeLenia*) | therapy toy, κ 0.5, seed 0 | 2026-11-15 |
 | [G068](#g068--cure-or-control) | Cure or control (chart; *modified rule: GenomeLenia*) | every therapy run | 2026-11-15 |
+| [G069](#g069--a-price-for-resistance) | A price for resistance (chart; *modified rule: GenomeLenia*) | therapy toy with a crowding cost, κ 0.3, 6000 tu | 2026-11-15 |
 
 ### G001 — Four ways to move
 
@@ -1012,7 +1013,7 @@ Film: [`epidemic.mp4`](exhibits/G064-same-disease-three-worlds/epidemic.mp4) ·
 - **Observation (claims C114, C115).** Left: every run of G064's setting. Right: final size
   against the transmission chance β, five runs per value.
 
-## Population dynamics (G066–G068)
+## Population dynamics (G066–G069)
 
 ### G066 — Fitness measured against luck
 
@@ -1044,6 +1045,18 @@ Film: [`therapy.mp4`](exhibits/G067-drug-against-fast-dividers/therapy.mp4) ·
 [`provenance.json`](exhibits/G068-cure-or-control/provenance.json)
 
 - **Observation (claims C119–C121).** Every therapy run: 4 seeds × 4 drug strengths × 3 schedules.
+
+### G069 — A price for resistance
+
+![Six panels in three rows for no cost, cost 0.1 and cost 0.3: burden and resistant share over 6000 time units; with the cost, adaptive lines hover below the start and constant lines sit at a small resistant remnant](exhibits/G069-a-price-for-resistance/cost.png)
+
+[`provenance.json`](exhibits/G069-a-price-for-resistance/provenance.json)
+
+- **Observation (claims C122–C124).** The weakest dose (κ 0.3) for 6000 tu, with slow matter
+  made to decay in a crowd (cost 0, 0.1, 0.3). With the cost nothing progresses; constant
+  dosing leaves a small fully resistant remnant, adaptive dosing a larger tumour that at cost
+  0.3 stays sensitive.
+- **Caveats.** The form of the cost is our choice; the remnant was never taken off the drug.
 
 ## Field note, 7 October 2026
 

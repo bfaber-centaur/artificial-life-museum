@@ -43,3 +43,23 @@ def test_drug_hits_fast_genomes_and_adaptive_switches_off():
     # adaptive starts with the drug on and stops once the burden is at or below half of B0
     ad = therapy.treat(A, np.ones_like(A), "adaptive", 0, 2.5 * B0, 1.0, kappa=0.5)
     assert ad["drug_time"] == 0.0
+
+
+class _W:
+    def __init__(self, A, g):
+        self.A, self.g, self.dt = A.copy(), g.copy(), 0.1
+
+
+def test_crowding_cost_hits_slow_matter_in_crowds_and_is_off_by_default():
+    A = np.full((32, 32), therapy.CARRY)
+    g = np.zeros_like(A); g[:, 16:] = 1.0
+    w = _W(A, g)
+    therapy.crowding_cost(w, 0.0)
+    assert np.array_equal(w.A, A)  # cost 0: untouched, so C119-C121 runs are unchanged
+    therapy.crowding_cost(w, 0.3)
+    assert w.A[:, 2:14].mean() < A[:, 2:14].mean()  # slow half, full crowd: decays
+    assert np.allclose(w.A[:, 18:30], A[:, 18:30])  # fast (g = 1) half: no cost
+    sparse = _W(np.full((32, 32), 0.1 * therapy.CARRY), np.zeros((32, 32)))
+    therapy.crowding_cost(sparse, 0.3)
+    loss_sparse = 1 - sparse.A.mean() / (0.1 * therapy.CARRY)
+    assert 0 < loss_sparse < 1 - w.A[:, 2:14].mean() / therapy.CARRY  # less crowded, smaller cost

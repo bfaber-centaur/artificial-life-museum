@@ -217,6 +217,39 @@ size.</p>
   an <em>analogy</em> in the language of the <a href="so-what-evolution.html">So what? wing</a>.</p>
 </div>
 
+<h3>Giving resistance a price</h3>
+<p>So we added the missing competition. In a crowd, slow matter now slowly decays, at a rate
+proportional to how slow it is and how full its neighbourhood is, and fast matter grows into
+the space it frees. This is the cost of resistance that adaptive therapy depends on. We tried
+two strengths of cost, reran every dose, and ran the weakest dose three times longer.</p>
+<figure class="evidence">
+  <img src="../../research/gallery/exhibits/G069-a-price-for-resistance/cost.png" width="1375" height="924" loading="lazy"
+       alt="Six panels in three rows: no cost, cost 0.1, cost 0.3. Left column, tumour burden over 6000 time units: without the cost, blue adaptive and orange constant lines climb past the progression line; with the cost, blue adaptive lines hover just under the starting burden and orange constant lines sit flat near 0.17 or drop to zero. Right column, resistant share: orange lines go to one in every row; with cost 0.3 the blue lines mostly stay near zero.">
+  <figcaption><strong>The same weak drug, with and without a price for resistance.</strong>
+  Drug strength κ 0.3, four seeds per colour, 6000 time units.
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G069-a-price-for-resistance/provenance.json">provenance</a>.</figcaption>
+</figure>
+<div class="label">
+  <p class="obs"><strong>What you see.</strong> With the price, untreated tumours stay red. Under
+  constant dosing the tumour shrinks to a small blue remnant (or vanishes) and stays there.
+  Under adaptive dosing it hovers just below its starting size, and with the stronger price it
+  stays mostly red: still sensitive to the drug, thousands of time units later.</p>
+  <p class="int"><strong>What the ledger says.</strong> The price keeps untreated tumours almost
+  free of slow matter <a class="claim" href="claims.html#C122" title="A crowding cost of resistance (slow matter decays where the tissue is full) keeps untreated GenomeLenia tumours sensitive: after 6000 tu the share of matter at genome below 0.4 is 0.30–0.46 with no cost, 0.07–0.10 at cost 0.1 and 0–0.02 at cost 0.3"><span class="cid">C122</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>. With it, no tumour progressed under either schedule, and
+  constant dosing eradicated far more tumours than adaptive dosing <a class="claim" href="claims.html#C123" title="With the cost of resistance, no tumour progressed under either schedule in 2000 tu, and constant dosing eradicated more tumours than adaptive dosing: 8 vs 2 of 16 at cost 0.1, 14 vs 9 of 16 at cost 0.3 (without the cost, 7 vs 2, with 7 and 11 progressions)"><span class="cid">C123</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>. At the weak
+  dose, constant dosing left a remnant that was entirely resistant; adaptive dosing held a
+  tumour about four times larger that, with the stronger price, stayed sensitive, on 62–93% of
+  the drug <a class="claim" href="claims.html#C124" title="At the weakest dose (κ 0.3) over 6000 tu with the cost, constant dosing leaves a small remnant that is entirely resistant (0.16–0.18 of the starting burden; all 6 survivors across costs 0.1 and 0.3) while adaptive dosing holds a tumour about four times larger (0.69–0.91) that at cost 0.3 stays sensitive (0–18% resistant) with the drug on 62–93% of the time; nothing progressed and the resistant remnant never regrew"><span class="cid">C124</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>.</p>
+  <p class="open"><strong>So who won?</strong> The price turned on adaptive therapy's mechanism:
+  competition did keep resistance down. It did not produce adaptive therapy's payoff, a later
+  relapse, because in our toy nothing relapsed. The resistant remnant under constant dosing
+  just sat there, small, for 6000 time units. In patients the case for adaptive therapy is that
+  the resistant remnant eventually regrows and kills; a toy where it doesn't will always
+  favour the bigger hammer. The next experiment would give resistant cells a way to regrow
+  slowly, and see whether a sensitive, controlled tumour then outlasts a small resistant
+  one.</p>
+</div>
+
 <h2>Sources</h2>
 <ul>
   <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/REPLICATORS/REPLICATORS.md">Replicator notes</a></li>
@@ -227,13 +260,15 @@ size.</p>
       <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/REPLICATORS/evolve.jsonl">the evolution runs</a> and
       <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/REPLICATORS/invasion.jsonl">the invasion runs</a></li>
   <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/REPLICATORS/therapy.py">The therapy toy</a> and
-      <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/REPLICATORS/therapy.jsonl">every therapy run</a></li>
+      <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/REPLICATORS/therapy.jsonl">every therapy run</a>;
+      with a cost of resistance: <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/REPLICATORS/therapy_cost.jsonl">all doses</a> and
+      <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/REPLICATORS/therapy_long.jsonl">the long runs</a></li>
 </ul>
 
 <nav class="walk" aria-label="Tour"><a class="prev" href="other-models.html"><small>Back</small>East wing III: cousins from other models</a><a class="next" href="evolution-soup.html"><small>Next room</small>East wing V: evolution in a soup</a></nav>
 </main>
 <footer class="site">
-  <p>Claim statuses read from <code>research/claims.md</code> (sha256 <code>5af74353b6af</code>) when this page was built.</p>
+  <p>Claim statuses read from <code>research/claims.md</code> (sha256 <code>7a5971a25ae4</code>) when this page was built.</p>
   <p>Every picture here is a recorded simulation or a figure drawn from committed data. Statuses
   are the claims ledger's, not the museum's: a badge never says more than
   <a href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/claims.md">research/claims.md</a> does.</p>
