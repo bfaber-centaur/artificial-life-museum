@@ -28,7 +28,7 @@ is `therapy.crowding_cost`.
 | Factor | Levels |
 | --- | --- |
 | Cost of resistance c | 0, 0.3 |
-| Dose κ | 0.4, 0.6 |
+| Dose κ | 0.3, 0.4 (A1; was 0.4, 0.6) |
 | Seed | 1, 2, 3, 4 |
 | Arm | none (once per seed and c), constant, adaptive |
 
@@ -58,4 +58,9 @@ designed for it, and we say so.
 
 ## Amendments
 
-(none yet)
+- **A1 (2026-11-17, before the main runs).** A 10 tu smoke test (seed 1, c 0.3) showed that
+  constant dosing at κ 0.6 wipes out the tumour within 10 tu, before any resistant matter can
+  arise. No resistant matter exists at the start of treatment (resistant share 0.0), so κ 0.6
+  cannot test relapse. This matches C119, where κ 0.6 eradicated 4 of 4. **The doses are changed
+  to κ 0.3 and 0.4** (C119: 0 and 1 of 4 eradicated; survivors at κ 0.3 were 64–100% resistant).
+  Nothing else changes. The smoke-test rows were deleted and are not part of the results.
