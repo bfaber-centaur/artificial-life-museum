@@ -46,4 +46,6 @@ tissue is suppressed. That is the regime in which adaptive therapy theory predic
 The particulate inheritance from E1c should also be used, since blending dilutes the resistant
 clone in T2's untreated arm.
 
+**Update:** T3 (`../T3-neighbour-competition/`) measured crowding at neighbour scale. Constant dosing then relapses in 8/8 pairs and untreated tumours suppress the clone, but adaptive dosing stays on 99–100% of the time and does not win (2 better, 5 worse).
+
 No claims enter `claims.md` until this PR merges and a hostile review has read it.
