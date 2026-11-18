@@ -20,7 +20,9 @@ OUT = Path(os.environ.get("POPGEN_OUT", "/tmp/claude-0/-home-user/1e73a8fc-c1a3-
 arm, ws, rs = sys.argv[1], int(sys.argv[2]), int(sys.argv[3])
 G0 = 0.5
 ARMS = {"blend+": ("blend", 0.2, None), "part+": ("part", 0.2, None), "part0": ("part", 0.0, None),
-        "drift0.5": ("part", 0.0, 0.5), "drift0.1": ("part", 0.0, 0.1)}
+        "drift0.5": ("part", 0.0, 0.5), "drift0.1": ("part", 0.0, 0.1),
+        # E1c (protocol_e1c.md): unbiased stochastic particulate inheritance
+        "s+": ("stoch", 0.2, None), "s0": ("stoch", 0.0, None), "sdrift0.5": ("stoch", 0.0, 0.5), "sdrift0.1": ("stoch", 0.0, 0.1)}
 mode, delta, p0 = ARMS[arm]
 TU = float(sys.argv[4]) if len(sys.argv) > 4 else (3000.0 if p0 is None else 2000.0)
 z = np.load(OUT / f"e0_N256_g0.5_s{ws}_tu5000.npz")
@@ -31,7 +33,7 @@ if p0 is None:
     L, P, chosen = label_cells(A, 0.0, rng, which=[int(np.random.default_rng(rs).integers(n))])
 else:
     L, P, chosen = label_cells(A, p0, rng)
-w = TwoType(A, L, G0, delta, mode)
+w = TwoType(A, L, G0, delta, mode, seed=1000 * ws + rs)
 h0 = state_hash(np.stack([w.A, w.L]))
 every = int(round(10 / w.dt)); steps = int(round(TU / w.dt))
 tr = []; t0 = time.time()

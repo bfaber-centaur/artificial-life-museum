@@ -75,6 +75,29 @@ if "E1b_p0.5" in res and "E1b_p0.1" in res:
     ratio = max(a_["Ne"], b_["Ne"]) / min(a_["Ne"], b_["Ne"])
     overlap = not (a_["CI95"][1] < b_["CI95"][0] or b_["CI95"][1] < a_["CI95"][0])
     res["P1f"] = dict(ratio=round(ratio, 2), CIs_overlap=overlap, verdict="pass" if ratio <= 1.5 else ("inconclusive" if overlap else "fail"))
+# E1c (protocol_e1c.md): same estimators on the stochastic-particulate arms
+sa = {arm: sorted(by.get(arm, []), key=lambda r: (r["world_seed"], r["rng_seed"])) for arm in ("s+", "s0")}
+if all(len(v) == 12 for v in sa.values()):
+    grew = {k: sum(fin(r, 1) > r["trace"][0][1] for r in v) for k, v in sa.items()}
+    alive = {k: sum(fin(r, 1) > 0 for r in v) for k, v in sa.items()}
+    res["E1c_single"] = dict(grew=grew, alive=alive, final={k: [fin(r, 1) for r in v] for k, v in sa.items()},
+                             P1c_b_pass=grew["s+"] > grew["s0"])
+    res["P1c_c"] = dict(neutral_alive=alive["s0"], pass_=1 <= alive["s0"] <= 6)
+for p0 in ("0.5", "0.1"):
+    rs = by.get(f"sdrift{p0}", [])
+    if len(rs) < 2:
+        continue
+    T, F, d = F_curve(rs)
+    ne = fit_ne(T, F)
+    boots = []
+    for _ in range(2000):
+        idx = rng.integers(len(rs), size=len(rs))
+        Tb, Fb, _ = F_curve([rs[i] for i in idx])
+        boots.append(fit_ne(Tb, Fb))
+    se = float(d.std(ddof=1) / np.sqrt(len(d)))
+    res[f"E1c_p{p0}"] = dict(n=len(rs), Ne=round(ne, 1), CI95=[round(float(np.percentile(boots, q)), 1) for q in (2.5, 97.5)],
+                             mean_dp=round(float(d.mean()), 4), se_dp=round(se, 4), P1c_a_pass=bool(abs(d.mean()) <= 2 * se),
+                             in_range=bool(0.2 * K <= ne <= 2 * K))
 print(json.dumps({k: v for k, v in res.items() if k != "E1a"}, indent=1))
 for arm, s in res["E1a"].items():
     print(arm, {k: v for k, v in s.items() if k not in ("start", "final_share", "final_majority")})

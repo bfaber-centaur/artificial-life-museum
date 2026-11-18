@@ -165,34 +165,34 @@
   "pass_": false
  },
  "E1b_p0.5": {
-  "n": 8,
-  "Ne": 104.0,
+  "n": 12,
+  "Ne": 132.4,
   "CI95": [
-   46.9,
-   502.0
+   62.2,
+   390.7
   ],
-  "mean_dp": 0.0937,
-  "se_dp": 0.0485,
-  "F_final": 0.1011,
-  "P1d_pass": true,
+  "mean_dp": 0.0909,
+  "se_dp": 0.032,
+  "F_final": 0.0784,
+  "P1d_pass": false,
   "P1e_pass": true
  },
  "E1b_p0.1": {
-  "n": 6,
-  "Ne": 172.8,
+  "n": 12,
+  "Ne": 148.9,
   "CI95": [
-   111.0,
-   384.4
+   106.8,
+   238.0
   ],
-  "mean_dp": -0.0708,
-  "se_dp": 0.0209,
-  "F_final": 0.0724,
+  "mean_dp": -0.0777,
+  "se_dp": 0.0123,
+  "F_final": 0.0768,
   "P1d_pass": false,
   "P1e_pass": false
  },
  "P1f": {
-  "ratio": 1.66,
+  "ratio": 1.12,
   "CIs_overlap": true,
-  "verdict": "inconclusive"
+  "verdict": "pass"
  }
 }

@@ -6,6 +6,8 @@ every growth step exactly as in REPLICATORS/genome.py:
   - "blend"  (genome.py's rule): new matter takes Lhat, the mass-weighted mean label of its
              neighbourhood (Gaussian SIGMA_G px), and the pixel's label is the mass-weighted mix
              of old and new. Labels become fractions: blending inheritance.
+  - "stoch"  (particulate, unbiased; E1c): new matter is type 1 with probability Lhat (a fresh
+             random draw per pixel per step), so the expected new label equals Lhat; otherwise as "part".
   - "part"   (particulate): new matter takes round(Lhat), the neighbourhood's majority type, and
              the pixel keeps whichever label (its old one or the new one) carries more of its mass.
              Labels stay exactly 0 or 1.
@@ -27,8 +29,9 @@ import tree  # noqa: E402,F401
 class TwoType:
     SIGMA_G = 2.0
 
-    def __init__(self, A, L, g0, delta=0.0, mode="part"):
-        assert mode in ("part", "blend")
+    def __init__(self, A, L, g0, delta=0.0, mode="part", seed=0):
+        assert mode in ("part", "blend", "stoch")
+        self.rng = np.random.default_rng(seed)
         self.mode, self.g0, self.delta = mode, g0, delta
         self.well, self.wild = found_entry("213", 84)["params"], found_entry("213", 83)["params"]
         self.A = np.asarray(A, float).copy(); self.L = np.asarray(L, float).copy()
@@ -56,7 +59,7 @@ class TwoType:
         if self.mode == "blend":
             L = np.where(An > 1e-9, (old * L + grow * Lhat) / np.maximum(An, 1e-12), Lhat)
         else:
-            new = (Lhat > 0.5).astype(float)
+            new = (Lhat > 0.5).astype(float) if self.mode == "part" else (self.rng.random(A.shape) < Lhat).astype(float)
             L = np.where(old >= grow, L, new)
             L = np.where(An > 1e-9, L, new)
         self.n += 1
