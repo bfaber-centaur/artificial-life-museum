@@ -1,0 +1,693 @@
+{
+ "pairs": [
+  {
+   "seed": 1,
+   "cost": 0.0,
+   "kappa": 0.3,
+   "verdict": 0,
+   "constant": {
+    "prog": 128.0,
+    "res": 0.4146,
+    "erad": false,
+    "end": [
+     6000.0,
+     2.761,
+     0.2202,
+     0.9697,
+     1
+    ]
+   },
+   "adaptive": {
+    "prog": 128.0,
+    "res": 0.4146,
+    "erad": false,
+    "drug": 6000.0,
+    "end": [
+     6000.0,
+     2.761,
+     0.2202,
+     0.9697,
+     1
+    ]
+   },
+   "none_end": [
+    6000.0,
+    2.2945,
+    0.4588,
+    0.4592,
+    0
+   ]
+  },
+  {
+   "seed": 1,
+   "cost": 0.0,
+   "kappa": 0.4,
+   "verdict": 1,
+   "constant": {
+    "prog": 153.6,
+    "res": 0.8677,
+    "erad": false,
+    "end": [
+     6000.0,
+     2.606,
+     0.2253,
+     0.9693,
+     1
+    ]
+   },
+   "adaptive": {
+    "prog": 192.3,
+    "res": 0.6842,
+    "erad": false,
+    "drug": 5986.9,
+    "end": [
+     6000.0,
+     2.7381,
+     0.2309,
+     0.9703,
+     1
+    ]
+   },
+   "none_end": [
+    6000.0,
+    2.2945,
+    0.4588,
+    0.4592,
+    0
+   ]
+  },
+  {
+   "seed": 2,
+   "cost": 0.0,
+   "kappa": 0.3,
+   "verdict": -1,
+   "constant": {
+    "prog": 1762.4,
+    "res": 0.6937,
+    "erad": false,
+    "end": [
+     6000.0,
+     2.6629,
+     0.231,
+     0.9914,
+     1
+    ]
+   },
+   "adaptive": {
+    "prog": 506.6,
+    "res": 0.459,
+    "erad": false,
+    "drug": 5986.0,
+    "end": [
+     6000.0,
+     2.6797,
+     0.209,
+     0.9882,
+     1
+    ]
+   },
+   "none_end": [
+    6000.0,
+    2.2736,
+    0.4704,
+    0.4399,
+    0
+   ]
+  },
+  {
+   "seed": 2,
+   "cost": 0.0,
+   "kappa": 0.4,
+   "verdict": 0,
+   "constant": {
+    "prog": 109.7,
+    "res": 0.654,
+    "erad": false,
+    "end": [
+     6000.0,
+     2.5738,
+     0.2507,
+     0.9773,
+     1
+    ]
+   },
+   "adaptive": {
+    "prog": 109.7,
+    "res": 0.654,
+    "erad": false,
+    "drug": 6000.0,
+    "end": [
+     6000.0,
+     2.5738,
+     0.2507,
+     0.9773,
+     1
+    ]
+   },
+   "none_end": [
+    6000.0,
+    2.2736,
+    0.4704,
+    0.4399,
+    0
+   ]
+  },
+  {
+   "seed": 3,
+   "cost": 0.0,
+   "kappa": 0.3,
+   "verdict": 0,
+   "constant": {
+    "prog": 84.5,
+    "res": 0.526,
+    "erad": false,
+    "end": [
+     6000.0,
+     2.8459,
+     0.2878,
+     0.8863,
+     1
+    ]
+   },
+   "adaptive": {
+    "prog": 84.5,
+    "res": 0.526,
+    "erad": false,
+    "drug": 6000.0,
+    "end": [
+     6000.0,
+     2.8459,
+     0.2878,
+     0.8863,
+     1
+    ]
+   },
+   "none_end": [
+    6000.0,
+    2.4413,
+    0.6884,
+    0.1357,
+    0
+   ]
+  },
+  {
+   "seed": 3,
+   "cost": 0.0,
+   "kappa": 0.4,
+   "verdict": 0,
+   "constant": {
+    "prog": 141.7,
+    "res": 0.5959,
+    "erad": false,
+    "end": [
+     6000.0,
+     2.5697,
+     0.2813,
+     0.921,
+     1
+    ]
+   },
+   "adaptive": {
+    "prog": 141.7,
+    "res": 0.5959,
+    "erad": false,
+    "drug": 6000.0,
+    "end": [
+     6000.0,
+     2.5697,
+     0.2813,
+     0.921,
+     1
+    ]
+   },
+   "none_end": [
+    6000.0,
+    2.4413,
+    0.6884,
+    0.1357,
+    0
+   ]
+  },
+  {
+   "seed": 4,
+   "cost": 0.0,
+   "kappa": 0.3,
+   "verdict": 0,
+   "constant": {
+    "prog": 144.8,
+    "res": 0.2544,
+    "erad": false,
+    "end": [
+     6000.0,
+     2.6919,
+     0.2418,
+     0.9703,
+     1
+    ]
+   },
+   "adaptive": {
+    "prog": 144.8,
+    "res": 0.2544,
+    "erad": false,
+    "drug": 6000.0,
+    "end": [
+     6000.0,
+     2.6919,
+     0.2418,
+     0.9703,
+     1
+    ]
+   },
+   "none_end": [
+    6000.0,
+    2.2623,
+    0.5554,
+    0.2983,
+    0
+   ]
+  },
+  {
+   "seed": 4,
+   "cost": 0.0,
+   "kappa": 0.4,
+   "verdict": 0,
+   "constant": {
+    "prog": 82.0,
+    "res": 0.5255,
+    "erad": false,
+    "end": [
+     6000.0,
+     2.419,
+     0.243,
+     0.9497,
+     1
+    ]
+   },
+   "adaptive": {
+    "prog": 82.0,
+    "res": 0.5255,
+    "erad": false,
+    "drug": 6000.0,
+    "end": [
+     6000.0,
+     2.419,
+     0.243,
+     0.9497,
+     1
+    ]
+   },
+   "none_end": [
+    6000.0,
+    2.2623,
+    0.5554,
+    0.2983,
+    0
+   ]
+  },
+  {
+   "seed": 1,
+   "cost": 0.3,
+   "kappa": 0.3,
+   "verdict": -1,
+   "constant": {
+    "prog": null,
+    "res": null,
+    "erad": true,
+    "end": [
+     6000.0,
+     0.0,
+     0.0,
+     0.0,
+     1
+    ]
+   },
+   "adaptive": {
+    "prog": null,
+    "res": null,
+    "erad": false,
+    "drug": 1826.1,
+    "end": [
+     6000.0,
+     0.9648,
+     0.7661,
+     0.1875,
+     0
+    ]
+   },
+   "none_end": [
+    6000.0,
+    2.1892,
+    0.7639,
+    0.0,
+    0
+   ]
+  },
+  {
+   "seed": 1,
+   "cost": 0.3,
+   "kappa": 0.4,
+   "verdict": 0,
+   "constant": {
+    "prog": null,
+    "res": null,
+    "erad": true,
+    "end": [
+     6000.0,
+     0.0,
+     0.0,
+     0.0,
+     1
+    ]
+   },
+   "adaptive": {
+    "prog": null,
+    "res": null,
+    "erad": true,
+    "drug": 680.7,
+    "end": [
+     6000.0,
+     0.0,
+     0.0,
+     0.0,
+     0
+    ]
+   },
+   "none_end": [
+    6000.0,
+    2.1892,
+    0.7639,
+    0.0,
+    0
+   ]
+  },
+  {
+   "seed": 2,
+   "cost": 0.3,
+   "kappa": 0.3,
+   "verdict": -1,
+   "constant": {
+    "prog": null,
+    "res": null,
+    "erad": true,
+    "end": [
+     6000.0,
+     0.0,
+     0.0,
+     0.0,
+     1
+    ]
+   },
+   "adaptive": {
+    "prog": null,
+    "res": null,
+    "erad": false,
+    "drug": 5526.7,
+    "end": [
+     6000.0,
+     0.7486,
+     0.7882,
+     0.0,
+     1
+    ]
+   },
+   "none_end": [
+    6000.0,
+    2.1795,
+    0.7436,
+    0.0142,
+    0
+   ]
+  },
+  {
+   "seed": 2,
+   "cost": 0.3,
+   "kappa": 0.4,
+   "verdict": 0,
+   "constant": {
+    "prog": null,
+    "res": null,
+    "erad": false,
+    "end": [
+     6000.0,
+     0.1672,
+     0.2214,
+     1.0,
+     1
+    ]
+   },
+   "adaptive": {
+    "prog": null,
+    "res": null,
+    "erad": false,
+    "drug": 776.9,
+    "end": [
+     6000.0,
+     0.5886,
+     0.9346,
+     0.0,
+     1
+    ]
+   },
+   "none_end": [
+    6000.0,
+    2.1795,
+    0.7436,
+    0.0142,
+    0
+   ]
+  },
+  {
+   "seed": 3,
+   "cost": 0.3,
+   "kappa": 0.3,
+   "verdict": -1,
+   "constant": {
+    "prog": null,
+    "res": null,
+    "erad": true,
+    "end": [
+     6000.0,
+     0.0,
+     0.0,
+     0.0,
+     1
+    ]
+   },
+   "adaptive": {
+    "prog": null,
+    "res": null,
+    "erad": false,
+    "drug": 5335.0,
+    "end": [
+     6000.0,
+     0.737,
+     0.7143,
+     0.0,
+     1
+    ]
+   },
+   "none_end": [
+    6000.0,
+    2.2098,
+    0.8165,
+    0.0,
+    0
+   ]
+  },
+  {
+   "seed": 3,
+   "cost": 0.3,
+   "kappa": 0.4,
+   "verdict": 0,
+   "constant": {
+    "prog": null,
+    "res": null,
+    "erad": false,
+    "end": [
+     6000.0,
+     0.1689,
+     0.1061,
+     1.0,
+     1
+    ]
+   },
+   "adaptive": {
+    "prog": null,
+    "res": null,
+    "erad": false,
+    "drug": 714.8,
+    "end": [
+     6000.0,
+     0.8181,
+     0.7724,
+     0.0,
+     1
+    ]
+   },
+   "none_end": [
+    6000.0,
+    2.2098,
+    0.8165,
+    0.0,
+    0
+   ]
+  },
+  {
+   "seed": 4,
+   "cost": 0.3,
+   "kappa": 0.3,
+   "verdict": -1,
+   "constant": {
+    "prog": null,
+    "res": null,
+    "erad": true,
+    "end": [
+     6000.0,
+     0.0,
+     0.0,
+     0.0,
+     1
+    ]
+   },
+   "adaptive": {
+    "prog": null,
+    "res": null,
+    "erad": false,
+    "drug": 5548.1,
+    "end": [
+     6000.0,
+     0.7206,
+     0.8882,
+     0.0,
+     1
+    ]
+   },
+   "none_end": [
+    6000.0,
+    2.2021,
+    0.7904,
+    0.0,
+    0
+   ]
+  },
+  {
+   "seed": 4,
+   "cost": 0.3,
+   "kappa": 0.4,
+   "verdict": 0,
+   "constant": {
+    "prog": null,
+    "res": null,
+    "erad": true,
+    "end": [
+     6000.0,
+     0.0,
+     0.0,
+     0.0,
+     1
+    ]
+   },
+   "adaptive": {
+    "prog": null,
+    "res": null,
+    "erad": true,
+    "drug": 68.5,
+    "end": [
+     6000.0,
+     0.0,
+     0.0,
+     0.0,
+     0
+    ]
+   },
+   "none_end": [
+    6000.0,
+    2.2021,
+    0.7904,
+    0.0,
+    0
+   ]
+  }
+ ],
+ "c0.0": {
+  "adaptive_better": 1,
+  "worse": 1,
+  "tie": 6,
+  "constant_progressed": 8,
+  "constant_progressed_mostly_resistant": 6
+ },
+ "c0.3": {
+  "adaptive_better": 0,
+  "worse": 4,
+  "tie": 4,
+  "constant_progressed": 0,
+  "constant_progressed_mostly_resistant": 0
+ },
+ "PT2-4": {
+  "c0_3": [
+   [
+    1,
+    0.1074,
+    0.0
+   ],
+   [
+    2,
+    0.1739,
+    0.0142
+   ],
+   [
+    3,
+    0.1859,
+    0.0
+   ],
+   [
+    4,
+    0.1029,
+    0.0
+   ]
+  ],
+  "c0": [
+   [
+    2,
+    0.1558,
+    0.4399
+   ],
+   [
+    1,
+    0.154,
+    0.4592
+   ],
+   [
+    4,
+    0.1735,
+    0.2983
+   ],
+   [
+    3,
+    0.1399,
+    0.1357
+   ]
+  ],
+  "pass_": true
+ },
+ "PT2-1": {
+  "pass_": true,
+  "adaptive_better": 1,
+  "worse": 1,
+  "tie": 6,
+  "constant_progressed": 8,
+  "constant_progressed_mostly_resistant": 6
+ },
+ "PT2-2": {
+  "pass_": false,
+  "adaptive_better": 0,
+  "worse": 4,
+  "tie": 4,
+  "constant_progressed": 0,
+  "constant_progressed_mostly_resistant": 0
+ },
+ "PT2-3": {
+  "pass_": true,
+  "adaptive_better": 1
+ }
+}
