@@ -48,16 +48,17 @@ def treat(A, g, arm, seed, B0, TU, kappa, cost, every=5.0):
                 eradicated=bool(m < 1.0), final_sha=state_hash(np.stack([w.A, w.g])))
 
 
-seed, cost = int(sys.argv[1]), float(sys.argv[2])
-N = int(sys.argv[3]) if len(sys.argv) > 3 else 128
-TU = float(sys.argv[4]) if len(sys.argv) > 4 else 6000.0
-t0 = time.time()
-A, g, t_grow, B0 = th.grow(seed, N, cost)
-for arm, kappa in [("none", 0.0)] + [(a, k) for k in KAPPAS for a in ("constant", "adaptive")]:
-    r = treat(A, g, arm, seed, B0, TU, kappa, cost)
-    rec = dict(seed=seed, cost=cost, N=N, tu=TU, arm=arm, kappa=kappa or None, B0=round(B0, 1), t_start=t_grow,
-               columns=["t", "burden/B0", "mean_g", "resistant_share", "drug_on"], **r)
-    with open(HERE / "t1.jsonl", "a") as f:
-        f.write(json.dumps(rec) + "\n")
-    print(seed, cost, arm, kappa, "prog", r["progression"], "res", r["resistant_at_progression"], "erad", r["eradicated"],
-          "end", r["trace"][-1], f"{time.time() - t0:.0f}s", flush=True)
+if __name__ == "__main__":
+    seed, cost = int(sys.argv[1]), float(sys.argv[2])
+    N = int(sys.argv[3]) if len(sys.argv) > 3 else 128
+    TU = float(sys.argv[4]) if len(sys.argv) > 4 else 6000.0
+    t0 = time.time()
+    A, g, t_grow, B0 = th.grow(seed, N, cost)
+    for arm, kappa in [("none", 0.0)] + [(a, k) for k in KAPPAS for a in ("constant", "adaptive")]:
+        r = treat(A, g, arm, seed, B0, TU, kappa, cost)
+        rec = dict(seed=seed, cost=cost, N=N, tu=TU, arm=arm, kappa=kappa or None, B0=round(B0, 1), t_start=t_grow,
+                   columns=["t", "burden/B0", "mean_g", "resistant_share", "drug_on"], **r)
+        with open(HERE / "t1.jsonl", "a") as f:
+            f.write(json.dumps(rec) + "\n")
+        print(seed, cost, arm, kappa, "prog", r["progression"], "res", r["resistant_at_progression"], "erad", r["eradicated"],
+              "end", r["trace"][-1], f"{time.time() - t0:.0f}s", flush=True)
