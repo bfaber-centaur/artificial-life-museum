@@ -1,7 +1,7 @@
 {
   "ledger": "research/claims.md",
-  "ledger_sha256": "7a5971a25ae4213aa801ba090f2e515995cae7cf389c0b1066f341d0fe00fe50",
-  "ledger_commit": "fd0ddc3",
+  "ledger_sha256": "10c7256139c9cc5a936b3793b7c8612fcf0b7707020f3c398794d97babbc6835",
+  "ledger_commit": "c0c77b2",
   "conventions_sha256": "0e237384e0425b3c325229cf650ab6f9807fb08c1bedc991433b54b13c2eb02f",
   "claims": {
     "C001": {
@@ -656,6 +656,35 @@
         "replicators",
         "so-what-evolution"
       ]
+    },
+    "C125": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "replicators"
+      ]
+    },
+    "C126": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "replicators"
+      ]
+    },
+    "C127": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "replicators"
+      ]
+    },
+    "C128": {
+      "status": "OBSERVED",
+      "status_text": "OBSERVED",
+      "rooms": [
+        "replicators",
+        "so-what-evolution"
+      ]
     }
   },
   "sources": {
@@ -816,6 +845,8 @@
       "research/experiments/REPLICATORS/replicate3d.jsonl",
       "research/experiments/REPLICATORS/therapy.jsonl",
       "research/experiments/REPLICATORS/therapy.py",
+      "research/experiments/REPLICATORS/therapy2.jsonl",
+      "research/experiments/REPLICATORS/therapy2.py",
       "research/experiments/REPLICATORS/therapy_cost.jsonl",
       "research/experiments/REPLICATORS/therapy_long.jsonl",
       "research/experiments/REPLICATORS/tree.py",
@@ -834,7 +865,12 @@
       "research/gallery/exhibits/G067-drug-against-fast-dividers/provenance.json",
       "research/gallery/exhibits/G067-drug-against-fast-dividers/therapy.mp4",
       "research/gallery/exhibits/G068-cure-or-control/provenance.json",
-      "research/gallery/exhibits/G069-a-price-for-resistance/provenance.json"
+      "research/gallery/exhibits/G069-a-price-for-resistance/provenance.json",
+      "research/gallery/exhibits/G070-off-the-drug/provenance.json",
+      "research/gallery/exhibits/G071-how-far-to-push/provenance.json",
+      "research/gallery/exhibits/G072-two-drugs/provenance.json",
+      "research/gallery/exhibits/G073-two-drugs-steering/bind.mp4",
+      "research/gallery/exhibits/G073-two-drugs-steering/provenance.json"
     ],
     "evolution-soup": [
       "research/experiments/SOUP/SOUP.md",

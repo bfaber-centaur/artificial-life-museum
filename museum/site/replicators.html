@@ -245,9 +245,83 @@ two strengths of cost, reran every dose, and ran the weakest dose three times lo
   relapse, because in our toy nothing relapsed. The resistant remnant under constant dosing
   just sat there, small, for 6000 time units. In patients the case for adaptive therapy is that
   the resistant remnant eventually regrows and kills; a toy where it doesn't will always
-  favour the bigger hammer. The next experiment would give resistant cells a way to regrow
-  slowly, and see whether a sensitive, controlled tumour then outlasts a small resistant
-  one.</p>
+  favour the bigger hammer. So we took the drug away, varied the pauses, and brought in a
+  second drug.</p>
+</div>
+
+<h3>Off the drug</h3>
+<figure class="evidence">
+  <img src="../../research/gallery/exhibits/G070-off-the-drug/holiday.png" width="1375" height="924" loading="lazy"
+       alt="Six panels in three rows: no cost, cost 0.1, cost 0.3. Green lines show tumours whose drug stopped at time 2000, dashed orange lines the same tumours with the drug kept on. With no cost the green lines jump to the top at once. With cost 0.1 they sit low until 2000, then shoot up to more than twice the starting burden within a few hundred time units, while their resistant share falls back toward zero. With cost 0.3 the green lines stay at the bottom and end before 4300.">
+  <figcaption><strong>Stop the drug at 2000 time units.</strong> Same weak drug (κ 0.3), four
+  seeds per row.
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G070-off-the-drug/provenance.json">provenance</a>.</figcaption>
+</figure>
+<div class="label">
+  <p class="obs"><strong>What you see.</strong> With a mild price on resistance, the remnant comes
+  roaring back once the drug stops, but it comes back red: fast, sensitive cells take the space
+  again. With a stiff price, the remnant never recovers and fades away with no drug at all.</p>
+  <p class="int"><strong>What the ledger says.</strong> At cost 0.1 every remnant was back at its
+  starting size 50–500 time units after the drug stopped, and by the end only 1–20% of it was
+  resistant. At cost 0.3 both remnants died out on their own, 615 and 2235 time units after the
+  last dose <a class="claim" href="claims.html#C125" title="Taken off the drug, the resistant remnant&#x27;s fate depends on the cost of resistance: at cost 0.1 every remnant relapsed (back to the starting burden 50–500 tu after the drug stopped) and the regrown tumour became mostly sensitive again (resistant share 0.01–0.20 at 6000 tu); at cost 0.3 both remnants died out on their own, 615 and 2235 tu after the drug stopped"><span class="cid">C125</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>. So this toy can relapse after all, and the relapse is a tumour the
+  same drug can hit again.</p>
+</div>
+
+<h3>How far to push</h3>
+<figure class="evidence">
+  <img src="../../research/gallery/exhibits/G071-how-far-to-push/thresholds.png" width="1485" height="660" loading="lazy"
+       alt="Eight panels in four columns, one per pause threshold of 0.3, 0.5, 0.7 and 0.9 times the starting burden. Top row: burden over 4000 time units; the lower the threshold, the lower the band the lines move in. Bottom row: resistant share; at 0.3 most lines climb to one, at 0.5 one does, at 0.7 and 0.9 they stay near zero.">
+  <figcaption><strong>Pause when the tumour reaches the orange line, resume at its starting
+  size.</strong> Cost 0.3, drug A κ 0.3, four seeds.
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G071-how-far-to-push/provenance.json">provenance</a>.</figcaption>
+</figure>
+<div class="label">
+  <p class="int"><strong>What the ledger says.</strong> Push the tumour down to 30% before
+  pausing and it stays small, about 0.4–0.5 of its starting size, but three of four end entirely
+  resistant. Pause at 70% or 90% and it stays sensitive but almost full size. Pausing at half,
+  the rule used in the prostate-cancer pilot, sits in between: about 0.7 of the starting size and
+  three of four still sensitive <a class="claim" href="claims.html#C126" title="How far adaptive dosing lets the tumour shrink trades size against resistance: pausing at 0.3 of the starting burden kept the tumour at a mean 0.40–0.54 but 3 of 4 ended fully resistant; pausing at 0.5 kept it at 0.67–0.77 and 3 of 4 ended sensitive; pausing at 0.7 or 0.9 kept it near 0.9–1.0 and fully sensitive throughout (resistant share at most 0.22)"><span class="cid">C126</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>. Small or sensitive, but not both.</p>
+</div>
+
+<h3>A second drug</h3>
+<p>Resistance to our drug means being slow. So we invented drug B, which hits slow matter and
+spares fast matter: the mirror image. Borrowing from pest control, Gatenby, Brown and Vincent
+(2009) called this an <em>evolutionary double bind</em>: resisting one threat leaves you
+exposed to the other. We tried drug B alone, both drugs at once, swapping every 100 time units, and
+<em>steering</em>: give drug A, and switch to drug B only while the tumour is mostly
+resistant.</p>
+<figure class="vitrine">
+  <img src="../../research/gallery/exhibits/G073-two-drugs-steering/bind.gif" width="820" height="425" loading="lazy"
+       alt="Three square worlds side by side. Left, drug A only: the tumour is knocked down to two or three large round cells, which turn blue and keep dividing. Middle, drug B only: red tissue fills the world. Right, steering: the same few cells as on the left; when they turn blue a short pulse of drug B is given, the blue cells vanish and the last grey cell dies soon after. A burden chart runs underneath with one narrow shaded band where drug B was given.">
+  <figcaption><strong>Drug A only, drug B only, steering</strong> (cost 0.3, seed 0). Colour is the
+  genome (blue slow, red fast), brightness the matter. Shading in the chart: the steering arm
+  gives drug B.
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G073-two-drugs-steering/bind.mp4">Full video</a> ·
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G073-two-drugs-steering/provenance.json">provenance</a>.</figcaption>
+</figure>
+<figure class="evidence">
+  <img src="../../research/gallery/exhibits/G072-two-drugs/bind.png" width="1375" height="616" loading="lazy"
+       alt="A grid of markers: five schedules by two conditions, four seeds each. Without a cost of resistance almost every marker is an orange dot for progressed, except one row of rings and a single cross for both drugs together. With cost 0.3, drug A only has two crosses and two rings, drug B only four orange dots, both drugs four crosses, alternating three crosses and a dot, and steering four crosses with drug B used 1% of the time.">
+  <figcaption><strong>Every two-drug run.</strong> X: eradicated; dot: progressed; ring: held.
+  <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/gallery/exhibits/G072-two-drugs/provenance.json">provenance</a>.</figcaption>
+</figure>
+<div class="label">
+  <p class="obs"><strong>What you see.</strong> Drug A knocks the tumour down to a few large
+  cells, and they turn blue: slow, and safe from drug A. Drug B on its own lets the red tissue
+  fill the world. Steering gives drug B for a moment once the cells turn blue; the blue cells
+  vanish, and drug A finishes off the last one.</p>
+  <p class="int"><strong>What the ledger says.</strong> Without a price on resistance, no schedule
+  cured more than one tumour in four, and every one-drug-at-a-time schedule progressed. With the
+  price, both drugs together cured 4 of 4, alternation 3 of 4, drug A alone 2 of 4, drug B alone
+  none, and steering 4 of 4 <a class="claim" href="claims.html#C127" title="A second drug that hits slow matter only helps if resistance has a cost: without the cost, no two-drug schedule eradicated more than 1 of 4 tumours and every schedule that used one drug at a time progressed; with cost 0.3, both drugs together eradicated 4 of 4, alternation 3 of 4, steering 4 of 4, drug A alone 2 of 4 and drug B alone 0 of 4"><span class="cid">C127</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>. Steering cured the two tumours drug A could not
+  finish with drug B on for just 14 and 66 time units, under 2% of the run <a class="claim" href="claims.html#C128" title="Steering needs very little of the second drug: with cost 0.3 it eradicated the two tumours that drug A alone left as fully resistant remnants (seeds 0, 1) with drug B on for 14 and 66 tu in total (0.4% and 1.6% of the run), and matched drug A alone where A sufficed (seed 2 with 5 tu of B, seed 3 with none)"><span class="cid">C128</span><span class="badge s-OBSERVED" title="OBSERVED">observed</span></a>.</p>
+  <p class="open"><strong>What this does and does not show.</strong> In this toy, the
+  double bind works only when resistance is costly, the same condition Gatenby and colleagues
+  put at its heart. And a little of the second drug, at the right moment, does as well as
+  giving both drugs all the time, which in a patient would mean twice the side effects. Drug B
+  is our invention: real drugs with this mirror-image property are rare and a subject of active
+  research (Acar and colleagues, 2020). This is an analogy, not a treatment plan.</p>
 </div>
 
 <h2>Sources</h2>
@@ -262,13 +336,19 @@ two strengths of cost, reran every dose, and ran the weakest dose three times lo
   <li><a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/REPLICATORS/therapy.py">The therapy toy</a> and
       <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/REPLICATORS/therapy.jsonl">every therapy run</a>;
       with a cost of resistance: <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/REPLICATORS/therapy_cost.jsonl">all doses</a> and
-      <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/REPLICATORS/therapy_long.jsonl">the long runs</a></li>
+      <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/REPLICATORS/therapy_long.jsonl">the long runs</a>;
+      round 3 (holidays, thresholds, two drugs): <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/REPLICATORS/therapy2.py">the code</a> and
+      <a class="src" href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/experiments/REPLICATORS/therapy2.jsonl">every run</a></li>
+  <li>Gatenby, Brown &amp; Vincent (2009) <a href="https://doi.org/10.1158/0008-5472.CAN-09-1354">Cancer Res. 69:7499</a> ·
+      Basanta, Gatenby &amp; Anderson (2012) <a href="https://doi.org/10.1021/mp200458e">Mol. Pharm. 9:914</a> ·
+      Acar et al. (2020) <a href="https://doi.org/10.1038/s41467-020-15596-z">Nat. Commun. 11:1923</a> ·
+      Zhang et al. (2017) <a href="https://doi.org/10.1038/s41467-017-01968-5">Nat. Commun. 8:1816</a></li>
 </ul>
 
 <nav class="walk" aria-label="Tour"><a class="prev" href="other-models.html"><small>Back</small>East wing III: cousins from other models</a><a class="next" href="evolution-soup.html"><small>Next room</small>East wing V: evolution in a soup</a></nav>
 </main>
 <footer class="site">
-  <p>Claim statuses read from <code>research/claims.md</code> (sha256 <code>7a5971a25ae4</code>) when this page was built.</p>
+  <p>Claim statuses read from <code>research/claims.md</code> (sha256 <code>10c7256139c9</code>) when this page was built.</p>
   <p>Every picture here is a recorded simulation or a figure drawn from committed data. Statuses
   are the claims ledger's, not the museum's: a badge never says more than
   <a href="https://github.com/bfaber-centaur/artificial-life-museum/blob/main/research/claims.md">research/claims.md</a> does.</p>

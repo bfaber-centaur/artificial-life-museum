@@ -1,0 +1,16 @@
+{
+ "exhibit": "G070",
+ "title": "Off the drug",
+ "claims": [
+  "C125"
+ ],
+ "media": [
+  "holiday.png"
+ ],
+ "data": "research/experiments/REPLICATORS/therapy2.jsonl (+ therapy_long.jsonl for the drug-kept-on lines)",
+ "commands": [
+  "chart_round3.py OUT_DIR (writes holiday.png)"
+ ],
+ "view": "rows: cost 0, 0.1, 0.3; left: burden / B0 vs time since treatment (green: drug A stopped at 2000 tu, dotted vertical line; dashed orange: same tumours with the drug kept on, from therapy_long.jsonl); right: share of matter at genome < 0.4 after the stop; kappa 0.3, four seeds",
+ "rule": "GenomeLenia (modified rule) + drug A step A <- A (1 - dt kA g) + drug B step A <- A (1 - dt kB (1 - g)) + crowding cost"
+}

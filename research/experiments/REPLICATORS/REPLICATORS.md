@@ -117,3 +117,19 @@ regrows under the drug, while adaptive dosing holds a tumour about four times la
 c 0.3 stays sensitive (C124). The mechanism works; the payoff (a delayed relapse) is missing because
 nothing relapses. Next: let slow matter regrow, or take the remnant off the drug.
 Chart `chart_cost.py` (G069).
+
+## Therapy room round 3 (C125–C128, 2026-11-17)
+
+`therapy2.py` runs the same tumour, drug and cost with a policy that picks which drugs are on each
+step, and adds drug B (`A ← A (1 − dt κB (1 − g))`, hits slow matter). Experiments, all in
+`therapy2.jsonl`: `holiday` (drug A to 2000 tu, then off; 6000 tu; costs 0, 0.1, 0.3), `threshold`
+(adaptive with pause at 0.3/0.5/0.7/0.9 B0; cost 0.3; 4000 tu), `bind` (A, B, A+B, alternate every
+100 tu, steer: B while resistant share > 0.5 until < 0.2; costs 0 and 0.3; 4000 tu). With drug A only,
+`therapy2.run` gives bit-identical results to `therapy.treat` (test).
+
+Findings: off the drug, a cost-0.1 remnant relapses within 50–500 tu and comes back sensitive, a
+cost-0.3 remnant dies out (C125). Pausing deeper keeps the tumour smaller but resistant, pausing
+shallower keeps it sensitive but large (C126). A second drug helps only with a cost of resistance;
+then steering cures 4/4 with drug B on under 2% of the time (C127, C128). Charts `chart_round3.py`
+(G070–G072), film `film_bind.py 0 OUT` (G073).
+

@@ -164,6 +164,7 @@ Euler + clip [0, 1], float64, periodic 128 × 128 torus, no intervention, determ
 | "So what?" wing 2026-11-15 (`research/experiments/SOWHAT/`, gallery G062–G065, rooms 85–87) | C112 / C113 / C114 / C115 |
 | Population-dynamics round 2026-11-15 (`SOUP/neutral.py`, `REPLICATORS/therapy.py`, gallery G066–G068, rooms 77, 76, 85) | C116 / C117 / C118 / C119 / C120 / C121 |
 | Population-dynamics round, cost of resistance, 2026-11-15 (`REPLICATORS/therapy.py` with `crowding_cost`, gallery G069, rooms 76, 85) | C122 / C123 / C124; history line on C121 |
+| Therapy room round 3, 2026-11-17 (`REPLICATORS/therapy2.py`: drug holidays, adaptive thresholds, a second drug; gallery G070–G073, rooms 76, 85) | C125 / C126 / C127 / C128 |
 
 ## Claims
 
@@ -2971,3 +2972,79 @@ CIRCLER (net < 0.1 and path speed > 0.2), STATIC (path speed < 0.02), OTHER. Tab
 - **Prior literature:** CONSISTENT WITH the mechanism (competition suppresses resistant cells while the drug is paused; Gatenby et al. 2009; Zhang et al. 2017), not with the clinical payoff, which our toy cannot test
 - **History:**
   - 2026-11-15 — OBSERVED — cost-of-resistance follow-up.
+
+### C125 — Taken off the drug, the resistant remnant's fate depends on the cost of resistance: at cost 0.1 every remnant relapsed (back to the starting burden 50–500 tu after the drug stopped) and the regrown tumour became mostly sensitive again (resistant share 0.01–0.20 at 6000 tu); at cost 0.3 both remnants died out on their own, 615 and 2235 tu after the drug stopped
+
+- **Status:** OBSERVED
+- **Owner lane:** therapy room round 3 (2026-11-17, Bobby: "give the therapy room some leash")
+- **Sources:** `research/experiments/REPLICATORS/therapy2.py` (experiment "holiday"), `therapy2.jsonl`, `summarize.py` (C125–C128 block); chart `chart_round3.py` → G070
+- **Specimen / version:** as C119
+- **Simulator / version:** as C122; `therapy2.run` (same bookkeeping as `therapy.treat`, policy chooses which drugs are on each step); drug B step `A ← A (1 − dt κB (1 − g))`
+- **Parameters:** as C122; drug A κ 0.3 from the start of treatment until T_OFF = 2000 tu, then off; 6000 tu; cost 0, 0.1, 0.3; seeds 0–3
+- **Intervention:** drug holiday after 2000 tu of constant dosing
+- **Metric:** first sampled time after 2000 with burden ≥ B0 (`back_to_B0`); eradication time; resistant share at 6000 tu and mean over 5000–6000
+- **Result:** cost 0.1, seeds 0–3: burden at 2000 0.17, 0.20, 0.36, 0.18 B0 (resistant 0.96, 0, 1, 1); back at B0 at t 2060, 2050, 2500, 2300; progression 2065, 2053, 2548, 2333; at 6000 resistant 0.01, 0.10, 0.20, 0.10 (mean over the last 1000 tu 0.00–0.16). Cost 0.3: seeds 2, 3 were already eradicated under the drug (t 805, 725); seeds 0, 1 (0.17 B0, fully resistant at 2000) died out at t 2615 and 4235 without any drug. No cost: all four tumours had already progressed under the drug; off it they grew to 2.3–2.8 B0 and their resistant share fell to 0.05–0.37
+- **Run IDs:** `therapy2.jsonl` rows with exp "holiday"; up to t 2000 the traces equal the constant arm in `therapy_long.jsonl` (checked)
+- **Search / parameter bounds:** one stop time, one dose, three costs, four seeds
+- **Reproduction command:** `cd research/experiments/REPLICATORS && ../../../.venv/bin/python therapy2.py holiday SEED COST 6000` (SEED 0–3, COST 0, 0.1, 0.3); `summarize.py`
+- **Known caveats:** as C119 and C122. The re-sensitising after relapse comes from mutation plus the crowding cost: mutation keeps making fast genomes and, without the drug, they win the space. Two remnants at cost 0.3 is a small sample
+- **Prior literature:** RELATED: tumours that relapse after a drug holiday can respond again to the same drug (re-challenge) when resistance carries a cost; Gatenby, Brown & Vincent 2009 argue that the cost of resistance, not resistance itself, limits control
+- **History:**
+  - 2026-11-17 — OBSERVED — therapy room round 3.
+
+### C126 — How far adaptive dosing lets the tumour shrink trades size against resistance: pausing at 0.3 of the starting burden kept the tumour at a mean 0.40–0.54 but 3 of 4 ended fully resistant; pausing at 0.5 kept it at 0.67–0.77 and 3 of 4 ended sensitive; pausing at 0.7 or 0.9 kept it near 0.9–1.0 and fully sensitive throughout (resistant share at most 0.22)
+
+- **Status:** OBSERVED
+- **Owner lane:** therapy room round 3 (2026-11-17)
+- **Sources:** as C125 (experiment "threshold"); chart G071
+- **Specimen / version:** as C119
+- **Simulator / version:** as C122; `therapy2.run` (same bookkeeping as `therapy.treat`, policy chooses which drugs are on each step); drug B step `A ← A (1 − dt κB (1 − g))`
+- **Parameters:** cost 0.3, drug A κ 0.3, adaptive: off when burden ≤ LOW · B0, on again at ≥ 1.0 B0, LOW ∈ {0.3, 0.5, 0.7, 0.9}; 4000 tu; seeds 0–3
+- **Intervention:** the pause threshold LOW
+- **Metric:** time-mean burden, time-mean and final resistant share, drug-on fraction, progression (first step above 1.25 B0) and time spent above 1.25 B0
+- **Result:** LOW 0.3: mean burden 0.44, 0.44, 0.40, 0.54; final resistant 0, 1, 1, 1; drug on 37–96%. LOW 0.5: 0.77, 0.67, 0.72, 0.70; final resistant 0, 1, 0, 0.001; drug on 63–93%. LOW 0.7: 0.89–0.92; final resistant 0–0.22; drug on 85–90%. LOW 0.9: 0.97–0.99; final resistant 0; drug on 72–76%. Formal progressions: 0 at LOW 0.3 and 0.5, 2 of 4 at 0.7 (t 600, 3252), 3 of 4 at 0.9 (t 869, 1044, 1935), each a single spike (maximum 1.27 B0, at most one 5-tu sample above 1.25) while the burden hovers at the switch-on level
+- **Run IDs:** `therapy2.jsonl` rows with exp "threshold"
+- **Search / parameter bounds:** four thresholds, one switch-on level, one dose, one cost, four seeds
+- **Reproduction command:** `therapy2.py threshold SEED 0.3 4000`
+- **Known caveats:** as C119 and C122. Our "progression" rule (one step above 1.25 B0) counts noise spikes when the tumour is held near its starting size; we report both and do not read the 0.7/0.9 progressions as relapse
+- **Prior literature:** CONSISTENT WITH the clinical rule's choice: the Zhang et al. 2017 pilot paused at half the starting PSA, the middle of our range
+- **History:**
+  - 2026-11-17 — OBSERVED — therapy room round 3.
+
+### C127 — A second drug that hits slow matter only helps if resistance has a cost: without the cost, no two-drug schedule eradicated more than 1 of 4 tumours and every schedule that used one drug at a time progressed; with cost 0.3, both drugs together eradicated 4 of 4, alternation 3 of 4, steering 4 of 4, drug A alone 2 of 4 and drug B alone 0 of 4
+
+- **Status:** OBSERVED
+- **Owner lane:** therapy room round 3 (2026-11-17)
+- **Sources:** as C125 (experiment "bind"); chart G072
+- **Specimen / version:** as C119
+- **Simulator / version:** as C122; `therapy2.run` (same bookkeeping as `therapy.treat`, policy chooses which drugs are on each step); drug B step `A ← A (1 − dt κB (1 − g))`
+- **Parameters:** κA = κB = 0.3; 4000 tu; cost 0 and 0.3; seeds 0–3. Schedules: A only; B only; A+B (both always on: together they remove 0.3 per tu from every genome); alternate (A for 100 tu, then B for 100 tu); steer (A; switch to B when the resistant share exceeds 0.5, back to A when it falls below 0.2)
+- **Intervention:** the schedule
+- **Metric:** eradicated (burden 0) by 4000 tu, progression, drug-on time per drug (counted until 4000 tu, also after eradication)
+- **Result:** no cost: A 0/4 eradicated, 4/4 progressed (ending 0.96–1.0 resistant); B 0/4, 4/4 progressed (t 5–64, ending sensitive); A+B 1/4 eradicated (t 1880), 3/4 held at 0.17 B0 fully resistant; alternate 0/4, 4/4 progressed (t 100–127); steer 0/4, 4/4 progressed (t 107–2772), ending at 0.94–1.22 B0 with B on 16–36% of the time. Cost 0.3: A 2/4 (t 725, 805; the other two held at 0.17 B0, fully resistant); B 0/4, 4/4 progressed (t 33–59); A+B 4/4 (t 10–80); alternate 3/4 (t 255–470; seed 3 progressed at 153 and ended at 2.46 B0); steer 4/4 (t 535–1185)
+- **Run IDs:** `therapy2.jsonl` rows with exp "bind"
+- **Search / parameter bounds:** five schedules, one dose per drug, two costs, four seeds; steering thresholds and alternation period not tuned
+- **Reproduction command:** `therapy2.py bind SEED COST 4000` (COST 0, 0.3)
+- **Known caveats:** as C119 and C122. "A+B" is a bigger hammer, not a cleverer schedule: it kills every genome at the full rate. Drug B is our invention; it is "collateral sensitivity" by construction
+- **Prior literature:** CONSISTENT WITH the evolutionary double bind (Gatenby, Brown & Vincent 2009; Basanta et al. 2012): resistance to one therapy should leave cells exposed to another, and robust control requires a cost of resistance
+- **History:**
+  - 2026-11-17 — OBSERVED — therapy room round 3.
+
+### C128 — Steering needs very little of the second drug: with cost 0.3 it eradicated the two tumours that drug A alone left as fully resistant remnants (seeds 0, 1) with drug B on for 14 and 66 tu in total (0.4% and 1.6% of the run), and matched drug A alone where A sufficed (seed 2 with 5 tu of B, seed 3 with none)
+
+- **Status:** OBSERVED
+- **Owner lane:** therapy room round 3 (2026-11-17)
+- **Sources:** as C127; film `film_bind.py` → G073
+- **Specimen / version:** as C119
+- **Simulator / version:** as C122; `therapy2.run` (same bookkeeping as `therapy.treat`, policy chooses which drugs are on each step); drug B step `A ← A (1 − dt κB (1 − g))`
+- **Parameters:** as C127, cost 0.3
+- **Intervention:** steering vs drug A only, from the identical pre-treatment state and identical mutation noise
+- **Metric:** eradication time, drug B time, sampled times at which B was on
+- **Result:** seed 0: B on at t 650–660, eradicated at 1185 (A alone: remnant 0.17 B0, 100% resistant, to 4000); seed 1: B on between 420 and 530, eradicated at 535 (A alone: remnant 0.17 B0); seed 2: B on at 840 for 5 tu, eradicated at 845 (A alone 805); seed 3: no B, eradicated at 725 (same as A alone)
+- **Run IDs:** `therapy2.jsonl` rows with exp "bind", arm "steer" and "A"; the film re-runs each arm and asserts its final hash
+- **Search / parameter bounds:** as C127
+- **Reproduction command:** as C127; `film_bind.py 0 OUT_DIR`
+- **Known caveats:** as C127. Our reading, not tested separately: a short pulse suffices because drug B removes slow matter at about 0.27 per tu, and at cost 0.3 slow survivors cannot regrow afterwards (compare C125); without the cost (C127) steering only delayed progression in one seed of four
+- **Prior literature:** CONSISTENT WITH evolutionary steering toward collateral sensitivity (Acar et al. 2020), in outcome only
+- **History:**
+  - 2026-11-17 — OBSERVED — therapy room round 3.

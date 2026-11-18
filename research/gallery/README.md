@@ -75,6 +75,10 @@ made of, ten times per unit of time. Some of them travel; one of them never chan
 | [G067](#g067--a-drug-against-fast-dividers) | A drug against fast dividers (animated; *modified rule: GenomeLenia*) | therapy toy, κ 0.5, seed 0 | 2026-11-15 |
 | [G068](#g068--cure-or-control) | Cure or control (chart; *modified rule: GenomeLenia*) | every therapy run | 2026-11-15 |
 | [G069](#g069--a-price-for-resistance) | A price for resistance (chart; *modified rule: GenomeLenia*) | therapy toy with a crowding cost, κ 0.3, 6000 tu | 2026-11-15 |
+| [G070](#g070--off-the-drug) | Off the drug (chart; *modified rule: GenomeLenia*) | drug stopped at 2000 tu, three costs | 2026-11-17 |
+| [G071](#g071--how-far-to-push) | How far to push (chart; *modified rule: GenomeLenia*) | adaptive pause thresholds 0.3–0.9 | 2026-11-17 |
+| [G072](#g072--two-drugs) | Two drugs (chart; *modified rule: GenomeLenia*) | five two-drug schedules × two costs | 2026-11-17 |
+| [G073](#g073--two-drugs-steering) | Two drugs, steering (animated; *modified rule: GenomeLenia*) | A only, B only, steering; cost 0.3, seed 0 | 2026-11-17 |
 
 ### G001 — Four ways to move
 
@@ -1013,7 +1017,7 @@ Film: [`epidemic.mp4`](exhibits/G064-same-disease-three-worlds/epidemic.mp4) ·
 - **Observation (claims C114, C115).** Left: every run of G064's setting. Right: final size
   against the transmission chance β, five runs per value.
 
-## Population dynamics (G066–G069)
+## Population dynamics (G066–G073)
 
 ### G066 — Fitness measured against luck
 
@@ -1057,6 +1061,43 @@ Film: [`therapy.mp4`](exhibits/G067-drug-against-fast-dividers/therapy.mp4) ·
   dosing leaves a small fully resistant remnant, adaptive dosing a larger tumour that at cost
   0.3 stays sensitive.
 - **Caveats.** The form of the cost is our choice; the remnant was never taken off the drug.
+
+### G070 — Off the drug
+
+![Burden and resistant share for tumours whose drug stopped at 2000 tu, three costs of resistance; at cost 0.1 the remnant regrows and turns sensitive, at cost 0.3 it dies out](exhibits/G070-off-the-drug/holiday.png)
+
+[`provenance.json`](exhibits/G070-off-the-drug/provenance.json)
+
+- **Observation (claim C125).** Drug A (κ 0.3) for 2000 tu, then a drug holiday; dashed orange:
+  the same tumours with the drug kept on.
+
+### G071 — How far to push
+
+![Four columns of burden and resistant share for adaptive pause thresholds 0.3, 0.5, 0.7 and 0.9; lower thresholds keep the tumour smaller but more resistant](exhibits/G071-how-far-to-push/thresholds.png)
+
+[`provenance.json`](exhibits/G071-how-far-to-push/provenance.json)
+
+- **Observation (claim C126).** Adaptive drug A, cost 0.3: small or sensitive, not both.
+
+### G072 — Two drugs
+
+![Outcome grid: five drug schedules by two costs, four seeds each; with the cost, steering and both-drugs eradicate every tumour](exhibits/G072-two-drugs/bind.png)
+
+[`provenance.json`](exhibits/G072-two-drugs/provenance.json)
+
+- **Observation (claims C127, C128).** Drug B removes slow matter (∝ 1 − g); steering switches to
+  it only while the tumour is mostly resistant.
+- **Caveats.** Drug B is invented; "both drugs" kills every genome at the full rate.
+
+### G073 — Two drugs, steering
+
+![Three worlds: drug A leaves blue survivors, drug B lets red tissue fill the world, steering removes the blue survivors with a short pulse of drug B](exhibits/G073-two-drugs-steering/bind.gif)
+
+Film: [`bind.mp4`](exhibits/G073-two-drugs-steering/bind.mp4) ·
+[`provenance.json`](exhibits/G073-two-drugs-steering/provenance.json)
+
+- **Observation (claim C128).** Cost 0.3, seed 0, first 1600 tu; each arm re-run in full and its
+  final hash checked against `therapy2.jsonl`.
 
 ## Field note, 7 October 2026
 

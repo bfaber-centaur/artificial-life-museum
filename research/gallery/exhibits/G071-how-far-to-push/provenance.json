@@ -1,0 +1,16 @@
+{
+ "exhibit": "G071",
+ "title": "How far to push",
+ "claims": [
+  "C126"
+ ],
+ "media": [
+  "thresholds.png"
+ ],
+ "data": "research/experiments/REPLICATORS/therapy2.jsonl",
+ "commands": [
+  "chart_round3.py OUT_DIR (writes thresholds.png)"
+ ],
+ "view": "one column per pause threshold LOW (0.3, 0.5, 0.7, 0.9 x B0, dashed orange); top: burden / B0 over 4000 tu, dotted 1.0 (drug back on) and 1.25 (progression); bottom: resistant share; cost 0.3, kappa 0.3, four seeds",
+ "rule": "GenomeLenia (modified rule) + drug A step A <- A (1 - dt kA g) + drug B step A <- A (1 - dt kB (1 - g)) + crowding cost"
+}

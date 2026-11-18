@@ -381,6 +381,22 @@ that cite them say so in their **Prior literature** field.
   kept stable oscillations; median TTP at least 27 months vs ~16.5 with standard dosing;
   cumulative drug 47% of standard; compared with published studies and a contemporaneous
   population, not randomised).
+- **[GatenbyBrownVincent2009]** R. A. Gatenby, J. Brown, T. Vincent. *Lessons from applied ecology:
+  cancer control using an evolutionary double bind.* Cancer Res. 69:7499–7502.
+  [doi:10.1158/0008-5472.CAN-09-1354](https://doi.org/10.1158/0008-5472.CAN-09-1354). Read: abstract (long-term
+  control is limited not by resistance but by its phenotypic cost; robust control when resistance
+  to one therapy reduces fitness in the original niche, "an evolutionary double bind"). Added
+  2026-11-17 for C125+.
+- **[Basanta2012]** D. Basanta, R. A. Gatenby, A. R. A. Anderson. *Exploiting evolution to treat drug
+  resistance: combination therapy and the double bind.* Mol. Pharm. 9:914–921.
+  [doi:10.1021/mp200458e](https://doi.org/10.1021/mp200458e). Read: abstract (PubMed 22369188: two therapies
+  combined so that resistance to one leaves cells more susceptible to the other; evolutionary game
+  theory model). Added 2026-11-17.
+- **[Acar2020]** A. Acar, D. Nichol, J. Fernandez-Mateos, G. D. Cresswell et al. *Exploiting
+  evolutionary steering to induce collateral drug sensitivity in cancer.* Nat. Commun. 11:1923.
+  [doi:10.1038/s41467-020-15596-z](https://doi.org/10.1038/s41467-020-15596-z). Read: abstract (lung cancer model;
+  steering shifts clonal composition toward collateral sensitivity and proliferative costs).
+  Added 2026-11-17.
 - **[Wolfram2024a]** S. Wolfram. *Why does biological evolution work? A minimal model for
   biological evolution and other adaptive processes.* Stephen Wolfram Writings, 3 May 2024.
   [link](https://writings.stephenwolfram.com/2024/05/why-does-biological-evolution-work-a-minimal-model-for-biological-evolution-and-other-adaptive-processes/).
