@@ -63,3 +63,40 @@ def test_crowding_cost_hits_slow_matter_in_crowds_and_is_off_by_default():
     therapy.crowding_cost(sparse, 0.3)
     loss_sparse = 1 - sparse.A.mean() / (0.1 * therapy.CARRY)
     assert 0 < loss_sparse < 1 - w.A[:, 2:14].mean() / therapy.CARRY  # less crowded, smaller cost
+
+
+import therapy2  # noqa: E402
+
+
+def test_therapy2_policies():
+    st = {}
+    assert therapy2.holiday(1999.9, 1.0, 0.0, st) == (True, False)
+    assert therapy2.holiday(2000.0, 1.0, 0.0, st) == (False, False)
+    p, st = therapy2.adaptive(0.5), {}
+    assert p(0, 1.0, 0, st) == (True, False)
+    assert p(1, 0.5, 0, st) == (False, False)   # paused at LOW
+    assert p(2, 0.9, 0, st) == (False, False)   # stays off until back at 1.0
+    assert p(3, 1.0, 0, st) == (True, False)
+    assert therapy2.alternate(50, 1, 0, {}) == (True, False) and therapy2.alternate(150, 1, 0, {}) == (False, True)
+    st = {}
+    assert therapy2.steer(0, 1, 0.4, st) == (True, False)
+    assert therapy2.steer(1, 1, 0.6, st) == (False, True)    # mostly resistant: drug B
+    assert therapy2.steer(2, 1, 0.3, st) == (False, True)    # hysteresis
+    assert therapy2.steer(3, 1, 0.1, st) == (True, False)
+
+
+@needs_refs
+def test_drug_b_hits_slow_genomes_and_matches_treat_for_drug_a():
+    rng = np.random.default_rng(2)
+    A = rng.uniform(0, 0.5, (32, 32))
+    B0 = float(A.sum())
+    def loss(g):  # burden lost to drug B relative to the same world with no drug
+        off = therapy2.run(A, g, 0, B0, 2.0, lambda *a: (False, False), 0.0, every=1.0)
+        on = therapy2.run(A, g, 0, B0, 2.0, therapy2.only_b, 0.0, every=1.0)
+        return off["trace"][-1][1] - on["trace"][-1][1]
+    assert loss(np.zeros_like(A)) > 0.03 and abs(loss(np.ones_like(A))) < 1e-9
+    # drug A alone under therapy2.run reproduces therapy.treat (constant arm) exactly
+    g = rng.uniform(0, 1, A.shape)
+    a = therapy2.run(A, g, 0, B0, 2.0, therapy2.constant, 0.1, kA=0.5, every=1.0)
+    b = therapy.treat(A, g, "constant", 0, B0, 2.0, kappa=0.5, every=1.0, cost=0.1)
+    assert a["final_sha"] == b["final_sha"]

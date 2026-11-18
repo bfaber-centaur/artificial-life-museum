@@ -106,3 +106,31 @@ for c in (0.0, 0.1, 0.3):
         rs = sorted((r for r in TL if r.get("cost", 0.0) == c and r["arm"] == arm), key=lambda r: r["seed"])
         print(f"  kappa 0.3, 6000 tu, cost {c}, {arm}: " + "; ".join(
             f"s{r['seed']} {outcome(r)} res {r['trace'][-1][3]:.2f} drug {100 * r['drug_time'] / r['tu']:.0f}%" for r in rs))
+
+print("== C125-C128 therapy room round 3 (therapy2.jsonl)")
+T2 = [json.loads(l) for l in open(H / "therapy2.jsonl")]
+
+
+def gone(r):
+    return next((x[0] for x in r["trace"] if x[1] == 0), None)
+
+
+for r in sorted((r for r in T2 if r["exp"] == "holiday"), key=lambda r: (r["cost"], r["seed"])):
+    e = r["trace"][-1]
+    print(f"  holiday cost {r['cost']} seed {r['seed']}: back to B0 at {r['back_to_B0']}, eradicated at {gone(r)},"
+          f" end burden {e[1]:.2f} resistant {e[3]:.2f}")
+for lo in (0.3, 0.5, 0.7, 0.9):
+    rs = sorted((r for r in T2 if r["exp"] == "threshold" and r["arm"] == f"adaptive{lo}"), key=lambda r: r["seed"])
+    print(f"  pause at {lo}: mean burden " + ", ".join(f"{sum(x[1] for x in r['trace']) / len(r['trace']):.2f}" for r in rs)
+          + "; final resistant " + ", ".join(f"{r['trace'][-1][3]:.2f}" for r in rs)
+          + "; drug on " + ", ".join(f"{100 * r['drug_A'] / r['tu']:.0f}%" for r in rs)
+          + "; progression " + ", ".join(str(r["progression"]) for r in rs)
+          + "; max burden " + ", ".join(f"{max(x[1] for x in r['trace']):.2f}" for r in rs))
+for c in (0.0, 0.3):
+    for arm in ("A", "B", "A+B", "alternate", "steer"):
+        rs = sorted((r for r in T2 if r["exp"] == "bind" and r["arm"] == arm and r["cost"] == c), key=lambda r: r["seed"])
+        print(f"  bind cost {c} {arm}: " + "; ".join(
+            f"s{r['seed']} " + (f"gone t{gone(r):.0f}" if gone(r) is not None else
+                                 (f"progressed t{r['progression']:.0f}" if r["progression"] is not None else "held")
+                                 + f" end {r['trace'][-1][1]:.2f} B0 res {r['trace'][-1][3]:.2f}")
+            + f" (A {r['drug_A']:.0f} tu, B {r['drug_B']:.0f} tu)" for r in rs))

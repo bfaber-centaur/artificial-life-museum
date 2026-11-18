@@ -1,0 +1,17 @@
+{
+ "exhibit": "G072",
+ "title": "Two drugs",
+ "claims": [
+  "C127",
+  "C128"
+ ],
+ "media": [
+  "bind.png"
+ ],
+ "data": "research/experiments/REPLICATORS/therapy2.jsonl",
+ "commands": [
+  "chart_round3.py OUT_DIR (writes bind.png)"
+ ],
+ "view": "outcome of every two-drug run: rows = schedule, columns = no cost / cost 0.3, one marker per seed (X eradicated, filled dot progressed and not eradicated, ring held below 1.25 B0); text: counts and mean drug-on fractions",
+ "rule": "GenomeLenia (modified rule) + drug A step A <- A (1 - dt kA g) + drug B step A <- A (1 - dt kB (1 - g)) + crowding cost"
+}

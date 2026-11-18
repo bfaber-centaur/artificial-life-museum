@@ -1,0 +1,19 @@
+{
+ "exhibit": "G073",
+ "title": "Two drugs, steering",
+ "claims": [
+  "C127",
+  "C128"
+ ],
+ "media": [
+  "bind.gif",
+  "bind.mp4",
+  "bind-final.png"
+ ],
+ "data": "research/experiments/REPLICATORS/therapy2.jsonl (exp bind, cost 0.3, seed 0; the film re-runs arms A, B and steer for 4000 tu and asserts their final hashes)",
+ "commands": [
+  "film_bind.py 0 OUT_DIR"
+ ],
+ "view": "128x128 at 3 px; colour = genome on coolwarm (blue slow, resistant to drug A; red fast), brightness = field value; one frame per 8 tu for the first 1600 tu; mp4 20 fps, gif 8 fps at 820 px; chart: burden / B0, shading = steering arm gives drug B",
+ "rule": "GenomeLenia (modified rule) + drug A, drug B and crowding cost 0.3 (therapy2.py)"
+}
