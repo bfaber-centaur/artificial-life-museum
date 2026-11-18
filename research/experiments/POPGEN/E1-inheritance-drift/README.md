@@ -59,16 +59,20 @@ Two E1c numbers are both too high for textbook branching-process theory with Poi
   establishment ≈ 2*s*/σ² ≈ 0.41 if σ² = 1, but the mutant was still present in 12/12 (chance
   ≈ 2 × 10⁻⁵ at 0.41).
 
-Both point the same way. Lenia cells divide almost deterministically, so offspring variance is
-far below 1, and the effective population size (*Nₑ* ≈ *K*/σ²) is **above** the census size. That
-matches P1c-d's *Nₑ* ≈ 4–5 *K*. This is the most interesting lead so far. It turns "does Kimura
-hold?" into a sharper question: **does Kimura hold once the measured offspring variance of
-Lenia cells is put in?** E3 should measure σ² directly from the family-tree tracker (offspring
-per cell lifetime) before any fixation runs. Other explanations still need ruling out:
+**Correction (2026-11-18, before E2).** These two observations are **not** independent evidence.
+Both say the same thing: drift per generation is weaker than a census of ~74 cells implies,
+that is, *Nₑ* > *K*, which is P1c-d. The "0.41" above uses Haldane's 2*s* with *Nₑ* = *N*. With the
+measured *Nₑ* (~300) instead, Kimura's single-copy formula gives
+u ≈ 1 − exp(−2 *Nₑ* *s* /*K*) ≈ 0.88, which is consistent with 12/12 (P ≈ 0.2).
 
-- τ is too short (tracker births inflated by flicker, so *Nₑ* is overestimated in generations).
-- With stochastic per-pixel inheritance, a "cell" is not a unit of inheritance, which smooths
-  drift.
+Fixation theory also does not need the generation time. In time units, the diffusion has
+drift *s*ₜ *p*(1−*p*) and variance *p*(1−*p*)/*D* per tu, where *D* = *Nₑ*τ. The pooled E1c
+neutral runs give **D ≈ 62,000 tu**. So the clean test is to predict mutant outcomes from *D*
+and from *s*ₜ measured independently, with no tracker and no τ at all. That is E2
+([`../E2-diffusion-test/protocol.md`](../E2-diffusion-test/protocol.md)).
+
+Whether Lenia cells really reproduce with low offspring variance, or the tracker's τ is too
+short, remains open. It only matters for interpreting *Nₑ*/*K*, not for the test.
 
 ## Next
 
