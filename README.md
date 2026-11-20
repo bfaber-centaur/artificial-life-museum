@@ -18,7 +18,7 @@ evidence. Some of the best exhibits are ideas that turned out to be wrong.
 
 **Start here:**
 
-- 🏛️ **[Walk the museum](https://bfaber-centaur.github.io/artificial-life-museum/museum/site/)**:
+- 🏛️ **[Walk the museum](https://bubskee.github.io/artificial-life-museum/museum/site/)**:
   about twenty rooms, from one calibration animal to self-copying cells and evolution.
 - 🖼️ **[Browse the gallery](research/gallery/README.md)**: about 60 filmed exhibits (G001–G073),
   each with its provenance and caveats, readable right here on GitHub.
@@ -66,7 +66,7 @@ The GIFs are previews. Full-quality MP4s sit next to them in each exhibit folder
 
 The museum is plain HTML and CSS built from the ledger and the gallery
 ([how it is built](museum/README.md)). Online it is at
-**<https://bfaber-centaur.github.io/artificial-life-museum/museum/site/>**; to open it from a
+**<https://bubskee.github.io/artificial-life-museum/museum/site/>**; to open it from a
 clone, see [Run it yourself](#run-it-yourself).
 
 | Wing | Rooms | What you will see |
@@ -105,7 +105,7 @@ pretty GIF but a **specimen + reproducible claim + intervention + evidence**.
 You need Python 3.10 or newer and git.
 
 ```bash
-git clone https://github.com/bfaber-centaur/artificial-life-museum.git
+git clone https://github.com/bubskee/artificial-life-museum.git
 cd artificial-life-museum
 ./scripts/bootstrap.sh            # makes .venv/, installs the package, fetches the pinned Lenia catalogue
 source .venv/bin/activate
